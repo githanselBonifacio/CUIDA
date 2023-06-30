@@ -1,0 +1,20 @@
+<h1 mat-dialog-title>Desea reprogramar esta la cita?</h1>
+<div mat-dialog-content>
+ 
+   <label for="horario">Selecciona un horario:</label>
+   <input type="time" id="horario" name="horario" min="09:00" max="18:00" [(ngModel)] ="horaCita">
+    <div  id="content-dialog">
+      <div id="content-option">
+
+          <div id="option-boton">
+            <button class="btn btn-outline-danger"  (click)="onNoClick()" >Cancelar</button>
+          </div>
+          
+          <div id="option-boton">
+            <button class="btn btn-outline-success" cdkFocusInitial (click)="onConfirm()">Confirmar</button>
+          </div>
+
+      </div>
+  </div>
+
+</div>

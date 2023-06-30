@@ -1,0 +1,60 @@
+<div>
+    <div class="d-flex" id = "header_filtro_agenda">
+        <h1>Gestion de agenda</h1>
+        <div>
+            <button class="bnt-bot-agendamiento" (click)=" autoagendar()">
+                <i class = 'bi bi-robot'></i><span>  Agendar</span>
+            </button>
+            
+        </div>
+        <div class = "form-group">
+            <div class="d-flex" id = "filtro_agenda">
+                
+                <div class="input-group">
+                    <label for="fecha">Fecha</label>
+                    <input type="date" id="fecha" [(ngModel)]="fechaFiltroTurno" id="fecha-consultada">
+                </div>
+
+                
+                <div class="input-group">
+                    <label for="opcionRegional">Regional</label>
+                    <select name="select-regional" [(ngModel)]="opcioRegional" id="opcionRegional">
+                        <option value="default" selected disabled>seleccione..</option>
+                        <option *ngFor="let option of regionales" [value]="option.id">{{option.nombre}} </option>
+                    </select>
+                </div>
+
+               
+                <div class="input-group">
+                    <label for="OpcionTurno">Turno enfermeria</label>
+                    <select name="select-turno" [(ngModel)]="opcionHorariosTurno" id="OpcionTurno">
+                        <option value="default" selected disabled>seleccione..</option>
+                        <option *ngFor="let option of horarioTurno" [value]="option.id">T{{option.id}}</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <button class="bnt-consulta" (click)="consultarCitas()">
+                        Buscar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</div>
+<div  class="row">
+    <div class="col-md-3" id="container-list-citas">
+        <div class="d-flex">
+            <h2>Citas</h2>
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1">ID</span>
+                <input [(ngModel)]="id_remision" (ngModelChange)=filtrarCitasByIdRemision() type="text" class="form-control" placeholder="remisión" aria-label="Username" aria-describedby="basic-addon1">
+              </div>
+        </div>
+        <hr>
+            <app-agenda-card-cita [citas]="citas"></app-agenda-card-cita>
+    </div>
+    <div class="col-md-9" id="container-agenda-gantt">
+        <app-diagramas-gantt [actividades]="actividades" [horas]="horasTurnoString"></app-diagramas-gantt>
+    </div>
+</div>

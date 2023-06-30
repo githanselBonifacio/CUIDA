@@ -1,0 +1,22 @@
+@import url('../styles.css');
+.bg-custom {
+    background-color:var(--second-color) !important;
+  }
+
+ .offcanvas-header {
+    background-color:var(--second-color);
+  }
+  
+  .offcanvas-title {
+    color: var(--yellow-color);
+    font-size: 1.8rem;
+    font-family: var(--bs-font-monospace);
+  }
+  
+  .offcanvas-body {
+    background-color: var(--gris4-color);
+  }
+  hr{
+    border: 0px;
+    margin: 0px;
+  }

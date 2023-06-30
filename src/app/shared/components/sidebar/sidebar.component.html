@@ -1,0 +1,34 @@
+
+    <li  routerLink=""
+         routerLinkActive="active"
+         [routerLinkActiveOptions]="{ exact : true}"
+         class="nav-item">
+         <button type="button" class="btn-sidebar" data-bs-dismiss="offcanvas">
+            <span class="bi-house-fill"></span> Inicio
+        </button>
+    </li>
+    <hr>
+    <li routerLink="citas" 
+    routerLinkActive="active"
+    class="nav-item">
+        <button type="button" class="btn-sidebar" data-bs-dismiss="offcanvas" aria-label="Close">
+            <span class="bi-calendar2-check-fill"></span> Citas</button>
+    </li>
+    <hr>
+    <li [routerLink]="['/agenda']"
+    routerLinkActive="active" 
+    class="nav-item">
+        <button type="button" class="btn-sidebar" data-bs-dismiss="offcanvas" aria-label="Close">
+            <span class="bi-journal-bookmark-fill"></span> Agenda</button>
+    </li>
+    <hr>
+    <li routerLink="moviles" 
+    routerLinkActive="active" 
+    class="nav-item">
+        <button type="button" class="btn-sidebar" data-bs-dismiss="offcanvas" aria-label="Close">
+            <span class="bi-truck"></span> Moviles</button>
+    </li>
+    <hr>
+
+    
+

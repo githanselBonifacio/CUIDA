@@ -1,0 +1,62 @@
+h5{
+    color: var(--orange-color);
+    font-weight: bold;
+}
+.card{
+    border-color: var(--gris2-color);
+    box-shadow: 5px 5px 15px var(--gris3-color);
+}
+.input-group-text{
+    padding: 0 0.5rem 0 1rem;
+}
+.input-group-text i{
+    font-size: 1.5rem;
+    font-weight: bold;
+    padding: 0 0 2.2rem 0;
+    margin: 0 1rem 0 0;
+}
+
+#container-card-citas{
+    margin: 0.3rem 0.3rem 0.3rem 0.3rem;
+}
+#container-card{
+    overflow-y: scroll;
+    max-height:  45rem;
+}
+
+.i-card-agenda{
+    padding-top: 0.5rem;
+    display: flex;
+    justify-content: flex-end;
+}
+.i-card-agenda i{
+    font-size: 2.2rem;
+    margin-left: 0.4rem;
+}
+#i-card-agenda-agendar{
+    color: var(--primary-color);
+}
+#i-card-agenda-agendar:hover{
+    color : var(--second-color);
+}
+
+#i-card-agenda-desagendar{
+    color: var(--orange-color);
+}
+#i-card-agenda-desagendar:hover{
+    color: var(--orange-color-dark);
+}
+
+#i-card-agenda-cancelar{
+    color: var(--red-color);
+}
+#i-card-agenda-cancelar:hover{
+   
+    color: var(--red-dark-color);
+}
+#i-card-agenda-reprogramar{
+    color: var(--green-color);
+}
+#i-card-agenda-reprogramar:hover{
+  color: var(--green-color-dark);
+}

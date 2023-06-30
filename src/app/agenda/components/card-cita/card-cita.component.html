@@ -1,0 +1,44 @@
+<div  class="row" id = 'container-card'>
+    <div *ngFor="let cita of citas" class="col-md-12" id = "container-card-citas">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">{{cita.id_remision}}</h5>
+                <span class="input-group-text" id="basic-addon2"><i class="bi bi-calendar" ></i>{{formatDateTime(cita.fecha_programada)}}</span>
+                <span class="input-group-text" id="basic-addon2"><i class="bi bi-clock"></i>{{convertSecondsToMinutesOrHours(cita.duracion_seg)}}</span>
+                <span class="input-group-text" id="basic-addon2"><i class="bi bi-hourglass-bottom"></i>{{convertSecondsToMinutesOrHours(cita.holgura_seg)}}</span>
+                <span class="input-group-text" id="basic-addon2"><i class="bi bi-tag"></i>{{cita.clasificacion_habilidad}}</span>
+                <span class="input-group-text" id="basic-addon2"><i class="bi bi-clipboard"></i>  {{cita.estado}}</span>
+                <div class="i-card-agenda">
+                    <ng-container *ngIf="cita.estado =='Agendada'">
+
+                       
+                        <i class="bi bi-clock" id="i-card-agenda-reprogramar"  title="Reprogramar"
+                            (click)="reprogramarHoraCita(cita)"
+                        ></i>
+
+                        <i class="bi bi-calendar2-x-fill" id="i-card-agenda-desagendar"
+                                title="Desagendar"
+                                (click)="desagendarProfesionalCita(cita,'Desea desagendar cita ?')"
+                        ></i>
+                        <i class="bi bi-x-square-fill" id="i-card-agenda-cancelar"
+                        title="Cancelar"
+                        ></i>
+                
+
+                    </ng-container>
+                    <ng-container *ngIf="cita.estado =='No Agendada'">
+                            <i class="bi bi-calendar-plus-fill" (click)="asignarProfesionalCita(cita)" 
+                            title="Agendar"
+                            id = "i-card-agenda-agendar"></i>
+                    </ng-container>
+                </div>
+                
+            
+            </div>
+        </div>
+    </div>
+    <div *ngIf="citas.length === 0">
+            <p>No hay citas para la fecha buscada!!</p>
+    </div>
+</div>
+

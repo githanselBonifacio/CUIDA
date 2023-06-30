@@ -1,0 +1,46 @@
+#header-horas{
+    flex-grow: 1;
+    display: flex;
+    justify-content: space-around;
+    padding: 0;
+
+}
+#content-hora{
+    text-align: center;
+    position: relative;
+}
+#position-hora{
+    position: absolute;
+    padding: 0;
+}
+#container-card-gantt{
+    margin: 0.2rem 0 0.2rem 0;
+    box-shadow: 0px 0px 4px 0px var(--gris3-color);
+}
+
+#header-prefesional-gantt{
+    padding: 0.5rem 0.5rem 0.5rem 0.5rem;
+    color: var(--second-color);
+    font-size: 1.5rem;
+}
+.container-actividades-panel{
+    max-height: 50rem;
+ 
+}
+
+#container-actividad-time{
+   position: relative;
+   padding: 0 0.6rem 0 0;
+   text-align: center;
+   border: 1px dotted var(--gris3-color);
+}
+.container-linea-tiempo{
+    display: flex;
+    position: absolute;
+    align-items: center;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    height: 50%;
+    width: 100%;
+}

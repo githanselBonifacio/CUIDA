@@ -1,0 +1,79 @@
+@import url('../../../../styles.css');
+
+h1{
+    color: var( --second-color);
+}
+
+#container-list-citas{
+    border:1px solid var( --gris3-color);
+    background-color:var(---primary-color);
+    padding-top: 1.5rem;
+}
+#container-list-citas h2{
+    padding: 0 0.5rem 0 0;
+    color: var(--second-color);
+}
+#container-agenda-gantt{
+    border:1px solid var(--gris3-color);
+}
+#header_filtro_agenda{
+   justify-content: space-between;
+}
+#filtro_agenda{
+    justify-content: space-around;
+    padding: 1rem 1rem 1rem 1rem;
+ }
+ .input-group div{
+    padding: 1rem 1rem 1rem 1rem;
+    color: var( --primary-color);
+ }
+ .input-group input{
+    margin: 0 1rem 0 0;
+ }
+ select {
+    background-color: var(--gris4-color);
+    color: var(--quarter-color);
+    padding: 0.5rem 0.5rem;
+    border: solid var(--gris3-color) 0.1rem;
+    border-color:  var(--gris3-color);
+    border-radius: 1px;
+  }
+  
+option {
+    background-color: var(--gris4-color);
+    color: var(--quarter-color);
+}
+
+input{
+    border: solid 0.1rem;
+    border-color:var( --gris3-color);
+}
+#fecha-consultada{
+    background-color:var(--gris4-color);
+    color: var(--quarter-color);
+    padding: 0.4rem 0.4rem 0.4rem 0.4rem;
+    border: solid 0.1rem;
+    border-color: var(--gris4-color);
+}
+.bnt-consulta{
+    background-color:var(--primary-color);
+    color:var( --gris4-color);
+    padding: 0.4rem 0.4rem 0.4rem 0.4rem;
+    border: solid 1px var(--gris4-color);
+    border-color: transparent;
+    border-radius: 0.5rem;
+    font-size: 1.2rem;
+}
+ button:hover{
+    background-color: var( --second-color);
+    color: var( --cero-color);
+}
+
+.bnt-bot-agendamiento{
+    background-color: var( --primary-color);
+    color: var(--gris4-color);
+    font-weight: bold;
+    font-size: 1.5rem;
+    border-radius: 5px;
+    border: none;
+}

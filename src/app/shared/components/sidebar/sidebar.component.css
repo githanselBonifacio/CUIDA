@@ -1,0 +1,20 @@
+@import url('../../../../styles.css');
+.btn-sidebar {
+    background-color: transparent;
+    border: none;
+    color: var(--quarter-color) ;
+    cursor: pointer;
+    font-size: 1.3rem;
+    padding: 0;
+    text-align: left;
+    text-decoration: none;
+    padding: 1rem 1rem 1rem 1rem ;
+  }
+  
+.btn-sidebar:hover {
+    color:var(--second-color) ;
+    font-size: 1.5rem;
+}
+hr {
+  color: black;
+}

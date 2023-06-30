@@ -1,1 +1,29 @@
-/* You can add global styles to this file, and also import other style files */
+
+
+
+:root{
+    --cero-color: #ffffff;
+    --primary-color: #00AEC7;
+    --second-color: #0033A0;
+    --second-color-2: #0248e0;
+    --third-color: #E3E829;
+    --quarter-color: #53565A;
+    --gris1-color: #707372;
+    --gris2-color: #9EA2A2;
+    --gris3-color: #C7C9C7;
+    --gris4-color: #ecf0f1;
+    --yellow-color: #F9E547;
+    --yellow-color-light: #f9e4478f;
+    --red-color: #f8434a;
+    --tutquesa-color: #58C8C6;
+    --green-color: #97D700;
+    --green-color-dark: #77a804;
+    --orange-color: #f5b120;
+    --orange-color-dark: #d19004;
+    --red-dark-color : #fc2229;
+    --bs-font-sans-serif: system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans","Liberation Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+    --bs-font-monospace: SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
+    --bs-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0));
+}
+html, body { height: 100%;}
+body { margin: 2rem 2rem 2rem 2rem; font-family: --bs-font-sans-serif, --bs-font-monospace; }

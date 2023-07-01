@@ -82,11 +82,11 @@ input{
     background-color: var( --second-color);
     color: var(--gris4-color);
     font-weight: bold;
-    font-size: 0.9rem;
+    font-size: 1.4rem;
     border-radius: 5px;
     border: none;
 }
 .bnt-bot-agendamiento:hover{
-    font-size: 1rem;
+    font-size: 1.5rem;
     color: var( --third-color);
 }

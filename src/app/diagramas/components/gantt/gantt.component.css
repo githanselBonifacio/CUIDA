@@ -44,3 +44,22 @@
     height: 50%;
     width: 100%;
 }
+#container-map {
+    border: 1px dotted var(--gris3-color) !important;
+}
+.map-ruta{
+     text-align: center;
+}
+
+.map-content{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 2.3rem;
+    font-size: 2rem;
+    color: var(--second-color);
+}
+.map-content:hover{
+    font-size: 2.3rem;
+    color: var(--primary-color);
+}

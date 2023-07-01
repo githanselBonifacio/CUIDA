@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MainComponentAgendaComponent } from './components/main-component-agenda/main-component-agenda.component';
+import { MainComponentAgendaComponent } from './pages/main-agenda-page/main-agenda.page';
 import { DiagramasModule } from '../diagramas/diagramas.module';
 import { CardCitaComponent } from './components/card-cita/card-cita.component';
 import { FormsModule } from '@angular/forms';

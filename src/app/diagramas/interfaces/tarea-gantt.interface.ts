@@ -12,6 +12,8 @@ export interface Tarea {
     fecha_programada:     string;
     duracion_seg:         number;
     holgura_seg:          number;
+    latitud:              number|any;
+    longitud:             number|any;
     estado:               string;
     tipo:                 string;
     conductor:            string|null;

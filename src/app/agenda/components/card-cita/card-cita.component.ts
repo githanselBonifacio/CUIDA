@@ -6,7 +6,6 @@ import {MatDialog} from '@angular/material/dialog'
 import { ModalAsignarProfesionalComponent } from '../modal-asignar-profesional/modal-asignar-profesional.component';
 import {VentanaConfirmacionComponent} from '../../../shared/components/ventana-confirmacion/ventana-confirmacion.component'
 import { AgendaService } from 'src/app/shared/services/agenda/agenda.service';
-import { DialogRef } from '@angular/cdk/dialog';
 import { ModalCambioHoraCitaComponent } from '../modal-cambio-hora-cita/modal-cambio-hora-cita.component';
 import { PuntoUnicoComponent } from 'src/app/maps/components/punto-unico/punto-unico.component';
 @Component({

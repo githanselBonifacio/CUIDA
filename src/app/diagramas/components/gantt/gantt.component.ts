@@ -2,8 +2,9 @@
 import { Actividad } from '../../interfaces/tarea-gantt.interface';
 import { Component,Input, OnInit } from '@angular/core';
 import {Tarea} from '../../interfaces/tarea-gantt.interface'
-
-
+import {MatDialog} from '@angular/material/dialog'
+import { Turno } from '../../../agenda/interfaces/turno.interface';
+import { MapRutaComponent } from 'src/app/maps/components/map-ruta/map-ruta.component';
 @Component({
   selector: 'app-diagramas-gantt',
   templateUrl:'./gantt.component.html',
@@ -11,6 +12,10 @@ import {Tarea} from '../../interfaces/tarea-gantt.interface'
 })
 
 export class GanttComponent implements OnInit{
+  constructor(
+    private modalMapRuta: MatDialog,
+  ){}
+
   @Input() public actividades: Actividad[] = [];
   @Input() public horas :string[] = [];
   
@@ -210,5 +215,11 @@ export class GanttComponent implements OnInit{
         container.appendChild(div);
    
       }
+   }
+
+   mostrarRutaMapa(tarea:Tarea[]):void{
+    const dialogRef = this.modalMapRuta.open(MapRutaComponent,{
+      data : tarea
+   })
    }
 }

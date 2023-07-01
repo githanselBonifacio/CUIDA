@@ -1,17 +1,16 @@
-
 <div>
     <div class="row">
             <div class="col-3">
                 <h5 id="header-prefesional-gantt">Profesionales</h5>
             </div>
-        </div>
+    </div>
  
     <div class="overflow-auto" class="container-actividades-panel">
         
         <div *ngFor="let actividad of actividades; let i = index">
             
             <div class="row">
-                <div class="col-3">
+                <div class="col-2">
                     <div  class="row" id = 'container-card'>
                         <div class="col-md-12" id = "container-card-gantt">
                             <div class="card">
@@ -32,7 +31,8 @@
                         </div>
                     </div>
                 </div>
-                    <div class="col-9" id = "container-actividad-time">
+
+                <div class="col-9" id = "container-actividad-time">
                         <div class = "container-linea-tiempo" id="{{actividad.numero_identificacion}}">
                         
                             <ng-container *ngIf="i <= actividades.length - 1">
@@ -50,6 +50,13 @@
                                 
                             </ng-container>
                     </div>
+                </div>
+                <div class="col-1" id ="container-map">
+                
+                        <div  *ngIf="actividad.citas.length>0" class="map-content">
+                             <i class="bi bi-geo-alt-fill" title="ubicación" (click)="mostrarRutaMapa(actividad.citas)"></i>
+                        </div>
+                   
                 </div>
             </div>
         </div>

@@ -1,4 +1,3 @@
-<br>
 <div id="container-agenda">
         <div >
             <div class="d-flex" id = "header_filtro_agenda">
@@ -61,12 +60,15 @@
                         <input [(ngModel)]="id_remision" (ngModelChange)=filtrarCitasByIdRemision() type="text" class="form-control" placeholder="remisión" aria-label="Username" aria-describedby="basic-addon1">
                     </div>
                 </div>
-                <hr>
-                    <app-agenda-card-cita [citas]="citas"></app-agenda-card-cita>
+
+                <app-agenda-card-cita [citas]="citas"></app-agenda-card-cita>
+
             </div>
+
             <div class="col-md-9" id="container-agenda-gantt">
                 <app-diagramas-gantt [actividades]="actividades" [horas]="horasTurnoString"></app-diagramas-gantt>
             </div>
+            
             <ng-container *ngIf="loadingPage == false">
                 <app-spinner></app-spinner>
             </ng-container>

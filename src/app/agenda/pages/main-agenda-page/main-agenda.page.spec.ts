@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MainComponentAgendaComponent } from './main-component-agenda.component';
+import { MainComponentAgendaComponent } from './main-agenda.page';
 
 describe('MainComponentAgendaComponent', () => {
   let component: MainComponentAgendaComponent;

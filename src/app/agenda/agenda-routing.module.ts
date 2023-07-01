@@ -1,6 +1,6 @@
 import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
-import { MainComponentAgendaComponent } from './components/main-component-agenda/main-component-agenda.component';
+import { MainComponentAgendaComponent } from './pages/main-agenda-page/main-agenda.page';
 
 
 export const routes: Routes = [

@@ -6,12 +6,11 @@ import { HorarioTurno, Regional } from 'src/app/shared/interfaces/maestros.inter
 import { Actividad } from 'src/app/diagramas/interfaces/tarea-gantt.interface';
 import { ActivatedRoute,Router } from '@angular/router';
 import { generarHorario} from '../../../shared/interfaces/maestros.interfaces'
-import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-main-component-agenda',
-  templateUrl: './main-component-agenda.component.html',
-  styleUrls: ['./main-component-agenda.component.css']
+  templateUrl: './main-agenda.page.html',
+  styleUrls: ['./main-agenda.page.css']
 })
 export class MainComponentAgendaComponent implements OnInit{
       loadingPage = false;

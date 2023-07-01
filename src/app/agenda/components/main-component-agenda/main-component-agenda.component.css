@@ -3,7 +3,9 @@
 h1{
     color: var( --second-color);
 }
-
+#container-agenda{
+    margin: 4rem 4rem 4rem 4rem ;
+}
 #container-list-citas{
     border:1px solid var( --gris3-color);
     background-color:var(---primary-color);
@@ -18,9 +20,17 @@ h1{
 }
 #header_filtro_agenda{
    justify-content: space-between;
+   flex-direction: row;
+   align-items: center;
+}
+#container-buttom-header{
+    display: flex;
+}
+.btn-agendamientos{
+    padding-left: 1rem;
 }
 #filtro_agenda{
-    justify-content: space-around;
+    justify-content: space-between;
     padding: 1rem 1rem 1rem 1rem;
  }
  .input-group div{
@@ -56,7 +66,7 @@ input{
     border-color: var(--gris4-color);
 }
 .bnt-consulta{
-    background-color:var(--primary-color);
+    background-color:var(--second-color);
     color:var( --gris4-color);
     padding: 0.4rem 0.4rem 0.4rem 0.4rem;
     border: solid 1px var(--gris4-color);
@@ -65,15 +75,18 @@ input{
     font-size: 1.2rem;
 }
  button:hover{
-    background-color: var( --second-color);
-    color: var( --cero-color);
+    color: var( --third-color);
 }
 
 .bnt-bot-agendamiento{
-    background-color: var( --primary-color);
+    background-color: var( --second-color);
     color: var(--gris4-color);
     font-weight: bold;
-    font-size: 1.5rem;
+    font-size: 0.9rem;
     border-radius: 5px;
     border: none;
+}
+.bnt-bot-agendamiento:hover{
+    font-size: 1rem;
+    color: var( --third-color);
 }

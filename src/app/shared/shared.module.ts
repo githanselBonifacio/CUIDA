@@ -9,6 +9,7 @@ import { RouterModule } from '@angular/router';
 import { DiagramasModule } from '../diagramas/diagramas.module';
 import { AgendaModule } from '../agenda/agenda.module';
 import { VentanaConfirmacionComponent } from './components/ventana-confirmacion/ventana-confirmacion.component';
+import { SpinnerComponent } from './components/spinner/spinner.component';
 
 
 @NgModule({
@@ -19,7 +20,7 @@ import { VentanaConfirmacionComponent } from './components/ventana-confirmacion/
        AgendaComponent,
        MovilesComponent,
        SidebarComponent,
-       VentanaConfirmacionComponent,
+       VentanaConfirmacionComponent
        
 
   ],

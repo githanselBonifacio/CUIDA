@@ -70,16 +70,13 @@ export class AgendaService {
 
       return this.http.get<string>(`${this.serviceUrl}/estado_cita/retirarProfesional`, {params})
     }
-    async reprogramarCita(id_cita:string,fecha_programada:string,nueva_hora:string){
+    reprogramarCita(id_cita:string,fecha_programada:string,nueva_hora:string){
       const params = new HttpParams()
       .set('id_cita',id_cita)
       .set('fecha_programada',fecha_programada)
       .set('nueva_hora',nueva_hora)
 
-      this.http.get<string>(`${this.serviceUrl}/citas/reprogramar`, {params})
-      .subscribe(resp=> {
-          console.log(resp)
-      })
+      return this.http.get<string>(`${this.serviceUrl}/citas/reprogramar`, {params})
     }
     calcularDesplazamientosTurno(turno: Turno){
         return this.http.post(`${this.serviceUrl}/citas/calcularDesplazamiento`,[turno])

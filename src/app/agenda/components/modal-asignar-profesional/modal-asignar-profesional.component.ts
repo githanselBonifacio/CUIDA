@@ -42,7 +42,6 @@ export class ModalAsignarProfesionalComponent implements OnInit{
       this.citaSeleccionada.id_regional
     ).subscribe(
         resp =>{
-          location.reload();
                 this.agendaService.calcularDesplazamientosTurno(this.citaSeleccionada)
                 .subscribe(resp=>{
                     location.reload();

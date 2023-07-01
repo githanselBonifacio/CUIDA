@@ -42,8 +42,16 @@ export class ModalCambioHoraCitaComponent implements OnInit{
       this.citaSeleccionada.id_cita,
       `${year}-${month}-${day}`,
       this.horaCita
-    );
-    this.dialogRef.close(true)
-    location.reload();
+    ).subscribe(resp =>{
+      this.agendaService.calcularDesplazamientosTurno(
+        this.citaSeleccionada
+      ).subscribe(resp =>{
+        this.dialogRef.close(true)
+        location.reload();
+         
+      })
+    });
+    
+   
   }
 }

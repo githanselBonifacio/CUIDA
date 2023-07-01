@@ -14,7 +14,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
   styleUrls: ['./main-component-agenda.component.css']
 })
 export class MainComponentAgendaComponent implements OnInit{
-
+      loadingPage = false;
       today = new Date();
       year = this.today.getFullYear();
       month = (this.today.getMonth() + 1).toString().padStart(2, '0');
@@ -35,7 +35,6 @@ export class MainComponentAgendaComponent implements OnInit{
         private maestroService: MaestrosService,
         private activateRoute : ActivatedRoute,
         private router: Router,
-        private spinner: NgxSpinnerService
         ){}
        
         ngOnInit() {
@@ -62,6 +61,7 @@ export class MainComponentAgendaComponent implements OnInit{
               );
 
               this.horasTurnoString = generarHorario(this.opcionHorariosTurno)
+              this.loadingPage = true
             }
             
           )
@@ -105,6 +105,7 @@ export class MainComponentAgendaComponent implements OnInit{
 
     
      autoagendar():void{
+      this.loadingPage = false
       this.agendaService.desagendarTurnoCompleto(
         this.citas[0].fecha_programada
       )
@@ -115,10 +116,20 @@ export class MainComponentAgendaComponent implements OnInit{
                   this.agendaService.calcularDesplazamientoTurnoCompleto(
                     this.agendaService.citas
                   ).subscribe(resp => {
-                    location.reload()
+                    this.loadingPage = true
+                    this.ngOnInit();
                   })
           })
         }
       )
+     }
+
+     desagendarTurnoCompleto():void{
+        this.loadingPage = false
+        this.agendaService.desagendarTurnoCompleto(this.citas[0].fecha_programada)
+        .subscribe(res =>{
+          this.loadingPage = true
+          this.ngOnInit();
+        })
      }
   }

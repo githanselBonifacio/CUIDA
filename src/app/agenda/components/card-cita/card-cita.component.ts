@@ -8,6 +8,7 @@ import {VentanaConfirmacionComponent} from '../../../shared/components/ventana-c
 import { AgendaService } from 'src/app/shared/services/agenda/agenda.service';
 import { DialogRef } from '@angular/cdk/dialog';
 import { ModalCambioHoraCitaComponent } from '../modal-cambio-hora-cita/modal-cambio-hora-cita.component';
+import { PuntoUnicoComponent } from 'src/app/maps/components/punto-unico/punto-unico.component';
 @Component({
   selector: 'app-agenda-card-cita',
   templateUrl: './card-cita.component.html',
@@ -47,6 +48,7 @@ export class CardCitaComponent {
     constructor(
       private dialogoAsignarProfesional : MatDialog,
       private dialogoRepogramarCita : MatDialog,
+      private modalMapPuntoUnico: MatDialog,
       private agendaService : AgendaService
     ){
 
@@ -122,6 +124,13 @@ export class CardCitaComponent {
     const dialogRef = this.dialogoRepogramarCita.open(ModalCambioHoraCitaComponent,{
         data : this.citaSeleccionada
     })
+    
    }
- 
+   
+   mostrarMapaUbicacion(citaSeleccionada:Turno):void{
+      this.citaSeleccionada = citaSeleccionada;
+      const modalMap = this.modalMapPuntoUnico.open(PuntoUnicoComponent, {
+        data : this.citaSeleccionada
+      })
+   }
 }

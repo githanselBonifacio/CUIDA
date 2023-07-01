@@ -10,6 +10,8 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import { ModalAsignarProfesionalComponent } from './components/modal-asignar-profesional/modal-asignar-profesional.component';
 import {AgendaRoutingModule} from './agenda-routing.module';
 import { ModalCambioHoraCitaComponent } from './components/modal-cambio-hora-cita/modal-cambio-hora-cita.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { SpinnerComponent } from '../shared/components/spinner/spinner.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +19,7 @@ import { ModalCambioHoraCitaComponent } from './components/modal-cambio-hora-cit
     CardCitaComponent,
     ModalAsignarProfesionalComponent,
     ModalCambioHoraCitaComponent,
+    SpinnerComponent
   ],
   imports: [
     CommonModule,
@@ -25,7 +28,8 @@ import { ModalCambioHoraCitaComponent } from './components/modal-cambio-hora-cit
     MatFormFieldModule, 
     MatInputModule, 
     MatDialogModule,
-    AgendaRoutingModule
+    AgendaRoutingModule,
+    MatProgressSpinnerModule, 
   ],
   exports:[
     MainComponentAgendaComponent

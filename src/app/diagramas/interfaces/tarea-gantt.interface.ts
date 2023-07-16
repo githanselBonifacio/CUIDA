@@ -1,9 +1,9 @@
 export interface Actividad {
     numero_identificacion:               string;
-    identificacion_movil:                string|null;
+    id_movil:                            string|null;
     responsable:                         string;
     Clasificacion_habilidad_responsable: string|null;
-    citas:                              Tarea[];
+    tareas:                              Tarea[];
 }
 
 export interface Tarea {

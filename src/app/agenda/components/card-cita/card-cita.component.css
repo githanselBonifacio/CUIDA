@@ -72,3 +72,6 @@ h5{
 #i-card-agenda-reprogramar:hover{
   color: var(--green-color-dark);
 }
+#conductor-card h5{
+    color: var(--orange-color);
+}

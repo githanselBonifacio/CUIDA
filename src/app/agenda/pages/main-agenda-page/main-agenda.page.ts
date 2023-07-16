@@ -22,7 +22,7 @@ export class MainComponentAgendaComponent implements OnInit{
   
       horasTurnoString: string[] = [] 
 
-      public id_remision: string = "";
+      id_remision: string = "";
       fechaFiltroTurno: string =this.fechaHoy;
 
       opcioRegional: number = 1
@@ -43,10 +43,12 @@ export class MainComponentAgendaComponent implements OnInit{
             
           this.activateRoute.params.subscribe(
             params =>{
+              if(params['id_turno'] != null){
+          
               this.fechaFiltroTurno = params ['id_turno'];
               this.opcioRegional = params ['id_regional'];
               this.opcionHorariosTurno = params ['id_horario_turno'];
-
+             }
               this.agendaService.getTurno(
                 params ['id_turno'],
                 params ['id_regional'],
@@ -89,10 +91,11 @@ export class MainComponentAgendaComponent implements OnInit{
       }
 
      consultarCitas():void{
+   
         this.agendaService.getTurno(this.fechaFiltroTurno,this.opcioRegional,this.opcionHorariosTurno);
         this.agendaService.getActividadesAgendaGantt(this.fechaFiltroTurno,this.opcioRegional,this.opcionHorariosTurno);
-        this.router.navigate(['agenda',this.fechaFiltroTurno,this.opcioRegional,this.opcionHorariosTurno]);
         this.horasTurnoString = generarHorario(this.opcionHorariosTurno);
+        this.router.navigate(['agenda',this.fechaFiltroTurno,this.opcioRegional,this.opcionHorariosTurno]);
      }
 
      filtrarCitasByIdRemision():void{
@@ -106,18 +109,25 @@ export class MainComponentAgendaComponent implements OnInit{
      autoagendar():void{
       this.loadingPage = false
       this.agendaService.desagendarTurnoCompleto(
-        this.citas[0].fecha_programada
+        this.citas[0].fecha_programada, this.opcionHorariosTurno
       )
       .subscribe(
           resp => {
             this.agendaService.autoagendar(this.agendaService.citas)
             .subscribe(resp =>{
-                  this.agendaService.calcularDesplazamientoTurnoCompleto(
-                    this.agendaService.citas
+              this.agendaService.getTurnoObservable(
+                this.fechaFiltroTurno,
+                this.opcioRegional,
+                this.opcionHorariosTurno
+              ).subscribe(citasTurno =>{
+                this.agendaService.calcularDesplazamientoTurnoCompleto(
+                    citasTurno
                   ).subscribe(resp => {
-                    this.loadingPage = true
-                    this.ngOnInit();
+                      this.loadingPage = true
+                      this.ngOnInit();
                   })
+              });
+                  
           })
         }
       )
@@ -125,7 +135,7 @@ export class MainComponentAgendaComponent implements OnInit{
 
      desagendarTurnoCompleto():void{
         this.loadingPage = false
-        this.agendaService.desagendarTurnoCompleto(this.citas[0].fecha_programada)
+        this.agendaService.desagendarTurnoCompleto(this.citas[0].fecha_programada,this.opcionHorariosTurno)
         .subscribe(res =>{
           this.loadingPage = true
           this.ngOnInit();

@@ -5,6 +5,8 @@ import {Tarea} from '../../interfaces/tarea-gantt.interface'
 import {MatDialog} from '@angular/material/dialog'
 import { Turno } from '../../../agenda/interfaces/turno.interface';
 import { MapRutaComponent } from 'src/app/maps/components/map-ruta/map-ruta.component';
+import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-diagramas-gantt',
   templateUrl:'./gantt.component.html',
@@ -14,11 +16,13 @@ import { MapRutaComponent } from 'src/app/maps/components/map-ruta/map-ruta.comp
 export class GanttComponent implements OnInit{
   constructor(
     private modalMapRuta: MatDialog,
+    private router: Router
   ){}
 
   @Input() public actividades: Actividad[] = [];
   @Input() public horas :string[] = [];
   
+  currentUrl: string = '';
   simpleHoras: number[] = [];
   intervalo:number = 0;
   segundosInHoras=3600;
@@ -30,6 +34,7 @@ export class GanttComponent implements OnInit{
   colorFondoTexto:string ="#0033A0"
   colorDesplazamiento :string = "#f5b120";
   ngOnInit(): void {
+      this.currentUrl = this.router.url;
       this.simpleHoras = this.horas.map(hora => parseInt(hora.substring(0, 2)));
       this.intervalo = (this.horas.length-1)*3600
   }

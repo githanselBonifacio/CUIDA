@@ -1,0 +1,54 @@
+h5{
+    color: var(--second-color);
+    font-weight: bold;
+}
+.title{
+    margin: 0;
+}
+i{
+    font-size: 1.2rem;
+    color: var(--gris1-color);
+    margin-right: 0.5rem;
+    margin-bottom: 0.7rem;
+}
+ i:hover{
+    color: var( --second-color-2);
+}
+
+#container-card{
+    overflow-y: scroll;
+    max-height:  45rem;
+}
+.input-group-text{
+    padding-left: 0.5rem !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    padding-right: 0 !important;
+}
+.container-card-citas{
+    margin: 0.3rem 0.3rem 0.3rem 0.3rem;
+}
+
+.i-card-agenda{
+    padding-top: 0.5rem;
+    display: flex;
+    justify-content: flex-end;
+}
+.i-card-agenda i{
+    font-size: 1.8rem;
+    margin-left: 0.4rem;
+}
+
+#i-card-agenda-agendar{
+    color: var(--primary-color);
+}
+#i-card-agenda-agendar:hover{
+    color : var(--second-color);
+}
+
+#i-card-agenda-desagendar{
+    color: var(--orange-color);
+}
+#i-card-agenda-desagendar:hover{
+    color: var(--orange-color-dark);
+}

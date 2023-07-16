@@ -11,12 +11,20 @@
                     </div>
                 </div>
                 
-                <span class="input-group-text" id="basic-addon2"><i class="bi bi-calendar" ></i>{{formatDateTime(cita.fecha_inicio)}}</span>
-                <span class="input-group-text" id="basic-addon2"><i class="bi bi-calendar-check" ></i>{{formatDateTime(cita.fecha_programada)}}</span>
-                <span class="input-group-text" id="basic-addon2"><i class="bi bi-clock"></i>{{convertSecondsToMinutesOrHours(cita.duracion_seg)}}</span>
-                <span class="input-group-text" id="basic-addon2"><i class="bi bi-hourglass-bottom"></i>{{convertSecondsToMinutesOrHours(cita.holgura_seg)}}</span>
-                <span class="input-group-text" id="basic-addon2"><i class="bi bi-tag"></i>{{cita.clasificacion_habilidad}}</span>
-                <span class="input-group-text" id="basic-addon2"><i class="bi bi-clipboard"></i>  {{cita.estado}}</span>
+                <span class="input-group-text"><i class="bi bi-calendar" ></i>{{formatDateTime(cita.fecha_inicio)}}</span>
+                <span class="input-group-text"><i class="bi bi-calendar-check" ></i>{{formatDateTime(cita.fecha_programada)}}</span>
+                <span class="input-group-text"><i class="bi bi-clock"></i>{{convertSecondsToMinutesOrHours(cita.duracion_seg)}}</span>
+                <span class="input-group-text"><i class="bi bi-hourglass-bottom"></i>{{convertSecondsToMinutesOrHours(cita.holgura_seg)}}</span>
+                <span class="input-group-text"><i class="bi bi-clipboard"></i>  {{cita.estado}}</span>
+
+               
+                <div class="card-body" *ngIf="cita.conductor" id="conductor-card">
+                    <h5 for="conductor" class="card-title">conductor asignado</h5>
+                    <span  class="input-group-text" id="conductor"><i class="bi bi-file-person-fill"></i>  {{cita.conductor}}</span>
+                <span class="input-group-text" ><i class="bi bi-card-heading"></i> {{cita.id_movil}}</span>
+                </div>
+              
+
                 <div class="i-card-agenda">
                     <ng-container *ngIf="cita.estado =='Agendada'">
 

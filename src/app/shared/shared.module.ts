@@ -10,6 +10,9 @@ import { DiagramasModule } from '../diagramas/diagramas.module';
 import { AgendaModule } from '../agenda/agenda.module';
 import { VentanaConfirmacionComponent } from './components/ventana-confirmacion/ventana-confirmacion.component';
 import { SpinnerComponent } from './components/spinner/spinner.component';
+import { MovilesModule } from '../moviles/moviles.module';
+import { AdminComponent } from './pages/admin/admin.component';
+import { AdminModule } from '../admin/admin.module';
 
 
 @NgModule({
@@ -20,7 +23,8 @@ import { SpinnerComponent } from './components/spinner/spinner.component';
        AgendaComponent,
        MovilesComponent,
        SidebarComponent,
-       VentanaConfirmacionComponent
+       VentanaConfirmacionComponent,
+       AdminComponent
        
 
   ],
@@ -29,6 +33,8 @@ import { SpinnerComponent } from './components/spinner/spinner.component';
     RouterModule,
     DiagramasModule,
     AgendaModule,
+    MovilesModule,
+    AdminModule
     
   ],
   exports:[

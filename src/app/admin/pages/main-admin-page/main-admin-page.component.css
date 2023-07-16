@@ -1,0 +1,38 @@
+.menu-hex{
+        display:flex;
+        justify-content: center;
+        margin: 2rem 2rem 2rem 2rem;
+      }
+.hexagon {
+    display: flex;
+        width: 13rem;
+        height: 15rem;
+        background-color:var(--second-color);
+        clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+        margin: 0 1rem 0 1rem;
+        text-align: center;
+        justify-content: center;
+        align-items: center;
+        font-size: 8rem;       
+}
+h1{
+    color: var(--second-color);
+    font-size: 5rem;
+}
+.title{
+    text-align: center;
+}
+
+.text-menu{
+    justify-content: center;
+    align-items: center;
+}
+.text-menu h5{
+    color: var(--gris4-color);
+    font-size: 1.9rem;
+    font-weight: bold;
+}
+.text-menu h5:hover{
+    color: var( --third-color);
+    font-size: 2rem
+}

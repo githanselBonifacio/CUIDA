@@ -1,0 +1,62 @@
+<div class="container-d">
+    <div class="d-flex">
+        <div>
+            <h1>Gestion de móviles</h1>
+        </div>
+
+        <div>
+            <button class="bnt-bot-agendamiento" (click)="consultarDesplazamientos">
+                <i class = 'bi bi-robot'></i><span> Agendar</span>
+            </button>
+
+        </div>
+
+        <div class = "form-group">
+
+            <div class="d-flex">
+
+                <div class="input-group">
+                    <label for="fecha" >Fecha</label>
+                    <input type="date" id="fecha" [(ngModel)]="fechaFiltroTurno" >
+                </div>
+
+                
+                <div class="input-group">
+                    <label for="opcionRegional" >Regional</label>
+                    <select name="select-regional" [(ngModel)]="opcioRegional">
+                        <option value="default" selected disabled>seleccione..</option>
+                        <option *ngFor="let option of regionales" [value]="option.id">{{option.nombre}}</option>
+                    </select>
+                </div>
+
+            
+                <div class="input-group">
+                    <label for="OpcionTurno">Turno enfermeria</label>
+                    <select name="select-turno" [(ngModel)]="opcionHorariosTurno" >
+                        <option value="default" selected disabled>seleccione..</option>
+                        <option *ngFor="let option of horarioTurno" [value]="option.id">T{{option.id}}</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <button class="bnt-consulta" (click)="consultarDesplazamientos()">
+                        Buscar
+                    </button>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+    <div class="row">
+        <div class="col-md-3" id = "container-lista-desplazamientos">
+            
+            <app-moviles-card-desplazamiento [desplazamientos]="desplazamientos"></app-moviles-card-desplazamiento>
+
+        </div>
+        <div class="col-md-9" id = "container-gantt">
+            <app-diagramas-gantt [actividades]="actividades" [horas]="horasTurnoString"></app-diagramas-gantt>
+        </div>
+         
+    </div>
+</div>

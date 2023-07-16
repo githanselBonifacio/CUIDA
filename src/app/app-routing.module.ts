@@ -1,9 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { CitasComponent } from './shared/pages/citas/citas.component';
-import { AgendaComponent } from './shared/pages/agenda/agenda.component';
-import { MovilesComponent } from './shared/pages/moviles/moviles.component';
 import { InicioComponent } from './shared/pages/inicio/inicio.component';
+import { AdminComponent } from './shared/pages/admin/admin.component';
 
 const routes: Routes = [
   {
@@ -20,7 +18,11 @@ const routes: Routes = [
   },
   {
     path:'moviles',
-    component:MovilesComponent
+    loadChildren:() => import('./moviles/moviles.module').then(m =>m.MovilesModule)
+  },
+  {
+    path:'admin',
+    component: AdminComponent
   },
   {
     path:'**',

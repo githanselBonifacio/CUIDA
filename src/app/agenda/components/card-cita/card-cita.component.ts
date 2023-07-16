@@ -33,6 +33,7 @@ export class CardCitaComponent {
       estado:                  '',
       id_profesional:          '',
       id_movil:                '',
+      conductor:               '',
       fecha_programada:        '',
       descripcion:             ''
     };

@@ -1,0 +1,72 @@
+.container-d{
+    padding-top: 5rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    padding-bottom: 2rem;
+}
+.d-flex{
+    justify-content: space-between !important;
+    align-items: center;
+    padding-bottom: 1rem !important;
+}
+h1{
+    color: var(--second-color);
+}
+
+.bnt-bot-agendamiento{
+    background-color: var( --second-color);
+    color: var(--gris4-color);
+    font-weight: bold;
+    font-size: 1.4rem;
+    border-radius: 5px;
+    border: none;
+}
+.bnt-bot-agendamiento:hover{
+    font-size: 1.5rem;
+    color: var( --third-color);
+}
+
+.bnt-consulta{
+    background-color:var(--second-color);
+    color:var( --gris4-color);
+    padding: 0.4rem 0.4rem 0.4rem 0.4rem;
+    border: solid 1px var(--gris4-color);
+    border-color: transparent;
+    border-radius: 0.5rem;
+    font-size: 1.2rem;
+}
+ button:hover{
+    color: var( --third-color);
+}
+
+option {
+    background-color: var(--gris4-color);
+    color: var(--quarter-color);
+}
+
+input{
+    border: solid 0.1rem;
+    border-color:var( --gris3-color);
+}
+
+#fecha-consultada{
+    background-color:var(--gris4-color);
+    color: var(--quarter-color);
+    padding: 0.4rem 0.4rem 0.4rem 0.4rem;
+    border: solid 0.1rem;
+    border-color: var(--gris4-color);
+}
+
+select {
+    background-color: var(--gris4-color);
+    color: var(--quarter-color);
+    padding: 0.5rem 0.5rem;
+    border: solid var(--gris3-color) 0.1rem;
+    border-color:  var(--gris3-color);
+    border-radius: 1px;
+  }
+
+#container-lista-desplazamientos, #container-gantt {
+    border: 1px solid var(--gris3-color);
+    padding: 0.5rem 0.5rem 0.5rem 0.5rem;
+}

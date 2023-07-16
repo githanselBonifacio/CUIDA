@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import {Profesional} from '../../../agenda/interfaces/profesional.interface'
 import {Turno} from '../../../agenda/interfaces/turno.interface'
 import {Actividad} from '../../../diagramas/interfaces/tarea-gantt.interface'
-import { Observable, catchError } from 'rxjs';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -24,7 +24,7 @@ export class AgendaService {
       });
     }
 
-    getTurno (date:string, id_region:number, id_schedule_shift:number){
+    async getTurno (date:string, id_region:number, id_schedule_shift:number){
       const params = new HttpParams()
       .set('date',date)
       .set('id_region',id_region)
@@ -36,7 +36,15 @@ export class AgendaService {
       });
       
     }
+     getTurnoObservable (date:string, id_region:number, id_schedule_shift:number){
+      const params = new HttpParams()
+      .set('date',date)
+      .set('id_region',id_region)
+      .set('id_schedule_shift',id_schedule_shift)
 
+      return this.http.get<Turno[]>(`${this.serviceUrl}/shift`, {params})
+    }
+ 
     async getActividadesAgendaGantt (date:string, id_region:number, id_schedule_shift:number){
       const params = new HttpParams()
       .set('date',date)
@@ -85,9 +93,10 @@ export class AgendaService {
       return this.http.post(`${this.serviceUrl}/citas/calcularDesplazamiento`,turno)
     }
 
-    desagendarTurnoCompleto(fecha_turno:string){
+    desagendarTurnoCompleto(fecha_turno:string, id_horario_turno: number){
       const params = new HttpParams()
       .set('fecha_turno',fecha_turno)
+      .set('id_horario_turno',id_horario_turno)
 
       return this.http.get(`${this.serviceUrl}/estado_cita/desagendarTurno`, {params})    
     }

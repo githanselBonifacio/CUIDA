@@ -1,8 +1,11 @@
 <div>
     <div class="row">
-            <div class="col-3">
+            <div class="col-3" *ngIf="currentUrl.includes('agenda'); else elseProfesional">
                 <h5 id="header-prefesional-gantt">Profesionales</h5>
             </div>
+            <ng-template #elseProfesional>
+                <h5 id="header-prefesional-gantt">Móviles</h5>
+            </ng-template>
     </div>
  
     <div class="overflow-auto" class="container-actividades-panel">
@@ -23,8 +26,8 @@
                                     <div *ngIf="actividad.Clasificacion_habilidad_responsable">
                                         {{actividad.Clasificacion_habilidad_responsable}}
                                     </div>
-                                    <div *ngIf="actividad.identificacion_movil">
-                                        {{actividad.identificacion_movil}}
+                                    <div *ngIf="actividad.id_movil">
+                                        {{actividad.id_movil}}
                                     </div>
                                 </div>
                             </div>
@@ -36,15 +39,15 @@
                         <div class = "container-linea-tiempo" id="{{actividad.numero_identificacion}}">
                         
                             <ng-container *ngIf="i <= actividades.length - 1">
-                                <ng-container *ngFor="let cita of actividad.citas">
-                                    <ng-container *ngIf="cita">
+                                <ng-container *ngFor="let tarea of actividad.tareas">
+                                    <ng-container *ngIf="tarea">
                                     
                                         {{crearLineaTiempoTarea(
                                             actividad.numero_identificacion,
-                                            cita
+                                            tarea
                                         )
                                         }}
-                                    
+                                       
                                     </ng-container>
                                 </ng-container>
                                 
@@ -53,8 +56,8 @@
                 </div>
                 <div class="col-1" id ="container-map">
                 
-                        <div  *ngIf="actividad.citas.length>0" class="map-content">
-                             <i class="bi bi-geo-alt-fill" title="ubicación" (click)="mostrarRutaMapa(actividad.citas)"></i>
+                        <div  *ngIf="actividad.tareas.length>0" class="map-content">
+                             <i class="bi bi-geo-alt-fill" title="ubicación" (click)="mostrarRutaMapa(actividad.tareas)"></i>
                         </div>
                    
                 </div>

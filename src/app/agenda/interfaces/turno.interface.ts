@@ -13,7 +13,8 @@ export interface Turno {
     clasificacion_habilidad: string;
     estado:                  string;
     id_profesional:          string;
-    id_movil:                string;
+    id_movil:                string |null;
+    conductor:               string |null;
     fecha_programada:        string;
     descripcion:             string;
 }

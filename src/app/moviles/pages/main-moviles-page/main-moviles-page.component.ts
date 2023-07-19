@@ -4,7 +4,7 @@ import { ActivatedRoute,Router } from '@angular/router';
 import { MovilesService } from 'src/app/shared/services/moviles/moviles.service';
 import { generarHorario} from '../../../shared/interfaces/maestros.interfaces'
 import {Desplazamiento} from '../../interfaces/desplazamiento.interface'
-import { HorarioTurno, Regional } from 'src/app/shared/interfaces/maestros.interfaces';
+import { HorarioTurno, Ciudad } from 'src/app/shared/interfaces/maestros.interfaces';
 import { Actividad } from 'src/app/diagramas/interfaces/tarea-gantt.interface';
 
 
@@ -37,7 +37,7 @@ export class MainMovilesPageComponent implements OnInit{
     ){}
 
   ngOnInit() {
-    this.maestroService.getRegionales();
+    this.maestroService.getCiudades();
     this.maestroService.getHorarioTurno();
 
     this.activateRoute.params.subscribe(
@@ -70,8 +70,8 @@ export class MainMovilesPageComponent implements OnInit{
   get  desplazamientos (): Desplazamiento []{
     return this.movilesService.desplazamientos
   }
-  get regionales(): Regional[]{
-    return this.maestroService.regionales;
+  get regionales(): Ciudad[]{
+    return this.maestroService.ciudades;
   }
 
   get horarioTurno(): HorarioTurno[]{

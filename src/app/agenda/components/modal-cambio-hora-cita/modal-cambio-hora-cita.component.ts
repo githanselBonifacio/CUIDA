@@ -1,7 +1,7 @@
 import { Component , Inject,OnInit} from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
-import {Turno} from '../../interfaces/turno.interface'
-import { AgendaService } from 'src/app/shared/services/agenda/agenda.service';
+import {Cita} from '../../interfaces/turno.interface'
+import { AgendaService } from 'src/app/agenda/services/agenda.service';
 
 @Component({
   selector: 'app-modal-cambio-hora-cita',
@@ -13,7 +13,7 @@ export class ModalCambioHoraCitaComponent implements OnInit{
   horaCita = "";
   constructor(
     public dialogRef: MatDialogRef<ModalCambioHoraCitaComponent>,
-    @Inject(MAT_DIALOG_DATA) public citaSeleccionada: Turno,
+    @Inject(MAT_DIALOG_DATA) public citaSeleccionada: Cita,
     private agendaService: AgendaService,
   ) {}
 
@@ -22,7 +22,7 @@ export class ModalCambioHoraCitaComponent implements OnInit{
     console.log(this.horaCita)
   }
   getHoraFecha():string{
-  const [fechaCompleta, horaCompleta] = this.citaSeleccionada.fecha_programada.split('T');
+  const [fechaCompleta, horaCompleta] = String(this.citaSeleccionada.fechaInicio).split('T');
   const hora = horaCompleta.substring(0, 5);
 
   return hora;
@@ -32,14 +32,14 @@ export class ModalCambioHoraCitaComponent implements OnInit{
     this.dialogRef.close(false);
   }
   onConfirm():void{
-    const fecha = new Date(this.citaSeleccionada.fecha_inicio);
+    const fecha = new Date(this.citaSeleccionada.fechaInicio);
     
     const year = fecha.getFullYear();
     const month = fecha.getMonth()+1;
     const day = fecha.getDate();
 
     this.agendaService.reprogramarCita(
-      this.citaSeleccionada.id_cita,
+      this.citaSeleccionada.idCita,
       `${year}-${month}-${day}`,
       this.horaCita
     ).subscribe(resp =>{

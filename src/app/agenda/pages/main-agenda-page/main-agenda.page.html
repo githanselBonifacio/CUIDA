@@ -26,7 +26,7 @@
                         
                         <div class="input-group">
                             <label for="opcionRegional">Regional</label>
-                            <select name="select-regional" [(ngModel)]="opcioRegional" id="opcionRegional">
+                            <select name="select-regional" [(ngModel)]="opcioCiudad" id="opcionRegional">
                                 <option value="default" selected disabled>seleccione..</option>
                                 <option *ngFor="let option of regionales" [value]="option.id">{{option.nombre}} </option>
                             </select>
@@ -59,20 +59,36 @@
                         <input [(ngModel)]="id_remision" (ngModelChange)=filtrarCitasByIdRemision() type="text" class="form-control" placeholder="remisión" aria-label="Username" aria-describedby="basic-addon1">
                     </div>
                 </div>
-
-                <app-agenda-card-cita [citas]="citas"></app-agenda-card-cita>
+                <app-agenda-card-cita 
+                        [citas]="citas"  [idCiudad]="opcioCiudad" [fechaTurno]="fechaFiltroTurno" [idHorarioTurno]="opcionHorariosTurno">
+                </app-agenda-card-cita>
 
             </div>
 
             <div class="col-md-9" id="container-agenda-gantt">
-                <app-diagramas-gantt [actividades]="actividades" [horas]="horasTurnoString"></app-diagramas-gantt>
+                <app-diagramas-gantt 
+                        [actividades]="actividades" 
+                        [horas]="horasTurnoString"
+                        (idprofesionalEvent)= "desasignarProfesionalTurno($event)">
+                </app-diagramas-gantt>
+
+                <div class="row">
+                    <div class="col-2">
+                        <div id="agregar-profesional">
+                                <i class="bi bi-person-plus-fill" title="Agregar profesional" (click)="agregarProfesionalTurno()"></i>
+                        </div>
+
+                    </div>
+                </div>
+                
             </div>
-            
+             
             <ng-container *ngIf="loadingPage == false">
                 <app-spinner></app-spinner>
             </ng-container>
             
         </div>
+
 
 </div>
 

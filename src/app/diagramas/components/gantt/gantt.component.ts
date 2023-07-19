@@ -1,9 +1,8 @@
 
 import { Actividad } from '../../interfaces/tarea-gantt.interface';
-import { Component,Input, OnInit } from '@angular/core';
+import { Component,Input, OnInit, EventEmitter, Output } from '@angular/core';
 import {Tarea} from '../../interfaces/tarea-gantt.interface'
 import {MatDialog} from '@angular/material/dialog'
-import { Turno } from '../../../agenda/interfaces/turno.interface';
 import { MapRutaComponent } from 'src/app/maps/components/map-ruta/map-ruta.component';
 import { Router } from '@angular/router';
 
@@ -14,6 +13,9 @@ import { Router } from '@angular/router';
 })
 
 export class GanttComponent implements OnInit{
+
+  @Output() idprofesionalEvent = new EventEmitter<string>();
+
   constructor(
     private modalMapRuta: MatDialog,
     private router: Router
@@ -41,8 +43,8 @@ export class GanttComponent implements OnInit{
 
   crearLineaTiempoTarea( idElement: string, tarea: Tarea){
     // Crear  divs
-    let fechaProgramada  = new Date(tarea.fecha_programada);
-    let fechaNominal  = new Date(tarea.fecha_inicio);
+    let fechaProgramada  = new Date(tarea.fechaProgramada);
+    let fechaNominal  = new Date(tarea.fechaInicio);
     const div = document.createElement('div');
     const text = document.createElement('p');
     const holgura =document.createElement('div');
@@ -59,14 +61,14 @@ export class GanttComponent implements OnInit{
     } else{
           div.style.backgroundColor = this.colorDesplazamiento;
     }
-    const idNuevoDiv =  `tarea-${tarea.tipo}-${tarea.id_cita}`;
+    const idNuevoDiv =  `tarea-${tarea.tipo}-${tarea.id}`;
     div.style.borderRadius="0.4rem";
     div.id = idNuevoDiv;
     div.style.fontSize = '0rem';
 
   
      // Asignar estilos al p
-    text.textContent = tarea.id_cita;
+    text.textContent = tarea.id;
     text.style.position = 'absolute';
     text.style.top = '50%';
     text.style.left = '50%';
@@ -119,16 +121,16 @@ export class GanttComponent implements OnInit{
 
         //calculo de posiciones fecha programada
         const posisionInicialTarea = this.calcularPosicionContainerPx(longitudContainer,ubicacionEnIntervaloTiempoFechaProgramada,primeraHora);
-        const widthDivTarea = this.calcularLongitud(longitudContainer,tarea.duracion_seg);
+        const widthDivTarea = this.calcularLongitud(longitudContainer,tarea.duracion);
       
     
         //calculo posiciones holgura
-        let ubicacionEnIntervaloTiempoHolgura = ubicacionEnIntervaloTiempoFechaNominal-tarea.holgura_seg;
+        let ubicacionEnIntervaloTiempoHolgura = ubicacionEnIntervaloTiempoFechaNominal-tarea.holgura;
 
         let posisionInicialHolgura = this.calcularPosicionContainerPx(
           longitudContainer,ubicacionEnIntervaloTiempoHolgura,primeraHora);
         
-        let widthDivHolgura = this.calcularLongitud(longitudContainer,2*tarea.holgura_seg+tarea.duracion_seg);
+        let widthDivHolgura = this.calcularLongitud(longitudContainer,2*tarea.holgura+tarea.duracion);
 
         //asignacion de posiciones tarea
         div.style.left = `${posisionInicialTarea}px`;
@@ -226,5 +228,9 @@ export class GanttComponent implements OnInit{
     const dialogRef = this.modalMapRuta.open(MapRutaComponent,{
       data : tarea
    })
+   }
+
+   emitirProfesionalTurno(idProfesional: string):void{ 
+      this.idprofesionalEvent.emit(idProfesional);
    }
 }

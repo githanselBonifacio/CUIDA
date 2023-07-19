@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {AgendaService} from './shared/services/agenda/agenda.service'
+import {AgendaService} from './agenda/services/agenda.service'
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',

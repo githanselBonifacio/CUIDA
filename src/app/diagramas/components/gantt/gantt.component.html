@@ -19,16 +19,20 @@
                             <div class="card">
                                 <div class="card-body">
                                     <h6 class="card-title">{{actividad.responsable}}</h6>
-                                   
                                     <div>
-                                        {{actividad.numero_identificacion}}
+                                        {{actividad.numeroIdentificacion}}
                                     </div>
-                                    <div *ngIf="actividad.Clasificacion_habilidad_responsable">
-                                        {{actividad.Clasificacion_habilidad_responsable}}
+                                  
+                                    <div *ngIf="actividad.idMovil">
+                                        {{actividad.idMovil}}
                                     </div>
-                                    <div *ngIf="actividad.id_movil">
-                                        {{actividad.id_movil}}
-                                    </div>
+                                    <div class="retirar-profesional">
+                                        <i class="bi bi-person-x-fill" 
+                                        title="Retirar profesional"
+                                        (click)="emitirProfesionalTurno(actividad.numeroIdentificacion)">
+
+                                        </i>
+                                   </div>
                                 </div>
                             </div>
                         </div>
@@ -36,14 +40,14 @@
                 </div>
 
                 <div class="col-9" id = "container-actividad-time">
-                        <div class = "container-linea-tiempo" id="{{actividad.numero_identificacion}}">
+                        <div class = "container-linea-tiempo" id="{{actividad.numeroIdentificacion}}">
                         
                             <ng-container *ngIf="i <= actividades.length - 1">
                                 <ng-container *ngFor="let tarea of actividad.tareas">
                                     <ng-container *ngIf="tarea">
                                     
                                         {{crearLineaTiempoTarea(
-                                            actividad.numero_identificacion,
+                                            actividad.numeroIdentificacion,
                                             tarea
                                         )
                                         }}

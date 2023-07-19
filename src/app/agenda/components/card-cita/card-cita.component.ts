@@ -1,13 +1,14 @@
 import { Component, Input } from '@angular/core';
 
-import { Turno } from '../../interfaces/turno.interface';
+import { Cita,crearCita } from '../../interfaces/turno.interface';
 
 import {MatDialog} from '@angular/material/dialog'
-import { ModalAsignarProfesionalComponent } from '../modal-asignar-profesional/modal-asignar-profesional.component';
+import { ModalSeleccionProfesionalComponent } from '../modal-seleccion-profesional/modal-seleccion-profesional.component';
 import {VentanaConfirmacionComponent} from '../../../shared/components/ventana-confirmacion/ventana-confirmacion.component'
-import { AgendaService } from 'src/app/shared/services/agenda/agenda.service';
+import { AgendaService } from 'src/app/agenda/services/agenda.service';
 import { ModalCambioHoraCitaComponent } from '../modal-cambio-hora-cita/modal-cambio-hora-cita.component';
-import { PuntoUnicoComponent } from 'src/app/maps/components/punto-unico/punto-unico.component';
+import { ModalDetalleRemisionComponent } from '../modal-detalle-remision/modal-detalle-remision.component';
+
 @Component({
   selector: 'app-agenda-card-cita',
   templateUrl: './card-cita.component.html',
@@ -15,38 +16,19 @@ import { PuntoUnicoComponent } from 'src/app/maps/components/punto-unico/punto-u
 })
 export class CardCitaComponent {
     @Input()
-    public citas:Turno[] = [];
+    public citas:Cita[] = [];
 
-    citaSeleccionada :Turno = {
-      id_turno:                0,
-      fecha_turno:             new Date(),
-      id_horario_turno:        0,
-      id_cita:                 '',
-      id_remision:             '',
-      fecha_inicio:            '',
-      duracion_seg:            0,
-      holgura_seg:             0,
-      id_regional:             0,
-      latitud:                 0.0,
-      longitud:                0.0,
-      clasificacion_habilidad: '',
-      estado:                  '',
-      id_profesional:          '',
-      id_movil:                '',
-      conductor:               '',
-      fecha_programada:        '',
-      descripcion:             ''
-    };
+    citaSeleccionada :Cita = crearCita();
     
-
-    public nombreRegionalFiltro: string = 'Barranquilla';
-
+    @Input()
+    public idCiudad: string = '';
+    @Input()
     public fechaTurno: string = new Date().toISOString().slice(0, 10);
-
-    public idTurnoFiltro: number = 1
+    @Input()
+    public idHorarioTurno: number = 0
 
     constructor(
-      private dialogoAsignarProfesional : MatDialog,
+      private dialogoSeleccionProfesional : MatDialog,
       private dialogoRepogramarCita : MatDialog,
       private modalMapPuntoUnico: MatDialog,
       private agendaService : AgendaService
@@ -81,45 +63,59 @@ export class CardCitaComponent {
       return `${day}-${month}-${year} ${hours}:${minutes}`;
     }
 
-   asignarProfesionalCita(citaSeleccionada:Turno):void{
-        this.citaSeleccionada = citaSeleccionada;
-        const dialogRef = this.dialogoAsignarProfesional.open(ModalAsignarProfesionalComponent, {
-          data: this.citaSeleccionada,
-        });
+   asignarProfesionalCita(citaSeleccionada:Cita):void{
+       
+        this.agendaService
+              .getProfesionaFromTurnoCiudad(this.fechaTurno, this.idCiudad,this.idHorarioTurno)
+              .subscribe(profesionales =>{
+                this.citaSeleccionada = citaSeleccionada;
+                const dialogRef = this.dialogoSeleccionProfesional.open(ModalSeleccionProfesionalComponent, {
+                  data: {
+                    profesionales     :profesionales
+                  },
+                });
+                  dialogRef.afterClosed()
+                      .subscribe(opcionProfesional => {
+                       if(opcionProfesional != ''){
+                         this.agendaService.asignarProfesionaByIdCita(
+                            this.citaSeleccionada.idCita,
+                            opcionProfesional,
+                          ).subscribe(resp =>{
+                              location.reload()
+                            })
+                         }
+                         
+                        });
 
-        dialogRef.afterClosed().subscribe(result => {
-           //colocar popup de aviso   
+        
+
+      
         });
 
    }
 
-   desagendarProfesionalCita(citaSeleccionada:Turno, mensaje:string):void{
+   desagendarProfesionalCita(citaSeleccionada:Cita, mensaje:string):void{
     this.citaSeleccionada = citaSeleccionada;
-    const dialogRef = this.dialogoAsignarProfesional.open(VentanaConfirmacionComponent, {
+    const dialogRef = this.dialogoSeleccionProfesional.open(VentanaConfirmacionComponent, {
       data: {
         mensaje:mensaje
        }
 
       });
-      dialogRef.afterClosed().subscribe(result =>{
-        if(result){
-            this.agendaService.retirarProfesional(
-               this.citaSeleccionada.id_cita,
-               this.citaSeleccionada.id_regional
-            ).subscribe(resp =>{
-              if(resp){
-                this.agendaService.calcularDesplazamientosTurno(this.citaSeleccionada).subscribe(resp =>{
-                       location.reload();            
-                });
-              }
-            });
+      dialogRef.afterClosed()
+          .subscribe(result =>{
+              if(result){
+                    this.agendaService.retirarProfesional(this.citaSeleccionada.idCita)
+                       .subscribe(resp =>{
+                           location.reload();  
+                  });
 
         }
       })
      
    }
 
-   reprogramarHoraCita(citaSeleccionada:Turno):void{
+   reprogramarHoraCita(citaSeleccionada:Cita):void{
     this.citaSeleccionada = citaSeleccionada;
     const dialogRef = this.dialogoRepogramarCita.open(ModalCambioHoraCitaComponent,{
         data : this.citaSeleccionada
@@ -127,10 +123,12 @@ export class CardCitaComponent {
     
    }
    
-   mostrarMapaUbicacion(citaSeleccionada:Turno):void{
+   mostrarDetalleCita(citaSeleccionada:Cita):void{
       this.citaSeleccionada = citaSeleccionada;
-      const modalMap = this.modalMapPuntoUnico.open(PuntoUnicoComponent, {
+      const modalMap = this.modalMapPuntoUnico.open(ModalDetalleRemisionComponent, {
         data : this.citaSeleccionada
       })
+
+      
    }
 }

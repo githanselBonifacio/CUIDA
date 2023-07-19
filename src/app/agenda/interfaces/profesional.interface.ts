@@ -1,11 +1,12 @@
 export interface Profesional {
-    numero_identificacion: string;
-    primer_nombre:         string;
-    segundo_nombre:        string;
-    primer_apellido:       string;
-    segundo_apellido:      string;
-    id_habilidad:          number;
-    id_regional:           number;
+
+    numeroIdentificacion: string;
+    nombres:              string;
+    apellidos:            string;
+    fechaNacimiento:      string;
+    idCiudad:             string;
+    activo:               number;
+  
 }
 
 export class Convert {

@@ -23,6 +23,17 @@
     color: var(--second-color);
     font-size: 1.5rem;
 }
+.retirar-profesional{
+    display: flex;
+    justify-content: end;
+}
+.retirar-profesional i{
+    font-size: 1.5rem;
+    color: var(--red-color);
+}
+.retirar-profesional i:hover{
+    color: var(--red-dark-color);
+}
 .container-actividades-panel{
     max-height: 50rem;
  

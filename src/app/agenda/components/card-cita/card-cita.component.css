@@ -75,3 +75,37 @@ h5{
 #conductor-card h5{
     color: var(--orange-color);
 }
+
+.estado-cita{
+    font-size: 1.1rem;
+    font-weight: bold;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    border-radius: 5px;
+}
+@keyframes parpadeo-progreso {
+   
+    0% {
+      background-color: var(--orange-color);
+    }
+    50% {
+       background-color: var(--orange-color-dark);
+    }
+    100%{
+        background-color: var(--orange-color);
+    }
+   
+  }
+#estado-confirmado{
+  color: white;
+  background-color: var(--green-color-dark);
+}
+#estado-progreso{
+    animation: parpadeo-progreso 2s ease-in-out infinite;
+    color: var(--gris4-color);
+    background-color: var(--orange-color);
+}
+#estado-finalizada{
+    color: white;
+    background-color: var(--primary-color);
+}

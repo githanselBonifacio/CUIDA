@@ -1,19 +1,24 @@
 
-export interface Regional{
-    id:number,
-    nombre:string
+export interface Ciudad{
+    id: string,
+    nombre:string ,
+    latitud: number,
+    longitud: number,
+    direccion: string
 }
 
 export interface HorarioTurno{
     id:number,
-    hora_inicio:Date,
-    hora_fin:Date
+    nombre:string,
+    horaInicio:Date,
+    horaFin:Date
 }
 export function crearHorario():HorarioTurno{
     return {
         id:1,
-        hora_inicio:new Date(),
-        hora_fin:new Date()
+        nombre:'T1',
+        horaInicio:new Date(),
+        horaFin:new Date()
     }
 }
 export function generarHorario(idHorarioTurno: number): string[] {

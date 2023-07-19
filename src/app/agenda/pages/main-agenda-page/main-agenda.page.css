@@ -90,3 +90,17 @@ input{
     font-size: 1.5rem;
     color: var( --third-color);
 }
+
+#agregar-profesional{
+ font-size: 2.5rem;
+ color: var(--third-color);
+ text-align: center;
+ border:1px solid var( --gris3-color);
+ border-radius: 5px;
+}
+
+#agregar-profesional:hover{
+ color: var(--orange-color);
+ background-color: var(--gris4-color);
+ box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+}

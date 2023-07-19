@@ -9,7 +9,7 @@ export const routes: Routes = [
     component:MainComponentAgendaComponent,
   },
   {
-      path:":id_turno/:id_regional/:id_horario_turno",
+      path:":idTurno/:idCiudad/:idHorarioTurno",
       component:MainComponentAgendaComponent,
   },
   {

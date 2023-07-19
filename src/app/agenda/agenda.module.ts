@@ -7,19 +7,22 @@ import { FormsModule } from '@angular/forms';
 import {MatInputModule} from '@angular/material/input';
 import {MatDialogModule} from '@angular/material/dialog'
 import {MatFormFieldModule} from '@angular/material/form-field';
-import { ModalAsignarProfesionalComponent } from './components/modal-asignar-profesional/modal-asignar-profesional.component';
+import { ModalSeleccionProfesionalComponent } from './components/modal-seleccion-profesional/modal-seleccion-profesional.component';
 import {AgendaRoutingModule} from './agenda-routing.module';
 import { ModalCambioHoraCitaComponent } from './components/modal-cambio-hora-cita/modal-cambio-hora-cita.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { SpinnerComponent } from '../shared/components/spinner/spinner.component';
-
+import { ModalDetalleRemisionComponent } from './components/modal-detalle-remision/modal-detalle-remision.component';
+import { MapsModule } from '../maps/maps.module';
+import {MatSelectModule} from '@angular/material/select';
 @NgModule({
   declarations: [
     MainComponentAgendaComponent,
     CardCitaComponent,
-    ModalAsignarProfesionalComponent,
+    ModalSeleccionProfesionalComponent,
     ModalCambioHoraCitaComponent,
-    SpinnerComponent
+    SpinnerComponent,
+    ModalDetalleRemisionComponent
   ],
   imports: [
     CommonModule,
@@ -29,7 +32,10 @@ import { SpinnerComponent } from '../shared/components/spinner/spinner.component
     MatInputModule, 
     MatDialogModule,
     AgendaRoutingModule,
-    MatProgressSpinnerModule, 
+    MatProgressSpinnerModule,
+    MapsModule ,
+    MatSelectModule
+
   ],
   exports:[
     MainComponentAgendaComponent

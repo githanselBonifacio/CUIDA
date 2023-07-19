@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ModalAsignarProfesionalComponent } from './modal-asignar-profesional.component';
+import { ModalAsignarProfesionalComponent } from './modal-seleccion-profesional.component';
 
 describe('ModalAsignarProfesionalComponent', () => {
   let component: ModalAsignarProfesionalComponent;

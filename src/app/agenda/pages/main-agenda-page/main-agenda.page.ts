@@ -9,6 +9,7 @@ import { generarHorario} from '../../../shared/interfaces/maestros.interfaces'
 import {MatDialog} from '@angular/material/dialog'
 import { ModalSeleccionProfesionalComponent } from '../../../agenda/components/modal-seleccion-profesional/modal-seleccion-profesional.component';
 import { VentanaConfirmacionComponent } from 'src/app/shared/components/ventana-confirmacion/ventana-confirmacion.component';
+import { switchMap ,filter,tap} from 'rxjs/operators';
 
 @Component({
   selector: 'app-main-component-agenda',
@@ -25,10 +26,10 @@ export class MainComponentAgendaComponent implements OnInit{
   
       horasTurnoString: string[] = [] 
 
-      id_remision: string = "";
+      idRemision: string = "";
       fechaFiltroTurno: string =this.fechaHoy;
 
-      opcioCiudad: string = "427"
+      opcionCiudad: string = "427"
       opcionHorariosTurno:number = 1
 
       constructor (
@@ -49,7 +50,7 @@ export class MainComponentAgendaComponent implements OnInit{
               if(params['idTurno'] != null){
           
                   this.fechaFiltroTurno = params ['idTurno'];
-                  this.opcioCiudad = params ['idCiudad'];
+                  this.opcionCiudad = params ['idCiudad'];
                   this.opcionHorariosTurno = params ['idHorarioTurno'];
              }
               this.agendaService.getCitas(
@@ -95,17 +96,17 @@ export class MainComponentAgendaComponent implements OnInit{
 
      consultarCitas():void{
    
-        this.agendaService.getCitas(this.fechaFiltroTurno,this.opcioCiudad,this.opcionHorariosTurno);
-        this.agendaService.getActividadesAgendaGantt(this.fechaFiltroTurno,this.opcioCiudad,this.opcionHorariosTurno);
+        this.agendaService.getCitas(this.fechaFiltroTurno,this.opcionCiudad,this.opcionHorariosTurno);
+        this.agendaService.getActividadesAgendaGantt(this.fechaFiltroTurno,this.opcionCiudad,this.opcionHorariosTurno);
         this.horasTurnoString = generarHorario(this.opcionHorariosTurno);
-        this.router.navigate(['agenda',this.fechaFiltroTurno,this.opcioCiudad,this.opcionHorariosTurno]);
+        this.router.navigate(['agenda',this.fechaFiltroTurno,this.opcionCiudad,this.opcionHorariosTurno]);
      }
 
      filtrarCitasByIdRemision():void{
-      if(this.id_remision.length === 0){
+      if(this.idRemision.length === 0){
         this.consultarCitas()
       }
-      this.agendaService.filtrarCitasByIdRemision(this.id_remision);
+      this.agendaService.filtrarCitasByIdRemision(this.idRemision);
      }
 
     
@@ -120,7 +121,7 @@ export class MainComponentAgendaComponent implements OnInit{
             .subscribe(resp =>{
               this.agendaService.getCitasObservable(
                 this.fechaFiltroTurno,
-                this.opcioCiudad,
+                this.opcionCiudad,
                 this.opcionHorariosTurno
               ).subscribe(citasTurno =>{
                 this.agendaService.calcularDesplazamientoTurnoCompleto(
@@ -140,52 +141,51 @@ export class MainComponentAgendaComponent implements OnInit{
         this.loadingPage = false
         this.agendaService.desagendarTurnoCompleto(this.citas[0].fechaProgramada,this.opcionHorariosTurno)
         .subscribe(res =>{
-          this.loadingPage = true
-          this.ngOnInit();
+          this.loadingPage = true;
+          location.reload();
+          //this.ngOnInit();
         })
      }
-     agregarProfesionalTurno():void{
+     agregarProfesionalTurno(): void {
       this.agendaService
-            .getProfesionalDisponibleByturnoCiudad(this.fechaFiltroTurno, this.opcioCiudad)
-            .subscribe(profesionales =>{
-              const dialogRef = this.dialogoSeleccionProfesional.open(ModalSeleccionProfesionalComponent, {
-                data: {
-                  profesionales    : profesionales
-                }
-              })
-              dialogRef.afterClosed()
-              .subscribe(opcionProfesional =>{
-                      this.agendaService.asignarProfesionalTurno(
-                        this.fechaFiltroTurno,
-                        this.opcionHorariosTurno,
-                        opcionProfesional
-                      ).subscribe(
-                        res=>{
-                          this.ngOnInit();
-                        }
-                      )
-              })
-            })
-     }
-
-     desasignarProfesionalTurno(idprofesional: string):void{
-          const dialogRef = this.dialogoSeleccionProfesional.open(VentanaConfirmacionComponent,{
-            data: {
-              mensaje     :"Desea desasignar este profesional?"
-            },
-          });
-          dialogRef.afterClosed()
-              .subscribe(resp =>{
-                if(resp){
-                  this.agendaService.desasignarProfesionalTurno(
-                    this.fechaFiltroTurno,
-                    this.opcionHorariosTurno,
-                    idprofesional
-                  ).subscribe(resp =>{
-                    this.ngOnInit();
-                  })
-                }
-              })
-
-     }
+        .getProfesionalDisponibleByturnoCiudad(this.fechaFiltroTurno, this.opcionCiudad)
+        .pipe(
+          switchMap(profesionales => {
+            const dialogRef = this.dialogoSeleccionProfesional.open(ModalSeleccionProfesionalComponent, {
+              data: {
+                profesionales: profesionales
+              }
+            });
+            return dialogRef.afterClosed();
+          }),
+          switchMap(opcionProfesional => {
+            return this.agendaService.asignarProfesionalTurno(
+              this.fechaFiltroTurno,
+              this.opcionHorariosTurno,
+              opcionProfesional
+            );
+          })
+        )
+        .subscribe(res => {
+          location.reload();
+          //this.ngOnInit();
+        });
+    }
+    desasignarProfesionalTurno(idprofesional: string): void {
+      const dialogRef = this.dialogoSeleccionProfesional.open(VentanaConfirmacionComponent, {
+        data: {
+          mensaje: "Desea desasignar este profesional?"
+        },
+      });
+    
+      dialogRef.afterClosed().pipe(
+        filter(resp => !!resp),
+        switchMap(() => this.agendaService.desasignarProfesionalTurno(
+          this.fechaFiltroTurno,
+          this.opcionHorariosTurno,
+          idprofesional
+        )),
+        tap(() => location.reload())
+      ).subscribe();
+    }
   }

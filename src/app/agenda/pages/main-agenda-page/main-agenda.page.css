@@ -21,7 +21,8 @@ h1{
 #header_filtro_agenda{
    justify-content: space-between;
    flex-direction: row;
-   align-items: center;
+   align-items: end;
+   padding: 1rem 1rem 1rem 1rem;
 }
 #container-buttom-header{
     display: flex;
@@ -31,12 +32,13 @@ h1{
 }
 #filtro_agenda{
     justify-content: space-between;
-    padding: 1rem 1rem 1rem 1rem;
  }
+
  .input-group div{
     padding: 1rem 1rem 1rem 1rem;
     color: var( --primary-color);
  }
+
  .input-group input{
     margin: 0 1rem 0 0;
  }
@@ -47,6 +49,7 @@ h1{
     border: solid var(--gris3-color) 0.1rem;
     border-color:  var(--gris3-color);
     border-radius: 1px;
+    margin-right: 0.5rem;
   }
   
 option {
@@ -68,16 +71,30 @@ input{
 .bnt-consulta{
     background-color:var(--second-color);
     color:var( --gris4-color);
-    padding: 0.4rem 0.4rem 0.4rem 0.4rem;
     border: solid 1px var(--gris4-color);
     border-color: transparent;
     border-radius: 0.5rem;
-    font-size: 1.2rem;
+    font-size: 1.4rem;
+    height: 60%;
+    text-align: end;
+}
+.input-group{
+    align-items: end !important;
+}
+.form-group{
+    justify-content: start !important;
 }
  button:hover{
     color: var( --third-color);
+    box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5);
 }
 
+.btn-group{
+    display: flex;
+    justify-content: start;
+    align-items: end;
+    padding-right: 1rem;
+}
 .bnt-bot-agendamiento{
     background-color: var( --second-color);
     color: var(--gris4-color);
@@ -87,8 +104,8 @@ input{
     border: none;
 }
 .bnt-bot-agendamiento:hover{
-    font-size: 1.5rem;
     color: var( --third-color);
+    box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5);
 }
 
 #agregar-profesional{

@@ -29,7 +29,7 @@
           </div>
           
           <div id="option-boton">
-            <button class="btn btn-outline-success" cdkFocusInitial (click)="onConfirm()">Confirmar</button>
+            <button class="btn btn-outline-success" cdkFocusInitial (click)="onConfirm()" [disabled]="opcionProfesional==''">Confirmar</button>
           </div>
 
       </div>

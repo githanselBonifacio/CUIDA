@@ -10,7 +10,7 @@ export interface Tarea {
     fechaInicio:      string;
     fechaProgramada:  string;
     duracion:         number;
-    holgura    :      number;
+    holgura:          number;
     latitud:          number;
     longitud:         number;
     estado:           string;

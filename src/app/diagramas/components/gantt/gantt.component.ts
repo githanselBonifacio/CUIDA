@@ -5,11 +5,23 @@ import {Tarea} from '../../interfaces/tarea-gantt.interface'
 import {MatDialog} from '@angular/material/dialog'
 import { MapRutaComponent } from 'src/app/maps/components/map-ruta/map-ruta.component';
 import { Router } from '@angular/router';
+import { trigger, state, style, transition, animate } from '@angular/animations';
 
 @Component({
   selector: 'app-diagramas-gantt',
   templateUrl:'./gantt.component.html',
-  styleUrls: ['./gantt.component.css']
+  styleUrls: ['./gantt.component.css'],
+  animations: [
+    trigger('cambioColor', [
+      state('inicial', style({
+        backgroundColor: 'red'
+      })),
+      state('final', style({
+        backgroundColor: 'blue'
+      })),
+      transition('inicial <=> final', animate('1000ms ease-in-out'))
+    ])
+  ]
 })
 
 export class GanttComponent implements OnInit{
@@ -35,11 +47,17 @@ export class GanttComponent implements OnInit{
   colorHolgura:string="#f9e4478f"
   colorFondoTexto:string ="#0033A0"
   colorDesplazamiento :string = "#f5b120";
+
   ngOnInit(): void {
       this.currentUrl = this.router.url;
       this.simpleHoras = this.horas.map(hora => parseInt(hora.substring(0, 2)));
       this.intervalo = (this.horas.length-1)*3600
+
   }
+ /* onResize(){
+    this.ngOnInit()
+    console.log("cambio")
+  }*/
 
   crearLineaTiempoTarea( idElement: string, tarea: Tarea){
     // Crear  divs
@@ -56,6 +74,7 @@ export class GanttComponent implements OnInit{
     div.className =  `tarea-${tarea.tipo}`;
     div.style.border = `2px solid ${this.colorFondoTexto}`;
 
+    //color por estado
     if(tarea.tipo === 'visita'){
         div.style.backgroundColor = this.colorTareaAtencion;
     } else{
@@ -68,7 +87,12 @@ export class GanttComponent implements OnInit{
 
   
      // Asignar estilos al p
-    text.textContent = tarea.id;
+     if(tarea.tipo=='visita'){
+      text.textContent = tarea.id;
+     }else{
+      text.textContent="desplazamiento"
+     }
+    
     text.style.position = 'absolute';
     text.style.top = '50%';
     text.style.left = '50%';
@@ -103,7 +127,7 @@ export class GanttComponent implements OnInit{
     let container = document.getElementById(idElement);
 
     if(container != null && document.getElementById(idNuevoDiv)==null){
-
+       
         longitudContainer = container.offsetWidth
         //calculo para la fecha programada
         const horaFechaProgramada = Number(fechaProgramada.getHours());

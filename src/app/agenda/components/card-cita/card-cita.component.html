@@ -11,8 +11,8 @@
                     </div>
                 </div>
                 
-                <span class="input-group-text"><i class="bi bi-calendar" ></i>{{cita.fechaInicio}}</span>
-                <span class="input-group-text"><i class="bi bi-calendar-check" ></i>{{cita.fechaProgramada}}</span>
+                <span class="input-group-text"><i class="bi bi-calendar" ></i>{{formatDateTime(cita.fechaInicio)}}</span>
+                <span class="input-group-text"><i class="bi bi-calendar-check" ></i>{{formatDateTime(cita.fechaProgramada)}}</span>
                 <span class="input-group-text"><i class="bi bi-clock"></i>{{convertSecondsToMinutesOrHours(cita.duracion)}}</span>
                 <span class="input-group-text"><i class="bi bi-hourglass-bottom"></i>{{convertSecondsToMinutesOrHours(cita.holgura)}}</span>
                 <span class="input-group-text"><i class="bi bi-clipboard"></i>

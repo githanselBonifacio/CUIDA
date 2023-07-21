@@ -6,6 +6,16 @@ export interface Ciudad{
     longitud: number,
     direccion: string
 }
+export function crearCiudad():Ciudad{
+    const cita: Ciudad = {
+        id:           "",
+        nombre:       '',
+        latitud:       0,
+        longitud:      0,
+        direccion:    '',
+      };
+      return cita;
+}
 
 export interface HorarioTurno{
     id:number,
@@ -31,4 +41,13 @@ export function generarHorario(idHorarioTurno: number): string[] {
         horarioArray = ['22:00','23:00','00:00','01:00','02:00','03:00','04:00','05:00','06:00']
     }
     return horarioArray;
-  }
+}
+export function formatoFecha(date:Date):string{
+    const dateTime = new Date(date);
+    const day = dateTime.getDate().toString().padStart(2, '0');
+    const month = (dateTime.getMonth() + 1).toString().padStart(2, '0');
+    const year = dateTime.getFullYear().toString();
+    const hours = dateTime.getHours().toString().padStart(2, '0');
+    const minutes = dateTime.getMinutes().toString().padStart(2, '0');
+    return `${year}-${month}-${day}`;
+}

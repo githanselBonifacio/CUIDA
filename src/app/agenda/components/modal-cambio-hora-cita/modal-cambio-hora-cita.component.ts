@@ -10,48 +10,22 @@ import { AgendaService } from 'src/app/agenda/services/agenda.service';
 })
 export class ModalCambioHoraCitaComponent implements OnInit{
 
-  horaCita = "";
+  horaCitaNueva = "";
   constructor(
     public dialogRef: MatDialogRef<ModalCambioHoraCitaComponent>,
-    @Inject(MAT_DIALOG_DATA) public citaSeleccionada: Cita,
-    private agendaService: AgendaService,
+    @Inject(MAT_DIALOG_DATA) public horaActual: string,
   ) {}
 
   ngOnInit() {
-    this.horaCita = this.getHoraFecha();
-    console.log(this.horaCita)
+    this.horaCitaNueva = this.horaActual;
+   
   }
-  getHoraFecha():string{
-  const [fechaCompleta, horaCompleta] = String(this.citaSeleccionada.fechaInicio).split('T');
-  const hora = horaCompleta.substring(0, 5);
 
-  return hora;
-  }
 
   onNoClick(): void {
-    this.dialogRef.close(false);
+    this.dialogRef.close('');
   }
   onConfirm():void{
-    const fecha = new Date(this.citaSeleccionada.fechaInicio);
-    
-    const year = fecha.getFullYear();
-    const month = fecha.getMonth()+1;
-    const day = fecha.getDate();
-
-    this.agendaService.reprogramarCita(
-      this.citaSeleccionada.idCita,
-      `${year}-${month}-${day}`,
-      this.horaCita
-    ).subscribe(resp =>{
-      this.agendaService.calcularDesplazamientosTurno(
-        this.citaSeleccionada
-      ).subscribe(resp =>{
-        this.dialogRef.close(true)
-        location.reload();
-         
-      })
-    });
-    
-   
+    this.dialogRef.close(this.horaCitaNueva)
   }
 }

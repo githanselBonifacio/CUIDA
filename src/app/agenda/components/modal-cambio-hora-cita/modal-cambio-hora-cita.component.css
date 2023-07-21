@@ -17,3 +17,22 @@
  #opcionProfesional input{
   color: var(--quarter-color);
  }
+ input{
+  display: block;
+  font-size: 1.2rem;
+  text-align: center;
+  align-content: center;
+  align-items: center;
+  text-align: center;
+  border: 1px solid var(--gris3-color);
+  padding: 0.5rem 0.5rem 0.5rem 0.5rem;
+ }
+
+ #content{
+  text-align: center;
+ }
+ #content-input{
+  padding-top: 0.5rem;
+  display: flex;
+  justify-content: center;
+ }

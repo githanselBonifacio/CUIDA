@@ -7,7 +7,7 @@ import { MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
   templateUrl: './modal-seleccion-profesional.component.html',
   styleUrls: ['./modal-seleccion-profesional.component.css'],
 })
-export class ModalSeleccionProfesionalComponent  implements OnInit{
+export class ModalSeleccionProfesionalComponent {
   
   opcionProfesional: string ="";
 
@@ -15,14 +15,11 @@ export class ModalSeleccionProfesionalComponent  implements OnInit{
     public dialogRef: MatDialogRef<ModalSeleccionProfesionalComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
   ) {}
-ngOnInit(): void {
-    console.log(this.data)
-}
+
   onNoClick(): void {
     this.dialogRef.close('');
   }
   onConfirm():void{
-    console.log(this.data['profesionales'])
     this.dialogRef.close(String(this.opcionProfesional))
     
   }

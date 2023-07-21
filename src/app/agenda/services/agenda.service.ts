@@ -6,6 +6,7 @@ import {Actividad} from '../../diagramas/interfaces/tarea-gantt.interface'
 import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environments';
 import { AgendaModule } from '../agenda.module';
+import {formatoFecha} from '../../shared/interfaces/maestros.interfaces'
 
 @Injectable({
   providedIn: AgendaModule
@@ -171,27 +172,35 @@ export class AgendaService {
 
       return this.http.get<string>(`${environment.URL_API_CUIDA}/${this.urlRecurso}/desasignarProfesionalCita`, {params})
     }
-    reprogramarCita(id_cita:string,fecha_programada:string,nueva_hora:string){
+    reprogramarCita(idCita:string,fechaProgramada:string,nuevaHora:string){
+      console.log(idCita)
+      console.log(fechaProgramada)
+      console.log(nuevaHora)
       const params = new HttpParams()
-      .set('id_cita',id_cita)
-      .set('fecha_programada',fecha_programada)
-      .set('nueva_hora',nueva_hora)
+      .set('idCita',idCita)
+      .set('fechaProgramada',fechaProgramada)
+      .set('nuevaHora',nuevaHora)
 
-      return this.http.get<string>(`${this.serviceUrl}/citas/reprogramar`, {params})
+      return this.http.get<string>(`${environment.URL_API_CUIDA}/${this.urlRecurso}/reprogramarCita`, {params})
     }
-    calcularDesplazamientosTurno(turno: Cita){
-        return this.http.post(`${this.serviceUrl}/citas/calcularDesplazamiento`,[turno])
+    calcularDesplazamientosCitasProfesional(fechaTurno: string,idHorarioTurno:number,idCiudad:string,idProfesional:string){
+      const params = new HttpParams()
+      .set('fechaTurno',fechaTurno)
+      .set('idHorarioTurno',idHorarioTurno)
+      .set('idCiudad',idCiudad)
+      .set('idProfesional',idProfesional)
+        return this.http.get(`${environment.URL_API_CUIDA}/${this.urlRecurso}/calcularDesplazamientoCitasByprofesional`, {params})
     }
     calcularDesplazamientoTurnoCompleto(turno: Cita[]){
       return this.http.post(`${this.serviceUrl}/citas/calcularDesplazamiento`,turno)
     }
 
-    desagendarTurnoCompleto(fecha_turno:Date, id_horario_turno: number){
+    desagendarTurnoCompleto(fechaTurno:Date, idHorarioTurno: number){
       const params = new HttpParams()
-      .set('fecha_turno',`${fecha_turno}`)
-      .set('id_horario_turno',id_horario_turno)
+      .set('fechaTurno',`${formatoFecha(fechaTurno)}`)
+      .set('idHorarioTurno',idHorarioTurno)
 
-      return this.http.get(`${this.serviceUrl}/estado_cita/desagendarTurno`, {params})    
+      return this.http.get(`${environment.URL_API_CUIDA}/${this.urlRecurso}/desagendarTurnoCompleto`, {params})    
     }
     autoagendar(turno:  Cita []){
       return this.http.post(`${this.serviceUrl}/citas/autoagendar`,turno)

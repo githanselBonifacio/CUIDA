@@ -1,23 +1,28 @@
 <div id="container-agenda">
         <div >
             <div class="d-flex" id = "header_filtro_agenda">
-                <h1>Gestion de agenda</h1>
-
-                <div class= "btn-agendamientos">
-                    <button class="bnt-bot-agendamiento" (click)=" autoagendar()">
-                        <i class = 'bi bi-robot'></i><span> Agendar</span>
-                    </button>
-                </div>
-                   
-                <div class= "btn-agendamientos">
-                    <button class="bnt-bot-agendamiento" (click)="desagendarTurnoCompleto()">
-                        <i class="bi bi-trash2-fill"></i> <span>  Desagendar </span>
-                    </button>
+                <div>
+                    <h1>Gestion de agenda</h1>
                 </div>
 
                 <div class = "form-group">
+                    
                     <div class="d-flex" id = "filtro_agenda">
-                        
+                    
+                        <div class="btn-group">
+                            <div class= "btn-agendamientos">
+                                <button class="bnt-bot-agendamiento" (click)=" autoagendar()">
+                                    Agendar
+                                </button>
+                             </div>
+
+                            <div class= "btn-agendamientos">
+                                <button class="bnt-bot-agendamiento" (click)="desagendarTurnoCompleto()">
+                                        Desagendar 
+                                </button>
+                            </div>
+                        </div>   
+                    
                         <div class="input-group">
                             <label for="fecha">Fecha</label>
                             <input type="date" id="fecha" [(ngModel)]="fechaFiltroTurno" id="fecha-consultada">
@@ -25,17 +30,17 @@
 
                         
                         <div class="input-group">
-                            <label for="opcionRegional">Regional</label>
-                            <select name="select-regional" [(ngModel)]="opcioCiudad" id="opcionRegional">
+                            <label for="opcionCiudad">Ciudad</label>
+                            <select name="select-regional" [(ngModel)]="opcionCiudad" id="opcionCiudad">
                                 <option value="default" selected disabled>seleccione..</option>
-                                <option *ngFor="let option of regionales" [value]="option.id">{{option.nombre}} </option>
+                                <option *ngFor="let ciudad of regionales" [value]="ciudad.id">{{ciudad.nombre}} </option>
                             </select>
                         </div>
 
                     
                         <div class="input-group">
-                            <label for="OpcionTurno">Turno enfermeria</label>
-                            <select name="select-turno" [(ngModel)]="opcionHorariosTurno" id="OpcionTurno">
+                            <label for="opcionTurno">Turno enfermeria</label>
+                            <select name="select-turno" [(ngModel)]="opcionHorariosTurno" id="opcionTurno">
                                 <option value="default" selected disabled>seleccione..</option>
                                 <option *ngFor="let option of horarioTurno" [value]="option.id">T{{option.id}}</option>
                             </select>
@@ -56,11 +61,11 @@
                     <h2>Citas</h2>
                     <div class="input-group mb-3">
                         <span class="input-group-text" id="basic-addon1">ID</span>
-                        <input [(ngModel)]="id_remision" (ngModelChange)=filtrarCitasByIdRemision() type="text" class="form-control" placeholder="remisión" aria-label="Username" aria-describedby="basic-addon1">
+                        <input [(ngModel)]="idRemision" (ngModelChange)=filtrarCitasByIdRemision() type="text" class="form-control" placeholder="remisión" aria-label="Username" aria-describedby="basic-addon1">
                     </div>
                 </div>
                 <app-agenda-card-cita 
-                        [citas]="citas"  [idCiudad]="opcioCiudad" [fechaTurno]="fechaFiltroTurno" [idHorarioTurno]="opcionHorariosTurno">
+                        [citas]="citas"  [idCiudad]="opcionCiudad" [fechaTurno]="fechaFiltroTurno" [idHorarioTurno]="opcionHorariosTurno">
                 </app-agenda-card-cita>
 
             </div>
@@ -74,8 +79,8 @@
 
                 <div class="row">
                     <div class="col-2">
-                        <div id="agregar-profesional">
-                                <i class="bi bi-person-plus-fill" title="Agregar profesional" (click)="agregarProfesionalTurno()"></i>
+                        <div id="agregar-profesional" (click)="agregarProfesionalTurno()">
+                                <i class="bi bi-person-plus-fill" title="Agregar profesional"></i>
                         </div>
 
                     </div>

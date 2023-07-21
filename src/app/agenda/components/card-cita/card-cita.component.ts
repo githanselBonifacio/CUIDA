@@ -8,7 +8,7 @@ import {VentanaConfirmacionComponent} from '../../../shared/components/ventana-c
 import { AgendaService } from 'src/app/agenda/services/agenda.service';
 import { ModalCambioHoraCitaComponent } from '../modal-cambio-hora-cita/modal-cambio-hora-cita.component';
 import { ModalDetalleRemisionComponent } from '../modal-detalle-remision/modal-detalle-remision.component';
-
+import { switchMap ,filter,tap,catchError } from 'rxjs/operators';
 @Component({
   selector: 'app-agenda-card-cita',
   templateUrl: './card-cita.component.html',
@@ -53,7 +53,7 @@ export class CardCitaComponent {
       
     }
 
-     formatDateTime(dateTimeString: string): string {
+     formatDateTime(dateTimeString: Date): string {
       const dateTime = new Date(dateTimeString);
       const day = dateTime.getDate().toString().padStart(2, '0');
       const month = (dateTime.getMonth() + 1).toString().padStart(2, '0');
@@ -63,52 +63,66 @@ export class CardCitaComponent {
       return `${day}-${month}-${year} ${hours}:${minutes}`;
     }
 
-   asignarProfesionalCita(citaSeleccionada:Cita):void{
-       
-        this.agendaService
-              .getProfesionaFromTurnoCiudad(this.fechaTurno, this.idCiudad,this.idHorarioTurno)
-              .subscribe(profesionales =>{
-                this.citaSeleccionada = citaSeleccionada;
-                const dialogRef = this.dialogoSeleccionProfesional.open(ModalSeleccionProfesionalComponent, {
-                  data: {
-                    profesionales     :profesionales
-                  },
-                });
-                  dialogRef.afterClosed()
-                      .subscribe(opcionProfesional => {
-                       if(opcionProfesional != ''){
-                         this.agendaService.asignarProfesionaByIdCita(
-                            this.citaSeleccionada.idCita,
-                            opcionProfesional,
-                          ).subscribe(resp =>{
-                              location.reload()
-                            })
-                         }
-                         
-                        });
-
-        
-
-      
-        });
-
-   }
-
+    asignarProfesionalCita(citaSeleccionada: Cita): void {
+      let opcionProfesional:string='';
+      this.agendaService.getProfesionaFromTurnoCiudad(this.fechaTurno, this.idCiudad, this.idHorarioTurno)
+        .pipe(
+          tap(profesionales => {
+            this.citaSeleccionada = citaSeleccionada;
+            const dialogRef = this.dialogoSeleccionProfesional.open(ModalSeleccionProfesionalComponent, {
+              data: {
+                profesionales: profesionales
+              },
+            });
+            dialogRef.afterClosed()
+              .pipe(
+                filter(opcionProfesional => opcionProfesional !== ''),
+                switchMap(opcionProfesionalResp => {
+                  opcionProfesional =opcionProfesionalResp
+                  return this.agendaService.asignarProfesionaByIdCita(
+                    this.citaSeleccionada.idCita,
+                    opcionProfesional,
+                  );
+                }),
+                switchMap(resp => {
+                  return this.agendaService.calcularDesplazamientosCitasProfesional(
+                    this.fechaTurno,
+                    this.idHorarioTurno,
+                    this.idCiudad,
+                    opcionProfesional
+                  );
+                }),
+              )
+              .subscribe(resp => {
+                location.reload();
+              });
+          }),
+        )
+        .subscribe();
+    }
    desagendarProfesionalCita(citaSeleccionada:Cita, mensaje:string):void{
     this.citaSeleccionada = citaSeleccionada;
     const dialogRef = this.dialogoSeleccionProfesional.open(VentanaConfirmacionComponent, {
       data: {
-        mensaje:mensaje
-       }
-
+              mensaje:mensaje
+            }
       });
-      dialogRef.afterClosed()
-          .subscribe(result =>{
-              if(result){
-                    this.agendaService.retirarProfesional(this.citaSeleccionada.idCita)
-                       .subscribe(resp =>{
-                           location.reload();  
-                  });
+    dialogRef.afterClosed()
+      .subscribe(result =>{
+        if(result){
+          this.agendaService.retirarProfesional(this.citaSeleccionada.idCita)
+          .subscribe(resp =>{
+            if(citaSeleccionada.idProfesional){
+              this.agendaService.calcularDesplazamientosCitasProfesional(
+              this.fechaTurno,
+              this.idHorarioTurno,
+              this.idCiudad,
+              citaSeleccionada.idProfesional
+             ).subscribe(resp =>{
+                 location.reload()
+             }) 
+            }
+          });
 
         }
       })
@@ -116,9 +130,41 @@ export class CardCitaComponent {
    }
 
    reprogramarHoraCita(citaSeleccionada:Cita):void{
-    this.citaSeleccionada = citaSeleccionada;
+    const fecha = new Date(citaSeleccionada.fechaInicio);
+    
+    const year = fecha.getFullYear();
+    const month = (fecha.getMonth() + 1).toString().padStart(2, '0');
+    const day = fecha.getDate().toString().padStart(2, '0');
+    const hours = fecha.getHours().toString().padStart(2, '0');
+    const minutes = fecha.getMinutes().toString().padStart(2, '0');
+    const fechaFormateada = `${year}-${month}-${day} ${hours}:${minutes}`
+    const horaActual =`${hours}:${minutes}`
+
     const dialogRef = this.dialogoRepogramarCita.open(ModalCambioHoraCitaComponent,{
-        data : this.citaSeleccionada
+        data : horaActual
+    })
+    dialogRef.afterClosed()
+    .subscribe(nuevaHora =>{
+      if(nuevaHora!=''){
+
+          this.agendaService.reprogramarCita(
+              citaSeleccionada.idCita,
+              fechaFormateada,
+              nuevaHora
+      ).subscribe(resp =>{
+        if(citaSeleccionada.idProfesional){
+          this.agendaService.calcularDesplazamientosCitasProfesional(
+          this.fechaTurno,
+          this.idHorarioTurno,
+          this.idCiudad,
+          citaSeleccionada.idProfesional
+         ).subscribe(resp =>{
+             location.reload()
+         }) 
+        }
+      })
+      }
+    
     })
     
    }

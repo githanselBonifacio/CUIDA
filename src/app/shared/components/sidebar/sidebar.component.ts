@@ -10,6 +10,6 @@ export class SidebarComponent {
   year = this.today.getFullYear();
   month = (this.today.getMonth() + 1).toString().padStart(2, '0');
   day = this.today.getDate().toString().padStart(2, '0');
-  @Input()
+  
   fechaHoy = `${this.year}-${this.month}-${this.day}`;
 }

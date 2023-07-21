@@ -10,7 +10,7 @@ import {MatDialog} from '@angular/material/dialog'
 import { ModalSeleccionProfesionalComponent } from '../../../agenda/components/modal-seleccion-profesional/modal-seleccion-profesional.component';
 import { VentanaConfirmacionComponent } from 'src/app/shared/components/ventana-confirmacion/ventana-confirmacion.component';
 import { switchMap ,filter,tap} from 'rxjs/operators';
-
+import {formatoFecha} from '../../../shared/interfaces/maestros.interfaces'
 @Component({
   selector: 'app-main-component-agenda',
   templateUrl: './main-agenda.page.html',
@@ -109,37 +109,26 @@ export class MainComponentAgendaComponent implements OnInit{
       this.agendaService.filtrarCitasByIdRemision(this.idRemision);
      }
 
-    
      autoagendar():void{
       this.loadingPage = false
-      this.agendaService.desagendarTurnoCompleto(
-        this.citas[0].fechaProgramada, this.opcionHorariosTurno
-      )
-      .subscribe(
-          resp => {
-            this.agendaService.autoagendar(this.agendaService.citas)
-            .subscribe(resp =>{
-              this.agendaService.getCitasObservable(
-                this.fechaFiltroTurno,
-                this.opcionCiudad,
-                this.opcionHorariosTurno
-              ).subscribe(citasTurno =>{
-                this.agendaService.calcularDesplazamientoTurnoCompleto(
-                    citasTurno
-                  ).subscribe(resp => {
-                      this.loadingPage = true
-                      this.ngOnInit();
-                  })
-              });
-                  
-          })
-        }
-      )
+      this.agendaService.desagendarTurnoCompleto(this.citas[0].fechaProgramada,this.opcionHorariosTurno,this.opcionCiudad)
+      .subscribe(res =>{
+          this.agendaService.autoagendar(
+            this.citas[0].fechaInicio,
+            this.opcionHorariosTurno,
+            this.opcionCiudad
+          ).subscribe(resp =>{
+            this.loadingPage = true
+            location.reload()
+          });
+      })
+      
      }
+    
 
      desagendarTurnoCompleto():void{
         this.loadingPage = false
-        this.agendaService.desagendarTurnoCompleto(this.citas[0].fechaProgramada,this.opcionHorariosTurno)
+        this.agendaService.desagendarTurnoCompleto(this.citas[0].fechaProgramada,this.opcionHorariosTurno,this.opcionCiudad)
         .subscribe(res =>{
           this.loadingPage = true;
           location.reload();

@@ -112,6 +112,7 @@ export class GanttComponent implements OnInit{
     holgura.style.display ='none';
     holgura.style.borderRadius="0.3rem";
     holgura.style.zIndex ="9999";
+    div.style.fontSize = '0rem;'
     //eventos de visualizacion
     div.addEventListener('mouseover', () => {
       div.style.fontSize = '1.2rem';
@@ -227,7 +228,7 @@ export class GanttComponent implements OnInit{
     divHoraTexto.style.position = "absolute"
     divHoraTexto.style.top = '50%';
     divHoraTexto.style.left = '50%';
-    divHoraTexto.style.transform = 'translate(-50%, -350%)';
+    divHoraTexto.style.transform = 'translate(-50%, -390%)';
     divHoraTexto.style.fontWeight = "bold"
 
     //div para el contenedor del texto

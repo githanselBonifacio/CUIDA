@@ -130,7 +130,7 @@ export class CardCitaComponent {
    }
 
    reprogramarHoraCita(citaSeleccionada:Cita):void{
-    const fecha = new Date(citaSeleccionada.fechaInicio);
+    const fecha = new Date(citaSeleccionada.fechaProgramada);
     
     const year = fecha.getFullYear();
     const month = (fecha.getMonth() + 1).toString().padStart(2, '0');

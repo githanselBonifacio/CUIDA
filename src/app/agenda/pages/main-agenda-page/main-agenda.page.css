@@ -2,6 +2,12 @@
 
 h1{
     color: var( --second-color);
+    font-size: 2rem;
+    margin-bottom: -0.2rem;
+}
+#titulo{
+    display: flex;
+    justify-content: center;
 }
 #container-agenda{
     margin: 4rem 4rem 4rem 4rem ;

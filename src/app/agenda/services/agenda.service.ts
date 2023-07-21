@@ -195,14 +195,19 @@ export class AgendaService {
       return this.http.post(`${this.serviceUrl}/citas/calcularDesplazamiento`,turno)
     }
 
-    desagendarTurnoCompleto(fechaTurno:Date, idHorarioTurno: number){
+    desagendarTurnoCompleto(fechaTurno:Date, idHorarioTurno: number,idCiudad:string){
       const params = new HttpParams()
       .set('fechaTurno',`${formatoFecha(fechaTurno)}`)
       .set('idHorarioTurno',idHorarioTurno)
+      .set('idCiudad',idCiudad)
 
       return this.http.get(`${environment.URL_API_CUIDA}/${this.urlRecurso}/desagendarTurnoCompleto`, {params})    
     }
-    autoagendar(turno:  Cita []){
-      return this.http.post(`${this.serviceUrl}/citas/autoagendar`,turno)
+    autoagendar(fechaTurno:Date, idHorarioTurno: number, idCiudad:string){
+      const params = new HttpParams()
+      .set('fechaTurno',`${formatoFecha(fechaTurno)}`)
+      .set('idHorarioTurno',idHorarioTurno)
+      .set('idCiudad',idCiudad)
+      return this.http.get(`${environment.URL_API_CUIDA}/${this.urlRecurso}/autoagendarTurnoCompleto`, {params})
   }
 }

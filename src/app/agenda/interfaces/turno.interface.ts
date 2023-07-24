@@ -6,6 +6,8 @@ export interface Cita {
     fechaInicio:     Date;
     fechaProgramada: Date;
     especialidad:    string;
+    latitud:         number;
+    longitud:        number;
     idCiudad :       string;
     idEstado:        number;
     idProfesional:   string|null;
@@ -28,6 +30,8 @@ export function crearCita():Cita{
         idRemision:       '',
         duracion:         0,
         holgura:          0,
+        latitud:         0,
+        longitud:          0,
         idCiudad:         '',
         idEstado:         0,
         idProfesional:    '',

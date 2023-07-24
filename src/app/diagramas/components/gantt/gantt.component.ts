@@ -204,6 +204,7 @@ export class GanttComponent implements OnInit{
         return (longitudContainer*(ubicacionEnIntervaloTiempo-ubicacionTiempoInicial))/this.intervalo;
 
    }
+   
    calcularLongitud(longitudContainer:number,duracionSegundos:number):number{
         return (longitudContainer*duracionSegundos/this.intervalo);
    }
@@ -249,10 +250,12 @@ export class GanttComponent implements OnInit{
       }
    }
 
-   mostrarRutaMapa(tarea:Tarea[]):void{
+   mostrarRutaMapa(tareas:Tarea[]):void{
+    console.log(tareas)
     const dialogRef = this.modalMapRuta.open(MapRutaComponent,{
-      data : tarea
-   })
+      data : tareas
+      })
+      
    }
 
    emitirProfesionalTurno(idProfesional: string):void{ 

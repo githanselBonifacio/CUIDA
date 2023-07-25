@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MaestrosService } from 'src/app/shared/services/maestros/maestros.service';
 import { ActivatedRoute,Router } from '@angular/router';
-import { MovilesService } from 'src/app/shared/services/moviles/moviles.service';
+import { MovilesService } from 'src/app/moviles/services/moviles.service';
 import { generarHorario} from '../../../shared/interfaces/maestros.interfaces'
 import {Desplazamiento} from '../../interfaces/desplazamiento.interface'
 import { HorarioTurno, Ciudad } from 'src/app/shared/interfaces/maestros.interfaces';

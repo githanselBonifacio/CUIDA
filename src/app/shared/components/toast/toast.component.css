@@ -1,0 +1,13 @@
+.custom-dialog{
+    padding: 2rem 2rem 2rem 2rem;
+    text-align: center;
+    justify-content: center;
+    font-size: 1.5rem;
+  }
+.content-option{
+    display: flex;
+    justify-content: end;
+  }
+.content-option button{
+    margin-left: 0.5rem;
+  }

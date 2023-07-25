@@ -1,24 +1,19 @@
+.container-admin{
+    padding-top: 5rem;
+    width: 100vw;
+    height: 100vh;
+    background-image: url("../../../../assets/img/cuida-background.png");
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    width: 100%;
+}
 .menu-hex{
         display:flex;
         justify-content: center;
         margin: 2rem 2rem 2rem 2rem;
       }
-.hexagon {
-    display: flex;
-        width: 13rem;
-        height: 15rem;
-        background-color:var(--second-color);
-        clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
-        margin: 0 1rem 0 1rem;
-        text-align: center;
-        justify-content: center;
-        align-items: center;
-        font-size: 8rem;       
-}
-h1{
-    color: var(--second-color);
-    font-size: 5rem;
-}
+
 .title{
     text-align: center;
 }
@@ -27,12 +22,60 @@ h1{
     justify-content: center;
     align-items: center;
 }
-.text-menu h5{
-    color: var(--gris4-color);
-    font-size: 1.9rem;
-    font-weight: bold;
+@media screen  and (min-width: 850px) and (max-width:1799px){
+    .hexagon {
+        display: flex;
+            width: 10rem;
+            height: 12rem;
+            background-color:var(--second-color);
+            clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+            margin: 0 1rem 0 1rem;
+            text-align: center;
+            justify-content: center;
+            align-items: center;
+            font-size: 7rem;       
+    }
+    h1{
+        color: var(--second-color);
+        font-size: 3.5rem;
+    }
+    
+    .text-menu h5{
+        color: var(--gris4-color);
+        font-size: 1.4rem;
+        font-weight: bold;
+    }
+    .text-menu h5:hover{
+        color: var( --third-color);
+        font-size: 1.5rem
+    }
 }
-.text-menu h5:hover{
-    color: var( --third-color);
-    font-size: 2rem
+@media screen  and (min-width: 1800px) and (max-width: 2200px) {
+    .hexagon {
+        display: flex;
+            width: 16rem;
+            height: 18rem;
+            background-color:var(--second-color);
+            clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+            margin: 0 1rem 0 1rem;
+            text-align: center;
+            justify-content: center;
+            align-items: center;
+            font-size: 8.5rem;       
+    }
+
+    h1{
+        color: var(--second-color);
+        font-size: 5rem;
+    }
+    
+    .text-menu h5{
+        color: var(--gris4-color);
+        font-size: 1.9rem;
+        font-weight: bold;
+    }
+    .text-menu h5:hover{
+        color: var( --third-color);
+        font-size: 2rem
+    }
 }

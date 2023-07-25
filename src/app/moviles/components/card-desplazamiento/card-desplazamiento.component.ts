@@ -1,6 +1,6 @@
 import { Component,Input } from '@angular/core';
 import {Desplazamiento} from '../../interfaces/desplazamiento.interface';
-import { MovilesService } from 'src/app/shared/services/moviles/moviles.service';
+import { MovilesService } from 'src/app/moviles/services/moviles.service';
 import {MatDialog} from '@angular/material/dialog'
 import { VentanaConfirmacionComponent } from 'src/app/shared/components/ventana-confirmacion/ventana-confirmacion.component';
 import { ModalAsignarMovilComponent } from '../modal-asignar-movil/modal-asignar-movil.component';
@@ -61,8 +61,8 @@ export class CardDesplazamientoComponent {
       dialogRef.afterClosed().subscribe(resp =>{
         if(resp){
           this.movilService.desasignarMovil(
-            desplazamiento.id_cita_partida,
-            desplazamiento.id_cita_destino,
+            desplazamiento.idCitaPartida,
+            desplazamiento.idCitaDestino,
             ).subscribe(resp =>{
                   location.reload();  
              

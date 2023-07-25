@@ -9,6 +9,7 @@ import { AgendaService } from 'src/app/agenda/services/agenda.service';
 import { ModalCambioHoraCitaComponent } from '../modal-cambio-hora-cita/modal-cambio-hora-cita.component';
 import { ModalDetalleRemisionComponent } from '../modal-detalle-remision/modal-detalle-remision.component';
 import { switchMap ,filter,tap,catchError } from 'rxjs/operators';
+
 @Component({
   selector: 'app-agenda-card-cita',
   templateUrl: './card-cita.component.html',

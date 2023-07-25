@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { InicioComponent } from './pages/inicio/inicio.component';
-import { CitasComponent } from './pages/citas/citas.component';
 import { AgendaComponent } from './pages/agenda/agenda.component';
 import { MovilesComponent } from './pages/moviles/moviles.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
@@ -12,18 +11,19 @@ import { VentanaConfirmacionComponent } from './components/ventana-confirmacion/
 import { MovilesModule } from '../moviles/moviles.module';
 import { AdminComponent } from './pages/admin/admin.component';
 import { AdminModule } from '../admin/admin.module';
+import { ToastComponent } from './components/toast/toast.component';
 
 
 @NgModule({
   declarations: [
   
     InicioComponent,
-       CitasComponent,
        AgendaComponent,
        MovilesComponent,
        SidebarComponent,
        VentanaConfirmacionComponent,
-       AdminComponent
+       AdminComponent,
+       ToastComponent
        
 
   ],

@@ -8,10 +8,7 @@ const routes: Routes = [
     path:'',
     component:InicioComponent
   },
-  {
-    path:"citas",
-    loadChildren:() => import('./citas/citas.module').then(m =>m.CitasModule)
-  },
+
   {
     path:'agenda',
     loadChildren:() => import('./agenda/agenda.module').then(m =>m.AgendaModule)
@@ -22,7 +19,7 @@ const routes: Routes = [
   },
   {
     path:'admin',
-    component: AdminComponent
+    loadChildren: () => import('./admin/admin.module').then(m =>m.AdminModule)
   },
   {
     path:'**',

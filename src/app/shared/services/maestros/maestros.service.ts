@@ -8,7 +8,7 @@ import { environment } from '../../../../environments/environments';
 })
 export class MaestrosService {
   private resourceUrl: string = 'maestros'
-  private serviceUrl: string = 'maestros'
+
   public ciudades : Ciudad[] = []
   public horariosTurno : HorarioTurno[] = []
  public horarioTurnoSeleccionado : HorarioTurno = crearHorario() 

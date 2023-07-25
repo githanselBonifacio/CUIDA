@@ -1,13 +1,14 @@
 export interface Desplazamiento {
-    id_cita_partida:                 string;
-    id_cita_destino:                 string;
+    idCitaPartida:                   string;
+    idCitaDestino:                   string;
     id_movil:                        string;
     id_profesional:                  string;
-    fecha_inicio_desplazamiento:     Date;
-    duracion_seg:                    number;
-    id_estado:                       number;
-    fecha_programada_desplazamiento: Date;
-    holgura_seg:                     number;
+    idHorarioTurno:                  number;
+    tipo:                            string;
+    duracion:                        number;
+    idEstado:                        number;
+    fechaProgramada:                 Date;
+    holgura:                         number;
     matricula:                       string;
     numero_identificacion_conductor: string;
     conductor:                       string;

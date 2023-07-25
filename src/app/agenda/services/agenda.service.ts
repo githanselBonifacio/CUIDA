@@ -21,6 +21,7 @@ export class AgendaService {
 
     constructor (private http: HttpClient){};
 
+    //profesionales
     async getProfesionalesCiudad (idCiudad:string){
       this.http.get<Profesional[]>(`${environment.URL_API_CUIDA}/${this.urlRecurso}/profesionales/${idCiudad}`)
       .subscribe(resp =>{
@@ -60,6 +61,7 @@ export class AgendaService {
       return this.http.get<any> (`${environment.URL_API_CUIDA}/${this.urlRecurso}/deasignarProfesionalTurno`, {params});
     }
 
+    //citas
     async getCitas (fechaTurno:string, idCiudad:string, idHorarioTurno:number){
       const params = new HttpParams()
       .set('fechaTurno',fechaTurno)
@@ -80,6 +82,7 @@ export class AgendaService {
 
       return this.http.get<Cita[]>(`${environment.URL_API_CUIDA}/${this.urlRecurso}/citas`, {params})
     }
+
     //agregados de la remision para detalle
 
     getPacienteByRemision(idRemision:string){
@@ -139,7 +142,7 @@ export class AgendaService {
       return this.http.get<Secrecion[]>(`${environment.URL_API_CUIDA}/${this.urlRecurso}/procedimiento/secreciones`, {params})
    
     }
- 
+ //actividades gantt
     async getActividadesAgendaGantt (fechaTurno:string, idCiudad:string,idHorarioTurno:number){
       const params = new HttpParams()
       .set('fechaTurno',fechaTurno)
@@ -154,6 +157,7 @@ export class AgendaService {
       
     }
 
+    //admin agenda
     async filtrarCitasByIdRemision(id_remision:string){
        this.citas = this.citas.filter(cita => cita.idRemision.includes(id_remision))
     }

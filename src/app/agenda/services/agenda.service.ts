@@ -187,13 +187,18 @@ export class AgendaService {
 
       return this.http.get<string>(`${environment.URL_API_CUIDA}/${this.urlRecurso}/reprogramarCita`, {params})
     }
-    calcularDesplazamientosCitasProfesional(fechaTurno: string,idHorarioTurno:number,idCiudad:string,idProfesional:string){
-      const params = new HttpParams()
-      .set('fechaTurno',fechaTurno)
-      .set('idHorarioTurno',idHorarioTurno)
-      .set('idCiudad',idCiudad)
-      .set('idProfesional',idProfesional)
-        return this.http.get(`${environment.URL_API_CUIDA}/${this.urlRecurso}/calcularDesplazamientoCitasByprofesional`, {params})
+    calcularDesplazamientosCitasProfesional(fechaTurno: string,idHorarioTurno:number,idCiudad:string,idProfesional:string|null){
+      if(idProfesional != null){
+        const params = new HttpParams()
+        .set('fechaTurno',fechaTurno)
+        .set('idHorarioTurno',idHorarioTurno)
+        .set('idCiudad',idCiudad)
+        .set('idProfesional',idProfesional)
+          return this.http.get(`${environment.URL_API_CUIDA}/${this.urlRecurso}/calcularDesplazamientoCitasByprofesional`, {params})
+      }else{
+        throw new Error('Invalid input: idProfesional is null');
+      }
+      
     }
     calcularDesplazamientoTurnoCompleto(turno: Cita[]){
       return this.http.post(`${this.serviceUrl}/citas/calcularDesplazamiento`,turno)

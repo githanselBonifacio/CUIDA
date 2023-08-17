@@ -45,19 +45,16 @@ export class ServicioFarmaceuticoPageComponent implements OnInit{
       this.notificacionesMostradas = this.notificacionesCompleta;
       this.filtrarByEstadoNotificacion();  
     }else{
-       
           this.notificacionesMostradas =  this.notificacionesMostradas.filter(notificacion => {
-          const nombre = notificacion.nombre.toLowerCase();
-          const apellido = notificacion.apellido.toLowerCase();
+          const nombreCompleto = `${notificacion.nombre.toLowerCase()} ${notificacion.apellido.toLowerCase()}`;
           const numeroIdentificacion = notificacion.numeroIdentificacion.toLowerCase();
-          return nombre.includes(textoBuscado) || apellido.includes(textoBuscado) || numeroIdentificacion.includes(textoBuscado);
+          return  nombreCompleto.includes(textoBuscado) || numeroIdentificacion.includes(textoBuscado);
    
         });
           this.totalItems = this.notificacionesMostradas.length;
     }
- 
-   
   }
+
   filtrarByEstadoNotificacion(){
     this.notificacionesMostradas = this.notificacionesCompleta;
     if(this.checkedNotificado === true && this.checkedSinNotificado===false){
@@ -80,7 +77,6 @@ export class ServicioFarmaceuticoPageComponent implements OnInit{
   onCheckboxChangeNotificado(event: any) {
     this.checkedNotificado = event.target.checked;
     this.filtrarByEstadoNotificacion();  
-    console.log("notificado")
     this.quitarSeleccionCompleta();
   }
   onCheckboxChangeSinNotificado(event: any) {

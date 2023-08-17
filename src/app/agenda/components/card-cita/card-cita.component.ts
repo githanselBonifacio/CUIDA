@@ -103,30 +103,25 @@ export class CardCitaComponent {
     }
    desagendarProfesionalCita(citaSeleccionada:Cita, mensaje:string):void{
     this.citaSeleccionada = citaSeleccionada;
+    
     const dialogRef = this.dialogoSeleccionProfesional.open(VentanaConfirmacionComponent, {
       data: {
               mensaje:mensaje
             }
       });
-    dialogRef.afterClosed()
-      .subscribe(result =>{
-        if(result){
-          this.agendaService.retirarProfesional(this.citaSeleccionada.idCita)
-          .subscribe(resp =>{
-            if(citaSeleccionada.idProfesional){
-              this.agendaService.calcularDesplazamientosCitasProfesional(
-              this.fechaTurno,
-              this.idHorarioTurno,
-              this.idCiudad,
-              citaSeleccionada.idProfesional
-             ).subscribe(resp =>{
-                 location.reload()
-             }) 
-            }
-          });
-
-        }
-      })
+      dialogRef.afterClosed().pipe(
+        filter(result => result),
+        switchMap(() => this.agendaService.retirarProfesional(this.citaSeleccionada.idCita)),
+        switchMap(() => this.agendaService.calcularDesplazamientosCitasProfesional(
+                            this.fechaTurno,
+                            this.idHorarioTurno,
+                            this.idCiudad,
+                            this.citaSeleccionada.idProfesional
+                        )
+        )
+      ).subscribe(() => {
+        location.reload();
+      });
      
    }
 
@@ -144,30 +139,30 @@ export class CardCitaComponent {
     const dialogRef = this.dialogoRepogramarCita.open(ModalCambioHoraCitaComponent,{
         data : horaActual
     })
-    dialogRef.afterClosed()
-    .subscribe(nuevaHora =>{
-      if(nuevaHora!=''){
-
-          this.agendaService.reprogramarCita(
-              citaSeleccionada.idCita,
-              fechaFormateada,
-              nuevaHora
-      ).subscribe(resp =>{
-        if(citaSeleccionada.idProfesional){
-          this.agendaService.calcularDesplazamientosCitasProfesional(
-          this.fechaTurno,
-          this.idHorarioTurno,
-          this.idCiudad,
-          citaSeleccionada.idProfesional
-         ).subscribe(resp =>{
-             location.reload()
-         }) 
+    dialogRef.afterClosed().pipe(
+      switchMap(nuevaHora =>{
+        if (nuevaHora !== ''){
+          return  this.agendaService.reprogramarCita(
+            citaSeleccionada.idCita,
+            fechaFormateada,
+            nuevaHora
+          )
+        }else{
+          throw Error('No se ha seleccionado una hora');
+          }
         }
-      })
-      }
-    
-    })
-    
+      ),
+      switchMap(resp => this.agendaService.calcularDesplazamientosCitasProfesional(
+            this.fechaTurno,
+            this.idHorarioTurno,
+            this.idCiudad,
+            citaSeleccionada.idProfesional
+           )
+       
+      )
+    ).subscribe(resp =>{
+      location.reload()
+   });
    }
    
    mostrarDetalleCita(citaSeleccionada:Cita):void{

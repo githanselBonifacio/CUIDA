@@ -163,7 +163,8 @@ export class MainComponentAgendaComponent implements OnInit{
     desasignarProfesionalTurno(idprofesional: string): void {
       const dialogRef = this.dialogoSeleccionProfesional.open(VentanaConfirmacionComponent, {
         data: {
-          mensaje: "Desea desasignar este profesional?"
+          mensaje: "Desea desasignar este profesional?",
+          nota : "Las citas asociadas serán desagendadas"
         },
       });
     

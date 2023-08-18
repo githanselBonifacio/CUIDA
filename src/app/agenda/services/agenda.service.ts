@@ -58,7 +58,7 @@ export class AgendaService {
       .set('idHorarioTurno',idHorarioTurno)
       .set('idProfesional',idProfesional)
 
-      return this.http.get<any> (`${environment.URL_API_CUIDA}/${this.urlRecurso}/deasignarProfesionalTurno`, {params});
+      return this.http.get<any> (`${environment.URL_API_CUIDA}/${this.urlRecurso}/desasignarProfesionalTurno`, {params});
     }
 
     //citas

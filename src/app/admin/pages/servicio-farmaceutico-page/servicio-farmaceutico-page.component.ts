@@ -1,8 +1,7 @@
-import { Component,OnInit ,ViewChild} from '@angular/core';
+import { Component,OnInit} from '@angular/core';
 import { AdminRemisionService } from '../../services/admin-remision.service';
 import {NotificacionFarmacia} from '../../interfaces/servicioFarmaceutico.interface';
 import {MatDialog} from '@angular/material/dialog'
-import { VentanaConfirmacionComponent } from 'src/app/shared/components/ventana-confirmacion/ventana-confirmacion.component';
 import { ToastComponent } from 'src/app/shared/components/toast/toast.component';
 
 @Component({

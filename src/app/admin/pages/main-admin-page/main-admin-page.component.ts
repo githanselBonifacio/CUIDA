@@ -13,4 +13,7 @@ export class MainAdminPageComponent {
   navigateToServicioFarmaceutico() {
     this.router.navigate(['admin/servicioFarmaceutico']);
   }
+  navigateToRemisiones() {
+    this.router.navigate(['admin/remisiones']);
+  }
 }

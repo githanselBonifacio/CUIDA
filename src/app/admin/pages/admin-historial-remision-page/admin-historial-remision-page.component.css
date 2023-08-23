@@ -1,0 +1,13 @@
+.container-historial{
+    padding-top: 5rem;
+    padding-left: 2rem;
+    padding-right: 3rem;
+}
+.header{
+    display: flex;
+    justify-content: space-between;
+}
+h2{
+    color: var(--second-color);
+    font-weight: bold;
+}

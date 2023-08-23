@@ -1,0 +1,60 @@
+<div class="container-remision">
+    <div class=" header">
+        <div>
+                <h2>Remisiones</h2>
+        </div>
+        <div>
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1"><i class="bi bi-person"></i></span>
+                <input  type="text" class="form-control" placeholder="remisión.." aria-label="Username" aria-describedby="basic-addon1">
+            </div>
+        </div>
+    </div>
+
+    <div class="divider"></div>
+    
+    <div class = "content-item">
+
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th class="col-left">Paciente</th>
+                    <th>Fecha Admisión</th>
+                    <th>Programa</th>
+                    <th>Ciudad</th>
+                    <th class="col-left">Remitente</th>
+                    <th>Estado</th>
+                    <th></th>
+                </tr>
+              
+            </thead>
+            <tbody>
+                <tr *ngFor="let remision of remisiones | paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage, totalItems: totalItems }">
+                    <td scope = "row">{{remision.idRemision}}</td>
+                    <td>
+                        <div class="card-item">
+                            {{remision.paciente.toLowerCase()}}
+                        </div>
+                        <div class="card-item">
+                            {{remision.numeroIdentificacionPaciente}}
+                        </div>
+                    </td>
+                    <td>{{remision.fechaAdmision| date:'dd/MM/yyyy'}}</td>
+                    <td>{{remision.programa}}</td>
+                    <td>{{remision.ciudad}}</td>
+                    <td  class="card-item">{{remision.institucionRemite.toLowerCase()}}</td>
+                    <td  class="card-item">{{remision.estado.toLowerCase()}}</td>
+                    <td>
+                        <i class="bi bi-clock-history" id="history" title="ver historial" (click)="verHistorialRemision(remision.idRemision)"></i>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div id="paginador">
+        <pagination-controls  previousLabel="Anterior" nextLabel="Siguiente"  (pageChange)="currentPage = $event"></pagination-controls> 
+    </div>
+</div>
+
+

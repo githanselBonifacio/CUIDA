@@ -1,0 +1,59 @@
+.container-remision{
+    padding-top: 5rem;
+    padding-left: 2rem;
+    padding-right: 3rem;
+}
+
+.header{
+    display: flex;
+    justify-content: space-between;
+}
+
+h2{
+    color: var(--second-color);
+    font-weight: bold;
+}
+.divider{
+    padding-top: 0.1rem;
+    background-color: var(--gris3-color);
+}
+.card-item, .card-item td{
+    text-align: start;
+    text-transform: capitalize;
+}
+th{
+    color: var(--primary-color);
+    font-weight: bold;
+    text-align: center;
+    font-size: 1.2rem;
+}
+td{
+    color: var( --quarter-color);
+    text-align: center;
+    font-size: 1rem;
+    vertical-align: middle;
+}
+th  :hover{
+    background-color: var(--gris4-color);
+}
+.content-item{
+    padding-right: 1rem;
+    padding-left: 1rem;
+}
+.card-item, .card-item td{
+    text-align: start;
+    text-transform: capitalize;
+}
+#paginador{
+    text-align: center;
+    color: var( --quarter-color);
+    padding-bottom: 2rem;
+}
+#history{
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--second-color);
+}
+.col-left{
+    text-align: start;
+}

@@ -1,7 +1,6 @@
 import { Component , Inject,OnInit} from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
-import {Cita} from '../../interfaces/turno.interface'
-import { AgendaService } from 'src/app/agenda/services/agenda.service';
+
 
 @Component({
   selector: 'app-modal-cambio-hora-cita',
@@ -20,7 +19,6 @@ export class ModalCambioHoraCitaComponent implements OnInit{
     this.horaCitaNueva = this.horaActual;
    
   }
-
 
   onNoClick(): void {
     this.dialogRef.close('');

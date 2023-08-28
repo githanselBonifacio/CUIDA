@@ -7,20 +7,25 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { FormsModule } from '@angular/forms';
 import { AdminRemisionesPageComponent } from './pages/admin-remisiones-page/admin-remisiones-page.component';
 import { AdminHistorialRemisionPageComponent } from './pages/admin-historial-remision-page/admin-historial-remision-page.component';
+import { TablaHistorialCitasComponent } from './components/tabla-historial-citas/tabla-historial-citas.component';
+import { PipesModule} from '../pipes/pipes.module';
+import { ModalDetalleCitasHistorialComponent } from './components/modal-detalle-citas-historial/modal-detalle-citas-historial.component';
 
 @NgModule({
   declarations: [
     MainAdminPageComponent,
     ServicioFarmaceuticoPageComponent,
     AdminRemisionesPageComponent,
-    AdminHistorialRemisionPageComponent
+    AdminHistorialRemisionPageComponent,
+    TablaHistorialCitasComponent,
+    ModalDetalleCitasHistorialComponent,
   ],
   imports: [
     CommonModule,
     AdminRoutingModule,
     NgxPaginationModule,
     FormsModule,
-
+    PipesModule
   ],
   bootstrap: [MainAdminPageComponent],
   exports:[

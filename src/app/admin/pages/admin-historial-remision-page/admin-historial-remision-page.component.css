@@ -1,13 +1,104 @@
+*{
+    font-family: var(--bs-font-sans-serif);
+}
 .container-historial{
     padding-top: 5rem;
     padding-left: 2rem;
     padding-right: 3rem;
+    padding-bottom: 2rem;
 }
 .header{
     display: flex;
     justify-content: space-between;
 }
-h2{
+#i-back-remision {
+    font-size: 1.5rem;
+     color: var(--primary-color);
+}
+#i-back-remision:hover {
+    font-size: 1.6rem;
+}
+h3{
+    color: var(--gris1-color);
+    font-weight: bold;
+}
+h5{
     color: var(--second-color);
     font-weight: bold;
+    padding-top: 0.5rem;
+}
+p{
+    padding-left: 0.5rem;
+    color: var(--gris1-color);
+}
+.row{
+    margin: 0;
+}
+.col, .col-3,.col-2,.col-4{
+    border:1px solid var( --gris3-color);
+    text-transform: capitalize;
+    vertical-align: middle;
+}
+.divider{
+    padding-top: 0.1rem;
+    background-color: var(--gris3-color);
+}
+#datos-personales{
+    padding: 0;
+}
+#datos-actuales{
+    height: 50vh;
+    overflow-y: scroll;
+    border: 1px solid var(--gris3-color);
+    padding: 0.5rem 0.5rem 0.1rem 0.5rem;
+    margin-bottom: 2rem;
+}
+#datos-personales, .datos-atencion{
+    color: var(--quarter-color);
+}
+
+.content-item{
+    padding-top: 1rem;
+    border:1px solid var( --gris3-color);
+}
+#badge-advertencia{
+    background-color: var(--orange-color);
+    color: white;
+    font-weight: bold;
+    font-size: 0.8rem;
+    border-radius: 5px;
+    margin-left: 0.2rem;
+    padding-left: 0.2rem;
+    padding-right: 0.2rem;
+  
+}
+.citas{
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+#accordion-registro{
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+}
+#accordion-registro button{
+    color:var(--quarter-color);
+    font-size: 1.3rem;
+    background: linear-gradient(to right, var(--third-color) 0%, var(--third-color) 1%,white 1%, white 99%);
+    margin-bottom: 0.5rem;
+    padding-left: 2rem;
+    box-shadow: 2px 2px 5px var(--gris2-color);
+}
+#accordion-registro button:hover{
+    background: linear-gradient(to right,var(--third-color) 0%, var(--third-color) 1%,var(--second-color) 1%, var(--second-color) 99.5%);
+    color: var(--third-color);
+}
+
+#accordion-registro button:hover::after {
+  background-color: var(--gris4-color);
+  border-radius: 5px;
+}
+
+.paginador{
+    text-align: center;
+    color: var( --quarter-color);
 }

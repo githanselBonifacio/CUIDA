@@ -14,16 +14,20 @@ export class AdminRemisionesPageComponent implements OnInit {
     private adminService:AdminRemisionService,
     private router: Router,
     ){}
-    itemsPerPage : number     = 6;
-    currentPage  : number     = 1;
-    totalItems   : number     = 0;
-    remisiones   : Remision[] = [];
+    filtroBusqueda: string     = "";
+    itemsPerPage  : number     = 6;
+    currentPage   : number     = 1;
+    totalItems    : number     = 0;
+    remisiones    : Remision[] = [];
+
+    remisionesFiltradas:Remision[]=[];
 
   ngOnInit() {
     this.calcularItemsPerPage()
     this.adminService.consultarRemisiones()
       .subscribe(resp =>{
         this.remisiones = resp;
+        this.remisionesFiltradas = this.remisiones;
       })
   }
 
@@ -44,5 +48,20 @@ calcularItemsPerPage(){
 
   verHistorialRemision(idRemision:string){
     this.router.navigate(['admin/remisiones',idRemision]);
+  }
+  filtrarRemisiones():void{
+    const textoBuscado = this.filtroBusqueda;
+    const textoLowerCase = this.filtroBusqueda.toLowerCase()
+
+    if(this.filtroBusqueda.length == 0){
+      this.remisionesFiltradas = this.remisiones;
+    }else{
+      this.remisionesFiltradas = this.remisionesFiltradas.filter(remision =>{
+        const nombrePaciente = `${remision.paciente.toLowerCase()}`
+        const idRemision     = `${remision.idRemision}`
+        console.log(`${idRemision} - ${nombrePaciente} `)
+        return nombrePaciente.includes(textoLowerCase) || idRemision.includes(textoBuscado)
+      })
+    }
   }
 }

@@ -13,8 +13,8 @@
                 
                 <span class="input-group-text"><i class="bi bi-calendar" ></i>{{cita.fechaInicio |date :'dd/MM/yyyy HH:mm' }}</span>
                 <span class="input-group-text"><i class="bi bi-calendar-check" ></i>{{cita.fechaProgramada |date :'dd/MM/yyyy HH:mm'}}</span>
-                <span class="input-group-text"><i class="bi bi-clock"></i>{{cita.duracion}}</span>
-                <span class="input-group-text"><i class="bi bi-hourglass-bottom"></i>{{convertSecondsToMinutesOrHours(cita.holgura)}}</span>
+                <span class="input-group-text"><i class="bi bi-clock"></i>{{cita.duracion|formatearSegundos }}</span>
+                <span class="input-group-text"><i class="bi bi-hourglass-bottom"></i>{{cita.holgura |formatearSegundos}}</span>
                 <span class="input-group-text"><i class="bi bi-clipboard"></i>
                     <ng-container *ngIf="cita.idEstado === 1; then thenEstado else elseEstado">
                     </ng-container>

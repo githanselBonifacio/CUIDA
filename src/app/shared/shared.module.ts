@@ -13,10 +13,8 @@ import { AdminComponent } from './pages/admin/admin.component';
 import { AdminModule } from '../admin/admin.module';
 import { ToastComponent } from './components/toast/toast.component';
 
-
 @NgModule({
   declarations: [
-  
     InicioComponent,
        AgendaComponent,
        MovilesComponent,
@@ -24,8 +22,6 @@ import { ToastComponent } from './components/toast/toast.component';
        VentanaConfirmacionComponent,
        AdminComponent,
        ToastComponent
-       
-
   ],
   imports: [
     CommonModule,

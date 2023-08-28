@@ -1,0 +1,5 @@
+@import url('../../../agenda/components/modal-detalle-remision/modal-detalle-remision.component.css');
+p{
+    padding-left: 0.5rem;
+    color: var(--gris1-color);
+}

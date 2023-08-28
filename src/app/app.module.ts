@@ -13,7 +13,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 @NgModule({
   declarations: [
     AppComponent,
-
+   
   ],
   imports: [
     BrowserModule,
@@ -22,7 +22,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     HttpClientModule,
     SharedModule,
     NgbModule,
-    NgxSpinnerModule,
+    NgxSpinnerModule
   ],
   exports:[
     RouterModule

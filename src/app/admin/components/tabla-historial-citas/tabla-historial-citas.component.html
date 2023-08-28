@@ -1,0 +1,32 @@
+
+<div class="content-item">
+    <div class="paginador" *ngIf="citas.length >3">
+        <pagination-controls   id = "{{tableId}}"   previousLabel="Anterior" nextLabel="Siguiente"  (pageChange)="currentPage = $event"></pagination-controls> 
+    </div>
+    <table class="table table-hover">
+        <thead>
+            <tr id="header-table">
+                <th scope="col">ID</th>
+                <th scope="col">Fecha programada</th>
+                <th scope="col">Duración</th>
+                <th scope="col">Holgura</th>
+                <th scope="col">Especialidad</th>
+                <th scope="col">Estado</th>
+                <th scope="col">Detalle</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let cita of citas | paginate:{id:tableId, itemsPerPage: 3, currentPage: currentPage}">
+                <th scope="row">{{cita.datos_cita.id_cita}}</th>
+                <td>{{cita.datos_cita.fecha_programada|date :'dd/MM/yyyy HH:mm'}}</td>
+                <td>{{cita.datos_cita.duracion |formatearSegundos }}</td>
+                <td>{{cita.datos_cita.holgura  |formatearSegundos}}</td>
+                <td>{{cita.datos_cita.especialidad}}</td>
+                <td>{{getNombreEstadoCita(cita.datos_cita.id_estado)}}</td>
+                <td><i class="bi bi-eye" title="ver detalle" (click)="mostrarModalDetalleCita(cita)"></i></td>
+            </tr>
+
+        </tbody>
+    </table>
+
+</div>

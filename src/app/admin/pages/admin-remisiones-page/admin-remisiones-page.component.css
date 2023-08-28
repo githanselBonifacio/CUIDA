@@ -1,3 +1,6 @@
+*{
+    font-family: var(--bs-font-sans-serif);
+}
 .container-remision{
     padding-top: 5rem;
     padding-left: 2rem;
@@ -15,7 +18,7 @@ h2{
 }
 .divider{
     padding-top: 0.1rem;
-    background-color: var(--gris3-color);
+    background-color: var(--quarter-color);
 }
 .card-item, .card-item td{
     text-align: start;
@@ -42,6 +45,9 @@ th  :hover{
 }
 .card-item, .card-item td{
     text-align: start;
+    text-transform: capitalize;
+}
+.card-item2{
     text-transform: capitalize;
 }
 #paginador{

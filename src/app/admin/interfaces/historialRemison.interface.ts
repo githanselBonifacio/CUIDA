@@ -28,33 +28,33 @@ export interface DatosCita {
     duracion:         number;
     longitud:         number;
     id_ciudad:        string;
-    id_estado:        number;
+    id_estado:        string;
     id_remision:      string;
     especialidad:     string;
     fecha_inicio:     Date;
-    id_conductor:     null;
-    id_profesional:   null;
+    id_conductor:     string|null;
+    id_profesional:   string|null;
     fecha_programada: Date;
 }
 
 export interface Procedimientos {
-    sondajes:                Sondaje[];
-    curaciones:              Curacione[];
-    secreciones:             Secrecione[];
-    fototerapias:            Fototerapia[];
-    canalizaciones:          Canalizacione[];
-    "toma de muestra":       TomaDeMuestra[];
-    "soporte nutricionales": SoporteNutricionale[];
+    sondajes:             Sondaje[];
+    curaciones:           Curacion[];
+    secreciones:          Secrecion[];
+    fototerapias:         Fototerapia[];
+    canalizaciones:       Canalizacion[];
+    toma_muestra:          TomaMuestra[];
+    soporte_nutricionales: SoporteNutricional[];
 }
 
-export interface Canalizacione {
+export interface Canalizacion {
     id_cita:           string;
     id_canalizacion:   number;
     tipo_prestacion:   string;
     tipo_canalizacion: string;
 }
 
-export interface Curacione {
+export interface Curacion {
     id_cita:       string;
     sesiones:      number;
     descripcion:   string;
@@ -71,7 +71,7 @@ export interface Fototerapia {
     dias_tratamiento: number;
 }
 
-export interface Secrecione {
+export interface Secrecion {
     nasal:             boolean;
     id_cita:           string;
     tipo_sonda:        string;
@@ -92,7 +92,7 @@ export interface Sondaje {
     tipo_prestacion: string;
 }
 
-export interface SoporteNutricionale {
+export interface SoporteNutricional {
     tipo:                     string;
     no_pbs:                   boolean;
     id_cita:                  string;
@@ -110,7 +110,7 @@ export interface SoporteNutricionale {
     presentacion_medicamento: string;
 }
 
-export interface TomaDeMuestra {
+export interface TomaMuestra {
     id_cita:         string;
     tipo_muestra:    string;
     requiere_ayuno:  boolean;
@@ -179,15 +179,4 @@ export interface UbicacionPaciente {
     id_ubicacion:     string;
     nro_interseccion: string;
     sin_nomenclatura: boolean;
-}
-
-// Converts JSON strings to/from your types
-export class Convert {
-    public static toHistorialRemision(json: string): HistorialRemision {
-        return JSON.parse(json);
-    }
-
-    public static historialRemisionToJson(value: HistorialRemision): string {
-        return JSON.stringify(value);
-    }
 }

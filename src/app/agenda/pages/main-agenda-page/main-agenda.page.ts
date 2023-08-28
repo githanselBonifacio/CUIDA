@@ -1,4 +1,4 @@
-import { Component,OnInit,Input,Pipe } from '@angular/core';
+import { Component,OnInit } from '@angular/core';
 import { AgendaService } from 'src/app/agenda/services/agenda.service';
 import {Cita} from "../../interfaces/turno.interface"
 import { MaestrosService } from 'src/app/shared/services/maestros/maestros.service';
@@ -10,7 +10,7 @@ import {MatDialog} from '@angular/material/dialog'
 import { ModalSeleccionProfesionalComponent } from '../../../agenda/components/modal-seleccion-profesional/modal-seleccion-profesional.component';
 import { VentanaConfirmacionComponent } from 'src/app/shared/components/ventana-confirmacion/ventana-confirmacion.component';
 import { switchMap ,filter,tap} from 'rxjs/operators';
-import {formatoFecha} from '../../../shared/interfaces/maestros.interfaces'
+
 @Component({
   selector: 'app-main-component-agenda',
   templateUrl: './main-agenda.page.html',

@@ -14,56 +14,31 @@
             <div class="col" id="datos-personales">
                   <div class="row">
 
-                          <div class="col">
-                                Tipo Identificación:
-                          </div>
-                          <div class="col">
-                                {{paciente.tipoIdentificacion}}
-                          </div>
+                    <div class="col">Tipo Identificación</div>
+                          <div class="col">{{paciente.tipoIdentificacion}}</div>
                   </div>
 
                   <div class="row">
-                          <div class="col">
-                            Numero Identificación:
-                          </div>
-                          <div class="col">
-                                {{paciente.numeroIdentificacion}}
-                          </div>
+                          <div class="col">Numero Identificación</div>
+                          <div class="col">{{paciente.numeroIdentificacion}}</div>
                   </div>
 
                   <div class="row">
-
-                        <div class="col-3">
-                          Nombres:
-                        </div>
-                        <div class="col">
-                            {{paciente.nombre}} 
-                        </div>
+                        <div class="col-3">Nombres</div>
+                        <div class="col">{{paciente.nombre}}</div>
                   </div> 
 
                   <div class="row">
-                    <div class="col-3">
-                      Apellidos:
-                    </div>
-                    <div class="col">
-                         {{paciente.apellido}}
-                    </div>
+                    <div class="col-3">Apellidos:</div>
+                    <div class="col">{{paciente.apellido}}</div>
                   </div>
 
                   <div class="row">
 
-                        <div class="col">
-                            Edad:
-                        </div>
-                        <div class="col">
-                          {{paciente.edad}} años
-                        </div>
-                        <div class="col">
-                          Genero:
-                        </div>
-                        <div class="col">
-                            {{paciente.sexo}}
-                        </div>
+                        <div class="col">Edad:</div>
+                        <div class="col">{{paciente.edad}} años</div>
+                        <div class="col">Genero:</div>
+                        <div class="col">{{paciente.sexo}}</div>
                 
                   </div>
                   <div class="row">
@@ -71,12 +46,8 @@
                     <div class="col">
                       <h5 >Ubicación</h5>
                       <div style="display: flex;">
-                        <div>
-                           <span> {{paciente.ubicacion.direccion}} </span>
-                        </div>
-                       <div>
-                         <span>,  {{paciente.ubicacion.barrio}} ::  </span> 
-                       </div>
+                        <div> <span> {{paciente.ubicacion.direccion}} </span> </div>
+                       <div> <span>,  {{paciente.ubicacion.barrio}} ::  </span> </div>
                          
                         <div *ngIf="paciente.ubicacion.sinNomenclatura" class="item-procedimiento"> 
                           <div class="badge-advertencia">
@@ -103,32 +74,16 @@
     <div class="datos-atencion">
   
         <div class="row">
-          <div class="col-2">
-            Nombre cuidador:
-          </div>
-          <div class="col">
-            {{datosAtencionRemision.nombreCuidador}}
-          </div>
-          <div class="col-2">
-            Nombre responsable:
-          </div>
-          <div class="col">
-            {{datosAtencionRemision.nombreResponsable}}
-          </div>
+          <div class="col-2">Nombre cuidador:</div>
+          <div class="col">{{datosAtencionRemision.nombreCuidador}}</div>
+          <div class="col-2"> Nombre responsable</div>
+          <div class="col">{{datosAtencionRemision.nombreResponsable}}</div>
         </div>
         <div class="row">
-          <div class="col-2">
-            Telefono: 
-          </div>
-          <div class="col">
-            {{datosAtencionRemision.telefonoPaciente}}
-          </div>
-          <div class="col-2">
-            Celular:
-          </div>
-          <div class="col">
-            {{datosAtencionRemision.celularPaciente}}<span *ngIf="datosAtencionRemision.celularPaciente2"> - {{datosAtencionRemision.celularPaciente2}}</span>
-          </div>
+          <div class="col-2">Telefono: </div>
+          <div class="col">{{datosAtencionRemision.telefonoPaciente}}</div>
+          <div class="col-2">Celular</div>
+          <div class="col">{{datosAtencionRemision.celularPaciente}}<span *ngIf="datosAtencionRemision.celularPaciente2"> - {{datosAtencionRemision.celularPaciente2}}</span></div>
         </div>
 
     </div>
@@ -179,13 +134,11 @@
 
         <div class="procedimientos">
        
-        
           <div *ngFor="let curacion of curaciones">
                 
             <div class="content-procedimiento">
-                  <div class="titulo-procedimiento">
-                      Curación
-                  </div>
+                  
+                <div class="titulo-procedimiento">Curación</div>
                   
                   <div class="item-procedimiento">
                     <span class="input-group-text">Tipo: {{curacion.tipoCuracion}}</span>
@@ -205,24 +158,19 @@
           <div *ngFor="let canalizacion of canalizaciones">
                 
             <div class="content-procedimiento">
-                  <div class="titulo-procedimiento">
-                    Canalización
-                  </div>
+                  <div class="titulo-procedimiento">Canalización</div>
                   
                   <div class="item-procedimiento">
                     <span class="input-group-text">Tipo: {{canalizacion.tipoCanalizacion}}</span>
                   </div>
-             
-                
+ 
             </div>
                 
           </div>
           <div *ngFor="let fototerapia of fototerapias">
                 
             <div class="content-procedimiento">
-                  <div class="titulo-procedimiento">
-                      Fototerapia
-                  </div>
+                  <div class="titulo-procedimiento">Fototerapia</div>
                   
                   <div class="item-procedimiento">
                     <span class="input-group-text"> Fecuencia: {{fototerapia.tipoFrecuencia}}</span>
@@ -233,19 +181,15 @@
                   <div class="item-procedimiento">
                     <span class="input-group-text">Dosis: {{fototerapia.cantidadDosis}}</span>
                   </div>
-                 
-                
-            </div>
-                
+
+            </div>               
           </div>
          
-
           <div *ngFor="let tomaMuestra of tomaMuestras">
                 
             <div class="content-procedimiento">
                   <div class="titulo-procedimiento">
-                      Toma de muestras
-                  </div>
+                      Toma de muestras</div>
                   
                   <div class="item-procedimiento">
                     <span class="input-group-text">Tipo: {{tomaMuestra.tipoMuestra}}</span>
@@ -255,17 +199,14 @@
                       <div class="badge-advertencia">
                         <span >Requiere ayuno</span>
                       </div>
-                  </div>
-                  
+                  </div>   
             </div>
                 
           </div>
           <div *ngFor="let sondaje of sondajes">
                 
             <div class="content-procedimiento">
-                  <div class="titulo-procedimiento">
-                      Sondaje
-                  </div>
+                  <div class="titulo-procedimiento"> Sondaje</div>
                   
                   <div class="item-procedimiento">
                      <span class="input-group-text"> Tipo: {{sondaje.tipoSondaje}}</span>
@@ -283,9 +224,7 @@
           <div *ngFor="let secrecion of secreciones">
                 
             <div class="content-procedimiento">
-                  <div class="titulo-procedimiento">
-                     Secreción
-                  </div>
+                  <div class="titulo-procedimiento">Secreción</div>
                   
                   <div class="item-procedimiento">
                     <span class="input-group-text">Tipo sonda: {{secrecion.tipoSonda}}</span>
@@ -316,17 +255,13 @@
                     <div class="badge-advertencia">
                       <span >Traqueostomia</span>
                     </div>
-                  </div>
-                
-            </div>
-                
+                  </div>              
+            </div>      
           </div>
           <div *ngFor="let soporteNutricional of soporteNutricionales">
                 
             <div class="content-procedimiento">
-                  <div class="titulo-procedimiento">
-                      Soporte nutricional
-                  </div>
+                  <div class="titulo-procedimiento">Soporte nutricional</div>
                   
                   <div class="item-procedimiento">
                       <div class="card-medicamento">
@@ -365,8 +300,6 @@
                     </div>
                 </div>
             </div>
-                
-    
 
         </div>
 

@@ -1,0 +1,225 @@
+<div class="container">
+
+    <Div id="btn-close">
+        <h4>Detalle cita</h4>
+        <div id="i-cont">
+          <i class="bi bi-x" (click)='onClose()' title="cerrar"></i>
+        </div>
+        
+    </Div>
+
+    <h5>Tratamientos</h5>
+
+    <div class="tratamientos ">
+        <p *ngIf="citaSeleccionada.tratamientos ==null">La cita no contiene tratamientos</p>
+        <div class="content-item" *ngIf="citaSeleccionada.tratamientos !=null">
+            <table class="table table-hover" >
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Tipo tratamiento</th>
+                    <th scope="col">Prestación</th>
+                    <th scope="col">Medicamento</th>
+                    <th scope="col">Dosis</th>
+                    <th scope="col">Via</th>
+                    <th scope="col">Fecuencia</th>
+                    <th scope="col">Duracion</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let tratamiento of citaSeleccionada.tratamientos;let i = index;">
+                    <th scope="row">{{i+1}}</th>
+                    <td>{{tratamiento.tipo_tratamiento}}</td>
+                    <td>{{tratamiento.tipo_prestacion}}</td>
+                    <td>
+                      <div>{{tratamiento.nombre_medicamento}} </div>
+                      <div>{{tratamiento.presentacion_medicamento}}</div>
+                    </td>
+                    <td>{{tratamiento.cantidad_dosis}} {{tratamiento.unidad_dosis}}</td>
+                    <td>{{tratamiento.via_administracion}}</td>
+                    <td>{{tratamiento.frecuencia}}</td>
+                    <td>{{tratamiento.duracion}}</td>
+                  </tr>
+
+                </tbody>
+              </table>
+        
+        </div>
+       
+
+    </div>
+
+    <h5>Procedimientos</h5>
+    <div class="procedimientos">
+        <p *ngIf="contieneProcedimientos()">La cita no contiene procedimientos</p>
+        <div *ngFor="let curacion of citaSeleccionada.procedimientos.curaciones">
+              
+          <div class="content-procedimiento">
+                
+              <div class="titulo-procedimiento">Curación</div>
+                
+                <div class="item-procedimiento">
+                  <span class="input-group-text">Tipo: {{curacion.tipo_curacion}}</span>
+                </div>
+
+                <div class="item-procedimiento">
+                  <span class="input-group-text">Descripción: {{curacion.descripcion}}</span>
+                </div >
+
+                <div class="item-procedimiento">
+                  <span class="input-group-text">Sesiones: {{curacion.sesiones}}</span>
+                </div>
+          </div>
+              
+        </div>
+
+        <div *ngFor="let canalizacion of citaSeleccionada.procedimientos.canalizaciones">
+              
+          <div class="content-procedimiento">
+                <div class="titulo-procedimiento">Canalización</div>
+                
+                <div class="item-procedimiento">
+                  <span class="input-group-text">Tipo: {{canalizacion.tipo_canalizacion}}</span>
+                </div>
+
+          </div>
+              
+        </div>
+       <div *ngFor="let fototerapia of citaSeleccionada.procedimientos.fototerapias">
+              
+          <div class="content-procedimiento">
+                <div class="titulo-procedimiento">Fototerapia</div>
+                
+                <div class="item-procedimiento">
+                  <span class="input-group-text"> Fecuencia: {{fototerapia.tipo_frecuencia}}</span>
+                </div>
+                <div class="item-procedimiento">
+                  <span class="input-group-text">Dias tratamiento: {{fototerapia.dias_tratamiento}}</span>
+                </div>
+                <div class="item-procedimiento">
+                  <span class="input-group-text">Dosis: {{fototerapia.cantidad_dosis}}</span>
+                </div>
+
+          </div>               
+        </div>
+       
+        <div *ngFor="let tomaMuestra of citaSeleccionada.procedimientos.toma_muestra">
+              
+          <div class="content-procedimiento">
+                <div class="titulo-procedimiento">Toma de muestras</div>
+                
+                <div class="item-procedimiento">
+                  <span class="input-group-text">Tipo: {{tomaMuestra.tipo_muestra}}</span>
+                </div>
+              
+                <div *ngIf="tomaMuestra.requiere_ayuno" class="item-procedimiento">
+                    <div class="badge-advertencia">
+                      <span >Requiere ayuno</span>
+                    </div>
+                </div>   
+          </div>
+              
+        </div>
+        <div *ngFor="let sondaje of citaSeleccionada.procedimientos.sondajes">
+              
+          <div class="content-procedimiento">
+                <div class="titulo-procedimiento"> Sondaje</div>
+                
+                <div class="item-procedimiento">
+                   <span class="input-group-text"> Tipo: {{sondaje.tipo_sondaje}}</span>
+                </div>
+                <div class="item-procedimiento">
+                  <span class="input-group-text">Sonda: {{sondaje.tipo_sondaje}}</span>
+                </div>
+                <div class="item-procedimiento">
+                  <span class="input-group-text">Sesiones: {{sondaje.total_sesiones}}</span>
+                </div>
+               
+          </div>
+              
+        </div>
+        <div *ngFor="let secrecion of citaSeleccionada.procedimientos.secreciones">
+              
+          <div class="content-procedimiento">
+                <div class="titulo-procedimiento">Secreción</div>
+                
+                <div class="item-procedimiento">
+                  <span class="input-group-text">Tipo sonda: {{secrecion.tipo_sonda}}</span>
+                </div>
+                <div class="item-procedimiento">
+                  <span class="input-group-text">Dias tratamiento: {{secrecion.dias_tratamiento}}</span>
+                </div>
+               
+                <div *ngIf="secrecion.visita_enfermeria" class="item-procedimiento">
+                  <div class="badge-advertencia">
+                    <span >Tiene visita enfermería</span>
+                  </div>
+            
+                </div>
+                <div *ngIf="secrecion.envio_aspirador" class="item-procedimiento">
+                  <div class="badge-advertencia">
+                    <span >Tiene Respirador</span>
+                  </div>
+                  <br>
+                </div>
+                <div *ngIf="secrecion.nasal" class="item-procedimiento">
+                  <div class="badge-advertencia">
+                    <span >Nasal</span>
+                  </div>
+               
+                </div>
+                <div *ngIf="secrecion.traqueostomia" class="item-procedimiento"> 
+                  <div class="badge-advertencia">
+                    <span >Traqueostomia</span>
+                  </div>
+                </div>              
+          </div>      
+        </div>
+        <div *ngFor="let soporteNutricional of citaSeleccionada.procedimientos.soporte_nutricionales">
+              
+          <div class="content-procedimiento">
+                <div class="titulo-procedimiento">Soporte nutricional</div>
+                
+                <div class="item-procedimiento">
+                    <div class="card-medicamento">
+                      <h6>Medicamento</h6> 
+                      <div >
+                            {{soporteNutricional.nombre_medicamento}}
+                      </div>
+                      <div>
+                          {{soporteNutricional.presentacion_medicamento}}
+                      </div>
+                        
+                    </div>
+                </div>
+                
+
+                <div class="item-procedimiento">
+                  <span class="input-group-text"> Dosis: {{soporteNutricional.cantidad_dosis}} ({{soporteNutricional.unidad_dosis}})</span>
+                </div>
+                <div class="item-procedimiento">
+                  <span class="input-group-text">Tipo: {{soporteNutricional.tipo}}</span>
+                </div>
+                <div class="item-procedimiento">
+                  <span class="input-group-text"> Descripción: {{soporteNutricional.descripcion}}</span>
+                 
+                </div>
+                <div class="item-procedimiento">
+                  <span class="input-group-text"> Duración: {{soporteNutricional.duracion}}</span>
+                </div>
+                <div class="item-procedimiento">
+                  <span class="input-group-text">volumen: {{soporteNutricional.volumen}}</span>
+                </div>
+              
+                <div *ngIf="soporteNutricional.no_pbs" class="item-procedimiento">
+                  <div class="badge-advertencia">
+                    <span >No PBS</span>
+                  </div>
+              </div>
+          </div>
+
+      </div>
+
+  </div>
+
+</div>

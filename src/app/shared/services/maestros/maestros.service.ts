@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {Ciudad,HorarioTurno} from '../../interfaces/maestros.interfaces'
 import { HttpClient } from '@angular/common/http';
-import { crearHorario } from "../../interfaces/maestros.interfaces"
+import { crearHorario,EstadoCita } from "../../interfaces/maestros.interfaces"
 import { environment } from '../../../../environments/environments';
 @Injectable({
   providedIn: 'root'
@@ -9,8 +9,9 @@ import { environment } from '../../../../environments/environments';
 export class MaestrosService {
   private resourceUrl: string = 'maestros'
 
-  public ciudades : Ciudad[] = []
-  public horariosTurno : HorarioTurno[] = []
+  public ciudades : Ciudad[] = [];
+  public horariosTurno : HorarioTurno[] = [];
+  public estadosCita : EstadoCita[] = [];
  public horarioTurnoSeleccionado : HorarioTurno = crearHorario() 
 
   constructor (private http: HttpClient){}
@@ -34,5 +35,9 @@ export class MaestrosService {
       if (horarioTurnoBuscado){
        this.horarioTurnoSeleccionado = horarioTurnoBuscado;
       }
+  }
+
+   getEstadosCita(){
+    return this.http.get<EstadoCita[]>(`${environment.URL_API_CUIDA}/${this.resourceUrl}/estadosCita`)
   }
 }

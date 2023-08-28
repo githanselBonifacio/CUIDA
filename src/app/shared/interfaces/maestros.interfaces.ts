@@ -51,3 +51,13 @@ export function formatoFecha(date:Date):string{
     const minutes = dateTime.getMinutes().toString().padStart(2, '0');
     return `${year}-${month}-${day}`;
 }
+
+export interface EstadoCita{
+    id:string,
+    nombre:string,
+}
+
+export function getNombreEstadoCitaById(id: string, list: EstadoCita[]): string | undefined {
+    const item = list.find(item => item.id == id);
+    return item?.nombre;
+  }

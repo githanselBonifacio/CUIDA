@@ -6,7 +6,8 @@
         <div>
             <div class="input-group mb-3">
                 <span class="input-group-text" id="basic-addon1"><i class="bi bi-person"></i></span>
-                <input  type="text" class="form-control" placeholder="remisión.." aria-label="Username" aria-describedby="basic-addon1">
+                <input  type="text" class="form-control" placeholder="remisión.." aria-label="Username" aria-describedby="basic-addon1" 
+                [(ngModel)]="filtroBusqueda" (ngModelChange) ="filtrarRemisiones()">
             </div>
         </div>
     </div>
@@ -30,7 +31,7 @@
               
             </thead>
             <tbody>
-                <tr *ngFor="let remision of remisiones | paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage, totalItems: totalItems }">
+                <tr *ngFor="let remision of remisionesFiltradas | paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage}">
                     <td scope = "row">{{remision.idRemision}}</td>
                     <td>
                         <div class="card-item">
@@ -44,7 +45,7 @@
                     <td>{{remision.programa}}</td>
                     <td>{{remision.ciudad}}</td>
                     <td  class="card-item">{{remision.institucionRemite.toLowerCase()}}</td>
-                    <td  class="card-item">{{remision.estado.toLowerCase()}}</td>
+                    <td class="card-item2">{{remision.estado.toLowerCase()}}</td>
                     <td>
                         <i class="bi bi-clock-history" id="history" title="ver historial" (click)="verHistorialRemision(remision.idRemision)"></i>
                     </td>

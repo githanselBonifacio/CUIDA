@@ -14,7 +14,9 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { SpinnerComponent } from '../shared/components/spinner/spinner.component';
 import { ModalDetalleRemisionComponent } from './components/modal-detalle-remision/modal-detalle-remision.component';
 import { MapsModule } from '../maps/maps.module';
-import {MatSelectModule} from '@angular/material/select';
+import { MatSelectModule } from '@angular/material/select';
+import { PipesModule } from '../pipes/pipes.module';
+
 @NgModule({
   declarations: [
     MainComponentAgendaComponent,
@@ -22,7 +24,7 @@ import {MatSelectModule} from '@angular/material/select';
     ModalSeleccionProfesionalComponent,
     ModalCambioHoraCitaComponent,
     SpinnerComponent,
-    ModalDetalleRemisionComponent
+    ModalDetalleRemisionComponent,
   ],
   imports: [
     CommonModule,
@@ -34,8 +36,8 @@ import {MatSelectModule} from '@angular/material/select';
     AgendaRoutingModule,
     MatProgressSpinnerModule,
     MapsModule ,
+    PipesModule,
     MatSelectModule
-
   ],
   exports:[
     MainComponentAgendaComponent

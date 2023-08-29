@@ -10,7 +10,7 @@ td, th{
     text-align: center;
 }
 #header-table th{
-    color: white;
+    color:var(--gris4-color);
     font-weight: bold;
     background-color: var(--primary-color);
 }

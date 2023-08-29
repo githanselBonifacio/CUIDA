@@ -58,17 +58,17 @@
                 
               <div class="titulo-procedimiento">Curación</div>
                 
-                <div class="item-procedimiento">
-                  <span class="input-group-text">Tipo: {{curacion.tipo_curacion}}</span>
-                </div>
+              <div class="item-procedimiento">
+                  <span >Tipo: {{curacion.tipo_curacion}}</span>
+              </div>
 
-                <div class="item-procedimiento">
-                  <span class="input-group-text">Descripción: {{curacion.descripcion}}</span>
-                </div >
+              <div class="item-procedimiento">
+                  <span >Descripción: {{curacion.descripcion}}</span>
+              </div >
 
-                <div class="item-procedimiento">
-                  <span class="input-group-text">Sesiones: {{curacion.sesiones}}</span>
-                </div>
+              <div class="item-procedimiento">
+                  <span>Sesiones: {{curacion.sesiones}}</span>
+              </div>
           </div>
               
         </div>
@@ -79,7 +79,7 @@
                 <div class="titulo-procedimiento">Canalización</div>
                 
                 <div class="item-procedimiento">
-                  <span class="input-group-text">Tipo: {{canalizacion.tipo_canalizacion}}</span>
+                  <span>Tipo: {{canalizacion.tipo_canalizacion}}</span>
                 </div>
 
           </div>
@@ -91,13 +91,13 @@
                 <div class="titulo-procedimiento">Fototerapia</div>
                 
                 <div class="item-procedimiento">
-                  <span class="input-group-text"> Fecuencia: {{fototerapia.tipo_frecuencia}}</span>
+                  <span> Fecuencia: {{fototerapia.tipo_frecuencia}}</span>
                 </div>
                 <div class="item-procedimiento">
-                  <span class="input-group-text">Dias tratamiento: {{fototerapia.dias_tratamiento}}</span>
+                  <span>Dias tratamiento: {{fototerapia.dias_tratamiento}}</span>
                 </div>
                 <div class="item-procedimiento">
-                  <span class="input-group-text">Dosis: {{fototerapia.cantidad_dosis}}</span>
+                  <span>Dosis: {{fototerapia.cantidad_dosis}}</span>
                 </div>
 
           </div>               
@@ -109,12 +109,12 @@
                 <div class="titulo-procedimiento">Toma de muestras</div>
                 
                 <div class="item-procedimiento">
-                  <span class="input-group-text">Tipo: {{tomaMuestra.tipo_muestra}}</span>
+                  <span>Tipo: {{tomaMuestra.tipo_muestra}}</span>
                 </div>
               
                 <div *ngIf="tomaMuestra.requiere_ayuno" class="item-procedimiento">
                     <div class="badge-advertencia">
-                      <span >Requiere ayuno</span>
+                      <span>Requiere ayuno</span>
                     </div>
                 </div>   
           </div>
@@ -126,13 +126,13 @@
                 <div class="titulo-procedimiento"> Sondaje</div>
                 
                 <div class="item-procedimiento">
-                   <span class="input-group-text"> Tipo: {{sondaje.tipo_sondaje}}</span>
+                   <span> Tipo: {{sondaje.tipo_sondaje}}</span>
                 </div>
                 <div class="item-procedimiento">
-                  <span class="input-group-text">Sonda: {{sondaje.tipo_sondaje}}</span>
+                  <span>Sonda: {{sondaje.tipo_sondaje}}</span>
                 </div>
                 <div class="item-procedimiento">
-                  <span class="input-group-text">Sesiones: {{sondaje.total_sesiones}}</span>
+                  <span>Sesiones: {{sondaje.total_sesiones}}</span>
                 </div>
                
           </div>
@@ -144,31 +144,31 @@
                 <div class="titulo-procedimiento">Secreción</div>
                 
                 <div class="item-procedimiento">
-                  <span class="input-group-text">Tipo sonda: {{secrecion.tipo_sonda}}</span>
+                  <span>Tipo sonda: {{secrecion.tipo_sonda}}</span>
                 </div>
                 <div class="item-procedimiento">
-                  <span class="input-group-text">Dias tratamiento: {{secrecion.dias_tratamiento}}</span>
+                  <span>Dias tratamiento: {{secrecion.dias_tratamiento}}</span>
                 </div>
                
-                <div *ngIf="secrecion.visita_enfermeria" class="item-procedimiento">
+                <div *ngIf="secrecion.visita_enfermeria">
                   <div class="badge-advertencia">
-                    <span >Tiene visita enfermería</span>
+                    <span>Tiene visita enfermería</span>
                   </div>
             
                 </div>
-                <div *ngIf="secrecion.envio_aspirador" class="item-procedimiento">
+                <div *ngIf="secrecion.envio_aspirador" >
                   <div class="badge-advertencia">
                     <span >Tiene Respirador</span>
                   </div>
                   <br>
                 </div>
-                <div *ngIf="secrecion.nasal" class="item-procedimiento">
+                <div *ngIf="secrecion.nasal">
                   <div class="badge-advertencia">
                     <span >Nasal</span>
                   </div>
                
                 </div>
-                <div *ngIf="secrecion.traqueostomia" class="item-procedimiento"> 
+                <div *ngIf="secrecion.traqueostomia"> 
                   <div class="badge-advertencia">
                     <span >Traqueostomia</span>
                   </div>
@@ -183,10 +183,10 @@
                 <div class="item-procedimiento">
                     <div class="card-medicamento">
                       <h6>Medicamento</h6> 
-                      <div >
+                      <div class="item-medicamento">
                             {{soporteNutricional.nombre_medicamento}}
                       </div>
-                      <div>
+                      <div  class="item-medicamento">
                           {{soporteNutricional.presentacion_medicamento}}
                       </div>
                         
@@ -195,23 +195,23 @@
                 
 
                 <div class="item-procedimiento">
-                  <span class="input-group-text"> Dosis: {{soporteNutricional.cantidad_dosis}} ({{soporteNutricional.unidad_dosis}})</span>
+                  <span> Dosis: {{soporteNutricional.cantidad_dosis}} ({{soporteNutricional.unidad_dosis}})</span>
                 </div>
                 <div class="item-procedimiento">
-                  <span class="input-group-text">Tipo: {{soporteNutricional.tipo}}</span>
+                  <span>Tipo: {{soporteNutricional.tipo}}</span>
                 </div>
                 <div class="item-procedimiento">
-                  <span class="input-group-text"> Descripción: {{soporteNutricional.descripcion}}</span>
+                  <span> Descripción: {{soporteNutricional.descripcion}}</span>
                  
                 </div>
                 <div class="item-procedimiento">
-                  <span class="input-group-text"> Duración: {{soporteNutricional.duracion}}</span>
+                  <span> Duración: {{soporteNutricional.duracion}}</span>
                 </div>
                 <div class="item-procedimiento">
-                  <span class="input-group-text">volumen: {{soporteNutricional.volumen}}</span>
+                  <span>volumen: {{soporteNutricional.volumen}}</span>
                 </div>
               
-                <div *ngIf="soporteNutricional.no_pbs" class="item-procedimiento">
+                <div *ngIf="soporteNutricional.no_pbs">
                   <div class="badge-advertencia">
                     <span >No PBS</span>
                   </div>

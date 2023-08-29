@@ -79,6 +79,13 @@ th  :hover{
     border:1px solid var( --gris3-color);
     
 }
+
+span{
+    word-wrap: break-word;
+    overflow-wrap: normal;
+    line-height: 0px;
+}
+
 #datos-personales{
     padding: 0;
 }
@@ -130,17 +137,21 @@ th  :hover{
     font-weight: bolder;
     padding: 0 0.3rem 0 0.3rem;
     border-radius: 5px;
+    margin-left: 0.5rem;
    
 }
 .item-procedimiento{
-    padding: 0.1rem 0.5rem 0.1rem 0.5rem;
+    padding: 0.2rem 0.2rem 0.2rem 0.5rem !important;
+    margin: 0.5rem 0.5rem 0.5rem 0.5rem;
+    background-color: var(--third-color);
+    border-radius: 5px;
+    color: var(--second-color);
+    font-weight: bold;
 }
-.input-group-text{
-    padding: 0 0.5rem 0 0.5rem !important;
-}
+
+
 .card-medicamento{
-    border:1px solid var( --gris3-color);
-    padding: 0.5rem 0.5rem 0.5rem 0.5rem;
+    padding: 0.3rem 0.3rem 0rem 0.3rem !important;
     border-radius: 5px;
     background-color: var(--third-color);
     color :var(--second-color);
@@ -151,8 +162,6 @@ th  :hover{
    font-weight: bold;
    color :var(--second-color);
 }
-.input-group-text{
-    background-color: var(--third-color);
-    color :var(--second-color);
-    font-weight: bold;
+.item-medicamento{
+    padding: 0rem 0rem 0rem 0rem !important;
 }

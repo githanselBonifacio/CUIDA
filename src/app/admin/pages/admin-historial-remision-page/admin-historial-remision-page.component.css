@@ -89,8 +89,8 @@ p{
     box-shadow: 2px 2px 5px var(--gris2-color);
 }
 #accordion-registro button:hover{
-    background: linear-gradient(to right,var(--third-color) 0%, var(--third-color) 1%,var(--second-color) 1%, var(--second-color) 99.5%);
-    color: var(--third-color);
+    background: linear-gradient(to right,var(--third-color) 0%, var(--third-color) 1%,var(--primary-color) 1%, var(--primary-color) 99.5%);
+    color: var(--gris4-color);
 }
 
 #accordion-registro button:hover::after {

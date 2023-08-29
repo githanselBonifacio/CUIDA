@@ -99,8 +99,10 @@
                 </h2>
                 <div id="collapse{{i}}" class="accordion-collapse collapse" [attr.aria-labelledby]="'heading'+i.toString()" >
                   <div class="accordion-body">
-                    <h5>Citas</h5>
-                    <app-tabla-historial-citas [citas]="registro.citas"></app-tabla-historial-citas>
+                    <div *ngIf="registro.citas!=null">
+                       <h5>Citas</h5>
+                       <app-tabla-historial-citas [citas]="registro.citas"></app-tabla-historial-citas>
+                    </div>
                   </div>
                 </div>
               </div>        

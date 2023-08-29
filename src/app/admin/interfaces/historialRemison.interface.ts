@@ -156,8 +156,8 @@ export interface Paciente {
     edad:                  string;
     peso:                  string;
     sexo:                  string;
-    nombre:                string;
-    apellido:              string;
+    nombres:               string;
+    apellidos:             string;
     id_ubicacion:          string;
     tipo_afiliacion:       string;
     fecha_nacimiento:      Date;

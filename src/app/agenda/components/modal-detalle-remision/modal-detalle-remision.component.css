@@ -135,7 +135,7 @@ span{
     background-color: var(--primary-color);
     color: white;
     font-weight: bolder;
-    padding: 0 0.3rem 0 0.3rem;
+    padding: 0 0.3rem 0 0.3rem !important;
     border-radius: 5px;
     margin-left: 0.5rem;
    

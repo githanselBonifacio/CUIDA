@@ -1,0 +1,7 @@
+input[type="date"]{
+    background-color:var(--gris4-color);
+    color: var(--quarter-color);
+    padding: 0.4rem 0.4rem 0.4rem 0.4rem;
+    margin: 0px;
+    border: 1px solid var(--gris3-color);
+}

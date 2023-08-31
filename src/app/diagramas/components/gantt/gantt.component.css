@@ -1,10 +1,13 @@
-h5{margin-bottom: 0.5rem;}
-#header-horas{
-    flex-grow: 1;
-    display: flex;
-    justify-content: space-around;
-    padding: 0;
+@import url("../../../../styles.css");
 
+
+#header-hora{
+   display: flex;
+   justify-content: space-around;
+   height: 2rem;
+   padding: 0px;
+   color: var(--quarter-color);
+   font-weight: lighter;
 }
 #content-hora{
     text-align: center;
@@ -19,11 +22,16 @@ h5{margin-bottom: 0.5rem;}
     box-shadow: 0px 0px 4px 0px var(--gris3-color);
 }
 
-#header-prefesional-gantt{
-    padding: 0.5rem 0.5rem 0.5rem 0.5rem;
-    color: var(--second-color);
-    font-size: 1.5rem;
+.panel-gantt{
+    display: flex; 
+    flex-direction: column;
+    height: 100%;
+    justify-content: end;
 }
+.panel-gantt div{
+    height: 100%;
+}
+
 .retirar-profesional{
     display: flex;
     justify-content: end;
@@ -35,14 +43,25 @@ h5{margin-bottom: 0.5rem;}
 .retirar-profesional i:hover{
     color: var(--red-dark-color);
 }
-.container-actividades-panel{
-    max-height: 50rem;
- 
+
+@media screen  and (max-width:1370px){
+    .container-actividades-panel{
+        overflow-y: scroll;
+        max-height:calc(50vh);
+        overflow-x: hidden;
+    }
 }
 
+@media screen  and (min-width:1400px){
+    .container-actividades-panel{
+        overflow-y: scroll;
+        max-height:calc(58vh);
+        overflow-x: hidden;
+    }
+}
 #container-actividad-time{
    position: relative;
-   padding: 0 0.6rem 0 0;
+   padding: 0px;
    text-align: center;
    border: 1px dotted var(--gris3-color);
 }

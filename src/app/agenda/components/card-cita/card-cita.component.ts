@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 
-import { Cita,crearCita } from '../../interfaces/turno.interface';
+import { Cita } from '../../interfaces/turno.interface';
 
 import {MatDialog} from '@angular/material/dialog'
 import { ModalSeleccionProfesionalComponent } from '../modal-seleccion-profesional/modal-seleccion-profesional.component';
@@ -19,7 +19,7 @@ export class CardCitaComponent {
     @Input()
     public citas:Cita[] = [];
 
-    citaSeleccionada :Cita = crearCita();
+    citaSeleccionada :Cita|any = {};
     
     @Input()
     public idCiudad: string = '';

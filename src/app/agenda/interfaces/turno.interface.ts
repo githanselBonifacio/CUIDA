@@ -22,24 +22,7 @@ export enum EstadosCita {
     cancelada   = 5,
     finalizada  = 6
   }
-export function crearCita():Cita{
-    const cita: Cita = {
-        idCita:           "",
-        fechaInicio:      new Date(),
-        fechaProgramada:  new Date(),
-        idRemision:       '',
-        duracion:         0,
-        holgura:          0,
-        latitud:         0,
-        longitud:          0,
-        idCiudad:         '',
-        idEstado:         0,
-        idProfesional:    '',
-        idConductor:      '',
-        especialidad:     ''
-      };
-      return cita;
-}
+
 export interface Medicamento{
     idMedicamento:     string;
     nombre:            string;
@@ -130,16 +113,7 @@ export interface DatosAtencionRemision{
     celularPaciente:string;
     celularPaciente2:string;
 }
-export function crearDatosAtencionRemision(): DatosAtencionRemision {
-    const datosAtencion: DatosAtencionRemision = {
-    nombreCuidador:"",
-    nombreResponsable:"",
-    telefonoPaciente:"",
-    celularPaciente:"",
-    celularPaciente2:"",
-    }
-    return datosAtencion;
-};
+
 export interface Paciente{
     tipoIdentificacion:   string;
     numeroIdentificacion: string;
@@ -154,33 +128,6 @@ export interface Paciente{
     ubicacion:            Ubicacion;
 } 
 
-export function crearPaciente(): Paciente {
-    const paciente: Paciente = {
-      tipoIdentificacion: "",
-      numeroIdentificacion: "",
-      nombre: "",
-      apellido: "",
-      edad: 0,
-      sexo: "",
-      peso: 0,
-      tipoAfiliacion: "",
-      nombreAseguradora: "",
-      fechaNacimiento: new Date(),
-      ubicacion: {
-        latitud: 0,
-        longitud: 0,
-        direccion: "",
-        tipoVia: "",
-        numero1: "",
-        numero2: "",
-        barrio: "",
-        sinNomenclatura: false,
-        nroInterseccion: "",
-      },
-    };
-  
-    return paciente;
-  }
 
 export class Convert {
     public static toTurno(json: string): Cita {

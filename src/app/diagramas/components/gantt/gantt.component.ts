@@ -1,6 +1,6 @@
 
 import { Actividad } from '../../interfaces/tarea-gantt.interface';
-import { Component,Input, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component,Input, OnInit, EventEmitter, Output  } from '@angular/core';
 import {Tarea} from '../../interfaces/tarea-gantt.interface'
 import {MatDialog} from '@angular/material/dialog'
 import { MapRutaComponent } from 'src/app/maps/components/map-ruta/map-ruta.component';
@@ -24,13 +24,13 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
   ]
 })
 
-export class GanttComponent implements OnInit{
+export class GanttComponent implements OnInit {
 
   @Output() idprofesionalEvent = new EventEmitter<string>();
 
   constructor(
     private modalMapRuta: MatDialog,
-    private router: Router
+    private router: Router,
   ){}
 
   @Input() public actividades: Actividad[] = [];
@@ -41,19 +41,20 @@ export class GanttComponent implements OnInit{
   intervalo:number = 0;
   segundosInHoras=3600;
   segundosInMinutos=60;
-
+  idHeaderHora = "header-hora";
   //estilos
   colorTareaAtencion :string="#00AEC7";
   colorHolgura:string="#f9e4478f"
   colorFondoTexto:string ="#0033A0"
   colorDesplazamiento :string = "#f5b120";
+  colorGris:string='#53565A'
 
   ngOnInit(): void {
       this.currentUrl = this.router.url;
       this.simpleHoras = this.horas.map(hora => parseInt(hora.substring(0, 2)));
       this.intervalo = (this.horas.length-1)*3600
-
   }
+
  /* onResize(){
     this.ngOnInit()
     console.log("cambio")
@@ -177,17 +178,12 @@ export class GanttComponent implements OnInit{
             }
           
         }
-
         for (let hora in this.simpleHoras){
      
           const horaSegundosGrid =this.simpleHoras[hora]*this.segundosInHoras;
           const pos = (longitudContainer*(horaSegundosGrid-this.simpleHoras[0]*this.segundosInHoras))/this.intervalo;
         
-          this.crearGridVertical(
-            idElement,
-            this.simpleHoras[hora],
-            String((pos))
-          );
+          this.crearGridVertical( idElement,this.simpleHoras[hora], String((pos)));
         }
         container.appendChild(holgura);
         container.appendChild(div);
@@ -211,8 +207,6 @@ export class GanttComponent implements OnInit{
    
    crearGridVertical(idElement: string, hora:number, pos:string){
     const div = document.createElement('div');
-    const divHora = document.createElement('div');
-    const divHoraTexto = document.createElement('div');
     const idNuevoDiv = 'div-line-'+idElement+'-'+hora;
     
     //estilo para el div de la tarea
@@ -223,33 +217,15 @@ export class GanttComponent implements OnInit{
     div.id = idNuevoDiv;
     div.className = 'grid-time';
 
-    //div para el texto de la hora
-    divHoraTexto.textContent = `${hora}:00`;
-    divHoraTexto.style.color = this.colorFondoTexto;
-    divHoraTexto.style.position = "absolute"
-    divHoraTexto.style.top = '50%';
-    divHoraTexto.style.left = '50%';
-    divHoraTexto.style.transform = 'translate(-50%, -390%)';
-    divHoraTexto.style.fontWeight = "bold"
-
-    //div para el contenedor del texto
-    divHora.id = `hora-${hora}:00`;
-    div.style.position = "absolute"
-
-    if (document.getElementById(`hora-${hora}:00`)==null){
-      divHora.appendChild(divHoraTexto);
-       div.appendChild(divHora);
-    };
-   
     let container = document.getElementById(idElement);
     
-    if(container != null && document.getElementById(idNuevoDiv)==null){
+
+    if( container != null && document.getElementById(idNuevoDiv)==null){
         div.style.left = `${pos}px`;
         container.appendChild(div);
-   
       }
    }
-
+   
    mostrarRutaMapa(tareas:Tarea[]):void{
     console.log(tareas)
     const dialogRef = this.modalMapRuta.open(MapRutaComponent,{

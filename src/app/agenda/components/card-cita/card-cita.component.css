@@ -1,39 +1,39 @@
-.header-map{
+@import url('../../../../styles.css');
+
+.header-cita{
     display: flex;
     justify-content: space-between;
+    vertical-align: middle;
+    padding: 0.2rem 0.5rem 0.2rem 0.5rem;
+    font-weight: bold;
+    background-color: var(--second-color);
 }
-.header-map i{
-    font-size: 1.6rem;
-    color: var(--second-color);
-}
-.header-map i:hover{
-    color: var( --second-color-2);
+.header-cita h5{
+ color: var(--third-color);
 }
 
-h5{
-    color: var(--second-color);
-    font-weight: bold;
+.header-cita i{
+    color: var(--gris3-color);;
+    font-size: 1.2rem;
 }
+
 .card{
     border-color: var(--gris2-color);
     box-shadow: 5px 5px 15px var(--gris3-color);
+    padding-bottom: 0.5rem;
 }
 .input-group-text{
-    padding: 0 0.5rem 0 1rem;
+    color: var(--quarter-color);
+    margin-bottom: 0.3rem;
+    border-width: 0px;
 }
 .input-group-text i{
-    font-size: 1.5rem;
-    font-weight: bold;
-    padding: 0 0 2.2rem 0;
-    margin: 0 1rem 0 0;
+   font-style: normal;
+   font-size: 1.2rem;
 }
 
 #container-card-citas{
     margin: 0.3rem 0.3rem 0.3rem 0.3rem;
-}
-#container-card{
-    overflow-y: scroll;
-    max-height:  45rem;
 }
 
 .i-card-agenda{
@@ -42,7 +42,7 @@ h5{
     justify-content: flex-end;
 }
 .i-card-agenda i{
-    font-size: 2.2rem;
+    font-size: 1.5rem;
     margin-left: 0.4rem;
 }
 #i-card-agenda-agendar{

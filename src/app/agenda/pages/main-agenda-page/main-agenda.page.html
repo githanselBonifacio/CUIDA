@@ -1,4 +1,4 @@
-<div id="container-agenda">
+<div class="container-view">
         <div >
             <div class="d-flex" id = "header_filtro_agenda">
                 <div id="titulo">
@@ -9,28 +9,21 @@
                     
                     <div class="d-flex" id = "filtro_agenda">
                     
-                        <div class="btn-group">
-                            <div class= "btn-agendamientos">
-                                <button class="bnt-bot-agendamiento" (click)=" autoagendar()">
-                                    Agendar
-                                </button>
-                             </div>
-
-                            <div class= "btn-agendamientos">
-                                <button class="bnt-bot-agendamiento" (click)="desagendarTurnoCompleto()">
-                                        Desagendar 
-                                </button>
-                            </div>
+                        <div class="buttom-group-horinzontal">
+                        
+                            <button class="buttom-seleccion" (click)=" autoagendar()">Agendar</button>
+                            <button class="buttom-seleccion" (click)="desagendarTurnoCompleto()">Desagendar </button>
+                           
                         </div>   
                     
                         <div class="input-group">
                             <label for="fecha">Fecha</label>
-                            <input type="date" id="fecha" [(ngModel)]="fechaFiltroTurno" id="fecha-consultada">
+                            <input type="date" id="fecha" [(ngModel)]="fechaFiltroTurno" >
                         </div>
 
                         
                         <div class="input-group">
-                            <label for="opcionCiudad">Ciudad</label>
+                            <label for="opcionCiudad">Regional</label>
                             <select name="select-regional" [(ngModel)]="opcionCiudad" id="opcionCiudad">
                                 <option value="default" selected disabled>seleccione..</option>
                                 <option *ngFor="let ciudad of regionales" [value]="ciudad.id">{{ciudad.nombre}} </option>
@@ -40,13 +33,13 @@
                     
                         <div class="input-group">
                             <label for="opcionTurno">Turno enfermeria</label>
-                            <select name="select-turno" [(ngModel)]="opcionHorariosTurno" id="opcionTurno">
+                            <select name="select-turno" [(ngModel)]="opcionHorariosTurno" id="opcionTurno" (ngModelChange)="actualizarHorarioHeader()"> 
                                 <option value="default" selected disabled>seleccione..</option>
                                 <option *ngFor="let option of horarioTurno" [value]="option.id">T{{option.id}}</option>
                             </select>
                         </div>
                         <div class="input-group">
-                            <button class="bnt-consulta" (click)="consultarCitas()">
+                            <button class="buttom-seleccion" (click)="consultarCitas()">
                                 Buscar
                             </button>
                         </div>
@@ -58,8 +51,8 @@
         <div  class="row">
             <div class="col-md-3" id="container-list-citas">
                 <div class="d-flex">
-                    <h2>Citas</h2>
-                    <div class="input-group mb-3">
+                   
+                    <div class="input-group mb-2">
                         <span class="input-group-text" id="basic-addon1">ID</span>
                         <input [(ngModel)]="idRemision" (ngModelChange)=filtrarCitasByIdRemision() type="text" class="form-control" placeholder="remisión" aria-label="Username" aria-describedby="basic-addon1">
                     </div>
@@ -71,21 +64,23 @@
             </div>
 
             <div class="col-md-9" id="container-agenda-gantt">
-                <app-diagramas-gantt 
-                        [actividades]="actividades" 
-                        [horas]="horasTurnoString"
-                        (idprofesionalEvent)= "desasignarProfesionalTurno($event)">
-                </app-diagramas-gantt>
-
-                <div class="row">
-                    <div class="col-2">
-                        <div id="agregar-profesional" (click)="agregarProfesionalTurno()">
-                                <i class="bi bi-person-plus-fill" title="Agregar profesional"></i>
-                        </div>
-
+                <div class="panel-gantt">
+                    <div>
+                        <app-diagramas-gantt 
+                            [actividades]="actividades" 
+                            [horas]="horasTurnoString"
+                            (idprofesionalEvent)= "desasignarProfesionalTurno($event)">
+                        </app-diagramas-gantt>
                     </div>
-                </div>
-                
+                    <hr>
+                    <div>
+                       
+                        <button id="agregar-profesional"(click)="agregarProfesionalTurno()">
+                            <i class="bi bi-person-plus-fill" title="Agregar profesional"></i>
+                         </button>
+                     
+                    </div>
+                </div>   
             </div>
              
             <ng-container *ngIf="loadingPage == false">

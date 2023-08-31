@@ -101,6 +101,9 @@ export class MainComponentAgendaComponent implements OnInit{
         this.horasTurnoString = generarHorario(this.opcionHorariosTurno);
         this.router.navigate(['agenda',this.fechaFiltroTurno,this.opcionCiudad,this.opcionHorariosTurno]);
      }
+     actualizarHorarioHeader(){
+      this.horasTurnoString = generarHorario(this.opcionHorariosTurno);
+     }
 
      filtrarCitasByIdRemision():void{
       if(this.idRemision.length === 0){

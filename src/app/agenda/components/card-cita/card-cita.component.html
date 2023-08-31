@@ -1,8 +1,7 @@
 <div  class="row" id = 'container-card'>
     <div *ngFor="let cita of citas" class="col-md-12" id = "container-card-citas">
         <div class="card">
-            <div class="card-body">
-                <div class="header-map">
+            <div class="header-cita">
                     <div>
                         <h5 class="card-title">{{cita.idRemision}}</h5>
                     </div>
@@ -10,12 +9,13 @@
                         <i class="bi bi-eye-fill" title="ubicación" (click)="mostrarDetalleCita(cita)"></i>
                     </div>
                 </div>
-                
-                <span class="input-group-text"><i class="bi bi-calendar" ></i>{{cita.fechaInicio |date :'dd/MM/yyyy HH:mm' }}</span>
-                <span class="input-group-text"><i class="bi bi-calendar-check" ></i>{{cita.fechaProgramada |date :'dd/MM/yyyy HH:mm'}}</span>
-                <span class="input-group-text"><i class="bi bi-clock"></i>{{cita.duracion|formatearSegundos }}</span>
-                <span class="input-group-text"><i class="bi bi-hourglass-bottom"></i>{{cita.holgura |formatearSegundos}}</span>
-                <span class="input-group-text"><i class="bi bi-clipboard"></i>
+            <div class="card-body">
+     
+                <div class="input-group-text"><i class="bi bi-calendar" > {{cita.fechaInicio |date :'dd/MM/yyyy HH:mm' }}</i></div>
+                <div class="input-group-text"><i class="bi bi-calendar-check" > {{cita.fechaProgramada |date :'dd/MM/yyyy HH:mm'}}</i></div>
+                <div class="input-group-text"><i class="bi bi-clock"> {{cita.duracion|formatearSegundos }}</i></div>
+                <div class="input-group-text"><i class="bi bi-hourglass-bottom"> {{cita.holgura |formatearSegundos}}</i></div>
+                <div class="input-group-text"><i class="bi bi-clipboard">  
                     <ng-container *ngIf="cita.idEstado === 1; then thenEstado else elseEstado">
                     </ng-container>
                     <ng-template #thenEstado>
@@ -24,8 +24,8 @@
                     <ng-template #elseEstado>
                         Agendada
                     </ng-template>
-                        
-                </span>
+                   </i>     
+                </div>
 
                 <div class="card-body" *ngIf="cita.idConductor" id="conductor-card">
                     <h5 for="conductor" class="card-title">conductor asignado</h5>

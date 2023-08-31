@@ -1,0 +1,23 @@
+.buttom-seleccion{
+    background-color:var(--second-color);
+    color:var( --gris4-color);
+    border: solid 1px var(--gris4-color);
+    border-color: transparent;
+    border-radius: 0.5rem;
+    height: 60%;
+    text-align: end;
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+}
+
+.buttom-seleccion:hover{
+    color: var( --third-color);
+    box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5);
+}
+.buttom-group-horinzontal{
+    display: flex;
+    justify-content: start;
+    align-items: end;
+    margin-left: 0.4rem;
+    margin-right: 0.4rem;
+}

@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import {crearDatosAtencionRemision,DatosAtencionRemision,Paciente,crearPaciente,Cita, Curacion, Tratamiento,Sondaje,TomaMuestra, SoporteNutricional, Canalizacion,Fototerapia, Secrecion} from '../../interfaces/turno.interface'
+import {DatosAtencionRemision,Paciente,Cita, Curacion, Tratamiento,Sondaje,TomaMuestra, SoporteNutricional, Canalizacion,Fototerapia, Secrecion} from '../../interfaces/turno.interface'
 import { MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import { AgendaService } from 'src/app/agenda/services/agenda.service';
 
@@ -9,16 +9,16 @@ import { AgendaService } from 'src/app/agenda/services/agenda.service';
   styleUrls: ['./modal-detalle-remision.component.css']
 })
 export class ModalDetalleRemisionComponent implements OnInit{
-  paciente             : Paciente              = crearPaciente();
-  datosAtencionRemision: DatosAtencionRemision = crearDatosAtencionRemision();       
-  tratamientos         : Tratamiento        [] = [];
-  curaciones           : Curacion           [] = [];
-  sondajes             : Sondaje            [] = [];
-  tomaMuestras         : TomaMuestra        [] = [];
-  soporteNutricionales : SoporteNutricional [] = [];
-  canalizaciones       : Canalizacion       [] = [];
-  fototerapias         : Fototerapia        [] = [];
-  secreciones          : Secrecion          [] = [];
+  paciente             : Paciente|any              = {};
+  datosAtencionRemision: DatosAtencionRemision|any = {};       
+  tratamientos         : Tratamiento            [] = [];
+  curaciones           : Curacion               [] = [];
+  sondajes             : Sondaje                [] = [];
+  tomaMuestras         : TomaMuestra            [] = [];
+  soporteNutricionales : SoporteNutricional     [] = [];
+  canalizaciones       : Canalizacion           [] = [];
+  fototerapias         : Fototerapia            [] = [];
+  secreciones          : Secrecion              [] = [];
 
   constructor(
     public dialogRef: MatDialogRef<ModalDetalleRemisionComponent>,

@@ -5,6 +5,10 @@ import { MainComponentAgendaComponent } from './pages/main-agenda-page/main-agen
 
 export const routes: Routes = [
   {
+    path:"",
+    component:MainComponentAgendaComponent,
+  },
+  {
       path:":idTurno/:idCiudad/:idHorarioTurno",
       component:MainComponentAgendaComponent,
   },

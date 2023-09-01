@@ -12,7 +12,8 @@
                 <button class = "navbar-button" type="button">Administración</button>
             </li>
 
-            <li routerLink="/agenda/{{fechaHoy}}/427/1"
+            <li routerLink="/agenda"
+                [routerLinkActiveOptions]="{exact: false}"
                 routerLinkActive="active">
                 <button class = "navbar-button" type="button" >Agenda</button>
             </li>

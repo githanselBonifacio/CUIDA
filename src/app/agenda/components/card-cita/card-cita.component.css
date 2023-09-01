@@ -22,28 +22,42 @@
     box-shadow: 5px 5px 15px var(--gris3-color);
     padding-bottom: 0.5rem;
 }
+
 .input-group-text{
     color: var(--quarter-color);
     margin-bottom: 0.3rem;
     border-width: 0px;
+    padding: 0px;
 }
 .input-group-text i{
    font-style: normal;
    font-size: 1.2rem;
+   margin: -1rem 0.4rem 0rem 0rem;
 }
 
+#container-card{
+    overflow-y: scroll;
+    overflow-x: hidden;
+    max-height: 70vh;
+}
+@media screen  and (max-height:650px){
+    #container-card{
+        max-height: 60vh;
+    }
+}
 #container-card-citas{
     margin: 0.3rem 0.3rem 0.3rem 0.3rem;
 }
 
+
 .i-card-agenda{
-    padding-top: 0.5rem;
     display: flex;
     justify-content: flex-end;
 }
 .i-card-agenda i{
     font-size: 1.5rem;
     margin-left: 0.4rem;
+    margin: -1rem 0.4rem 0rem 0rem;
 }
 #i-card-agenda-agendar{
     color: var(--primary-color);

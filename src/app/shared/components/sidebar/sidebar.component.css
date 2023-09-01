@@ -4,10 +4,13 @@
 .content-navbar{
    display: flex;
    justify-content: end;
-   position: absolute;
+   position: fixed;
    width: 100%;
    top: 0px;
+   z-index: 1;
+   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
 }
+
 nav{
     padding: 0px;
 }
@@ -25,6 +28,7 @@ li{
 
 .content-navbar{
   background-color: var(--second-color);
+
 }
 .navbar-menu li.active button{
   border-bottom: 2px solid var(--third-color);

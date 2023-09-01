@@ -7,11 +7,7 @@
     border:1px solid var( --gris3-color);
     background-color:var(---primary-color);
     padding-top: 1.5rem;
-    overflow-y: scroll;
-    overflow-x: hidden;
-    max-height: 75vh;
 }
-
 #container-agenda-gantt{
     border:1px solid var(--gris3-color);
     padding-top: 1rem;
@@ -32,6 +28,9 @@
 .input-group{
     align-items: end !important;
     justify-content: start !important;
+}
+#input-remision{
+    border: 1px solid var(--gris3-color);
 }
 
 #agregar-profesional{

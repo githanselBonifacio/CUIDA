@@ -11,11 +11,11 @@
                 </div>
             <div class="card-body">
      
-                <div class="input-group-text"><i class="bi bi-calendar" > {{cita.fechaInicio |date :'dd/MM/yyyy HH:mm' }}</i></div>
-                <div class="input-group-text"><i class="bi bi-calendar-check" > {{cita.fechaProgramada |date :'dd/MM/yyyy HH:mm'}}</i></div>
-                <div class="input-group-text"><i class="bi bi-clock"> {{cita.duracion|formatearSegundos }}</i></div>
-                <div class="input-group-text"><i class="bi bi-hourglass-bottom"> {{cita.holgura |formatearSegundos}}</i></div>
-                <div class="input-group-text"><i class="bi bi-clipboard">  
+                <div class="input-group-text"><i class="bi bi-calendar"> </i>{{cita.fechaInicio |date :'dd/MM/yyyy HH:mm' }}</div>
+                <div class="input-group-text"><i class="bi bi-calendar-check"> </i>{{cita.fechaProgramada |date :'dd/MM/yyyy HH:mm'}}</div>
+                <div class="input-group-text"><i class="bi bi-clock"> </i>{{cita.duracion|formatearSegundos }}</div>
+                <div class="input-group-text"><i class="bi bi-hourglass-bottom"> </i>{{cita.holgura |formatearSegundos}}</div>
+                <div class="input-group-text"><i class="bi bi-clipboard"> </i>     
                     <ng-container *ngIf="cita.idEstado === 1; then thenEstado else elseEstado">
                     </ng-container>
                     <ng-template #thenEstado>
@@ -24,7 +24,7 @@
                     <ng-template #elseEstado>
                         Agendada
                     </ng-template>
-                   </i>     
+                  
                 </div>
 
                 <div class="card-body" *ngIf="cita.idConductor" id="conductor-card">

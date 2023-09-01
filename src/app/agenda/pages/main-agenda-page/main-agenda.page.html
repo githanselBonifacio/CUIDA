@@ -1,10 +1,7 @@
 <div class="container-view">
-        <div >
-            <div class="d-flex" id = "header_filtro_agenda">
-                <div id="titulo">
-                    <h1>Gestion de agenda</h1>
-                </div>
-
+        <div class="d-flex" id = "header_filtro_agenda"> 
+                <h1>Gestion de agenda</h1>
+ 
                 <div class = "form-group">
                     
                     <div class="d-flex" id = "filtro_agenda">
@@ -45,25 +42,25 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            
         </div>
+            
         <div  class="row">
-            <div class="col-md-3" id="container-list-citas">
+            <div class="col-md-2" id="container-list-citas">
                 <div class="d-flex">
-                   
+                    
                     <div class="input-group mb-2">
-                        <span class="input-group-text" id="basic-addon1">ID</span>
-                        <input [(ngModel)]="idRemision" (ngModelChange)=filtrarCitasByIdRemision() type="text" class="form-control" placeholder="remisión" aria-label="Username" aria-describedby="basic-addon1">
+                        <span class="input-group-text">ID</span>
+                        <input id="input-remision" [(ngModel)]="idRemision" (ngModelChange)=filtrarCitasByIdRemision() type="text" class="form-control" placeholder="remisión..." aria-label="Username" aria-describedby="input-remision">
                     </div>
                 </div>
+                <hr>
                 <app-agenda-card-cita 
                         [citas]="citas"  [idCiudad]="opcionCiudad" [fechaTurno]="fechaFiltroTurno" [idHorarioTurno]="opcionHorariosTurno">
                 </app-agenda-card-cita>
 
             </div>
 
-            <div class="col-md-9" id="container-agenda-gantt">
+            <div class="col-md-10" id="container-agenda-gantt">
                 <div class="panel-gantt">
                     <div>
                         <app-diagramas-gantt 

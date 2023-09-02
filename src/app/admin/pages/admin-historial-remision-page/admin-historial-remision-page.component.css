@@ -1,11 +1,10 @@
-*{
-    font-family: var(--bs-font-sans-serif);
-}
+@import url('../../../../styles.css');
+
 .container-historial{
-    padding-top: 5rem;
-    padding-left: 2rem;
-    padding-right: 3rem;
-    padding-bottom: 2rem;
+    padding-top: 2rem;
+    padding-left: 1rem;
+    padding-right: 1.5rem;
+    padding-bottom: 1rem;
 }
 .header{
     display: flex;

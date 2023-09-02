@@ -1,11 +1,12 @@
 
 export interface NotificacionFarmacia {
+    idRemision:                   string;
     idTratamiento:                number|null;
     idSoporteNutricional:         number|null;
     numeroIdentificacion:         string;
     tipoIdentificacion:           string;
-    nombre:                       string;
-    apellido:                     string;
+    nombres:                      string;
+    apellidos:                    string;
 
     idMedicamento:                string;
     nombreMedicamento:            string;

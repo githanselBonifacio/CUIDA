@@ -1,51 +1,49 @@
-<div class="container-farmacia">
-    <div class=" header">
-        <div>
-            <h2>Servicio Farmaceutico</h2>
+<div class="container-view">
+    <div class="header">
+        <div class="content-toolbar">
+            <i id = "back-admin" class="bi bi-arrow-left-square-fill" title="volver a remisiones" (click)="backRemisionesTabla()"></i> <h2>Servicio Farmaceutico</h2>
         </div>
-        <div>
-            <div class="input-group mb-3">
-                <div id="notificar" title="Notificar" (click)="notificarSeleccion()">
-                    <div *ngIf="notificacionesSeleccionadas.length>0">
-                         <i class="bi bi-bell-fill" ></i>
-                    </div>
-                    
-                </div>
-               
-                <div class="input-check-notificado">
-                    <input class="select-individual-input" type="checkbox" (change)="onCheckboxChangeNotificado($event)" >
-                    <label class="form-check-label" for="select-individual-input">Notificado</label>
-
-                     <input class="select-individual-input" type="checkbox"  (change)="onCheckboxChangeSinNotificado($event)" >
-                     <label class="form-check-label" for="select-individual-input">Sin Notificar</label>
-                </div>
-
-                <span class="input-group-text" id="basic-addon1"><i class="bi bi-person"></i></span>
-                <input  [(ngModel)]="filtroBusqueda" (ngModelChange) ="filtrarNotificaciones()" type="text" class="form-control" placeholder="paciente.." aria-label="Username" aria-describedby="basic-addon1">
-            
+       
+        <div class="content-toolbar">
                 
-            </div>
-        
-        </div>
+            <button id="notificar" title="Notificar" (click)="notificarSeleccion()"  [ngClass]="{'active': hayNotificacionesSeleccionadas()}" [disabled]="!hayNotificacionesSeleccionadas()">
+                <div>
+                    <i class="bi bi-bell-fill" ></i>
+                </div>
+            </button>
+               
+            <div class="content-check-notificacion">
+               
+                <input   id ="check-notificado" type="checkbox" (change)="onCheckboxChangeNotificado($event)" >
+                <label  class = "label-notificacion" for="check-notificado">Notificado</label>
+                
+                <input id ="check-sin-notificado" type="checkbox"  (change)="onCheckboxChangeSinNotificado($event)" >
+                <label class = "label-notificacion" for="check-sin-notificado">Sin Notificar</label>
+              
+                </div>
+
+            <span class="input-group-text" id="basic-addon1"><i class="bi bi-person"></i></span>
+            <input  [(ngModel)]="filtroBusqueda" (ngModelChange) ="filtrarNotificaciones()" type="text" class="form-control" placeholder="paciente.." aria-label="Username" aria-describedby="basic-addon1">          
+        </div>  
     </div>
-    <div class="divider"></div>
+    <hr>
     <div class="content-item">
 
         <table class="table table-hover">
         <thead>
           <tr>
-            <th scope="col">
+            <th scope="col" class="th-start">
     
                 <input id = "master-check" class="select-group-input" type="checkbox" (change) ="agregarTodasNotificacionesMostradas($event)">
                 <label class="form-check-label" for="select-group-input"></label>
-
+                Remisión
             </th>
         
-            <th scope="col">Paciente</th>
-            <th>Tipo</th>
-            <th scope="col">Medicamento</th>
+            <th scope="col"  class="th-start">Paciente</th>
+            <th scope="col"  class="th-start">Tipo</th>
+            <th scope="col"  class="th-start">Medicamento</th>
             <th scope="col">Dosis</th>
-            <th scope="col">Vía administración</th>
+            <th scope="col">Vía</th>
             <th scope="col">Frecuencia</th>
             <th scope="col">Volumen</th>
             <th scope="col">Fecha programada</th>
@@ -54,23 +52,22 @@
         </thead>
         <tbody>
           <tr *ngFor="let notificacion of notificacionesMostradas | paginate: { itemsPerPage: 6, currentPage: currentPage, totalItems: totalItems }">
-            <td scope="row">
+            <td class="card-item" scope="row" style="white-space: nowrap;">
 
-                <input name = "individual-check" 
-                class="select-individual-input" 
-                type="checkbox" 
-                (change)="agregarListaSeleccionada(notificacion,$event)"
-                *ngIf="!notificacion.notificado">
-        
+                <input  
+                        type="checkbox" 
+                        (change)="agregarListaSeleccionada(notificacion,$event)"
+                        *ngIf="!notificacion.notificado">
+                        {{notificacion.idRemision}}
 
             </td>
             <td>
                 <div >
                      <div  class="card-item">
-                        <td>{{ notificacion.nombre.toLowerCase() }} {{ notificacion.apellido.toLowerCase() }}</td>
+                        <td>{{ notificacion.nombres |titlecase }} {{ notificacion.apellidos|titlecase  }}</td>
                     </div>
                     <div  class="card-item">
-                        <td>{{ notificacion.tipoIdentificacion }}</td>
+                        <td>{{ notificacion.tipoIdentificacion|titlecase  }}</td>
                     </div>
                     <div  class="card-item">
                         {{ notificacion.numeroIdentificacion }}

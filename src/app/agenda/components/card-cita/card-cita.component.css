@@ -20,7 +20,6 @@
 .card{
     border-color: var(--gris2-color);
     box-shadow: 5px 5px 15px var(--gris3-color);
-    padding-bottom: 0.5rem;
 }
 
 .input-group-text{
@@ -30,9 +29,12 @@
     padding: 0px;
 }
 .input-group-text i{
+   display: flex;
+   align-items: center;
    font-style: normal;
    font-size: 1.2rem;
-   margin: -1rem 0.4rem 0rem 0rem;
+   margin-right: 0.5rem;
+   
 }
 
 #container-card{
@@ -55,9 +57,10 @@
     justify-content: flex-end;
 }
 .i-card-agenda i{
+    display: flex;
+    align-items: center;
     font-size: 1.5rem;
     margin-left: 0.4rem;
-    margin: -1rem 0.4rem 0rem 0rem;
 }
 #i-card-agenda-agendar{
     color: var(--primary-color);

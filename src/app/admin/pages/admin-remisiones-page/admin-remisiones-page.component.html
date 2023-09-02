@@ -1,18 +1,18 @@
-<div class="container-remision">
+<div class="container-view">
     <div class=" header">
-        <div>
-                <h2>Remisiones</h2>
+        <div class="content-toolbar">
+            <i id = "back-admin" class="bi bi-arrow-left-square-fill" title="volver a remisiones" (click)="backAdmin()"></i>   <h2>Remisiones</h2>
         </div>
-        <div>
-            <div class="input-group mb-3">
-                <span class="input-group-text" id="basic-addon1"><i class="bi bi-person"></i></span>
-                <input  type="text" class="form-control" placeholder="remisión.." aria-label="Username" aria-describedby="basic-addon1" 
-                [(ngModel)]="filtroBusqueda" (ngModelChange) ="filtrarRemisiones()">
-            </div>
+        <div class="content-toolbar">
+          
+            <span id="buscar-remision"></span>
+            <input  type="text" class="form-control" placeholder="remisión.." aria-label="Username" aria-describedby="buscar-remision" 
+            [(ngModel)]="filtroBusqueda" (ngModelChange) ="filtrarRemisiones()">
         </div>
+       
     </div>
 
-    <div class="divider"></div>
+    <hr>
     
     <div class = "content-item">
 

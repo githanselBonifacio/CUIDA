@@ -97,12 +97,12 @@ export class GanttComponent implements OnInit {
     text.style.position = 'absolute';
     text.style.top = '50%';
     text.style.left = '50%';
-    text.style.transform = 'translate(-50%, -230%)';
+    text.style.transform = 'translate(-50%, -120%)';
     text.style.backgroundColor = this.colorFondoTexto;
     text.style.color ="#ffffff";
-    text.style.fontWeight="bold";
+    text.style.fontWeight="lighter";
     text.style.zIndex ="9999";
-    div.appendChild(text);
+
 
     // asignar estilos holgura
     holgura.style.position = 'absolute';
@@ -116,15 +116,19 @@ export class GanttComponent implements OnInit {
     div.style.fontSize = '0rem;'
     //eventos de visualizacion
     div.addEventListener('mouseover', () => {
-      div.style.fontSize = '1.2rem';
+      div.style.fontSize = '1rem';
       holgura.style.display = 'block';
+      text.style.padding="0.3rem 0.6rem 0.3rem 0.6rem";
+      text.style.borderRadius="5px";
     });
 
     div.addEventListener('mouseout', () => {
+      text.style.padding="0px";
       div.style.fontSize = '0rem';
       holgura.style.display = 'none';
     });
 
+    div.appendChild(text);
     let longitudContainer = 0;
     let container = document.getElementById(idElement);
 

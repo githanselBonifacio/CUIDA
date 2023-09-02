@@ -68,7 +68,8 @@ hr {
   }
 @media screen and (min-width: 850px) and (max-width:1450px){
     .container-view{
-        margin: 3rem 2rem 1rem 2rem ;
+        margin: 4rem 2rem 1rem 2rem ;
+        
     }
     h1{
         font-size: 1.5rem;
@@ -82,7 +83,7 @@ hr {
 }
 @media screen and (min-width: 1451px) and (max-width:2000px){
     .container-view{
-        margin: 3rem 4rem 2rem 2rem ;
+        margin: 5rem 4rem 2rem 2rem ;
     }
     h1{
         font-size: 2rem;
@@ -92,6 +93,6 @@ hr {
         font-size: 1.2rem;
     }
     h2{
-        font-size: 1rem;
+        font-size: 1.5rem;
     }
 }

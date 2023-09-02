@@ -1,7 +1,7 @@
 import { Component,OnInit,HostListener  } from '@angular/core';
 import { AdminRemisionService } from '../../services/admin-remision.service';
 import {Remision} from '../../interfaces/remision.interface';
-import { Router } from '@angular/router';
+import { Router ,ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-admin-remisiones-page',
@@ -12,6 +12,7 @@ export class AdminRemisionesPageComponent implements OnInit {
    
   constructor (
     private adminService:AdminRemisionService,
+    private activateRoute : ActivatedRoute,
     private router: Router,
     ){}
     filtroBusqueda: string     = "";
@@ -63,5 +64,9 @@ calcularItemsPerPage(){
         return nombrePaciente.includes(textoLowerCase) || idRemision.includes(textoBuscado)
       })
     }
+  }
+
+  backAdmin(){
+    this.router.navigate(['admin']);
   }
 }

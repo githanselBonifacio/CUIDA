@@ -1,0 +1,28 @@
+
+th{
+    color: var(--primary-color);
+    font-weight: bold;
+    text-align: center;
+}
+td{
+    color: var( --quarter-color);
+    text-align: center;
+    vertical-align: middle;
+}
+th  :hover{
+    background-color: var(--gris4-color);
+}
+
+@media screen  and (max-height:650px){
+    th{
+        font-size: 1rem;
+    }
+    td{
+        color: var( --quarter-color);
+        text-align: center;
+        vertical-align: middle;
+    }
+    th  :hover{
+        background-color: var(--gris4-color);
+    }
+}

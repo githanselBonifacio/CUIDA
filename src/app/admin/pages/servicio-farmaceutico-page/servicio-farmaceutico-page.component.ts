@@ -3,6 +3,7 @@ import { AdminRemisionService } from '../../services/admin-remision.service';
 import {NotificacionFarmacia} from '../../interfaces/servicioFarmaceutico.interface';
 import {MatDialog} from '@angular/material/dialog'
 import { ToastComponent } from 'src/app/shared/components/toast/toast.component';
+import { ActivatedRoute,Router } from '@angular/router';
 
 @Component({
   selector: 'app-servicio-farmaceutico-page',
@@ -13,7 +14,9 @@ export class ServicioFarmaceuticoPageComponent implements OnInit{
 
   constructor (
     private adminService:AdminRemisionService,
-    private dialogoConfirmacion : MatDialog
+    private dialogoConfirmacion : MatDialog,
+    private activateRoute : ActivatedRoute,
+    private router: Router
     ){}
 
   currentPage:             number  = 1;
@@ -26,6 +29,7 @@ export class ServicioFarmaceuticoPageComponent implements OnInit{
   notificacionesSeleccionadas :NotificacionFarmacia[]=[];
 
   ngOnInit() {
+    this.notificacionesSeleccionadas=[];
       this.adminService.getNotificacionesFarmacia()
       .subscribe(resp =>{
           this.notificacionesCompleta = resp;
@@ -45,9 +49,10 @@ export class ServicioFarmaceuticoPageComponent implements OnInit{
       this.filtrarByEstadoNotificacion();  
     }else{
           this.notificacionesMostradas =  this.notificacionesMostradas.filter(notificacion => {
-          const nombreCompleto = `${notificacion.nombre.toLowerCase()} ${notificacion.apellido.toLowerCase()}`;
+          const nombreCompleto = `${notificacion.nombres.toLowerCase()} ${notificacion.apellidos.toLowerCase()}`;
           const numeroIdentificacion = notificacion.numeroIdentificacion.toLowerCase();
-          return  nombreCompleto.includes(textoBuscado) || numeroIdentificacion.includes(textoBuscado);
+          const idRemision = notificacion.idRemision;
+          return  nombreCompleto.includes(textoBuscado) || numeroIdentificacion.includes(textoBuscado) || idRemision.includes(textoBuscado);
    
         });
           this.totalItems = this.notificacionesMostradas.length;
@@ -73,6 +78,10 @@ export class ServicioFarmaceuticoPageComponent implements OnInit{
     this.totalItems = this.notificacionesMostradas.length;
   }
 
+  hayNotificacionesSeleccionadas(){
+    return this.notificacionesSeleccionadas.length>0
+  }
+
   onCheckboxChangeNotificado(event: any) {
     this.checkedNotificado = event.target.checked;
     this.filtrarByEstadoNotificacion();  
@@ -86,6 +95,7 @@ export class ServicioFarmaceuticoPageComponent implements OnInit{
 
   agregarListaSeleccionada(notificacionSeleccionada :NotificacionFarmacia,event: any):void{
     this.quitarSeleccionCompleta();
+
     if(event.target.checked){
       this.notificacionesSeleccionadas.push(notificacionSeleccionada);
     
@@ -113,11 +123,13 @@ export class ServicioFarmaceuticoPageComponent implements OnInit{
   }
 
   quitarSeleccionCompleta():void{
+
     const checkboxMaster = document.getElementById('master-check') as HTMLInputElement;
      checkboxMaster.checked = false;
     
   }
   checkedMasterListaCompleta():void{
+
     if(this.notificacionesSeleccionadas.length === this.notificacionesMostradas.length ){
       const checkboxMaster = document.getElementById('master-check') as HTMLInputElement;
       checkboxMaster.checked = true;
@@ -154,6 +166,9 @@ export class ServicioFarmaceuticoPageComponent implements OnInit{
           this.ngOnInit()
         })
       })
+  }
+  backRemisionesTabla(){
+    this.router.navigate(['admin']);
   }
 
 }

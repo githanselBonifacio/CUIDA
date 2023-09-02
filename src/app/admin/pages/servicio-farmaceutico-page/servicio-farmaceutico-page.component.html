@@ -54,7 +54,7 @@
           <tr *ngFor="let notificacion of notificacionesMostradas | paginate: { itemsPerPage: 6, currentPage: currentPage, totalItems: totalItems }">
             <td class="card-item" scope="row" style="white-space: nowrap;">
 
-                <input  
+                <input  name="individual-check"
                         type="checkbox" 
                         (change)="agregarListaSeleccionada(notificacion,$event)"
                         *ngIf="!notificacion.notificado">
@@ -76,16 +76,16 @@
                
                
             </td>
-            <td  class="card-item"> {{notificacion.tipo}}</td>
+            <td  class="card-item"> {{notificacion.tipo|titlecase}}</td>
             <td>
                 <div>
                     
                     <div  class="card-item">
-                        {{notificacion.presentacionMedicamento.toLowerCase()}}
+                        {{notificacion.presentacionMedicamento|titlecase}}
                     </div >
 
                     <div class="card-item">
-                        {{notificacion.codigoMedicamento.toLowerCase()}}
+                        {{notificacion.codigoMedicamento}}
                     </div>
 
                 </div>
@@ -93,7 +93,7 @@
                
             </td>
         
-            <td>{{notificacion.cantidadDosis}} ({{notificacion.unidadDosis}})</td>
+            <td style="white-space: nowrap;">{{notificacion.cantidadDosis}} ({{notificacion.unidadDosis}})</td>
             
             <td>
                 <span *ngIf="notificacion.viaAdministracion">{{notificacion.viaAdministracion}}</span>

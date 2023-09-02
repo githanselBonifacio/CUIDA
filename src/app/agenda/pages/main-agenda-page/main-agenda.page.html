@@ -21,16 +21,16 @@
                         
                         <div class="input-group">
                             <label for="opcionCiudad">Regional</label>
-                            <select name="select-regional" [(ngModel)]="opcionCiudad" id="opcionCiudad">
+                            <select name="select-regional" [(ngModel)]="opcionRegional" id="opcionRegional">
                                 <option value="default" selected disabled>seleccione..</option>
-                                <option *ngFor="let ciudad of regionales" [value]="ciudad.id">{{ciudad.nombre}} </option>
+                                <option *ngFor="let regional of regionales" [value]="regional.id">{{regional.nombre}} </option>
                             </select>
                         </div>
 
                     
                         <div class="input-group">
                             <label for="opcionTurno">Turno enfermeria</label>
-                            <select name="select-turno" [(ngModel)]="opcionHorariosTurno" id="opcionTurno" (ngModelChange)="actualizarHorarioHeader()"> 
+                            <select name="select-turno" [(ngModel)]="opcionHorariosTurno" id="opcionTurno"> 
                                 <option value="default" selected disabled>seleccione..</option>
                                 <option *ngFor="let option of horarioTurno" [value]="option.id">T{{option.id}}</option>
                             </select>
@@ -55,7 +55,7 @@
                 </div>
                 <hr>
                 <app-agenda-card-cita 
-                        [citas]="citas"  [idCiudad]="opcionCiudad" [fechaTurno]="fechaFiltroTurno" [idHorarioTurno]="opcionHorariosTurno">
+                        [citas]="citas"  [idRegional]="opcionRegional" [fechaTurno]="fechaFiltroTurno" [idHorarioTurno]="opcionHorariosTurno">
                 </app-agenda-card-cita>
 
             </div>

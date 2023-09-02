@@ -1,13 +1,13 @@
 
-export interface Ciudad{
+export interface Regional{
     id: string,
     nombre:string ,
     latitud: number,
     longitud: number,
     direccion: string
 }
-export function crearCiudad():Ciudad{
-    const cita: Ciudad = {
+export function crearCiudad():Regional{
+    const cita: Regional = {
         id:           "",
         nombre:       '',
         latitud:       0,

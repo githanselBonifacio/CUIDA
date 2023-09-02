@@ -2,7 +2,7 @@ import { Component,OnInit } from '@angular/core';
 import { AgendaService } from 'src/app/agenda/services/agenda.service';
 import {Cita} from "../../interfaces/turno.interface"
 import { MaestrosService } from 'src/app/shared/services/maestros/maestros.service';
-import { HorarioTurno, Ciudad } from 'src/app/shared/interfaces/maestros.interfaces';
+import { HorarioTurno, Regional } from 'src/app/shared/interfaces/maestros.interfaces';
 import { Actividad } from 'src/app/diagramas/interfaces/tarea-gantt.interface';
 import { ActivatedRoute,Router } from '@angular/router';
 import { generarHorario} from '../../../shared/interfaces/maestros.interfaces'
@@ -29,7 +29,7 @@ export class MainComponentAgendaComponent implements OnInit{
       idRemision: string = "";
       fechaFiltroTurno: string =this.fechaHoy;
 
-      opcionCiudad: string = "427"
+      opcionRegional: string = "4292"
       opcionHorariosTurno:number = 1
 
       constructor (
@@ -41,39 +41,28 @@ export class MainComponentAgendaComponent implements OnInit{
         ){}
        
         ngOnInit() {
-          this.maestroService.getCiudades();
-
+          this.maestroService.getRegionales();
           this.maestroService.getHorarioTurno();
-            
           this.activateRoute.params.subscribe(
             params =>{
               if(params['idTurno'] != null){
           
                   this.fechaFiltroTurno = params ['idTurno'];
-                  this.opcionCiudad = params ['idCiudad'];
+                  this.opcionRegional = params ['idCiudad'];
                   this.opcionHorariosTurno = params ['idHorarioTurno'];
              }
-              this.agendaService.getCitas(
-                params ['idTurno'],
-                params ['idCiudad'],
-                params ['idHorarioTurno'],
-              );
+             
 
-              this.agendaService.getActividadesAgendaGantt(
-                params ['idTurno'],
-                params ['idCiudad'],
-                params ['idHorarioTurno']
-              );
-
-              this.horasTurnoString = generarHorario(this.opcionHorariosTurno)
+              //this.horasTurnoString = generarHorario(this.opcionHorariosTurno)
               this.loadingPage = true
             }
             
           )
+          this.consultarCitas()
         }
 
-      get regionales(): Ciudad[]{
-        return this.maestroService.ciudades;
+      get regionales(): Regional[]{
+        return this.maestroService.regionales;
       }
 
       get horarioTurno(): HorarioTurno[]{
@@ -95,16 +84,13 @@ export class MainComponentAgendaComponent implements OnInit{
       }
 
      consultarCitas():void{
-   
-        this.agendaService.getCitas(this.fechaFiltroTurno,this.opcionCiudad,this.opcionHorariosTurno);
-        this.agendaService.getActividadesAgendaGantt(this.fechaFiltroTurno,this.opcionCiudad,this.opcionHorariosTurno);
         this.horasTurnoString = generarHorario(this.opcionHorariosTurno);
-        this.router.navigate(['agenda',this.fechaFiltroTurno,this.opcionCiudad,this.opcionHorariosTurno]);
+        this.agendaService.getCitas(this.fechaFiltroTurno,this.opcionRegional,this.opcionHorariosTurno);
+        this.agendaService.getActividadesAgendaGantt(this.fechaFiltroTurno,this.opcionRegional,this.opcionHorariosTurno);
+        this.horasTurnoString = generarHorario(this.opcionHorariosTurno);
+        this.router.navigate(['agenda',this.fechaFiltroTurno,this.opcionRegional,this.opcionHorariosTurno]);
      }
-     actualizarHorarioHeader(){
-      this.horasTurnoString = generarHorario(this.opcionHorariosTurno);
-     }
-
+    
      filtrarCitasByIdRemision():void{
       if(this.idRemision.length === 0){
         this.consultarCitas()
@@ -114,12 +100,12 @@ export class MainComponentAgendaComponent implements OnInit{
 
      autoagendar():void{
       this.loadingPage = false
-      this.agendaService.desagendarTurnoCompleto(this.citas[0].fechaProgramada,this.opcionHorariosTurno,this.opcionCiudad)
+      this.agendaService.desagendarTurnoCompleto(this.citas[0].fechaProgramada,this.opcionHorariosTurno,this.opcionRegional)
       .subscribe(res =>{
           this.agendaService.autoagendar(
             this.citas[0].fechaInicio,
             this.opcionHorariosTurno,
-            this.opcionCiudad
+            this.opcionRegional
           ).subscribe(resp =>{
             this.loadingPage = true
             location.reload()
@@ -131,7 +117,7 @@ export class MainComponentAgendaComponent implements OnInit{
 
      desagendarTurnoCompleto():void{
         this.loadingPage = false
-        this.agendaService.desagendarTurnoCompleto(this.citas[0].fechaProgramada,this.opcionHorariosTurno,this.opcionCiudad)
+        this.agendaService.desagendarTurnoCompleto(this.citas[0].fechaProgramada,this.opcionHorariosTurno,this.opcionRegional)
         .subscribe(res =>{
           this.loadingPage = true;
           location.reload();
@@ -140,7 +126,7 @@ export class MainComponentAgendaComponent implements OnInit{
      }
      agregarProfesionalTurno(): void {
       this.agendaService
-        .getProfesionalDisponibleByturnoCiudad(this.fechaFiltroTurno, this.opcionCiudad)
+        .getProfesionalDisponibleByturnoCiudad(this.fechaFiltroTurno, this.opcionRegional)
         .pipe(
           switchMap(profesionales => {
             const dialogRef = this.dialogoSeleccionProfesional.open(ModalSeleccionProfesionalComponent, {

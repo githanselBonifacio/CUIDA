@@ -22,7 +22,7 @@ export class CardCitaComponent {
     citaSeleccionada :Cita|any = {};
     
     @Input()
-    public idCiudad: string = '';
+    public idRegional: string = '';
     @Input()
     public fechaTurno: string = new Date().toISOString().slice(0, 10);
     @Input()
@@ -40,7 +40,7 @@ export class CardCitaComponent {
 
     asignarProfesionalCita(citaSeleccionada: Cita): void {
       let opcionProfesional:string='';
-      this.agendaService.getProfesionaFromTurnoCiudad(this.fechaTurno, this.idCiudad, this.idHorarioTurno)
+      this.agendaService.getProfesionaFromTurnoCiudad(this.fechaTurno, this.idRegional, this.idHorarioTurno)
         .pipe(
           tap(profesionales => {
             this.citaSeleccionada = citaSeleccionada;
@@ -63,7 +63,7 @@ export class CardCitaComponent {
                   return this.agendaService.calcularDesplazamientosCitasProfesional(
                     this.fechaTurno,
                     this.idHorarioTurno,
-                    this.idCiudad,
+                    this.idRegional,
                     opcionProfesional
                   );
                 }),
@@ -89,7 +89,7 @@ export class CardCitaComponent {
         switchMap(() => this.agendaService.calcularDesplazamientosCitasProfesional(
                             this.fechaTurno,
                             this.idHorarioTurno,
-                            this.idCiudad,
+                            this.idRegional,
                             this.citaSeleccionada.idProfesional
                         )
         )
@@ -129,7 +129,7 @@ export class CardCitaComponent {
       switchMap(resp => this.agendaService.calcularDesplazamientosCitasProfesional(
             this.fechaTurno,
             this.idHorarioTurno,
-            this.idCiudad,
+            this.idRegional,
             citaSeleccionada.idProfesional
            )
        

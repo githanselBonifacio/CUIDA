@@ -11,18 +11,24 @@
                 <th scope="col">Duración</th>
                 <th scope="col">Holgura</th>
                 <th scope="col">Especialidad</th>
-                <th scope="col">Estado</th>
+                <th scope="col" >Estado</th>
                 <th scope="col">Detalle</th>
             </tr>
         </thead>
         <tbody>
             <tr *ngFor="let cita of citas | paginate:{id:tableId, itemsPerPage: 3, currentPage: currentPage}">
-                <th scope="row">{{cita.datos_cita.id_cita}}</th>
-                <td>{{cita.datos_cita.fecha_programada|date :'dd/MM/yyyy HH:mm'}}</td>
-                <td>{{cita.datos_cita.duracion |formatearSegundos }}</td>
-                <td>{{cita.datos_cita.holgura  |formatearSegundos}}</td>
-                <td>{{cita.datos_cita.especialidad}}</td>
-                <td>{{getNombreEstadoCita(cita.datos_cita.id_estado)}}</td>
+                <th scope="row">{{cita.datosCita.idCita}}</th>
+                <td>{{cita.datosCita.fechaProgramada|date :'dd/MM/yyyy HH:mm'}}</td>
+                <td>{{cita.datosCita.duracion |formatearSegundos }}</td>
+                <td>{{cita.datosCita.holgura  |formatearSegundos}}</td>
+                <td>{{cita.datosCita.especialidad}}</td>
+
+                <td class="estado">
+                    <div *ngIf="!isHistorial"  id="estado-{{cita.datosCita.idEstado}}">{{getNombreEstadoCita(cita.datosCita.idEstado)}}</div>
+
+                    <div *ngIf="isHistorial"><i class="bi bi-x-circle-fill" style="color: var(--red-color);"></i></div>
+                </td>
+
                 <td><i class="bi bi-eye" title="ver detalle" (click)="mostrarModalDetalleCita(cita)"></i></td>
             </tr>
 

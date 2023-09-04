@@ -1,6 +1,6 @@
 import { Component,OnInit } from '@angular/core';
 import { AgendaService } from 'src/app/agenda/services/agenda.service';
-import {Cita} from "../../interfaces/turno.interface"
+import {Cita} from "../../interfaces/remision.interface"
 import { MaestrosService } from 'src/app/shared/services/maestros/maestros.service';
 import { HorarioTurno, Regional } from 'src/app/shared/interfaces/maestros.interfaces';
 import { Actividad } from 'src/app/diagramas/interfaces/tarea-gantt.interface';

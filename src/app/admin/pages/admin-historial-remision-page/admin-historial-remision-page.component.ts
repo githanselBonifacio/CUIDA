@@ -35,6 +35,7 @@ export class AdminHistorialRemisionPageComponent implements OnInit{
     .subscribe(resp=>{
       this.estados=resp
     });
+
     this.activateRoute.params.subscribe(
       params => {
         this.idRemision = params ['idRemision'];
@@ -49,7 +50,6 @@ export class AdminHistorialRemisionPageComponent implements OnInit{
       this.remisionDataActual = resp
     })
   }
-
 
   getNombreEstadoCita(id:string){
     return getNombreEstadoCitaById(id,this.estados);

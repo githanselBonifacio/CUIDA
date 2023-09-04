@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import {DatosAtencionRemision,Paciente,Cita, Curacion, Tratamiento,Sondaje,TomaMuestra, SoporteNutricional, Canalizacion,Fototerapia, Secrecion} from '../../interfaces/turno.interface'
+import {DatosAtencionRemision,Paciente,Cita, Curacion, Tratamiento,Sondaje,TomaMuestra, SoporteNutricional, Canalizacion,Fototerapia, Secrecion} from '../../interfaces/remision.interface'
 import { MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import { AgendaService } from 'src/app/agenda/services/agenda.service';
 

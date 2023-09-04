@@ -18,19 +18,12 @@ export class ModalDetalleCitasHistorialComponent {
     this.dialogRef.close(false);
   }
   contieneProcedimientos(){
-    console.log(this.citaSeleccionada.procedimientos.curaciones)
-    console.log(this.citaSeleccionada.procedimientos.canalizaciones)
-    console.log(this.citaSeleccionada.procedimientos.secreciones)
-    console.log(this.citaSeleccionada.procedimientos.fototerapias)
-    console.log(this.citaSeleccionada.procedimientos.toma_muestra)
-    console.log(this.citaSeleccionada.procedimientos.sondajes)
-    console.log(this.citaSeleccionada.procedimientos.soporte_nutricionales)
     return this.citaSeleccionada.procedimientos.curaciones==null &&
            this.citaSeleccionada.procedimientos.canalizaciones==null &&
            this.citaSeleccionada.procedimientos.secreciones==null &&
            this.citaSeleccionada.procedimientos.fototerapias==null &&
-           this.citaSeleccionada.procedimientos.toma_muestra==null &&
+           this.citaSeleccionada.procedimientos.tomaMuestra==null &&
            this.citaSeleccionada.procedimientos.sondajes==null &&
-           this.citaSeleccionada.procedimientos.soporte_nutricionales==null
+           this.citaSeleccionada.procedimientos.soporteNutricionales==null
   }
 }

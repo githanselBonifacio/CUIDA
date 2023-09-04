@@ -1,6 +1,6 @@
 
 import { Actividad } from '../../interfaces/tarea-gantt.interface';
-import { Component,Input, OnInit, EventEmitter, Output  } from '@angular/core';
+import { Component,Input, OnInit, EventEmitter, Output ,HostListener  } from '@angular/core';
 import {Tarea} from '../../interfaces/tarea-gantt.interface'
 import {MatDialog} from '@angular/material/dialog'
 import { MapRutaComponent } from 'src/app/maps/components/map-ruta/map-ruta.component';
@@ -53,13 +53,23 @@ export class GanttComponent implements OnInit {
       this.currentUrl = this.router.url;
       this.simpleHoras = this.horas.map(hora => parseInt(hora.substring(0, 2)));
       this.intervalo = (this.horas.length-1)*3600
+   
+  }
+  @HostListener('window:resize', ['$event'])
+  onResize(event:any){
+    this.limpiaLineaTiempo();
   }
 
- /* onResize(){
-    this.ngOnInit()
-    console.log("cambio")
-  }*/
-
+  limpiaLineaTiempo(){
+    const visitas = document.querySelectorAll(".tarea-visita");
+    const holguras = document.querySelectorAll(".tarea-dvisita");
+    const gridTime = document.querySelectorAll(".grid-time");
+    const holguraGrid = document.querySelectorAll(".holgura");
+    visitas.forEach(elemento => elemento.remove());
+    holguras.forEach(elemento => elemento.remove());
+    gridTime.forEach(elemento => elemento.remove());
+    holguraGrid.forEach(elemento => elemento.remove());
+  }
   crearLineaTiempoTarea( idElement: string, tarea: Tarea){
     // Crear  divs
     let fechaProgramada  = new Date(tarea.fechaProgramada);
@@ -108,6 +118,7 @@ export class GanttComponent implements OnInit {
     holgura.style.position = 'absolute';
     holgura.style.margin = "0px auto";
     holgura.style.height = '4rem';
+    holgura.className =  `holgura`;
     holgura.id =  `holgura-${tarea.tipo}`;
     holgura.style.backgroundColor =this.colorHolgura;
     holgura.style.display ='none';
@@ -187,11 +198,11 @@ export class GanttComponent implements OnInit {
           const horaSegundosGrid =this.simpleHoras[hora]*this.segundosInHoras;
           const pos = (longitudContainer*(horaSegundosGrid-this.simpleHoras[0]*this.segundosInHoras))/this.intervalo;
         
-          this.crearGridVertical( idElement,this.simpleHoras[hora], String((pos)));
-        }
+         this.crearGridVertical( idElement,this.simpleHoras[hora], String((pos)));
+        } 
+        
         container.appendChild(holgura);
         container.appendChild(div);
-
       }
    }
 

@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 
-import { Cita } from '../../interfaces/turno.interface';
+import { Cita } from '../../interfaces/remision.interface';
 
 import {MatDialog} from '@angular/material/dialog'
 import { ModalSeleccionProfesionalComponent } from '../modal-seleccion-profesional/modal-seleccion-profesional.component';

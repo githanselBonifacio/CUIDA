@@ -14,20 +14,17 @@ import { ModalDetalleCitasHistorialComponent } from '../modal-detalle-citas-hist
 export class TablaHistorialCitasComponent implements OnInit{
   currentPage = 1;
   tableId: string="";
-  estadosCita: EstadoCita[] = [];
+
 
   constructor (
-    private maestroService: MaestrosService,
     private dialogoDetalleCita : MatDialog,
     ){}
   @Input() public citas: Cita[] = [];
+  @Input() public estadosCita: EstadoCita[] = [];
+  @Input() public isHistorial: boolean=false;
 
   ngOnInit(){
     this.tableId = uuidv4().substr(0, 7);
-    this.maestroService.getEstadosCita()
-    .subscribe(resp=>{
-        this.estadosCita = resp;
-    });
   }
 
   getNombreEstadoCita(id:string){

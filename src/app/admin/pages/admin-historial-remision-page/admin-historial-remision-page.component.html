@@ -27,20 +27,20 @@
                       </div>
                       <div class="row">
                           <div class="col-2">Tipo identificación</div>
-                          <div class="col-3">{{remisionDataActual.paciente.tipo_identificacion}}</div>
+                          <div class="col-3">{{remisionDataActual.paciente.tipoIdentificacion}}</div>
 
                           <div class="col-2">Número identificación</div>
-                          <div class="col-3">{{remisionDataActual.paciente.numero_identificacion}}</div>
+                          <div class="col-3">{{remisionDataActual.paciente.numeroIdentificacion}}</div>
 
                           <div class="col">Edad</div>
                           <div class="col">{{remisionDataActual.paciente.edad}} años</div>
                       </div>
                       <div class="row">
                           <div class="col-2">Plan salud</div>
-                          <div class="col-3">{{remisionDataActual.paciente.tipo_afiliacion}}</div>
+                          <div class="col-3">{{remisionDataActual.paciente.tipoAfiliacion}}</div>
 
                           <div class="col-2">Aseguradora</div>
-                          <div class="col">{{remisionDataActual.paciente.nombre_aseguradora}}</div>
+                          <div class="col">{{remisionDataActual.paciente.nombreAseguradora}}</div>
                       </div>
                       
                   </div>
@@ -51,15 +51,15 @@
     
                   <div class="row">
                       <div class="col-2">Cuidador </div>
-                      <div class="col">{{remisionDataActual.datosAtencion.nombre_cuidador}}</div>
+                      <div class="col">{{remisionDataActual.datosAtencion.nombreCuidador}}</div>
                       <div class="col-2"> Responsable</div>
-                      <div class="col">{{remisionDataActual.datosAtencion.nombre_responsable}}</div>
+                      <div class="col">{{remisionDataActual.datosAtencion.nombreResponsable}}</div>
                   </div>
                   <div class="row">
                       <div class="col-2">Telefono </div>
-                      <div class="col">{{remisionDataActual.datosAtencion.telefono_paciente}}</div>
+                      <div class="col">{{remisionDataActual.datosAtencion.telefonoPaciente}}</div>
                       <div class="col-2">Celular</div>
-                      <div class="col">{{remisionDataActual.datosAtencion.telefono_paciente}}<span *ngIf="remisionDataActual.datosAtencion.telefono_paciente2"> - {{remisionDataActual.datosAtencion.telefono_paciente2}}</span></div>
+                      <div class="col">{{remisionDataActual.datosAtencion.celularPaciente}}<span *ngIf="remisionDataActual.datosAtencion.telefono_paciente2"> - {{remisionDataActual.datosAtencion.celularPaciente2}}</span></div>
                   </div>
                   <div class="row">
                       <div class="col-2">Ubicación</div>
@@ -82,7 +82,7 @@
 
           <h5>Citas</h5>
           <div class="citas">
-              <app-tabla-historial-citas [citas]="remisionDataActual.citas"></app-tabla-historial-citas>
+              <app-tabla-historial-citas [citas]="remisionDataActual.citas" [estadosCita]="estados"></app-tabla-historial-citas>
           </div>
       </div>
 
@@ -102,7 +102,7 @@
                     <div class="accordion-body">
                       <div *ngIf="registro.citas!=null">
                         <h5>Citas</h5>
-                        <app-tabla-historial-citas [citas]="registro.citas"></app-tabla-historial-citas>
+                        <app-tabla-historial-citas [citas]="registro.citas" [estadosCita]="estados" [isHistorial]="true"></app-tabla-historial-citas>
                       </div>
                     </div>
                   </div>

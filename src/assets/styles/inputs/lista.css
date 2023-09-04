@@ -2,21 +2,18 @@
 
 label{
     color: var( --quarter-color);
+    white-space: nowrap;
 }
 input{
     margin: 0px;
     border: 2px solid var(--quarter-color);
+    color: var( --quarter-color);
 }
 
 select {
-    background-color: var(--gris4-color);
+    border-radius: 5px;
     color: var(--quarter-color);
-    padding: 0.5rem 0.5rem;
-    border: solid var(--gris3-color) 1px;
-    border-color:  var(--gris3-color);
-  }
+    padding: 0.4rem 0.4rem;
+    border: solid var(--gris2-color) 1px;
   
-option {
-    background-color: var(--gris4-color);
-    color: var(--quarter-color);
 }

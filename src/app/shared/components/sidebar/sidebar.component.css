@@ -33,4 +33,5 @@ li{
 .navbar-menu li.active button{
   border-bottom: 2px solid var(--third-color);
   color: var(--third-color);
+  transition: border-bottom 0.5s ease-in;
 }

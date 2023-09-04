@@ -11,25 +11,31 @@
 #container-agenda-gantt{
     border:1px solid var(--gris3-color);
     padding-top: 1rem;
-
 }
 #header_filtro_agenda{
    justify-content: space-between;
    flex-direction: row;
    align-items: end;
    padding: 1rem 1rem 1rem 1rem;
+
 }
 
 #filtro_agenda{
     justify-content: space-between;
  }
 
-
+ .d-flex-col{
+    align-items: center;
+    margin: 0rem 0.5rem 0rem 0.5rem;
+ }
 .input-group{
+    display: flex!important;
     align-items: end !important;
-    justify-content: start !important;
+    justify-content: end !important;
 }
-#input-remision{
+
+#buscar-remision span,
+#buscar-remision input {
     border: 1px solid var(--gris3-color);
 }
 

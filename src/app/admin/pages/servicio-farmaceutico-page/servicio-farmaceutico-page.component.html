@@ -34,7 +34,7 @@
           <tr>
             <th scope="col" class="th-start">
     
-                <input id = "master-check" class="select-group-input" type="checkbox" (change) ="agregarTodasNotificacionesMostradas($event)">
+                <input id = "master-check" class="select-group-input" type="checkbox" (change) ="agregarTodasNotificacionesMostradas($event)"  [disabled]="checkedNotificado">
                 <label class="form-check-label" for="select-group-input"></label>
                 Remisión
             </th>
@@ -57,7 +57,7 @@
                 <input  name="individual-check"
                         type="checkbox" 
                         (change)="agregarListaSeleccionada(notificacion,$event)"
-                        *ngIf="!notificacion.notificado">
+                        [disabled]="notificacion.notificado">
                         {{notificacion.idRemision}}
 
             </td>

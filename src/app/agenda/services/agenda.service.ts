@@ -1,7 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {Profesional} from '../interfaces/profesional.interface'
-import {DatosAtencionRemision,Paciente,Cita,Curacion,Sondaje,Tratamiento,TomaMuestra, SoporteNutricional,Canalizacion,Fototerapia,Secrecion} from '../interfaces/turno.interface'
+import {DatosAtencionRemision,Paciente,Cita,Curacion,Sondaje,Tratamiento,TomaMuestra, SoporteNutricional,Canalizacion,Fototerapia,Secrecion} from '../interfaces/remision.interface'
 import {Actividad} from '../../diagramas/interfaces/tarea-gantt.interface'
 import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environments';

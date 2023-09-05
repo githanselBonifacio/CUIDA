@@ -1,20 +1,22 @@
 <div class="container-view">
     <div class=" header">
         <div class="content-toolbar">
-            <i id = "back-admin" class="bi bi-arrow-left-square-fill" title="volver a remisiones" (click)="backAdmin()"></i>   <h2>Remisiones</h2>
+            <i id="back-admin" class="bi bi-arrow-left-square-fill" title="volver a remisiones"
+                (click)="backAdmin()"></i>
+            <h2>Remisiones</h2>
         </div>
         <div class="content-toolbar">
-          
+
             <span id="buscar-remision"></span>
-            <input  type="text" class="form-control" placeholder="remisión.." aria-label="Username" aria-describedby="buscar-remision" 
-            [(ngModel)]="filtroBusqueda" (ngModelChange) ="filtrarRemisiones()">
+            <input type="text" class="form-control" placeholder="remisión.." aria-label="Username"
+                aria-describedby="buscar-remision" [(ngModel)]="filtroBusqueda" (ngModelChange)="filtrarRemisiones()">
         </div>
-       
+
     </div>
 
     <hr>
-    
-    <div class = "content-item">
+
+    <div class="content-item">
 
         <table class="table table-hover">
             <thead>
@@ -28,11 +30,12 @@
                     <th>Estado</th>
                     <th></th>
                 </tr>
-              
+
             </thead>
             <tbody>
-                <tr *ngFor="let remision of remisionesFiltradas | paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage}">
-                    <td scope = "row">{{remision.idRemision}}</td>
+                <tr
+                    *ngFor="let remision of remisionesFiltradas | paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage}">
+                    <td scope="row">{{remision.idRemision}}</td>
                     <td>
                         <div class="card-item">
                             {{remision.paciente.toLowerCase()}}
@@ -44,18 +47,18 @@
                     <td>{{remision.fechaAdmision| date:'dd/MM/yyyy'}}</td>
                     <td>{{remision.programa}}</td>
                     <td>{{remision.ciudad}}</td>
-                    <td  class="card-item">{{remision.institucionRemite.toLowerCase()}}</td>
+                    <td class="card-item">{{remision.institucionRemite.toLowerCase()}}</td>
                     <td class="card-item2">{{remision.estado.toLowerCase()}}</td>
                     <td>
-                        <i class="bi bi-clock-history" id="history" title="ver historial" (click)="verHistorialRemision(remision.idRemision)"></i>
+                        <i class="bi bi-clock-history" id="history" title="ver historial"
+                            (click)="verHistorialRemision(remision.idRemision)"></i>
                     </td>
                 </tr>
             </tbody>
         </table>
     </div>
     <div id="paginador">
-        <pagination-controls  previousLabel="Anterior" nextLabel="Siguiente"  (pageChange)="currentPage = $event"></pagination-controls> 
+        <pagination-controls previousLabel="Anterior" nextLabel="Siguiente"
+            (pageChange)="currentPage = $event"></pagination-controls>
     </div>
 </div>
-
-

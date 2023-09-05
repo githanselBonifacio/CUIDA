@@ -1,21 +1,24 @@
-<div  class="row" id = 'container-card'>
-    <div *ngFor="let cita of citas" class="col-md-12" id = "container-card-citas">
+<div class="row" id='container-card'>
+    <div *ngFor="let cita of citas" class="col-md-12" id="container-card-citas">
         <div class="card">
             <div class="header-cita">
-                    <div>
-                        <h5 class="card-title">{{cita.idRemision}}</h5>
-                    </div>
-                    <div>
-                        <i class="bi bi-eye-fill" title="ubicación" (click)="mostrarDetalleCita(cita)"></i>
-                    </div>
+                <div>
+                    <h5 class="card-title">{{cita.idRemision}}</h5>
                 </div>
+                <div>
+                    <i class="bi bi-eye-fill" title="ubicación" (click)="mostrarDetalleCita(cita)"></i>
+                </div>
+            </div>
             <div class="card-body">
-     
-                <div class="input-group-text"><i class="bi bi-calendar"> </i>{{cita.fechaInicio |date :'dd/MM/yyyy HH:mm' }}</div>
-                <div class="input-group-text"><i class="bi bi-calendar-check"> </i>{{cita.fechaProgramada |date :'dd/MM/yyyy HH:mm'}}</div>
+
+                <div class="input-group-text"><i class="bi bi-calendar"> </i>{{cita.fechaInicio |date :'dd/MM/yyyy
+                    HH:mm' }}</div>
+                <div class="input-group-text"><i class="bi bi-calendar-check"> </i>{{cita.fechaProgramada |date
+                    :'dd/MM/yyyy HH:mm'}}</div>
                 <div class="input-group-text"><i class="bi bi-clock"> </i>{{cita.duracion|formatearSegundos }}</div>
-                <div class="input-group-text"><i class="bi bi-hourglass-bottom"> </i>{{cita.holgura |formatearSegundos}}</div>
-                <div class="input-group-text"><i class="bi bi-clipboard"> </i>     
+                <div class="input-group-text"><i class="bi bi-hourglass-bottom"> </i>{{cita.holgura |formatearSegundos}}
+                </div>
+                <div class="input-group-text"><i class="bi bi-clipboard"> </i>
                     <ng-container *ngIf="cita.idEstado === 1; then thenEstado else elseEstado">
                     </ng-container>
                     <ng-template #thenEstado>
@@ -24,47 +27,45 @@
                     <ng-template #elseEstado>
                         Agendada
                     </ng-template>
-                  
+
                 </div>
 
                 <div class="card-body" *ngIf="cita.idConductor" id="conductor-card">
                     <h5 for="conductor" class="card-title">conductor asignado</h5>
-                    <span  class="input-group-text" id="conductor"><i class="bi bi-file-person-fill"></i>  {{cita.idConductor}}</span>
-                <span class="input-group-text" ><i class="bi bi-card-heading"></i> {{cita.idConductor}}</span>
+                    <span class="input-group-text" id="conductor"><i class="bi bi-file-person-fill"></i>
+                        {{cita.idConductor}}</span>
+                    <span class="input-group-text"><i class="bi bi-card-heading"></i> {{cita.idConductor}}</span>
                 </div>
-              
+
 
                 <div class="i-card-agenda">
                     <ng-container *ngIf="cita.idEstado == 2">
 
-                       
-                        <i class="bi bi-clock" id="i-card-agenda-reprogramar"  title="Reprogramar"
+
+                        <i class="bi bi-clock" id="i-card-agenda-reprogramar" title="Reprogramar"
                             (click)="reprogramarHoraCita(cita)">
                         </i>
 
-                        <i class="bi bi-calendar2-x-fill" id="i-card-agenda-desagendar"
-                                title="Desagendar"
-                                (click)="desagendarProfesionalCita(cita,'Desea desagendar cita ?')">
-                            </i>
-                        
-                
+                        <i class="bi bi-calendar2-x-fill" id="i-card-agenda-desagendar" title="Desagendar"
+                            (click)="desagendarProfesionalCita(cita,'Desea desagendar cita ?')">
+                        </i>
+
+
 
                     </ng-container>
                     <ng-container *ngIf="cita.idEstado == 1">
-                            <i class="bi bi-calendar-plus-fill" (click)="asignarProfesionalCita(cita)" 
-                            title="Agendar"
-                            id = "i-card-agenda-agendar"></i>
+                        <i class="bi bi-calendar-plus-fill" (click)="asignarProfesionalCita(cita)" title="Agendar"
+                            id="i-card-agenda-agendar"></i>
                     </ng-container>
-                    
-                    <span class='estado-cita' id ='estado-confirmado'  *ngIf="cita.idEstado  == 3">Confirmada</span>
-                    <span class='estado-cita' id ='estado-progreso'    *ngIf="cita.idEstado  == 4">En progreso</span>
-                    <span class='estado-cita' id ='estado-finalizada'  *ngIf="cita.idEstado  == 6">Finalizada</span>
+
+                    <span class='estado-cita' id='estado-confirmado' *ngIf="cita.idEstado  == 3">Confirmada</span>
+                    <span class='estado-cita' id='estado-progreso' *ngIf="cita.idEstado  == 4">En progreso</span>
+                    <span class='estado-cita' id='estado-finalizada' *ngIf="cita.idEstado  == 6">Finalizada</span>
                 </div>
             </div>
         </div>
     </div>
     <div *ngIf="citas.length === 0">
-            <p>No hay citas para la fecha buscada!!</p>
+        <p>No hay citas para la fecha buscada!!</p>
     </div>
 </div>
-

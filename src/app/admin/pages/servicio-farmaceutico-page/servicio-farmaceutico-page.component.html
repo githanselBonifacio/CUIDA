@@ -1,127 +1,133 @@
 <div class="container-view">
     <div class="header">
         <div class="content-toolbar">
-            <i id = "back-admin" class="bi bi-arrow-left-square-fill" title="volver a remisiones" (click)="backRemisionesTabla()"></i> <h2>Servicio Farmaceutico</h2>
+            <i id="back-admin" class="bi bi-arrow-left-square-fill" title="volver a remisiones"
+                (click)="backRemisionesTabla()"></i>
+            <h2>Servicio Farmaceutico</h2>
         </div>
-       
+
         <div class="content-toolbar">
-                
-            <button id="notificar" title="Notificar" (click)="notificarSeleccion()"  [ngClass]="{'active': hayNotificacionesSeleccionadas()}" [disabled]="!hayNotificacionesSeleccionadas()">
+
+            <button id="notificar" title="Notificar" (click)="notificarSeleccion()"
+                [ngClass]="{'active': hayNotificacionesSeleccionadas()}" [disabled]="!hayNotificacionesSeleccionadas()">
                 <div>
-                    <i class="bi bi-bell-fill" ></i>
+                    <i class="bi bi-bell-fill"></i>
                 </div>
             </button>
-               
+
             <div class="content-check-notificacion">
-               
-                <input   id ="check-notificado" type="checkbox" (change)="onCheckboxChangeNotificado($event)" >
-                <label  class = "label-notificacion" for="check-notificado">Notificado</label>
-                
-                <input id ="check-sin-notificado" type="checkbox"  (change)="onCheckboxChangeSinNotificado($event)" >
-                <label class = "label-notificacion" for="check-sin-notificado">Sin Notificar</label>
-              
-                </div>
+
+                <input id="check-notificado" type="checkbox" (change)="onCheckboxChangeNotificado($event)">
+                <label class="label-notificacion" for="check-notificado">Notificado</label>
+
+                <input id="check-sin-notificado" type="checkbox" (change)="onCheckboxChangeSinNotificado($event)">
+                <label class="label-notificacion" for="check-sin-notificado">Sin Notificar</label>
+
+            </div>
 
             <span class="input-group-text" id="basic-addon1"><i class="bi bi-person"></i></span>
-            <input  [(ngModel)]="filtroBusqueda" (ngModelChange) ="filtrarNotificaciones()" type="text" class="form-control" placeholder="paciente.." aria-label="Username" aria-describedby="basic-addon1">          
-        </div>  
+            <input [(ngModel)]="filtroBusqueda" (ngModelChange)="filtrarNotificaciones()" type="text"
+                class="form-control" placeholder="paciente.." aria-label="Username" aria-describedby="basic-addon1">
+        </div>
     </div>
     <hr>
     <div class="content-item">
 
         <table class="table table-hover">
-        <thead>
-          <tr>
-            <th scope="col" class="th-start">
-    
-                <input id = "master-check" class="select-group-input" type="checkbox" (change) ="agregarTodasNotificacionesMostradas($event)"  [disabled]="checkedNotificado">
-                <label class="form-check-label" for="select-group-input"></label>
-                Remisión
-            </th>
-        
-            <th scope="col"  class="th-start">Paciente</th>
-            <th scope="col"  class="th-start">Tipo</th>
-            <th scope="col"  class="th-start">Medicamento</th>
-            <th scope="col">Dosis</th>
-            <th scope="col">Vía</th>
-            <th scope="col">Frecuencia</th>
-            <th scope="col">Volumen</th>
-            <th scope="col">Fecha programada</th>
-            <th scope="col">Notificado</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let notificacion of notificacionesMostradas | paginate: { itemsPerPage: 6, currentPage: currentPage, totalItems: totalItems }">
-            <td class="card-item" scope="row" style="white-space: nowrap;">
+            <thead>
+                <tr>
+                    <th scope="col" class="th-start">
 
-                <input  name="individual-check"
-                        type="checkbox" 
-                        (change)="agregarListaSeleccionada(notificacion,$event)"
-                        [disabled]="notificacion.notificado">
+                        <input id="master-check" class="select-group-input" type="checkbox"
+                            (change)="agregarTodasNotificacionesMostradas($event)" [disabled]="checkedNotificado">
+                        <label class="form-check-label" for="select-group-input"></label>
+                        Remisión
+                    </th>
+
+                    <th scope="col" class="th-start">Paciente</th>
+                    <th scope="col" class="th-start">Tipo</th>
+                    <th scope="col" class="th-start">Medicamento</th>
+                    <th scope="col">Dosis</th>
+                    <th scope="col">Vía</th>
+                    <th scope="col">Frecuencia</th>
+                    <th scope="col">Volumen</th>
+                    <th scope="col">Fecha programada</th>
+                    <th scope="col">Notificado</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr
+                    *ngFor="let notificacion of notificacionesMostradas | paginate: { itemsPerPage: 6, currentPage: currentPage, totalItems: totalItems }">
+                    <td class="card-item" scope="row" style="white-space: nowrap;">
+
+                        <input name="individual-check" type="checkbox"
+                            (change)="agregarListaSeleccionada(notificacion,$event)"
+                            [disabled]="notificacion.notificado">
                         {{notificacion.idRemision}}
 
-            </td>
-            <td>
-                <div >
-                     <div  class="card-item">
-                        <td>{{ notificacion.nombres |titlecase }} {{ notificacion.apellidos|titlecase  }}</td>
-                    </div>
-                    <div  class="card-item">
-                        <td>{{ notificacion.tipoIdentificacion|titlecase  }}</td>
-                    </div>
-                    <div  class="card-item">
-                        {{ notificacion.numeroIdentificacion }}
-                    </div>
-                </div>
-               
-               
-            </td>
-            <td  class="card-item"> {{notificacion.tipo|titlecase}}</td>
-            <td>
-                <div>
-                    
-                    <div  class="card-item">
-                        {{notificacion.presentacionMedicamento|titlecase}}
-                    </div >
-
-                    <div class="card-item">
-                        {{notificacion.codigoMedicamento}}
-                    </div>
-
-                </div>
-               
-               
-            </td>
-        
-            <td style="white-space: nowrap;">{{notificacion.cantidadDosis}} ({{notificacion.unidadDosis}})</td>
-            
-            <td>
-                <span *ngIf="notificacion.viaAdministracion">{{notificacion.viaAdministracion}}</span>
-                <span class="badge-no-aplica" *ngIf="!notificacion.viaAdministracion">NA</span>
-            </td>
-
-            <td>
-                <span *ngIf="notificacion.frecuencia">{{notificacion.frecuencia}}</span>
-                <span class="badge-no-aplica" *ngIf="!notificacion.frecuencia">NA</span>
-
-            </td>
-
-            <td>
-                <span  *ngIf="notificacion.volumen">{{notificacion.volumen}}  (gr)</span>
-                <span class="badge-no-aplica" *ngIf="!notificacion.volumen">NA</span>
-            </td>
-
-            <td>{{notificacion.fechaProgramada | date:'dd/MM/yyyy HH:mm'}}</td>
-            <td>
-                <i *ngIf="notificacion.notificado" class="bi bi-check-square-fill" id="notificado"></i>
-                <i *ngIf="!notificacion.notificado" class="bi bi-slash-circle-fill" id="no-notificado"></i>
-              </td>
-          </tr>
-        </tbody>
-      </table>
+                    </td>
+                    <td>
+                        <div>
+                            <div class="card-item">
+                    <td>{{ notificacion.nombres |titlecase }} {{ notificacion.apellidos|titlecase }}</td>
     </div>
-    <div id="paginador">
-        <pagination-controls  previousLabel="Anterior" nextLabel="Siguiente"  (pageChange)="currentPage = $event;handlePageChange($event)"></pagination-controls> 
+    <div class="card-item">
+        <td>{{ notificacion.tipoIdentificacion|titlecase }}</td>
     </div>
-    
+    <div class="card-item">
+        {{ notificacion.numeroIdentificacion }}
+    </div>
+</div>
+
+
+</td>
+<td class="card-item"> {{notificacion.tipo|titlecase}}</td>
+<td>
+    <div>
+
+        <div class="card-item">
+            {{notificacion.presentacionMedicamento|titlecase}}
+        </div>
+
+        <div class="card-item">
+            {{notificacion.codigoMedicamento}}
+        </div>
+
+    </div>
+
+
+</td>
+
+<td style="white-space: nowrap;">{{notificacion.cantidadDosis}} ({{notificacion.unidadDosis}})</td>
+
+<td>
+    <span *ngIf="notificacion.viaAdministracion">{{notificacion.viaAdministracion}}</span>
+    <span class="badge-no-aplica" *ngIf="!notificacion.viaAdministracion">NA</span>
+</td>
+
+<td>
+    <span *ngIf="notificacion.frecuencia">{{notificacion.frecuencia}}</span>
+    <span class="badge-no-aplica" *ngIf="!notificacion.frecuencia">NA</span>
+
+</td>
+
+<td>
+    <span *ngIf="notificacion.volumen">{{notificacion.volumen}} (gr)</span>
+    <span class="badge-no-aplica" *ngIf="!notificacion.volumen">NA</span>
+</td>
+
+<td>{{notificacion.fechaProgramada | date:'dd/MM/yyyy HH:mm'}}</td>
+<td>
+    <i *ngIf="notificacion.notificado" class="bi bi-check-square-fill" id="notificado"></i>
+    <i *ngIf="!notificacion.notificado" class="bi bi-slash-circle-fill" id="no-notificado"></i>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="paginador">
+    <pagination-controls previousLabel="Anterior" nextLabel="Siguiente"
+        (pageChange)="currentPage = $event;handlePageChange($event)"></pagination-controls>
+</div>
+
 </div>

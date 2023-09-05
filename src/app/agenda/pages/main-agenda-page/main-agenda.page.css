@@ -3,33 +3,42 @@
 @import url('../../../../assets/styles/inputs/lista.css');
 @import url('../../../../assets/styles/inputs/fecha.css');
 
-#container-list-citas{
-    border:1px solid var( --gris3-color);
-    background-color:var(---primary-color);
+#titulo-agenda {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+}
+
+#container-list-citas {
+    border: 1px solid var(--gris3-color);
+    background-color: var(---primary-color);
     padding-top: 1.5rem;
 }
-#container-agenda-gantt{
-    border:1px solid var(--gris3-color);
+
+#container-agenda-gantt {
+    border: 1px solid var(--gris3-color);
     padding-top: 1rem;
 }
-#header_filtro_agenda{
-   justify-content: space-between;
-   flex-direction: row;
-   align-items: end;
-   padding: 1rem 1rem 1rem 1rem;
+
+#header_filtro_agenda {
+    justify-content: space-between;
+    flex-direction: row;
+    align-items: end;
+    padding: 1rem 1rem 1rem 1rem;
 
 }
 
-#filtro_agenda{
+#filtro_agenda {
     justify-content: space-between;
- }
+}
 
- .d-flex-col{
+.d-flex-col {
     align-items: center;
     margin: 0rem 0.5rem 0rem 0.5rem;
- }
-.input-group{
-    display: flex!important;
+}
+
+.input-group {
+    display: flex !important;
     align-items: end !important;
     justify-content: end !important;
 }
@@ -39,20 +48,42 @@
     border: 1px solid var(--gris3-color);
 }
 
-#agregar-profesional{
- font-size: 2.5rem;
- color: var(--third-color);
- text-align: center;
- border:1px solid var( --gris3-color);
- border-radius: 5px;
- margin-top: 0.5rem;
- margin-bottom: 0.5rem;
- width: 12rem;
+#agregar-profesional {
+    font-size: 2.5rem;
+    color: var(--third-color);
+    text-align: center;
+    border: 1px solid var(--gris3-color);
+    border-radius: 5px;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    width: 12rem;
 }
 
-#agregar-profesional:hover{
- color: var(--orange-color);
- background-color: var(--gris4-color);
- box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+#agregar-profesional:hover {
+    color: var(--orange-color);
+    background-color: var(--gris4-color);
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
 
+}
+
+
+.vignette {
+    margin: 5rem;
+    width: 5rem;
+    height: 2rem;
+    background-color: #7c1313;
+    position: relative;
+}
+
+.vignette::before {
+    content: "";
+    position: absolute;
+    top: -0.8rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 0.8rem solid transparent;
+    border-right: 0.8rem solid transparent;
+    border-bottom: 0.8rem solid #7c1313;
 }

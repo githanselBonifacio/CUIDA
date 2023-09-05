@@ -1,68 +1,68 @@
 export interface Cita {
-    idCita:          string;
-    idRemision:      string;
-    duracion:        number;
-    holgura:         number;
-    fechaInicio:     Date;
+    idCita: string;
+    idRemision: string;
+    duracion: number;
+    holgura: number;
+    fechaInicio: Date;
     fechaProgramada: Date;
-    especialidad:    string;
-    latitud:         number;
-    longitud:        number;
-    idCiudad :       string;
-    idEstado:        number;
-    idProfesional:   string|null;
-    idConductor:     string|null;
+    especialidad: string;
+    latitud: number;
+    longitud: number;
+    idCiudad: string;
+    idEstado: number;
+    idProfesional: string | null;
+    idConductor: string | null;
 
 }
 export enum EstadosCita {
-    sinAgendar  = 1,
-    agendada    = 2,
-    confirmada  = 3,
-    enProgreso  = 4,
-    cancelada   = 5,
-    finalizada  = 6
-  }
+    sinAgendar = 1,
+    agendada = 2,
+    confirmada = 3,
+    enProgreso = 4,
+    cancelada = 5,
+    finalizada = 6
+}
 
-export interface Medicamento{
-    idMedicamento:     string;
-    nombre:            string;
-    presentacion:      string;
+export interface Medicamento {
+    idMedicamento: string;
+    nombre: string;
+    presentacion: string;
     codigoMedicamento: string;
 }
 
-export interface Tratamiento{
-    tipoTratamiento:   string;
-    cantidadDosis:     string;
-    medicamento:  Medicamento;
-    unidadDosis:       string;
-    viaAdministracion: string;
-    frecuencia:        string;
-    duracion:          number;
-    noPBS:             boolean;
-    tipoPrestacion:    string;
-}
-export interface Curacion{
-    tipoCuracion:  string;
-    descripcion:   string;
-    sesiones:      number;
-}
-export interface Sondaje{
-    tipoSondaje:    string;
-    tipoSonda:      string;
-    totalSesiones:  number;
-    tipoPrestacion: string;
-}
-
-export interface TomaMuestra{
-    tipoMuestra:    string;
-    requiereAyuno:  boolean;
-    tipoPrestacion: string;
-}
-
-export interface SoporteNutricional{
+export interface Tratamiento {
+    tipoTratamiento: string;
+    cantidadDosis: string;
     medicamento: Medicamento;
-    cantidadDosis:    number;
-    unidadDosis:  string;
+    unidadDosis: string;
+    viaAdministracion: string;
+    frecuencia: string;
+    duracion: number;
+    noPBS: boolean;
+    tipoPrestacion: string;
+}
+export interface Curacion {
+    tipoCuracion: string;
+    descripcion: string;
+    sesiones: number;
+}
+export interface Sondaje {
+    tipoSondaje: string;
+    tipoSonda: string;
+    totalSesiones: number;
+    tipoPrestacion: string;
+}
+
+export interface TomaMuestra {
+    tipoMuestra: string;
+    requiereAyuno: boolean;
+    tipoPrestacion: string;
+}
+
+export interface SoporteNutricional {
+    medicamento: Medicamento;
+    cantidadDosis: number;
+    unidadDosis: string;
     tipo: string;
     descripcion: string;
     duracion: number;
@@ -72,61 +72,62 @@ export interface SoporteNutricional{
 
 
 }
-export interface Fototerapia{
+export interface Fototerapia {
     diasTratamiento: number;
-    tipoFrecuencia : string;
-    cantidadDosis  : string;
-    tipoPrestacion : string;
+    tipoFrecuencia: string;
+    cantidadDosis: string;
+    tipoPrestacion: string;
 }
 
-export interface Canalizacion{
-    tipoCanalizacion : string;
-    tipoPrestacion   : string;
+export interface Canalizacion {
+    tipoCanalizacion: string;
+    tipoPrestacion: string;
 }
 
-export interface Secrecion{
-    diasTratamiento  : number;
-    envioAspirador   : boolean;
-    visitaEnfermeria : boolean;
-    tipoSonda        : string;
-    nasal            : boolean;
-    traqueostomia    : boolean;
-    tipoPrestacion   : string;
+export interface Secrecion {
+    diasTratamiento: number;
+    envioAspirador: boolean;
+    visitaEnfermeria: boolean;
+    tipoSonda: string;
+    nasal: boolean;
+    traqueostomia: boolean;
+    tipoPrestacion: string;
 
 }
-export interface Ubicacion{
-    latitud:number;
-    longitud:number;
-    direccion:string;
-    tipoVia:string;
+export interface Ubicacion {
+    latitud: number;
+    longitud: number;
+    direccion: string;
+    tipoVia: string;
     numero1: string;
-    numero2:string;
-    barrio:string;
-    sinNomenclatura:boolean;
-    nroInterseccion:string;
+    numero2: string;
+    barrio: string;
+    sinNomenclatura: boolean;
+    nroInterseccion: string;
+    municipio: string;
 
 }
-export interface DatosAtencionRemision{
-    nombreCuidador:string;
-    nombreResponsable:string;
-    telefonoPaciente:string;
-    celularPaciente:string;
-    celularPaciente2:string;
+export interface DatosAtencionRemision {
+    nombreCuidador: string;
+    nombreResponsable: string;
+    telefonoPaciente: string;
+    celularPaciente: string;
+    celularPaciente2: string;
 }
 
-export interface Paciente{
-    tipoIdentificacion:   string;
+export interface Paciente {
+    tipoIdentificacion: string;
     numeroIdentificacion: string;
-    nombre:               string;
-    apellido:             string;
-    edad:                 number;
-    sexo:                 string;
-    peso:                 number;
-    tipoAfiliacion:       string;
-    nombreAseguradora:    string;
-    fechaNacimiento:      Date;
-    ubicacion:            Ubicacion;
-} 
+    nombre: string;
+    apellido: string;
+    edad: number;
+    sexo: string;
+    peso: number;
+    tipoAfiliacion: string;
+    nombreAseguradora: string;
+    fechaNacimiento: Date;
+    ubicacion: Ubicacion;
+}
 
 
 export class Convert {

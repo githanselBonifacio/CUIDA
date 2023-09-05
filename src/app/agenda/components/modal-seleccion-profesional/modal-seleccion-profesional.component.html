@@ -1,43 +1,39 @@
 <h1 mat-dialog-title>Desea asignar profesional a la cita?</h1>
 <div mat-dialog-content>
-    <mat-form-field style="width:20rem;">
-      <mat-label>Seleccione profesional</mat-label>
-      <mat-select [(ngModel)]="opcionProfesional">
-        <mat-option *ngFor="let profesional of data['profesionales']" 
-                     [value]="profesional.numeroIdentificacion"
-                    [ngClass]="'option-profesional'">
+  <mat-form-field style="width:20rem;">
+    <mat-label>Seleccione profesional</mat-label>
+    <mat-select [(ngModel)]="opcionProfesional">
+      <mat-option *ngFor="let profesional of data['profesionales']" [value]="profesional.numeroIdentificacion"
+        [ngClass]="'option-profesional'">
 
-            <div class="opcion-profesional-card">
-              <div>
-                  {{profesional.nombres}} {{profesional.apellidos}}
-              </div>
-              <div>
-                {{profesional.numeroIdentificacion}}
-              </div>
-            </div>
-          
-        </mat-option>
-        <mat-option *ngIf="data['profesionales'].length == 0" disabled [value]="null">No hay profesionales disponibles</mat-option>
-      </mat-select>
-    </mat-form-field>
-
-    <div  id="content-dialog">
-      <div id="content-option">
-
-          <div id="option-boton">
-            <button class="btn btn-outline-danger"  (click)="onNoClick()" >Cancelar</button>
+        <div class="opcion-profesional-card">
+          <div>
+            {{profesional.nombres}} {{profesional.apellidos}}
           </div>
-          
-          <div id="option-boton">
-            <button class="btn btn-outline-success" cdkFocusInitial (click)="onConfirm()" [disabled]="opcionProfesional==''">Confirmar</button>
+          <div>
+            {{profesional.numeroIdentificacion}}
           </div>
+        </div>
 
+      </mat-option>
+      <mat-option *ngIf="data['profesionales'].length == 0" disabled [value]="null">No hay profesionales
+        disponibles</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <div id="content-dialog">
+    <div id="content-option">
+
+      <div id="option-boton">
+        <button class="btn btn-outline-danger" (click)="onNoClick()">Cancelar</button>
       </div>
+
+      <div id="option-boton">
+        <button class="btn btn-outline-success" cdkFocusInitial (click)="onConfirm()"
+          [disabled]="opcionProfesional==''">Confirmar</button>
+      </div>
+
+    </div>
   </div>
 
 </div>
-
-
-
-
-

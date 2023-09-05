@@ -1,45 +1,56 @@
 @import url('../../../../styles.css');
-.paginador{
-    text-align: center;
-    color: var( --quarter-color);
-}
-td, th{
-    color: var( --quarter-color);
+
+.paginador {
     text-align: center;
 }
-#header-table th{
-    color:var(--gris4-color);
+
+td,
+th {
+    color: var(--quarter-color);
+    text-align: center;
+}
+
+#header-table th {
+    color: var(--gris4-color);
     font-weight: bold;
     background-color: var(--primary-color);
 }
-th  :hover{
+
+th :hover {
     background-color: var(--gris4-color);
 }
-.row{
+
+.row {
     margin: 0;
 }
-tbody{
+
+tbody {
     border: 1px solid var(--gris3-color);
 }
-i{
+
+i {
     color: var(--second-color);
     font-size: 1.2rem;
     font-weight: bold;
 }
-i:hover{
+
+i:hover {
     box-shadow: 5px 5px 15px var(--gris2-color);
     padding: 0.2rem 0.2rem 0.2rem 0.2rem;
     border-radius: 5px;
 }
-.content-item table{
+
+.content-item table {
     box-shadow: 5px 5px 10px var(--gris2-color);
 }
-.estado{
+
+.estado {
     display: flex;
     text-align: center;
     justify-content: center;
 }
-.estado div{
+
+.estado div {
     padding: 0.1rem 0.5rem 0.2rem 0.5rem;
     margin: 0;
     border-radius: 5px;
@@ -47,21 +58,27 @@ i:hover{
     font-weight: bold;
     min-width: 60%
 }
-#estado-1{
+
+#estado-1 {
     background-color: var(--orange-color);
 }
-#estado-2{
+
+#estado-2 {
     background-color: var(--primary-color);
 }
-#estado-3{
+
+#estado-3 {
     background-color: purple;
 }
-#estado-4{
+
+#estado-4 {
     background-color: var(--green-color);
 }
-#estado-5{
+
+#estado-5 {
     background-color: var(--quarter-color);
 }
-#estado-6{
+
+#estado-6 {
     background-color: black;
 }

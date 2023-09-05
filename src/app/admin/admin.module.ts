@@ -8,8 +8,10 @@ import { FormsModule } from '@angular/forms';
 import { AdminRemisionesPageComponent } from './pages/admin-remisiones-page/admin-remisiones-page.component';
 import { AdminHistorialRemisionPageComponent } from './pages/admin-historial-remision-page/admin-historial-remision-page.component';
 import { TablaHistorialCitasComponent } from './components/tabla-historial-citas/tabla-historial-citas.component';
-import { PipesModule} from '../pipes/pipes.module';
+import { PipesModule } from '../pipes/pipes.module';
 import { ModalDetalleCitasHistorialComponent } from './components/modal-detalle-citas-historial/modal-detalle-citas-historial.component';
+import { TablaActualizacionDatosRemisionComponent } from './components/tabla-actualizacion-datos-remision/tabla-actualizacion-datos-remision.component';
+
 
 @NgModule({
   declarations: [
@@ -19,6 +21,7 @@ import { ModalDetalleCitasHistorialComponent } from './components/modal-detalle-
     AdminHistorialRemisionPageComponent,
     TablaHistorialCitasComponent,
     ModalDetalleCitasHistorialComponent,
+    TablaActualizacionDatosRemisionComponent,
   ],
   imports: [
     CommonModule,
@@ -28,7 +31,7 @@ import { ModalDetalleCitasHistorialComponent } from './components/modal-detalle-
     PipesModule
   ],
   bootstrap: [MainAdminPageComponent],
-  exports:[
+  exports: [
     MainAdminPageComponent,
   ]
 })

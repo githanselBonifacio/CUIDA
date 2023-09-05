@@ -1,40 +1,49 @@
 <div class="container-view">
-        <div class="d-flex" id = "header_filtro_agenda"> 
-                <h1>Gestion de agenda</h1>
-                <div class = "form-group row">
-                     
-                    <div class="d-flex" id = "filtro_agenda">
-                    
+    <div class="row">
+        <div class="col-lg-3" id="titulo-agenda">
+
+            <h1>Gestion de agenda</h1>
+
+        </div>
+        <div class="col-lg-9">
+            <div class="d-flex" id="header_filtro_agenda">
+                <div class="form-group row">
+
+                    <div class="d-flex" id="filtro_agenda">
+
                         <div class="buttom-group-horinzontal">
-                        
+
                             <button class="buttom-seleccion" (click)=" autoagendar()">Agendar</button>
                             <button class="buttom-seleccion" (click)="desagendarTurnoCompleto()">Desagendar </button>
-                           
-                        </div>   
-                       
+
+                        </div>
+
                         <div class="d-flex">
                             <div class="d-flex-col">
-                                 <label for="fecha">Fecha</label>
-                                 <input type="date" id="fecha" [(ngModel)]="fechaFiltroTurno" >
+                                <label for="fecha">Fecha</label>
+                                <input type="date" id="fecha" [(ngModel)]="fechaFiltroTurno">
                             </div>
-                           
+
                             <div class="d-flex-col">
                                 <label for="opcionRegional">Regional</label>
                                 <select name="select-regional" [(ngModel)]="opcionRegional" id="opcionRegional">
                                     <option value="default" selected disabled>seleccione..</option>
-                                    <option *ngFor="let regional of regionales" [value]="regional.id">{{regional.nombre}} </option>
+                                    <option *ngFor="let regional of regionales" [value]="regional.id">
+                                        {{regional.nombre}}
+                                    </option>
                                 </select>
                             </div>
-                             
-                            <div  class="d-flex-col">
+
+                            <div class="d-flex-col">
                                 <label for="opcionTurno">Turno enfermeria</label>
-                                <select name="select-turno" [(ngModel)]="opcionHorariosTurno" id="opcionTurno"> 
+                                <select name="select-turno" [(ngModel)]="opcionHorariosTurno" id="opcionTurno">
                                     <option value="default" selected disabled>seleccione..</option>
-                                    <option *ngFor="let option of horarioTurno" [value]="option.id">T{{option.id}}</option>
+                                    <option *ngFor="let option of horarioTurno" [value]="option.id">T{{option.id}}
+                                    </option>
                                 </select>
                             </div>
-                            
-                             
+
+
                         </div>
 
                         <div class="input-group">
@@ -44,50 +53,53 @@
                         </div>
                     </div>
                 </div>
+            </div>
         </div>
-            
-        <div  class="row">
-            <div class="col-md-2" id="container-list-citas">
-                <div class="d-flex">
-                    
-                    <div class="input-group mb-2" id="buscar-remision">
-                        <span class="input-group-text" style=" border: 1px solid var(--gris3-color);">ID</span>
-                        <input [(ngModel)]="idRemision" (ngModelChange)=filtrarCitasByIdRemision() type="text" class="form-control" placeholder="remisión..." aria-label="Username" aria-describedby="input-remision">
-                    </div>
+    </div>
+
+
+
+    <div class="row">
+        <div class="col-lg-3 col-xl-2" id="container-list-citas">
+            <div class="d-flex">
+
+                <div class="input-group mb-2" id="buscar-remision">
+                    <span class="input-group-text" style=" border: 1px solid var(--gris3-color);">ID</span>
+                    <input [(ngModel)]="idRemision" (ngModelChange)=filtrarCitasByIdRemision() type="text"
+                        class="form-control" placeholder="remisión..." aria-label="Username"
+                        aria-describedby="input-remision">
+                </div>
+            </div>
+            <hr>
+            <app-agenda-card-cita [citas]="citas" [idRegional]="opcionRegional" [fechaTurno]="fechaFiltroTurno"
+                [idHorarioTurno]="opcionHorariosTurno">
+            </app-agenda-card-cita>
+
+        </div>
+
+        <div class="col-lg-9 col-xl-10" id="container-agenda-gantt">
+            <div class="panel-gantt">
+                <div>
+                    <app-diagramas-gantt [actividades]="actividades" [horas]="horasTurnoString"
+                        (idprofesionalEvent)="desasignarProfesionalTurno($event)">
+                    </app-diagramas-gantt>
                 </div>
                 <hr>
-                <app-agenda-card-cita 
-                        [citas]="citas"  [idRegional]="opcionRegional" [fechaTurno]="fechaFiltroTurno" [idHorarioTurno]="opcionHorariosTurno">
-                </app-agenda-card-cita>
+                <div>
 
-            </div>
+                    <button id="agregar-profesional" (click)="agregarProfesionalTurno()">
+                        <i class="bi bi-person-plus-fill" title="Agregar profesional"></i>
+                    </button>
 
-            <div class="col-md-10" id="container-agenda-gantt">
-                <div class="panel-gantt">
-                    <div>
-                        <app-diagramas-gantt 
-                            [actividades]="actividades" 
-                            [horas]="horasTurnoString"
-                            (idprofesionalEvent)= "desasignarProfesionalTurno($event)">
-                        </app-diagramas-gantt>
-                    </div>
-                    <hr>
-                    <div>
-            
-                        <button id="agregar-profesional"(click)="agregarProfesionalTurno()">
-                            <i class="bi bi-person-plus-fill" title="Agregar profesional"></i>
-                         </button>
-                     
-                    </div>
-                </div>   
+                </div>
             </div>
-             
-            <ng-container *ngIf="loadingPage == false">
-                <app-spinner></app-spinner>
-            </ng-container>
-            
         </div>
+
+        <ng-container *ngIf="loadingPage == false">
+            <app-spinner></app-spinner>
+        </ng-container>
+
+    </div>
 
 
 </div>
-

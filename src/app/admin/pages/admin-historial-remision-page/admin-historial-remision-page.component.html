@@ -1,115 +1,136 @@
 <div class="container-view">
-    <div class="container-historial">
-      <div class="header">
-          <i class="bi bi-arrow-left-square-fill" id="i-back-remision" title="volver a remisiones" (click)="backRemisionesTabla()"></i>
-          <div>
-              <h3>Remisión: {{idRemision}}</h3>
-          </div>
-        
+  <div class="container-historial">
+    <div class="header">
+      <i class="bi bi-arrow-left-square-fill" id="i-back-remision" title="volver a remisiones"
+        (click)="backRemisionesTabla()"></i>
+      <div>
+        <h3>Remisión: {{idRemision}}</h3>
       </div>
 
-      <div class = "content-item" id="datos-actuales">
-        
-          <h5>Datos del paciente</h5>
-            <div class="datos-paciente">
-                <div class="row">
-                  <div class="col" id="datos-personales">
-                      <div class="row">
-                          <div class="col-2">Nombres</div>
-                          <div class="col-3">{{remisionDataActual.paciente.nombres.toLowerCase()}}</div>
+    </div>
 
-                          <div class="col-2">Apellidos</div>
-                          <div class="col-3">{{remisionDataActual.paciente.apellidos.toLowerCase()}}</div>
+    <div class="content-item" id="datos-actuales">
 
-                          <div class="col">Genero</div>
-                          <div class="col">{{remisionDataActual.paciente.sexo}}</div>
+      <h5>Datos del paciente</h5>
+      <div class="datos-paciente">
+        <div class="row">
+          <div class="col" id="datos-personales">
+            <div class="row">
+              <div class="col-2">Nombres</div>
+              <div class="col-3">{{remisionDataActual.paciente.nombres.toLowerCase()}}</div>
 
-                      </div>
-                      <div class="row">
-                          <div class="col-2">Tipo identificación</div>
-                          <div class="col-3">{{remisionDataActual.paciente.tipoIdentificacion}}</div>
+              <div class="col-2">Apellidos</div>
+              <div class="col-3">{{remisionDataActual.paciente.apellidos.toLowerCase()}}</div>
 
-                          <div class="col-2">Número identificación</div>
-                          <div class="col-3">{{remisionDataActual.paciente.numeroIdentificacion}}</div>
+              <div class="col">Genero</div>
+              <div class="col">{{remisionDataActual.paciente.sexo}}</div>
 
-                          <div class="col">Edad</div>
-                          <div class="col">{{remisionDataActual.paciente.edad}} años</div>
-                      </div>
-                      <div class="row">
-                          <div class="col-2">Plan salud</div>
-                          <div class="col-3">{{remisionDataActual.paciente.tipoAfiliacion}}</div>
-
-                          <div class="col-2">Aseguradora</div>
-                          <div class="col">{{remisionDataActual.paciente.nombreAseguradora}}</div>
-                      </div>
-                      
-                  </div>
-                </div>
             </div>
-            <h5>Datos de atención</h5>
-            <div class="datos-atencion">
-    
-                  <div class="row">
-                      <div class="col-2">Cuidador </div>
-                      <div class="col">{{remisionDataActual.datosAtencion.nombreCuidador}}</div>
-                      <div class="col-2"> Responsable</div>
-                      <div class="col">{{remisionDataActual.datosAtencion.nombreResponsable}}</div>
-                  </div>
-                  <div class="row">
-                      <div class="col-2">Telefono </div>
-                      <div class="col">{{remisionDataActual.datosAtencion.telefonoPaciente}}</div>
-                      <div class="col-2">Celular</div>
-                      <div class="col">{{remisionDataActual.datosAtencion.celularPaciente}}<span *ngIf="remisionDataActual.datosAtencion.telefono_paciente2"> - {{remisionDataActual.datosAtencion.celularPaciente2}}</span></div>
-                  </div>
-                  <div class="row">
-                      <div class="col-2">Ubicación</div>
-                      <div class="col">
-                        <div style="display: flex;">
-                          <div> <span> {{remisionDataActual.ubicacionPaciente.direccion}} </span> </div>
-                          <div> <span>,  {{remisionDataActual.ubicacionPaciente.municipio.toLowerCase()}}  </span> </div>
-                        <div> <span>, Barrio {{remisionDataActual.ubicacionPaciente.barrio}}</span> </div>
-                      
-                          
-                    
-                        <div *ngIf="remisionDataActual.ubicacionPaciente.sin_nomenclatura">
-                          <span id="badge-advertencia"> Sin Nomenclatura</span>
-                        </div>
-                      
-                        </div>
-                      </div>
-                    </div>
+            <div class="row">
+              <div class="col-2">Tipo identificación</div>
+              <div class="col-3">{{remisionDataActual.paciente.tipoIdentificacion}}</div>
+
+              <div class="col-2">Número identificación</div>
+              <div class="col-3">{{remisionDataActual.paciente.numeroIdentificacion}}</div>
+
+              <div class="col">Edad</div>
+              <div class="col">{{remisionDataActual.paciente.edad}} años</div>
+            </div>
+            <div class="row">
+              <div class="col-2">Plan salud</div>
+              <div class="col-3">{{remisionDataActual.paciente.tipoAfiliacion}}</div>
+
+              <div class="col-2">Aseguradora</div>
+              <div class="col">{{remisionDataActual.paciente.nombreAseguradora}}</div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <h5>Datos de atención</h5>
+      <div class="datos-atencion">
+
+        <div class="row">
+          <div class="col-2">Cuidador </div>
+          <div class="col">{{remisionDataActual.datosAtencion.nombreCuidador}}</div>
+          <div class="col-2"> Responsable</div>
+          <div class="col">{{remisionDataActual.datosAtencion.nombreResponsable}}</div>
+        </div>
+        <div class="row">
+          <div class="col-2">Telefono </div>
+          <div class="col">{{remisionDataActual.datosAtencion.telefonoPaciente}}</div>
+          <div class="col-2">Celular</div>
+          <div class="col">{{remisionDataActual.datosAtencion.celularPaciente}}<span
+              *ngIf="remisionDataActual.datosAtencion.telefono_paciente2"> -
+              {{remisionDataActual.datosAtencion.celularPaciente2}}</span></div>
+        </div>
+        <div class="row">
+          <div class="col-2">Ubicación</div>
+          <div class="col">
+            <div style="display: flex;">
+              <div> <span> {{remisionDataActual.ubicacionPaciente.direccion}} </span> </div>
+              <div> <span>, {{remisionDataActual.ubicacionPaciente.municipio.toLowerCase()}} </span> </div>
+              <div> <span>, Barrio {{remisionDataActual.ubicacionPaciente.barrio}}</span> </div>
+
+              <div *ngIf="remisionDataActual.ubicacionPaciente.sin_nomenclatura">
+                <span id="badge-advertencia"> Sin Nomenclatura</span>
               </div>
 
-          <h5>Citas</h5>
-          <div class="citas">
-              <app-tabla-historial-citas [citas]="remisionDataActual.citas" [estadosCita]="estados"></app-tabla-historial-citas>
+            </div>
           </div>
+        </div>
       </div>
 
-      <h3>Historial Cambios</h3> 
-      <div class="content-item">
-          <div class="paginador" *ngIf="historialRemisiones.length >3">
-            <pagination-controls   id = "historico"   previousLabel="Anterior" nextLabel="Siguiente"  (pageChange)="currentPageHistorico = $event"></pagination-controls> 
-          </div>
-          <div class="accordion" id="accordion-registro">
-              <div class="accordion-item" *ngFor="let registro of historialRemisiones | paginate:{id:'historico', itemsPerPage: 3, currentPage: currentPageHistorico},let i = index ">
-                  <h2 class="accordion-header" id="heading{{i}}">
-                    <button class="accordion-button" type="button" data-bs-toggle="collapse" [attr.data-bs-target]= "'#collapse'+i.toString()" aria-expanded="false" [attr.aria-controls]="'#collapse'+i.toString()">
-                      {{registro.fechaAplicacionNovedad|date :'dd/MM/yyyy HH:mm'}} | {{registro.motivoNovedad}}
-                    </button>
-                  </h2>
-                  <div id="collapse{{i}}" class="accordion-collapse collapse" [attr.aria-labelledby]="'heading'+i.toString()" >
-                    <div class="accordion-body">
-                      <div *ngIf="registro.citas!=null">
-                        <h5>Citas</h5>
-                        <app-tabla-historial-citas [citas]="registro.citas" [estadosCita]="estados" [isHistorial]="true"></app-tabla-historial-citas>
-                      </div>
-                    </div>
-                  </div>
-                </div>        
-          </div>
-          <p *ngIf="historialRemisiones.length==0"> Remisión no tiene cambios </p>
+      <h5>Citas</h5>
+      <div class="citas">
+        <app-tabla-historial-citas [citas]="remisionDataActual.citas"
+          [estadosCita]="estados"></app-tabla-historial-citas>
       </div>
+    </div>
+
+    <h3>Historial Cambios</h3>
+    <div class="content-item">
+      <div class="paginador" *ngIf="historialRemisiones.length >3">
+        <pagination-controls id="historico" previousLabel="Anterior" nextLabel="Siguiente"
+          (pageChange)="currentPageHistorico = $event"></pagination-controls>
+      </div>
+      <div class="accordion" id="accordion-registro">
+        <div class="accordion-item"
+          *ngFor="let registro of historialRemisiones | paginate:{id:'historico', itemsPerPage: 3, currentPage: currentPageHistorico},let i = index ">
+          <h2 class="accordion-header" id="heading{{i}}">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse"
+              [attr.data-bs-target]="'#collapse'+i.toString()" aria-expanded="false"
+              [attr.aria-controls]="'#collapse'+i.toString()">
+              {{registro.fechaAplicacionNovedad|date :'dd/MM/yyyy HH:mm'}} | {{registro.motivoNovedad}}
+            </button>
+          </h2>
+          <div id="collapse{{i}}" class="accordion-collapse collapse" [attr.aria-labelledby]="'heading'+i.toString()">
+            <div class="accordion-body">
+
+              <div *ngIf="i-1>=0; else noDataRemision">
+                <app-tabla-actualizacion-datos-remision [registroAnterior]="registro"
+                  [registroNuevo]="historialRemisiones[i-1]"></app-tabla-actualizacion-datos-remision>
+              </div>
+              <ng-template #noDataRemision>
+                <app-tabla-actualizacion-datos-remision [registroAnterior]="registro"
+                  [registroNuevo]="remisionDataActual"></app-tabla-actualizacion-datos-remision>
+              </ng-template>
+
+              <div *ngIf="registro.citas!=null; else noCitas">
+                <h5>Citas descartadas</h5>
+                <app-tabla-historial-citas [citas]="registro.citas" [estadosCita]="estados"
+                  [isHistorial]="true"></app-tabla-historial-citas>
+              </div>
+              <ng-template #noCitas>
+                <p>No hay citas descartadas.</p>
+              </ng-template>
+
+            </div>
+          </div>
+        </div>
+        <p *ngIf="historialRemisiones.length==0"> Remisión no tiene cambios </p>
+      </div>
+    </div>
+
   </div>
-
-</div>

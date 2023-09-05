@@ -1,0 +1,113 @@
+<h5 *ngIf="registroAnterior.paciente.sexo != registroNuevo.paciente.sexo ||
+           registroAnterior.paciente.edad != registroNuevo.paciente.edad ||
+           registroAnterior.paciente.nombreAseguradora != registroNuevo.paciente.nombreAseguradora  ||
+            registroAnterior.paciente.tipoAfiliacion != registroNuevo.paciente.tipoAfiliacion">
+    Datos del paciente actualizados</h5>
+
+<div class="row" *ngIf="registroAnterior.paciente.sexo != registroNuevo.paciente.sexo">
+    <div class="col-2">
+        Genero:
+    </div>
+    <div class="col-10">
+        {{registroAnterior.paciente.sexo}} -> {{registroNuevo.paciente.sexo}}
+    </div>
+</div>
+
+<div class="row" *ngIf="registroAnterior.paciente.edad != registroNuevo.paciente.edad">
+    <div class="col-2">
+        Edad:
+    </div>
+    <div class="col-10">
+        {{registroAnterior.paciente.edad}} -> {{registroNuevo.paciente.edad}}
+    </div>
+</div>
+
+<div class="row" *ngIf="registroAnterior.paciente.nombreAseguradora != registroNuevo.paciente.nombreAseguradora">
+    <div class="col-2">
+        Aseguradora:
+    </div>
+    <div class="col-10">
+        {{registroAnterior.paciente.nombreAseguradora}} -> {{registroNuevo.paciente.nombreAseguradora}}
+    </div>
+</div>
+
+<div class="row" *ngIf="registroAnterior.paciente.tipoAfiliacion != registroNuevo.paciente.tipoAfiliacion">
+    <div class="col-2">
+        Plan salud:
+    </div>
+    <div class="col-10">
+        {{registroAnterior.paciente.tipoAfiliacion}} -> {{registroNuevo.paciente.tipoAfiliacion}}
+    </div>
+</div>
+
+
+
+<h5
+    *ngIf="registroAnterior.datosAtencion.nombreCuidador != registroNuevo.datosAtencion.nombreCuidador ||
+           registroAnterior.datosAtencion.nombreResponsable != registroNuevo.datosAtencion.nombreResponsable ||
+           registroAnterior.datosAtencion.telefonoPaciente != registroNuevo.datosAtencion.telefonoPaciente  ||
+           registroAnterior.datosAtencion.celularPaciente != registroNuevo.datosAtencion.celularPaciente ||
+           (registroAnterior.ubicacionPaciente.direccion != registroNuevo.ubicacionPaciente.direccion || registroAnterior.ubicacionPaciente.municipio != registroNuevo.ubicacionPaciente.municipio || registroAnterior.ubicacionPaciente.barrio != registroNuevo.ubicacionPaciente.barrio)">
+    Datos de atención actualizados</h5>
+
+<div class="row" *ngIf="registroAnterior.datosAtencion.nombreCuidador != registroNuevo.datosAtencion.nombreCuidador">
+    <div class="col-2">
+        Cuidador:
+    </div>
+    <div class="col-10">
+        {{registroAnterior.datosAtencion.nombreCuidador}} ->
+        {{registroNuevo.datosAtencion.nombreCuidador}}
+    </div>
+</div>
+
+<div class="row"
+    *ngIf="registroAnterior.datosAtencion.nombreResponsable != registroNuevo.datosAtencion.nombreResponsable">
+    <div class="col-2">
+        Responsable:
+    </div>
+    <div class="col-10">
+        {{registroAnterior.datosAtencion.nombreResponsable}} ->
+        {{registroNuevo.datosAtencion.nombreResponsable}}
+    </div>
+</div>
+
+<div class="row"
+    *ngIf="registroAnterior.datosAtencion.telefonoPaciente != registroNuevo.datosAtencion.telefonoPaciente">
+    <div class="col-2">
+        telefono:
+    </div>
+    <div class="col-10">
+        {{registroAnterior.datosAtencion.telefonoPaciente}} ->
+        {{registroNuevo.datosAtencion.telefonoPaciente}}
+    </div>
+</div>
+
+<div class="row" *ngIf="registroAnterior.datosAtencion.celularPaciente != registroNuevo.datosAtencion.celularPaciente">
+    <div class="col-2">
+        celular:
+    </div>
+    <div class="col-10">
+        {{registroAnterior.datosAtencion.celularPaciente}} ->
+        {{registroNuevo.datosAtencion.celularPaciente}}
+    </div>
+</div>
+
+<div class="row"
+    *ngIf="registroAnterior.ubicacionPaciente.direccion != registroNuevo.ubicacionPaciente.direccion || registroAnterior.ubicacionPaciente.municipio != registroNuevo.ubicacionPaciente.municipio || registroAnterior.ubicacionPaciente.barrio != registroNuevo.ubicacionPaciente.barrio">
+    <div class="col-2">
+        Ubicacion:
+    </div>
+    <div class="col-10">
+        <span>
+            {{registroAnterior.ubicacionPaciente.direccion}}
+            {{registroAnterior.ubicacionPaciente.municipio|titlecase}}
+            {{registroAnterior.ubicacionPaciente.barrio|titlecase}} ->
+        </span>
+
+        <span>
+            {{registroNuevo.ubicacionPaciente.direccion}}
+            {{registroNuevo.ubicacionPaciente.municipio|titlecase}}
+            {{registroNuevo.ubicacionPaciente.barrio|titlecase}}
+        </span>
+    </div>
+</div>

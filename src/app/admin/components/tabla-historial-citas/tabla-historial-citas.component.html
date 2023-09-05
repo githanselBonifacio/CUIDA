@@ -1,7 +1,7 @@
-
 <div class="content-item">
     <div class="paginador" *ngIf="citas.length >3">
-        <pagination-controls   id = "{{tableId}}"   previousLabel="Anterior" nextLabel="Siguiente"  (pageChange)="currentPage = $event"></pagination-controls> 
+        <pagination-controls id="{{tableId}}" previousLabel="Anterior" nextLabel="Siguiente"
+            (pageChange)="currentPage = $event"></pagination-controls>
     </div>
     <table class="table table-hover">
         <thead>
@@ -11,7 +11,7 @@
                 <th scope="col">Duración</th>
                 <th scope="col">Holgura</th>
                 <th scope="col">Especialidad</th>
-                <th scope="col" >Estado</th>
+                <th scope="col">Estado</th>
                 <th scope="col">Detalle</th>
             </tr>
         </thead>
@@ -20,11 +20,12 @@
                 <th scope="row">{{cita.datosCita.idCita}}</th>
                 <td>{{cita.datosCita.fechaProgramada|date :'dd/MM/yyyy HH:mm'}}</td>
                 <td>{{cita.datosCita.duracion |formatearSegundos }}</td>
-                <td>{{cita.datosCita.holgura  |formatearSegundos}}</td>
+                <td>{{cita.datosCita.holgura |formatearSegundos}}</td>
                 <td>{{cita.datosCita.especialidad}}</td>
 
                 <td class="estado">
-                    <div *ngIf="!isHistorial"  id="estado-{{cita.datosCita.idEstado}}">{{getNombreEstadoCita(cita.datosCita.idEstado)}}</div>
+                    <div *ngIf="!isHistorial" id="estado-{{cita.datosCita.idEstado}}">
+                        {{getNombreEstadoCita(cita.datosCita.idEstado)}}</div>
 
                     <div *ngIf="isHistorial"><i class="bi bi-x-circle-fill" style="color: var(--red-color);"></i></div>
                 </td>

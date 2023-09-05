@@ -1,19 +1,20 @@
 @import url('../../../styles.css');
 
-label{
-    color: var( --quarter-color);
+label {
+    color: var(--quarter-color);
     white-space: nowrap;
 }
-input{
+
+input {
     margin: 0px;
     border: 2px solid var(--quarter-color);
-    color: var( --quarter-color);
+    color: var(--quarter-color);
 }
 
 select {
     border-radius: 5px;
     color: var(--quarter-color);
     padding: 0.4rem 0.4rem;
-    border: solid var(--gris2-color) 1px;
-  
+    border: solid var(--second-color) 1px;
+
 }

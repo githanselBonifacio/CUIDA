@@ -1,66 +1,84 @@
 @import url('../../../../styles.css');
 
-.container-historial{
+.container-historial {
     padding-top: 2rem;
     padding-left: 1rem;
     padding-right: 1.5rem;
     padding-bottom: 1rem;
 }
-.header{
+
+.header {
     display: flex;
     justify-content: space-between;
 }
+
 #i-back-remision {
     font-size: 1.5rem;
-     color: var(--primary-color);
+    color: var(--primary-color);
 }
+
 #i-back-remision:hover {
     font-size: 1.6rem;
 }
-h3{
+
+h3 {
     color: var(--gris1-color);
     font-weight: bold;
 }
-h5{
+
+h5 {
     color: var(--second-color);
     font-weight: bold;
     padding-top: 0.5rem;
 }
-p{
+
+p {
     padding-left: 0.5rem;
     color: var(--gris1-color);
 }
-.row{
+
+.row {
     margin: 0;
 }
-.col, .col-3,.col-2,.col-4{
-    border:1px solid var( --gris3-color);
+
+.col,
+.col-3,
+.col-2,
+.col-4,
+.col-10 {
+    border: 1px solid var(--gris3-color);
     text-transform: capitalize;
     vertical-align: middle;
 }
-.divider{
+
+.divider {
     padding-top: 0.1rem;
     background-color: var(--gris3-color);
 }
-#datos-personales{
+
+#datos-personales {
     padding: 0;
 }
-#datos-actuales{
+
+#datos-actuales {
     height: 50vh;
     overflow-y: scroll;
     border: 1px solid var(--gris3-color);
     padding: 0.5rem 0.5rem 0.1rem 0.5rem;
     margin-bottom: 2rem;
 }
-#datos-personales, .datos-atencion{
+
+#datos-personales,
+.datos-atencion {
     color: var(--quarter-color);
 }
 
-.content-item{
+.content-item {
     padding-top: 1rem;
-    border:1px solid var( --gris3-color);
+    border: 1px solid var(--gris3-color);
 }
-#badge-advertencia{
+
+#badge-advertencia {
     background-color: var(--orange-color);
     color: white;
     font-weight: bold;
@@ -69,35 +87,39 @@ p{
     margin-left: 0.2rem;
     padding-left: 0.2rem;
     padding-right: 0.2rem;
-  
+
 }
-.citas{
+
+.citas {
     padding-left: 1rem;
     padding-right: 1rem;
 }
-#accordion-registro{
+
+#accordion-registro {
     padding-left: 0.5rem;
     padding-right: 0.5rem;
 }
-#accordion-registro button{
-    color:var(--quarter-color);
+
+#accordion-registro button {
+    color: var(--quarter-color);
     font-size: 1.3rem;
-    background: linear-gradient(to right, var(--third-color) 0%, var(--third-color) 1%,white 1%, white 99%);
+    background: linear-gradient(to right, var(--third-color) 0%, var(--third-color) 1%, white 1%, white 99%);
     margin-bottom: 0.5rem;
     padding-left: 2rem;
     box-shadow: 2px 2px 5px var(--gris2-color);
 }
-#accordion-registro button:hover{
-    background: linear-gradient(to right,var(--third-color) 0%, var(--third-color) 1%,var(--primary-color) 1%, var(--primary-color) 99.5%);
+
+#accordion-registro button:hover {
+    background: linear-gradient(to right, var(--third-color) 0%, var(--third-color) 1%, var(--primary-color) 1%, var(--primary-color) 99.5%);
     color: var(--gris4-color);
 }
 
 #accordion-registro button:hover::after {
-  background-color: var(--gris4-color);
-  border-radius: 5px;
+    background-color: var(--gris4-color);
+    border-radius: 5px;
 }
 
-.paginador{
+.paginador {
     text-align: center;
-    color: var( --quarter-color);
+    color: var(--quarter-color);
 }

@@ -1,113 +1,115 @@
-<h5 *ngIf="registroAnterior.paciente.sexo != registroNuevo.paciente.sexo ||
-           registroAnterior.paciente.edad != registroNuevo.paciente.edad ||
-           registroAnterior.paciente.nombreAseguradora != registroNuevo.paciente.nombreAseguradora  ||
-            registroAnterior.paciente.tipoAfiliacion != registroNuevo.paciente.tipoAfiliacion">
-    Datos del paciente actualizados</h5>
+<h6 *ngIf="tieneCambiosDatosPaciente">
+    Datos del paciente actualizados</h6>
 
-<div class="row" *ngIf="registroAnterior.paciente.sexo != registroNuevo.paciente.sexo">
-    <div class="col-2">
-        Genero:
+
+<div class="content" *ngIf="tieneCambiosDatosPaciente">
+    <div class="row" *ngIf="!existeEnDatosPaciente(registroNuevo.paciente.sexo)">
+        <div class="col-2">
+            Genero:
+        </div>
+        <div class="col-10">
+            <span class="atr-anterior">{{registroAnterior.paciente.sexo}}</span>
+            <span class="atr-nueva">{{registroNuevo.paciente.sexo}}</span>
+        </div>
     </div>
-    <div class="col-10">
-        {{registroAnterior.paciente.sexo}} -> {{registroNuevo.paciente.sexo}}
+
+    <div class="row" *ngIf="!existeEnDatosPaciente(registroNuevo.paciente.edad)">
+        <div class="col-2">
+            Edad:
+        </div>
+        <div class="col-10">
+            <span class="atr-anterior">{{registroAnterior.paciente.edad}} años</span>
+            <span class="atr-nueva">{{registroNuevo.paciente.edad}} años</span>
+        </div>
+    </div>
+
+    <div class="row" *ngIf="!existeEnDatosPaciente(registroNuevo.paciente.nombreAseguradora)">
+        <div class="col-2">
+            Aseguradora:
+        </div>
+        <div class="col-10">
+            <span class="atr-anterior">{{registroAnterior.paciente.nombreAseguradora}}</span>
+            <span class="atr-nueva">{{registroNuevo.paciente.nombreAseguradora}}</span>
+        </div>
+    </div>
+
+    <div class="row" *ngIf="!existeEnDatosPaciente(registroNuevo.paciente.tipoAfiliacion)">
+        <div class="col-2">
+            Plan salud:
+        </div>
+        <div class="col-10">
+            <span class="atr-anterior">{{registroAnterior.paciente.tipoAfiliacion}}</span>
+            <span class="atr-nueva">{{registroNuevo.paciente.tipoAfiliacion}}</span>
+        </div>
     </div>
 </div>
 
-<div class="row" *ngIf="registroAnterior.paciente.edad != registroNuevo.paciente.edad">
-    <div class="col-2">
-        Edad:
-    </div>
-    <div class="col-10">
-        {{registroAnterior.paciente.edad}} -> {{registroNuevo.paciente.edad}}
-    </div>
-</div>
-
-<div class="row" *ngIf="registroAnterior.paciente.nombreAseguradora != registroNuevo.paciente.nombreAseguradora">
-    <div class="col-2">
-        Aseguradora:
-    </div>
-    <div class="col-10">
-        {{registroAnterior.paciente.nombreAseguradora}} -> {{registroNuevo.paciente.nombreAseguradora}}
-    </div>
-</div>
-
-<div class="row" *ngIf="registroAnterior.paciente.tipoAfiliacion != registroNuevo.paciente.tipoAfiliacion">
-    <div class="col-2">
-        Plan salud:
-    </div>
-    <div class="col-10">
-        {{registroAnterior.paciente.tipoAfiliacion}} -> {{registroNuevo.paciente.tipoAfiliacion}}
-    </div>
-</div>
 
 
 
-<h5
-    *ngIf="registroAnterior.datosAtencion.nombreCuidador != registroNuevo.datosAtencion.nombreCuidador ||
-           registroAnterior.datosAtencion.nombreResponsable != registroNuevo.datosAtencion.nombreResponsable ||
-           registroAnterior.datosAtencion.telefonoPaciente != registroNuevo.datosAtencion.telefonoPaciente  ||
-           registroAnterior.datosAtencion.celularPaciente != registroNuevo.datosAtencion.celularPaciente ||
-           (registroAnterior.ubicacionPaciente.direccion != registroNuevo.ubicacionPaciente.direccion || registroAnterior.ubicacionPaciente.municipio != registroNuevo.ubicacionPaciente.municipio || registroAnterior.ubicacionPaciente.barrio != registroNuevo.ubicacionPaciente.barrio)">
-    Datos de atención actualizados</h5>
+<h6 *ngIf="tieneCambiosDatosAtencion">
+    Datos de atención actualizados</h6>
 
-<div class="row" *ngIf="registroAnterior.datosAtencion.nombreCuidador != registroNuevo.datosAtencion.nombreCuidador">
-    <div class="col-2">
-        Cuidador:
-    </div>
-    <div class="col-10">
-        {{registroAnterior.datosAtencion.nombreCuidador}} ->
-        {{registroNuevo.datosAtencion.nombreCuidador}}
-    </div>
-</div>
 
-<div class="row"
-    *ngIf="registroAnterior.datosAtencion.nombreResponsable != registroNuevo.datosAtencion.nombreResponsable">
-    <div class="col-2">
-        Responsable:
-    </div>
-    <div class="col-10">
-        {{registroAnterior.datosAtencion.nombreResponsable}} ->
-        {{registroNuevo.datosAtencion.nombreResponsable}}
-    </div>
-</div>
 
-<div class="row"
-    *ngIf="registroAnterior.datosAtencion.telefonoPaciente != registroNuevo.datosAtencion.telefonoPaciente">
-    <div class="col-2">
-        telefono:
+<div class="content" *ngIf="tieneCambiosDatosAtencion">
+    <div class="row" *ngIf="!existeEnDatosAtencion(registroNuevo.datosAtencion.nombreCuidador)">
+        <div class="col-2">
+            Cuidador:
+        </div>
+        <div class="col-10">
+            <span class="atr-anterior">{{registroAnterior.datosAtencion.nombreCuidador}}</span>
+            <span class="atr-nueva">{{registroNuevo.datosAtencion.nombreCuidador}}</span>
+        </div>
     </div>
-    <div class="col-10">
-        {{registroAnterior.datosAtencion.telefonoPaciente}} ->
-        {{registroNuevo.datosAtencion.telefonoPaciente}}
-    </div>
-</div>
 
-<div class="row" *ngIf="registroAnterior.datosAtencion.celularPaciente != registroNuevo.datosAtencion.celularPaciente">
-    <div class="col-2">
-        celular:
+    <div class="row" *ngIf="!existeEnDatosAtencion(registroNuevo.datosAtencion.nombreResponsable)">
+        <div class="col-2">
+            Responsable:
+        </div>
+        <div class="col-10">
+            <span class="atr-anterior">{{registroAnterior.datosAtencion.nombreResponsable}}</span>
+            <span class="atr-nueva">{{registroNuevo.datosAtencion.nombreResponsable}}</span>
+        </div>
     </div>
-    <div class="col-10">
-        {{registroAnterior.datosAtencion.celularPaciente}} ->
-        {{registroNuevo.datosAtencion.celularPaciente}}
-    </div>
-</div>
 
-<div class="row"
-    *ngIf="registroAnterior.ubicacionPaciente.direccion != registroNuevo.ubicacionPaciente.direccion || registroAnterior.ubicacionPaciente.municipio != registroNuevo.ubicacionPaciente.municipio || registroAnterior.ubicacionPaciente.barrio != registroNuevo.ubicacionPaciente.barrio">
-    <div class="col-2">
-        Ubicacion:
+    <div class="row" *ngIf="!existeEnDatosAtencion(registroNuevo.datosAtencion.telefonoPaciente)">
+        <div class="col-2">
+            telefono:
+        </div>
+        <div class="col-10">
+            <span class="atr-anterior">{{registroAnterior.datosAtencion.telefonoPaciente}}</span>
+            <span class="atr-nueva">{{registroNuevo.datosAtencion.telefonoPaciente}}</span>
+        </div>
     </div>
-    <div class="col-10">
-        <span>
-            {{registroAnterior.ubicacionPaciente.direccion}}
-            {{registroAnterior.ubicacionPaciente.municipio|titlecase}}
-            {{registroAnterior.ubicacionPaciente.barrio|titlecase}} ->
-        </span>
 
-        <span>
-            {{registroNuevo.ubicacionPaciente.direccion}}
-            {{registroNuevo.ubicacionPaciente.municipio|titlecase}}
-            {{registroNuevo.ubicacionPaciente.barrio|titlecase}}
-        </span>
+    <div class="row" *ngIf="!existeEnDatosAtencion(registroNuevo.datosAtencion.celularPaciente)">
+        <div class="col-2">
+            celular:
+        </div>
+        <div class="col-10">
+            <span class="atr-anterior">{{registroAnterior.datosAtencion.celularPaciente}}</span>
+            <span class="atr-nueva">{{registroNuevo.datosAtencion.celularPaciente}}</span>
+        </div>
+    </div>
+
+    <div class="row"
+        *ngIf="!existeEnDatosAtencion(registroNuevo.ubicacionPaciente.direccion + registroNuevo.ubicacionPaciente.municipio + registroNuevo.ubicacionPaciente.barrio)">
+        <div class="col-2">
+            Ubicacion:
+        </div>
+        <div class="col-10">
+            <span class="atr-anterior">
+                {{registroAnterior.ubicacionPaciente.direccion}}
+                {{registroAnterior.ubicacionPaciente.municipio|titlecase}}
+                {{registroAnterior.ubicacionPaciente.barrio|titlecase}}
+            </span>
+
+            <span class="atr-nueva">
+                {{registroNuevo.ubicacionPaciente.direccion}}
+                {{registroNuevo.ubicacionPaciente.municipio|titlecase}}
+                {{registroNuevo.ubicacionPaciente.barrio|titlecase}}
+            </span>
+        </div>
     </div>
 </div>

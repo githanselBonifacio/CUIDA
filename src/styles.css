@@ -40,13 +40,18 @@ h2 {
     margin: 0;
 }
 
-h5 {
+h5,
+h6 {
     color: var(--quarter-color);
     margin: 0;
 }
 
 a {
     text-decoration: none;
+}
+
+p {
+    color: var(--quarter-color);
 }
 
 hr {

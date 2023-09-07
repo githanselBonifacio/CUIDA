@@ -1,2 +1,49 @@
 @import url('../../../../styles.css');
 @import url('../../pages/admin-historial-remision-page/admin-historial-remision-page.component.css');
+
+h6 {
+    padding-bottom: 0.5rem;
+}
+
+.row div {
+    padding: 0.5rem 0.5rem 0.5rem 0.6rem;
+    color: var(--quarter-color);
+    border: none;
+}
+
+.content {
+    border: 1px solid var(--gris3-color);
+    margin-bottom: 0.8rem;
+    padding: 0.8rem 0.8rem 0.8rem 0.8rem;
+}
+
+.atr-anterior {
+    position: relative;
+    border: 2px solid var(--second-color);
+    border-radius: 5px;
+    padding: 0.2rem 0.4rem 0.2rem 0.4rem;
+    box-shadow: 2px 2px 5px var(--gris1-color);
+    color: var(--quarter-color);
+    font-size: 0.9rem;
+}
+
+.atr-nueva {
+    margin-left: 1.2rem;
+    border: 2px solid var(--green-color);
+    border-radius: 5px;
+    min-height: 6rem;
+    padding: 0.2rem 0.4rem 0.2rem 0.4rem;
+    box-shadow: 2px 2px 5px var(--gris1-color);
+    color: var(--quarter-color);
+    font-size: 0.9rem;
+}
+
+.atr-anterior::before {
+    position: absolute;
+    content: "";
+    right: -1.8rem;
+    top: 50%;
+    transform: translateY(-50%);
+    border: 0.9rem solid transparent;
+    border-left-color: var(--second-color);
+}

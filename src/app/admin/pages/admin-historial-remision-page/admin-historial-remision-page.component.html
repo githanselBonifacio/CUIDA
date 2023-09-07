@@ -97,15 +97,29 @@
       </div>
       <div class="accordion" id="accordion-registro">
         <div class="accordion-item"
-          *ngFor="let registro of historialRemisiones | paginate:{id:'historico', itemsPerPage: 3, currentPage: currentPageHistorico},let i = index ">
+          *ngFor="let registro of historialRemisiones | paginate:{id:'historico', itemsPerPage: 4, currentPage: currentPageHistorico},let i = index ">
           <h2 class="accordion-header" id="heading{{i}}">
             <button class="accordion-button" type="button" data-bs-toggle="collapse"
               [attr.data-bs-target]="'#collapse'+i.toString()" aria-expanded="false"
               [attr.aria-controls]="'#collapse'+i.toString()">
-              {{registro.fechaAplicacionNovedad|date :'dd/MM/yyyy HH:mm'}} | {{registro.motivoNovedad}}
+
+              <div class="row" id="content-buttom-accordion">
+
+                <div class="col-md-4 col-lg-3 col-xl-3 col-xxl-2" id="fecha-novedad">
+                  {{registro.fechaAplicacionNovedad|date :'dd/MM/yyyy HH:mm'}}
+                </div>
+
+                <div class="col-md-8 col-lg-9 col-xl-9 col-xxl-10" id="motivo-novedad">
+                  {{registro.motivoNovedad}}
+                </div>
+
+              </div>
+
             </button>
+
           </h2>
           <div id="collapse{{i}}" class="accordion-collapse collapse" [attr.aria-labelledby]="'heading'+i.toString()">
+
             <div class="accordion-body">
 
               <div *ngIf="i-1>=0; else noDataRemision">
@@ -117,20 +131,23 @@
                   [registroNuevo]="remisionDataActual"></app-tabla-actualizacion-datos-remision>
               </ng-template>
 
-              <div *ngIf="registro.citas!=null; else noCitas">
-                <h5>Citas descartadas</h5>
-                <app-tabla-historial-citas [citas]="registro.citas" [estadosCita]="estados"
-                  [isHistorial]="true"></app-tabla-historial-citas>
+              <div *ngIf="i-1>=0">
+                <app-tabla-historial-citas
+                  [citas]="agregarCitasEstadoAnterior(registro.citas, historialRemisiones[i-1].citas, registro.fechaAplicacionNovedad)"
+                  [estadosCita]="estados" [isHistorial]="true"></app-tabla-historial-citas>
               </div>
-              <ng-template #noCitas>
-                <p>No hay citas descartadas.</p>
-              </ng-template>
+
+              <div *ngIf="i-1<0">
+                <app-tabla-historial-citas
+                  [citas]="agregarCitasEstadoAnterior(registro.citas,remisionDataActual.citas,registro.fechaAplicacionNovedad)"
+                  [estadosCita]="estados" [isHistorial]="true"></app-tabla-historial-citas>
+
+              </div>
 
             </div>
           </div>
         </div>
-        <p *ngIf="historialRemisiones.length==0"> Remisión no tiene cambios </p>
       </div>
     </div>
-
   </div>
+</div>

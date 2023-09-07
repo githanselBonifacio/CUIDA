@@ -1,5 +1,6 @@
-<div class="content-item">
-    <div class="paginador" *ngIf="citas.length >3">
+<div class="content-item" *ngIf="citas.length >0">
+    <h6 *ngIf="isHistorial">Actualización de citas</h6>
+    <div class="paginador" *ngIf="citas.length >4">
         <pagination-controls id="{{tableId}}" previousLabel="Anterior" nextLabel="Siguiente"
             (pageChange)="currentPage = $event"></pagination-controls>
     </div>
@@ -11,26 +12,43 @@
                 <th scope="col">Duración</th>
                 <th scope="col">Holgura</th>
                 <th scope="col">Especialidad</th>
-                <th scope="col">Estado</th>
+                <th scope="col">
+                    <div *ngIf="!isHistorial;else hitorial">
+                        Estado
+                    </div>
+                    <ng-template #hitorial>
+                        Acción realizada
+                    </ng-template>
+                </th>
                 <th scope="col">Detalle</th>
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let cita of citas | paginate:{id:tableId, itemsPerPage: 3, currentPage: currentPage}">
+            <tr *ngFor="let cita of citas | paginate:{id:tableId, itemsPerPage: 4, currentPage: currentPage}">
                 <th scope="row">{{cita.datosCita.idCita}}</th>
                 <td>{{cita.datosCita.fechaProgramada|date :'dd/MM/yyyy HH:mm'}}</td>
                 <td>{{cita.datosCita.duracion |formatearSegundos }}</td>
                 <td>{{cita.datosCita.holgura |formatearSegundos}}</td>
                 <td>{{cita.datosCita.especialidad}}</td>
 
-                <td class="estado">
-                    <div *ngIf="!isHistorial" id="estado-{{cita.datosCita.idEstado}}">
-                        {{getNombreEstadoCita(cita.datosCita.idEstado)}}</div>
-
-                    <div *ngIf="isHistorial"><i class="bi bi-x-circle-fill" style="color: var(--red-color);"></i></div>
+                <td [ngClass]="{'estado': true}">
+                    <div *ngIf="!isHistorial; else historial" [attr.id]="'estado-' + cita.datosCita.idEstado">
+                        {{ getNombreEstadoCita(cita.datosCita.idEstado) }}
+                    </div>
+                    <ng-template #historial>
+                        <div *ngIf="cita.datosCita.idEstado !== '0'">
+                            <i class="bi bi-x-circle-fill" [style.color]="'var(--red-color)'"
+                                title="cita descartada"></i>
+                        </div>
+                        <div *ngIf="cita.datosCita.idEstado === '0'" title="cita agregada">
+                            <i class="bi bi-plus-circle-fill"></i>
+                        </div>
+                    </ng-template>
                 </td>
 
-                <td><i class="bi bi-eye" title="ver detalle" (click)="mostrarModalDetalleCita(cita)"></i></td>
+                <td>
+                    <i class="bi bi-eye" title="ver detalle" (click)="mostrarModalDetalleCita(cita)"></i>
+                </td>
             </tr>
 
         </tbody>

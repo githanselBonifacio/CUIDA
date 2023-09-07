@@ -101,6 +101,10 @@ p {
 }
 
 #accordion-registro button {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
     color: var(--quarter-color);
     font-size: 1.3rem;
     background: linear-gradient(to right, var(--third-color) 0%, var(--third-color) 1%, white 1%, white 99%);
@@ -117,6 +121,23 @@ p {
 #accordion-registro button:hover::after {
     background-color: var(--gris4-color);
     border-radius: 5px;
+}
+
+#content-buttom-accordion {
+    width: 100%;
+}
+
+
+#motivo-novedad {
+    border-left: 2px solid var(--gris2-color);
+}
+
+#motivo-novedad:hover {
+    border-left: 2px solid var(--gris4-color);
+}
+
+#fecha-novedad:hover {
+    border-right: 2px solid var(--gris4-color);
 }
 
 .paginador {

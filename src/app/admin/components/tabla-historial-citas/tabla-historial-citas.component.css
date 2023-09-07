@@ -1,5 +1,17 @@
 @import url('../../../../styles.css');
 
+h6 {
+    padding-bottom: 0.4rem;
+}
+
+.content-item {
+    padding-top: 0.5rem;
+}
+
+.content-item table {
+    box-shadow: 5px 5px 10px var(--gris2-color);
+}
+
 .paginador {
     text-align: center;
 }
@@ -40,9 +52,7 @@ i:hover {
     border-radius: 5px;
 }
 
-.content-item table {
-    box-shadow: 5px 5px 10px var(--gris2-color);
-}
+
 
 .estado {
     display: flex;
@@ -64,7 +74,7 @@ i:hover {
 }
 
 #estado-2 {
-    background-color: var(--primary-color);
+    background-color: var(--second-color-2);
 }
 
 #estado-3 {

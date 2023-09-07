@@ -48,7 +48,7 @@
                     <td>{{remision.programa}}</td>
                     <td>{{remision.ciudad}}</td>
                     <td class="card-item">{{remision.institucionRemite.toLowerCase()}}</td>
-                    <td class="card-item2">{{remision.estado.toLowerCase()}}</td>
+                    <td class="card-item2">{{remision.estado|titlecase}}</td>
                     <td>
                         <i class="bi bi-clock-history" id="history" title="ver historial"
                             (click)="verHistorialRemision(remision.idRemision)"></i>

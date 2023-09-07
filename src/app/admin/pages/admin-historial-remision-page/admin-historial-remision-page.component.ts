@@ -67,7 +67,7 @@ export class AdminHistorialRemisionPageComponent implements OnInit {
       return ca.concat(cn);
 
     } else {
-      //cn = cn.filter(c1 => !this.remisionDataActual.citas.some((c2: { datosCita: { idCita: string; }; }) => c2.datosCita.idCita === c1.datosCita.idCita));
+      cn = cn.filter(c1 => !this.remisionDataActual.citas.some((c2: { datosCita: { idCita: string; }; }) => c2.datosCita.idCita === c1.datosCita.idCita));
       return cn;
     }
   }

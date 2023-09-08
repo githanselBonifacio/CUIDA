@@ -28,10 +28,6 @@ th {
     background-color: var(--primary-color);
 }
 
-th :hover {
-    background-color: var(--gris4-color);
-}
-
 .row {
     margin: 0;
 }

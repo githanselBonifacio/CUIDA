@@ -37,8 +37,7 @@
                     </div>
                     <ng-template #historial>
                         <div *ngIf="cita.datosCita.idEstado !== '0'">
-                            <i class="bi bi-x-circle-fill" [style.color]="'var(--red-color)'"
-                                title="cita descartada"></i>
+                            <i class="bi bi-trash-fill" [style.color]="'var(--red-color)'" title="cita descartada"></i>
                         </div>
                         <div *ngIf="cita.datosCita.idEstado === '0'" title="cita agregada">
                             <i class="bi bi-plus-circle-fill"></i>

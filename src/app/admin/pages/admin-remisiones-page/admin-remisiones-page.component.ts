@@ -1,7 +1,7 @@
-import { Component,OnInit,HostListener  } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { AdminRemisionService } from '../../services/admin-remision.service';
-import {Remision} from '../../interfaces/remision.interface';
-import { Router ,ActivatedRoute} from '@angular/router';
+import { Remision } from '../../interfaces/remision.interface';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-admin-remisiones-page',
@@ -9,35 +9,34 @@ import { Router ,ActivatedRoute} from '@angular/router';
   styleUrls: ['./admin-remisiones-page.component.css']
 })
 export class AdminRemisionesPageComponent implements OnInit {
-   
-  constructor (
-    private adminService:AdminRemisionService,
-    private activateRoute : ActivatedRoute,
-    private router: Router,
-    ){}
-    filtroBusqueda: string     = "";
-    itemsPerPage  : number     = 6;
-    currentPage   : number     = 1;
-    totalItems    : number     = 0;
-    remisiones    : Remision[] = [];
 
-    remisionesFiltradas:Remision[]=[];
+  constructor(
+    private adminService: AdminRemisionService,
+    private router: Router,
+  ) { }
+  filtroBusqueda: string = "";
+  itemsPerPage: number = 6;
+  currentPage: number = 1;
+  totalItems: number = 0;
+  remisiones: Remision[] = [];
+
+  remisionesFiltradas: Remision[] = [];
 
   ngOnInit() {
     this.calcularItemsPerPage()
     this.adminService.consultarRemisiones()
-      .subscribe(resp =>{
+      .subscribe(resp => {
         this.remisiones = resp;
         this.remisionesFiltradas = this.remisiones;
       })
   }
 
-@HostListener('window:resize', ['$event'])
-onResize(event: any) {
-  this.calcularItemsPerPage()
-}
-calcularItemsPerPage(){
-  const screenHeight = window.innerHeight;
+  @HostListener('window:resize', ['$event'])
+  onResize(event: any) {
+    this.calcularItemsPerPage()
+  }
+  calcularItemsPerPage() {
+    const screenHeight = window.innerHeight;
     if (screenHeight < 800) {
       this.itemsPerPage = 6;
     } else if (screenHeight < 1200) {
@@ -47,26 +46,26 @@ calcularItemsPerPage(){
     }
   }
 
-  verHistorialRemision(idRemision:string){
-    this.router.navigate(['admin/remisiones',idRemision]);
+  verHistorialRemision(idRemision: string) {
+    this.router.navigate(['admin/remisiones', idRemision]);
   }
-  filtrarRemisiones():void{
+  filtrarRemisiones(): void {
     const textoBuscado = this.filtroBusqueda;
     const textoLowerCase = this.filtroBusqueda.toLowerCase()
 
-    if(this.filtroBusqueda.length == 0){
+    if (this.filtroBusqueda.length == 0) {
       this.remisionesFiltradas = this.remisiones;
-    }else{
-      this.remisionesFiltradas = this.remisionesFiltradas.filter(remision =>{
+    } else {
+      this.remisionesFiltradas = this.remisionesFiltradas.filter(remision => {
         const nombrePaciente = `${remision.paciente.toLowerCase()}`
-        const idRemision     = `${remision.idRemision}`
+        const idRemision = `${remision.idRemision}`
         console.log(`${idRemision} - ${nombrePaciente} `)
         return nombrePaciente.includes(textoLowerCase) || idRemision.includes(textoBuscado)
       })
     }
   }
 
-  backAdmin(){
+  backAdmin() {
     this.router.navigate(['admin']);
   }
 }

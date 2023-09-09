@@ -1,13 +1,54 @@
-.custom-dialog{
-    padding: 2rem 2rem 2rem 2rem;
-    text-align: center;
-    justify-content: center;
-    font-size: 1.5rem;
-  }
-.content-option{
-    display: flex;
-    justify-content: end;
-  }
-.content-option button{
-    margin-left: 0.5rem;
-  }
+@import url('../../../../styles.css');
+
+.container-toast {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.icon-toast i {
+  display: flex;
+  align-items: center;
+  font-size: 2rem;
+  padding: 0rem 0.5rem 0rem 0.2rem;
+}
+
+.body-toast h5 {
+  font-weight: bold;
+  padding-bottom: 0.25rem;
+}
+
+.toast {
+  display: block;
+  height: fit-content;
+  color: #030202;
+  padding: 1rem 1rem 0rem 1rem !important;
+  border-radius: 15px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  z-index: 9999;
+  transition: opacity 1s ease-in-out;
+}
+
+#toast-success {
+  background: linear-gradient(to right, var(--green-color) 0%, var(--green-color) 5%, white 5%, white 90%);
+}
+
+#toast-success i {
+  color: var(--green-color);
+}
+
+#toast-error {
+  background: linear-gradient(to right, var(--red-dark-color) 0%, var(--red-dark-color) 5%, white 5%, white 90%);
+}
+
+#toast-error i {
+  color: var(--red-dark-color);
+}
+
+#toast-info {
+  background: linear-gradient(to right, var(--second-color) 0%, var(--second-color) 5%, white 5%, white 90%);
+}
+
+#toast-info i {
+  color: var(--second-color);
+}

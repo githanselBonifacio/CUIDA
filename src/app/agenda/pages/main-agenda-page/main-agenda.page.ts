@@ -1,15 +1,22 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+
+import { MatDialog } from '@angular/material/dialog'
+import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
+
 import { AgendaService } from 'src/app/agenda/services/agenda.service';
 import { Cita } from "../../interfaces/remision.interface"
 import { MaestrosService } from 'src/app/shared/services/maestros/maestros.service';
 import { HorarioTurno, Regional } from 'src/app/shared/interfaces/maestros.interfaces';
 import { Actividad } from 'src/app/diagramas/interfaces/tarea-gantt.interface';
-import { ActivatedRoute, Router } from '@angular/router';
 import { generarHorario } from '../../../shared/interfaces/maestros.interfaces'
-import { MatDialog } from '@angular/material/dialog'
+
+
+
 import { ModalSeleccionProfesionalComponent } from '../../../agenda/components/modal-seleccion-profesional/modal-seleccion-profesional.component';
 import { VentanaConfirmacionComponent } from 'src/app/shared/components/ventana-confirmacion/ventana-confirmacion.component';
 import { switchMap, filter, tap } from 'rxjs/operators';
+import { ToastComponent, ToastType, TitleToast, crearConfig } from 'src/app/shared/components/toast/toast.component';
 
 @Component({
   selector: 'app-main-component-agenda',
@@ -17,6 +24,9 @@ import { switchMap, filter, tap } from 'rxjs/operators';
   styleUrls: ['./main-agenda.page.css']
 })
 export class MainComponentAgendaComponent implements OnInit {
+
+
+
   loadingPage = false;
   today = new Date();
   year = this.today.getFullYear();
@@ -38,6 +48,7 @@ export class MainComponentAgendaComponent implements OnInit {
     private activateRoute: ActivatedRoute,
     private router: Router,
     private dialogoSeleccionProfesional: MatDialog,
+    private _snackBar: MatSnackBar
   ) { }
 
   ngOnInit() {
@@ -98,27 +109,40 @@ export class MainComponentAgendaComponent implements OnInit {
   autoagendar(): void {
     this.loadingPage = false
     this.agendaService.desagendarTurnoCompleto(this.citas[0].fechaProgramada, this.opcionHorariosTurno, this.opcionRegional)
-      .subscribe(res => {
-        this.agendaService.autoagendar(
-          this.citas[0].fechaInicio,
-          this.opcionHorariosTurno,
-          this.opcionRegional
-        ).subscribe(resp => {
-          this.loadingPage = true
-          location.reload()
-        });
+      .subscribe(resp => {
+        if (resp.status == 200) {
+          this.agendaService.autoagendar(
+            this.citas[0].fechaInicio,
+            this.opcionHorariosTurno,
+            this.opcionRegional
+          ).subscribe(resp => {
+            if (resp.status == 200) {
+              this.loadingPage = true;
+              this.consultarCitas();
+              this.mostrarToast(ToastType.Success, TitleToast.Success, resp.message, 7)
+            } else {
+              this.consultarCitas();
+              this.mostrarToast(ToastType.Error, TitleToast.Error, resp.message, 7)
+            }
+          });
+        }
+
       })
 
   }
 
-
   desagendarTurnoCompleto(): void {
     this.loadingPage = false
     this.agendaService.desagendarTurnoCompleto(this.citas[0].fechaProgramada, this.opcionHorariosTurno, this.opcionRegional)
-      .subscribe(res => {
-        this.loadingPage = true;
-        location.reload();
-        //this.ngOnInit();
+      .subscribe(resp => {
+        if (resp.status == 200) {
+          this.loadingPage = true;
+          this.consultarCitas();
+          this.mostrarToast(ToastType.Success, TitleToast.Success, resp.message, 5)
+        } else {
+          this.mostrarToast(ToastType.Error, TitleToast.Error, resp.message, 5)
+        }
+
       })
   }
   agregarProfesionalTurno(): void {
@@ -128,7 +152,7 @@ export class MainComponentAgendaComponent implements OnInit {
         switchMap(profesionales => {
           const dialogRef = this.dialogoSeleccionProfesional.open(ModalSeleccionProfesionalComponent, {
             data: {
-              profesionales: profesionales
+              profesionales: profesionales.result
             }
           });
           return dialogRef.afterClosed();
@@ -141,9 +165,14 @@ export class MainComponentAgendaComponent implements OnInit {
           );
         })
       )
-      .subscribe(res => {
-        location.reload();
-        //this.ngOnInit();
+      .subscribe(resp => {
+        if (resp.status == 200) {
+          this.loadingPage = true;
+          this.consultarCitas();
+          this.mostrarToast(ToastType.Success, TitleToast.Success, resp.message, 5)
+        } else {
+          this.mostrarToast(ToastType.Error, TitleToast.Error, resp.message, 5)
+        }
       });
   }
   desasignarProfesionalTurno(idprofesional: string): void {
@@ -160,8 +189,25 @@ export class MainComponentAgendaComponent implements OnInit {
         this.fechaFiltroTurno,
         this.opcionHorariosTurno,
         idprofesional
-      )),
-      tap(() => location.reload())
-    ).subscribe();
+      ))
+    ).subscribe(resp => {
+      if (resp.status == 200) {
+        this.loadingPage = true;
+        this.consultarCitas();
+        this.mostrarToast(ToastType.Success, TitleToast.Success, resp.message, 5)
+      } else {
+        this.mostrarToast(ToastType.Error, TitleToast.Error, resp.message, 5)
+      }
+    });
+  }
+
+
+  mostrarToast(tipo: ToastType, titulo: TitleToast, mensaje: string, duracion: number) {
+    const config: MatSnackBarConfig = crearConfig(tipo, titulo, mensaje, duracion)
+    this._snackBar.openFromComponent(ToastComponent, config)
+  }
+
+  actualizarComponenteMainAgenda() {
+    this.consultarCitas()
   }
 }

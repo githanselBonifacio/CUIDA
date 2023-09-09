@@ -41,6 +41,15 @@ export interface Tratamiento {
     noPBS: boolean;
     tipoPrestacion: string;
 }
+export interface Procedimientos {
+    curaciones: Curacion[];
+    fototerapias: Fototerapia[];
+    sondajes: Sondaje[];
+    secreciones: Secrecion[];
+    tomaMuestras: TomaMuestra[];
+    soporteNutricionales: SoporteNutricional[];
+    canalizaciones: Canalizacion[];
+}
 export interface Curacion {
     tipoCuracion: string;
     descripcion: string;

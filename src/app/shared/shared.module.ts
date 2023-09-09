@@ -11,17 +11,15 @@ import { VentanaConfirmacionComponent } from './components/ventana-confirmacion/
 import { MovilesModule } from '../moviles/moviles.module';
 import { AdminComponent } from './pages/admin/admin.component';
 import { AdminModule } from '../admin/admin.module';
-import { ToastComponent } from './components/toast/toast.component';
 
 @NgModule({
   declarations: [
     InicioComponent,
-       AgendaComponent,
-       MovilesComponent,
-       SidebarComponent,
-       VentanaConfirmacionComponent,
-       AdminComponent,
-       ToastComponent
+    AgendaComponent,
+    MovilesComponent,
+    SidebarComponent,
+    VentanaConfirmacionComponent,
+    AdminComponent,
   ],
   imports: [
     CommonModule,
@@ -30,11 +28,10 @@ import { ToastComponent } from './components/toast/toast.component';
     AgendaModule,
     MovilesModule,
     AdminModule
-    
   ],
-  exports:[
+  exports: [
     InicioComponent,
-    SidebarComponent
+    SidebarComponent,
   ]
 })
 

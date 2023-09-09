@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import {NotificacionFarmacia} from '../interfaces/servicioFarmaceutico.interface';
-import {Remision} from '../interfaces/remision.interface';
-import {HistorialRemision} from '../interfaces/historialRemison.interface';
+import { NotificacionFarmacia } from '../interfaces/servicioFarmaceutico.interface';
+import { Respuesta } from 'src/app/shared/interfaces/response.interfaces';
+import { HistorialRemision } from '../interfaces/historialRemison.interface';
 import { environment } from '../../../environments/environments';
 
 @Injectable({
@@ -12,23 +12,23 @@ export class AdminRemisionService {
   private urlRecursoRemision = 'remision'
   constructor(private http: HttpClient) { }
 
-   getNotificacionesFarmacia(){
-  return  this.http.get<NotificacionFarmacia[]>(`${environment.URL_API_CUIDA}/${this.urlRecursoRemision}/tratamientosFarmacia/`)
-    
+  getNotificacionesFarmacia() {
+    return this.http.get<Respuesta>(`${environment.URL_API_CUIDA}/${this.urlRecursoRemision}/tratamientosFarmacia/`)
+
   }
-  notificarMedicamentosToFarmacia(notificaciones:NotificacionFarmacia[]){
-    return this.http.post(`${environment.URL_API_CUIDA}/${this.urlRecursoRemision}/notificarFarmacia`,notificaciones);
-  }
- 
-  consultarRemisiones(){
-    return this.http.get<Remision[]>(`${environment.URL_API_CUIDA}/${this.urlRecursoRemision}`);
-  }
-  consultarDataActualRemision(idRemision:string){
-    return this.http.get<HistorialRemision>(`${environment.URL_API_CUIDA}/${this.urlRecursoRemision}/${idRemision}`)
+  notificarMedicamentosToFarmacia(notificaciones: NotificacionFarmacia[]) {
+    return this.http.post<Respuesta>(`${environment.URL_API_CUIDA}/${this.urlRecursoRemision}/notificarFarmacia`, notificaciones);
   }
 
-  consultarHistorialRemision(idRemision:string){
-    return this.http.get<HistorialRemision[]>(`${environment.URL_API_CUIDA}/${this.urlRecursoRemision}/historial/${idRemision}`)
+  consultarRemisiones() {
+    return this.http.get<Respuesta>(`${environment.URL_API_CUIDA}/${this.urlRecursoRemision}`);
+  }
+  consultarDataActualRemision(idRemision: string) {
+    return this.http.get<Respuesta>(`${environment.URL_API_CUIDA}/${this.urlRecursoRemision}/${idRemision}`)
+  }
+
+  consultarHistorialRemision(idRemision: string) {
+    return this.http.get<Respuesta>(`${environment.URL_API_CUIDA}/${this.urlRecursoRemision}/historial/${idRemision}`)
   }
 
 }

@@ -26,7 +26,7 @@ export class AdminRemisionesPageComponent implements OnInit {
     this.calcularItemsPerPage()
     this.adminService.consultarRemisiones()
       .subscribe(resp => {
-        this.remisiones = resp;
+        this.remisiones = resp.result;
         this.remisionesFiltradas = this.remisiones;
       })
   }

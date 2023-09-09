@@ -4,11 +4,11 @@ import { MainComponentAgendaComponent } from './pages/main-agenda-page/main-agen
 import { DiagramasModule } from '../diagramas/diagramas.module';
 import { CardCitaComponent } from './components/card-cita/card-cita.component';
 import { FormsModule } from '@angular/forms';
-import {MatInputModule} from '@angular/material/input';
-import {MatDialogModule} from '@angular/material/dialog'
-import {MatFormFieldModule} from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatDialogModule } from '@angular/material/dialog'
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { ModalSeleccionProfesionalComponent } from './components/modal-seleccion-profesional/modal-seleccion-profesional.component';
-import {AgendaRoutingModule} from './agenda-routing.module';
+import { AgendaRoutingModule } from './agenda-routing.module';
 import { ModalCambioHoraCitaComponent } from './components/modal-cambio-hora-cita/modal-cambio-hora-cita.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { SpinnerComponent } from '../shared/components/spinner/spinner.component';
@@ -16,6 +16,8 @@ import { ModalDetalleRemisionComponent } from './components/modal-detalle-remisi
 import { MapsModule } from '../maps/maps.module';
 import { MatSelectModule } from '@angular/material/select';
 import { PipesModule } from '../pipes/pipes.module';
+import { ToastComponent } from '../shared/components/toast/toast.component';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -25,21 +27,23 @@ import { PipesModule } from '../pipes/pipes.module';
     ModalCambioHoraCitaComponent,
     SpinnerComponent,
     ModalDetalleRemisionComponent,
+    ToastComponent
   ],
   imports: [
     CommonModule,
     DiagramasModule,
     FormsModule,
-    MatFormFieldModule, 
-    MatInputModule, 
+    MatFormFieldModule,
+    MatInputModule,
     MatDialogModule,
     AgendaRoutingModule,
     MatProgressSpinnerModule,
-    MapsModule ,
+    MapsModule,
     PipesModule,
-    MatSelectModule
+    MatSelectModule,
+    MatSnackBarModule
   ],
-  exports:[
+  exports: [
     MainComponentAgendaComponent
   ]
 })

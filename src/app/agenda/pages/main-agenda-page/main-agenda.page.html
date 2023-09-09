@@ -71,8 +71,8 @@
                 </div>
             </div>
             <hr>
-            <app-agenda-card-cita [citas]="citas" [idRegional]="opcionRegional" [fechaTurno]="fechaFiltroTurno"
-                [idHorarioTurno]="opcionHorariosTurno">
+            <app-agenda-card-cita (actualizarMainView)="actualizarComponenteMainAgenda()" [citas]="citas"
+                [idRegional]="opcionRegional" [fechaTurno]="fechaFiltroTurno" [idHorarioTurno]="opcionHorariosTurno">
             </app-agenda-card-cita>
 
         </div>
@@ -100,6 +100,5 @@
         </ng-container>
 
     </div>
-
 
 </div>

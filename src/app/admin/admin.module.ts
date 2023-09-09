@@ -11,7 +11,7 @@ import { TablaHistorialCitasComponent } from './components/tabla-historial-citas
 import { PipesModule } from '../pipes/pipes.module';
 import { ModalDetalleCitasHistorialComponent } from './components/modal-detalle-citas-historial/modal-detalle-citas-historial.component';
 import { TablaActualizacionDatosRemisionComponent } from './components/tabla-actualizacion-datos-remision/tabla-actualizacion-datos-remision.component';
-
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 @NgModule({
   declarations: [
@@ -28,7 +28,8 @@ import { TablaActualizacionDatosRemisionComponent } from './components/tabla-act
     AdminRoutingModule,
     NgxPaginationModule,
     FormsModule,
-    PipesModule
+    PipesModule,
+    MatPaginatorModule
   ],
   bootstrap: [MainAdminPageComponent],
   exports: [

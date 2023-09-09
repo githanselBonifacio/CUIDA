@@ -33,7 +33,7 @@ export class AdminHistorialRemisionPageComponent implements OnInit {
   ngOnInit() {
     this.maestroService.getEstadosCita()
       .subscribe(resp => {
-        this.estados = resp
+        this.estados = resp.result;
       });
 
     this.activateRoute.params.subscribe(
@@ -43,11 +43,11 @@ export class AdminHistorialRemisionPageComponent implements OnInit {
     )
     this.adminService.consultarHistorialRemision(this.idRemision)
       .subscribe(resp => {
-        this.historialRemisiones = resp
+        this.historialRemisiones = resp.result
       })
     this.adminService.consultarDataActualRemision(this.idRemision)
       .subscribe(resp => {
-        this.remisionDataActual = resp
+        this.remisionDataActual = resp.result
       })
   }
 

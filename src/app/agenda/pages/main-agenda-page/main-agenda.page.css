@@ -65,25 +65,3 @@
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
 
 }
-
-
-.vignette {
-    margin: 5rem;
-    width: 5rem;
-    height: 2rem;
-    background-color: #7c1313;
-    position: relative;
-}
-
-.vignette::before {
-    content: "";
-    position: absolute;
-    top: -0.8rem;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 0;
-    height: 0;
-    border-left: 0.8rem solid transparent;
-    border-right: 0.8rem solid transparent;
-    border-bottom: 0.8rem solid #7c1313;
-}

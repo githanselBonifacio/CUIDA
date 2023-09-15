@@ -1,17 +1,14 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { GanttComponent } from './components/gantt/gantt.component';
-import { GanttModule } from '@syncfusion/ej2-angular-gantt';
-
-
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 @NgModule({
   declarations: [
-    GanttComponent,
-    
+    GanttComponent
   ],
   imports: [
     CommonModule,
-    GanttModule,
+    MatProgressBarModule
   ],
   exports: [
     GanttComponent

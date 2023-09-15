@@ -1,22 +1,28 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, AfterViewInit, ViewChild } from '@angular/core';
 import { AdminRemisionService } from '../../services/admin-remision.service';
 import { NotificacionFarmacia } from '../../interfaces/servicioFarmaceutico.interface';
 import { ToastComponent, TitleToast, crearConfig, ToastType } from 'src/app/shared/components/toast/toast.component';
 import { Router } from '@angular/router';
 import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-servicio-farmaceutico-page',
   templateUrl: './servicio-farmaceutico-page.component.html',
   styleUrls: ['./servicio-farmaceutico-page.component.css']
 })
-export class ServicioFarmaceuticoPageComponent implements OnInit {
+export class ServicioFarmaceuticoPageComponent implements AfterViewInit {
 
   constructor(
     private adminService: AdminRemisionService,
     private router: Router,
     private _snackBar: MatSnackBar
   ) { }
+  @ViewChild('paginatorFarmacia') paginator!: MatPaginator;
+
+  displayedColumns: string[] = ['Remisión', 'Paciente', 'Tipo', 'Medicamento', 'Dosis', 'Vía', 'Volumen', 'Fecha programada', 'Notificado'];
+  dataSource = new MatTableDataSource<NotificacionFarmacia>([]);
 
   currentPage: number = 1;
   totalItems: number = 0;
@@ -24,17 +30,17 @@ export class ServicioFarmaceuticoPageComponent implements OnInit {
   checkedNotificado: boolean = false;
   checkedSinNotificado: boolean = false;
   notificacionesCompleta: NotificacionFarmacia[] = [];
-  notificacionesMostradas: NotificacionFarmacia[] = [];
   notificacionesSeleccionadas: NotificacionFarmacia[] = [];
 
-  ngOnInit() {
+  ngAfterViewInit() {
     this.notificacionesSeleccionadas = [];
+    this.dataSource.paginator = this.paginator;
     this.adminService.getNotificacionesFarmacia()
       .subscribe(resp => {
         if (resp.status == 200) {
           this.notificacionesCompleta = resp.result;
           this.totalItems = this.notificacionesCompleta.length;
-          this.notificacionesMostradas = this.notificacionesCompleta;
+          this.dataSource.data = this.notificacionesCompleta;
         }
 
       });
@@ -45,37 +51,42 @@ export class ServicioFarmaceuticoPageComponent implements OnInit {
 
     if (this.filtroBusqueda.length == 0) {
 
-      this.notificacionesMostradas = this.notificacionesCompleta;
+      this.dataSource.data = this.notificacionesCompleta;
       this.filtrarByEstadoNotificacion();
     } else {
-      this.notificacionesMostradas = this.notificacionesMostradas.filter(notificacion => {
+      this.dataSource.data = this.dataSource.data.filter(notificacion => {
         const nombreCompleto = `${notificacion.nombres.toLowerCase()} ${notificacion.apellidos.toLowerCase()}`;
         const numeroIdentificacion = notificacion.numeroIdentificacion.toLowerCase();
         const idRemision = notificacion.idRemision;
         return nombreCompleto.includes(textoBuscado) || numeroIdentificacion.includes(textoBuscado) || idRemision.includes(textoBuscado);
 
       });
-      this.totalItems = this.notificacionesMostradas.length;
+      this.totalItems = this.dataSource.data.length;
     }
   }
 
   filtrarByEstadoNotificacion() {
-    this.notificacionesMostradas = this.notificacionesCompleta;
+    this.dataSource.data = this.notificacionesCompleta;
     if (this.checkedNotificado === true && this.checkedSinNotificado === false) {
-      this.notificacionesMostradas = this.notificacionesMostradas.filter(notificacion => {
+      this.dataSource.data = this.dataSource.data.filter(notificacion => {
         const notificado = notificacion.notificado
         return notificado === true;
       });
     }
     if (this.checkedNotificado === false && this.checkedSinNotificado === true) {
-      this.notificacionesMostradas = this.notificacionesMostradas.filter(notificacion => {
+      this.dataSource.data = this.dataSource.data.filter(notificacion => {
         const notificado = notificacion.notificado
         return notificado === false;
       });
     }
 
 
-    this.totalItems = this.notificacionesMostradas.length;
+    this.totalItems = this.dataSource.data.length;
+  }
+
+  validarMasterCheck() {
+    const hayNotificaciones = this.dataSource.data.filter((notificacion) => !notificacion.notificado).length;
+    return hayNotificaciones > 0 && this.checkedNotificado;
   }
 
   hayNotificacionesSeleccionadas() {
@@ -130,7 +141,7 @@ export class ServicioFarmaceuticoPageComponent implements OnInit {
   }
   checkedMasterListaCompleta(): void {
 
-    if (this.notificacionesSeleccionadas.length === this.notificacionesMostradas.length) {
+    if (this.notificacionesSeleccionadas.length === this.dataSource.data.length) {
       const checkboxMaster = document.getElementById('master-check') as HTMLInputElement;
       checkboxMaster.checked = true;
 
@@ -146,7 +157,7 @@ export class ServicioFarmaceuticoPageComponent implements OnInit {
       }
     }
     if (event.target.checked) {
-      this.notificacionesSeleccionadas = this.notificacionesMostradas;
+      this.notificacionesSeleccionadas = this.dataSource.data;
     } else {
       this.notificacionesSeleccionadas = [];
     }
@@ -157,10 +168,10 @@ export class ServicioFarmaceuticoPageComponent implements OnInit {
     this.adminService.notificarMedicamentosToFarmacia(this.notificacionesSeleccionadas)
       .subscribe(resp => {
         if (resp.status == 200) {
-          this.ngOnInit();
+          this.ngAfterViewInit();
           this.mostrarToast(ToastType.Success, TitleToast.Success, resp.message, 5)
         } else {
-          this.ngOnInit();
+          this.ngAfterViewInit();
           this.mostrarToast(ToastType.Error, TitleToast.Error, resp.message, 5)
         }
       })

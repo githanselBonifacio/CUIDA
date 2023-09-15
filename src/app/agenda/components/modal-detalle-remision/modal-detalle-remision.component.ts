@@ -1,14 +1,19 @@
 import { Component, OnInit, Inject } from '@angular/core';
+import { forkJoin } from 'rxjs';
 import { DatosAtencionRemision, Paciente, Cita, Tratamiento } from '../../interfaces/remision.interface'
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { AgendaService } from 'src/app/agenda/services/agenda.service';
 import { Procedimientos } from '../../interfaces/remision.interface';
+
 @Component({
   selector: 'app-modal-detalle-remision',
   templateUrl: './modal-detalle-remision.component.html',
   styleUrls: ['./modal-detalle-remision.component.css']
 })
 export class ModalDetalleRemisionComponent implements OnInit {
+
+
+  pageLoaded: boolean = false;
   paciente: Paciente | any = {};
   datosAtencionRemision: DatosAtencionRemision | any = {};
   tratamientos: Tratamiento[] = [];
@@ -25,26 +30,18 @@ export class ModalDetalleRemisionComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.agendaService.getPacienteByRemision(this.citaSeleccionada.idRemision)
-      .subscribe(resp => {
-        this.paciente = resp.result;
-      })
-
-    this.agendaService.getDatosAtencionByRemision(this.citaSeleccionada.idRemision)
-      .subscribe(resp => {
-        this.datosAtencionRemision = resp.result;
-      })
-
-    this.agendaService.getTratamientoByCita(this.citaSeleccionada.idCita)
-      .subscribe(resp => {
-        this.tratamientos = resp.result
-      });
-
-    this.agendaService.getProcedimientosByCita(this.citaSeleccionada.idCita)
-      .subscribe(resp => {
-        this.procedimientos = resp.result
-      })
-
+    forkJoin([
+      this.agendaService.getPacienteByRemision(this.citaSeleccionada.idRemision),
+      this.agendaService.getDatosAtencionByRemision(this.citaSeleccionada.idRemision),
+      this.agendaService.getTratamientoByCita(this.citaSeleccionada.idCita),
+      this.agendaService.getProcedimientosByCita(this.citaSeleccionada.idCita)
+    ]).subscribe(results => {
+      this.paciente = results[0].result;
+      this.datosAtencionRemision = results[1].result;
+      this.tratamientos = results[2].result;
+      this.procedimientos = results[3].result;
+      this.pageLoaded = true;
+    });
 
 
   }

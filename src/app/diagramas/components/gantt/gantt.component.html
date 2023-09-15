@@ -8,8 +8,8 @@
 </div>
 
 <div class="row">
-    <div class="col-lg-2 col-xl-2"></div>
-    <div class="col-lg-9 col-xl-9" id="header-hora">
+    <div class="col-lg-3 col-xl-3"></div>
+    <div class="col-lg-8 col-xl-8" id="header-hora">
         <div *ngFor="let hora  of horas.slice(0, -1)">
             {{hora}}
         </div>
@@ -21,7 +21,7 @@
     <div *ngFor="let actividad of actividades; let i = index">
 
         <div class="row">
-            <div class="col-md-2 col-lg-3 col-xl-2">
+            <div class="col-md-2 col-lg-3 col-xl-3 col-xxl-2">
                 <div class="row" id='container-card'>
                     <div class="col-md-12" id="container-card-gantt">
                         <div class="card">
@@ -46,23 +46,25 @@
                 </div>
             </div>
 
-            <div class="col-md-9 col-lg-8 col-xl-9" id="container-actividad-time">
+            <div class="col-md-9 col-lg-8 col-xl-8 col-xxl-9" id="container-actividad-time">
                 <div class="container-actividad-time">
 
                 </div>
                 <div class="container-linea-tiempo" id="{{actividad.numeroIdentificacion}}">
 
                     <ng-container *ngIf="i <= actividades.length - 1">
-                        <ng-container *ngFor="let tarea of actividad.tareas">
+                        <ng-container *ngFor="let tarea of actividad.tareas, let i = index">
                             <ng-container *ngIf="tarea">
 
                                 {{crearLineaTiempoTarea(
                                 actividad.numeroIdentificacion,
-                                tarea
+                                tarea,
+                                i
                                 )
                                 }}
 
                             </ng-container>
+
                         </ng-container>
 
                     </ng-container>
@@ -76,5 +78,9 @@
 
             </div>
         </div>
+    </div>
+    <div *ngIf="!loadingPage">
+        <mat-progress-bar class="progress-bar" [value]="0" [bufferValue]="100" [mode]="'indeterminate'">
+        </mat-progress-bar>
     </div>
 </div>

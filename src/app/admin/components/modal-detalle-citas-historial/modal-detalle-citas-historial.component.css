@@ -1,5 +1,26 @@
 @import url('../../../agenda/components/modal-detalle-remision/modal-detalle-remision.component.css');
-p{
+@import url('../../../../styles.css');
+
+p {
     padding-left: 0.5rem;
     color: var(--gris1-color);
+}
+
+.accordion {
+    margin: 0rem 0.5rem 0rem 0.5rem !important;
+}
+
+.accordion button,
+.accordion button.collapse {
+    background-color: var(--second-color);
+    color: var(--third-color);
+    font-size: 1.2rem;
+    font-weight: bold;
+    border-radius: 10px !important;
+    text-align: center;
+}
+
+.accordion button::after {
+    background-color: var(--third-color);
+    border-radius: 50%;
 }

@@ -12,20 +12,13 @@
                 <th scope="col">Duración</th>
                 <th scope="col">Holgura</th>
                 <th scope="col">Especialidad</th>
-                <th scope="col">
-                    <div *ngIf="!isHistorial;else hitorial">
-                        Estado
-                    </div>
-                    <ng-template #hitorial>
-                        Acción realizada
-                    </ng-template>
-                </th>
+                <th scope="col">{{getTituloEstados()}}</th>
                 <th scope="col">Detalle</th>
             </tr>
         </thead>
         <tbody>
             <tr *ngFor="let cita of citas | paginate:{id:tableId, itemsPerPage: 4, currentPage: currentPage}">
-                <th scope="row">{{cita.datosCita.idCita}}</th>
+                <td scope="row">{{cita.datosCita.idCita}}</td>
                 <td>{{cita.datosCita.fechaProgramada|date :'dd/MM/yyyy HH:mm'}}</td>
                 <td>{{cita.datosCita.duracion |formatearSegundos }}</td>
                 <td>{{cita.datosCita.holgura |formatearSegundos}}</td>

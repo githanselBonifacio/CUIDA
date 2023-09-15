@@ -36,4 +36,11 @@ export class TablaHistorialCitasComponent implements OnInit {
     })
 
   }
+  getTituloEstados() {
+    if (this.isHistorial) {
+      return "Acción realizada"
+    } else {
+      return "Estado"
+    }
+  }
 }

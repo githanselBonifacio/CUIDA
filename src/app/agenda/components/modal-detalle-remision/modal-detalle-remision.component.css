@@ -1,37 +1,21 @@
-@media screen  and (min-width: 850px) and (max-width:1799px){
-    .container{
+@import url('../../../../styles.css');
+@import url('../../../../assets/styles/tablas/tabla.css');
+
+@media screen and (min-width: 850px) and (max-width:1799px) {
+    .container {
         height: 80vh !important;
         width: 75vw !important;
     }
-    .content-procedimiento{
-        box-shadow: 2px 2px 2px var( --gris3-color);
-        border:1px solid var( --gris3-color);
-        margin-right: 0.5rem;
-        width: 19rem;
-        height: 100%;
-        border-radius: 5px;
-    
-    }
 }
 
-@media screen  and (min-width: 1800px) and (max-width: 2200px) {
-    .container{
+@media screen and (min-width: 1800px) and (max-width: 2200px) {
+    .container {
         height: 80vh !important;
         width: 90vw !important;
     }
-
-    .content-procedimiento{
-        box-shadow: 2px 2px 2px var( --gris3-color);
-        border:1px solid var( --gris3-color);
-        margin-right: 0.5rem;
-        width: 19.2rem;
-        height: 100%;
-        border-radius: 5px;
-    
-    }
 }
 
-#btn-close{
+#btn-close {
     display: flex;
     justify-content: space-between;
     padding-top: 0.5rem;
@@ -39,129 +23,61 @@
     font-weight: bold;
 }
 
-i{
+i {
     right: 1.5rem;
     font-size: 2rem;
-    color: var( --second-color);
+    color: var(--second-color);
 
 }
-i:hover{   
+
+i:hover {
     color: var(--second-color-2);
     font-weight: bold;
 }
-h5{
-   padding-top: 0.5rem;
-   color : var( --second-color);
-   font-weight: bold;
-}
 
-th{
-    color: var(--primary-color);
+h5 {
+    padding-top: 0.5rem;
+    color: var(--second-color);
     font-weight: bold;
-    text-align: center;
-}
-td{
-    color: var( --quarter-color);
-    text-align: center;
-}
-th  :hover{
-    background-color: var(--gris4-color);
 }
 
-.content-item{
+.content-item {
     padding-right: 1rem;
     padding-left: 1rem;
 }
-.row{
+
+.row {
     margin: 0;
 }
-.col, .col-3,.col-2{
-    border:1px solid var( --gris3-color);
-    
+
+.col,
+.col-3,
+.col-2 {
+    border: 1px solid var(--gris3-color);
+
 }
 
-span{
+span {
     word-wrap: break-word;
     overflow-wrap: normal;
     line-height: 0px;
 }
 
-#datos-personales{
+#datos-personales {
     padding: 0;
 }
-.datos-atencion,.datos-paciente{
+
+.datos-atencion,
+.datos-paciente {
     color: var(--quarter-color);
-    border:1px solid var( --gris3-color);
+    border: 1px solid var(--gris3-color);
     padding: 0.5rem 0.5rem 0.5rem 0.5rem;
     margin-bottom: 1rem;
 }
-#map-ubicacion{
+
+#map-ubicacion {
     display: flex;
     justify-content: center;
     align-items: center;
     vertical-align: middle;
-}
-.tratamientos{
-    border:1px solid var( --gris3-color);
-    margin-bottom: 1rem;
-}
-
-.titulo-procedimiento{
-    text-align: center;
-    font-size: 1.2rem;
-    background-color: var( --second-color);
-    color: var( --yellow-color);
-    font-weight: bold;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
-    margin-bottom: 0.5rem;
-   
- 
-}
-.procedimientos{
-    display: flex;
-    flex-wrap: wrap;
-    border:1px solid var( --gris3-color);
-    padding: 0.5rem 0.5rem 0.5rem 0.5rem;
-
-}
-.procedimientos div{
-    padding-bottom: 0.5rem;
-}
-
-
-.badge-advertencia{
-    display: inline-block;
-    background-color: var(--primary-color);
-    color: white;
-    font-weight: bolder;
-    padding: 0 0.3rem 0 0.3rem !important;
-    border-radius: 5px;
-    margin-left: 0.5rem;
-   
-}
-.item-procedimiento{
-    padding: 0.2rem 0.2rem 0.2rem 0.5rem !important;
-    margin: 0.5rem 0.5rem 0.5rem 0.5rem;
-    background-color: var(--third-color);
-    border-radius: 5px;
-    color: var(--second-color);
-    font-weight: bold;
-}
-
-
-.card-medicamento{
-    padding: 0.3rem 0.3rem 0rem 0.3rem !important;
-    border-radius: 5px;
-    background-color: var(--third-color);
-    color :var(--second-color);
-
-}
-.card-medicamento h6{
-   font-size: 1.2rem;
-   font-weight: bold;
-   color :var(--second-color);
-}
-.item-medicamento{
-    padding: 0rem 0rem 0rem 0rem !important;
 }

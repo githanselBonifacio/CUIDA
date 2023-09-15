@@ -118,9 +118,15 @@ p {
     color: var(--gris4-color);
 }
 
+#accordion-registro button::after {
+    background-color: var(--third-color);
+    border-radius: 50%;
+
+}
+
 #accordion-registro button:hover::after {
     background-color: var(--gris4-color);
-    border-radius: 5px;
+
 }
 
 #content-buttom-accordion {

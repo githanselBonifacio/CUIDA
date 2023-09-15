@@ -11,6 +11,7 @@ import { VentanaConfirmacionComponent } from './components/ventana-confirmacion/
 import { MovilesModule } from '../moviles/moviles.module';
 import { AdminComponent } from './pages/admin/admin.component';
 import { AdminModule } from '../admin/admin.module';
+import { PlaceholderTableComponent } from './components/placeholder-table/placeholder-table.component';
 
 @NgModule({
   declarations: [

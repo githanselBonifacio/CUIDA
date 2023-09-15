@@ -12,6 +12,9 @@ import { PipesModule } from '../pipes/pipes.module';
 import { ModalDetalleCitasHistorialComponent } from './components/modal-detalle-citas-historial/modal-detalle-citas-historial.component';
 import { TablaActualizacionDatosRemisionComponent } from './components/tabla-actualizacion-datos-remision/tabla-actualizacion-datos-remision.component';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { AgendaModule } from '../agenda/agenda.module';
+import { MatTableDataSource, MatTableModule } from '@angular/material/table';
+
 
 @NgModule({
   declarations: [
@@ -22,16 +25,18 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     TablaHistorialCitasComponent,
     ModalDetalleCitasHistorialComponent,
     TablaActualizacionDatosRemisionComponent,
+
   ],
   imports: [
     CommonModule,
     AdminRoutingModule,
+    AgendaModule,
     NgxPaginationModule,
     FormsModule,
     PipesModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatTableModule
   ],
-  bootstrap: [MainAdminPageComponent],
   exports: [
     MainAdminPageComponent,
   ]

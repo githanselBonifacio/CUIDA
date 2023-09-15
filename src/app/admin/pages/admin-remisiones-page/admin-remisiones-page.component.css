@@ -1,9 +1,12 @@
 @import url('../../../../styles.css');
 @import url('../../../../assets/styles/tablas/tabla.css');
-.content-toolbar{
+
+
+.content-toolbar {
     display: flex;
 }
-#back-admin{
+
+#back-admin {
     display: flex;
     align-items: center;
     padding-right: 2rem;
@@ -12,36 +15,35 @@
 }
 
 
-.header{
+.header {
     display: flex;
     justify-content: space-between;
     padding: 0.5rem 0.5rem 0.5rem 0.5rem;
     align-items: center;
 }
 
-.card-item, .card-item td{
+.card-item,
+.card-item td {
     text-align: start;
-    text-transform: capitalize;
 }
 
-.content-item{
+.content-item {
     padding-right: 1rem;
     padding-left: 1rem;
 }
-.card-item, .card-item td{
+
+.card-item,
+.card-item td {
     text-align: start;
 }
 
-#paginador{
-    text-align: center;
-    color: var( --quarter-color);
-    padding-bottom: 2rem;
-}
-#history{
+
+#history {
     font-size: 1.5rem;
     font-weight: bold;
     color: var(--second-color);
 }
-.col-left{
+
+.col-left {
     text-align: start;
 }

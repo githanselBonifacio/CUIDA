@@ -1,73 +1,82 @@
 @import url("../../../../styles.css");
 
-#header-hora{
-   display: flex;
-   justify-content: space-around;
-   height: 2rem;
-   padding: 0px;
-   color: var(--quarter-color);
-   font-weight: lighter;
+#header-hora {
+    display: flex;
+    justify-content: space-around;
+    height: 2rem;
+    padding: 0px;
+    color: var(--quarter-color);
+    font-weight: lighter;
 }
-#content-hora{
+
+#content-hora {
     text-align: center;
     position: relative;
 }
-#position-hora{
+
+#position-hora {
     position: absolute;
     padding: 0;
 }
-#container-card-gantt{
+
+#container-card-gantt {
     margin: 0.2rem 0 0.2rem 0;
 }
-.card{
-    box-shadow: 2px 2px 4px  var(--gris3-color)!important;
+
+.card {
+    box-shadow: 2px 2px 4px var(--gris3-color) !important;
 }
 
 
-.panel-gantt{
-    display: flex; 
+.panel-gantt {
+    display: flex;
     flex-direction: column;
     height: 100%;
     justify-content: end;
-    
+
 }
-.panel-gantt div{
+
+.panel-gantt div {
     height: 100%;
 }
 
-#retirar-profesional::before{
+#retirar-profesional::before {
     position: absolute;
     font-size: 1.5rem;
     color: var(--red-color);
     right: 0.5rem;
-    bottom:  0.5rem;
-    
+    bottom: 0.5rem;
+
 }
-#retirar-profesional:hover{
-    border-bottom: 1px solid var(--red-dark-color );
+
+#retirar-profesional:hover {
+    border-bottom: 1px solid var(--red-dark-color);
 }
 
 
-.container-actividades-panel{
-        overflow-y: scroll;
-        max-height:calc(60vh);
-        overflow-x: hidden;
-        border:1px solid var(--gris3-color);
-        padding-left: 0.2rem;
+.container-actividades-panel {
+    overflow-y: scroll;
+    max-height: calc(60vh);
+    overflow-x: hidden;
+    border: 1px solid var(--gris3-color);
+    padding-left: 0.2rem;
 }
-@media screen  and (max-height:650px){
-    .container-actividades-panel{
-        max-height:calc(48vh);
+
+@media screen and (max-height:650px) {
+    .container-actividades-panel {
+        max-height: calc(48vh);
     }
 }
-#container-actividad-time{
-   position: relative;
-   padding: 0px;
-   text-align: center;
-   border: 1px dotted var(--gris3-color);
-   
+
+#container-actividad-time {
+    position: relative;
+    padding: 0px;
+    text-align: center;
+    border: 1px dotted var(--gris3-color);
+
 }
-.container-linea-tiempo{
+
+.container-linea-tiempo {
     display: flex;
     position: absolute;
     align-items: center;
@@ -77,14 +86,29 @@
     height: 50%;
     width: 100%;
 }
+
 #container-map {
     border: 1px dotted var(--gris3-color) !important;
-}
-.map-ruta{
-     text-align: center;
+    padding: 0px;
+    display: flex;
+    justify-content: center;
 }
 
-.map-content{
+#container-map div {
+    padding: 0px;
+}
+
+#container-map i {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.map-ruta {
+    text-align: center;
+}
+
+.map-content {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -92,7 +116,73 @@
     font-size: 2rem;
     color: var(--second-color);
 }
-.map-content:hover{
+
+.map-content:hover {
     font-size: 2.3rem;
     color: var(--primary-color);
+}
+
+
+
+::ng-deep app-diagramas-gantt .tarea-visita {
+    position: absolute !important;
+    height: 3rem !important;
+    margin: 0px auto !important;
+    border: 2px solid var(--second-color) !important;
+    border-radius: 0.4rem !important;
+    background-color: var(--primary-color) !important;
+    height: 2rem;
+}
+
+
+
+::ng-deep app-diagramas-gantt .tarea-dvisita {
+    position: absolute !important;
+    height: 3rem !important;
+    margin: 0px auto !important;
+    border: 2px solid var(--second-color) !important;
+    border-radius: 0.4rem !important;
+    background-color: var(--orange-color) !important;
+}
+
+
+::ng-deep app-diagramas-gantt .holgura {
+    position: absolute !important;
+    height: 3rem !important;
+    margin: 0px auto !important;
+    background-color: #f9e4478f !important;
+    border-radius: 0.4rem !important;
+    z-index: 9999 !important;
+    display: none;
+}
+
+
+
+::ng-deep app-diagramas-gantt .vignette {
+    position: absolute !important;
+    top: 50% !important;
+    left: -0.6rem;
+    transform: translate(-100%, -50%) !important;
+    background-color: var(--second-color) !important;
+    color: #ffffff !important;
+    font-weight: lighter !important;
+    z-index: 99999 !important;
+    border-radius: 2px !important;
+}
+
+::ng-deep app-diagramas-gantt .vignette[showv=true]::before {
+    position: absolute;
+    content: "";
+    right: 0px;
+    transform: translate(95%, 55%);
+    border: 0.35rem solid transparent;
+    border-left-color: var(--second-color);
+    z-index: 99999 !important;
+}
+
+::ng-deep app-diagramas-gantt .grid-time {
+    border-left: 1px dotted #c7c9c7 !important;
+    margin: 0px auto !important;
+    height: 200% !important;
+    position: absolute !important;
 }

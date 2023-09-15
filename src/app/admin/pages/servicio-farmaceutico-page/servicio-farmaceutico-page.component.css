@@ -1,25 +1,29 @@
 @import url('../../../../styles.css');
 @import url('../../../../assets/styles/tablas/tabla.css');
 
-.content-toolbar{
+.content-toolbar {
     display: flex;
 }
-#back-admin{
+
+#back-admin {
     display: flex;
     align-items: center;
     padding-right: 2rem;
     font-size: 1.5rem;
     color: var(--primary-color);
 }
-#notificar{
+
+#notificar {
     background-color: transparent;
     border: 0;
 }
-#notificar:disabled i{
+
+#notificar:disabled i {
     color: var(--gris3-color);
     border: 0;
 }
-#notificar i{
+
+#notificar i {
     font-size: 1.6rem;
     font-weight: bold;
     padding: 0.5rem 1rem 0.5rem 1rem;
@@ -28,33 +32,38 @@
     margin-right: 0.5rem;
 
 }
+
 #notificar.active i {
     animation: notificar 1s infinite;
- }
+}
 
-#notificar i:hover{
+#notificar i:hover {
     box-shadow: 3px 3px 3px var(--gris3-color);
-  }
+}
+
 @keyframes notificar {
     0% {
-      color: var(--green-color);
-      
+        color: var(--green-color);
+
     }
+
     50% {
-      color: var(--green-color-dark);
-     
+        color: var(--green-color-dark);
+
     }
+
     100% {
-      color: var(--green-color);
-     
+        color: var(--green-color);
+
     }
-  }
+}
 
 
-.content-check-notificacion{
+.content-check-notificacion {
     display: flex;
 }
-.label-notificacion{
+
+.label-notificacion {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -63,7 +72,8 @@
     padding-left: 0.5rem;
     padding-right: 0.5rem;
 }
-.header{
+
+.header {
     display: flex;
     justify-content: space-between;
     border: 1px solid var(--gris3-color);
@@ -75,30 +85,30 @@
 }
 
 
-.content-item{
+.content-item {
     padding-right: 1rem;
     padding-left: 1rem;
 }
-.card-item, .card-item td, .th-start{
+
+.card-item,
+.card-item td,
+.th-start {
     text-align: start;
 }
-#notificado{
+
+#notificado {
     color: var(--green-color);
     font-size: 1.5rem;
     font-weight: bold;
 }
-#no-notificado{
+
+#no-notificado {
     color: var(--third-color);
     font-size: 1.5rem;
     font-weight: bold;
 }
-#paginador{
-    text-align: center;
-    color: var( --quarter-color);
-    padding-bottom: 2rem;
-}
 
-.badge-no-aplica{
+.badge-no-aplica {
     background-color: var(--orange-color);
     padding: 0.2rem 0.2rem 0.2rem 0.2rem;
     border-radius: 5px;
@@ -115,4 +125,8 @@
     padding: 10px;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-  }
+}
+
+span {
+    white-space: nowrap;
+}

@@ -1,30 +1,18 @@
 
 import { Actividad } from '../../interfaces/tarea-gantt.interface';
-import { Component, Input, OnInit, EventEmitter, Output, HostListener } from '@angular/core';
+import { Component, Input, OnInit, EventEmitter, Output, HostListener, AfterViewInit, OnChanges, SimpleChanges } from '@angular/core';
 import { Tarea } from '../../interfaces/tarea-gantt.interface'
 import { MatDialog } from '@angular/material/dialog'
 import { MapRutaComponent } from 'src/app/maps/components/map-ruta/map-ruta.component';
 import { Router } from '@angular/router';
-import { trigger, state, style, transition, animate } from '@angular/animations';
 
 @Component({
   selector: 'app-diagramas-gantt',
   templateUrl: './gantt.component.html',
   styleUrls: ['./gantt.component.css'],
-  animations: [
-    trigger('cambioColor', [
-      state('inicial', style({
-        backgroundColor: 'red'
-      })),
-      state('final', style({
-        backgroundColor: 'blue'
-      })),
-      transition('inicial <=> final', animate('1000ms ease-in-out'))
-    ])
-  ]
 })
 
-export class GanttComponent implements OnInit {
+export class GanttComponent implements AfterViewInit, OnChanges {
 
   @Output() idprofesionalEvent = new EventEmitter<string>();
 
@@ -36,31 +24,33 @@ export class GanttComponent implements OnInit {
   @Input() public actividades: Actividad[] = [];
   @Input() public horas: string[] = [];
 
+  loadingPage = false;
   currentUrl: string = '';
   simpleHoras: number[] = [];
   intervalo: number = 0;
   segundosInHoras = 3600;
   segundosInMinutos = 60;
   idHeaderHora = "header-hora";
-  //estilos
-  colorTareaAtencion: string = "#00AEC7";
-  colorHolgura: string = "#f9e4478f"
-  colorFondoTexto: string = "#0033A0"
-  colorDesplazamiento: string = "#f5b120";
-  colorGris: string = '#53565A'
 
-  ngOnInit(): void {
+
+  ngAfterViewInit(): void {
     this.currentUrl = this.router.url;
     this.simpleHoras = this.horas.map(hora => parseInt(hora.substring(0, 2)));
-    this.intervalo = (this.horas.length - 1) * 3600
-
+    this.intervalo = (this.horas.length - 1) * 3600;
   }
   @HostListener('window:resize', ['$event'])
   onResize(event: any) {
     this.limpiaLineaTiempo();
   }
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes["actividades"]) {
+      this.loadingPage = false;
+    }
+
+  }
 
   limpiaLineaTiempo() {
+
     const visitas = document.querySelectorAll(".tarea-visita");
     const holguras = document.querySelectorAll(".tarea-dvisita");
     const gridTime = document.querySelectorAll(".grid-time");
@@ -69,8 +59,9 @@ export class GanttComponent implements OnInit {
     holguras.forEach(elemento => elemento.remove());
     gridTime.forEach(elemento => elemento.remove());
     holguraGrid.forEach(elemento => elemento.remove());
+
   }
-  crearLineaTiempoTarea(idElement: string, tarea: Tarea) {
+  crearLineaTiempoTarea(idElement: string, tarea: Tarea, index: number) {
     // Crear  divs
     let fechaProgramada = new Date(tarea.fechaProgramada);
     let fechaNominal = new Date(tarea.fechaInicio);
@@ -79,51 +70,25 @@ export class GanttComponent implements OnInit {
     const holgura = document.createElement('div');
 
     // Asignar estilos al div tarea
-    div.style.position = 'absolute';
-    div.style.margin = "0px auto";
-    div.style.height = '4rem';
     div.className = `tarea-${tarea.tipo}`;
-    div.style.border = `2px solid ${this.colorFondoTexto}`;
-
-    //color por estado
-    if (tarea.tipo === 'visita') {
-      div.style.backgroundColor = this.colorTareaAtencion;
-    } else {
-      div.style.backgroundColor = this.colorDesplazamiento;
-    }
     const idNuevoDiv = `tarea-${tarea.tipo}-${tarea.id}`;
-    div.style.borderRadius = "0.4rem";
     div.id = idNuevoDiv;
     div.style.fontSize = '0rem';
 
 
-    // Asignar estilos al p
+    // Asignar estilos al div text
+    text.className = 'vignette';
+    text.setAttribute("showv", "false")
     if (tarea.tipo == 'visita') {
       text.textContent = tarea.id;
     } else {
       text.textContent = "desplazamiento"
     }
 
-    text.style.position = 'absolute';
-    text.className = 'vignette';
-    text.style.top = '50%';
-    text.style.left = '50%';
-    text.style.transform = 'translate(-50%, 120%)';
-    text.style.backgroundColor = this.colorFondoTexto;
-    text.style.color = "#ffffff";
-    text.style.fontWeight = "lighter";
-    text.style.zIndex = "9999";
-
-    // asignar estilos holgura
-    holgura.style.position = 'absolute';
-    holgura.style.margin = "0px auto";
-    holgura.style.height = '4rem';
     holgura.className = `holgura`;
     holgura.id = `holgura-${tarea.tipo}`;
-    holgura.style.backgroundColor = this.colorHolgura;
     holgura.style.display = 'none';
-    holgura.style.borderRadius = "0.3rem";
-    holgura.style.zIndex = "9999";
+
     div.style.fontSize = '0rem;'
     //eventos de visualizacion
     div.addEventListener('mouseover', () => {
@@ -131,12 +96,14 @@ export class GanttComponent implements OnInit {
       holgura.style.display = 'block';
       text.style.padding = "0.3rem 0.6rem 0.3rem 0.6rem";
       text.style.borderRadius = "5px";
+      text.setAttribute("showv", "true")
     });
 
     div.addEventListener('mouseout', () => {
       text.style.padding = "0px";
       div.style.fontSize = '0rem';
       holgura.style.display = 'none';
+      text.setAttribute("showv", "false")
     });
 
     div.appendChild(text);
@@ -204,6 +171,9 @@ export class GanttComponent implements OnInit {
       container.appendChild(holgura);
       container.appendChild(div);
     }
+    if (index == this.actividades.length - 1) {
+      this.paginaCargada();
+    }
   }
 
 
@@ -225,10 +195,6 @@ export class GanttComponent implements OnInit {
     const idNuevoDiv = 'div-line-' + idElement + '-' + hora;
 
     //estilo para el div de la tarea
-    div.style.borderLeft = "1px dotted #C7C9C7";
-    div.style.margin = "0px auto";
-    div.style.height = '200%';
-    div.style.position = 'absolute';
     div.id = idNuevoDiv;
     div.className = 'grid-time';
 
@@ -251,5 +217,8 @@ export class GanttComponent implements OnInit {
 
   emitirProfesionalTurno(idProfesional: string): void {
     this.idprofesionalEvent.emit(idProfesional);
+  }
+  paginaCargada() {
+    this.loadingPage = true;
   }
 }

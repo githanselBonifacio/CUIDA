@@ -18,6 +18,8 @@ import { MatSelectModule } from '@angular/material/select';
 import { PipesModule } from '../pipes/pipes.module';
 import { ToastComponent } from '../shared/components/toast/toast.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { ItemsCitaComponent } from './components/items-cita/items-cita.component';
+import { PlaceholderTableComponent } from '../shared/components/placeholder-table/placeholder-table.component';
 
 @NgModule({
   declarations: [
@@ -27,16 +29,18 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     ModalCambioHoraCitaComponent,
     SpinnerComponent,
     ModalDetalleRemisionComponent,
-    ToastComponent
+    ToastComponent,
+    ItemsCitaComponent,
+    PlaceholderTableComponent
   ],
   imports: [
     CommonModule,
     DiagramasModule,
+    AgendaRoutingModule,
     FormsModule,
     MatFormFieldModule,
     MatInputModule,
     MatDialogModule,
-    AgendaRoutingModule,
     MatProgressSpinnerModule,
     MapsModule,
     PipesModule,
@@ -44,7 +48,9 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     MatSnackBarModule
   ],
   exports: [
-    MainComponentAgendaComponent
+    MainComponentAgendaComponent,
+    ItemsCitaComponent
+
   ]
 })
 export class AgendaModule { }

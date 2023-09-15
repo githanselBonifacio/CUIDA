@@ -1,37 +1,48 @@
 @import url('../../../../styles.css');
 @import url('../../../../assets/styles/buttons/button-navbar.css');
 
-.content-navbar{
-   display: flex;
-   justify-content: end;
-   position: fixed;
-   width: 100%;
-   top: 0px;
-   z-index: 1;
-   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+.content-navbar {
+  display: flex;
+  justify-content: end;
+  position: fixed;
+  width: 100%;
+  top: 0px;
+  z-index: 1;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
 }
 
-nav{
-    padding: 0px;
-}
-ul{
-   padding:0.2rem 4rem 0.2rem 0.2rem;
-   display: flex;
-   margin: 0.3rem 0.3rem 0.3rem 0.3rem;
+nav {
+  padding: 0px;
 }
 
-li{
- list-style: none;
- margin-left: 0.5rem;
- margin-right: 0.5rem;
+ul {
+  padding: 0.2rem 4rem 0.2rem 0.2rem;
+  display: flex;
+  margin: 0.3rem 0.3rem 0.3rem 0.3rem;
 }
 
-.content-navbar{
+li {
+  list-style: none;
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+
+}
+
+.content-navbar {
   background-color: var(--second-color);
 
 }
-.navbar-menu li.active button{
+
+.navbar-menu li {
+  border-bottom: 2px solid transparent;
+}
+
+.navbar-menu li.active {
   border-bottom: 2px solid var(--third-color);
   color: var(--third-color);
   transition: border-bottom 0.5s ease-in;
+}
+
+.navbar-menu li.active button {
+  color: var(--third-color);
 }

@@ -1,5 +1,6 @@
+@import url('../../../../styles.css');
 
-.container-admin{
+.container-admin {
     padding-top: 5rem;
     width: 100vw;
     height: 100vh;
@@ -9,74 +10,80 @@
     height: 100vh;
     width: 100%;
 }
-.menu-hex{
-        display:flex;
-        justify-content: center;
-        margin: 2rem 2rem 2rem 2rem;
-      }
 
-.title{
+.menu-hex {
+    display: flex;
+    justify-content: center;
+    margin: 2rem 2rem 2rem 2rem;
+}
+
+.title {
     text-align: center;
 }
 
-.text-menu{
+.text-menu {
     justify-content: center;
     align-items: center;
 }
-@media screen  and (min-width: 850px) and (max-width:1799px){
+
+@media screen and (min-width: 850px) and (max-width:1799px) {
     .hexagon {
         display: flex;
-            width: 10rem;
-            height: 12rem;
-            background-color:var(--second-color);
-            clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
-            margin: 0 1rem 0 1rem;
-            text-align: center;
-            justify-content: center;
-            align-items: center;
-            font-size: 7rem;       
+        width: 10rem;
+        height: 12rem;
+        background-color: var(--second-color);
+        clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+        margin: 0 1rem 0 1rem;
+        text-align: center;
+        justify-content: center;
+        align-items: center;
+        font-size: 7rem;
     }
-    h1{
+
+    h1 {
         color: var(--second-color);
         font-size: 3.5rem;
     }
-    
-    .text-menu h5{
+
+    .text-menu h5 {
         color: var(--gris4-color);
         font-size: 1.4rem;
         font-weight: bold;
     }
-    .text-menu h5:hover{
-        color: var( --third-color);
+
+    .text-menu h5:hover {
+        color: var(--third-color);
         font-size: 1.5rem
     }
 }
-@media screen  and (min-width: 1800px) and (max-width: 2200px) {
+
+@media screen and (min-width: 1800px) and (max-width: 2200px) {
     .hexagon {
         display: flex;
-            width: 16rem;
-            height: 18rem;
-            background-color:var(--second-color);
-            clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
-            margin: 0 1rem 0 1rem;
-            text-align: center;
-            justify-content: center;
-            align-items: center;
-            font-size: 8.5rem;       
+        width: 16rem;
+        height: 18rem;
+        background-color: var(--second-color);
+        clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+        margin: 0 1rem 0 1rem;
+        text-align: center;
+        justify-content: center;
+        align-items: center;
+        font-size: 8.5rem;
     }
 
-    h1{
+    h1 {
         color: var(--second-color);
         font-size: 5rem;
     }
-    
-    .text-menu h5{
+
+    .text-menu h5 {
         color: var(--gris4-color);
         font-size: 1.9rem;
         font-weight: bold;
     }
-    .text-menu h5:hover{
-        color: var( --third-color);
+
+    .text-menu h5:hover {
+        color: var(--third-color);
         font-size: 2rem
     }
 }

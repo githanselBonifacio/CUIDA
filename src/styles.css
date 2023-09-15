@@ -25,12 +25,12 @@
 
 html,
 body {
-    margin: 0;
-    font-family: var(--bs-font-sans-serif), var(--bs-font-monospace);
+    margin: 0 !important;
+    font-family: var(--bs-font-sans-serif), var(--bs-font-monospace) !important;
 }
 
 .container-view {
-    margin: 4rem 2rem 1rem 2rem;
+    margin: 4rem 2rem 1rem 2rem !important;
 
 }
 
@@ -47,11 +47,11 @@ h6 {
 }
 
 a {
-    text-decoration: none;
+    text-decoration: none !important;
 }
 
 p {
-    color: var(--quarter-color);
+    color: var(--quarter-color) !important;
 }
 
 hr {
@@ -113,7 +113,7 @@ mat-snack-bar-container div {
 
 @media screen and (min-width: 1451px) and (max-width:2000px) {
     .container-view {
-        margin: 5rem 4rem 2rem 2rem;
+        margin: 5rem 3rem 2rem 3rem;
     }
 
     h1 {

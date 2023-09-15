@@ -8,60 +8,75 @@
         <div class="content-toolbar">
 
             <span id="buscar-remision"></span>
-            <input type="text" class="form-control" placeholder="buscar..." aria-label="Username"
+            <input type="text" class="form-control" placeholder="Buscar..." aria-label="Username"
                 aria-describedby="buscar-remision" [(ngModel)]="filtroBusqueda" (ngModelChange)="filtrarRemisiones()">
         </div>
 
     </div>
 
-    <hr>
-
     <div class="content-item">
 
-        <table class="table table-hover">
-            <thead>
-                <tr>
-                    <th>Id</th>
-                    <th class="col-left">Paciente</th>
-                    <th>Fecha Admisión</th>
-                    <th>Programa</th>
-                    <th>Ciudad</th>
-                    <th class="col-left">Remitente</th>
-                    <th>Estado</th>
-                    <th>Historial</th>
-                </tr>
+        <table class="mat-elevation-z8" mat-table [dataSource]="dataSource">
 
-            </thead>
-            <tbody>
-                <tr
-                    *ngFor="let remision of remisionesFiltradas | paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage}">
-                    <td scope="row">{{remision.idRemision}}</td>
-                    <td>
-                        <div class="card-item">
-                            {{remision.paciente.toLowerCase()}}
-                        </div>
-                        <div class="card-item">
-                            {{remision.numeroIdentificacionPaciente}}
-                        </div>
-                    </td>
-                    <td>{{remision.fechaAdmision| date:'dd/MM/yyyy'}}</td>
-                    <td>{{remision.programa}}</td>
-                    <td>{{remision.ciudad}}</td>
-                    <td class="card-item">{{remision.institucionRemite.toLowerCase()}}</td>
-                    <td class="card-item2">{{remision.estado|titlecase}}</td>
-                    <td>
-                        <i class="bi bi-clock-history" id="history" title="ver historial"
-                            (click)="verHistorialRemision(remision.idRemision)"></i>
-                    </td>
-                </tr>
-            </tbody>
+            <ng-container matColumnDef="Id">
+                <th mat-header-cell *matHeaderCellDef> Id </th>
+                <td mat-cell *matCellDef="let remision"> {{remision.idRemision}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="Paciente">
+                <th mat-header-cell *matHeaderCellDef> Paciente </th>
+                <td mat-cell *matCellDef="let remision">
+
+                    <div class="card-item">
+                        {{remision.paciente|titlecase}}
+                    </div>
+                    <div class="card-item">
+                        {{remision.numeroIdentificacionPaciente}}
+                    </div>
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="Admisión">
+                <th mat-header-cell *matHeaderCellDef> Admisión </th>
+                <td mat-cell *matCellDef="let remision"> {{remision.fechaAdmision| date:'dd/MM/yyyy'}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="Programa">
+                <th mat-header-cell *matHeaderCellDef> Programa </th>
+                <td mat-cell *matCellDef="let remision"> {{remision.programa}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="Ciudad">
+                <th mat-header-cell *matHeaderCellDef> Ciudad </th>
+                <td mat-cell *matCellDef="let remision"> {{remision.ciudad}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="Remitente">
+                <th mat-header-cell *matHeaderCellDef> Remitente </th>
+                <td mat-cell *matCellDef="let remision"> {{remision.institucionRemite|titlecase}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="Estado">
+                <th mat-header-cell *matHeaderCellDef> Estado </th>
+                <td mat-cell *matCellDef="let remision"> {{remision.estado|titlecase}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="Historial">
+                <th mat-header-cell *matHeaderCellDef> Historial </th>
+                <td mat-cell *matCellDef="let remision">
+                    <i class="bi bi-clock-history" id="history" title="ver historial"
+                        (click)="verHistorialRemision(remision.idRemision)"></i>
+                </td>
+            </ng-container>
+
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
         </table>
-    </div>
-    <div id="paginador">
-        <pagination-controls previousLabel="Anterior" nextLabel="Siguiente"
-            (pageChange)="currentPage = $event"></pagination-controls>
-    </div>
-</div>
 
-<mat-paginator [length]="100" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page">
+    </div>
+
+</div>
+<mat-paginator #paginatorRemisiones [pageSizeOptions]="[7,8,9, 10,15, 20,50,100]" aria-label="Select page"
+    itemsPerPageLabel="remisiones por páginas" showFirstLastButtons="true">
 </mat-paginator>

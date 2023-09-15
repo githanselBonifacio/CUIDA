@@ -1,24 +1,24 @@
-#container-inicio{
-    padding: 0;
-    margin: 0;
-    border: 0;
+#container-inicio {
+    padding: 0px;
+    margin: 0px;
+    border: 0px;
     width: 100%;
     height: 100vh;
     background-image: url("../../../../assets/img/CUIDA.png");
     background-size: cover;
     background-position: center;
-  
+
 }
-#logo-container{
-    display: flex ;
+
+#logo-container {
+    display: flex;
     justify-content: center;
     align-content: center;
 }
 
 
-#container-inicio h1{
+#container-inicio h1 {
     text-align: center;
     color: var(--quarter-color);
     padding-top: 5rem;
 }
-

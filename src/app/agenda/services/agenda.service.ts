@@ -1,16 +1,15 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Profesional } from '../interfaces/profesional.interface'
-import { DatosAtencionRemision, Paciente, Cita, Curacion, Sondaje, Tratamiento, TomaMuestra, SoporteNutricional, Canalizacion, Fototerapia, Secrecion } from '../interfaces/remision.interface'
+import { Cita } from '../interfaces/remision.interface'
 import { Actividad } from '../../diagramas/interfaces/tarea-gantt.interface'
-import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environments';
 import { AgendaModule } from '../agenda.module';
 import { formatoFecha } from '../../shared/interfaces/maestros.interfaces'
 import { Respuesta } from 'src/app/shared/interfaces/response.interfaces';
 
 @Injectable({
-  providedIn: AgendaModule
+  providedIn: 'root'
 })
 export class AgendaService {
   private serviceUrl: string = 'http://localhost:9090';

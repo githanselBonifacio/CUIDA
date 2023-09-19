@@ -1,6 +1,8 @@
+@import url('../../../styles.css');
+
 th {
     color: var(--gris4-color);
-    font-weight: bold;
+
     text-align: center;
     background-color: var(--primary-color) !important;
     border-left: 1px solid var(--gris4-color);

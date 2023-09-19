@@ -22,7 +22,7 @@ export class AdminHistorialRemisionPageComponent implements OnInit {
 
   remisionDataActual: HistorialRemision | any = {};
   historialRemisiones: HistorialRemision[] = [];
-  estados: EstadoCita[] = [];
+
   constructor(
     private adminService: AdminRemisionService,
     private maestroService: MaestrosService,
@@ -31,11 +31,8 @@ export class AdminHistorialRemisionPageComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.maestroService.getEstadosCita()
-      .subscribe(resp => {
-        this.estados = resp.result;
-      });
 
+    this.maestroService.getEstadosCita();
     this.activateRoute.params.subscribe(
       params => {
         this.idRemision = params['idRemision'];
@@ -51,6 +48,9 @@ export class AdminHistorialRemisionPageComponent implements OnInit {
       })
   }
 
+  get estados(): EstadoCita[] {
+    return this.maestroService.estadosCita;
+  }
   getNombreEstadoCita(id: string) {
     return getNombreEstadoCitaById(id, this.estados);
   }

@@ -8,7 +8,8 @@ import { SharedModule } from './shared/shared.module'
 import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap'
-import { NgxSpinnerModule } from 'ngx-spinner';
+
+import { SpinnerComponent } from './shared/components/spinner/spinner.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,6 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     HttpClientModule,
     SharedModule,
     NgbModule,
-    NgxSpinnerModule
   ],
   exports: [
     RouterModule

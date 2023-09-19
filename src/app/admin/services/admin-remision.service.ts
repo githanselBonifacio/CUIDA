@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { NotificacionFarmacia } from '../interfaces/servicioFarmaceutico.interface';
 import { Respuesta } from 'src/app/shared/interfaces/response.interfaces';
-import { HistorialRemision } from '../interfaces/historialRemison.interface';
 import { environment } from '../../../environments/environments';
+import { AdminModule } from '../admin.module';
 
 @Injectable({
   providedIn: 'root'

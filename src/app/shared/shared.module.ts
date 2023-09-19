@@ -11,7 +11,9 @@ import { VentanaConfirmacionComponent } from './components/ventana-confirmacion/
 import { MovilesModule } from '../moviles/moviles.module';
 import { AdminComponent } from './pages/admin/admin.component';
 import { AdminModule } from '../admin/admin.module';
-import { PlaceholderTableComponent } from './components/placeholder-table/placeholder-table.component';
+import { SpinnerComponent } from './components/spinner/spinner.component';
+import { SpinnerService } from './services/spinner/spinner.service.service';
+
 
 @NgModule({
   declarations: [
@@ -21,6 +23,8 @@ import { PlaceholderTableComponent } from './components/placeholder-table/placeh
     SidebarComponent,
     VentanaConfirmacionComponent,
     AdminComponent,
+    SpinnerComponent
+
   ],
   imports: [
     CommonModule,
@@ -33,6 +37,10 @@ import { PlaceholderTableComponent } from './components/placeholder-table/placeh
   exports: [
     InicioComponent,
     SidebarComponent,
+    SpinnerComponent
+  ],
+  providers: [
+    SpinnerService
   ]
 })
 

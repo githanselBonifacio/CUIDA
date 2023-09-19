@@ -14,6 +14,7 @@ import { TablaActualizacionDatosRemisionComponent } from './components/tabla-act
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { AgendaModule } from '../agenda/agenda.module';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
+import { SpinnerComponent } from '../shared/components/spinner/spinner.component';
 
 
 @NgModule({
@@ -25,6 +26,7 @@ import { MatTableDataSource, MatTableModule } from '@angular/material/table';
     TablaHistorialCitasComponent,
     ModalDetalleCitasHistorialComponent,
     TablaActualizacionDatosRemisionComponent,
+    //SpinnerComponent
 
   ],
   imports: [

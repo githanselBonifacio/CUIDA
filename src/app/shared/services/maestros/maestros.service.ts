@@ -40,5 +40,8 @@ export class MaestrosService {
 
   getEstadosCita() {
     return this.http.get<Respuesta>(`${environment.URL_API_CUIDA}/${this.resourceUrl}/estadosCita`)
+      .subscribe(resp => {
+        this.estadosCita = resp.result;
+      })
   }
 }

@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
 
 import { Cita } from '../../interfaces/remision.interface';
 
@@ -11,6 +11,7 @@ import { ModalDetalleRemisionComponent } from '../modal-detalle-remision/modal-d
 import { switchMap, filter, tap } from 'rxjs/operators';
 import { ToastComponent, ToastType, TitleToast, crearConfig } from 'src/app/shared/components/toast/toast.component';
 import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
+import { EstadoCita, getNombreEstadoCitaById } from 'src/app/shared/interfaces/maestros.interfaces';
 
 
 @Component({
@@ -20,7 +21,9 @@ import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 })
 export class CardCitaComponent {
   @Input()
-  public citas: Cita[] = [];
+  public cita!: Cita;
+  @Input()
+  public estadosCita: EstadoCita[] = [];
 
   @Output()
   actualizarMainView = new EventEmitter();
@@ -177,6 +180,9 @@ export class CardCitaComponent {
     })
 
 
+  }
+  getNombreEstadoCita(id: number) {
+    return getNombreEstadoCitaById(`${id}`, this.estadosCita);
   }
 
   mostrarToast(tipo: ToastType, titulo: TitleToast, mensaje: string, duracion: number) {

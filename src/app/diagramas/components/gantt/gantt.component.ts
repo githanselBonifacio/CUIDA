@@ -1,6 +1,6 @@
 
 import { Actividad } from '../../interfaces/tarea-gantt.interface';
-import { Component, Input, OnInit, EventEmitter, Output, HostListener, AfterViewInit, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, ChangeDetectorRef, Input, EventEmitter, Output, HostListener, AfterViewInit, OnChanges, SimpleChanges, ViewChild, ElementRef, ViewChildren, AfterViewChecked, AfterContentInit, AfterContentChecked } from '@angular/core';
 import { Tarea } from '../../interfaces/tarea-gantt.interface'
 import { MatDialog } from '@angular/material/dialog'
 import { MapRutaComponent } from 'src/app/maps/components/map-ruta/map-ruta.component';
@@ -12,19 +12,23 @@ import { Router } from '@angular/router';
   styleUrls: ['./gantt.component.css'],
 })
 
-export class GanttComponent implements AfterViewInit, OnChanges {
+export class GanttComponent implements AfterViewInit, AfterViewChecked, OnChanges {
 
   @Output() idprofesionalEvent = new EventEmitter<string>();
+  @ViewChild('containerActividad') containerGeneric: ElementRef | undefined;
 
   constructor(
     private modalMapRuta: MatDialog,
     private router: Router,
+    private cdr: ChangeDetectorRef
   ) { }
+
 
   @Input() public actividades: Actividad[] = [];
   @Input() public horas: string[] = [];
+  @Input() public tituloActorResponsable = "";
 
-  loadingPage = false;
+
   currentUrl: string = '';
   simpleHoras: number[] = [];
   intervalo: number = 0;
@@ -32,20 +36,29 @@ export class GanttComponent implements AfterViewInit, OnChanges {
   segundosInMinutos = 60;
   idHeaderHora = "header-hora";
 
+  ngAfterViewChecked(): void {
+    this.cdr.detectChanges();
 
+    this.construirDiagrama();
+  }
   ngAfterViewInit(): void {
+
     this.currentUrl = this.router.url;
     this.simpleHoras = this.horas.map(hora => parseInt(hora.substring(0, 2)));
     this.intervalo = (this.horas.length - 1) * 3600;
+
+
   }
+
   @HostListener('window:resize', ['$event'])
   onResize(event: any) {
     this.limpiaLineaTiempo();
+    this.construirDiagrama();
+
   }
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes["actividades"]) {
-      this.loadingPage = false;
-    }
+    this.limpiaLineaTiempo();
+    this.construirDiagrama();
 
   }
 
@@ -61,29 +74,35 @@ export class GanttComponent implements AfterViewInit, OnChanges {
     holguraGrid.forEach(elemento => elemento.remove());
 
   }
-  crearLineaTiempoTarea(idElement: string, tarea: Tarea, index: number) {
+  construirDiagrama() {
+    for (let actividad of this.actividades) {
+      for (let tarea of actividad.tareas) {
+        this.crearLineaTiempoTarea(actividad.numeroIdentificacion, tarea)
+      }
+
+    }
+
+  }
+  crearLineaTiempoTarea(idElement: string, tarea: Tarea) {
     // Crear  divs
     let fechaProgramada = new Date(tarea.fechaProgramada);
     let fechaNominal = new Date(tarea.fechaInicio);
     const div = document.createElement('div');
-    const text = document.createElement('div');
+    const vignette = document.createElement('div');
     const holgura = document.createElement('div');
 
     // Asignar estilos al div tarea
     div.className = `tarea-${tarea.tipo}`;
+    div.setAttribute("estado", tarea.idEstado)
     const idNuevoDiv = `tarea-${tarea.tipo}-${tarea.id}`;
     div.id = idNuevoDiv;
     div.style.fontSize = '0rem';
 
 
     // Asignar estilos al div text
-    text.className = 'vignette';
-    text.setAttribute("showv", "false")
-    if (tarea.tipo == 'visita') {
-      text.textContent = tarea.id;
-    } else {
-      text.textContent = "desplazamiento"
-    }
+    vignette.className = 'vignette';
+    vignette.setAttribute("showv", "false")
+    vignette.textContent = tarea.id;
 
     holgura.className = `holgura`;
     holgura.id = `holgura-${tarea.tipo}`;
@@ -91,28 +110,32 @@ export class GanttComponent implements AfterViewInit, OnChanges {
 
     div.style.fontSize = '0rem;'
     //eventos de visualizacion
-    div.addEventListener('mouseover', () => {
-      div.style.fontSize = '1rem';
-      holgura.style.display = 'block';
-      text.style.padding = "0.3rem 0.6rem 0.3rem 0.6rem";
-      text.style.borderRadius = "5px";
-      text.setAttribute("showv", "true")
+    div.addEventListener('click', () => {
+      const showv = vignette.getAttribute("showv");
+      if (showv == 'true') {
+        vignette.style.padding = "0px";
+        div.style.fontSize = '0rem';
+        holgura.style.display = 'none';
+        vignette.setAttribute("showv", "false")
+      } else {
+        div.style.fontSize = '1rem';
+        holgura.style.display = 'block';
+        vignette.style.padding = "0.3rem 0.6rem 0.3rem 0.6rem";
+        vignette.style.borderRadius = "5px";
+        vignette.setAttribute("showv", "true")
+      }
+
     });
 
-    div.addEventListener('mouseout', () => {
-      text.style.padding = "0px";
-      div.style.fontSize = '0rem';
-      holgura.style.display = 'none';
-      text.setAttribute("showv", "false")
-    });
-
-    div.appendChild(text);
+    div.appendChild(vignette);
     let longitudContainer = 0;
     let container = document.getElementById(idElement);
 
-    if (container != null && document.getElementById(idNuevoDiv) == null) {
+    if (container != null) {
 
       longitudContainer = container.offsetWidth
+
+
       //calculo para la fecha programada
       const horaFechaProgramada = Number(fechaProgramada.getHours());
       const minutosFechaProgramada = Number(fechaProgramada.getMinutes());
@@ -170,12 +193,10 @@ export class GanttComponent implements AfterViewInit, OnChanges {
 
       container.appendChild(holgura);
       container.appendChild(div);
-    }
-    if (index == this.actividades.length - 1) {
-      this.paginaCargada();
+
+
     }
   }
-
 
   calcularPosicionContainerPx(
     longitudContainer: number,
@@ -207,6 +228,21 @@ export class GanttComponent implements AfterViewInit, OnChanges {
     }
   }
 
+
+
+  obtenerElementoConEspera = (id: string, tiempoEspera: number): Promise<HTMLElement> => {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        const elemento = document.getElementById(id);
+        if (elemento) {
+          resolve(elemento);
+        } else {
+          reject(`No se encontró ningún elemento con id ${id}`);
+        }
+      }, tiempoEspera);
+    });
+  };
+
   mostrarRutaMapa(tareas: Tarea[]): void {
     console.log(tareas)
     const dialogRef = this.modalMapRuta.open(MapRutaComponent, {
@@ -218,7 +254,5 @@ export class GanttComponent implements AfterViewInit, OnChanges {
   emitirProfesionalTurno(idProfesional: string): void {
     this.idprofesionalEvent.emit(idProfesional);
   }
-  paginaCargada() {
-    this.loadingPage = true;
-  }
+
 }

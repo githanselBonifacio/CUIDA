@@ -1,128 +1,175 @@
 @import url('../../../../styles.css');
 
-.header-cita{
+#accordion-citas {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+
+}
+
+#accordion-citas button {
+    display: block;
+    width: 100%;
+    color: var(--quarter-color);
+    font-size: 1.3rem;
+    margin-bottom: 0.5rem;
+    padding: 0.5rem 0.5rem 0.8rem 1.5rem;
+    box-shadow: 2px 2px 5px var(--gris2-color);
+
+}
+
+#accordion-citas button[name="estado-1"] {
+    background: linear-gradient(to right, var(--orange-color) 0%, var(--orange-color) 5%, white 5%, white 95%);
+}
+
+#accordion-citas button[name="estado-2"] {
+    background: linear-gradient(to right, var(--second-color-2) 0%, var(--second-color-2) 5%, white 5%, white 95%);
+}
+
+#accordion-citas button[name="estado-3"] {
+    background: linear-gradient(to right, purple 0%, purple 5%, white 5%, white 95%);
+}
+
+#accordion-citas button[name="estado-4"] {
+    background: linear-gradient(to right, var(--green-color) 0%, var(--green-color) 5%, white 5%, white 95%);
+}
+
+#accordion-citas button[name="estado-5"] {
+    background: linear-gradient(to right, var(--quarter-color) 0%, var(--quarter-color) 5%, white 5%, white 95%);
+
+}
+
+#accordion-citas button[name="estado-6"] {
+    background: linear-gradient(to right, black 0%, black 5%, white 5%, white 95%);
+}
+
+
+div[name="contenido-accordion"] {
+    border: 1px solid var(--gris3-color)
+}
+
+#accordion-citas button::after {
+    background-color: var(--third-color);
+    border-radius: 50%;
+
+}
+
+.header-cita {
     display: flex;
     justify-content: space-between;
     vertical-align: middle;
-    padding: 0.2rem 0.5rem 0.2rem 0.5rem;
     font-weight: bold;
-    background-color: var(--second-color);
-}
-.header-cita h5{
- color: var(--third-color);
 }
 
-.header-cita i{
-    color: var(--gris3-color);;
+.header-cita i {
+    color: var(--gris1-color);
     font-size: 1.2rem;
 }
 
-.card{
-    border-color: var(--gris2-color);
-    box-shadow: 5px 5px 15px var(--gris3-color);
-}
-
-.input-group-text{
+.item-cita {
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
     color: var(--quarter-color);
-    margin-bottom: 0.3rem;
-    border-width: 0px;
-    padding: 0px;
-}
-.input-group-text i{
-   display: flex;
-   align-items: center;
-   font-style: normal;
-   font-size: 1.2rem;
-   margin-right: 0.5rem;
-   
 }
 
-#container-card{
-    overflow-y: scroll;
-    overflow-x: hidden;
-    max-height: 70vh;
-}
-@media screen  and (max-height:650px){
-    #container-card{
-        max-height: 60vh;
-    }
-}
-#container-card-citas{
-    margin: 0.3rem 0.3rem 0.3rem 0.3rem;
+.item-cita i {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-style: normal;
+    font-size: 1.2rem;
+    margin-right: 0.5rem;
+
 }
 
 
-.i-card-agenda{
+
+.i-card-agenda {
     display: flex;
     justify-content: flex-end;
 }
-.i-card-agenda i{
+
+.i-card-agenda i {
     display: flex;
     align-items: center;
     font-size: 1.5rem;
     margin-left: 0.4rem;
 }
-#i-card-agenda-agendar{
+
+#i-card-agenda-agendar {
     color: var(--primary-color);
 }
-#i-card-agenda-agendar:hover{
-    color : var(--second-color);
+
+#i-card-agenda-agendar:hover {
+    color: var(--second-color);
 }
 
-#i-card-agenda-desagendar{
+#i-card-agenda-desagendar {
     color: var(--orange-color);
 }
-#i-card-agenda-desagendar:hover{
+
+#i-card-agenda-desagendar:hover {
     color: var(--orange-color-dark);
 }
 
-#i-card-agenda-cancelar{
+#i-card-agenda-cancelar {
     color: var(--red-color);
 }
-#i-card-agenda-cancelar:hover{
-   
+
+#i-card-agenda-cancelar:hover {
+
     color: var(--red-dark-color);
 }
-#i-card-agenda-reprogramar{
+
+#i-card-agenda-reprogramar {
     color: var(--green-color);
 }
-#i-card-agenda-reprogramar:hover{
-  color: var(--green-color-dark);
+
+#i-card-agenda-reprogramar:hover {
+    color: var(--green-color-dark);
 }
-#conductor-card h5{
+
+#conductor-card h5 {
     color: var(--orange-color);
 }
 
-.estado-cita{
+.estado-cita {
     font-size: 1.1rem;
     font-weight: bold;
     padding-left: 0.5rem;
     padding-right: 0.5rem;
     border-radius: 5px;
 }
+
 @keyframes parpadeo-progreso {
-   
+
     0% {
-      background-color: var(--orange-color);
+        background-color: var(--green-color);
     }
+
     50% {
-       background-color: var(--orange-color-dark);
+        background-color: var(--green-color-dark);
     }
-    100%{
-        background-color: var(--orange-color);
+
+    100% {
+        background-color: var(--green-color);
     }
-   
-  }
-#estado-confirmado{
-  color: white;
-  background-color: var(--green-color-dark);
+
 }
-#estado-progreso{
+
+#estado-confirmado {
+    color: white;
+    background-color: purple;
+}
+
+#estado-progreso {
     animation: parpadeo-progreso 2s ease-in-out infinite;
     color: var(--gris4-color);
-    background-color: var(--orange-color);
+    background-color: var(--green-color);
 }
-#estado-finalizada{
+
+#estado-finalizada {
     color: white;
-    background-color: var(--primary-color);
+    background-color: black;
 }

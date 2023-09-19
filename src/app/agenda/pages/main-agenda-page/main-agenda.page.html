@@ -60,7 +60,7 @@
 
 
     <div class="row">
-        <div class="col-lg-3 col-xl-2" id="container-list-citas">
+        <div class="col-lg-3 col-xl-3 col-xxl-2" id="container-list-citas">
             <div class="d-flex">
 
                 <div class="input-group mb-2" id="buscar-remision">
@@ -71,16 +71,25 @@
                 </div>
             </div>
             <hr>
-            <app-agenda-card-cita (actualizarMainView)="actualizarComponenteMainAgenda()" [citas]="citas"
-                [idRegional]="opcionRegional" [fechaTurno]="fechaFiltroTurno" [idHorarioTurno]="opcionHorariosTurno">
-            </app-agenda-card-cita>
+            <!-- Listado de citas -->
+            <div id='container-card'>
 
+                <div *ngFor="let cita of citas" id="container-card-citas">
+
+                    <app-agenda-card-cita (actualizarMainView)="actualizarComponenteMainAgenda()" [cita]="cita"
+                        [idRegional]="opcionRegional" [fechaTurno]="fechaFiltroTurno"
+                        [idHorarioTurno]="opcionHorariosTurno" [estadosCita]="estadosCita">
+                    </app-agenda-card-cita>
+                </div>
+
+
+            </div>
         </div>
-
-        <div class="col-lg-9 col-xl-10" id="container-agenda-gantt">
+        <div class="col-lg-9 col-xl-9  col-xxl-10" id="container-agenda-gantt">
             <div class="panel-gantt">
                 <div>
                     <app-diagramas-gantt [actividades]="actividades" [horas]="horasTurnoString"
+                        [tituloActorResponsable]="'Profesionales'"
                         (idprofesionalEvent)="desasignarProfesionalTurno($event)">
                     </app-diagramas-gantt>
                 </div>
@@ -94,10 +103,6 @@
                 </div>
             </div>
         </div>
-
-        <ng-container *ngIf="loadingPage == false">
-            <app-spinner></app-spinner>
-        </ng-container>
 
     </div>
 

@@ -7,7 +7,7 @@ import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 import { AgendaService } from 'src/app/agenda/services/agenda.service';
 import { Cita } from "../../interfaces/remision.interface"
 import { MaestrosService } from 'src/app/shared/services/maestros/maestros.service';
-import { HorarioTurno, Regional } from 'src/app/shared/interfaces/maestros.interfaces';
+import { EstadoCita, HorarioTurno, Regional } from 'src/app/shared/interfaces/maestros.interfaces';
 import { Actividad } from 'src/app/diagramas/interfaces/tarea-gantt.interface';
 import { generarHorario } from '../../../shared/interfaces/maestros.interfaces'
 
@@ -17,6 +17,7 @@ import { ModalSeleccionProfesionalComponent } from '../../../agenda/components/m
 import { VentanaConfirmacionComponent } from 'src/app/shared/components/ventana-confirmacion/ventana-confirmacion.component';
 import { switchMap, filter, tap } from 'rxjs/operators';
 import { ToastComponent, ToastType, TitleToast, crearConfig } from 'src/app/shared/components/toast/toast.component';
+import { SpinnerService } from 'src/app/shared/services/spinner/spinner.service.service';
 
 @Component({
   selector: 'app-main-component-agenda',
@@ -48,10 +49,13 @@ export class MainComponentAgendaComponent implements OnInit {
     private activateRoute: ActivatedRoute,
     private router: Router,
     private dialogoSeleccionProfesional: MatDialog,
-    private _snackBar: MatSnackBar
+    private _snackBar: MatSnackBar,
+    private spinnerService: SpinnerService
   ) { }
 
   ngOnInit() {
+    this.spinnerService.show();
+    this.maestroService.getEstadosCita();
     this.maestroService.getRegionales();
     this.maestroService.getHorarioTurno();
     this.activateRoute.params.subscribe(
@@ -62,7 +66,7 @@ export class MainComponentAgendaComponent implements OnInit {
           this.opcionRegional = params['idCiudad'];
           this.opcionHorariosTurno = params['idHorarioTurno'];
         }
-        this.loadingPage = true
+        this.spinnerService.hide();
       }
 
     )
@@ -90,6 +94,9 @@ export class MainComponentAgendaComponent implements OnInit {
   get horaTurno(): HorarioTurno {
     return this.maestroService.horarioTurnoSeleccionado;
   }
+  get estadosCita(): EstadoCita[] {
+    return this.maestroService.estadosCita;
+  }
 
   consultarCitas(): void {
     this.horasTurnoString = generarHorario(this.opcionHorariosTurno);
@@ -107,7 +114,8 @@ export class MainComponentAgendaComponent implements OnInit {
   }
 
   autoagendar(): void {
-    this.loadingPage = false
+    this.spinnerService.show();
+    this.maestroService.getEstadosCita();
     this.agendaService.desagendarTurnoCompleto(this.citas[0].fechaProgramada, this.opcionHorariosTurno, this.opcionRegional)
       .subscribe(resp => {
         if (resp.status == 200) {
@@ -117,10 +125,11 @@ export class MainComponentAgendaComponent implements OnInit {
             this.opcionRegional
           ).subscribe(resp => {
             if (resp.status == 200) {
-              this.loadingPage = true;
+              this.spinnerService.hide();
               this.consultarCitas();
               this.mostrarToast(ToastType.Success, TitleToast.Success, resp.message, 7)
             } else {
+              this.spinnerService.hide();
               this.consultarCitas();
               this.mostrarToast(ToastType.Error, TitleToast.Error, resp.message, 7)
             }
@@ -132,11 +141,11 @@ export class MainComponentAgendaComponent implements OnInit {
   }
 
   desagendarTurnoCompleto(): void {
-    this.loadingPage = false
+    this.spinnerService.show();
     this.agendaService.desagendarTurnoCompleto(this.citas[0].fechaProgramada, this.opcionHorariosTurno, this.opcionRegional)
       .subscribe(resp => {
         if (resp.status == 200) {
-          this.loadingPage = true;
+          this.spinnerService.hide();
           this.consultarCitas();
           this.mostrarToast(ToastType.Success, TitleToast.Success, resp.message, 5)
         } else {
@@ -158,6 +167,7 @@ export class MainComponentAgendaComponent implements OnInit {
           return dialogRef.afterClosed();
         }),
         switchMap(opcionProfesional => {
+          this.spinnerService.show();
           return this.agendaService.asignarProfesionalTurno(
             this.fechaFiltroTurno,
             this.opcionHorariosTurno,
@@ -167,12 +177,13 @@ export class MainComponentAgendaComponent implements OnInit {
       )
       .subscribe(resp => {
         if (resp.status == 200) {
-          this.loadingPage = true;
+
           this.consultarCitas();
           this.mostrarToast(ToastType.Success, TitleToast.Success, resp.message, 5)
         } else {
           this.mostrarToast(ToastType.Error, TitleToast.Error, resp.message, 5)
         }
+        this.spinnerService.hide();
       });
   }
   desasignarProfesionalTurno(idprofesional: string): void {
@@ -185,6 +196,7 @@ export class MainComponentAgendaComponent implements OnInit {
 
     dialogRef.afterClosed().pipe(
       filter(resp => !!resp),
+
       switchMap(() => this.agendaService.desasignarProfesionalTurno(
         this.fechaFiltroTurno,
         this.opcionHorariosTurno,
@@ -192,7 +204,6 @@ export class MainComponentAgendaComponent implements OnInit {
       ))
     ).subscribe(resp => {
       if (resp.status == 200) {
-        this.loadingPage = true;
         this.consultarCitas();
         this.mostrarToast(ToastType.Success, TitleToast.Success, resp.message, 5)
       } else {

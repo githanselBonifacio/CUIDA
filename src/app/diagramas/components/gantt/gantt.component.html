@@ -1,10 +1,7 @@
 <div class="row">
-    <div class="col-3" *ngIf="currentUrl.includes('agenda'); else elseProfesional">
-        <h5>Profesionales</h5>
+    <div class="col-3">
+        <h5>{{tituloActorResponsable}}</h5>
     </div>
-    <ng-template #elseProfesional>
-        <h5>Móviles</h5>
-    </ng-template>
 </div>
 
 <div class="row">
@@ -46,29 +43,15 @@
                 </div>
             </div>
 
-            <div class="col-md-9 col-lg-8 col-xl-8 col-xxl-9" id="container-actividad-time">
-                <div class="container-actividad-time">
+            <div class="col-md-9 col-lg-8 col-xl-8 col-xxl-9" name="container-actividad-time">
+
+
+                <div class="container-linea-tiempo" [id]="actividad.numeroIdentificacion">
+
+                    <!--  lineas de tiempo -->
 
                 </div>
-                <div class="container-linea-tiempo" id="{{actividad.numeroIdentificacion}}">
 
-                    <ng-container *ngIf="i <= actividades.length - 1">
-                        <ng-container *ngFor="let tarea of actividad.tareas, let i = index">
-                            <ng-container *ngIf="tarea">
-
-                                {{crearLineaTiempoTarea(
-                                actividad.numeroIdentificacion,
-                                tarea,
-                                i
-                                )
-                                }}
-
-                            </ng-container>
-
-                        </ng-container>
-
-                    </ng-container>
-                </div>
             </div>
             <div class="col-md-1 col-lg-1 col-xl-1" id="container-map">
 
@@ -79,8 +62,5 @@
             </div>
         </div>
     </div>
-    <div *ngIf="!loadingPage">
-        <mat-progress-bar class="progress-bar" [value]="0" [bufferValue]="100" [mode]="'indeterminate'">
-        </mat-progress-bar>
-    </div>
+
 </div>

@@ -68,7 +68,7 @@
     }
 }
 
-#container-actividad-time {
+div[name="container-actividad-time"] {
     position: relative;
     padding: 0px;
     text-align: center;
@@ -122,33 +122,49 @@
     color: var(--primary-color);
 }
 
+@keyframes parpadeo-progreso {
 
+    0% {
+        opacity: 1;
+
+
+    }
+
+    50% {
+        opacity: 0.4;
+
+    }
+
+    100% {
+        opacity: 1;
+
+    }
+
+}
 
 ::ng-deep app-diagramas-gantt .tarea-visita {
     position: absolute !important;
-    height: 3rem !important;
+    height: 2rem !important;
     margin: 0px auto !important;
-    border: 2px solid var(--second-color) !important;
-    border-radius: 0.4rem !important;
     background-color: var(--primary-color) !important;
     height: 2rem;
+
 }
 
 
 
 ::ng-deep app-diagramas-gantt .tarea-dvisita {
     position: absolute !important;
-    height: 3rem !important;
+    height: 2rem !important;
     margin: 0px auto !important;
-    border: 2px solid var(--second-color) !important;
-    border-radius: 0.4rem !important;
     background-color: var(--orange-color) !important;
+
 }
 
 
 ::ng-deep app-diagramas-gantt .holgura {
     position: absolute !important;
-    height: 3rem !important;
+    height: 2rem !important;
     margin: 0px auto !important;
     background-color: #f9e4478f !important;
     border-radius: 0.4rem !important;
@@ -160,10 +176,11 @@
 
 ::ng-deep app-diagramas-gantt .vignette {
     position: absolute !important;
+    text-wrap: nowrap;
     top: 50% !important;
     left: -0.6rem;
     transform: translate(-100%, -50%) !important;
-    background-color: var(--second-color) !important;
+    background-color: var(--quarter-color) !important;
     color: #ffffff !important;
     font-weight: lighter !important;
     z-index: 99999 !important;
@@ -176,7 +193,7 @@
     right: 0px;
     transform: translate(95%, 55%);
     border: 0.35rem solid transparent;
-    border-left-color: var(--second-color);
+    border-left-color: var(--quarter-color);
     z-index: 99999 !important;
 }
 
@@ -186,3 +203,12 @@
     height: 200% !important;
     position: absolute !important;
 }
+
+
+/*::ng-deep app-diagramas-gantt .tarea-visita[estado="4"] {
+    animation: parpadeo-progreso 3s ease-in-out infinite !important;
+}
+
+::ng-deep app-diagramas-gantt .tarea-visita[estado="6"] {
+    opacity: 0.3 !important;
+}*/

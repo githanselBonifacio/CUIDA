@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-
+import { SpinnerService } from '../../services/spinner/spinner.service.service';
 
 @Component({
   selector: 'app-spinner',
@@ -8,6 +8,10 @@ import { Component, Input } from '@angular/core';
 })
 export class SpinnerComponent {
 
-  @Input()
-  loading = false;
+  showSpinner = false;
+  constructor(private spinnerService: SpinnerService) {
+    this.spinnerService.spinnerObservable.subscribe(show => {
+      this.showSpinner = show;
+    });
+  }
 }

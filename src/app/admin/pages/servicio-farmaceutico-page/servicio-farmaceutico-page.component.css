@@ -91,9 +91,13 @@
 }
 
 .card-item,
-.card-item td,
+.card-item td {
+    text-align: start;
+}
+
 .th-start {
     text-align: start;
+    white-space: nowrap;
 }
 
 #notificado {
@@ -116,17 +120,17 @@
     font-weight: bold;
 }
 
-.toast {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    background-color: #333;
-    color: #fff;
-    padding: 10px;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+
+td span {
+    white-space: nowrap;
 }
 
-span {
-    white-space: nowrap;
+tr[activacelta=true] {
+    background-color: var(--gris1-color);
+
+}
+
+tr[activacelta=true] td {
+    color: var(--gris4-color);
+
 }

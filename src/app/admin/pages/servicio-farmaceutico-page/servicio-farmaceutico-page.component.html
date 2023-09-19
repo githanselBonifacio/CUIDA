@@ -36,8 +36,8 @@
             <ng-container matColumnDef="Remisión">
                 <th mat-header-cell *matHeaderCellDef class="th-start">
                     <span>
-                        <input id="master-check" class="select-group-input" type="checkbox"
-                            (change)="agregarTodasNotificacionesMostradas($event)" disabled="validarMasterCheck()">
+                        <input id="master-check" class="th-start" type="checkbox"
+                            (change)="agregarTodasNotificacionesMostradas($event)" [disabled]="checkedDisabledMaster">
                         <label class="form-check-label" for="select-group-input"></label>
                         Remisión
                     </span>
@@ -45,6 +45,7 @@
                 <td mat-cell *matCellDef="let notificacion" class="card-item">
                     <span>
                         <input name="individual-check" type="checkbox"
+                            [id]="notificacion.idTratamiento+notificacion.idSoporteNutricional"
                             (change)="agregarListaSeleccionada(notificacion,$event)"
                             [disabled]="notificacion.notificado">
                         {{notificacion.idRemision}}
@@ -123,10 +124,16 @@
             </ng-container>
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            <tr *matNoDataRow>
+                <p style="padding: 0.5rem 0.5rem 0.5rem 1rem;">hay notificaciones pendientes !!!
+
+                </p>
+            </tr>
+
         </table>
     </div>
 </div>
 
 <mat-paginator #paginatorFarmacia [pageSizeOptions]="[7,8,9,10,15,20,50,100]" aria-label="Select page"
-    itemsPerPageLabel="notificaciones por página" showFirstLastButtons="true">
+    itemsPerPageLabel="notificaciones por página" showFirstLastButtons="true" (page)="handlePageChange($event)">
 </mat-paginator>

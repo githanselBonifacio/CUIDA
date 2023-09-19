@@ -3,6 +3,7 @@
 @import url('../../../../assets/styles/inputs/lista.css');
 @import url('../../../../assets/styles/inputs/fecha.css');
 
+
 #titulo-agenda {
     display: flex;
     align-items: center;
@@ -46,6 +47,22 @@
 #buscar-remision span,
 #buscar-remision input {
     border: 1px solid var(--gris3-color);
+}
+
+#container-card-citas {
+    margin: 0.3rem 0.3rem 0.3rem 0.3rem;
+}
+
+#container-card {
+    overflow-y: scroll;
+    overflow-x: hidden;
+    max-height: 70vh;
+}
+
+@media screen and (max-height:650px) {
+    #container-card {
+        max-height: 60vh;
+    }
 }
 
 #agregar-profesional {

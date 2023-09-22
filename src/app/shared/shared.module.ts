@@ -13,6 +13,7 @@ import { AdminComponent } from './pages/admin/admin.component';
 import { AdminModule } from '../admin/admin.module';
 import { SpinnerComponent } from './components/spinner/spinner.component';
 import { SpinnerService } from './services/spinner/spinner.service.service';
+import { ToastComponent } from './components/toast/toast.component';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { SpinnerService } from './services/spinner/spinner.service.service';
     SidebarComponent,
     VentanaConfirmacionComponent,
     AdminComponent,
-    SpinnerComponent
+    SpinnerComponent,
+    ToastComponent
 
   ],
   imports: [
@@ -37,7 +39,8 @@ import { SpinnerService } from './services/spinner/spinner.service.service';
   exports: [
     InicioComponent,
     SidebarComponent,
-    SpinnerComponent
+    SpinnerComponent,
+    ToastComponent
   ],
   providers: [
     SpinnerService

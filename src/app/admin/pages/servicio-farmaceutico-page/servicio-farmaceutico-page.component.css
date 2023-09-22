@@ -1,8 +1,36 @@
 @import url('../../../../styles.css');
 @import url('../../../../assets/styles/tablas/tabla.css');
+@import url('../../../../assets/styles/buttons/button-seleccion.css');
+@import url('../../../../assets/styles/inputs/fecha.css');
+@import url('../../../../assets/styles/inputs/lista.css');
 
 .content-toolbar {
     display: flex;
+    padding: 0.5rem 0.5rem 0.5rem 0.5rem;
+}
+
+.filter {
+    display: none;
+    align-items: center;
+    justify-content: end;
+    padding: 1.5rem 0.5rem 1rem 0.5rem;
+}
+
+.filter.activate {
+    display: flex;
+    transition: all 2s ease-in;
+}
+
+#content-activate-buttom {
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    padding-right: 1rem;
+}
+
+#content-activate-buttom button {
+
+    transform: translateY(-40%);
 }
 
 #back-admin {
@@ -80,7 +108,6 @@
     align-items: center;
     vertical-align: middle;
     padding: 0.5rem 0.5rem 0.5rem 0.5rem;
-    margin-bottom: 1rem;
     border-radius: 5px;
 }
 

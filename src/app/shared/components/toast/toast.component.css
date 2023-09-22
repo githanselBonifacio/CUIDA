@@ -2,15 +2,21 @@
 
 .container-toast {
   display: flex;
-  justify-content: space-around;
+  justify-content: start;
   align-items: center;
+}
+
+.icon-toast {
+  margin-right: 1rem;
+  margin-left: 0.5rem;
+  vertical-align: middle;
 }
 
 .icon-toast i {
   display: flex;
   align-items: center;
   font-size: 2rem;
-  padding: 0rem 0.5rem 0rem 0.2rem;
+  padding: 0rem 0.8rem 0rem 0.2rem;
 }
 
 .body-toast h5 {

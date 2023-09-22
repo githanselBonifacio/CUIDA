@@ -26,8 +26,6 @@ import { SpinnerComponent } from '../shared/components/spinner/spinner.component
     TablaHistorialCitasComponent,
     ModalDetalleCitasHistorialComponent,
     TablaActualizacionDatosRemisionComponent,
-    //SpinnerComponent
-
   ],
   imports: [
     CommonModule,

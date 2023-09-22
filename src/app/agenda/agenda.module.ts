@@ -27,11 +27,9 @@ import { PlaceholderTableComponent } from '../shared/components/placeholder-tabl
     CardCitaComponent,
     ModalSeleccionProfesionalComponent,
     ModalCambioHoraCitaComponent,
-    // SpinnerComponent,
     ModalDetalleRemisionComponent,
-    ToastComponent,
     ItemsCitaComponent,
-    PlaceholderTableComponent
+    PlaceholderTableComponent,
   ],
   imports: [
     CommonModule,

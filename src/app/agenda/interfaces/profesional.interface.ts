@@ -1,12 +1,12 @@
 export interface Profesional {
 
     numeroIdentificacion: string;
-    nombres:              string;
-    apellidos:            string;
-    fechaNacimiento:      string;
-    idCiudad:             string;
-    activo:               number;
-  
+    nombres: string;
+    apellidos: string;
+    fechaNacimiento: string;
+    idRegional: string;
+    activo: number;
+
 }
 
 export class Convert {

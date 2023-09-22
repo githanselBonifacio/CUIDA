@@ -5,3 +5,9 @@ input[type="date"] {
     border: 1px solid var(--second-color);
     border-radius: 5px;
 }
+
+input[type='date'] label {
+    position: absolute;
+    top: 0;
+    left: 0;
+}

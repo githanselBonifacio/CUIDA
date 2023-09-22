@@ -1,13 +1,13 @@
 export interface Remision {
-    idRemision:                   string;
-    estado:                       string;
+    idRemision: string;
+    estado: string;
     numeroIdentificacionPaciente: string;
-    paciente:                     string;
-    fechaAdmision:                Date;
-    programa:                     string;
-    ciudad:                       string;
-    tipoAdmision:                 string;
-    institucionRemite:            string;
+    paciente: string;
+    fechaAdmision: Date;
+    programa: string;
+    regional: string;
+    tipoAdmision: string;
+    institucionRemite: string;
 }
 
 // Converts JSON strings to/from your types

@@ -13,7 +13,7 @@ export interface Tarea {
     holgura: number;
     latitud: number;
     longitud: number;
-    idEstado: string;
+    idEstado: number;
     tipo: string;
 }
 

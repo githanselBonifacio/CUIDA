@@ -3,11 +3,11 @@ import { AdminRemisionService } from '../../services/admin-remision.service';
 import { NotificacionFarmacia } from '../../interfaces/servicioFarmaceutico.interface';
 import { ToastComponent, TitleToast, crearConfig, ToastType } from 'src/app/shared/components/toast/toast.component';
 import { Router } from '@angular/router';
-import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { ChangeDetectorRef } from '@angular/core';
 import { SpinnerService } from 'src/app/shared/services/spinner/spinner.service.service';
+import { ToastService } from 'src/app/shared/services/toast/toast.service';
 
 @Component({
   selector: 'app-servicio-farmaceutico-page',
@@ -19,9 +19,9 @@ export class ServicioFarmaceuticoPageComponent implements OnInit, AfterViewInit 
   constructor(
     private adminService: AdminRemisionService,
     private router: Router,
-    private _snackBar: MatSnackBar,
     private cdr: ChangeDetectorRef,
-    private spinnerService: SpinnerService
+    private spinnerService: SpinnerService,
+    private toastService: ToastService
   ) { }
 
   @ViewChild('paginatorFarmacia') paginator!: MatPaginator;
@@ -29,7 +29,7 @@ export class ServicioFarmaceuticoPageComponent implements OnInit, AfterViewInit 
   displayedColumns: string[] = ['Remisión', 'Paciente', 'Tipo', 'Medicamento', 'Dosis', 'Vía', 'Volumen', 'Fecha programada', 'Notificado'];
   dataSource = new MatTableDataSource<NotificacionFarmacia>([]);
 
-
+  filtroAvanzadoActivado: string = "";
   filtroBusqueda: string = "";
   checkedNotificado: boolean = false;
   checkedSinNotificado: boolean = false;
@@ -61,6 +61,13 @@ export class ServicioFarmaceuticoPageComponent implements OnInit, AfterViewInit 
     this.spinnerService.hide();
   }
 
+  activarFiltro() {
+    if (this.filtroAvanzadoActivado == "activate") {
+      this.filtroAvanzadoActivado = "";
+    } else {
+      this.filtroAvanzadoActivado = "activate"
+    }
+  }
   filtrarNotificaciones(): void {
     const textoBuscado = this.filtroBusqueda.toLowerCase();
 
@@ -195,10 +202,10 @@ export class ServicioFarmaceuticoPageComponent implements OnInit, AfterViewInit 
       .subscribe(resp => {
         if (resp.status == 200) {
 
-          this.mostrarToast(ToastType.Success, TitleToast.Success, resp.message, 5)
+          this.toastService.mostrarToast(ToastType.Success, TitleToast.Success, resp.message, 5)
         } else {
 
-          this.mostrarToast(ToastType.Error, TitleToast.Error, resp.message, 5)
+          this.toastService.mostrarToast(ToastType.Error, TitleToast.Error, resp.message, 5)
         }
         const checkboxMaster = document.getElementById('master-check') as HTMLInputElement;
         checkboxMaster.checked = false;
@@ -209,11 +216,5 @@ export class ServicioFarmaceuticoPageComponent implements OnInit, AfterViewInit 
   backRemisionesTabla() {
     this.router.navigate(['admin']);
   }
-
-  mostrarToast(tipo: ToastType, titulo: TitleToast, mensaje: string, duracion: number) {
-    const config: MatSnackBarConfig = crearConfig(tipo, titulo, mensaje, duracion)
-    this._snackBar.openFromComponent(ToastComponent, config)
-  }
-
 
 }

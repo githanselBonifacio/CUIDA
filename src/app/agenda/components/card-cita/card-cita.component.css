@@ -1,18 +1,13 @@
 @import url('../../../../styles.css');
 
-#accordion-citas {
-    padding-left: 0.5rem;
-    padding-right: 0.5rem;
-
-}
 
 #accordion-citas button {
     display: block;
     width: 100%;
     color: var(--quarter-color);
-    font-size: 1.3rem;
+    font-size: 1rem;
     margin-bottom: 0.5rem;
-    padding: 0.5rem 0.5rem 0.8rem 1.5rem;
+    padding: 0.5rem 0.3rem 0.8rem 1.5rem;
     box-shadow: 2px 2px 5px var(--gris2-color);
 
 }
@@ -118,7 +113,6 @@ div[name="contenido-accordion"] {
 }
 
 #i-card-agenda-cancelar:hover {
-
     color: var(--red-dark-color);
 }
 
@@ -158,18 +152,47 @@ div[name="contenido-accordion"] {
 
 }
 
-#estado-confirmado {
+.content-estado-card {
+    display: flex;
+    justify-content: end;
+}
+
+div[name='estado-card'] {
+    right: 50px;
+    width: fit-content;
+    padding: 0.1rem 0.4rem 0.3rem 0.4rem;
+    margin-top: 0.3rem;
+    border-radius: 5px;
+
+}
+
+#estado-1 {
+    color: white;
+    background-color: var(--orange-color);
+}
+
+#estado-2 {
+    color: white;
+    background-color: var(--second-color-2);
+}
+
+#estado-3 {
     color: white;
     background-color: purple;
 }
 
-#estado-progreso {
+#estado-4 {
     animation: parpadeo-progreso 2s ease-in-out infinite;
     color: var(--gris4-color);
-    background-color: var(--green-color);
+    background-color: var(--green-color)
 }
 
-#estado-finalizada {
+#estado-5 {
+    color: white;
+    background-color: var(--quarter-color);
+}
+
+#estado-6 {
     color: white;
     background-color: black;
 }

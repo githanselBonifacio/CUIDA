@@ -3,38 +3,39 @@
         <h1>Administración</h1>
     </div>
 
-    <div class="menu-hex">
+    <div class="container-menu">
 
-        <div class="hexagon" (click)="navigateToRemisiones()">
-            <div class="text-menu">
-                <h5>Remisiones</h5>
+        <div class="hex-row">
+            <div class="hexagon" (click)="navigateToRemisiones()">
+                <div class="text-menu">
+                    <h5>Remisiones</h5>
+                </div>
+
             </div>
 
-        </div>
-
-        <div class="hexagon">
-            <div class="text-menu">
-                <h5>Profesionales</h5>
+            <div class="hexagon">
+                <div class="text-menu">
+                    <h5>Informes</h5>
+                </div>
             </div>
-        </div>
-        <div class="hexagon">
-            <div class="text-menu">
-                <h5>Regionales</h5>
+
+            <div class="hexagon" (click)="navigateToServicioFarmaceutico()">
+                <div class="text-menu">
+                    <h5>Servicio Farmaceutico
+                    </h5>
+                </div>
+            </div>
+
+            <div class="hexagon">
+                <div class="text-menu">
+                    <h5>Profesionales</h5>
+                </div>
+            </div>
+            <div class="hexagon">
+                <div class="text-menu">
+                    <h5>Regionales</h5>
+                </div>
             </div>
         </div>
 
     </div>
-    <div class="menu-hex">
-        <div class="hexagon">
-            <div class="text-menu">
-                <h5>Informes</h5>
-            </div>
-        </div>
-        <div class="hexagon" (click)="navigateToServicioFarmaceutico()">
-            <div class="text-menu">
-                <h5>Servicio Farmaceutico</h5>
-            </div>
-        </div>
-    </div>
-
-</div>

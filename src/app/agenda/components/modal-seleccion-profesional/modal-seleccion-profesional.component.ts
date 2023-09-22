@@ -1,5 +1,5 @@
-import { Component,Inject } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
+import { Component, Inject } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 
 @Component({
@@ -8,19 +8,19 @@ import { MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
   styleUrls: ['./modal-seleccion-profesional.component.css'],
 })
 export class ModalSeleccionProfesionalComponent {
-  
-  opcionProfesional: string ="";
+
+  opcionProfesional: string = "";
 
   constructor(
     public dialogRef: MatDialogRef<ModalSeleccionProfesionalComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
-  ) {}
+  ) { }
 
   onNoClick(): void {
-    this.dialogRef.close('');
+    this.dialogRef.close(false);
   }
-  onConfirm():void{
+  onConfirm(): void {
     this.dialogRef.close(String(this.opcionProfesional))
-    
+
   }
 }

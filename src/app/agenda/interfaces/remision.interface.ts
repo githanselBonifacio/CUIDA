@@ -8,10 +8,13 @@ export interface Cita {
     especialidad: string;
     latitud: number;
     longitud: number;
-    idCiudad: string;
+    idRegional: string;
     idEstado: number;
     idProfesional: string | null;
     idConductor: string | null;
+    paciente: string;
+    tipoIdentificacionPaciente: string;
+    numeroIdentificacionPaciente: string;
 
 }
 export enum EstadosCita {

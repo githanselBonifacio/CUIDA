@@ -57,42 +57,26 @@ export class CardCitaComponent {
             data: { profesionales },
           });
 
-          dialogRef
-            .afterClosed()
-            .pipe(filter(opcionProfesional => opcionProfesional !== ''))
-            .subscribe(async opcionProfesional => {
-              try {
-                const respuestaAsignarProfesional = await this.agendaService.asignarProfesionaByIdCita(
-                  citaSeleccionada.idCita,
-                  opcionProfesional,
-                );
-                respuestaAsignarProfesional.subscribe(resp => {
-                  if (resp.status == 200) {
-                    const desplazamientos = this.agendaService.calcularDesplazamientosCitasProfesional(
-                      this.fechaTurno,
-                      this.idHorarioTurno,
-                      this.idRegional,
-                      opcionProfesional,
-                    );
-                    desplazamientos.subscribe(respuestaDesplazamiento => {
-                      this.actualizarComponenteMainAgenda();
-                      if (respuestaDesplazamiento.status == 200) {
-                        this.mostrarToast(ToastType.Success, TitleToast.Success, resp.message, 5);
+          dialogRef.afterClosed()
+            .pipe(filter(opcionProfesional => opcionProfesional !== '' && opcionProfesional))
+            .subscribe(opcionProfesional => {
 
-                      } else {
-                        this.mostrarToast(ToastType.Error, TitleToast.Error, respuestaDesplazamiento.message, 5);
-                      }
-                    })
+              this.agendaService.asignarProfesionaByIdCita(
+                citaSeleccionada.idCita,
+                opcionProfesional,
+                this.fechaTurno,
+                this.idHorarioTurno,
+                this.idRegional
+              ).subscribe(resp => {
+                if (resp.status == 200) {
 
-                  } else {
-                    this.mostrarToast(ToastType.Error, TitleToast.Error, resp.message, 5);
-                  }
-                });
+                  this.mostrarToast(ToastType.Success, TitleToast.Success, resp.message, 5);
+                } else {
+                  this.mostrarToast(ToastType.Error, TitleToast.Error, resp.message, 5);
+                }
+                this.actualizarComponenteMainAgenda();
+              });
 
-              } catch (error) {
-                console.error(error);
-                this.mostrarToast(ToastType.Error, TitleToast.Error, 'Error al asignar profesional', 5);
-              }
             });
         }),
       )
@@ -109,16 +93,14 @@ export class CardCitaComponent {
     dialogRef.afterClosed()
       .pipe(
         filter(result => result),
-        switchMap(() => this.agendaService.retirarProfesional(this.citaSeleccionada.idCita)),
-
-        switchMap(() => this.agendaService.calcularDesplazamientosCitasProfesional(
+        switchMap(() => this.agendaService.retirarProfesional(
+          citaSeleccionada.idCita,
+          citaSeleccionada.idProfesional ?? '',
           this.fechaTurno,
           this.idHorarioTurno,
-          this.idRegional,
-          this.citaSeleccionada.idProfesional
-        )
-        )
-      ).subscribe(resp => {
+          this.idRegional
+        )))
+      .subscribe(resp => {
         if (resp.status == 200) {
           this.mostrarToast(ToastType.Success, TitleToast.Success, "Se desagendó cita al profesional", 5)
         } else {
@@ -149,28 +131,26 @@ export class CardCitaComponent {
           return this.agendaService.reprogramarCita(
             citaSeleccionada.idCita,
             fechaFormateada,
-            nuevaHora
+            nuevaHora,
+            this.fechaTurno,
+            this.idHorarioTurno,
+            this.idRegional,
+            citaSeleccionada.idProfesional ?? ''
           )
         } else {
           throw Error('No se ha seleccionado una hora');
         }
       }
-      ),
-      switchMap(resp => this.agendaService.calcularDesplazamientosCitasProfesional(
-        this.fechaTurno,
-        this.idHorarioTurno,
-        this.idRegional,
-        citaSeleccionada.idProfesional
       ))
-    ).subscribe(resp => {
+      .subscribe(resp => {
 
-      if (resp.status == 200) {
-        this.mostrarToast(ToastType.Success, TitleToast.Success, "Se reprogramó cita al profesional", 5)
-      } else {
-        this.mostrarToast(ToastType.Error, TitleToast.Error, "Se presentó un error al reprogramar cita", 5)
-      }
-      this.actualizarComponenteMainAgenda()
-    });
+        if (resp.status == 200) {
+          this.mostrarToast(ToastType.Success, TitleToast.Success, "Se reprogramó cita al profesional", 5)
+        } else {
+          this.mostrarToast(ToastType.Error, TitleToast.Error, "Se presentó un error al reprogramar cita", 5)
+        }
+        this.actualizarComponenteMainAgenda()
+      });
   }
 
   mostrarDetalleCita(citaSeleccionada: Cita): void {

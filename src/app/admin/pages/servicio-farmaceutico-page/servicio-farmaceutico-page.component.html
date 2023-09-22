@@ -6,6 +6,7 @@
             <h2>Servicio Farmaceutico</h2>
         </div>
 
+
         <div class="content-toolbar">
 
             <button id="notificar" title="Notificar" (click)="notificarSeleccion()"
@@ -28,6 +29,36 @@
             <input [(ngModel)]="filtroBusqueda" (ngModelChange)="filtrarNotificaciones()" type="text"
                 class="form-control" placeholder="Buscar..." aria-label="Username" aria-describedby="basic-addon1">
         </div>
+    </div>
+    <div id="content-activate-buttom">
+        <button [class]="'buttom-primary buttom-circular-activador '+filtroAvanzadoActivado" (click)="activarFiltro()"
+            title="Filtro avanzado">Filtro avanzado</button>
+    </div>
+
+    <div [class]="'filter '+filtroAvanzadoActivado">
+        <div class="container-input">
+            <label for="fechaTurno">Fecha</label>
+            <input id="fechaTurno" type="date" />
+        </div>
+
+        <div class="container-input">
+            <label for="opcionRegional">Regionales</label>
+            <select id="opcionRegional">
+                <option>seleccionar regional</option>
+            </select>
+        </div>
+
+        <div class="container-input">
+            <label for="idturno"> Turno enfermería</label>
+            <select id="idturno">
+                <option>seleccionar turno</option>
+            </select>
+        </div>
+
+
+        <button class="buttom-seleccion">Buscar</button>
+
+
     </div>
 
     <div class="content-item">
@@ -60,7 +91,8 @@
                         {{ notificacion.nombres |titlecase }} {{ notificacion.apellidos|titlecase }}
                     </div>
                     <div class="card-item">
-                        No: {{ notificacion.numeroIdentificacion }}
+                        {{ notificacion.tipoIdentificacion |obtenerSiglasIdentificacion }}: {{
+                        notificacion.numeroIdentificacion }}
                     </div>
                 </td>
             </ng-container>

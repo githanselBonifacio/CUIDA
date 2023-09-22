@@ -14,7 +14,7 @@ import { Router } from '@angular/router';
 
 export class GanttComponent implements AfterViewInit, AfterViewChecked, OnChanges {
 
-  @Output() idprofesionalEvent = new EventEmitter<string>();
+  @Output() idprofesionalEvent = new EventEmitter<Actividad>();
   @ViewChild('containerActividad') containerGeneric: ElementRef | undefined;
 
   constructor(
@@ -93,7 +93,7 @@ export class GanttComponent implements AfterViewInit, AfterViewChecked, OnChange
 
     // Asignar estilos al div tarea
     div.className = `tarea-${tarea.tipo}`;
-    div.setAttribute("estado", tarea.idEstado)
+    div.setAttribute("estado", `${tarea.idEstado}`)
     const idNuevoDiv = `tarea-${tarea.tipo}-${tarea.id}`;
     div.id = idNuevoDiv;
     div.style.fontSize = '0rem';
@@ -126,6 +126,7 @@ export class GanttComponent implements AfterViewInit, AfterViewChecked, OnChange
       }
 
     });
+
 
     div.appendChild(vignette);
     let longitudContainer = 0;
@@ -251,8 +252,8 @@ export class GanttComponent implements AfterViewInit, AfterViewChecked, OnChange
 
   }
 
-  emitirProfesionalTurno(idProfesional: string): void {
-    this.idprofesionalEvent.emit(idProfesional);
+  emitirProfesionalTurno(actividadProfesional: Actividad): void {
+    this.idprofesionalEvent.emit(actividadProfesional);
   }
 
 }

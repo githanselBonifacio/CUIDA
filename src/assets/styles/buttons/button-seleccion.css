@@ -1,6 +1,14 @@
-.buttom-seleccion{
-    background-color:var(--second-color);
-    color:var( --gris4-color);
+@import url("../../../styles.css");
+
+.buttom-primary {
+    background-color: var(--primary-color);
+    color: var(--gris4-color);
+    border-color: transparent;
+}
+
+.buttom-seleccion {
+    background-color: var(--second-color);
+    color: var(--gris4-color);
     border: solid 1px var(--gris4-color);
     border-color: transparent;
     border-radius: 0.5rem;
@@ -9,16 +17,47 @@
     margin-left: 0.5rem;
     margin-right: 0.5rem;
     min-width: 5rem;
+    min-height: 2rem;
 }
 
-.buttom-seleccion:hover{
-    color: var( --third-color);
+.buttom-seleccion:hover {
+    color: var(--third-color);
     box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5);
 }
-.buttom-group-horinzontal{
+
+.buttom-group-horinzontal {
     display: flex;
     justify-content: start;
-    align-items: end;
+    align-items: center;
     margin-left: 0.4rem;
     margin-right: 0.4rem;
+}
+
+.buttom-circular-activador {
+    display: flex;
+    position: relative;
+    padding: 0.2rem 1.6rem 0.2rem 0.5rem;
+    border-radius: 15px;
+
+}
+
+.buttom-circular-activador::after {
+    content: "";
+    position: absolute;
+    border: 1px solid var(--gris4-color);
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    padding: 3px;
+    bottom: 30%;
+    right: 8px;
+    transform: rotate(-135deg);
+    -webkit-transform: rotate(-135deg);
+    transition-duration: 0.5s;
+}
+
+.buttom-circular-activador.activate::after {
+    bottom: 40%;
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+    transition-duration: 0.5s;
 }

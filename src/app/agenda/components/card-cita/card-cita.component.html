@@ -13,8 +13,28 @@
                 </div>
 
                 <div class="item-cita">
-                    {{getNombreEstadoCita(cita.idEstado)}}
+                    <div>
+                        {{cita.paciente|titlecase}}
+                        <div>
+                            {{cita.tipoIdentificacionPaciente|obtenerSiglasIdentificacion}}:
+                            {{cita.numeroIdentificacionPaciente}}
+                        </div>
+                    </div>
+
+
                 </div>
+
+
+                <div style="margin-top: 0.5rem;" *ngIf="cita.idProfesional">
+                    <span>Profesional:</span>
+                    {{cita.idProfesional}}
+                </div>
+                <div class="content-estado-card">
+                    <div class="item-cita" id="estado-{{cita.idEstado}}" name="estado-card">
+                        {{getNombreEstadoCita(cita.idEstado)}}
+                    </div>
+                </div>
+
 
             </button>
         </h2>
@@ -65,10 +85,6 @@
                             <i class="bi bi-calendar-plus-fill" (click)="asignarProfesionalCita(cita)" title="Agendar"
                                 id="i-card-agenda-agendar"></i>
                         </ng-container>
-
-                        <span class='estado-cita' id='estado-confirmado' *ngIf="cita.idEstado  == 3">Confirmada</span>
-                        <span class='estado-cita' id='estado-progreso' *ngIf="cita.idEstado  == 4">En progreso</span>
-                        <span class='estado-cita' id='estado-finalizada' *ngIf="cita.idEstado  == 6">Finalizada</span>
                     </div>
                 </div>
             </div>

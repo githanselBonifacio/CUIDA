@@ -22,23 +22,23 @@ export class AgendaService {
   constructor(private http: HttpClient) { };
 
   //profesionales
-  async getProfesionalesCiudad(idCiudad: string) {
-    this.http.get<Respuesta>(`${environment.URL_API_CUIDA}/${this.urlRecurso}/profesionales/${idCiudad}`)
+  async getProfesionalesCiudad(idRegional: string) {
+    this.http.get<Respuesta>(`${environment.URL_API_CUIDA}/${this.urlRecurso}/profesionales/${idRegional}`)
       .subscribe(resp => {
         this.profesionales = resp.result;
       });
   }
-  getProfesionalDisponibleByturnoCiudad(fechaTurno: string, idCiudad: string) {
+  getProfesionalDisponibleByturnoCiudad(fechaTurno: string, idRegional: string) {
     const params = new HttpParams()
       .set('fechaTurno', fechaTurno)
-      .set('idCiudad', idCiudad)
+      .set('idRegional', idRegional)
     return this.http.get<Respuesta>(`${environment.URL_API_CUIDA}/${this.urlRecurso}/profesionalesByTurnoCiudad`, { params });
   }
 
-  getProfesionaFromTurnoCiudad(fechaTurno: string, idCiudad: string, idHorarioTurno: number) {
+  getProfesionaFromTurnoCiudad(fechaTurno: string, idRegional: string, idHorarioTurno: number) {
     const params = new HttpParams()
       .set('fechaTurno', fechaTurno)
-      .set('idCiudad', idCiudad)
+      .set('idRegional', idRegional)
       .set('idHorarioTurno', idHorarioTurno)
 
     return this.http.get<Respuesta>(`${environment.URL_API_CUIDA}/${this.urlRecurso}/profesionalesFromTurnoCiudad`, { params });
@@ -62,11 +62,11 @@ export class AgendaService {
   }
 
   //citas
-  async getCitas(fechaTurno: string, idCiudad: string, idHorarioTurno: number) {
+  async getCitas(fechaTurno: string, idRegional: string, idHorarioTurno: number) {
     const params = new HttpParams()
       .set('fechaTurno', fechaTurno)
       .set('idHorarioTurno', idHorarioTurno)
-      .set('idCiudad', idCiudad)
+      .set('idRegional', idRegional)
 
     this.http.get<Respuesta>(`${environment.URL_API_CUIDA}/${this.urlRecurso}/citas`, { params })
       .subscribe(resp => {
@@ -100,11 +100,11 @@ export class AgendaService {
   }
 
   //actividades gantt
-  async getActividadesAgendaGantt(fechaTurno: string, idCiudad: string, idHorarioTurno: number) {
+  async getActividadesAgendaGantt(fechaTurno: string, idRegional: string, idHorarioTurno: number) {
     const params = new HttpParams()
       .set('fechaTurno', fechaTurno)
       .set('idHorarioTurno', idHorarioTurno)
-      .set('idCiudad', idCiudad)
+      .set('idRegional', idRegional)
 
     this.http.get<Respuesta>(`${environment.URL_API_CUIDA}/${this.urlRecurso}/actividadesByprofesionalesCiudadHorario`, { params })
 
@@ -115,65 +115,68 @@ export class AgendaService {
   }
 
   //admin agenda
-  async filtrarCitasByIdRemision(id_remision: string) {
-    this.citas = this.citas.filter(cita => cita.idRemision.includes(id_remision))
+  async filtrarCitasByIdRemision(criterioBusqueda: string) {
+    const criterioNombrePaciente = criterioBusqueda.toLowerCase();
+    this.citas = this.citas.filter(cita => {
+      return cita.idRemision.includes(criterioBusqueda) ||
+        cita.idProfesional?.includes(criterioBusqueda) ||
+        cita.paciente.toLowerCase().includes(criterioNombrePaciente) ||
+        cita.numeroIdentificacionPaciente.includes(criterioBusqueda);
+
+    });
   }
 
-  asignarProfesionaByIdCita(idCita: string, numeoIdentificacion: string) {
+  asignarProfesionaByIdCita(idCita: string, numeoIdentificacion: string, fechaTurno: string, idHorarioTurno: number, idRegional: string) {
     const params = new HttpParams()
       .set('idCita', idCita)
       .set('idProfesional', numeoIdentificacion)
+      .set('fechaTurno', fechaTurno)
+      .set('idHorarioTurno', idHorarioTurno)
+      .set('idRegional', idRegional)
 
     return this.http.get<Respuesta>(`${environment.URL_API_CUIDA}/${this.urlRecurso}/asignarProfesionalCita`, { params })
   }
 
-  retirarProfesional(idCita: string) {
+  retirarProfesional(idCita: string, numeoIdentificacion: string, fechaTurno: string, idHorarioTurno: number, idRegional: string) {
     const params = new HttpParams()
       .set('idCita', idCita)
+      .set('idProfesional', numeoIdentificacion)
+      .set('fechaTurno', fechaTurno)
+      .set('idHorarioTurno', idHorarioTurno)
+      .set('idRegional', idRegional)
 
     return this.http.get<Respuesta>(`${environment.URL_API_CUIDA}/${this.urlRecurso}/desasignarProfesionalCita`, { params })
   }
-  reprogramarCita(idCita: string, fechaProgramada: string, nuevaHora: string) {
-    console.log(idCita)
-    console.log(fechaProgramada)
-    console.log(nuevaHora)
+  reprogramarCita(idCita: string, fechaProgramada: string, nuevaHora: string, fechaTurno: string, idHorarioTurno: number, idRegional: string, idProfesional: string) {
     const params = new HttpParams()
       .set('idCita', idCita)
       .set('fechaProgramada', fechaProgramada)
       .set('nuevaHora', nuevaHora)
+      .set('fechaTurno', fechaTurno)
+      .set('idHorarioTurno', idHorarioTurno)
+      .set('idRegional', idRegional)
+      .set('idProfesional', idProfesional)
 
     return this.http.get<Respuesta>(`${environment.URL_API_CUIDA}/${this.urlRecurso}/reprogramarCita`, { params })
   }
-  calcularDesplazamientosCitasProfesional(fechaTurno: string, idHorarioTurno: number, idCiudad: string, idProfesional: string | null) {
-    if (idProfesional != null) {
-      const params = new HttpParams()
-        .set('fechaTurno', fechaTurno)
-        .set('idHorarioTurno', idHorarioTurno)
-        .set('idCiudad', idCiudad)
-        .set('idProfesional', idProfesional)
-      return this.http.get<Respuesta>(`${environment.URL_API_CUIDA}/${this.urlRecurso}/calcularDesplazamientoCitasByprofesional`, { params })
-    } else {
-      throw new Error('Invalid input: idProfesional is null');
-    }
 
-  }
   calcularDesplazamientoTurnoCompleto(turno: Cita[]) {
     return this.http.post(`${this.serviceUrl}/citas/calcularDesplazamiento`, turno)
   }
 
-  desagendarTurnoCompleto(fechaTurno: Date, idHorarioTurno: number, idCiudad: string) {
+  desagendarTurnoCompleto(fechaTurno: Date, idHorarioTurno: number, idRegional: string) {
     const params = new HttpParams()
       .set('fechaTurno', `${formatoFecha(fechaTurno)}`)
       .set('idHorarioTurno', idHorarioTurno)
-      .set('idCiudad', idCiudad)
+      .set('idRegional', idRegional)
 
     return this.http.get<Respuesta>(`${environment.URL_API_CUIDA}/${this.urlRecurso}/desagendarTurnoCompleto`, { params })
   }
-  autoagendar(fechaTurno: Date, idHorarioTurno: number, idCiudad: string) {
+  autoagendar(fechaTurno: Date, idHorarioTurno: number, idRegional: string) {
     const params = new HttpParams()
       .set('fechaTurno', `${formatoFecha(fechaTurno)}`)
       .set('idHorarioTurno', idHorarioTurno)
-      .set('idCiudad', idCiudad)
+      .set('idRegional', idRegional)
     return this.http.get<Respuesta>(`${environment.URL_API_CUIDA}/${this.urlRecurso}/autoagendarTurnoCompleto`, { params })
   }
 }

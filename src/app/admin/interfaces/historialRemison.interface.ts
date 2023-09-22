@@ -32,7 +32,7 @@ export interface DatosCita {
     latitud: number;
     duracion: number;
     longitud: number;
-    idCiudad: string;
+    idRegional: string;
     idEstado: string;
     idRemision: string;
     especialidad: string;

@@ -22,7 +22,7 @@
 }
 
 #header_filtro_agenda {
-    justify-content: space-between;
+    justify-content: end;
     flex-direction: row;
     align-items: end;
     padding: 1rem 1rem 1rem 1rem;
@@ -30,7 +30,7 @@
 }
 
 #filtro_agenda {
-    justify-content: space-between;
+    justify-content: end;
 }
 
 .d-flex-col {
@@ -40,7 +40,7 @@
 
 .input-group {
     display: flex !important;
-    align-items: end !important;
+    align-items: center !important;
     justify-content: end !important;
 }
 
@@ -50,7 +50,7 @@
 }
 
 #container-card-citas {
-    margin: 0.3rem 0.3rem 0.3rem 0.3rem;
+    margin: 0.3rem 0.3rem 0.3rem 0;
 }
 
 #container-card {

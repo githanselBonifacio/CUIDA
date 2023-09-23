@@ -29,6 +29,11 @@ body {
     font-family: var(--bs-font-sans-serif), var(--bs-font-monospace) !important;
 }
 
+* ::selection {
+    background-color: var(--primary-color);
+    color: var(--cero-color);
+}
+
 .container-view {
     margin: 4rem 2rem 1rem 2rem;
 
@@ -39,6 +44,8 @@ h2 {
     color: var(--second-color);
     margin: 0;
 }
+
+
 
 h5,
 h6 {

@@ -33,6 +33,10 @@
     transform: translateY(-40%);
 }
 
+#idHorarioturno {
+    min-width: 8rem;
+}
+
 #back-admin {
     display: flex;
     align-items: center;
@@ -117,15 +121,16 @@
     padding-left: 1rem;
 }
 
-.card-item,
-.card-item td {
+.card-item {
     text-align: start;
 }
 
-.th-start {
+.th-start,
+.td-start {
     text-align: start;
     white-space: nowrap;
 }
+
 
 #notificado {
     color: var(--green-color);
@@ -140,11 +145,11 @@
 }
 
 .badge-no-aplica {
+
     background-color: var(--orange-color);
     padding: 0.2rem 0.2rem 0.2rem 0.2rem;
     border-radius: 5px;
     color: white;
-    font-weight: bold;
 }
 
 

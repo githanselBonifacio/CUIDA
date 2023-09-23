@@ -8,6 +8,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { ChangeDetectorRef } from '@angular/core';
 import { SpinnerService } from 'src/app/shared/services/spinner/spinner.service.service';
 import { ToastService } from 'src/app/shared/services/toast/toast.service';
+import { MaestrosService } from 'src/app/shared/services/maestros/maestros.service';
 
 @Component({
   selector: 'app-servicio-farmaceutico-page',
@@ -18,6 +19,7 @@ export class ServicioFarmaceuticoPageComponent implements OnInit, AfterViewInit 
 
   constructor(
     private adminService: AdminRemisionService,
+    private maestrosService: MaestrosService,
     private router: Router,
     private cdr: ChangeDetectorRef,
     private spinnerService: SpinnerService,
@@ -37,19 +39,22 @@ export class ServicioFarmaceuticoPageComponent implements OnInit, AfterViewInit 
   notificacionesCompleta: NotificacionFarmacia[] = [];
   notificacionesSeleccionadas: NotificacionFarmacia[] = [];
 
+  //filtro oculto
+  fechaTurno!: Date;
+  idHorarioTurnoSeleccionado!: number;
+  idRegionalSeleccionada!: string;
 
   ngOnInit(): void {
+    this.maestrosService.getRegionales();
+    this.maestrosService.getHorarioTurno();
     this.notificacionesSeleccionadas = [];
     this.dataSource.paginator = this.paginator;
     this.adminService.getNotificacionesFarmacia()
       .subscribe(resp => {
         if (resp.status == 200) {
           this.notificacionesCompleta = resp.result;
-          this.dataSource.data = this.notificacionesCompleta;
+          this.dataSource.data = resp.result;
           this.validarMasterCheck();
-          setTimeout(() => {
-            this.cdr.detectChanges();
-          });
         }
 
       });
@@ -61,9 +66,31 @@ export class ServicioFarmaceuticoPageComponent implements OnInit, AfterViewInit 
     this.spinnerService.hide();
   }
 
+  get regionales() {
+    return this.maestrosService.regionales;
+  }
+  get horariosTurno() {
+    return this.maestrosService.horariosTurno;
+  }
+
+  consultaAvanzada() {
+    this.spinnerService.show();
+    this.adminService.getNotificacionesFarmaciaWithFilter(
+      this.fechaTurno, this.idHorarioTurnoSeleccionado, this.idRegionalSeleccionada)
+      .subscribe(resp => {
+        this.dataSource.data = resp.result
+      })
+    this.spinnerService.hide();
+  }
   activarFiltro() {
     if (this.filtroAvanzadoActivado == "activate") {
+      this.spinnerService.show()
       this.filtroAvanzadoActivado = "";
+      this.adminService.getNotificacionesFarmacia();
+      this.dataSource.data = this.notificacionesCompleta.slice();
+      this.validarMasterCheck();
+      this.spinnerService.hide()
+
     } else {
       this.filtroAvanzadoActivado = "activate"
     }

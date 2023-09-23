@@ -35,11 +35,12 @@ export function generarHorario(idHorarioTurno: number): string[] {
 }
 export function formatoFecha(date: Date): string {
     const dateTime = new Date(date);
-    const day = dateTime.getDate().toString().padStart(2, '0');
+    const day = (dateTime.getDate() + 1).toString().padStart(2, '0');
     const month = (dateTime.getMonth() + 1).toString().padStart(2, '0');
     const year = dateTime.getFullYear().toString();
     const hours = dateTime.getHours().toString().padStart(2, '0');
     const minutes = dateTime.getMinutes().toString().padStart(2, '0');
+    console.log(`${year}-${month}-${day}`)
     return `${year}-${month}-${day}`;
 }
 

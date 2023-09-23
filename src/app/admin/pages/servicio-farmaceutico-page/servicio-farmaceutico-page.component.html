@@ -32,31 +32,35 @@
     </div>
     <div id="content-activate-buttom">
         <button [class]="'buttom-primary buttom-circular-activador '+filtroAvanzadoActivado" (click)="activarFiltro()"
-            title="Filtro avanzado">Filtro avanzado</button>
+            title="Filtro avanzado">Filtro avanzado
+
+        </button>
+
     </div>
 
     <div [class]="'filter '+filtroAvanzadoActivado">
         <div class="container-input">
             <label for="fechaTurno">Fecha</label>
-            <input id="fechaTurno" type="date" />
+            <input id="fechaTurno" type="date" [(ngModel)]="fechaTurno" />
         </div>
 
         <div class="container-input">
             <label for="opcionRegional">Regionales</label>
-            <select id="opcionRegional">
-                <option>seleccionar regional</option>
+            <select id="opcionRegional" [(ngModel)]="idRegionalSeleccionada">
+                <option *ngFor="let regional of regionales" [value]="regional.id">{{regional.nombre}}</option>
             </select>
         </div>
 
         <div class="container-input">
-            <label for="idturno"> Turno enfermería</label>
-            <select id="idturno">
-                <option>seleccionar turno</option>
+            <label for="idHorarioturno"> Turno enfermería</label>
+            <select id="idHorarioturno" [(ngModel)]="idHorarioTurnoSeleccionado">
+                <option *ngFor="let horarioTurno of horariosTurno" [value]="horarioTurno.id">{{horarioTurno.nombre}}
+                </option>
             </select>
         </div>
 
 
-        <button class="buttom-seleccion">Buscar</button>
+        <button class="buttom-seleccion" (click)="consultaAvanzada()">Buscar</button>
 
 
     </div>
@@ -99,7 +103,7 @@
 
             <ng-container matColumnDef="Tipo">
                 <th mat-header-cell *matHeaderCellDef> Tipo </th>
-                <td mat-cell *matCellDef="let notificacion"> {{notificacion.tipo}} </td>
+                <td class="td-start" mat-cell *matCellDef="let notificacion"> {{notificacion.tipo}} </td>
             </ng-container>
 
             <ng-container matColumnDef="Medicamento">
@@ -107,7 +111,7 @@
                 <td mat-cell *matCellDef="let notificacion">
                     <div>
 
-                        <div class="card-item">
+                        <div class="card-item td-start">
                             {{notificacion.presentacionMedicamento|titlecase}}
                         </div>
 
@@ -121,8 +125,11 @@
 
             <ng-container matColumnDef="Dosis">
                 <th mat-header-cell *matHeaderCellDef> Dosis </th>
-                <td mat-cell *matCellDef="let notificacion"> {{notificacion.cantidadDosis}}
-                    ({{notificacion.unidadDosis}}) </td>
+                <td class="td-start" *matCellDef="let notificacion">
+                    <span>{{notificacion.cantidadDosis}}
+                        ({{notificacion.unidadDosis}})
+                    </span>
+                </td>
             </ng-container>
 
             <ng-container matColumnDef="Vía">

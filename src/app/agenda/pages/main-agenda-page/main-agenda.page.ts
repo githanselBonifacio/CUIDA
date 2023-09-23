@@ -7,7 +7,7 @@ import { MatDialog } from '@angular/material/dialog'
 import { AgendaService } from 'src/app/agenda/services/agenda.service';
 import { Cita } from "../../interfaces/remision.interface"
 import { MaestrosService } from 'src/app/shared/services/maestros/maestros.service';
-import { EstadoCita, HorarioTurno, Regional } from 'src/app/shared/interfaces/maestros.interfaces';
+import { EstadoCita, HorarioTurno, Regional, formatoFecha } from 'src/app/shared/interfaces/maestros.interfaces';
 import { Actividad } from 'src/app/diagramas/interfaces/tarea-gantt.interface';
 import { generarHorario } from '../../../shared/interfaces/maestros.interfaces'
 
@@ -30,16 +30,10 @@ export class MainComponentAgendaComponent implements OnInit {
 
 
   loadingPage = false;
-  today = new Date();
-  year = this.today.getFullYear();
-  month = (this.today.getMonth() + 1).toString().padStart(2, '0');
-  day = this.today.getDate().toString().padStart(2, '0');
-  fechaHoy = `${this.year}-${this.month}-${this.day}`;
-
   horasTurnoString: string[] = []
 
   idRemision: string = "";
-  fechaFiltroTurno: string = this.fechaHoy;
+  fechaFiltroTurno: string = formatoFecha(new Date());
 
   opcionRegional: string = "4292"
   opcionHorariosTurno: number = 1
@@ -221,3 +215,4 @@ export class MainComponentAgendaComponent implements OnInit {
     this.consultarCitas()
   }
 }
+

@@ -13,7 +13,8 @@ export class MaestrosService {
   public regionales: Regional[] = [];
   public horariosTurno: HorarioTurno[] = [];
   public estadosCita: EstadoCita[] = [];
-  public horarioTurnoSeleccionado: HorarioTurno = crearHorario()
+  public horarioTurnoSeleccionado!: HorarioTurno;
+
 
   constructor(private http: HttpClient) { }
 

@@ -10,15 +10,20 @@
 }
 
 .filter {
-    display: none;
+    height: 0px;
+    padding: 0rem 0.5rem 0rem 0.5rem;
+    display: flex;
+    opacity: 0;
     align-items: center;
     justify-content: end;
-    padding: 1.5rem 0.5rem 1rem 0.5rem;
+    transition: all 0.2s linear;
 }
 
 .filter.activate {
-    display: flex;
-    transition: all 2s ease-in;
+    height: 100%;
+    opacity: 1;
+    padding: 1.5rem 0.5rem 1rem 0.5rem;
+    transition: all 0.2s linear;
 }
 
 #content-activate-buttom {

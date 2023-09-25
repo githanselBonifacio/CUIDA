@@ -4,7 +4,7 @@ import { MainAdminPageComponent } from './pages/main-admin-page/main-admin-page.
 import { AdminRoutingModule } from './admin-routing.module';
 import { ServicioFarmaceuticoPageComponent } from './pages/servicio-farmaceutico-page/servicio-farmaceutico-page.component';
 import { NgxPaginationModule } from 'ngx-pagination';
-import { FormsModule } from '@angular/forms';
+import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AdminRemisionesPageComponent } from './pages/admin-remisiones-page/admin-remisiones-page.component';
 import { AdminHistorialRemisionPageComponent } from './pages/admin-historial-remision-page/admin-historial-remision-page.component';
 import { TablaHistorialCitasComponent } from './components/tabla-historial-citas/tabla-historial-citas.component';
@@ -13,8 +13,8 @@ import { ModalDetalleCitasHistorialComponent } from './components/modal-detalle-
 import { TablaActualizacionDatosRemisionComponent } from './components/tabla-actualizacion-datos-remision/tabla-actualizacion-datos-remision.component';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { AgendaModule } from '../agenda/agenda.module';
-import { MatTableDataSource, MatTableModule } from '@angular/material/table';
-import { SpinnerComponent } from '../shared/components/spinner/spinner.component';
+import { MatTableModule } from '@angular/material/table';
+
 
 
 @NgModule({
@@ -35,7 +35,8 @@ import { SpinnerComponent } from '../shared/components/spinner/spinner.component
     FormsModule,
     PipesModule,
     MatPaginatorModule,
-    MatTableModule
+    MatTableModule,
+    ReactiveFormsModule
   ],
   exports: [
     MainAdminPageComponent,

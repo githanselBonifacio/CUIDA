@@ -1,14 +1,15 @@
 import { Component, AfterViewInit, ViewChild, OnInit, SimpleChanges } from '@angular/core';
 import { AdminRemisionService } from '../../services/admin-remision.service';
 import { NotificacionFarmacia } from '../../interfaces/servicioFarmaceutico.interface';
-import { ToastComponent, TitleToast, crearConfig, ToastType } from 'src/app/shared/components/toast/toast.component';
+import { TitleToast, ToastType } from 'src/app/shared/components/toast/toast.component';
 import { Router } from '@angular/router';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
-import { ChangeDetectorRef } from '@angular/core';
 import { SpinnerService } from 'src/app/shared/services/spinner/spinner.service.service';
 import { ToastService } from 'src/app/shared/services/toast/toast.service';
 import { MaestrosService } from 'src/app/shared/services/maestros/maestros.service';
+import { formatoFecha } from 'src/app/shared/interfaces/maestros.interfaces';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-servicio-farmaceutico-page',
@@ -21,7 +22,6 @@ export class ServicioFarmaceuticoPageComponent implements OnInit, AfterViewInit 
     private adminService: AdminRemisionService,
     private maestrosService: MaestrosService,
     private router: Router,
-    private cdr: ChangeDetectorRef,
     private spinnerService: SpinnerService,
     private toastService: ToastService
   ) { }
@@ -40,9 +40,11 @@ export class ServicioFarmaceuticoPageComponent implements OnInit, AfterViewInit 
   notificacionesSeleccionadas: NotificacionFarmacia[] = [];
 
   //filtro oculto
-  fechaTurno!: Date;
-  idHorarioTurnoSeleccionado!: number;
-  idRegionalSeleccionada!: string;
+  formfiltro = new FormGroup({
+    fecha: new FormControl(formatoFecha(new Date()), [Validators.required]),
+    idHorario: new FormControl(0, [Validators.required]),
+    idRegional: new FormControl('', [Validators.required])
+  })
 
   ngOnInit(): void {
     this.maestrosService.getRegionales();
@@ -73,15 +75,28 @@ export class ServicioFarmaceuticoPageComponent implements OnInit, AfterViewInit 
     return this.maestrosService.horariosTurno;
   }
 
+  get fecha() {
+    return this.formfiltro.get("fecha")?.value;
+  }
+  get idHorario() {
+    return this.formfiltro.get("idHorario")?.value;
+  }
+  get idRegional() {
+    return this.formfiltro.get("idRegional")?.value;
+  }
+
   consultaAvanzada() {
     this.spinnerService.show();
-    this.adminService.getNotificacionesFarmaciaWithFilter(
-      this.fechaTurno, this.idHorarioTurnoSeleccionado, this.idRegionalSeleccionada)
-      .subscribe(resp => {
-        this.dataSource.data = resp.result
-      })
+    if (this.formfiltro.valid) {
+      this.adminService.getNotificacionesFarmaciaWithFilter(
+        this.fecha ?? '', this.idHorario ?? 0, this.idRegional ?? '')
+        .subscribe(resp => {
+          this.dataSource.data = resp.result
+        })
+    }
     this.spinnerService.hide();
   }
+
   activarFiltro() {
     if (this.filtroAvanzadoActivado == "activate") {
       this.spinnerService.show()

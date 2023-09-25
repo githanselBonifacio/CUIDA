@@ -27,7 +27,7 @@
             </div>
 
             <input [(ngModel)]="filtroBusqueda" (ngModelChange)="filtrarNotificaciones()" type="text"
-                class="form-control" placeholder="Buscar..." aria-label="Username" aria-describedby="basic-addon1">
+                class="form-control" placeholder="Buscar...">
         </div>
     </div>
     <div id="content-activate-buttom">
@@ -39,31 +39,40 @@
     </div>
 
     <div [class]="'filter '+filtroAvanzadoActivado">
-        <div class="container-input">
-            <label for="fechaTurno">Fecha</label>
-            <input id="fechaTurno" type="date" [(ngModel)]="fechaTurno" />
-        </div>
+        <form [formGroup]="formfiltro" (ngSubmit)="consultaAvanzada()">
 
-        <div class="container-input">
-            <label for="opcionRegional">Regionales</label>
-            <select id="opcionRegional" [(ngModel)]="idRegionalSeleccionada">
-                <option *ngFor="let regional of regionales" [value]="regional.id">{{regional.nombre}}</option>
-            </select>
-        </div>
+            <div class="d-flex">
 
-        <div class="container-input">
-            <label for="idHorarioturno"> Turno enfermería</label>
-            <select id="idHorarioturno" [(ngModel)]="idHorarioTurnoSeleccionado">
-                <option *ngFor="let horarioTurno of horariosTurno" [value]="horarioTurno.id">{{horarioTurno.nombre}}
-                </option>
-            </select>
-        </div>
+                <div class="container-input">
+                    <label for="fechaTurno">Fecha</label>
+                    <input id="fechaTurno" type="date" formControlName="fecha" />
+                </div>
+
+                <div class="container-input">
+                    <label for="opcionRegional">Regionales</label>
+                    <select formControlName="idRegional" id="opcionRegional">
+                        <option value="" selected disabled>seleccione...</option>
+                        <option *ngFor="let regional of regionales" [value]="regional.id">
+                            {{regional.nombre}}</option>
+                    </select>
+                </div>
+
+                <div class="container-input">
+                    <label for="idHorarioturno"> Turno enfermería</label>
+                    <select id="idHorarioturno" formControlName="idHorario">
+                        <option value="" selected disabled>seleccione...</option>
+                        <option *ngFor="let horarioTurno of horariosTurno" [value]="horarioTurno.id">
+                            {{horarioTurno.nombre}}
+                        </option>
+                    </select>
+                </div>
 
 
-        <button class="buttom-seleccion" (click)="consultaAvanzada()">Buscar</button>
-
-
+                <button type="submit" class="buttom-seleccion" [disabled]="!formfiltro.valid">Buscar</button>
+            </div>
+        </form>
     </div>
+
 
     <div class="content-item">
 

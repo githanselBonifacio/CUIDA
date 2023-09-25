@@ -59,6 +59,7 @@ a {
 
 p {
     color: var(--quarter-color) !important;
+    padding: 0rem 0.2rem 0rem 0.2rem;
 }
 
 hr {

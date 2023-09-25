@@ -4,9 +4,9 @@ import { Profesional } from '../interfaces/profesional.interface'
 import { Cita } from '../interfaces/remision.interface'
 import { Actividad } from '../../diagramas/interfaces/tarea-gantt.interface'
 import { environment } from '../../../environments/environments';
-import { AgendaModule } from '../agenda.module';
 import { formatoFecha } from '../../shared/interfaces/maestros.interfaces'
 import { Respuesta } from 'src/app/shared/interfaces/response.interfaces';
+import { TitleToast, ToastType } from 'src/app/shared/components/toast/toast.component';
 
 @Injectable({
   providedIn: 'root'
@@ -26,6 +26,7 @@ export class AgendaService {
     this.http.get<Respuesta>(`${environment.URL_API_CUIDA}/${this.urlRecurso}/profesionales/${idRegional}`)
       .subscribe(resp => {
         this.profesionales = resp.result;
+
       });
   }
   getProfesionalDisponibleByturnoCiudad(fechaTurno: string, idRegional: string) {

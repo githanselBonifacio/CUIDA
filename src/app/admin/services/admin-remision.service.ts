@@ -17,9 +17,9 @@ export class AdminRemisionService {
     return this.http.get<Respuesta>(`${environment.URL_API_CUIDA}/${this.urlRecursoRemision}/tratamientosFarmacia/`)
 
   }
-  getNotificacionesFarmaciaWithFilter(fechaTurno: Date, idHorarioTurno: number, idRegional: string) {
+  getNotificacionesFarmaciaWithFilter(fechaTurno: string, idHorarioTurno: number, idRegional: string) {
     const params = new HttpParams()
-      .set('fechaTurno', `${formatoFecha(fechaTurno)}`)
+      .set('fechaTurno', fechaTurno)
       .set('idHorarioTurno', idHorarioTurno)
       .set('idRegional', idRegional)
 

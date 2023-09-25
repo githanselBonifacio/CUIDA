@@ -14,6 +14,8 @@ import { AdminModule } from '../admin/admin.module';
 import { SpinnerComponent } from './components/spinner/spinner.component';
 import { SpinnerService } from './services/spinner/spinner.service.service';
 import { ToastComponent } from './components/toast/toast.component';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { ToastService } from './services/toast/toast.service';
 
 
 @NgModule({
@@ -34,7 +36,8 @@ import { ToastComponent } from './components/toast/toast.component';
     DiagramasModule,
     AgendaModule,
     MovilesModule,
-    AdminModule
+    AdminModule,
+    MatSnackBarModule
   ],
   exports: [
     InicioComponent,
@@ -43,7 +46,8 @@ import { ToastComponent } from './components/toast/toast.component';
     ToastComponent
   ],
   providers: [
-    SpinnerService
+    SpinnerService,
+    ToastService
   ]
 })
 

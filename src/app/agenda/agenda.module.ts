@@ -11,12 +11,10 @@ import { ModalSeleccionProfesionalComponent } from './components/modal-seleccion
 import { AgendaRoutingModule } from './agenda-routing.module';
 import { ModalCambioHoraCitaComponent } from './components/modal-cambio-hora-cita/modal-cambio-hora-cita.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { SpinnerComponent } from '../shared/components/spinner/spinner.component';
 import { ModalDetalleRemisionComponent } from './components/modal-detalle-remision/modal-detalle-remision.component';
 import { MapsModule } from '../maps/maps.module';
 import { MatSelectModule } from '@angular/material/select';
 import { PipesModule } from '../pipes/pipes.module';
-import { ToastComponent } from '../shared/components/toast/toast.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { ItemsCitaComponent } from './components/items-cita/items-cita.component';
 import { PlaceholderTableComponent } from '../shared/components/placeholder-table/placeholder-table.component';
@@ -39,7 +37,6 @@ import { PlaceholderTableComponent } from '../shared/components/placeholder-tabl
     MatFormFieldModule,
     MatInputModule,
     MatDialogModule,
-    MatProgressSpinnerModule,
     MapsModule,
     PipesModule,
     MatSelectModule,

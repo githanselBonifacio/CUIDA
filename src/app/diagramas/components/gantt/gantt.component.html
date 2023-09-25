@@ -14,7 +14,7 @@
 </div>
 
 <div class="overflow-auto" class="container-actividades-panel">
-
+    <p *ngIf="actividades.length==0"> No se encontrarón actividades para este turno!!!</p>
     <div *ngFor="let actividad of actividades; let i = index">
 
         <div class="row">

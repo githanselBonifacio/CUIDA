@@ -73,7 +73,9 @@
             <hr>
             <!-- Listado de citas -->
             <div id='container-card'>
-
+                <p *ngIf="citas.length==0">
+                    No se encontrarón citas!!!
+                </p>
                 <div *ngFor="let cita of citas" id="container-card-citas">
 
                     <app-agenda-card-cita (actualizarMainView)="actualizarComponenteMainAgenda()" [cita]="cita"
@@ -87,12 +89,12 @@
         </div>
         <div class="col-lg-9 col-xl-9  col-xxl-10" id="container-agenda-gantt">
             <div class="panel-gantt">
-                <div>
-                    <app-diagramas-gantt [actividades]="actividades" [horas]="horasTurnoString"
-                        [tituloActorResponsable]="'Profesionales'"
-                        (idprofesionalEvent)="desasignarProfesionalTurno($event)">
-                    </app-diagramas-gantt>
-                </div>
+
+                <app-diagramas-gantt [actividades]="actividades" [horas]="horasTurnoString"
+                    [tituloActorResponsable]="'Profesionales'"
+                    (idprofesionalEvent)="desasignarProfesionalTurno($event)">
+                </app-diagramas-gantt>
+
                 <hr>
                 <div>
 

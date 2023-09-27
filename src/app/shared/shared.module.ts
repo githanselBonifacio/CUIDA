@@ -47,7 +47,8 @@ import { ToastService } from './services/toast/toast.service';
   ],
   providers: [
     SpinnerService,
-    ToastService
+    ToastService,
+    RouterModule,
   ]
 })
 

@@ -1,11 +1,11 @@
 export interface Profesional {
-
+    idTipoIdentificacion: number;
     numeroIdentificacion: string;
     nombres: string;
     apellidos: string;
     fechaNacimiento: string;
     idRegional: string;
-    activo: number;
+    activo: boolean;
 
 }
 

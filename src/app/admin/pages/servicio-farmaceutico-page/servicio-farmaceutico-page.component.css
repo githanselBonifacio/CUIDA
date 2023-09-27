@@ -16,14 +16,14 @@
     opacity: 0;
     align-items: center;
     justify-content: end;
-    transition: all 0.2s linear;
+    transition: all 0.3s ease-in-out;
 }
 
 .filter.activate {
     height: 100%;
     opacity: 1;
     padding: 1.5rem 0.5rem 1rem 0.5rem;
-    transition: all 0.2s linear;
+    transition: all 0.2s ease-in-out;
 }
 
 #content-activate-buttom {

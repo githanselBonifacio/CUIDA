@@ -19,7 +19,7 @@ export class AdminRemisionesPageComponent implements AfterViewInit {
 
   @ViewChild('paginatorRemisiones') paginator!: MatPaginator;
 
-  displayedColumns: string[] = ['Id', 'Paciente', 'Admisión', 'Programa', 'Ciudad', 'Remitente', 'Estado', 'Historial'];
+  displayedColumns: string[] = ['Id', 'Paciente', 'Admisión', 'Programa', 'Regional', 'Remitente', 'Estado', 'Historial'];
   dataSource = new MatTableDataSource<Remision>([]);
 
 

@@ -25,7 +25,8 @@
 
 html,
 body {
-    margin: 0 !important;
+    margin: 0px !important;
+    height: 100%;
     font-family: var(--bs-font-sans-serif), var(--bs-font-monospace) !important;
 }
 
@@ -100,6 +101,7 @@ mat-snack-bar-container div {
 
 /* Estilo para la almohadilla de la barra de scroll al pasar el mouse sobre ella */
 ::-webkit-scrollbar-thumb:hover {
+
     background: var(--quarter-color);
 }
 

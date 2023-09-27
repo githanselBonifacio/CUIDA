@@ -69,3 +69,17 @@
     -webkit-transform: rotate(45deg);
     transition-duration: 0.5s;
 }
+
+.buttom-circular-activador.invertido.activate::after {
+    bottom: 30%;
+    transform: rotate(-135deg);
+    -webkit-transform: rotate(-135deg);
+    transition-duration: 0.5s;
+}
+
+.buttom-circular-activador.invertido::after {
+    bottom: 40%;
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+    transition-duration: 0.5s;
+}

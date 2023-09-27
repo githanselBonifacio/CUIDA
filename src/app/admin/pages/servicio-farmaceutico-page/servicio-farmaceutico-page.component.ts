@@ -8,8 +8,8 @@ import { MatPaginator } from '@angular/material/paginator';
 import { SpinnerService } from 'src/app/shared/services/spinner/spinner.service.service';
 import { ToastService } from 'src/app/shared/services/toast/toast.service';
 import { MaestrosService } from 'src/app/shared/services/maestros/maestros.service';
-import { formatoFecha } from 'src/app/shared/interfaces/maestros.interfaces';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { HorarioTurno, Regional, formatoFecha } from 'src/app/shared/interfaces/maestros.interfaces';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-servicio-farmaceutico-page',
@@ -22,6 +22,7 @@ export class ServicioFarmaceuticoPageComponent implements OnInit, AfterViewInit 
     private adminService: AdminRemisionService,
     private maestrosService: MaestrosService,
     private router: Router,
+    private formBuilder: FormBuilder,
     private spinnerService: SpinnerService,
     private toastService: ToastService
   ) { }
@@ -40,16 +41,15 @@ export class ServicioFarmaceuticoPageComponent implements OnInit, AfterViewInit 
   notificacionesSeleccionadas: NotificacionFarmacia[] = [];
 
   //filtro oculto
-  formfiltro = new FormGroup({
-    fecha: new FormControl(formatoFecha(new Date()), [Validators.required]),
-    idHorario: new FormControl(0, [Validators.required]),
-    idRegional: new FormControl('', [Validators.required])
+  formfiltro = this.formBuilder.group({
+    fecha: [formatoFecha(new Date()), Validators.required],
+    idHorario: [0, [Validators.required]],
+    idRegional: ['', [Validators.required]]
   })
 
   ngOnInit(): void {
     this.maestrosService.getRegionales();
     this.maestrosService.getHorarioTurno();
-    this.notificacionesSeleccionadas = [];
     this.dataSource.paginator = this.paginator;
     this.adminService.getNotificacionesFarmacia()
       .subscribe(resp => {
@@ -68,10 +68,10 @@ export class ServicioFarmaceuticoPageComponent implements OnInit, AfterViewInit 
     this.spinnerService.hide();
   }
 
-  get regionales() {
+  get regionales(): Regional[] {
     return this.maestrosService.regionales;
   }
-  get horariosTurno() {
+  get horariosTurno(): HorarioTurno[] {
     return this.maestrosService.horariosTurno;
   }
 
@@ -115,9 +115,10 @@ export class ServicioFarmaceuticoPageComponent implements OnInit, AfterViewInit 
 
     if (this.filtroBusqueda.length == 0) {
 
-      this.dataSource.data = this.notificacionesCompleta;
+      this.dataSource.data = this.notificacionesCompleta.slice();
       this.filtrarByEstadoNotificacion();
     } else {
+      this.dataSource.data = this.notificacionesCompleta.slice()
       this.dataSource.data = this.dataSource.data.filter(notificacion => {
         const nombreCompleto = `${notificacion.nombres.toLowerCase()} ${notificacion.apellidos.toLowerCase()}`;
         const numeroIdentificacion = notificacion.numeroIdentificacion.toLowerCase();
@@ -128,15 +129,40 @@ export class ServicioFarmaceuticoPageComponent implements OnInit, AfterViewInit 
     }
   }
 
+  onCheckboxChangeNotificado(event: any) {
+    this.checkedNotificado = event.target.checked;
+    this.checkedSinNotificado = false;
+    this.deshabilitarCheckbox("check-sin-notificar");
+    this.notificacionesSeleccionadas = [];
+    this.filtrarByEstadoNotificacion();
+    this.quitarSeleccionCompleta();
+    this.validarMasterCheck()
+  }
+  onCheckboxChangeSinNotificado(event: any) {
+    this.checkedSinNotificado = event.target.checked;
+    this.checkedNotificado = false;
+    this.deshabilitarCheckbox("check-notificado");
+    this.filtrarByEstadoNotificacion();
+    this.quitarSeleccionCompleta();
+    this.validarMasterCheck()
+  }
+
+
+  deshabilitarCheckbox(idCheckbox: string) {
+    const checkbox = document.getElementById(idCheckbox) as HTMLInputElement;
+    checkbox.checked = false;
+  }
+
   filtrarByEstadoNotificacion() {
-    this.dataSource.data = this.notificacionesCompleta;
+    console.log(`notificado: ${this.checkedNotificado}; sin notificar: ${this.checkedSinNotificado}`)
+    this.dataSource.data = this.notificacionesCompleta.slice();
     if (this.checkedNotificado === true && this.checkedSinNotificado === false) {
       this.dataSource.data = this.dataSource.data.filter(notificacion => {
         const notificado = notificacion.notificado
         return notificado === true;
       });
     }
-    if (this.checkedNotificado === false && this.checkedSinNotificado === true) {
+    if (this.checkedSinNotificado === true && this.checkedNotificado === false) {
       this.dataSource.data = this.dataSource.data.filter(notificacion => {
         const notificado = notificacion.notificado
         return notificado === false;
@@ -144,7 +170,6 @@ export class ServicioFarmaceuticoPageComponent implements OnInit, AfterViewInit 
     }
 
   }
-
   validarMasterCheck() {
     const hayNotificaciones = this.dataSource.data.filter((notificacion) => !notificacion.notificado).length;
     this.checkedDisabledMaster = (hayNotificaciones == 0)
@@ -153,19 +178,6 @@ export class ServicioFarmaceuticoPageComponent implements OnInit, AfterViewInit 
 
   hayNotificacionesSeleccionadas() {
     return this.notificacionesSeleccionadas.length > 0
-  }
-
-  onCheckboxChangeNotificado(event: any) {
-    this.checkedNotificado = event.target.checked;
-    this.filtrarByEstadoNotificacion();
-    this.quitarSeleccionCompleta();
-    this.validarMasterCheck()
-  }
-  onCheckboxChangeSinNotificado(event: any) {
-    this.checkedSinNotificado = event.target.checked;
-    this.filtrarByEstadoNotificacion();
-    this.quitarSeleccionCompleta();
-    this.validarMasterCheck()
   }
 
   agregarListaSeleccionada(notificacionSeleccionada: NotificacionFarmacia, event: any): void {
@@ -231,7 +243,8 @@ export class ServicioFarmaceuticoPageComponent implements OnInit, AfterViewInit 
     }
     if (event.target.checked) {
 
-      this.notificacionesSeleccionadas = this.dataSource.data;
+      this.notificacionesSeleccionadas = this.dataSource.data.slice()
+        .filter(notificacion => notificacion.notificado == false);
     } else {
 
       this.notificacionesSeleccionadas = [];

@@ -30,13 +30,13 @@ export class MainComponentAgendaComponent implements OnInit {
 
 
   loadingPage = false;
-  horasTurnoString: string[] = []
+  horasTurnoString: string[] = [];
 
   idRemision: string = "";
   fechaFiltroTurno: string = formatoFecha(new Date());
 
-  opcionRegional: string = "4292"
-  opcionHorariosTurno: number = 1
+  opcionRegional: string = "4292";
+  opcionHorariosTurno: number = 1;
 
   constructor(
     private agendaService: AgendaService,
@@ -61,11 +61,12 @@ export class MainComponentAgendaComponent implements OnInit {
           this.opcionRegional = params['idCiudad'];
           this.opcionHorariosTurno = params['idHorarioTurno'];
         }
+        this.consultarCitas()
         this.spinnerService.hide();
       }
 
     )
-    this.consultarCitas()
+
   }
 
   get regionales(): Regional[] {

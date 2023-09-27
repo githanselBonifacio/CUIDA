@@ -6,7 +6,7 @@
     <div class="container-menu">
 
         <div class="hex-row">
-            <div class="hexagon" (click)="navigateToRemisiones()">
+            <div class="hexagon" [routerLink]="'remisiones'">
                 <div class="text-menu">
                     <h5>Remisiones</h5>
                 </div>
@@ -19,16 +19,16 @@
                 </div>
             </div>
 
-            <div class="hexagon" (click)="navigateToServicioFarmaceutico()">
+            <div class="hexagon" [routerLink]="'servicioFarmaceutico'">
                 <div class="text-menu">
                     <h5>Servicio Farmaceutico
                     </h5>
                 </div>
             </div>
 
-            <div class="hexagon">
+            <div class="hexagon" [routerLink]="'personal/profesionales'">
                 <div class="text-menu">
-                    <h5>Profesionales</h5>
+                    <h5>Personal</h5>
                 </div>
             </div>
             <div class="hexagon">

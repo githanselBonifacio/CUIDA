@@ -14,7 +14,11 @@ import { TablaActualizacionDatosRemisionComponent } from './components/tabla-act
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { AgendaModule } from '../agenda/agenda.module';
 import { MatTableModule } from '@angular/material/table';
-
+import { AdminPersonalPageComponent } from './pages/admin-personal-page/admin-personal-page.component';
+import { AdminProfesionalesPageComponent } from './pages/admin-profesionales-page/admin-profesionales-page.component';
+import { AdminPersonalConductoresPageComponent } from './pages/admin-personal-conductores-page/admin-personal-conductores-page.component';
+import { AdminPersonalHorarioPageComponent } from './pages/admin-personal-horario-page/admin-personal-horario-page.component';
+import { AdminFormProfesionalesComponent } from './forms/admin-form-profesionales/admin-form-profesionales.component';
 
 
 @NgModule({
@@ -26,6 +30,11 @@ import { MatTableModule } from '@angular/material/table';
     TablaHistorialCitasComponent,
     ModalDetalleCitasHistorialComponent,
     TablaActualizacionDatosRemisionComponent,
+    AdminProfesionalesPageComponent,
+    AdminPersonalPageComponent,
+    AdminPersonalConductoresPageComponent,
+    AdminPersonalHorarioPageComponent,
+    AdminFormProfesionalesComponent
   ],
   imports: [
     CommonModule,

@@ -8,8 +8,8 @@
         <div class="content-toolbar">
 
             <span id="buscar-remision"></span>
-            <input type="text" class="form-control" placeholder="Buscar..." aria-label="Username"
-                aria-describedby="buscar-remision" [(ngModel)]="filtroBusqueda" (ngModelChange)="filtrarRemisiones()">
+            <input type="text" class="form-control" placeholder="Buscar..." [(ngModel)]="filtroBusqueda"
+                (ngModelChange)="filtrarRemisiones()">
         </div>
 
     </div>
@@ -46,9 +46,9 @@
                 <td mat-cell *matCellDef="let remision"> {{remision.programa}} </td>
             </ng-container>
 
-            <ng-container matColumnDef="Ciudad">
-                <th mat-header-cell *matHeaderCellDef> Ciudad </th>
-                <td mat-cell *matCellDef="let remision"> {{remision.ciudad}} </td>
+            <ng-container matColumnDef="Regional">
+                <th mat-header-cell *matHeaderCellDef> Regional </th>
+                <td mat-cell *matCellDef="let remision"> {{remision.regional}} </td>
             </ng-container>
 
             <ng-container matColumnDef="Remitente">

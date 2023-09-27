@@ -21,8 +21,8 @@
                 <input id="check-notificado" type="checkbox" (change)="onCheckboxChangeNotificado($event)">
                 <label class="label-notificacion" for="check-notificado">Notificado</label>
 
-                <input id="check-sin-notificado" type="checkbox" (change)="onCheckboxChangeSinNotificado($event)">
-                <label class="label-notificacion" for="check-sin-notificado">Sin Notificar</label>
+                <input id="check-sin-notificar" type="checkbox" (change)="onCheckboxChangeSinNotificado($event)">
+                <label class="label-notificacion" for="check-sin-notificar">Sin Notificar</label>
 
             </div>
 
@@ -51,16 +51,17 @@
                 <div class="container-input">
                     <label for="opcionRegional">Regionales</label>
                     <select formControlName="idRegional" id="opcionRegional">
-                        <option value="" selected disabled>seleccione...</option>
+                        <option [selected] disabled>seleccione...</option>
                         <option *ngFor="let regional of regionales" [value]="regional.id">
-                            {{regional.nombre}}</option>
+                            {{regional.nombre}}
+                        </option>
                     </select>
                 </div>
 
                 <div class="container-input">
-                    <label for="idHorarioturno"> Turno enfermería</label>
-                    <select id="idHorarioturno" formControlName="idHorario">
-                        <option value="" selected disabled>seleccione...</option>
+                    <label for="OpcionHorarioTurno"> Turno enfermería</label>
+                    <select formControlName="idHorario" id="OpcionHorarioTurno">
+                        <option [selected] disabled>seleccione...</option>
                         <option *ngFor="let horarioTurno of horariosTurno" [value]="horarioTurno.id">
                             {{horarioTurno.nombre}}
                         </option>

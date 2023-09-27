@@ -6,7 +6,6 @@ import { Actividad } from '../../diagramas/interfaces/tarea-gantt.interface'
 import { environment } from '../../../environments/environments';
 import { formatoFecha } from '../../shared/interfaces/maestros.interfaces'
 import { Respuesta } from 'src/app/shared/interfaces/response.interfaces';
-import { TitleToast, ToastType } from 'src/app/shared/components/toast/toast.component';
 
 @Injectable({
   providedIn: 'root'
@@ -22,6 +21,9 @@ export class AgendaService {
   constructor(private http: HttpClient) { };
 
   //profesionales
+  getAllProfesionales() {
+    return this.http.get<Respuesta>(`${environment.URL_API_CUIDA}/${this.urlRecurso}/profesionales`)
+  }
   async getProfesionalesCiudad(idRegional: string) {
     this.http.get<Respuesta>(`${environment.URL_API_CUIDA}/${this.urlRecurso}/profesionales/${idRegional}`)
       .subscribe(resp => {

@@ -1,0 +1,77 @@
+<div class="container-form">
+
+    <form [formGroup]="formProfesional" (ngSubmit)="enviarFormulario()" id="form-profesional">
+        <div id="title-form">
+            <h3>Crear profesional</h3>
+        </div>
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="container-input">
+                    <label for="campoNombres">Nombres</label>
+                    <input formControlName="nombres" id="campoNombres" type="text" />
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="container-input">
+                    <label for="campoApellidos">Apellidos</label>
+                    <input formControlName="apellidos" id="campoApellidos" type="text" />
+                </div>
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-lg-6 col-xl-3">
+
+                <div class="container-input">
+                    <label for="campoFechaNacimiento">Fecha de nacimiento</label>
+                    <input formControlName="fechaNacimiento" id="campoFechaNacimiento" type="date" />
+                </div>
+
+            </div>
+            <div class="col-lg-6 col-xl-3">
+                <div class="container-input">
+                    <label for="campoRegional">Regional</label>
+                    <select formControlName="idRegional" id="campoRegional">
+                        <option selected disabled>Seleccione...</option>
+                        <option *ngFor="let regional of regionales" [value]="regional.id">{{regional.nombre}}</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="col-lg-6 col-xl-3">
+                <div class="container-input">
+                    <label for="campoProfesion">Profesión</label>
+                    <select formControlName="profesion" id="campoProfesion">
+                        <option selected disabled>Seleccione...</option>
+                        <option>Auxiliar de enfermeria</option>
+                        <option>Enfermera profesional</option>
+                        <option>Fisioterapeuta</option>
+                        <option>Médico general</option>
+                        <option>Médico especialista</option>
+                        <option>Psicólogo</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="col-lg-6 col-xl-3">
+                <div class="container-input">
+                    <label for="campoGenero">Genero</label>
+                    <select formControlName="genero" id="campoGenero">
+                        <option selected disabled>Seleccione...</option>
+                        <option>Masculino</option>
+                        <option>Femenino</option>
+                        <option>Otro</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12" id="content-button-enviar">
+                <button type="submit" class="buttom-seleccion">Enviar</button>
+            </div>
+
+        </div>
+
+    </form>
+
+</div>

@@ -31,6 +31,10 @@ export class AgendaService {
 
       });
   }
+  CrearProfesional(profesional: Profesional) {
+
+    return this.http.post<Respuesta>(`${environment.URL_API_CUIDA}/${this.urlRecurso}/crearProfesional`, profesional);
+  }
   getProfesionalDisponibleByturnoCiudad(fechaTurno: string, idRegional: string) {
     const params = new HttpParams()
       .set('fechaTurno', fechaTurno)

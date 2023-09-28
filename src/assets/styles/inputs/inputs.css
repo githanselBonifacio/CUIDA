@@ -13,26 +13,59 @@
     left: 0;
 }
 
+/*inputs generales*/
+input:required+label::after {
+    content: '*';
+    color: red;
+}
+
 input {
     margin: 0px;
+    height: 2rem;
     border: 1px solid var(--gris2-color);
     border-radius: 5px;
     color: var(--quarter-color);
 }
+
+input.valid {
+    border: 1px solid var(--gris2-color);
+    color: var(--quarter-color)
+}
+
+input.invalid {
+    color: var(--red-color);
+    border: 1px solid var(--red-color);
+}
+
 
 input[type="text"]:focus {
     box-shadow: 2px 2px 5px var(--gris2-color);
 }
 
+/*select genericos*/
+select:required+label::after {
+    content: '*';
+    color: red;
+}
+
 select {
     border-radius: 5px;
     color: var(--gris4-color);
-    padding: 0.4rem 0.4rem;
+    height: 2rem;
     border: 1px solid var(--gris2-color);
     color: var(--quarter-color);
 
 }
 
+select.valid {
+    border: 1px solid var(--gris2-color);
+    color: var(--quarter-color)
+}
+
+select.invalid {
+    color: var(--red-color);
+    border: 1px solid var(--red-color);
+}
 
 option {
     appearance: none;

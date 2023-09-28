@@ -35,7 +35,7 @@
 
 .buttom-group-horinzontal {
     display: flex;
-    justify-content: start;
+    justify-content: flex-start;
     align-items: center;
     margin-left: 0.4rem;
     margin-right: 0.4rem;

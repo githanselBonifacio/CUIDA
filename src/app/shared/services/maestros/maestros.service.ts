@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
-import { Regional, HorarioTurno } from '../../interfaces/maestros.interfaces'
+import { Regional, HorarioTurno, tipoIdentificacion, Profesion } from '../../interfaces/maestros.interfaces'
 import { HttpClient } from '@angular/common/http';
-import { crearHorario, EstadoCita } from "../../interfaces/maestros.interfaces"
+import { EstadoCita } from "../../interfaces/maestros.interfaces"
 import { environment } from '../../../../environments/environments';
 import { Respuesta } from '../../interfaces/response.interfaces';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -13,6 +14,8 @@ export class MaestrosService {
   public regionales: Regional[] = [];
   public horariosTurno: HorarioTurno[] = [];
   public estadosCita: EstadoCita[] = [];
+  public tiposIdentificacion: tipoIdentificacion[] = [];
+  public profesiones: Profesion[] = [];
   public horarioTurnoSeleccionado!: HorarioTurno;
 
 
@@ -32,6 +35,12 @@ export class MaestrosService {
       });
 
   }
+  async getTiposIdentificacion() {
+    this.http.get<Respuesta>(`${environment.URL_API_CUIDA}/${this.resourceUrl}/tipoIdentificacion`)
+      .subscribe(resp => {
+        this.tiposIdentificacion = resp.result
+      });
+  }
   getHorarioTurnoById(idHorario: number) {
     let horarioTurnoBuscado = this.horariosTurno.find(h => h.id == idHorario);
     if (horarioTurnoBuscado) {
@@ -45,4 +54,12 @@ export class MaestrosService {
         this.estadosCita = resp.result;
       })
   }
+
+  getProfesiones() {
+    return this.http.get<Respuesta>(`${environment.URL_API_CUIDA}/${this.resourceUrl}/profesiones`)
+      .subscribe(resp => {
+        this.profesiones = resp.result;
+      })
+  }
+
 }

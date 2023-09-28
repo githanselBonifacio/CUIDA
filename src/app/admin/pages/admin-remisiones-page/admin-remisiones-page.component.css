@@ -1,6 +1,6 @@
 @import url('../../../../styles.css');
 @import url('../../../../assets/styles/tablas/tabla.css');
-@import url('../../../../assets/styles/inputs/lista.css');
+@import url('../../../../assets/styles/inputs/inputs.css');
 
 .content-toolbar {
     display: flex;

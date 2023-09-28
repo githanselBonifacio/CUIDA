@@ -8,6 +8,7 @@
     background-image: url("../../../../assets/img/cuida-background.png");
     background-size: cover;
     background-position: center;
+    overflow: auto;
 
 }
 

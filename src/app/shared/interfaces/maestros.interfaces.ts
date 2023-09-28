@@ -14,14 +14,18 @@ export interface HorarioTurno {
     horaInicio: Date,
     horaFin: Date
 }
-export function crearHorario(): HorarioTurno {
-    return {
-        id: 1,
-        nombre: 'T1',
-        horaInicio: new Date(),
-        horaFin: new Date()
-    }
+
+export interface tipoIdentificacion {
+    id: number,
+    idTipo: string,
+    nombre: string
 }
+export interface Profesion {
+    idProfesion: number,
+    nombre: string
+}
+
+
 export function generarHorario(idHorarioTurno: number): string[] {
     let horarioArray: string[] = [];
     if (idHorarioTurno == 1) {
@@ -51,6 +55,16 @@ export interface EstadoCita {
 }
 
 export function getNombreEstadoCitaById(id: string, list: EstadoCita[]): string | undefined {
+    const item = list.find(item => item.id == id);
+    return item?.nombre;
+}
+
+export function getNombreRegionalById(id: string, list: Regional[]): string | undefined {
+    const item = list.find(item => item.id == id);
+    return item?.nombre;
+}
+
+export function getNombreTipoIdentificacionById(id: number, list: tipoIdentificacion[]): string | undefined {
     const item = list.find(item => item.id == id);
     return item?.nombre;
 }

@@ -5,7 +5,7 @@ import { ServicioFarmaceuticoPageComponent } from './pages/servicio-farmaceutico
 import { AdminRemisionesPageComponent } from './pages/admin-remisiones-page/admin-remisiones-page.component';
 import { AdminHistorialRemisionPageComponent } from './pages/admin-historial-remision-page/admin-historial-remision-page.component';
 import { AdminPersonalPageComponent } from './pages/admin-personal-page/admin-personal-page.component';
-import { AdminProfesionalesPageComponent } from './pages/admin-profesionales-page/admin-profesionales-page.component';
+import { AdminPersonalProfesionalesPageComponent } from './pages/admin-personal-profesionales-page/admin-personal-profesionales-page.component';
 import { AdminPersonalConductoresPageComponent } from './pages/admin-personal-conductores-page/admin-personal-conductores-page.component';
 import { AdminPersonalHorarioPageComponent } from './pages/admin-personal-horario-page/admin-personal-horario-page.component';
 
@@ -33,7 +33,7 @@ export const routes: Routes = [
     children: [
       {
         path: "profesionales",
-        component: AdminProfesionalesPageComponent,
+        component: AdminPersonalProfesionalesPageComponent,
       },
       {
         path: "conductores",

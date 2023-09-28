@@ -3,6 +3,12 @@ export interface Profesional {
     numeroIdentificacion: string;
     nombres: string;
     apellidos: string;
+    email: string
+    telefono: string | null;
+    celular: string;
+    direccion: string;
+    genero: string;
+    idProfesion: string;
     fechaNacimiento: string;
     idRegional: string;
     activo: boolean;

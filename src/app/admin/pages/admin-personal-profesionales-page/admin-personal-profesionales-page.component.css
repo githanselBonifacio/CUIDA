@@ -25,3 +25,9 @@
     display: block;
     transition: all linear 0.3s;
 }
+
+i[name="accion-ico"] {
+    font-size: 1.2rem;
+    padding: 0 0.2rem 0 0.2rem;
+    color: var(--second-color);
+}

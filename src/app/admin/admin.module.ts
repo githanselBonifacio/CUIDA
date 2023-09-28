@@ -4,7 +4,7 @@ import { MainAdminPageComponent } from './pages/main-admin-page/main-admin-page.
 import { AdminRoutingModule } from './admin-routing.module';
 import { ServicioFarmaceuticoPageComponent } from './pages/servicio-farmaceutico-page/servicio-farmaceutico-page.component';
 import { NgxPaginationModule } from 'ngx-pagination';
-import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AdminRemisionesPageComponent } from './pages/admin-remisiones-page/admin-remisiones-page.component';
 import { AdminHistorialRemisionPageComponent } from './pages/admin-historial-remision-page/admin-historial-remision-page.component';
 import { TablaHistorialCitasComponent } from './components/tabla-historial-citas/tabla-historial-citas.component';
@@ -15,7 +15,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { AgendaModule } from '../agenda/agenda.module';
 import { MatTableModule } from '@angular/material/table';
 import { AdminPersonalPageComponent } from './pages/admin-personal-page/admin-personal-page.component';
-import { AdminProfesionalesPageComponent } from './pages/admin-profesionales-page/admin-profesionales-page.component';
+import { AdminPersonalProfesionalesPageComponent } from './pages/admin-personal-profesionales-page/admin-personal-profesionales-page.component';
 import { AdminPersonalConductoresPageComponent } from './pages/admin-personal-conductores-page/admin-personal-conductores-page.component';
 import { AdminPersonalHorarioPageComponent } from './pages/admin-personal-horario-page/admin-personal-horario-page.component';
 import { AdminFormProfesionalesComponent } from './forms/admin-form-profesionales/admin-form-profesionales.component';
@@ -30,7 +30,7 @@ import { AdminFormProfesionalesComponent } from './forms/admin-form-profesionale
     TablaHistorialCitasComponent,
     ModalDetalleCitasHistorialComponent,
     TablaActualizacionDatosRemisionComponent,
-    AdminProfesionalesPageComponent,
+    AdminPersonalProfesionalesPageComponent,
     AdminPersonalPageComponent,
     AdminPersonalConductoresPageComponent,
     AdminPersonalHorarioPageComponent,

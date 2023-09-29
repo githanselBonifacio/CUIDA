@@ -6,6 +6,27 @@
     border-color: transparent;
 }
 
+.buttom-primary:hover {
+    box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5);
+
+}
+
+.buttom-red {
+    background-color: var(--red-color);
+    color: var(--gris4-color);
+    border-color: transparent;
+
+}
+
+.buttom-red:hover {
+    background-color: var(--red-dark-color);
+    box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5);
+}
+
+.bordeado {
+    border-radius: 15px;
+}
+
 .buttom-seleccion {
     background-color: var(--second-color);
     color: var(--gris4-color);

@@ -38,9 +38,7 @@ export class CardCitaComponent {
   public idHorarioTurno: number = 0
 
   constructor(
-    private dialogoSeleccionProfesional: MatDialog,
-    private dialogoRepogramarCita: MatDialog,
-    private modalMapPuntoUnico: MatDialog,
+    private dialogo: MatDialog,
     private agendaService: AgendaService,
     private _snackBar: MatSnackBar
   ) {
@@ -53,7 +51,7 @@ export class CardCitaComponent {
       .getProfesionaFromTurnoCiudad(this.fechaTurno, this.idRegional, this.idHorarioTurno)
       .pipe(
         tap(({ result: profesionales }) => {
-          const dialogRef = this.dialogoSeleccionProfesional.open(ModalSeleccionProfesionalComponent, {
+          const dialogRef = this.dialogo.open(ModalSeleccionProfesionalComponent, {
             data: { profesionales },
           });
 
@@ -85,7 +83,7 @@ export class CardCitaComponent {
   desagendarProfesionalCita(citaSeleccionada: Cita, mensaje: string): void {
     this.citaSeleccionada = citaSeleccionada;
 
-    const dialogRef = this.dialogoSeleccionProfesional.open(VentanaConfirmacionComponent, {
+    const dialogRef = this.dialogo.open(VentanaConfirmacionComponent, {
       data: {
         mensaje: mensaje
       }
@@ -122,7 +120,7 @@ export class CardCitaComponent {
     const fechaFormateada = `${year}-${month}-${day} ${hours}:${minutes}`
     const horaActual = `${hours}:${minutes}`
 
-    const dialogRef = this.dialogoRepogramarCita.open(ModalCambioHoraCitaComponent, {
+    const dialogRef = this.dialogo.open(ModalCambioHoraCitaComponent, {
       data: horaActual
     })
     dialogRef.afterClosed().pipe(
@@ -155,7 +153,7 @@ export class CardCitaComponent {
 
   mostrarDetalleCita(citaSeleccionada: Cita): void {
     this.citaSeleccionada = citaSeleccionada;
-    const modalCita = this.modalMapPuntoUnico.open(ModalDetalleRemisionComponent, {
+    const modalCita = this.dialogo.open(ModalDetalleRemisionComponent, {
       data: this.citaSeleccionada
     })
 

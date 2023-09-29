@@ -15,7 +15,7 @@ export interface HorarioTurno {
     horaFin: Date
 }
 
-export interface tipoIdentificacion {
+export interface TipoIdentificacion {
     id: number,
     idTipo: string,
     nombre: string
@@ -64,7 +64,15 @@ export function getNombreRegionalById(id: string, list: Regional[]): string | un
     return item?.nombre;
 }
 
-export function getNombreTipoIdentificacionById(id: number, list: tipoIdentificacion[]): string | undefined {
+export function getNombreTipoIdentificacionById(id: number, list: TipoIdentificacion[]): string | undefined {
     const item = list.find(item => item.id == id);
+    return item?.nombre;
+}
+export function getIdTipoIdentificacionById(id: number, list: TipoIdentificacion[]): string | undefined {
+    const item = list.find(item => item.id == id);
+    return item?.idTipo;
+}
+export function getNombreProfesionById(id: number, list: Profesion[]): string | undefined {
+    const item = list.find(item => item.idProfesion == id);
     return item?.nombre;
 }

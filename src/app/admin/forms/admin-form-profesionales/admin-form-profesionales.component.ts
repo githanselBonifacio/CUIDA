@@ -1,24 +1,26 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnChanges, Input, Output, SimpleChanges } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { from } from 'rxjs';
 import { Profesional } from 'src/app/agenda/interfaces/profesional.interface';
 import { AgendaService } from 'src/app/agenda/services/agenda.service';
 import { TitleToast, ToastType } from 'src/app/shared/components/toast/toast.component';
-import { Profesion, Regional, tipoIdentificacion } from 'src/app/shared/interfaces/maestros.interfaces';
+import { Profesion, Regional, TipoIdentificacion } from 'src/app/shared/interfaces/maestros.interfaces';
 import { SpinnerService } from 'src/app/shared/services/spinner/spinner.service.service';
 import { ToastService } from 'src/app/shared/services/toast/toast.service';
+import { AccionFormulario } from '../../interfaces/enum';
+import { ExpresionesRegulares } from 'src/app/shared/forms/expresiones-regulares.validaciones';
 
 @Component({
   selector: 'app-admin-form-profesionales',
   templateUrl: './admin-form-profesionales.component.html',
   styleUrls: ['./admin-form-profesionales.component.css']
 })
-export class AdminFormProfesionalesComponent implements OnInit {
+
+export class AdminFormProfesionalesComponent implements OnChanges {
 
   @Output() enviado = new EventEmitter<void>();
 
   @Input()
-  tiposIdentificacion: tipoIdentificacion[] = []
+  tiposIdentificacion: TipoIdentificacion[] = []
 
   @Input()
   regionales: Regional[] = []
@@ -26,37 +28,53 @@ export class AdminFormProfesionalesComponent implements OnInit {
   @Input()
   profesiones: Profesion[] = []
 
+  @Input()
+  accionFormulario: AccionFormulario = AccionFormulario.CREAR;
+
+  @Input()
   profesional?: Profesional;
 
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['accionFormulario'] || changes['profesional']) {
+      this.tituloFormulario = (this.accionFormulario === AccionFormulario.CREAR) ? "Crear profesional" : "Actualizar profesional";
+      this.formProfesional.patchValue({
+        tipoIdentificacion: this.profesional?.idTipoIdentificacion,
+        numeroIdentificacion: this.profesional?.numeroIdentificacion,
+        nombres: this.profesional?.nombres,
+        apellidos: this.profesional?.apellidos,
+        email: this.profesional?.email,
+        telefono: this.profesional?.telefono,
+        celular: this.profesional?.celular,
+        direccion: this.profesional?.direccion,
+        fechaNacimiento: this.profesional?.fechaNacimiento,
+        idRegional: this.profesional?.idRegional,
+        genero: this.profesional?.genero,
+        profesion: this.profesional?.idProfesion,
+      })
+    }
+  }
   constructor(
     private formBuilder: FormBuilder,
     private toastservice: ToastService,
     private spinnerService: SpinnerService,
-    private agendaService: AgendaService) { }
-
-  ngOnInit(): void {
-
+    private agendaService: AgendaService) {
   }
 
-  expresionRegularText = "^[a-zA-Z áéíóúñ]+$";
-  expresionRegularCelular = "^3.*[123456890]+$";
-  expresionRegularSoloNumeros = "^[ 123456890]+$";
-  expresionRegularEmail = ".*@sura\.com\.co$";
-
+  tituloFormulario?: string;
 
   formProfesional = this.formBuilder.group({
-    tipoIdentificacion: [null, [Validators.required]],
-    numeroIdentificacion: [null, [Validators.required, Validators.pattern(this.expresionRegularSoloNumeros)]],
-    nombres: [null, [Validators.required, Validators.pattern(this.expresionRegularText), Validators.maxLength(35)]],
-    apellidos: [null, [Validators.required, Validators.pattern(this.expresionRegularText), Validators.maxLength(35)]],
-    email: [null, [Validators.required, Validators.pattern(this.expresionRegularEmail), Validators.email]],
-    telefono: [null, [Validators.pattern(this.expresionRegularSoloNumeros)]],
-    celular: [null, [Validators.required, Validators.pattern(this.expresionRegularCelular), Validators.maxLength(10), Validators.minLength(10)]],
-    direccion: [null, [Validators.required]],
-    fechaNacimiento: [null, [Validators.required]],
-    idRegional: [null, [Validators.required]],
-    genero: [null, [Validators.required]],
-    profesion: [null, [Validators.required]],
+    tipoIdentificacion: [this.profesional?.idTipoIdentificacion, [Validators.required]],
+    numeroIdentificacion: [this.profesional?.numeroIdentificacion, [Validators.required, Validators.pattern(ExpresionesRegulares.EXPRESION_REGULAR_SOLO_NUMEROS)]],
+    nombres: [this.profesional?.nombres, [Validators.required, Validators.pattern(ExpresionesRegulares.EXPRESION_REGULAR_TEXT), Validators.maxLength(35)]],
+    apellidos: [this.profesional?.apellidos, [Validators.required, Validators.pattern(ExpresionesRegulares.EXPRESION_REGULAR_TEXT), Validators.maxLength(35)]],
+    email: [this.profesional?.email, [Validators.required, Validators.pattern(ExpresionesRegulares.EXPRESION_REGULAR_EMAIL_SURA), Validators.email]],
+    telefono: [this.profesional?.telefono, [Validators.pattern(ExpresionesRegulares.EXPRESION_REGULAR_SOLO_NUMEROS)]],
+    celular: [this.profesional?.celular, [Validators.required, Validators.pattern(ExpresionesRegulares.EXPRESION_REGULAR_CELULAR), Validators.maxLength(10), Validators.minLength(10)]],
+    direccion: [this.profesional?.direccion, [Validators.required]],
+    fechaNacimiento: [this.profesional?.fechaNacimiento, [Validators.required]],
+    idRegional: [this.profesional?.idRegional, [Validators.required]],
+    genero: [this.profesional?.genero, [Validators.required]],
+    profesion: [this.profesional?.idProfesion, [Validators.required]],
   })
 
 
@@ -102,11 +120,13 @@ export class AdminFormProfesionalesComponent implements OnInit {
     return this.formProfesional.get("profesion")
   }
 
+
+
   enviarFormulario() {
     this.spinnerService.show()
     this.formProfesional.markAllAsTouched();
     if (this.formProfesional.valid) {
-      const profesional: Profesional = {
+      this.profesional = {
         idTipoIdentificacion: this.campoTipoIdentificacion?.value ?? 0,
         numeroIdentificacion: this.campoNumeroIdentificacion?.value ?? '',
         nombres: this.campoNombres?.value ?? '',
@@ -119,24 +139,37 @@ export class AdminFormProfesionalesComponent implements OnInit {
         idProfesion: this.campoProfesion?.value ?? '',
         fechaNacimiento: this.campoFechaNacimiento?.value ?? '',
         idRegional: this.campoRegional?.value ?? '',
-        activo: true
+        activo: true,
       };
-      this.agendaService.CrearProfesional(profesional)
-        .subscribe(resp => {
+      if (this.accionFormulario == AccionFormulario.CREAR) {
+        this.agendaService.CrearProfesional(this.profesional)
+          .subscribe(resp => {
+            if (resp.status == 200) {
+              this.toastservice.mostrarToast(ToastType.Success, TitleToast.Success, resp.message, 5);
+            } else {
+              this.toastservice.mostrarToast(ToastType.Error, TitleToast.Error, resp.message, 5);
+            }
+
+          })
+      } else if (this.accionFormulario == AccionFormulario.ACTUALIZAR) {
+
+        this.agendaService.ActualizarProfesional(this.profesional).subscribe(resp => {
           if (resp.status == 200) {
-            this.toastservice.mostrarToast(ToastType.Success, TitleToast.Success, "Se guardo nuevo profesional", 5);
+            this.toastservice.mostrarToast(ToastType.Success, TitleToast.Success, resp.message, 5);
           } else {
             this.toastservice.mostrarToast(ToastType.Error, TitleToast.Error, resp.message, 5);
           }
-          this.formProfesional.reset();
-          this.enviado.emit();
-          this.spinnerService.hide();
         })
 
+      }
+      this.formProfesional.reset();
+      this.enviado.emit();
     } else {
-      this.spinnerService.hide()
+
       this.toastservice.mostrarToast(ToastType.Error, TitleToast.Error, "Error en campos del formulario", 5);
     }
+
+    this.spinnerService.hide()
   }
 
 }

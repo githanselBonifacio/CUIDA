@@ -16,6 +16,7 @@ import { SpinnerService } from './services/spinner/spinner.service.service';
 import { ToastComponent } from './components/toast/toast.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { ToastService } from './services/toast/toast.service';
+import { ExpresionesRegulares } from './forms/expresiones-regulares.validaciones';
 
 
 @NgModule({
@@ -48,7 +49,7 @@ import { ToastService } from './services/toast/toast.service';
   providers: [
     SpinnerService,
     ToastService,
-    RouterModule,
+    RouterModule
   ]
 })
 

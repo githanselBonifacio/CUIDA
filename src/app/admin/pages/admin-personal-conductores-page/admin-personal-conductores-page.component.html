@@ -1,3 +1,68 @@
 <div class="container">
-    <p>admin-personal-conductores-page works!</p>
+    <h1>Conductores</h1>
+    <div class="form {{estadoVisualFormCrear}}">
+        <app-admin-from-conductores [regionales]="regionales"
+            [tiposIdentificacion]="tiposIdentificacion"></app-admin-from-conductores>
+    </div>
+    <div class="tool-bar">
+        <button class="buttom-red bordeado" *ngIf="accionFormulario == 1" (click)="volverCrear()"> Volver a Crear
+            Profesional</button>
+        <button [class]="'buttom-primary buttom-circular-activador invertido '+estadoVisualFormCrear"
+            (click)="mostrarFormularioCrearConductor()" id="desplegar-form">
+            {{tituloButtomDesplagarForm}}
+        </button>
+    </div>
+
+
+    <div class="mat-elevation-z8" id="content-tabla-conductores">
+        <table mat-table [dataSource]="conductoresSource">
+
+            <ng-container matColumnDef="TipoIdentificacion">
+                <th mat-header-cell *matHeaderCellDef>Tipo identificación</th>
+                <td class="td-start" mat-cell *matCellDef="let conductor">
+                    {{conductor.idTipoIdentificacion}}:
+                    {{conductor.numeroIdentificacion}}
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="Nombres">
+                <th mat-header-cell *matHeaderCellDef>Nombres</th>
+                <td class="td-start" mat-cell *matCellDef="let conductor">{{conductor.nombres|titlecase}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="Apellidos">
+                <th mat-header-cell *matHeaderCellDef>Apellidos</th>
+                <td class="td-start" mat-cell *matCellDef="let conductor">{{conductor.apellidos|titlecase}}</td>
+            </ng-container>
+
+
+            <ng-container matColumnDef="Regional">
+                <th mat-header-cell *matHeaderCellDef>Regional</th>
+                <td mat-cell *matCellDef="let conductor">{{conductor.idRegional}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="MatriculaMovil">
+                <th mat-header-cell *matHeaderCellDef>Matricula movil</th>
+                <td mat-cell *matCellDef="let conductor"></td>
+            </ng-container>
+
+            <ng-container matColumnDef="acciones">
+                <th mat-header-cell *matHeaderCellDef>Acciones</th>
+                <td mat-cell *matCellDef="let profesional">
+                    <i name="accion-ico" class="bi bi-pencil-square" title="editar"
+                        (click)="abrirFormEditarProfesional(profesional)"></i>
+                    <i name="accion-ico" [class]="'bi bi-toggle-'+getIconActivar(profesional.activo)"
+                        title="activar"></i>
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="columnas"></tr>
+            <tr mat-row *matRowDef="let row; columns:columnas;"></tr>
+        </table>
+    </div>
+
+    <mat-paginator #paginatorConductor [pageSizeOptions]="[5,6,7,8,9, 10,15, 20,50,100]" aria-label="Select page"
+        itemsPerPageLabel="conductores por páginas" showFirstLastButtons="true">
+    </mat-paginator>
+
 </div>

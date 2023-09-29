@@ -2,9 +2,11 @@
 
 th {
     color: var(--gris4-color);
-
     text-align: center;
     background-color: var(--primary-color) !important;
+}
+
+th:nth-child(n+2) {
     border-left: 1px solid var(--gris4-color);
 }
 
@@ -29,6 +31,13 @@ tr:nth-child(n):hover div::before {
 tr:nth-child(even) {
     background-color: var(--gris4-color);
 }
+
+.th-start,
+.td-start {
+    text-align: start;
+    white-space: nowrap;
+}
+
 
 @media screen and (max-height:650px) {
     th {

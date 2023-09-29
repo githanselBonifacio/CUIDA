@@ -130,13 +130,6 @@
     text-align: start;
 }
 
-.th-start,
-.td-start {
-    text-align: start;
-    white-space: nowrap;
-}
-
-
 #notificado {
     color: var(--green-color);
     font-size: 1.5rem;

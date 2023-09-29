@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Regional, HorarioTurno, tipoIdentificacion, Profesion } from '../../interfaces/maestros.interfaces'
+import { Regional, HorarioTurno, TipoIdentificacion, Profesion } from '../../interfaces/maestros.interfaces'
 import { HttpClient } from '@angular/common/http';
 import { EstadoCita } from "../../interfaces/maestros.interfaces"
 import { environment } from '../../../../environments/environments';
@@ -14,7 +14,7 @@ export class MaestrosService {
   public regionales: Regional[] = [];
   public horariosTurno: HorarioTurno[] = [];
   public estadosCita: EstadoCita[] = [];
-  public tiposIdentificacion: tipoIdentificacion[] = [];
+  public tiposIdentificacion: TipoIdentificacion[] = [];
   public profesiones: Profesion[] = [];
   public horarioTurnoSeleccionado!: HorarioTurno;
 

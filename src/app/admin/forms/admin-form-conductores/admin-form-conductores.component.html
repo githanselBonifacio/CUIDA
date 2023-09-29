@@ -1,8 +1,7 @@
 <div class="container-form">
-
-    <form [formGroup]="formProfesional" (ngSubmit)="enviarFormulario()">
+    <form [formGroup]="formConductor" (ngSubmit)="enviarFormulario()">
         <div class="title-form">
-            <h3>{{tituloFormulario}}</h3>
+            <h3>Titulo</h3>
         </div>
         <div class="row">
             <div class="col-lg-6 col-xl-3">
@@ -106,18 +105,7 @@
             </div>
 
             <div class="col-lg-6 col-xl-3">
-                <div class="container-input">
-                    <select [class.invalid]="campoProfesion?.touched && campoProfesion?.invalid"
-                        [class.valid]="campoProfesion?.touched && campoProfesion?.valid" required
-                        formControlName="profesion" id="campoProfesion">
-                        <option value="" [selected] [disabled]>Seleccione...</option>
-                        <option *ngFor="let profesion of profesiones" [value]="profesion.idProfesion">
-                            {{profesion.nombre}}
-                        </option>
 
-                    </select>
-                    <label for="campoProfesion">Profesión</label>
-                </div>
             </div>
 
             <div class="col-lg-6 col-xl-3">
@@ -141,7 +129,5 @@
             </div>
 
         </div>
-
     </form>
-
 </div>

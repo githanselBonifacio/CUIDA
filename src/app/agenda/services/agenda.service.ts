@@ -6,6 +6,7 @@ import { Actividad } from '../../diagramas/interfaces/tarea-gantt.interface'
 import { environment } from '../../../environments/environments';
 import { formatoFecha } from '../../shared/interfaces/maestros.interfaces'
 import { Respuesta } from 'src/app/shared/interfaces/response.interfaces';
+import { Conductor } from '../interfaces/conductores.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +16,7 @@ export class AgendaService {
   private urlRecurso = 'agenda'
 
   public profesionales: Profesional[] = [];
+  public conductores: Conductor[] = []
   public citas: Cita[] = [];
   public agendaGantt: Actividad[] = [];
 
@@ -34,6 +36,10 @@ export class AgendaService {
   CrearProfesional(profesional: Profesional) {
 
     return this.http.post<Respuesta>(`${environment.URL_API_CUIDA}/${this.urlRecurso}/crearProfesional`, profesional);
+  }
+  ActualizarProfesional(profesional: Profesional) {
+
+    return this.http.put<Respuesta>(`${environment.URL_API_CUIDA}/${this.urlRecurso}/actualizarProfesional`, profesional);
   }
   getProfesionalDisponibleByturnoCiudad(fechaTurno: string, idRegional: string) {
     const params = new HttpParams()
@@ -66,6 +72,10 @@ export class AgendaService {
       .set('idProfesional', idProfesional)
 
     return this.http.get<Respuesta>(`${environment.URL_API_CUIDA}/${this.urlRecurso}/desasignarProfesionalTurno`, { params });
+  }
+  //conductores
+  getAllConsultarConductores() {
+    return this.http.get<Respuesta>(`${environment.URL_API_CUIDA}/${this.urlRecurso}/conductores`)
   }
 
   //citas

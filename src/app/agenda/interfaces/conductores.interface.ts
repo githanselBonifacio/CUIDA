@@ -1,4 +1,4 @@
-export interface Profesional {
+export interface Conductor {
     idTipoIdentificacion: number;
     numeroIdentificacion: string;
     nombres: string;
@@ -8,21 +8,17 @@ export interface Profesional {
     celular: string;
     direccion: string;
     genero: string;
-    idProfesion: string;
     fechaNacimiento: string;
     idRegional: string;
+    movil: Movil;
     activo: boolean;
 
 }
 
+export interface Movil {
+    matriculaMovil: string;
+    numeroIdentificacionConductor: string;
+    idRegional: string;
+    activo: boolean;
 
-
-export class Convert {
-    public static toProfesional(json: string): Profesional {
-        return JSON.parse(json);
-    }
-
-    public static ProfesionalJson(value: Profesional): string {
-        return JSON.stringify(value);
-    }
 }

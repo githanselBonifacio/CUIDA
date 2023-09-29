@@ -19,7 +19,7 @@ input:required+label::after {
     color: red;
 }
 
-input {
+input[type="text"] {
     margin: 0px;
     height: 2rem;
     border: 1px solid var(--gris2-color);
@@ -74,4 +74,9 @@ option {
     background-color: var(--gris4-color);
     color: var(--quarter-color);
 
+}
+
+/*check box*/
+input[type="checkbox"]+label {
+    padding-left: 0.5rem;
 }

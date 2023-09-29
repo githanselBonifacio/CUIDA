@@ -13,21 +13,5 @@
     display: flex;
     justify-content: end;
     margin: 0 0 1rem 0;
-}
-
-
-.form {
-    display: none;
-    transition: all linear 0.3s;
-}
-
-.form.activate {
-    display: block;
-    transition: all linear 0.3s;
-}
-
-i[name="accion-ico"] {
-    font-size: 1.2rem;
-    padding: 0 0.2rem 0 0.2rem;
-    color: var(--second-color);
+    gap: 0.5rem
 }

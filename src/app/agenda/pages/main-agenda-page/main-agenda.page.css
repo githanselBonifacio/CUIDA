@@ -59,10 +59,17 @@
     max-height: 70vh;
 }
 
-@media screen and (max-height:650px) {
+@media screen and (min-height: 600px) and (max-height: 800px) {
     #container-card {
         max-height: 60vh;
     }
+}
+
+.panel-gantt {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: flex-start;
 }
 
 #agregar-profesional {

@@ -7,8 +7,8 @@
             [profesional]="profesionalSeleccionado"></app-admin-form-profesionales>
     </div>
     <div class="tool-bar">
-        <button class="buttom-red bordeado" *ngIf="accionFormulario == 1" (click)="volverCrear()"> Volver a Crear
-            Profesional</button>
+        <button class="buttom-red bordeado" *ngIf="accionFormulario == 1" (click)="volverCrear()"> Volver a crear
+            profesional</button>
         <button [class]="'buttom-primary buttom-circular-activador invertido '+estadoVisualFormCrearProfesional"
             (click)="mostrarFormularioCrearProfesional()" id="desplegar-form">
             {{tituloButtomDesplagarForm}}

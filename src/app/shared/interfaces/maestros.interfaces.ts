@@ -19,6 +19,7 @@ export interface TipoIdentificacion {
     id: number,
     idTipo: string,
     nombre: string
+    esMayorEdad: boolean;
 }
 export interface Profesion {
     idProfesion: number,

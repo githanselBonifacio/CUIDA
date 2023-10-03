@@ -28,6 +28,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatInputModule } from '@angular/material/input';
 import { MatDialogModule } from '@angular/material/dialog';
 import { AdminFormConductoresComponent } from './forms/admin-form-conductores/admin-form-conductores.component';
+import { AccionFormulario } from './interfaces/enum';
 
 
 @NgModule({
@@ -44,7 +45,7 @@ import { AdminFormConductoresComponent } from './forms/admin-form-conductores/ad
     AdminPersonalConductoresPageComponent,
     AdminPersonalHorarioPageComponent,
     AdminFormProfesionalesComponent,
-    AdminFormConductoresComponent
+    AdminFormConductoresComponent,
   ],
   imports: [
     CommonModule,

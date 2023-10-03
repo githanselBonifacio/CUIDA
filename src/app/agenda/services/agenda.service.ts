@@ -6,7 +6,7 @@ import { Actividad } from '../../diagramas/interfaces/tarea-gantt.interface'
 import { environment } from '../../../environments/environments';
 import { formatoFecha } from '../../shared/interfaces/maestros.interfaces'
 import { Respuesta } from 'src/app/shared/interfaces/response.interfaces';
-import { Conductor } from '../interfaces/conductores.interface';
+import { Conductor, Movil } from '../interfaces/conductores.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +16,7 @@ export class AgendaService {
   private urlRecurso = 'agenda'
 
   public profesionales: Profesional[] = [];
+  public moviles: Movil[] = [];
   public conductores: Conductor[] = []
   public citas: Cita[] = [];
   public agendaGantt: Actividad[] = [];
@@ -33,11 +34,11 @@ export class AgendaService {
 
       });
   }
-  CrearProfesional(profesional: Profesional) {
+  crearProfesional(profesional: Profesional) {
 
     return this.http.post<Respuesta>(`${environment.URL_API_CUIDA}/${this.urlRecurso}/crearProfesional`, profesional);
   }
-  ActualizarProfesional(profesional: Profesional) {
+  actualizarProfesional(profesional: Profesional) {
 
     return this.http.put<Respuesta>(`${environment.URL_API_CUIDA}/${this.urlRecurso}/actualizarProfesional`, profesional);
   }
@@ -74,10 +75,28 @@ export class AgendaService {
     return this.http.get<Respuesta>(`${environment.URL_API_CUIDA}/${this.urlRecurso}/desasignarProfesionalTurno`, { params });
   }
   //conductores
-  getAllConsultarConductores() {
+  getAllConductores() {
     return this.http.get<Respuesta>(`${environment.URL_API_CUIDA}/${this.urlRecurso}/conductores`)
   }
-
+  crearConductor(conductor: Conductor) {
+    return this.http.post<Respuesta>(`${environment.URL_API_CUIDA}/${this.urlRecurso}/crearConductor`, conductor);
+  }
+  actualizarConductor(conductor: Conductor) {
+    return this.http.put<Respuesta>(`${environment.URL_API_CUIDA}/${this.urlRecurso}/actualizarConductor`, conductor);
+  }
+  //moviles
+  getMovilesByIdRegional(idRegional: string) {
+    return this.http.get<Respuesta>(`${environment.URL_API_CUIDA}/${this.urlRecurso}/moviles/${idRegional}`)
+  }
+  async getAllMoviles() {
+    this.http.get<Respuesta>(`${environment.URL_API_CUIDA}/${this.urlRecurso}/moviles`)
+      .subscribe(resp => {
+        this.moviles = resp.result;
+      })
+  }
+  getAllMovilesSinConductor() {
+    return this.http.get<Respuesta>(`${environment.URL_API_CUIDA}/${this.urlRecurso}/movilesSinConductor`);
+  }
   //citas
   async getCitas(fechaTurno: string, idRegional: string, idHorarioTurno: number) {
     const params = new HttpParams()

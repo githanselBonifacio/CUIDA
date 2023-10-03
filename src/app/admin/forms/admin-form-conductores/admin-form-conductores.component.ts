@@ -1,20 +1,42 @@
-import { Component, EventEmitter, Input, Output, SimpleChanges } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
-import { Profesional } from 'src/app/agenda/interfaces/profesional.interface';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AgendaService } from 'src/app/agenda/services/agenda.service';
-import { TipoIdentificacion, Regional } from 'src/app/shared/interfaces/maestros.interfaces';
+import { TipoIdentificacion, Regional, getNombreRegionalById } from 'src/app/shared/interfaces/maestros.interfaces';
 import { SpinnerService } from 'src/app/shared/services/spinner/spinner.service.service';
 import { ToastService } from 'src/app/shared/services/toast/toast.service';
 import { AccionFormulario } from '../../interfaces/enum';
-import { ExpresionesRegulares } from '../../../shared/forms/expresiones-regulares.validaciones';
-import { Conductor } from 'src/app/agenda/interfaces/conductores.interface';
+import { expresionesRegulares, mesajeExpresionRegular } from '../../../shared/forms/expresiones-regulares.validaciones';
+import { Conductor, Movil } from 'src/app/agenda/interfaces/conductores.interface';
+import { ToastType, TitleToast } from 'src/app/shared/components/toast/toast.component';
+import { validatorMayorEdad } from 'src/app/shared/forms/validadors.validaciones';
+
 @Component({
   selector: 'app-admin-from-conductores',
   templateUrl: './admin-form-conductores.component.html',
-  styleUrls: ['./admin-form-conductores.component.css']
+  styleUrls: ['./admin-form-conductores.component.css'],
 })
-export class AdminFormConductoresComponent {
+export class AdminFormConductoresComponent implements OnChanges, OnInit {
+  constructor(
+    private formBuilder: FormBuilder,
+    private toastservice: ToastService,
+    private spinnerService: SpinnerService,
+    private agendaService: AgendaService) {
 
+    this.formConductor = this.formBuilder.group({
+      IdTipoIdentificacion: [this.conductor?.idTipoIdentificacion, [Validators.required]],
+      numeroIdentificacion: [this.conductor?.numeroIdentificacion, [Validators.required, Validators.pattern(expresionesRegulares.EXPRESION_REGULAR_SOLO_NUMEROS)]],
+      nombres: [this.conductor?.nombres, [Validators.required, Validators.pattern(expresionesRegulares.EXPRESION_REGULAR_TEXT), Validators.maxLength(35)]],
+      apellidos: [this.conductor?.apellidos, [Validators.required, Validators.pattern(expresionesRegulares.EXPRESION_REGULAR_TEXT), Validators.maxLength(35)]],
+      email: [this.conductor?.email, [Validators.required, Validators.pattern(expresionesRegulares.EXPRESION_REGULAR_EMAIL_SURA), Validators.email]],
+      telefono: [this.conductor?.telefono, [Validators.pattern(expresionesRegulares.EXPRESION_REGULAR_SOLO_NUMEROS)]],
+      celular: [this.conductor?.celular, [Validators.required, Validators.pattern(expresionesRegulares.EXPRESION_REGULAR_CELULAR), Validators.maxLength(10), Validators.minLength(10)]],
+      direccion: [this.conductor?.direccion, [Validators.required]],
+      fechaNacimiento: [this.conductor?.fechaNacimiento, [Validators.required, validatorMayorEdad]],
+      idRegional: [this.conductor?.idRegional, [Validators.required]],
+      genero: [this.conductor?.genero, [Validators.required]],
+    })
+
+  }
   @Output() enviado = new EventEmitter<void>();
 
   @Input()
@@ -23,18 +45,22 @@ export class AdminFormConductoresComponent {
   @Input()
   regionales: Regional[] = []
 
-
   @Input()
   accionFormulario: AccionFormulario = AccionFormulario.CREAR;
 
   @Input()
   conductor?: Conductor;
 
+  validacionDisabled: boolean = false;
+  formConductor: FormGroup;
+  tituloFormulario?: string;
+  mensageValidadores = mesajeExpresionRegular;
   ngOnChanges(changes: SimpleChanges) {
-    if (changes['accionFormulario'] || changes['profesional']) {
-      this.tituloFormulario = (this.accionFormulario === AccionFormulario.CREAR) ? "Crear profesional" : "Actualizar profesional";
+    if (changes['accionFormulario'] || changes['conductor']) {
+      this.tituloFormulario = (this.accionFormulario === AccionFormulario.CREAR) ? "Crear conductor" : "Actualizar conductor";
+      this.validacionDisabled = this.accionFormulario === AccionFormulario.ACTUALIZAR;
       this.formConductor.patchValue({
-        tipoIdentificacion: this.conductor?.idTipoIdentificacion,
+        IdTipoIdentificacion: this.conductor?.idTipoIdentificacion,
         numeroIdentificacion: this.conductor?.numeroIdentificacion,
         nombres: this.conductor?.nombres,
         apellidos: this.conductor?.apellidos,
@@ -48,32 +74,17 @@ export class AdminFormConductoresComponent {
       })
     }
   }
-  constructor(
-    private formBuilder: FormBuilder,
-    private toastservice: ToastService,
-    private spinnerService: SpinnerService,
-    private agendaService: AgendaService) {
+  ngOnInit(): void {
+    this.agendaService.getAllMoviles();
   }
 
-  tituloFormulario?: string;
 
-  formConductor = this.formBuilder.group({
-    tipoIdentificacion: [this.conductor?.idTipoIdentificacion, [Validators.required]],
-    numeroIdentificacion: [this.conductor?.numeroIdentificacion, [Validators.required, Validators.pattern(ExpresionesRegulares.EXPRESION_REGULAR_SOLO_NUMEROS)]],
-    nombres: [this.conductor?.nombres, [Validators.required, Validators.pattern(ExpresionesRegulares.EXPRESION_REGULAR_TEXT), Validators.maxLength(35)]],
-    apellidos: [this.conductor?.apellidos, [Validators.required, Validators.pattern(ExpresionesRegulares.EXPRESION_REGULAR_TEXT), Validators.maxLength(35)]],
-    email: [this.conductor?.email, [Validators.required, Validators.pattern(ExpresionesRegulares.EXPRESION_REGULAR_EMAIL_SURA), Validators.email]],
-    telefono: [this.conductor?.telefono, [Validators.pattern(ExpresionesRegulares.EXPRESION_REGULAR_SOLO_NUMEROS)]],
-    celular: [this.conductor?.celular, [Validators.required, Validators.pattern(ExpresionesRegulares.EXPRESION_REGULAR_CELULAR), Validators.maxLength(10), Validators.minLength(10)]],
-    direccion: [this.conductor?.direccion, [Validators.required]],
-    fechaNacimiento: [this.conductor?.fechaNacimiento, [Validators.required]],
-    idRegional: [this.conductor?.idRegional, [Validators.required]],
-    genero: [this.conductor?.genero, [Validators.required]],
-  })
-
+  get moviles(): Movil[] {
+    return this.agendaService.moviles;
+  }
 
   get campoTipoIdentificacion() {
-    return this.formConductor.get("tipoIdentificacion")
+    return this.formConductor.get("IdTipoIdentificacion")
   }
 
   get campoNumeroIdentificacion() {
@@ -111,8 +122,56 @@ export class AdminFormConductoresComponent {
     return this.formConductor.get("genero")
   }
 
+
+
   enviarFormulario() {
     this.formConductor.markAllAsTouched();
+    this.spinnerService.show()
+    if (this.formConductor.valid) {
+      this.conductor = {
+        idTipoIdentificacion: this.campoTipoIdentificacion?.value ?? 0,
+        numeroIdentificacion: this.campoNumeroIdentificacion?.value ?? '',
+        nombres: this.campoNombres?.value ?? '',
+        apellidos: this.campoApellidos?.value ?? '',
+        email: this.campoEmail?.value ?? '',
+        telefono: this.campoTelefono?.value ?? '',
+        celular: this.campoCelular?.value ?? '',
+        direccion: this.campoDireccion?.value ?? '',
+        genero: this.campoGenero?.value ?? '',
+        fechaNacimiento: this.campoFechaNacimiento?.value ?? '',
+        idRegional: this.campoRegional?.value ?? '',
+        activo: true,
+      };
+      if (this.accionFormulario == AccionFormulario.CREAR) {
+        this.agendaService.crearConductor(this.conductor)
+          .subscribe(resp => {
+            if (resp.status == 200) {
+              this.enviado.emit();
+              this.toastservice.mostrarToast(ToastType.Success, TitleToast.Success, resp.message, 5);
+            } else {
+              this.toastservice.mostrarToast(ToastType.Error, TitleToast.Error, resp.message, 5);
+            }
+
+          })
+      } else if (this.accionFormulario == AccionFormulario.ACTUALIZAR) {
+
+        this.agendaService.actualizarConductor(this.conductor).subscribe(resp => {
+          if (resp.status == 200) {
+            this.enviado.emit();
+            this.toastservice.mostrarToast(ToastType.Success, TitleToast.Success, resp.message, 5);
+          } else {
+            this.toastservice.mostrarToast(ToastType.Error, TitleToast.Error, resp.message, 5);
+          }
+        })
+
+      }
+      this.formConductor.reset();
+    } else {
+
+      this.toastservice.mostrarToast(ToastType.Error, TitleToast.Error, "Error en campos del formulario", 5);
+    }
+
+    this.spinnerService.hide()
   }
 
 }

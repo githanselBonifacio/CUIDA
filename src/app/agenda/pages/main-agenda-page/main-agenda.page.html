@@ -64,7 +64,7 @@
             <div class="d-flex">
 
                 <div class="input-group mb-2" id="buscar-remision">
-                    <span class="input-group-text" style=" border: 1px solid var(--gris3-color);">ID</span>
+
                     <input [(ngModel)]="idRemision" (ngModelChange)=filtrarCitasByIdRemision() type="text"
                         class="form-control" placeholder="Buscar..." aria-label="Username"
                         aria-describedby="input-remision">
@@ -89,13 +89,13 @@
         </div>
         <div class="col-lg-9 col-xl-9  col-xxl-10" id="container-agenda-gantt">
             <div class="panel-gantt">
+                <div>
+                    <app-diagramas-gantt [actividades]="actividades" [horas]="horasTurnoString"
+                        [tituloActorResponsable]="'Profesionales'"
+                        (idprofesionalEvent)="desasignarProfesionalTurno($event)">
+                    </app-diagramas-gantt>
+                </div>
 
-                <app-diagramas-gantt [actividades]="actividades" [horas]="horasTurnoString"
-                    [tituloActorResponsable]="'Profesionales'"
-                    (idprofesionalEvent)="desasignarProfesionalTurno($event)">
-                </app-diagramas-gantt>
-
-                <hr>
                 <div>
 
                     <button id="agregar-profesional" (click)="agregarProfesionalTurno()">

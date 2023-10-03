@@ -1,12 +1,13 @@
 <div class="container">
     <h1>Conductores</h1>
     <div class="form {{estadoVisualFormCrear}}">
-        <app-admin-from-conductores [regionales]="regionales"
-            [tiposIdentificacion]="tiposIdentificacion"></app-admin-from-conductores>
+        <app-admin-from-conductores (enviado)="actualizarDatos()" [regionales]="regionales"
+            [tiposIdentificacion]="tiposIdentificacion" [accionFormulario]="accionFormulario"
+            [conductor]="conductorSeleccionado"></app-admin-from-conductores>
     </div>
     <div class="tool-bar">
-        <button class="buttom-red bordeado" *ngIf="accionFormulario == 1" (click)="volverCrear()"> Volver a Crear
-            Profesional</button>
+        <button class="buttom-red bordeado" *ngIf="accionFormulario == 1" (click)="volverCrear()"> Volver a crear
+            conductor</button>
         <button [class]="'buttom-primary buttom-circular-activador invertido '+estadoVisualFormCrear"
             (click)="mostrarFormularioCrearConductor()" id="desplegar-form">
             {{tituloButtomDesplagarForm}}
@@ -18,9 +19,9 @@
         <table mat-table [dataSource]="conductoresSource">
 
             <ng-container matColumnDef="TipoIdentificacion">
-                <th mat-header-cell *matHeaderCellDef>Tipo identificación</th>
+                <th mat-header-cell *matHeaderCellDef>Identificación</th>
                 <td class="td-start" mat-cell *matCellDef="let conductor">
-                    {{conductor.idTipoIdentificacion}}:
+                    {{getNombreTipoIdentificacion(conductor.idTipoIdentificacion)}}:
                     {{conductor.numeroIdentificacion}}
                 </td>
             </ng-container>
@@ -38,12 +39,7 @@
 
             <ng-container matColumnDef="Regional">
                 <th mat-header-cell *matHeaderCellDef>Regional</th>
-                <td mat-cell *matCellDef="let conductor">{{conductor.idRegional}}</td>
-            </ng-container>
-
-            <ng-container matColumnDef="MatriculaMovil">
-                <th mat-header-cell *matHeaderCellDef>Matricula movil</th>
-                <td mat-cell *matCellDef="let conductor"></td>
+                <td mat-cell *matCellDef="let conductor">{{getNombreRegional(conductor.idRegional)}}</td>
             </ng-container>
 
             <ng-container matColumnDef="acciones">

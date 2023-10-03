@@ -7,7 +7,8 @@ import { Profesion, Regional, TipoIdentificacion } from 'src/app/shared/interfac
 import { SpinnerService } from 'src/app/shared/services/spinner/spinner.service.service';
 import { ToastService } from 'src/app/shared/services/toast/toast.service';
 import { AccionFormulario } from '../../interfaces/enum';
-import { ExpresionesRegulares } from 'src/app/shared/forms/expresiones-regulares.validaciones';
+import { expresionesRegulares, mesajeExpresionRegular } from 'src/app/shared/forms/expresiones-regulares.validaciones';
+import { validatorMayorEdad } from 'src/app/shared/forms/validadors.validaciones';
 
 @Component({
   selector: 'app-admin-form-profesionales',
@@ -17,6 +18,12 @@ import { ExpresionesRegulares } from 'src/app/shared/forms/expresiones-regulares
 
 export class AdminFormProfesionalesComponent implements OnChanges {
 
+  constructor(
+    private formBuilder: FormBuilder,
+    private toastservice: ToastService,
+    private spinnerService: SpinnerService,
+    private agendaService: AgendaService) {
+  }
   @Output() enviado = new EventEmitter<void>();
 
   @Input()
@@ -34,9 +41,31 @@ export class AdminFormProfesionalesComponent implements OnChanges {
   @Input()
   profesional?: Profesional;
 
+  tituloFormulario?: string;
+
+  validacionDisabled: boolean = false;
+
+  mensageValidadores = mesajeExpresionRegular;
+
+  formProfesional = this.formBuilder.group({
+    tipoIdentificacion: [this.profesional?.idTipoIdentificacion, [Validators.required]],
+    numeroIdentificacion: [this.profesional?.numeroIdentificacion, [Validators.required, Validators.pattern(expresionesRegulares.EXPRESION_REGULAR_SOLO_NUMEROS)]],
+    nombres: [this.profesional?.nombres, [Validators.required, Validators.pattern(expresionesRegulares.EXPRESION_REGULAR_TEXT), Validators.maxLength(35)]],
+    apellidos: [this.profesional?.apellidos, [Validators.required, Validators.pattern(expresionesRegulares.EXPRESION_REGULAR_TEXT), Validators.maxLength(35)]],
+    email: [this.profesional?.email, [Validators.required, Validators.pattern(expresionesRegulares.EXPRESION_REGULAR_EMAIL_SURA), Validators.email]],
+    telefono: [this.profesional?.telefono, [Validators.pattern(expresionesRegulares.EXPRESION_REGULAR_SOLO_NUMEROS)]],
+    celular: [this.profesional?.celular, [Validators.required, Validators.pattern(expresionesRegulares.EXPRESION_REGULAR_CELULAR), Validators.maxLength(10), Validators.minLength(10)]],
+    direccion: [this.profesional?.direccion, [Validators.required]],
+    fechaNacimiento: [this.profesional?.fechaNacimiento, [Validators.required, validatorMayorEdad]],
+    idRegional: [this.profesional?.idRegional, [Validators.required]],
+    genero: [this.profesional?.genero, [Validators.required]],
+    profesion: [this.profesional?.idProfesion, [Validators.required]],
+  })
+
   ngOnChanges(changes: SimpleChanges) {
     if (changes['accionFormulario'] || changes['profesional']) {
       this.tituloFormulario = (this.accionFormulario === AccionFormulario.CREAR) ? "Crear profesional" : "Actualizar profesional";
+      this.validacionDisabled = this.accionFormulario === AccionFormulario.ACTUALIZAR;
       this.formProfesional.patchValue({
         tipoIdentificacion: this.profesional?.idTipoIdentificacion,
         numeroIdentificacion: this.profesional?.numeroIdentificacion,
@@ -53,29 +82,7 @@ export class AdminFormProfesionalesComponent implements OnChanges {
       })
     }
   }
-  constructor(
-    private formBuilder: FormBuilder,
-    private toastservice: ToastService,
-    private spinnerService: SpinnerService,
-    private agendaService: AgendaService) {
-  }
 
-  tituloFormulario?: string;
-
-  formProfesional = this.formBuilder.group({
-    tipoIdentificacion: [this.profesional?.idTipoIdentificacion, [Validators.required]],
-    numeroIdentificacion: [this.profesional?.numeroIdentificacion, [Validators.required, Validators.pattern(ExpresionesRegulares.EXPRESION_REGULAR_SOLO_NUMEROS)]],
-    nombres: [this.profesional?.nombres, [Validators.required, Validators.pattern(ExpresionesRegulares.EXPRESION_REGULAR_TEXT), Validators.maxLength(35)]],
-    apellidos: [this.profesional?.apellidos, [Validators.required, Validators.pattern(ExpresionesRegulares.EXPRESION_REGULAR_TEXT), Validators.maxLength(35)]],
-    email: [this.profesional?.email, [Validators.required, Validators.pattern(ExpresionesRegulares.EXPRESION_REGULAR_EMAIL_SURA), Validators.email]],
-    telefono: [this.profesional?.telefono, [Validators.pattern(ExpresionesRegulares.EXPRESION_REGULAR_SOLO_NUMEROS)]],
-    celular: [this.profesional?.celular, [Validators.required, Validators.pattern(ExpresionesRegulares.EXPRESION_REGULAR_CELULAR), Validators.maxLength(10), Validators.minLength(10)]],
-    direccion: [this.profesional?.direccion, [Validators.required]],
-    fechaNacimiento: [this.profesional?.fechaNacimiento, [Validators.required]],
-    idRegional: [this.profesional?.idRegional, [Validators.required]],
-    genero: [this.profesional?.genero, [Validators.required]],
-    profesion: [this.profesional?.idProfesion, [Validators.required]],
-  })
 
 
   get campoTipoIdentificacion() {
@@ -142,9 +149,10 @@ export class AdminFormProfesionalesComponent implements OnChanges {
         activo: true,
       };
       if (this.accionFormulario == AccionFormulario.CREAR) {
-        this.agendaService.CrearProfesional(this.profesional)
+        this.agendaService.crearProfesional(this.profesional)
           .subscribe(resp => {
             if (resp.status == 200) {
+              this.enviado.emit();
               this.toastservice.mostrarToast(ToastType.Success, TitleToast.Success, resp.message, 5);
             } else {
               this.toastservice.mostrarToast(ToastType.Error, TitleToast.Error, resp.message, 5);
@@ -153,8 +161,9 @@ export class AdminFormProfesionalesComponent implements OnChanges {
           })
       } else if (this.accionFormulario == AccionFormulario.ACTUALIZAR) {
 
-        this.agendaService.ActualizarProfesional(this.profesional).subscribe(resp => {
+        this.agendaService.actualizarProfesional(this.profesional).subscribe(resp => {
           if (resp.status == 200) {
+            this.enviado.emit();
             this.toastservice.mostrarToast(ToastType.Success, TitleToast.Success, resp.message, 5);
           } else {
             this.toastservice.mostrarToast(ToastType.Error, TitleToast.Error, resp.message, 5);
@@ -163,7 +172,6 @@ export class AdminFormProfesionalesComponent implements OnChanges {
 
       }
       this.formProfesional.reset();
-      this.enviado.emit();
     } else {
 
       this.toastservice.mostrarToast(ToastType.Error, TitleToast.Error, "Error en campos del formulario", 5);

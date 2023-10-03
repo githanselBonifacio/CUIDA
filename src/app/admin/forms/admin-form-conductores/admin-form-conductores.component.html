@@ -1,75 +1,112 @@
 <div class="container-form">
     <form [formGroup]="formConductor" (ngSubmit)="enviarFormulario()">
         <div class="title-form">
-            <h3>Titulo</h3>
+            <h3>{{tituloFormulario}}</h3>
         </div>
         <div class="row">
             <div class="col-lg-6 col-xl-3">
                 <div class="container-input">
 
-                    <select [class.invalid]="campoTipoIdentificacion?.touched && campoTipoIdentificacion?.invalid"
+                    <select [disabled]="validacionDisabled"
+                        [class.invalid]="campoTipoIdentificacion?.touched && campoTipoIdentificacion?.invalid"
                         [class.valid]="campoTipoIdentificacion?.touched && campoTipoIdentificacion?.valid" required
-                        formControlName="tipoIdentificacion" id="campoTipoIdentificacion">
-                        <option value="" [selected] [disabled]>Seleccione...</option>
-                        <option *ngFor="let tipoIdentificacion of tiposIdentificacion" [value]="tipoIdentificacion.id">
+                        formControlName="IdTipoIdentificacion" id="campoTipoIdentificacion">
+                        <option value="" [selected] [disabled]="validacionDisabled">Seleccione...</option>
+                        <option [disabled]="validacionDisabled" *ngFor="let tipoIdentificacion of tiposIdentificacion"
+                            [value]="tipoIdentificacion.id">
                             {{tipoIdentificacion.nombre}}
                         </option>
                     </select>
                     <label for="campoTipoIdentificacion">Tipo identificación</label>
+                    <p *ngIf="campoTipoIdentificacion?.touched && campoTipoIdentificacion?.invalid">
+                        {{mensageValidadores.VALIDADOR_OPCION_VACIA}}</p>
                 </div>
 
             </div>
             <div class="col-lg-6 col-xl-3">
                 <div class="container-input">
-                    <input required
+                    <input [readonly]="validacionDisabled" required
                         [class.invalid]="campoNumeroIdentificacion?.touched && campoNumeroIdentificacion?.invalid"
                         [class.valid]="campoNumeroIdentificacion?.touched && campoNumeroIdentificacion?.valid"
                         formControlName="campoNumeroIdentificacion" formControlName="numeroIdentificacion"
                         id="campoNumeroIdentificacion" type="text" />
                     <label for="campoNumeroIdentificacion">Número de identificación</label>
+                    <p *ngIf="campoNumeroIdentificacion?.touched && campoNumeroIdentificacion?.invalid">
+                        {{mensageValidadores.VALIDADOR_CAMPO_VACIO}}
+                        ({{mensageValidadores.EXPRESION_REGULAR_SOLO_NUMEROS}})</p>
                 </div>
             </div>
             <div class="col-lg-6 col-xl-3">
                 <div class="container-input">
-                    <input required [class.invalid]="campoNombres?.touched && campoNombres?.invalid"
+                    <input [readonly]="validacionDisabled" required
+                        [class.invalid]="campoNombres?.touched && campoNombres?.invalid"
                         [class.valid]="campoNombres?.touched && campoNombres?.valid" formControlName="nombres"
                         id="campoNombres" type="text" />
                     <label for="campoNombres">Nombres</label>
+                    <p *ngIf="campoNombres?.touched && campoNombres?.invalid">
+                        {{mensageValidadores.VALIDADOR_CAMPO_VACIO}}
+                        ({{mensageValidadores.EXPRESION_REGULAR_TEXT}})</p>
                 </div>
             </div>
             <div class="col-lg-6 col-xl-3">
                 <div class="container-input">
-                    <input required [class.invalid]="campoApellidos?.touched && campoApellidos?.invalid"
+                    <input [readonly]="validacionDisabled" required
+                        [class.invalid]="campoApellidos?.touched && campoApellidos?.invalid"
                         [class.valid]="campoApellidos?.touched && campoApellidos?.valid" formControlName="nombres"
                         formControlName="apellidos" id="campoApellidos" type="text" />
                     <label for="campoApellidos">Apellidos</label>
+                    <p *ngIf="campoApellidos?.touched && campoApellidos?.invalid">
+                        {{mensageValidadores.VALIDADOR_CAMPO_VACIO}}
+                        ({{mensageValidadores.EXPRESION_REGULAR_TEXT}})</p>
                 </div>
             </div>
 
         </div>
         <div class="row">
-            <div class="col-lg-6 col-xl-3">
+            <div class="col-lg-6 col-xl-6">
                 <div class="container-input">
                     <input required [class.invalid]="campoDireccion?.touched && campoDireccion?.invalid"
                         [class.valid]="campoDireccion?.touched && campoDireccion?.valid" formControlName="direccion"
                         id="campoDireccion" type="text" />
                     <label for="campoDireccion">Dirección residencia</label>
+                    <p *ngIf="campoDireccion?.touched && campoDireccion?.invalid">
+                        {{mensageValidadores.VALIDADOR_CAMPO_VACIO}}
+                    </p>
                 </div>
             </div>
             <div class="col-lg-6 col-xl-3">
                 <div class="container-input">
                     <input required [class.invalid]="campoEmail?.touched && campoEmail?.invalid"
                         [class.valid]="campoEmail?.touched && campoEmail?.valid" formControlName="email" id="campoEmail"
-                        type="email" />
+                        type="email" placeholder="ej: **@sura.com.co" />
                     <label for="campoEmail">Email</label>
+                    <p *ngIf="campoEmail?.touched && campoEmail?.invalid">
+                        {{mensageValidadores.VALIDADOR_CAMPO_VACIO}}
+                        ({{mensageValidadores.EXPRESION_REGULAR_EMAIL_SURA}})</p>
                 </div>
             </div>
             <div class="col-lg-6 col-xl-3">
                 <div class="container-input">
+                    <input [class.invalid]="campoFechaNacimiento?.touched && campoFechaNacimiento?.invalid"
+                        [class.valid]="campoFechaNacimiento?.touched && campoFechaNacimiento?.valid" required
+                        formControlName="fechaNacimiento" id="campoFechaNacimiento" type="date" />
+                    <label for="campoFechaNacimiento">Fecha de nacimiento</label>
+                    <p *ngIf="campoFechaNacimiento?.touched && campoFechaNacimiento?.invalid">
+                        {{mensageValidadores.VALIDADOR_CAMPO_VACIO}} ({{mensageValidadores.VALIDADOR_FECHA_MAYOR_EDAD}})
+                    </p>
+                </div>
+            </div>
+
+        </div>
+        <div class="row">
+
+            <div class="col-lg-6 col-xl-3">
+                <div class="container-input">
                     <input required [class.invalid]="campoCelular?.touched && campoCelular?.invalid"
                         [class.valid]="campoCelular?.touched && campoCelular?.valid" formControlName="celular"
-                        id="campoCelular" type="tel" />
-                    <label for="campoCelular">celular</label>
+                        placeholder="(3xx) xxx xx-xx" id="campoCelular" type="tel" />
+                    <label for="campoCelular">Celular</label>
+
                 </div>
             </div>
             <div class="col-lg-6 col-xl-3">
@@ -81,16 +118,6 @@
                 </div>
             </div>
 
-        </div>
-        <div class="row">
-            <div class="col-lg-6 col-xl-3">
-                <div class="container-input">
-                    <input [class.invalid]="campoFechaNacimiento?.touched && campoFechaNacimiento?.invalid"
-                        [class.valid]="campoFechaNacimiento?.touched && campoFechaNacimiento?.valid" required
-                        formControlName="fechaNacimiento" id="campoFechaNacimiento" type="date" />
-                    <label for="campoFechaNacimiento">Fecha de nacimiento</label>
-                </div>
-            </div>
 
             <div class="col-lg-6 col-xl-3">
                 <div class="container-input">
@@ -98,14 +125,13 @@
                         [class.valid]="campoRegional?.touched && campoRegional?.valid" required
                         formControlName="idRegional" id="campoRegional">
                         <option value="" [selected] [disabled]>Seleccione...</option>
-                        <option *ngFor="let regional of regionales" [value]="regional.id">{{regional.nombre}}</option>
+                        <option *ngFor="let regional of regionales" [value]="regional.id">
+                            {{regional.nombre}}</option>
                     </select>
                     <label for="campoRegional">Regional</label>
+                    <p *ngIf="campoRegional?.touched && campoRegional?.invalid">
+                        {{mensageValidadores.VALIDADOR_OPCION_VACIA}}</p>
                 </div>
-            </div>
-
-            <div class="col-lg-6 col-xl-3">
-
             </div>
 
             <div class="col-lg-6 col-xl-3">
@@ -114,12 +140,14 @@
                     <select [class.invalid]="campoGenero?.touched && campoGenero?.invalid"
                         [class.valid]="campoGenero?.touched && campoGenero?.valid" required formControlName="genero"
                         id="campoGenero">
-                        <option value="" disabled selected>Seleccione...</option>
+                        <option value="" selected>Seleccione...</option>
                         <option>Masculino</option>
                         <option>Femenino</option>
                         <option>Otro</option>
                     </select>
                     <label for="campoGenero">Genero</label>
+                    <p *ngIf="campoGenero?.touched && campoGenero?.invalid">
+                        {{mensageValidadores.VALIDADOR_OPCION_VACIA}}</p>
                 </div>
             </div>
         </div>

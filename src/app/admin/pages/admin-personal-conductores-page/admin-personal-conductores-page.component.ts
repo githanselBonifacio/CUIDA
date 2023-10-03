@@ -2,11 +2,11 @@ import { Component, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import { Profesional } from 'src/app/agenda/interfaces/profesional.interface';
 import { AgendaService } from 'src/app/agenda/services/agenda.service';
 import { MaestrosService } from 'src/app/shared/services/maestros/maestros.service';
 import { AccionFormulario } from '../../interfaces/enum';
 import { Conductor } from 'src/app/agenda/interfaces/conductores.interface';
+import { getIdTipoIdentificacionById, getNombreRegionalById } from 'src/app/shared/interfaces/maestros.interfaces';
 
 @Component({
   selector: 'app-admin-personal-conductores-page',
@@ -21,7 +21,7 @@ export class AdminPersonalConductoresPageComponent {
     private maestrosService: MaestrosService) { }
 
   @ViewChild('paginatorConductor') paginator!: MatPaginator;
-  columnas: string[] = ['TipoIdentificacion', 'Nombres', 'Apellidos', 'Regional', "MatriculaMovil", "acciones"];
+  columnas: string[] = ['TipoIdentificacion', 'Nombres', 'Apellidos', 'Regional', "acciones"];
   conductoresSource = new MatTableDataSource<Conductor>([]);
   accionFormulario = AccionFormulario.CREAR;
   estadoVisualFormCrear?: string;
@@ -33,16 +33,17 @@ export class AdminPersonalConductoresPageComponent {
     this.estadoVisualFormCrear = "";
     this.maestrosService.getTiposIdentificacion();
     this.maestrosService.getRegionales();
-    this.agendaService.getAllConsultarConductores().subscribe(resp => {
+    this.agendaService.getAllConductores().subscribe(resp => {
       if (resp.status === 200) {
         this.conductoresSource.data = resp.result;
       }
     })
   }
   actualizarDatos() {
-    this.agendaService.getAllConsultarConductores().subscribe(resp => {
+    this.agendaService.getAllConductores().subscribe(resp => {
       if (resp.status === 200) {
         this.conductoresSource.data = resp.result;
+        this.paginator.pageIndex = 0;
       }
     })
   }
@@ -52,12 +53,23 @@ export class AdminPersonalConductoresPageComponent {
   }
 
   get tiposIdentificacion() {
-    return this.maestrosService.tiposIdentificacion;
+    return this.maestrosService.tiposIdentificacion
+      .filter(tipoIdentificacion => tipoIdentificacion.esMayorEdad == true);;
   }
 
   get regionales() {
     return this.maestrosService.regionales;
   }
+
+  getNombreTipoIdentificacion(id: number) {
+    return getIdTipoIdentificacionById(id, this.tiposIdentificacion)
+  }
+
+  getNombreRegional(id: string) {
+    return getNombreRegionalById(id, this.regionales)
+  }
+
+
   mostrarFormularioCrearConductor() {
 
     if (this.estadoVisualFormCrear == 'activate') {
@@ -80,7 +92,7 @@ export class AdminPersonalConductoresPageComponent {
     this.cambiarAccionFormulario()
   }
   cambiarAccionFormulario() {
-    this.tituloButtomDesplagarForm = (this.accionFormulario === AccionFormulario.CREAR) ? "Crear profesional" : "Actualizar profesional";
+    this.tituloButtomDesplagarForm = (this.accionFormulario === AccionFormulario.CREAR) ? "Crear conductor" : "Actualizar conductor";
   }
   abrirFormEditarProfesional(conductorActualizar: Conductor) {
     this.accionFormulario = AccionFormulario.ACTUALIZAR;

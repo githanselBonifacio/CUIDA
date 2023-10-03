@@ -14,18 +14,23 @@
 }
 
 /*inputs generales*/
+input {
+    color: var(--quarter-color);
+    border-radius: 5px;
+    border: 1px solid var(--gris2-color);
+    margin: 0px;
+    height: 2rem;
+}
+
+input[type="checkbox"] {
+    height: 100%
+}
+
 input:required+label::after {
     content: '*';
     color: red;
 }
 
-input[type="text"] {
-    margin: 0px;
-    height: 2rem;
-    border: 1px solid var(--gris2-color);
-    border-radius: 5px;
-    color: var(--quarter-color);
-}
 
 input.valid {
     border: 1px solid var(--gris2-color);
@@ -37,6 +42,21 @@ input.invalid {
     border: 1px solid var(--red-color);
 }
 
+input.invalid p {
+    color: var(--red-color);
+    margin: 0px;
+}
+
+input:read-only {
+    color: var(--gris2-color);
+}
+
+input.invalid~p {
+    color: var(--red-color) !important;
+    margin: 0px !important;
+    font-size: 0.8rem;
+
+}
 
 input[type="text"]:focus {
     box-shadow: 2px 2px 5px var(--gris2-color);
@@ -57,6 +77,7 @@ select {
 
 }
 
+
 select.valid {
     border: 1px solid var(--gris2-color);
     color: var(--quarter-color)
@@ -65,6 +86,14 @@ select.valid {
 select.invalid {
     color: var(--red-color);
     border: 1px solid var(--red-color);
+}
+
+select.invalid~p {
+    color: var(--red-color) !important;
+    content: "error";
+    margin: 0px !important;
+    font-size: 0.8rem;
+
 }
 
 option {

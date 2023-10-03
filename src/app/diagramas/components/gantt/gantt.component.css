@@ -28,14 +28,6 @@
 }
 
 
-.panel-gantt {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    justify-content: end;
-
-}
-
 .panel-gantt div {
     height: 100%;
 }

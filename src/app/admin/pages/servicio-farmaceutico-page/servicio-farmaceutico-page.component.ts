@@ -1,4 +1,4 @@
-import { Component, AfterViewInit, ViewChild, OnInit, SimpleChanges } from '@angular/core';
+import { Component, AfterViewInit, ViewChild, OnInit } from '@angular/core';
 import { AdminRemisionService } from '../../services/admin-remision.service';
 import { NotificacionFarmacia } from '../../interfaces/servicioFarmaceutico.interface';
 import { TitleToast, ToastType } from 'src/app/shared/components/toast/toast.component';
@@ -9,7 +9,7 @@ import { SpinnerService } from 'src/app/shared/services/spinner/spinner.service.
 import { ToastService } from 'src/app/shared/services/toast/toast.service';
 import { MaestrosService } from 'src/app/shared/services/maestros/maestros.service';
 import { HorarioTurno, Regional, formatoFecha } from 'src/app/shared/interfaces/maestros.interfaces';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-servicio-farmaceutico-page',

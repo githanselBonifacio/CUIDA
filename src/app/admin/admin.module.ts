@@ -29,6 +29,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatDialogModule } from '@angular/material/dialog';
 import { AdminFormConductoresComponent } from './forms/admin-form-conductores/admin-form-conductores.component';
 import { AccionFormulario } from './interfaces/enum';
+import { AdminPersonalVehiculosPageComponent } from './pages/admin-personal-vehiculos-page/admin-personal-vehiculos-page.component';
+import { AdminFromMovilesComponent } from './forms/admin-from-moviles/admin-from-moviles.component';
 
 
 @NgModule({
@@ -46,6 +48,8 @@ import { AccionFormulario } from './interfaces/enum';
     AdminPersonalHorarioPageComponent,
     AdminFormProfesionalesComponent,
     AdminFormConductoresComponent,
+    AdminPersonalVehiculosPageComponent,
+    AdminFromMovilesComponent,
   ],
   imports: [
     CommonModule,

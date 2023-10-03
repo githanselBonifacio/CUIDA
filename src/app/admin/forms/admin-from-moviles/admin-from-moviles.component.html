@@ -1,0 +1,68 @@
+<div class="container-form">
+
+    <form [formGroup]="formMovil" (ngSubmit)="enviarFormulario()">
+        <div class="title-form">
+            <h3>{{tituloFormulario}}</h3>
+        </div>
+        <div class="row">
+            <div class="col-lg-6 col-xl-3">
+                <div class="container-input">
+                    <input [readonly]="validacionDisabled" required
+                        [class.invalid]="campoMatricula?.touched && campoMatricula?.invalid"
+                        [class.valid]="campoMatricula?.touched && campoMatricula?.valid" formControlName="matricula"
+                        id="campoMatricula" type="text" />
+                    <label for="campoMatricula">Matrícula</label>
+                    <p *ngIf="campoMatricula?.touched && campoMatricula?.invalid">
+                        {{mensageValidadores.VALIDADOR_CAMPO_VACIO}}
+                    </p>
+                </div>
+
+            </div>
+            <div class="col-lg-6 col-xl-3">
+                <div class="container-input">
+                    <input [readonly]="validacionDisabled" required
+                        [class.invalid]="campoMarca?.touched && campoMarca?.invalid"
+                        [class.valid]="campoMarca?.touched && campoMarca?.valid" formControlName="marca" id="campoMarca"
+                        type="text" />
+                    <label for="campoMarca">Marca</label>
+                    <p *ngIf="campoMarca?.touched && campoMarca?.invalid">
+                        {{mensageValidadores.VALIDADOR_CAMPO_VACIO}}
+                        ({{mensageValidadores.EXPRESION_REGULAR_TEXT}})</p>
+                </div>
+            </div>
+            <div class="col-lg-6 col-xl-3">
+                <div class="container-input">
+                    <input [readonly]="validacionDisabled" required
+                        [class.invalid]="campoModelo?.touched && campoModelo?.invalid"
+                        [class.valid]="campoModelo?.touched && campoModelo?.valid" formControlName="modelo"
+                        id="campoModelo" type="date" />
+                    <label for="campoModelo">Modelo</label>
+                    <p *ngIf="campoModelo?.touched && campoModelo?.invalid">
+                        {{mensageValidadores.VALIDADOR_CAMPO_VACIO}}
+                    </p>
+                </div>
+            </div>
+            <div class="col-lg-6 col-xl-3">
+                <div class="container-input">
+                    <select [class.invalid]="campoIdRegional?.touched && campoIdRegional?.invalid"
+                        [class.valid]="campoIdRegional?.touched && campoIdRegional?.valid" required
+                        formControlName="idRegional" id="campoIdRegional">
+                        <option value="" [selected] [disabled]>Seleccione...</option>
+                        <option *ngFor="let regional of regionales" [value]="regional.id">
+                            {{regional.nombre}}</option>
+                    </select>
+                    <label for="campoIdRegional">Regional</label>
+                    <p *ngIf="campoIdRegional?.touched && campoIdRegional?.invalid">
+                        {{mensageValidadores.VALIDADOR_OPCION_VACIA}}</p>
+                </div>
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-12" id="content-button-enviar">
+                <button type="submit" class="buttom-seleccion">Enviar</button>
+            </div>
+
+        </div>
+    </form>
+</div>

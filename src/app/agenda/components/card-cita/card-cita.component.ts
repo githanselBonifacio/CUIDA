@@ -11,7 +11,7 @@ import { ModalDetalleRemisionComponent } from '../modal-detalle-remision/modal-d
 import { switchMap, filter, tap } from 'rxjs/operators';
 import { ToastComponent, ToastType, TitleToast, crearConfig } from 'src/app/shared/components/toast/toast.component';
 import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
-import { EstadoCita, getNombreEstadoCitaById } from 'src/app/shared/interfaces/maestros.interfaces';
+import { EstadoCita, funtionGetNombreEstadoCitaById } from 'src/app/shared/interfaces/maestros.interfaces';
 
 
 @Component({
@@ -37,6 +37,7 @@ export class CardCitaComponent {
   @Input()
   public idHorarioTurno: number = 0
 
+  convertEstado = funtionGetNombreEstadoCitaById;
   constructor(
     private dialogo: MatDialog,
     private agendaService: AgendaService,
@@ -159,9 +160,7 @@ export class CardCitaComponent {
 
 
   }
-  getNombreEstadoCita(id: number) {
-    return getNombreEstadoCitaById(`${id}`, this.estadosCita);
-  }
+
 
   mostrarToast(tipo: ToastType, titulo: TitleToast, mensaje: string, duracion: number) {
     const config: MatSnackBarConfig = crearConfig(tipo, titulo, mensaje, duracion)

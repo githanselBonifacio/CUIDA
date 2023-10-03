@@ -15,33 +15,13 @@ export class AgendaService {
   private serviceUrl: string = 'http://localhost:9090';
   private urlRecurso = 'agenda'
 
-  public profesionales: Profesional[] = [];
-  public moviles: Movil[] = [];
-  public conductores: Conductor[] = []
   public citas: Cita[] = [];
   public agendaGantt: Actividad[] = [];
 
   constructor(private http: HttpClient) { };
 
   //profesionales
-  getAllProfesionales() {
-    return this.http.get<Respuesta>(`${environment.URL_API_CUIDA}/${this.urlRecurso}/profesionales`)
-  }
-  async getProfesionalesCiudad(idRegional: string) {
-    this.http.get<Respuesta>(`${environment.URL_API_CUIDA}/${this.urlRecurso}/profesionales/${idRegional}`)
-      .subscribe(resp => {
-        this.profesionales = resp.result;
 
-      });
-  }
-  crearProfesional(profesional: Profesional) {
-
-    return this.http.post<Respuesta>(`${environment.URL_API_CUIDA}/${this.urlRecurso}/crearProfesional`, profesional);
-  }
-  actualizarProfesional(profesional: Profesional) {
-
-    return this.http.put<Respuesta>(`${environment.URL_API_CUIDA}/${this.urlRecurso}/actualizarProfesional`, profesional);
-  }
   getProfesionalDisponibleByturnoCiudad(fechaTurno: string, idRegional: string) {
     const params = new HttpParams()
       .set('fechaTurno', fechaTurno)
@@ -74,29 +54,7 @@ export class AgendaService {
 
     return this.http.get<Respuesta>(`${environment.URL_API_CUIDA}/${this.urlRecurso}/desasignarProfesionalTurno`, { params });
   }
-  //conductores
-  getAllConductores() {
-    return this.http.get<Respuesta>(`${environment.URL_API_CUIDA}/${this.urlRecurso}/conductores`)
-  }
-  crearConductor(conductor: Conductor) {
-    return this.http.post<Respuesta>(`${environment.URL_API_CUIDA}/${this.urlRecurso}/crearConductor`, conductor);
-  }
-  actualizarConductor(conductor: Conductor) {
-    return this.http.put<Respuesta>(`${environment.URL_API_CUIDA}/${this.urlRecurso}/actualizarConductor`, conductor);
-  }
-  //moviles
-  getMovilesByIdRegional(idRegional: string) {
-    return this.http.get<Respuesta>(`${environment.URL_API_CUIDA}/${this.urlRecurso}/moviles/${idRegional}`)
-  }
-  async getAllMoviles() {
-    this.http.get<Respuesta>(`${environment.URL_API_CUIDA}/${this.urlRecurso}/moviles`)
-      .subscribe(resp => {
-        this.moviles = resp.result;
-      })
-  }
-  getAllMovilesSinConductor() {
-    return this.http.get<Respuesta>(`${environment.URL_API_CUIDA}/${this.urlRecurso}/movilesSinConductor`);
-  }
+
   //citas
   async getCitas(fechaTurno: string, idRegional: string, idHorarioTurno: number) {
     const params = new HttpParams()
@@ -112,16 +70,6 @@ export class AgendaService {
   }
 
   //agregados de la remision para detalle
-
-  getPacienteByRemision(idRemision: string) {
-    return this.http.get<Respuesta>(`${environment.URL_API_CUIDA}/remision/pacienteFromRemision/${idRemision}`)
-
-  }
-
-  getDatosAtencionByRemision(idRemision: string) {
-    return this.http.get<Respuesta>(`${environment.URL_API_CUIDA}/remision/datosAtencionPaciente/${idRemision}`)
-
-  }
   getTratamientoByCita(idCita: string) {
     const params = new HttpParams()
       .set('idCita', idCita)

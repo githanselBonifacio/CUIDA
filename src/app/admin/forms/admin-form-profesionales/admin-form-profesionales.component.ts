@@ -1,7 +1,6 @@
 import { Component, EventEmitter, OnChanges, Input, Output, SimpleChanges } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Profesional } from 'src/app/agenda/interfaces/profesional.interface';
-import { AgendaService } from 'src/app/agenda/services/agenda.service';
 import { TitleToast, ToastType } from 'src/app/shared/components/toast/toast.component';
 import { Profesion, Regional, TipoIdentificacion } from 'src/app/shared/interfaces/maestros.interfaces';
 import { SpinnerService } from 'src/app/shared/services/spinner/spinner.service.service';
@@ -9,6 +8,7 @@ import { ToastService } from 'src/app/shared/services/toast/toast.service';
 import { AccionFormulario } from '../../interfaces/enum';
 import { expresionesRegulares, mesajeExpresionRegular } from 'src/app/shared/forms/expresiones-regulares.validaciones';
 import { validatorMayorEdad } from 'src/app/shared/forms/validadors.validaciones';
+import { AdminRemisionService } from '../../services/admin-remision.service';
 
 @Component({
   selector: 'app-admin-form-profesionales',
@@ -22,7 +22,7 @@ export class AdminFormProfesionalesComponent implements OnChanges {
     private formBuilder: FormBuilder,
     private toastservice: ToastService,
     private spinnerService: SpinnerService,
-    private agendaService: AgendaService) {
+    private adminService: AdminRemisionService,) {
   }
   @Output() enviado = new EventEmitter<void>();
 
@@ -149,7 +149,7 @@ export class AdminFormProfesionalesComponent implements OnChanges {
         activo: true,
       };
       if (this.accionFormulario == AccionFormulario.CREAR) {
-        this.agendaService.crearProfesional(this.profesional)
+        this.adminService.crearProfesional(this.profesional)
           .subscribe(resp => {
             if (resp.status == 200) {
               this.enviado.emit();
@@ -161,7 +161,7 @@ export class AdminFormProfesionalesComponent implements OnChanges {
           })
       } else if (this.accionFormulario == AccionFormulario.ACTUALIZAR) {
 
-        this.agendaService.actualizarProfesional(this.profesional).subscribe(resp => {
+        this.adminService.actualizarProfesional(this.profesional).subscribe(resp => {
           if (resp.status == 200) {
             this.enviado.emit();
             this.toastservice.mostrarToast(ToastType.Success, TitleToast.Success, resp.message, 5);

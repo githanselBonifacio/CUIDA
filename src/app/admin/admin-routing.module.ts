@@ -8,6 +8,7 @@ import { AdminPersonalPageComponent } from './pages/admin-personal-page/admin-pe
 import { AdminPersonalProfesionalesPageComponent } from './pages/admin-personal-profesionales-page/admin-personal-profesionales-page.component';
 import { AdminPersonalConductoresPageComponent } from './pages/admin-personal-conductores-page/admin-personal-conductores-page.component';
 import { AdminPersonalHorarioPageComponent } from './pages/admin-personal-horario-page/admin-personal-horario-page.component';
+import { AdminPersonalVehiculosPageComponent } from './pages/admin-personal-vehiculos-page/admin-personal-vehiculos-page.component';
 
 
 export const routes: Routes = [
@@ -43,6 +44,10 @@ export const routes: Routes = [
         path: "horario",
         component: AdminPersonalHorarioPageComponent,
       },
+      {
+        path: "vehiculos",
+        component: AdminPersonalVehiculosPageComponent
+      }
     ]
 
   }

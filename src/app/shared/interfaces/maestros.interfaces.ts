@@ -55,25 +55,31 @@ export interface EstadoCita {
     nombre: string,
 }
 
-export function getNombreEstadoCitaById(id: string, list: EstadoCita[]): string | undefined {
+function getNombreEstadoCitaById(id: string | number, list: EstadoCita[]): string | undefined {
     const item = list.find(item => item.id == id);
     return item?.nombre;
 }
 
-export function getNombreRegionalById(id: string, list: Regional[]): string | undefined {
+function getNombreRegionalById(id: string, list: Regional[]): string | undefined {
     const item = list.find(item => item.id == id);
     return item?.nombre;
 }
 
-export function getNombreTipoIdentificacionById(id: number, list: TipoIdentificacion[]): string | undefined {
+function getNombreTipoIdentificacionById(id: number, list: TipoIdentificacion[]): string | undefined {
     const item = list.find(item => item.id == id);
     return item?.nombre;
 }
-export function getIdTipoIdentificacionById(id: number, list: TipoIdentificacion[]): string | undefined {
+function getIdTipoIdentificacionById(id: number, list: TipoIdentificacion[]): string | undefined {
     const item = list.find(item => item.id == id);
     return item?.idTipo;
 }
-export function getNombreProfesionById(id: number, list: Profesion[]): string | undefined {
+function getNombreProfesionById(id: number, list: Profesion[]): string | undefined {
     const item = list.find(item => item.idProfesion == id);
     return item?.nombre;
 }
+
+export const funtionGetNombreEstadoCitaById = getNombreEstadoCitaById;
+export const funtionGetNombreRegionalById = getNombreRegionalById;
+export const funtionGetNombreTipoIdentificacionById = getNombreTipoIdentificacionById;
+export const funtionGetIdTipoIdentificacionById = getIdTipoIdentificacionById;
+export const funtionGetNombreProfesionById = getNombreProfesionById;

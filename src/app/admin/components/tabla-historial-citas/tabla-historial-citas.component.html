@@ -26,7 +26,7 @@
 
                 <td [ngClass]="{'estado': true}">
                     <div *ngIf="!isHistorial; else historial" [attr.id]="'estado-' + cita.datosCita.idEstado">
-                        {{ getNombreEstadoCita(cita.datosCita.idEstado) }}
+                        {{ convertEstados(cita.datosCita.idEstado, estadosCita) }}
                     </div>
                     <ng-template #historial>
                         <div *ngIf="cita.datosCita.idEstado !== '0'">

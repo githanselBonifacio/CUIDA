@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { HistorialRemision } from '../../interfaces/historialRemison.interface';
 import { AdminRemisionService } from '../../services/admin-remision.service';
 import { MaestrosService } from '../../../shared/services/maestros/maestros.service';
-import { EstadoCita, getNombreEstadoCitaById } from 'src/app/shared/interfaces/maestros.interfaces';
+import { EstadoCita, funtionGetNombreEstadoCitaById } from 'src/app/shared/interfaces/maestros.interfaces';
 import { Cita } from '../../interfaces/historialRemison.interface';
 
 @Component({
@@ -51,9 +51,7 @@ export class AdminHistorialRemisionPageComponent implements OnInit {
   get estados(): EstadoCita[] {
     return this.maestroService.estadosCita;
   }
-  getNombreEstadoCita(id: string) {
-    return getNombreEstadoCitaById(id, this.estados);
-  }
+
   backRemisionesTabla() {
     this.router.navigate(['admin/remisiones']);
   }

@@ -3,10 +3,10 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Profesional } from 'src/app/agenda/interfaces/profesional.interface';
-import { AgendaService } from 'src/app/agenda/services/agenda.service';
-import { getIdTipoIdentificacionById, getNombreProfesionById, getNombreRegionalById } from 'src/app/shared/interfaces/maestros.interfaces';
+import { funtionGetIdTipoIdentificacionById, funtionGetNombreProfesionById, funtionGetNombreRegionalById } from 'src/app/shared/interfaces/maestros.interfaces';
 import { MaestrosService } from 'src/app/shared/services/maestros/maestros.service';
 import { AccionFormulario } from '../../interfaces/enum'
+import { AdminRemisionService } from '../../services/admin-remision.service';
 
 @Component({
   selector: 'app-personal-admin-profesionales-page',
@@ -17,7 +17,7 @@ export class AdminPersonalProfesionalesPageComponent implements OnInit, AfterVie
 
   constructor(
     public dialogRef: MatDialog,
-    private agendaService: AgendaService,
+    private adminService: AdminRemisionService,
     private maestrosService: MaestrosService) { }
 
   @ViewChild('paginatorProfesionales') paginator!: MatPaginator;
@@ -28,13 +28,16 @@ export class AdminPersonalProfesionalesPageComponent implements OnInit, AfterVie
   profesionalSeleccionado?: Profesional;
   tituloButtomDesplagarForm = "Crear profesional";
 
+  convetIdTipoIdentificacion = funtionGetIdTipoIdentificacionById;
+  convetIdRegional = funtionGetNombreRegionalById;
+  convertProfesion = funtionGetNombreProfesionById;
 
   ngOnInit(): void {
     this.estadoVisualFormCrearProfesional = "";
     this.maestrosService.getTiposIdentificacion();
     this.maestrosService.getRegionales();
     this.maestrosService.getProfesiones();
-    this.agendaService.getAllProfesionales()
+    this.adminService.getAllProfesionales()
       .subscribe(
         resp => {
           this.profesionalesSource.data = resp.result;
@@ -44,7 +47,7 @@ export class AdminPersonalProfesionalesPageComponent implements OnInit, AfterVie
 
   }
   actualizarDatos() {
-    this.agendaService.getAllProfesionales()
+    this.adminService.getAllProfesionales()
       .subscribe(
         resp => {
           this.profesionalesSource.data = resp.result;
@@ -80,17 +83,6 @@ export class AdminPersonalProfesionalesPageComponent implements OnInit, AfterVie
     }
   }
 
-  getNombreTipoIdentificacion(id: number) {
-    return getIdTipoIdentificacionById(id, this.tiposIdentificacion)
-  }
-
-  getNombreRegional(id: string) {
-    return getNombreRegionalById(id, this.regionales)
-  }
-
-  getNombreProfesion(id: number) {
-    return getNombreProfesionById(id, this.profesiones)
-  }
 
   getIconActivar(estado: boolean) {
     if (estado) {

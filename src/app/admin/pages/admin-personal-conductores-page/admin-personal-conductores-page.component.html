@@ -21,7 +21,7 @@
             <ng-container matColumnDef="TipoIdentificacion">
                 <th mat-header-cell *matHeaderCellDef>Identificación</th>
                 <td class="td-start" mat-cell *matCellDef="let conductor">
-                    {{getNombreTipoIdentificacion(conductor.idTipoIdentificacion)}}:
+                    {{convetIdTipoIdentificacion(conductor.idTipoIdentificacion, tiposIdentificacion)}}:
                     {{conductor.numeroIdentificacion}}
                 </td>
             </ng-container>
@@ -39,7 +39,7 @@
 
             <ng-container matColumnDef="Regional">
                 <th mat-header-cell *matHeaderCellDef>Regional</th>
-                <td mat-cell *matCellDef="let conductor">{{getNombreRegional(conductor.idRegional)}}</td>
+                <td mat-cell *matCellDef="let conductor">{{convetIdRegional(conductor.idRegional, regionales)}}</td>
             </ng-container>
 
             <ng-container matColumnDef="acciones">

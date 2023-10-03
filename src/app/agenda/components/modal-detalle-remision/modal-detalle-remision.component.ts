@@ -4,6 +4,7 @@ import { DatosAtencionRemision, Paciente, Cita, Tratamiento } from '../../interf
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { AgendaService } from 'src/app/agenda/services/agenda.service';
 import { Procedimientos } from '../../interfaces/remision.interface';
+import { AdminRemisionService } from 'src/app/admin/services/admin-remision.service';
 
 @Component({
   selector: 'app-modal-detalle-remision',
@@ -24,6 +25,7 @@ export class ModalDetalleRemisionComponent implements OnInit {
     public dialogRef: MatDialogRef<ModalDetalleRemisionComponent>,
     @Inject(MAT_DIALOG_DATA) public citaSeleccionada: Cita,
     private agendaService: AgendaService,
+    private adminService: AdminRemisionService,
 
   ) {
 
@@ -31,8 +33,8 @@ export class ModalDetalleRemisionComponent implements OnInit {
 
   ngOnInit(): void {
     forkJoin([
-      this.agendaService.getPacienteByRemision(this.citaSeleccionada.idRemision),
-      this.agendaService.getDatosAtencionByRemision(this.citaSeleccionada.idRemision),
+      this.adminService.getPacienteByRemision(this.citaSeleccionada.idRemision),
+      this.adminService.getDatosAtencionByRemision(this.citaSeleccionada.idRemision),
       this.agendaService.getTratamientoByCita(this.citaSeleccionada.idCita),
       this.agendaService.getProcedimientosByCita(this.citaSeleccionada.idCita)
     ]).subscribe(results => {

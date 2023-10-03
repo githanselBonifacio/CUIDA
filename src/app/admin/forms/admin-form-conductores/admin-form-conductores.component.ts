@@ -1,26 +1,27 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AgendaService } from 'src/app/agenda/services/agenda.service';
-import { TipoIdentificacion, Regional, getNombreRegionalById } from 'src/app/shared/interfaces/maestros.interfaces';
+import { TipoIdentificacion, Regional } from 'src/app/shared/interfaces/maestros.interfaces';
 import { SpinnerService } from 'src/app/shared/services/spinner/spinner.service.service';
 import { ToastService } from 'src/app/shared/services/toast/toast.service';
 import { AccionFormulario } from '../../interfaces/enum';
 import { expresionesRegulares, mesajeExpresionRegular } from '../../../shared/forms/expresiones-regulares.validaciones';
-import { Conductor, Movil } from 'src/app/agenda/interfaces/conductores.interface';
+import { Conductor } from 'src/app/agenda/interfaces/conductores.interface';
 import { ToastType, TitleToast } from 'src/app/shared/components/toast/toast.component';
 import { validatorMayorEdad } from 'src/app/shared/forms/validadors.validaciones';
+import { AdminRemisionService } from '../../services/admin-remision.service';
 
 @Component({
   selector: 'app-admin-from-conductores',
   templateUrl: './admin-form-conductores.component.html',
   styleUrls: ['./admin-form-conductores.component.css'],
 })
-export class AdminFormConductoresComponent implements OnChanges, OnInit {
+export class AdminFormConductoresComponent implements OnChanges {
   constructor(
     private formBuilder: FormBuilder,
     private toastservice: ToastService,
     private spinnerService: SpinnerService,
-    private agendaService: AgendaService) {
+    private adminService: AdminRemisionService) {
 
     this.formConductor = this.formBuilder.group({
       IdTipoIdentificacion: [this.conductor?.idTipoIdentificacion, [Validators.required]],
@@ -55,6 +56,7 @@ export class AdminFormConductoresComponent implements OnChanges, OnInit {
   formConductor: FormGroup;
   tituloFormulario?: string;
   mensageValidadores = mesajeExpresionRegular;
+
   ngOnChanges(changes: SimpleChanges) {
     if (changes['accionFormulario'] || changes['conductor']) {
       this.tituloFormulario = (this.accionFormulario === AccionFormulario.CREAR) ? "Crear conductor" : "Actualizar conductor";
@@ -74,14 +76,7 @@ export class AdminFormConductoresComponent implements OnChanges, OnInit {
       })
     }
   }
-  ngOnInit(): void {
-    this.agendaService.getAllMoviles();
-  }
 
-
-  get moviles(): Movil[] {
-    return this.agendaService.moviles;
-  }
 
   get campoTipoIdentificacion() {
     return this.formConductor.get("IdTipoIdentificacion")
@@ -143,7 +138,7 @@ export class AdminFormConductoresComponent implements OnChanges, OnInit {
         activo: true,
       };
       if (this.accionFormulario == AccionFormulario.CREAR) {
-        this.agendaService.crearConductor(this.conductor)
+        this.adminService.crearConductor(this.conductor)
           .subscribe(resp => {
             if (resp.status == 200) {
               this.enviado.emit();
@@ -155,7 +150,7 @@ export class AdminFormConductoresComponent implements OnChanges, OnInit {
           })
       } else if (this.accionFormulario == AccionFormulario.ACTUALIZAR) {
 
-        this.agendaService.actualizarConductor(this.conductor).subscribe(resp => {
+        this.adminService.actualizarConductor(this.conductor).subscribe(resp => {
           if (resp.status == 200) {
             this.enviado.emit();
             this.toastservice.mostrarToast(ToastType.Success, TitleToast.Success, resp.message, 5);

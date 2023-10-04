@@ -12,10 +12,10 @@ import { ModalDetalleCitasHistorialComponent } from './components/modal-detalle-
 import { TablaActualizacionDatosRemisionComponent } from './components/tabla-actualizacion-datos-remision/tabla-actualizacion-datos-remision.component';
 
 import { AgendaModule } from '../agenda/agenda.module';
-import { AdminPersonalPageComponent } from './pages/admin-personal-page/admin-personal-page.component';
-import { AdminPersonalProfesionalesPageComponent } from './pages/admin-personal-profesionales-page/admin-personal-profesionales-page.component';
-import { AdminPersonalConductoresPageComponent } from './pages/admin-personal-conductores-page/admin-personal-conductores-page.component';
-import { AdminPersonalHorarioPageComponent } from './pages/admin-personal-horario-page/admin-personal-horario-page.component';
+import { AdminPersonalPageComponent } from './pages/personal/admin-personal-page/admin-personal-page.component';
+import { AdminPersonalProfesionalesPageComponent } from './pages/personal/admin-personal-profesionales-page/admin-personal-profesionales-page.component';
+import { AdminPersonalConductoresPageComponent } from './pages/personal/admin-personal-conductores-page/admin-personal-conductores-page.component';
+import { AdminPersonalHorarioPageComponent } from './pages/personal/admin-personal-horario-page/admin-personal-horario-page.component';
 import { AdminFormProfesionalesComponent } from './forms/admin-form-profesionales/admin-form-profesionales.component';
 
 import { NgxPaginationModule } from 'ngx-pagination';
@@ -28,8 +28,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatInputModule } from '@angular/material/input';
 import { MatDialogModule } from '@angular/material/dialog';
 import { AdminFormConductoresComponent } from './forms/admin-form-conductores/admin-form-conductores.component';
-import { AccionFormulario } from './interfaces/enum';
-import { AdminPersonalVehiculosPageComponent } from './pages/admin-personal-vehiculos-page/admin-personal-vehiculos-page.component';
+import { AdminPersonalVehiculosPageComponent } from './pages/personal/admin-personal-vehiculos-page/admin-personal-vehiculos-page.component';
 import { AdminFromMovilesComponent } from './forms/admin-from-moviles/admin-from-moviles.component';
 
 

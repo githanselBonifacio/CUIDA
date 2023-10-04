@@ -1,11 +1,11 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MaestrosService } from 'src/app/shared/services/maestros/maestros.service';
-import { AdminRemisionService } from '../../services/admin-remision.service';
+import { AdminRemisionService } from '../../../services/admin-remision.service';
 import { MatPaginator } from '@angular/material/paginator';
 import { Movil } from 'src/app/agenda/interfaces/conductores.interface';
 import { MatTableDataSource } from '@angular/material/table';
-import { AccionFormulario } from '../../interfaces/enum';
-import { funtionGetNombreRegionalById } from '../../../shared/interfaces/maestros.interfaces';
+import { AccionFormulario } from '../../../interfaces/enum';
+import { funtionGetNombreRegionalById } from '../../../../shared/interfaces/maestros.interfaces';
 @Component({
   selector: 'app-admin-personal-vehiculos-page',
   templateUrl: './admin-personal-vehiculos-page.component.html',

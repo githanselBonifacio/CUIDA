@@ -4,11 +4,11 @@ import { MainAdminPageComponent } from './pages/main-admin-page/main-admin-page.
 import { ServicioFarmaceuticoPageComponent } from './pages/servicio-farmaceutico-page/servicio-farmaceutico-page.component';
 import { AdminRemisionesPageComponent } from './pages/admin-remisiones-page/admin-remisiones-page.component';
 import { AdminHistorialRemisionPageComponent } from './pages/admin-historial-remision-page/admin-historial-remision-page.component';
-import { AdminPersonalPageComponent } from './pages/admin-personal-page/admin-personal-page.component';
-import { AdminPersonalProfesionalesPageComponent } from './pages/admin-personal-profesionales-page/admin-personal-profesionales-page.component';
-import { AdminPersonalConductoresPageComponent } from './pages/admin-personal-conductores-page/admin-personal-conductores-page.component';
-import { AdminPersonalHorarioPageComponent } from './pages/admin-personal-horario-page/admin-personal-horario-page.component';
-import { AdminPersonalVehiculosPageComponent } from './pages/admin-personal-vehiculos-page/admin-personal-vehiculos-page.component';
+import { AdminPersonalPageComponent } from './pages/personal/admin-personal-page/admin-personal-page.component';
+import { AdminPersonalProfesionalesPageComponent } from './pages/personal/admin-personal-profesionales-page/admin-personal-profesionales-page.component';
+import { AdminPersonalConductoresPageComponent } from './pages/personal/admin-personal-conductores-page/admin-personal-conductores-page.component';
+import { AdminPersonalHorarioPageComponent } from './pages/personal/admin-personal-horario-page/admin-personal-horario-page.component';
+import { AdminPersonalVehiculosPageComponent } from './pages/personal/admin-personal-vehiculos-page/admin-personal-vehiculos-page.component';
 
 
 export const routes: Routes = [

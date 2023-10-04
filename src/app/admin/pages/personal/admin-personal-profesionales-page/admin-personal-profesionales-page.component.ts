@@ -5,8 +5,8 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Profesional } from 'src/app/agenda/interfaces/profesional.interface';
 import { funtionGetIdTipoIdentificacionById, funtionGetNombreProfesionById, funtionGetNombreRegionalById } from 'src/app/shared/interfaces/maestros.interfaces';
 import { MaestrosService } from 'src/app/shared/services/maestros/maestros.service';
-import { AccionFormulario } from '../../interfaces/enum'
-import { AdminRemisionService } from '../../services/admin-remision.service';
+import { AccionFormulario } from '../../../interfaces/enum'
+import { AdminRemisionService } from '../../../services/admin-remision.service';
 
 @Component({
   selector: 'app-personal-admin-profesionales-page',
@@ -28,9 +28,9 @@ export class AdminPersonalProfesionalesPageComponent implements OnInit, AfterVie
   profesionalSeleccionado?: Profesional;
   tituloButtomDesplagarForm = "Crear profesional";
 
-  convetIdTipoIdentificacion = funtionGetIdTipoIdentificacionById;
-  convetIdRegional = funtionGetNombreRegionalById;
-  convertProfesion = funtionGetNombreProfesionById;
+  mostrarNombreTipoIdentificacion = funtionGetIdTipoIdentificacionById;
+  mostrarNombreRegional = funtionGetNombreRegionalById;
+  mostrarNombreProfesion = funtionGetNombreProfesionById;
 
   ngOnInit(): void {
     this.estadoVisualFormCrearProfesional = "";

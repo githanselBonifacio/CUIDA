@@ -21,7 +21,7 @@
             <ng-container matColumnDef="TipoIdentificacion">
                 <th mat-header-cell *matHeaderCellDef>Tipo identificación</th>
                 <td class="td-start" mat-cell *matCellDef="let profesional">
-                    {{convetIdTipoIdentificacion(profesional.idTipoIdentificacion, tiposIdentificacion)}}:
+                    {{mostrarNombreTipoIdentificacion(profesional.idTipoIdentificacion, tiposIdentificacion)}}:
                     {{profesional.numeroIdentificacion}}
                 </td>
             </ng-container>
@@ -39,12 +39,14 @@
 
             <ng-container matColumnDef="Regional">
                 <th mat-header-cell *matHeaderCellDef>Regional</th>
-                <td mat-cell *matCellDef="let profesional">{{convetIdRegional(profesional.idRegional,regionales)}}</td>
+                <td mat-cell *matCellDef="let profesional">{{mostrarNombreRegional(profesional.idRegional,regionales)}}
+                </td>
             </ng-container>
 
             <ng-container matColumnDef="Profesion">
                 <th mat-header-cell *matHeaderCellDef>Profesión</th>
-                <td mat-cell *matCellDef="let profesional">{{convertProfesion(profesional.idProfesion, profesiones)}}
+                <td mat-cell *matCellDef="let profesional">{{mostrarNombreProfesion(profesional.idProfesion,
+                    profesiones)}}
                 </td>
             </ng-container>
 

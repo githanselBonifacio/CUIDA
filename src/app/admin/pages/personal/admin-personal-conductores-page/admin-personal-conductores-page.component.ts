@@ -2,10 +2,10 @@ import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { MaestrosService } from 'src/app/shared/services/maestros/maestros.service';
-import { AccionFormulario } from '../../interfaces/enum';
+import { AccionFormulario } from '../../../interfaces/enum';
 import { Conductor } from 'src/app/agenda/interfaces/conductores.interface';
 import { funtionGetIdTipoIdentificacionById, funtionGetNombreRegionalById } from 'src/app/shared/interfaces/maestros.interfaces';
-import { AdminRemisionService } from '../../services/admin-remision.service';
+import { AdminRemisionService } from '../../../services/admin-remision.service';
 
 @Component({
   selector: 'app-admin-personal-conductores-page',

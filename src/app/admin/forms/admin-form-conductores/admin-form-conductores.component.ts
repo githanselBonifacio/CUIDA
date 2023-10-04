@@ -142,6 +142,7 @@ export class AdminFormConductoresComponent implements OnChanges {
           .subscribe(resp => {
             if (resp.status == 200) {
               this.enviado.emit();
+              this.formConductor.reset();
               this.toastservice.mostrarToast(ToastType.Success, TitleToast.Success, resp.message, 5);
             } else {
               this.toastservice.mostrarToast(ToastType.Error, TitleToast.Error, resp.message, 5);
@@ -153,6 +154,7 @@ export class AdminFormConductoresComponent implements OnChanges {
         this.adminService.actualizarConductor(this.conductor).subscribe(resp => {
           if (resp.status == 200) {
             this.enviado.emit();
+            this.formConductor.reset();
             this.toastservice.mostrarToast(ToastType.Success, TitleToast.Success, resp.message, 5);
           } else {
             this.toastservice.mostrarToast(ToastType.Error, TitleToast.Error, resp.message, 5);
@@ -160,7 +162,7 @@ export class AdminFormConductoresComponent implements OnChanges {
         })
 
       }
-      this.formConductor.reset();
+
     } else {
 
       this.toastservice.mostrarToast(ToastType.Error, TitleToast.Error, "Error en campos del formulario", 5);

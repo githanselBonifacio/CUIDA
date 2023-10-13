@@ -4,19 +4,19 @@
   display: flex;
   justify-content: start;
   align-items: center;
+  gap: 0.2rem;
+  margin-left: 0.5rem;
 }
 
 .icon-toast {
-  margin-right: 1rem;
-  margin-left: 0.5rem;
   vertical-align: middle;
 }
 
 .icon-toast i {
   display: flex;
   align-items: center;
-  font-size: 2rem;
-  padding: 0rem 0.8rem 0rem 0.2rem;
+  font-size: 1.8rem;
+  padding: 0rem 0.2rem 0rem 0.2rem;
 }
 
 .body-toast h5 {
@@ -28,7 +28,7 @@
   display: block;
   height: fit-content;
   color: #030202;
-  padding: 1rem 1rem 0rem 1rem !important;
+  padding: 1rem 1.1rem 1rem 1rem !important;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
   z-index: 9999;
   transition: opacity 1s ease-in-out;

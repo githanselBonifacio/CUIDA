@@ -10,7 +10,8 @@ import { ToastService } from 'src/app/shared/services/toast/toast.service';
 import { MaestrosService } from 'src/app/shared/services/maestros/maestros.service';
 import { HorarioTurno, Regional, formatoFecha } from 'src/app/shared/interfaces/maestros.interfaces';
 import { FormBuilder, Validators } from '@angular/forms';
-
+import localeEs from '@angular/common/locales/es';
+import { registerLocaleData } from '@angular/common';
 @Component({
   selector: 'app-servicio-farmaceutico-page',
   templateUrl: './servicio-farmaceutico-page.component.html',
@@ -48,6 +49,7 @@ export class ServicioFarmaceuticoPageComponent implements OnInit, AfterViewInit 
   })
 
   ngOnInit(): void {
+    registerLocaleData(localeEs);
     this.maestrosService.getRegionales();
     this.maestrosService.getHorarioTurno();
     this.dataSource.paginator = this.paginator;

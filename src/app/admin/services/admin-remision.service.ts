@@ -3,7 +3,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { NotificacionFarmacia } from '../interfaces/servicioFarmaceutico.interface';
 import { Respuesta } from 'src/app/shared/interfaces/response.interfaces';
 import { environment } from '../../../environments/environments';
-import { Profesional } from 'src/app/agenda/interfaces/profesional.interface';
+import { Profesional, Turno } from 'src/app/agenda/interfaces/profesional.interface';
 import { Conductor, Movil } from 'src/app/agenda/interfaces/conductores.interface';
 
 @Injectable({
@@ -38,7 +38,7 @@ export class AdminRemisionService {
     return this.http.get<Respuesta>(`${environment.URL_API_CUIDA}/${this.urlRecurso}`);
   }
   consultarDataActualRemision(idRemision: string) {
-    return this.http.get<Respuesta>(`${environment.URL_API_CUIDA}/${this.urlRecurso}/${idRemision}`)
+    return this.http.get<Respuesta>(`${environment.URL_API_CUIDA}/${this.urlRecurso}/remision/${idRemision}`)
   }
 
   consultarHistorialRemision(idRemision: string) {
@@ -100,5 +100,17 @@ export class AdminRemisionService {
   }
   getAllMovilesSinConductor() {
     return this.http.get<Respuesta>(`${environment.URL_API_CUIDA}/${this.urlRecurso}/movilesSinConductor`);
+  }
+  //horarios
+  getProfesionalesWithTurno(fechaTurno: string, idRegional: string) {
+    const params = new HttpParams()
+      .set('fechaTurno', fechaTurno)
+      .set('idRegional', idRegional)
+
+    return this.http.get<Respuesta>(`${environment.URL_API_CUIDA}/${this.urlRecurso}/horarioTurno`, { params });
+  }
+
+  actualizarTurnoProfesional(turnos: Turno[]) {
+    return this.http.put<Respuesta>(`${environment.URL_API_CUIDA}/${this.urlRecurso}/actualizarTurnoProfesional`, turnos);
   }
 }

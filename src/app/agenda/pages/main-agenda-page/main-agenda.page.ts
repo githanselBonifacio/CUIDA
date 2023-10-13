@@ -74,7 +74,7 @@ export class MainComponentAgendaComponent implements OnInit {
   }
 
   get horarioTurno(): HorarioTurno[] {
-    return this.maestroService.horariosTurno;
+    return this.maestroService.horariosTurno.filter(h => h.esHorarioBase);
   }
 
   get citas(): Cita[] {
@@ -160,7 +160,8 @@ export class MainComponentAgendaComponent implements OnInit {
             respuesta = this.agendaService.asignarProfesionalTurno(
               this.fechaFiltroTurno,
               this.opcionHorariosTurno,
-              opcionProfesional
+              opcionProfesional,
+              this.opcionRegional
             );
           } else {
             respuesta = new Observable<Respuesta>

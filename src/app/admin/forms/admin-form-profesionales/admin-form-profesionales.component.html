@@ -88,7 +88,7 @@
                     <input required [class.invalid]="campoCelular?.touched && campoCelular?.invalid"
                         [class.valid]="campoCelular?.touched && campoCelular?.valid" formControlName="celular"
                         placeholder="(3xx) xxx xx-xx" id="campoCelular" type="tel" />
-                    <label for="campoCelular">celular</label>
+                    <label for="campoCelular">Celular</label>
                     <p *ngIf="campoCelular?.touched && campoCelular?.invalid">
                         {{mensageValidadores.VALIDADOR_CAMPO_VACIO}} ({{mensageValidadores.EXPRESION_REGULAR_CELULAR}})
                     </p>

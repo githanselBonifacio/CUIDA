@@ -10,7 +10,6 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { ModalSeleccionProfesionalComponent } from './components/modal-seleccion-profesional/modal-seleccion-profesional.component';
 import { AgendaRoutingModule } from './agenda-routing.module';
 import { ModalCambioHoraCitaComponent } from './components/modal-cambio-hora-cita/modal-cambio-hora-cita.component';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ModalDetalleRemisionComponent } from './components/modal-detalle-remision/modal-detalle-remision.component';
 import { MapsModule } from '../maps/maps.module';
 import { MatSelectModule } from '@angular/material/select';

@@ -5,7 +5,8 @@
         </div>
         <nav class="vertical-bar">
             <ul>
-                <li routerLink="horario" routerLinkActive="active" class="vertical-item">
+                <li [routerLink]="['horario']" [routerLinkActive]="'active'"
+                    [routerLinkActiveOptions]="{ exact : false}" class=" vertical-item">
                     <button type="button">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                             class="bi bi-calendar3" viewBox="0 0 16 16">
@@ -17,8 +18,7 @@
                         <span class="titulo-menu">Horario</span>
                     </button>
                 </li>
-                <li routerLink="profesionales" routerLinkActive="active" [routerLinkActiveOptions]="{ exact : true}"
-                    class="vertical-item">
+                <li routerLink="profesionales" routerLinkActive="active" class="vertical-item">
                     <button type="button">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                             class="bi bi-person" viewBox="0 0 16 16">

@@ -3,9 +3,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { HistorialRemision } from '../../interfaces/historialRemison.interface';
 import { AdminRemisionService } from '../../services/admin-remision.service';
 import { MaestrosService } from '../../../shared/services/maestros/maestros.service';
-import { EstadoCita, funtionGetNombreEstadoCitaById } from 'src/app/shared/interfaces/maestros.interfaces';
+import { EstadoCita } from 'src/app/shared/interfaces/maestros.interfaces';
 import { Cita } from '../../interfaces/historialRemison.interface';
-
+import localeEs from '@angular/common/locales/es';
+import { registerLocaleData } from '@angular/common';
 @Component({
   selector: 'app-admin-historial-remision-page',
   templateUrl: './admin-historial-remision-page.component.html',
@@ -31,7 +32,7 @@ export class AdminHistorialRemisionPageComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-
+    registerLocaleData(localeEs);
     this.maestroService.getEstadosCita();
     this.activateRoute.params.subscribe(
       params => {

@@ -7,7 +7,7 @@
 }
 
 #item-personal {
-    margin: 5rem 0 0 0;
+    margin: 0;
     width: 100%;
     overflow: auto;
 }
@@ -19,13 +19,16 @@
 }
 
 #vertical-nav-bar[close="false"] span {
-    display: inline-block;
-    transition: all linear 0.3s;
+    opacity: 1;
+    font-size: 1rem;
+    transition: font-size linear 0.3s;
+
 }
 
 #vertical-nav-bar[close="true"] span {
-    display: none;
-    transition: all linear 0.3s;
+    opacity: 0;
+    font-size: 0;
+    transition: font-size linear 0.3s;
 }
 
 
@@ -104,4 +107,9 @@ li.active button {
     background-color: var(--gris4-color);
     color: var(--quater-color);
     padding: 0.2rem 1rem 0.2rem 1rem;
+}
+
+svg {
+    text-align: center;
+    transform: translateX(30%);
 }

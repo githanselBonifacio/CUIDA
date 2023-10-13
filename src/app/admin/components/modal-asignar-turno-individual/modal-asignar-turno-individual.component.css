@@ -1,0 +1,85 @@
+@import url('../../../../styles.css');
+@import url('../../../../assets/styles/buttons/button-seleccion.css');
+
+.container-main {
+    padding: 1rem;
+    min-width: 25rem;
+}
+
+#titulo {
+    padding: 0.5rem;
+    text-align: center;
+    font-weight: bold;
+}
+
+.container-modal {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.container-horas-trabajadas {
+    display: flex;
+    justify-content: flex-end;
+}
+
+#i-eliminar i {
+    display: flex;
+    justify-content: center;
+    font-size: 1.2rem;
+    color: var(--red-color);
+}
+
+.item-turno {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.2rem;
+}
+
+.iten-nombre-turno {
+    text-align: center;
+    min-width: 5rem;
+}
+
+.button-toogle {
+    padding-top: 0.2rem;
+}
+
+#boton-plus {
+    font-size: 1.5rem;
+    color: var(--second-color);
+}
+
+.validacion-horario p {
+    color: var(--red-color) !important;
+    font-size: 0.9rem;
+}
+
+.container-select {
+    text-wrap: nowrap;
+    width: 100%;
+}
+
+.container-form {
+    padding-top: 0.5rem;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 1rem;
+}
+
+.buttom-second {
+    font-size: 1.5rem;
+}
+
+.form-nuevo-turno {
+    display: flex;
+    gap: 1rem;
+}
+
+.buttom-second:active+div {
+    background: #76b8e9 !important;
+}

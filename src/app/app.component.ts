@@ -1,11 +1,14 @@
-import { Component } from '@angular/core';
-import {AgendaService} from './agenda/services/agenda.service'
+import { Component, OnInit } from '@angular/core';
+import { registerLocaleData } from '@angular/common';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
+
   title = 'CUIDA';
-  constructor( agendaService:AgendaService){}
+  ngOnInit(): void {
+    registerLocaleData("es");
+  }
 }

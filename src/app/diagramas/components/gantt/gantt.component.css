@@ -47,7 +47,7 @@
 
 
 .container-actividades-panel {
-    overflow-y: scroll;
+    overflow-y: auto;
     max-height: calc(60vh);
     overflow-x: hidden;
     border: 1px solid var(--gris3-color);

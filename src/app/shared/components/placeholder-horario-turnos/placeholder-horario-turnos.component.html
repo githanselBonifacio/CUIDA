@@ -1,0 +1,13 @@
+<div class="container-placeholder" [class.visible]="(visible)? visible:''">
+    <div class="row" *ngFor="let n of repeticionesArray">
+        <div class="col-lg-3 col-xl-3 col-xxl-2 container-persona">
+            <div class="input-placeholder c-80"></div>
+            <div class="input-placeholder c-60"></div>
+        </div>
+        <div class="col-lg-9 col-xl-9 col-xxl-10 container-dias">
+            <div class="container-box-dia">
+                <div class="box-dia" *ngFor="let d of numeroDiasArray"></div>
+            </div>
+        </div>
+    </div>
+</div>

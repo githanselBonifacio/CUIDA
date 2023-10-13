@@ -31,7 +31,7 @@ export class MaestrosService {
   async getHorarioTurno() {
     this.http.get<Respuesta>(`${environment.URL_API_CUIDA}/${this.resourceUrl}/horarioTurno`)
       .subscribe(resp => {
-        this.horariosTurno = resp.result
+        this.horariosTurno = resp.result;
       });
 
   }

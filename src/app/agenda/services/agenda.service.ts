@@ -37,11 +37,12 @@ export class AgendaService {
 
     return this.http.get<Respuesta>(`${environment.URL_API_CUIDA}/${this.urlRecurso}/profesionalesFromTurnoCiudad`, { params });
   }
-  asignarProfesionalTurno(fechaTurno: string, idHorarioTurno: number, idProfesional: string) {
+  asignarProfesionalTurno(fechaTurno: string, idHorarioTurno: number, idProfesional: string, idRegional: string) {
     const params = new HttpParams()
       .set('fechaTurno', fechaTurno)
       .set('idHorarioTurno', idHorarioTurno)
       .set('idProfesional', idProfesional)
+      .set('idRegional', idRegional)
 
     return this.http.get<Respuesta>(`${environment.URL_API_CUIDA}/${this.urlRecurso}/asignarProfesionalTurno`, { params });
   }

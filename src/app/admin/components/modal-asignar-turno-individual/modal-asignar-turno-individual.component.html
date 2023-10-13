@@ -1,0 +1,71 @@
+<div class="container-main">
+    <h6>{{profesional.nombres}} {{profesional.apellidos}}</h6>
+    <h6>CC: {{profesional.numeroIdentificacion}}</h6>
+    <p id="titulo">{{fechaTurno|date:"dd MMMM YYYY"}}</p>
+    <div class="container-modal">
+
+        <div class="container">
+            <hr>
+            <div *ngFor="let turno of turnosDiaHorario">
+                <div class="item-turno">
+
+                    <div class="iten-nombre-turno">
+                        <div>
+                            {{turno.idHorarioTurno?.nombre}}
+                        </div>
+                        <div>
+                            <div> {{turno.idHorarioTurno?.descripcion}}</div>
+                        </div>
+                    </div>
+                    <div>
+                        {{turno.idHorarioTurno?.horaInicio}} &rarr;
+                        {{turno.idHorarioTurno?.horaFin}}
+                        &rArr; {{turno.idHorarioTurno?.duracionHoras}}h
+                    </div>
+                    <div id="i-eliminar" title="Eliminar Turno" (click)="elininarTurno(turno.idHorarioTurno?.id)"><i
+                            class="bi bi-x-circle"></i></div>
+                </div>
+                <hr>
+            </div>
+            <div class="container-horas-trabajadas">
+                <p>total: {{totalHorasTrabajadas}}h</p>
+            </div>
+            <div class="button-toogle">
+                <div class="container-form">
+
+                    <div class="form-nuevo-turno">
+                        <mat-form-field>
+                            <mat-label>horario turno</mat-label>
+                            <mat-select [(ngModel)]="horarioSeleccionado" [required]="true">
+                                <mat-option *ngFor="let horarioTurno of horariosTurnoValidos" [value]="horarioTurno">
+                                    <div class="container-select">
+                                        {{horarioTurno.nombre}} : {{horarioTurno.horaInicio}} &rarr;
+                                        {{horarioTurno.horaFin}}
+                                    </div>
+
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div>
+                        <i id="boton-plus" class="bi bi-plus-circle-fill" (click)="agregarNuevoTurno()"></i>
+                    </div>
+
+
+                </div>
+
+                <div class="validacion-horario" *ngIf="mesajeValidacion !=''">
+                    <p>{{mesajeValidacion}}</p>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="container">
+            <div class="container-buttom-flex">
+                <button [disabled]="!seRealizoCambioTurno" class="buttom-primary" (click)="onConfirm()">Guardar</button>
+                <button class="buttom-red" (click)="onClose()">Cancelar</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -16,6 +16,8 @@ import { SpinnerService } from './services/spinner/spinner.service.service';
 import { ToastComponent } from './components/toast/toast.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { ToastService } from './services/toast/toast.service';
+import { PlaceholderHorarioTurnosComponent } from './components/placeholder-horario-turnos/placeholder-horario-turnos.component';
+import { PlaceholderTableComponent } from './components/placeholder-table/placeholder-table.component';
 
 
 @NgModule({
@@ -27,7 +29,8 @@ import { ToastService } from './services/toast/toast.service';
     VentanaConfirmacionComponent,
     AdminComponent,
     SpinnerComponent,
-    ToastComponent
+    ToastComponent,
+
 
   ],
   imports: [
@@ -43,12 +46,12 @@ import { ToastService } from './services/toast/toast.service';
     InicioComponent,
     SidebarComponent,
     SpinnerComponent,
-    ToastComponent
+    ToastComponent,
   ],
   providers: [
     SpinnerService,
     ToastService,
-    RouterModule
+    RouterModule,
   ]
 })
 

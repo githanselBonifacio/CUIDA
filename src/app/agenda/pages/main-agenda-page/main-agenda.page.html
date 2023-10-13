@@ -38,7 +38,7 @@
                                 <label for="opcionTurno">Turno enfermeria</label>
                                 <select name="select-turno" [(ngModel)]="opcionHorariosTurno" id="opcionTurno">
                                     <option value="default" selected disabled>seleccione..</option>
-                                    <option *ngFor="let option of horarioTurno" [value]="option.id">T{{option.id}}
+                                    <option *ngFor="let option of horarioTurno" [value]="option.id">{{option.nombre}}
                                     </option>
                                 </select>
                             </div>

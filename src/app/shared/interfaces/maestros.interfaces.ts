@@ -12,7 +12,11 @@ export interface HorarioTurno {
     id: number,
     nombre: string,
     horaInicio: Date,
-    horaFin: Date
+    horaFin: Date,
+    colorHexReferencia: string,
+    esHorarioBase: boolean,
+    descripcion: string,
+    duracionHoras: number
 }
 
 export interface TipoIdentificacion {
@@ -26,7 +30,10 @@ export interface Profesion {
     nombre: string
 }
 
-
+export interface Dia {
+    numero: string,
+    nombre: string
+}
 export function generarHorario(idHorarioTurno: number): string[] {
     let horarioArray: string[] = [];
     if (idHorarioTurno == 1) {
@@ -46,7 +53,6 @@ export function formatoFecha(date: Date | string): string {
     const year = dateTime.getFullYear().toString();
     const hours = dateTime.getHours().toString().padStart(2, '0');
     const minutes = dateTime.getMinutes().toString().padStart(2, '0');
-    console.log(`${year}-${month}-${day}`)
     return `${year}-${month}-${day}`;
 }
 
@@ -77,9 +83,15 @@ function getNombreProfesionById(id: number, list: Profesion[]): string | undefin
     const item = list.find(item => item.idProfesion == id);
     return item?.nombre;
 }
+function getColorReferenciaTurnoById(id: number | any, list: HorarioTurno[]): string | undefined {
+    const item = list.find(item => item.id == id);
+    return item?.colorHexReferencia;
+}
+
 
 export const funtionGetNombreEstadoCitaById = getNombreEstadoCitaById;
 export const funtionGetNombreRegionalById = getNombreRegionalById;
 export const funtionGetNombreTipoIdentificacionById = getNombreTipoIdentificacionById;
 export const funtionGetIdTipoIdentificacionById = getIdTipoIdentificacionById;
 export const funtionGetNombreProfesionById = getNombreProfesionById;
+export const funtionGetColorReferenciaTurnoById = getColorReferenciaTurnoById;

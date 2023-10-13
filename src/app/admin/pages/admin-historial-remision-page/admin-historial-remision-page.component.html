@@ -17,10 +17,10 @@
           <div class="col" id="datos-personales">
             <div class="row">
               <div class="col-2">Nombres</div>
-              <div class="col-3">{{remisionDataActual.paciente.nombres.toLowerCase()}}</div>
+              <div class="col-3">{{remisionDataActual.paciente.nombres|titlecase}}</div>
 
               <div class="col-2">Apellidos</div>
-              <div class="col-3">{{remisionDataActual.paciente.apellidos.toLowerCase()}}</div>
+              <div class="col-3">{{remisionDataActual.paciente.apellidos|titlecase}}</div>
 
               <div class="col">Genero</div>
               <div class="col">{{remisionDataActual.paciente.sexo}}</div>
@@ -70,7 +70,7 @@
           <div class="col">
             <div style="display: flex;">
               <div> <span> {{remisionDataActual.ubicacionPaciente.direccion}} </span> </div>
-              <div> <span>, {{remisionDataActual.ubicacionPaciente.municipio.toLowerCase()}} </span> </div>
+              <div> <span>, {{remisionDataActual.ubicacionPaciente.municipio|titlecase}} </span> </div>
               <div> <span>, Barrio {{remisionDataActual.ubicacionPaciente.barrio}}</span> </div>
 
               <div *ngIf="remisionDataActual.ubicacionPaciente.sin_nomenclatura">

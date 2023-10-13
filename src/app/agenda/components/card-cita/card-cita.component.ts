@@ -12,7 +12,8 @@ import { switchMap, filter, tap } from 'rxjs/operators';
 import { ToastComponent, ToastType, TitleToast, crearConfig } from 'src/app/shared/components/toast/toast.component';
 import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 import { EstadoCita, funtionGetNombreEstadoCitaById } from 'src/app/shared/interfaces/maestros.interfaces';
-
+import localeEs from '@angular/common/locales/es';
+import { registerLocaleData } from '@angular/common';
 
 @Component({
   selector: 'app-agenda-card-cita',
@@ -43,7 +44,7 @@ export class CardCitaComponent {
     private agendaService: AgendaService,
     private _snackBar: MatSnackBar
   ) {
-
+    registerLocaleData(localeEs);
   }
 
 

@@ -4,7 +4,8 @@ import { Remision } from '../../interfaces/remision.interface';
 import { Router } from '@angular/router';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-
+import { registerLocaleData } from '@angular/common';
+import localeEs from '@angular/common/locales/es';
 
 @Component({
   selector: 'app-admin-remisiones-page',
@@ -27,6 +28,7 @@ export class AdminRemisionesPageComponent implements AfterViewInit {
   remisiones: Remision[] = [];
 
   ngAfterViewInit() {
+    registerLocaleData(localeEs);
     this.dataSource.paginator = this.paginator;
     this.adminService.consultarRemisiones()
       .subscribe(resp => {

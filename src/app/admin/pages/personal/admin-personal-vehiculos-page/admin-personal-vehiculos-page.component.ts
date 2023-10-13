@@ -6,12 +6,16 @@ import { Movil } from 'src/app/agenda/interfaces/conductores.interface';
 import { MatTableDataSource } from '@angular/material/table';
 import { AccionFormulario } from '../../../interfaces/enum';
 import { funtionGetNombreRegionalById } from '../../../../shared/interfaces/maestros.interfaces';
+import localeEs from '@angular/common/locales/es';
+import { registerLocaleData } from '@angular/common';
+
 @Component({
   selector: 'app-admin-personal-vehiculos-page',
   templateUrl: './admin-personal-vehiculos-page.component.html',
   styleUrls: ['./admin-personal-vehiculos-page.component.css']
 })
 export class AdminPersonalVehiculosPageComponent implements OnInit, AfterViewInit {
+
   constructor(
     private adminService: AdminRemisionService,
     private maestrosService: MaestrosService) { }
@@ -28,6 +32,7 @@ export class AdminPersonalVehiculosPageComponent implements OnInit, AfterViewIni
   converIdRegional = funtionGetNombreRegionalById;
 
   ngOnInit(): void {
+    registerLocaleData(localeEs);
     this.estadoVisualFormCrear = "";
     this.maestrosService.getTiposIdentificacion();
     this.maestrosService.getRegionales();

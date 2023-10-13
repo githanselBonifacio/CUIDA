@@ -1,9 +1,16 @@
 @import url("../../../styles.css");
 
+.container-buttom-flex {
+    display: flex;
+    gap: 1rem;
+}
+
 .buttom-primary {
     background-color: var(--primary-color);
     color: var(--gris4-color);
     border-color: transparent;
+    border-radius: 5px;
+    outline: none;
 }
 
 .buttom-primary:hover {
@@ -12,7 +19,16 @@
 }
 
 .buttom-red {
+    border-radius: 5px;
     background-color: var(--red-color);
+    color: var(--gris4-color);
+    outline: none;
+    border-color: transparent;
+
+}
+
+.buttom-second {
+    background-color: var(--second-color);
     color: var(--gris4-color);
     border-color: transparent;
 
@@ -23,8 +39,24 @@
     box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5);
 }
 
+.redondo {
+    padding: 0;
+    margin: 0;
+    width: 2rem;
+    height: 2rem;
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+}
+
 .bordeado {
     border-radius: 15px;
+}
+
+.buttom-primary:disabled,
+.buttom-primary:disabled:hover {
+    opacity: 0.8;
+    box-shadow: none;
+    background-color: var(--gris2-color);
 }
 
 .buttom-seleccion {
@@ -35,8 +67,6 @@
     border-radius: 0.5rem;
     height: 60%;
     text-align: center;
-    margin-left: 0.5rem;
-    margin-right: 0.5rem;
     min-width: 5rem;
     min-height: 2rem;
 }
@@ -49,17 +79,16 @@
 }
 
 
-.buttom-seleccion:hover {
+.buttom-seleccion:hover,
+.buttom-second:hover {
     color: var(--third-color);
-    box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5);
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.5);
 }
 
 .buttom-group-horinzontal {
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    margin-left: 0.4rem;
-    margin-right: 0.4rem;
 }
 
 .buttom-circular-activador {

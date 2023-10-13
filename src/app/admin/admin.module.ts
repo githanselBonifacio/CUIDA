@@ -30,6 +30,13 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { AdminFormConductoresComponent } from './forms/admin-form-conductores/admin-form-conductores.component';
 import { AdminPersonalVehiculosPageComponent } from './pages/personal/admin-personal-vehiculos-page/admin-personal-vehiculos-page.component';
 import { AdminFromMovilesComponent } from './forms/admin-from-moviles/admin-from-moviles.component';
+import { AdminPersonalHorarioConsolidadoPageComponent } from './pages/personal/admin-personal-horario-consolidado-page/admin-personal-horario-consolidado-page.component';
+import { ModalAsignarTurnoIndividualComponent } from './components/modal-asignar-turno-individual/modal-asignar-turno-individual.component';
+import { MatSelectModule } from '@angular/material/select';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { PlaceholderHorarioTurnosComponent } from '../shared/components/placeholder-horario-turnos/placeholder-horario-turnos.component';
+import { AdminPersonalHorarioSecuenciasPageComponent } from './pages/personal/admin-personal-horario-secuencias-page/admin-personal-horario-secuencias-page.component';
 
 
 @NgModule({
@@ -49,6 +56,10 @@ import { AdminFromMovilesComponent } from './forms/admin-from-moviles/admin-from
     AdminFormConductoresComponent,
     AdminPersonalVehiculosPageComponent,
     AdminFromMovilesComponent,
+    AdminPersonalHorarioConsolidadoPageComponent,
+    AdminPersonalHorarioSecuenciasPageComponent,
+    ModalAsignarTurnoIndividualComponent,
+    PlaceholderHorarioTurnosComponent
   ],
   imports: [
     CommonModule,
@@ -56,17 +67,21 @@ import { AdminFromMovilesComponent } from './forms/admin-from-moviles/admin-from
     AgendaModule,
     NgxPaginationModule,
     FormsModule,
+    MatFormFieldModule,
     PipesModule,
     MatPaginatorModule,
     MatTableModule,
+    MatSelectModule,
     ReactiveFormsModule,
     MatNativeDateModule,
     MatDatepickerModule,
     MatInputModule,
-    MatDialogModule
+    MatDialogModule,
+    MatCheckboxModule
   ],
   exports: [
     MainAdminPageComponent,
-  ]
+  ],
+
 })
 export class AdminModule { }

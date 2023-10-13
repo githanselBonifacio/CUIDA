@@ -143,7 +143,7 @@ export class AdminFormProfesionalesComponent implements OnChanges {
         celular: this.campoCelular?.value ?? '',
         direccion: this.campoDireccion?.value ?? '',
         genero: this.campoGenero?.value ?? '',
-        idProfesion: this.campoProfesion?.value ?? '',
+        idProfesion: this.campoProfesion?.value ?? 0,
         fechaNacimiento: this.campoFechaNacimiento?.value ?? '',
         idRegional: this.campoRegional?.value ?? '',
         activo: true,

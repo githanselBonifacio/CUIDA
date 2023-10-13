@@ -130,8 +130,8 @@ export interface DatosAtencionRemision {
 export interface Paciente {
     tipoIdentificacion: string;
     numeroIdentificacion: string;
-    nombre: string;
-    apellido: string;
+    nombres: string;
+    apellidos: string;
     edad: number;
     sexo: string;
     peso: number;

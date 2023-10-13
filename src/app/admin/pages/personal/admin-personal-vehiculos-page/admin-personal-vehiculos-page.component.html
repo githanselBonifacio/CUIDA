@@ -28,7 +28,7 @@
 
             <ng-container matColumnDef="modelo">
                 <th mat-header-cell *matHeaderCellDef>Modelo</th>
-                <td mat-cell *matCellDef="let movil">{{movil.modelo|date:'MMMM--yyyy'}}</td>
+                <td mat-cell *matCellDef="let movil">{{movil.modelo|date:'MMMM yyyy':'es'}}</td>
             </ng-container>
 
             <ng-container matColumnDef="regional">

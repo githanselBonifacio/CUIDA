@@ -1,0 +1,26 @@
+@import url('../../../../../styles.css');
+@import url('../../../../../assets/styles/inputs/inputs.css');
+@import url('../../../../../assets/styles/buttons/button-seleccion.css');
+@import url('../admin-personal-horario-consolidado-page/admin-personal-horario-consolidado-page.component.css');
+@import url('../../../../../assets/styles/buttons/button-multiple-seleccion.css');
+@import url('../../../../../assets/styles/tablas/tabla.css');
+
+.container-secuencias {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    background-color: var(--cero-color);
+    overflow: auto;
+    height: 100%;
+    box-shadow: 1px 1px 1px 1px var(--gris3-color);
+}
+
+.borde-t-b {
+    border-top: 1px solid var(--gris3-color);
+    border-bottom: 1px solid var(--gris3-color);
+    margin-top: 0.5rem;
+    padding-bottom: 0.5rem;
+}
+
+.table-profesionales {
+    padding: 2.1rem 1rem 0.5rem 1rem;
+}

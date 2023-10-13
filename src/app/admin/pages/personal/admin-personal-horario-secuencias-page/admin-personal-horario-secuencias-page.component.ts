@@ -35,7 +35,7 @@ export class AdminPersonalHorarioSecuenciasPageComponent implements OnInit, Afte
 
   //tablas
   @ViewChild('paginatorPersonalSecuencias') paginator!: MatPaginator;
-  displayedColumns: string[] = ['select', 'profesional', 'regional'];
+  displayedColumns: string[] = ['select', 'identificacion', 'profesional', 'profesion', 'regional'];
   dataSource = new MatTableDataSource<ProfesionalConTurnos>();
   selection = new SelectionModel<ProfesionalConTurnos>(true, []);
 

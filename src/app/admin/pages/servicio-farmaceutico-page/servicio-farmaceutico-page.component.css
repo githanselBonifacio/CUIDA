@@ -15,7 +15,7 @@
     display: flex;
     opacity: 0;
     align-items: center;
-    justify-content: end;
+    justify-content: flex-end;
     transition: all 0.3s ease-in-out;
 }
 
@@ -29,7 +29,7 @@
 #content-activate-buttom {
     display: flex;
     align-items: center;
-    justify-content: end;
+    justify-content: flex-end;
     padding-right: 1rem;
 }
 

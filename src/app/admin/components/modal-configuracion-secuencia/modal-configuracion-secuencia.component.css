@@ -1,0 +1,63 @@
+@import url('../../../../styles.css');
+@import url('../../../../assets/styles/inputs/inputs.css');
+@import url('../../../../assets/styles/tablas/tabla-secuencia.css');
+@import url('../../../../assets/styles/buttons/button-seleccion.css');
+@import url('../../../../assets/styles/buttons/button-multiple-seleccion.css');
+
+.container {
+    padding-top: 2rem;
+}
+
+.container-modal-secuencia {
+    min-width: 40rem;
+    padding: 1rem;
+}
+
+
+#btn-plus {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-top: 0.7rem;
+    font-size: 1.5rem;
+    color: var(--second-color);
+}
+
+[class^="col"] {
+    padding: 0;
+}
+
+.d-flex {
+    position: relative;
+    padding: 0;
+    align-items: center;
+}
+
+.line {
+    width: 1rem;
+    border-bottom: 1px solid var(--gris3-color);
+}
+
+#trash-i {
+    color: var(--red-color);
+}
+
+#trash-i:hover {
+    color: var(--red-dark-color);
+}
+
+.item-hora {
+    padding: 0.2rem;
+    font-size: 0.9rem;
+    border-radius: 2px;
+    border: 1px solid var(--gris3-color);
+}
+
+.hora-inicio::after {
+    position: absolute;
+    content: "";
+    width: 1rem;
+    bottom: 50%;
+    transform: translate(30%, 0%);
+    border-bottom: 1px solid var(--gris3-color);
+}

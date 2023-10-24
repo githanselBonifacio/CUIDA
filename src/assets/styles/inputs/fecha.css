@@ -1,9 +1,11 @@
-input[type="date"] {
+input[type="date"],
+input[type="week"] {
     color: var(--quarter-color);
     padding: 0.4rem 0.4rem 0.4rem 0.4rem;
     margin: 0px;
     border: 1px solid var(--gris2-color);
     border-radius: 5px;
+    outline: 0;
 }
 
 input[type='date'] label {

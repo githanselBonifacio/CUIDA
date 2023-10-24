@@ -4,40 +4,19 @@
     position: relative;
     border: 0;
     background-color: transparent;
+    color: var(--quarter-color);
+}
+
+.buttom-color-second {
     color: var(--second-color);
+}
+
+.buttom-enfasis {
     font-weight: bolder;
 }
 
 .container-buttom-multiple {
     position: relative;
-}
-
-.buttom-multiple-seleccion::after {
-    position: absolute;
-    content: "\276E";
-    margin-left: 0.2rem;
-    width: 2rem;
-    height: 2rem;
-    width: 1.5rem;
-    height: 100%;
-    transform: rotate(-90deg);
-    transition: 0.5s;
-}
-
-.buttom-multiple-seleccion.deployed::after {
-    transform: rotate(90deg);
-    transition: 0.5s;
-}
-
-.buttom-multiple-seleccion.position-left::after {
-
-    transform: rotate(180deg);
-
-}
-
-.buttom-multiple-seleccion.position-left.deployed::after {
-    transform: rotate(0deg);
-
 }
 
 .buttom-multiple-body {
@@ -48,8 +27,12 @@
     margin-top: 0.5rem;
     border: 1px solid var(--gris2-color);
     padding: 0;
-    width: 130%;
     transition: all 0.5s ease;
+}
+
+.buttom-multiple-body button {
+    width: 100%;
+    text-wrap: nowrap;
 }
 
 .buttom-multiple-body.position-left {
@@ -57,20 +40,26 @@
     top: -70%;
 }
 
-.buttom-multiple-body.deployed {
+.buttom-multiple-body.deployed,
+.buttom-multiple-body[deployed="true"] {
+    position: absolute;
     opacity: 1;
     display: block;
+    z-index: 9999;
     transition: all 0.5s ease;
 }
 
 .item-buttom-multiple {
     background-color: transparent;
-    padding: 0.4rem;
     text-align: start;
     border: 0;
     width: 100%;
     color: var(--quarter-color);
     background-color: var(--gris4-color);
+}
+
+.p-0 {
+    padding: 0;
 }
 
 .item-buttom-multiple:hover {

@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit, Type } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { ConvertMaestros, ProfesionalConTurnos, Turno } from 'src/app/agenda/interfaces/profesional.interface';
 import { HorarioTurno } from 'src/app/shared/interfaces/maestros.interfaces';
@@ -85,7 +85,7 @@ export class ModalAsignarTurnoIndividualComponent implements OnInit {
 
 
   }
-  elininarTurno(idHorarioTurno: number) {
+  eliminarTurno(idHorarioTurno: number) {
     this.mesajeValidacion = "";
     this.turnosDiaHorario = this.turnosDiaHorario.filter(h => h.idHorarioTurno.id !== idHorarioTurno)
     this.actualizarHorasTrabajadas();

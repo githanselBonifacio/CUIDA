@@ -1,0 +1,39 @@
+<div class="container">
+    <div class="vertical-flex">
+        <div class="item-vertical">
+            <div class="title-header">
+                <h5>Limpiar turno acción masiva</h5>
+            </div>
+
+            <div class="d-flex">
+                <input type="week" [(ngModel)]="semanaInput">
+                <button class="buttom-i" (click)="getFechasSemanas()">
+                    <i class="bi bi-plus-circle-fill"></i>
+                </button>
+            </div>
+
+            <div class="container-tabla">
+                <h6>Semanas seleccionadas</h6>
+                <p *ngIf="fechasSemanas.length==0">agregue semanas...</p>
+                <table class="table-semanas">
+                    <tbody>
+                        <tr *ngFor="let fechas of fechasSemanas" class="container-dias">
+                            <td>{{fechas[0]|date:'MMMM'}}</td>
+                            <td>{{fechas[0]|date:'dd'}} &rarr; {{fechas[fechas.length-1]|date:'dd'}}</td>
+                            <td>
+                                <button class="buttom-border buttom-border-red"
+                                    (click)="eliminarSemana(fechas)">X</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="item-vertical">
+            <div class="container-buttom-flex">
+                <button class="buttom-second" (click)="enviar()" [disabled]="fechasSemanas.length==0">Enviar</button>
+                <button class="buttom-red" (click)="cancel()">Cancelar</button>
+            </div>
+        </div>
+    </div>
+</div>

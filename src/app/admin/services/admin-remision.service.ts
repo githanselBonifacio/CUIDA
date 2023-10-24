@@ -3,7 +3,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { NotificacionFarmacia } from '../interfaces/servicioFarmaceutico.interface';
 import { Respuesta } from 'src/app/shared/interfaces/response.interfaces';
 import { environment } from '../../../environments/environments';
-import { Profesional, Turno } from 'src/app/agenda/interfaces/profesional.interface';
+import { Profesional, Secuencia, Turno } from 'src/app/agenda/interfaces/profesional.interface';
 import { Conductor, Movil } from 'src/app/agenda/interfaces/conductores.interface';
 
 @Injectable({
@@ -11,7 +11,6 @@ import { Conductor, Movil } from 'src/app/agenda/interfaces/conductores.interfac
 })
 export class AdminRemisionService {
   private urlRecurso = 'admin'
-  public profesionales: Profesional[] = [];
   public conductores: Conductor[] = []
   constructor(private http: HttpClient) { }
 
@@ -49,12 +48,8 @@ export class AdminRemisionService {
   getAllProfesionales() {
     return this.http.get<Respuesta>(`${environment.URL_API_CUIDA}/${this.urlRecurso}/profesionales`)
   }
-  async getProfesionalesCiudad(idRegional: string) {
-    this.http.get<Respuesta>(`${environment.URL_API_CUIDA}/${this.urlRecurso}/profesionales/${idRegional}`)
-      .subscribe(resp => {
-        this.profesionales = resp.result;
-
-      });
+  getProfesionalesRegional(idRegional: string) {
+    return this.http.get<Respuesta>(`${environment.URL_API_CUIDA}/${this.urlRecurso}/profesionales/${idRegional}`)
   }
   crearProfesional(profesional: Profesional) {
 
@@ -112,5 +107,15 @@ export class AdminRemisionService {
 
   actualizarTurnoProfesional(turnos: Turno[]) {
     return this.http.put<Respuesta>(`${environment.URL_API_CUIDA}/${this.urlRecurso}/actualizarTurnoProfesional`, turnos);
+  }
+  eliminarTurnoProfesionalAccionMasiva(turnos: any[]) {
+    return this.http.post<Respuesta>(`${environment.URL_API_CUIDA}/${this.urlRecurso}/eliminarTurnosProfesionalesAccionMasiva`, turnos);
+  }
+  //secuencias
+  getSecuenciasTurno() {
+    return this.http.get<Respuesta>(`${environment.URL_API_CUIDA}/${this.urlRecurso}/secuenciasTurno`);
+  }
+  crearSecuenciaTurno(secuencia: Secuencia) {
+    return this.http.post<Respuesta>(`${environment.URL_API_CUIDA}/${this.urlRecurso}/secuenciasTurno`, secuencia);
   }
 }

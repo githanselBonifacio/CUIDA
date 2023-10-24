@@ -37,6 +37,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { PlaceholderHorarioTurnosComponent } from '../shared/components/placeholder-horario-turnos/placeholder-horario-turnos.component';
 import { AdminPersonalHorarioSecuenciasPageComponent } from './pages/personal/admin-personal-horario-secuencias-page/admin-personal-horario-secuencias-page.component';
+import { ModalConfiguracionSecuenciaComponent } from './components/modal-configuracion-secuencia/modal-configuracion-secuencia.component';
+import { ModalAccionLimpiarHorarioComponent } from './components/modal-accion-limpiar-horario/modal-accion-limpiar-horario.component';
 
 
 @NgModule({
@@ -59,7 +61,9 @@ import { AdminPersonalHorarioSecuenciasPageComponent } from './pages/personal/ad
     AdminPersonalHorarioConsolidadoPageComponent,
     AdminPersonalHorarioSecuenciasPageComponent,
     ModalAsignarTurnoIndividualComponent,
-    PlaceholderHorarioTurnosComponent
+    PlaceholderHorarioTurnosComponent,
+    ModalConfiguracionSecuenciaComponent,
+    ModalAccionLimpiarHorarioComponent
   ],
   imports: [
     CommonModule,

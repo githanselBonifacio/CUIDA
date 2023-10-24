@@ -13,6 +13,21 @@
     outline: none;
 }
 
+.buttom-border {
+    border: 1px solid var(--gris3-color);
+    background-color: transparent;
+
+}
+
+.buttom-border-red {
+    color: var(--red-color);
+}
+
+.buttom-border:hover {
+    background-color: var(--red-color);
+    color: var(--gris4-color);
+}
+
 .buttom-primary:hover {
     box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5);
 
@@ -30,6 +45,7 @@
 .buttom-second {
     background-color: var(--second-color);
     color: var(--gris4-color);
+    border-radius: 5px;
     border-color: transparent;
 
 }
@@ -52,11 +68,28 @@
     border-radius: 15px;
 }
 
+
+.buttom-i {
+    border: none;
+    background-color: transparent;
+    color: var(--second-color);
+}
+
+.buttom-i i {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+}
+
 .buttom-primary:disabled,
-.buttom-primary:disabled:hover {
+.buttom-second:disabled,
+.buttom-primary:disabled:hover,
+.buttom-second:disabled:hover {
     opacity: 0.8;
     box-shadow: none;
     background-color: var(--gris2-color);
+    color: var(--gris4-color);
 }
 
 .buttom-seleccion {
@@ -89,6 +122,7 @@
     display: flex;
     justify-content: flex-start;
     align-items: center;
+    gap: 1rem
 }
 
 .buttom-circular-activador {

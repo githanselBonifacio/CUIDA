@@ -1,0 +1,98 @@
+<div class="container-modal-secuencia">
+    <h5>Configuración de secuencia</h5>
+    <div class="container">
+        <div class="row">
+            <div class="col-4">
+                <div class="container-input">
+                    <input id="nombre" type="text" [(ngModel)]="nombreSecuencia" [disabled]="!habilitarNombreSecuencia"
+                        [required]="true">
+                    <label for="nombre">Nombre</label>
+                </div>
+            </div>
+            <div class="col-8">
+                <div class="container-input">
+                    <input class="input-100" id="descripcion" type="text" [(ngModel)]="descripcionSecuencia">
+                    <label for="descripcion">Descripción</label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <table class="table-secuencia">
+            <thead>
+                <tr>
+                    <th class="w-15-p">Día</th>
+                    <th>Turnos</th>
+                    <th class="center w-10-p">Subtotal</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let itemDiaTurno of secuenciaEditable?.itemsDiaTurno">
+                    <td class="w-15-p">{{itemDiaTurno.nombreDia}}</td>
+                    <td>
+                        <div class="d-flex">
+
+                            <div *ngFor="let turno of itemDiaTurno.horariosTurno" class="d-flex">
+                                <div class="item-hora hora-inicio">
+                                    {{turno.horaInicio}}
+                                </div>
+                                <div class="item-hora">
+                                    {{turno.horaFin}}
+                                </div>
+                                <div id="trash-i" title="eliminar">
+
+                                    <button class="buttom-border buttom-border-red"
+                                        (click)="eliminarHorarioTurno(turno,itemDiaTurno.numeroDia)">
+                                        X
+                                    </button>
+                                </div>
+
+                            </div>
+
+                            <div class="btn-group" role="group">
+                                <button type="button" class="buttom-multiple-seleccion dropdown-toggle"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                    agregar...
+                                </button>
+                                <ul class="dropdown-menu p-0">
+                                    <li *ngFor="let horarioTurno of horariosturno">
+                                        <button class="dropdown-item item-buttom-multiple"
+                                            (click)="agregarHorarioTurno(horarioTurno,itemDiaTurno.numeroDia)">
+                                            <div class="d-flex" style="gap:0.2rem">
+                                                <div class="col">
+                                                    {{horarioTurno.nombre}}:
+                                                </div>
+                                                <div class="col">
+                                                    {{horarioTurno.horaInicio}} &RightArrow; {{horarioTurno.horaFin}}
+                                                </div>
+                                            </div>
+                                        </button>
+                                    </li>
+                                </ul>
+                            </div>
+
+                        </div>
+                    </td>
+                    <td class="center w-10-p">{{getDuracionTotal(itemDiaTurno.horariosTurno)}} h</td>
+                </tr>
+            </tbody>
+
+            <tfoot>
+                <tr class="footer">
+                    <td class="w-15-p">Total</td>
+                    <td></td>
+                    <td class="center w-10-p">{{sumaTotalHoras}} h</td>
+                </tr>
+            </tfoot>
+        </table>
+
+        <div class="container-buttom-flex">
+            <button class="buttom-second" (click)="guardarSecuencia()" [disabled]="!editoSecuencia">Guardar</button>
+            <button class="buttom-red" (click)="onCancel()">Cancelar</button>
+        </div>
+    </div>
+
+
+</div>

@@ -25,6 +25,18 @@ export interface Turno {
     idProfesional: string,
     idRegional: string
 }
+export interface Secuencia {
+    nombre: string;
+    descripcion: string;
+    itemsDiaTurno: ItemDiaTurno[];
+}
+export interface ItemDiaTurno {
+    numeroDia: number;
+    nombreDia: string;
+    horariosTurno: HorarioTurno[];
+}
+
+
 
 export class ConvertTurno {
     public static toTurno(json: string): Turno {

@@ -2,7 +2,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AdminRemisionService } from 'src/app/admin/services/admin-remision.service';
 import { ConvertTurno, ProfesionalConTurnos, Turno } from 'src/app/agenda/interfaces/profesional.interface';
-import { Dia, funtionGetColorReferenciaTurnoById, funtionGetNombreProfesionById } from 'src/app/shared/interfaces/maestros.interfaces';
+import { Dia, formatoFecha, funtionGetColorReferenciaTurnoById, funtionGetNombreProfesionById } from 'src/app/shared/interfaces/maestros.interfaces';
 import { MaestrosService } from 'src/app/shared/services/maestros/maestros.service';
 import { registerLocaleData } from '@angular/common';
 import localeEs from '@angular/common/locales/es';
@@ -35,7 +35,7 @@ export class AdminPersonalHorarioConsolidadoPageComponent implements OnInit {
   placeHolderVisible = true;
   diasSemana: string[] = ['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb'];
   dias: Dia[] = [];
-  mesFiltro: string = '2023-07'//formatoFecha(new Date()).slice(0, 7);
+  mesFiltro: string = formatoFecha(new Date()).slice(0, 7);
   opcionIdRegional: string = "427";
   profesionales: ProfesionalConTurnos[] = [];
   profesionalesMostrados: ProfesionalConTurnos[] = [];

@@ -12,6 +12,6 @@ export class AdminPersonalHorarioPageComponent implements OnInit {
     private router: Router) {
   }
   ngOnInit(): void {
-    this.router.navigate(['admin/personal/horario/secuencias']);
+    this.router.navigate(['admin/personal/horario/consolidado']);
   }
 }

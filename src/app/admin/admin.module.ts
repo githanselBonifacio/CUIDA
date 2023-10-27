@@ -39,6 +39,7 @@ import { PlaceholderHorarioTurnosComponent } from '../shared/components/placehol
 import { AdminPersonalHorarioSecuenciasPageComponent } from './pages/personal/admin-personal-horario-secuencias-page/admin-personal-horario-secuencias-page.component';
 import { ModalConfiguracionSecuenciaComponent } from './components/modal-configuracion-secuencia/modal-configuracion-secuencia.component';
 import { ModalAccionLimpiarHorarioComponent } from './components/modal-accion-limpiar-horario/modal-accion-limpiar-horario.component';
+import { ModalAccionAgregarSecuenciaComponent } from './components/modal-accion-agregar-secuencia/modal-accion-agregar-secuencia.component';
 
 
 @NgModule({
@@ -63,7 +64,8 @@ import { ModalAccionLimpiarHorarioComponent } from './components/modal-accion-li
     ModalAsignarTurnoIndividualComponent,
     PlaceholderHorarioTurnosComponent,
     ModalConfiguracionSecuenciaComponent,
-    ModalAccionLimpiarHorarioComponent
+    ModalAccionLimpiarHorarioComponent,
+    ModalAccionAgregarSecuenciaComponent
   ],
   imports: [
     CommonModule,

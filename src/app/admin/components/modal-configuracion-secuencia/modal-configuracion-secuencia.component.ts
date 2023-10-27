@@ -15,7 +15,7 @@ import { TitleToast, ToastType } from 'src/app/shared/components/toast/toast.com
 })
 export class ModalConfiguracionSecuenciaComponent implements OnInit, OnChanges {
 
-  dias: string[] = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"];
+  dias: string[] = ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"];
   nombreSecuencia!: string;
   descripcionSecuencia!: string;
   secuenciaEditable?: Secuencia;

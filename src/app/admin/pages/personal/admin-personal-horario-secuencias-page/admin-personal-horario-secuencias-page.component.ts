@@ -15,6 +15,8 @@ import { AccionFormulario } from 'src/app/admin/interfaces/enum';
 import { TitleToast, ToastType } from 'src/app/shared/components/toast/toast.component';
 import { DialogRef } from '@angular/cdk/dialog';
 import { ModalAccionLimpiarHorarioComponent } from 'src/app/admin/components/modal-accion-limpiar-horario/modal-accion-limpiar-horario.component';
+import { ModalAccionAgregarSecuenciaComponent } from 'src/app/admin/components/modal-accion-agregar-secuencia/modal-accion-agregar-secuencia.component';
+import { formatoFecha } from 'src/app/shared/interfaces/maestros.interfaces';
 
 @Component({
   selector: 'app-admin-personal-horario-secuencias-page',
@@ -34,7 +36,7 @@ export class AdminPersonalHorarioSecuenciasPageComponent implements OnInit, Afte
 
   mostrarListAccionesMasivas = false;
 
-  mesFiltro: string = '2023-07'//formatoFecha(new Date()).slice(0, 7);
+  mesFiltro: string = formatoFecha(new Date()).slice(0, 7);
   opcionIdRegional: string = "427";
 
 
@@ -47,7 +49,6 @@ export class AdminPersonalHorarioSecuenciasPageComponent implements OnInit, Afte
   selection = new SelectionModel<Profesional>(true, []);
 
   ngOnInit(): void {
-    this.spinnerService.show()
     this.maestroService.getRegionales();
     this.maestroService.getProfesiones();
     this.maestroService.getHorarioTurno();
@@ -125,19 +126,20 @@ export class AdminPersonalHorarioSecuenciasPageComponent implements OnInit, Afte
     });
 
     dialogRef.afterClosed().subscribe(result => {
+      this.spinnerService.show();
       if (result != null) {
-        this.spinnerService.show();
         this.adminService.crearSecuenciaTurno(result)
           .subscribe(resp => {
             if (resp.status == 200) {
               this.toastService.mostrarToast(ToastType.Success, TitleToast.Success, resp.message, 5);
             } else {
               this.toastService.mostrarToast(ToastType.Error, TitleToast.Error, resp.message, 5);
+
             }
             this.consultarSecuencia();
-            this.spinnerService.hide();
           });
       }
+      this.spinnerService.hide();
     });
   }
 
@@ -149,19 +151,56 @@ export class AdminPersonalHorarioSecuenciasPageComponent implements OnInit, Afte
       }
     })
     dialogRef.afterClosed().subscribe(data => {
+
       if (data != null) {
+        this.spinnerService.show();
         this.adminService.eliminarTurnoProfesionalAccionMasiva(data)
           .subscribe(resp => {
+
             if (resp.status == 200) {
-              this.toastService.mostrarToast(ToastType.Success, TitleToast.Success, resp.message, 5);
+              if (resp.result.length > 0) {
+                this.toastService.mostrarToast(ToastType.Info, TitleToast.Info, JSON.stringify(resp.result), 5);
+              } else {
+                this.toastService.mostrarToast(ToastType.Success, TitleToast.Success, resp.message, 5);
+              }
+
             } else {
               this.toastService.mostrarToast(ToastType.Error, TitleToast.Error, resp.message, 5);
             }
+            this.spinnerService.hide();
           })
       }
+
     })
   }
   abrirModalAccionAsignarSecuencia(profesionales: Profesional[]) {
-    window.alert("asignar secuencia")
+    const dialogRef = this.dialogo.open(ModalAccionAgregarSecuenciaComponent, {
+      data: {
+        profesionales: profesionales,
+        secuencias: this.secuencias
+      }
+    })
+
+    dialogRef.afterClosed().subscribe(data => {
+
+      if (data != null) {
+        this.spinnerService.show();
+        this.adminService.asignarTurnoProfesionalAccionMasiva(data)
+          .subscribe(resp => {
+
+            if (resp.status == 200) {
+              if (resp.result.length > 0) {
+                this.toastService.mostrarToast(ToastType.Info, TitleToast.Info, JSON.stringify(resp.result), 5);
+              } else {
+                this.toastService.mostrarToast(ToastType.Success, TitleToast.Success, resp.message, 5);
+              }
+            } else {
+              this.toastService.mostrarToast(ToastType.Error, TitleToast.Error, resp.message, 5);
+            }
+            this.spinnerService.hide();
+          })
+      }
+
+    })
   }
 }

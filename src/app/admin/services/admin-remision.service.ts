@@ -111,6 +111,9 @@ export class AdminRemisionService {
   eliminarTurnoProfesionalAccionMasiva(turnos: any[]) {
     return this.http.post<Respuesta>(`${environment.URL_API_CUIDA}/${this.urlRecurso}/eliminarTurnosProfesionalesAccionMasiva`, turnos);
   }
+  asignarTurnoProfesionalAccionMasiva(turnos: Turno[]) {
+    return this.http.post<Respuesta>(`${environment.URL_API_CUIDA}/${this.urlRecurso}/asignarTurnosProfesionalesAccionMasiva`, turnos);
+  }
   //secuencias
   getSecuenciasTurno() {
     return this.http.get<Respuesta>(`${environment.URL_API_CUIDA}/${this.urlRecurso}/secuenciasTurno`);

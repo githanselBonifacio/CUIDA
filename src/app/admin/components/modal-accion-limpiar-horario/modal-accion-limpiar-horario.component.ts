@@ -51,20 +51,21 @@ export class ModalAccionLimpiarHorarioComponent {
   enviar() {
     this.fechasSemanas = this.fechasSemanas.reduce((acc, l) => acc.concat(l), []);
 
-    let eliminarturnoRequest: any[] = this.profesionalesSeleccionados.map(profesional => {
-      return {
-        "idProfesional": profesional.numeroIdentificacion,
-        "fechasTurno": this.fechasSemanas.reduce((acc, l) => acc.concat(l), [])
-      }
-    });
-    eliminarturnoRequest = eliminarturnoRequest.map(
-      eliminarturnoRequest => {
+    let eliminarturnoRequest: any[] = this.profesionalesSeleccionados
+      .map(profesional => {
         return {
-          ...eliminarturnoRequest,
-          fechasTurno: this.fechasSemanas.map(f => formatoFecha(f))
+          "idProfesional": profesional.numeroIdentificacion,
+          "fechasTurno": this.fechasSemanas.flat().map(f => formatoFecha(f))
         }
       })
-    eliminarturnoRequest = eliminarturnoRequest.flatMap((t) => t.fechasTurno.map((d: any) => ({ "idProfesional": t.idProfesional, "fechaTurno": d })))
+      .flatMap(t => {
+        return t.fechasTurno.map(f => {
+          return {
+            "idProfesional": t.idProfesional,
+            "fechaTurno": f
+          }
+        })
+      });
 
     this.dialogRef.close(eliminarturnoRequest);
   }

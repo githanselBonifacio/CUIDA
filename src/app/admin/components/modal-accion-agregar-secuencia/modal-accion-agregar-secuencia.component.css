@@ -1,12 +1,16 @@
 @import url('../../../../styles.css');
 @import url('../../../../assets/styles/buttons/button-seleccion.css');
+@import url('../../../../assets/styles/buttons/button-multiple-seleccion.css');
 @import url('../../../../assets/styles/inputs/fecha.css');
 
+
 .container {
-    min-width: 25vw;
-    min-height: 45vh;
-    max-height: 65vh;
+    min-width: 33rem;
+    min-height: 50vh;
+    max-height: 70vh;
     padding: 2rem;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 .d-flex {
@@ -21,11 +25,6 @@
     gap: 1rem;
 }
 
-.item-vertical {
-    height: 100%;
-    width: 100%;
-}
-
 .title-header {
     margin-bottom: 0.5rem;
 }
@@ -33,10 +32,7 @@
 .container-tabla {
     margin-bottom: 0.5rem;
     margin-top: 0.5rem;
-    max-height: 30vh;
     min-height: 20vh;
-    overflow-y: auto;
-    overflow-x: hidden;
     border: 1px solid var(--gris3-color);
 }
 
@@ -56,7 +52,7 @@
 }
 
 .container-dias td:nth-child(1) {
-    min-width: 50%;
+    min-width: 6rem;
 }
 
 

@@ -89,15 +89,42 @@ export class ModalConfiguracionSecuenciaComponent implements OnInit, OnChanges {
   onCancel() {
     this.dialogRef.close(null);
   }
+
+  gethorariosSeleccionadosDiaTurno(numeroDia: number) {
+    let itemTurnoDiaSeleccionado = this.secuenciaEditable?.itemsDiaTurno.find(itemTurno => itemTurno.numeroDia == numeroDia);
+    return itemTurnoDiaSeleccionado?.horariosTurno;
+  }
+  validarTurnoDescanso(numeroDia: number) {
+    let horariosTurnoSeleccionado = this.gethorariosSeleccionadosDiaTurno(numeroDia);
+    return horariosTurnoSeleccionado?.find(h => h.nombre == "D") != undefined;
+
+  }
+  validarturnoSeleccionado(horarioTurno: HorarioTurno, numeroDia: number) {
+    let horariosTurnoSeleccionado = this.gethorariosSeleccionadosDiaTurno(numeroDia);
+    const turnoDescanso = horariosTurnoSeleccionado?.find(h => h.nombre == "D") != undefined;
+
+    if (turnoDescanso) {
+      return true;
+    } else if (horariosTurnoSeleccionado?.length == 0) {
+      return horariosTurnoSeleccionado?.find(h => h.id == horarioTurno.id) != undefined;
+    } else {
+      return horariosTurnoSeleccionado?.find(h => h.id == horarioTurno.id) != undefined || horarioTurno.nombre == "D";
+    }
+
+
+  }
+
   agregarHorarioTurno(horarioTurno: HorarioTurno, numeroDia: number) {
     this.editoSecuencia = true;
     let itemTurnoDiaSeleccionado = this.secuenciaEditable?.itemsDiaTurno.find(itemTurno => itemTurno.numeroDia == numeroDia);
     let horariosTurnoSeleccionado = itemTurnoDiaSeleccionado?.horariosTurno;
+
     if (horariosTurnoSeleccionado != undefined) {
       horariosTurnoSeleccionado?.push(horarioTurno);
     }
     this.calcularHorasTotales();
   }
+
 
   eliminarHorarioTurno(horarioTurno: HorarioTurno, numeroDia: number) {
     this.editoSecuencia = true;
@@ -124,6 +151,7 @@ export class ModalConfiguracionSecuenciaComponent implements OnInit, OnChanges {
     }
     this.calcularHorasTotales();
   }
+
 
   guardarSecuencia() {
     if (this.secuenciaEditable && this.nombreSecuencia != null && !(/^\s*$/g.test(this.nombreSecuencia))) {

@@ -62,8 +62,9 @@ export class ModalAsignarTurnoIndividualComponent implements OnInit {
     this.dialogRef.close(null);
   }
   filtrarListaHorariosDisponibles() {
-    this.horariosTurnoValidos = this.horariosTurno.slice().filter(h => this.turnosDiaHorario.find(t =>
-      t.idHorarioTurno.nombre == h.nombre) == undefined)
+
+    this.horariosTurnoValidos = this.horariosTurno.slice()
+      .filter(h => this.turnosDiaHorario.find(t => t.idHorarioTurno.nombre == h.nombre) == undefined);
   }
   actualizarHorasTrabajadas() {
     this.totalHorasTrabajadas = this.turnosDiaHorario
@@ -94,25 +95,48 @@ export class ModalAsignarTurnoIndividualComponent implements OnInit {
   }
 
   agregarNuevoTurno() {
+    let nuevoturno: Turno | any = null;
+
     if (this.horarioSeleccionado != null) {
-      if (this.totalHorasTrabajadas + this.horarioSeleccionado?.duracionHoras > this.horasMaximasTrabajadas && this.horarioSeleccionado.nombre != 'D') {
-        this.mesajeValidacion = `La suma de horas debe ser menor a ${this.horasMaximasTrabajadas} horas`
-      } else {
-        this.mesajeValidacion = ""
-        const turnoHorarioAgregado: Turno = {
+
+      if (this.turnosDiaHorario.length == 0) {
+        nuevoturno = {
           idTurno: null,
           fechaTurno: this.fechaTurno,
           idHorarioTurno: this.horarioSeleccionado ?? 0,
           idProfesional: this.profesional.numeroIdentificacion,
           idRegional: this.profesional.idRegional
         }
-        this.turnosDiaHorario.push(turnoHorarioAgregado)
-        this.horarioSeleccionado = undefined;
-        this.filtrarListaHorariosDisponibles();
-        this.actualizarHorasTrabajadas();
-        this.seRealizoCambioTurno = true;
+      } else if (this.horarioSeleccionado?.duracionHoras == 0) {
+        this.mesajeValidacion = `Si selecciona descanso no puede agregar otro turno`
+
+      } else if (this.totalHorasTrabajadas + this.horarioSeleccionado?.duracionHoras > this.horasMaximasTrabajadas) {
+
+        this.mesajeValidacion = `La suma de horas debe ser menor a ${this.horasMaximasTrabajadas} horas`
+      } else {
+        this.mesajeValidacion = "";
+        nuevoturno = {
+          idTurno: null,
+          fechaTurno: this.fechaTurno,
+          idHorarioTurno: this.horarioSeleccionado ?? 0,
+          idProfesional: this.profesional.numeroIdentificacion,
+          idRegional: this.profesional.idRegional
+        }
       }
 
     }
+    if (nuevoturno != null) {
+      this.turnosDiaHorario.push(nuevoturno);
+      if (nuevoturno.idHorarioTurno.nombre == 'D') {
+        this.horariosTurnoValidos = [];
+      } else {
+        this.filtrarListaHorariosDisponibles();
+      }
+      this.horarioSeleccionado = undefined;
+      this.actualizarHorasTrabajadas();
+      this.seRealizoCambioTurno = true;
+
+    }
   }
+
 }

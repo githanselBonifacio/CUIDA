@@ -1,8 +1,8 @@
 
-import { Component, OnInit } from '@angular/core';
+import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { AdminRemisionService } from 'src/app/admin/services/admin-remision.service';
-import { ConvertTurno, ProfesionalConTurnos, Turno } from 'src/app/agenda/interfaces/profesional.interface';
-import { Dia, formatoFecha, funtionGetColorReferenciaTurnoById, funtionGetNombreProfesionById } from 'src/app/shared/interfaces/maestros.interfaces';
+import { ProfesionalConTurnos, Turno } from 'src/app/agenda/interfaces/profesional.interface';
+import { Dia, Regional, formatoFecha, funtionGetColorReferenciaTurnoById, funtionGetNombreProfesionById } from 'src/app/shared/interfaces/maestros.interfaces';
 import { MaestrosService } from 'src/app/shared/services/maestros/maestros.service';
 import { registerLocaleData } from '@angular/common';
 import localeEs from '@angular/common/locales/es';
@@ -11,11 +11,13 @@ import { MatDialog } from '@angular/material/dialog';
 import { ModalAsignarTurnoIndividualComponent } from 'src/app/admin/components/modal-asignar-turno-individual/modal-asignar-turno-individual.component';
 import { ToastService } from 'src/app/shared/services/toast/toast.service';
 import { TitleToast, ToastType } from 'src/app/shared/components/toast/toast.component';
+
 @Component({
   selector: 'app-admin-personal-horario-consolidado-page',
   templateUrl: './admin-personal-horario-consolidado-page.component.html',
   styleUrls: ['./admin-personal-horario-consolidado-page.component.css']
 })
+
 export class AdminPersonalHorarioConsolidadoPageComponent implements OnInit {
 
   constructor(
@@ -29,28 +31,39 @@ export class AdminPersonalHorarioConsolidadoPageComponent implements OnInit {
   getNombreProfesion = funtionGetNombreProfesionById;
   getColorRefenciaTurno = funtionGetColorReferenciaTurnoById;
   currentPagePaginator = 1;
-  numerosPaginaSeleccionada = 4;
+  numerosPaginaSeleccionada = Number(localStorage.getItem('paginasTablaConsolidado')) ?? 4;
   numeroPaginasPaginator = [4, 5, 6, 7, 8, 9, 10];
   inputTextPersonal = "";
   placeHolderVisible = true;
   diasSemana: string[] = ['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb'];
   dias: Dia[] = [];
-  mesFiltro: string = formatoFecha(new Date()).slice(0, 7);
-  opcionIdRegional: string = "427";
+
+  mesFiltro: string = localStorage.getItem('fechaTurnoHorarioConsolidado') ?? formatoFecha(new Date()).slice(0, 7);
+  opcionIdRegional: string = localStorage.getItem('idRegionalHorarioConsolidadoFiltro') ?? '';
+
+
+  regionales: Regional[] = [];
   profesionales: ProfesionalConTurnos[] = [];
   profesionalesMostrados: ProfesionalConTurnos[] = [];
 
   ngOnInit(): void {
-    this.maestroService.getRegionales();
+    if (this.numerosPaginaSeleccionada == 0) {
+      this.numerosPaginaSeleccionada = this.numeroPaginasPaginator[0];
+    }
+
     this.maestroService.getProfesiones();
     this.maestroService.getHorarioTurno();
+    this.maestroService.getRegionalesObservable()
+      .subscribe(resp => {
+        if (resp.status == 200) {
+          this.regionales = resp.result;
+        }
+      });
     this.buscarTurno();
-  }
-
-  get regionales() {
-    return this.maestroService.regionales;
 
   }
+
+
   get profesiones() {
     return this.maestroService.profesiones;
 
@@ -58,7 +71,20 @@ export class AdminPersonalHorarioConsolidadoPageComponent implements OnInit {
   get horariosTurnos() {
     return this.maestroService.horariosTurno;
   }
-
+  onPaginateChange() {
+    localStorage.setItem("paginasTablaConsolidado", `${this.numerosPaginaSeleccionada}`);
+  }
+  guardarLocalStorage() {
+    localStorage.setItem("fechaTurnoHorarioConsolidado", this.mesFiltro);
+    localStorage.setItem("idRegionalHorarioConsolidadoFiltro", this.opcionIdRegional);
+  }
+  getRegionalfiltro(idRegional: string) {
+    return this.regionales.find(r => r.id == idRegional);
+  }
+  actualizarRegionalFilter(idRegional: string) {
+    this.opcionIdRegional = idRegional;
+    localStorage.setItem("idRegionalAgendaFiltro", this.opcionIdRegional);
+  }
   buscarTurno() {
     this.spinnerService.show()
     this.currentPagePaginator = 1;
@@ -84,6 +110,7 @@ export class AdminPersonalHorarioConsolidadoPageComponent implements OnInit {
         this.placeHolderVisible = false;
         this.spinnerService.hide()
       })
+    this.guardarLocalStorage()
   }
 
   filtrarPersonal() {

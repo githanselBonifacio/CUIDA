@@ -83,6 +83,7 @@ select {
     border: 1px solid var(--gris2-color);
     color: var(--quarter-color);
     outline: 0;
+    min-width: 7.5rem;
 }
 
 option {

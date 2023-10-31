@@ -35,10 +35,10 @@
                         <div class="d-flex">
 
                             <div *ngFor="let turno of itemDiaTurno.horariosTurno" class="d-flex">
-                                <div class="item-hora hora-inicio">
+                                <div class="item-hora hora-inicio" [class]="turno.nombre">
                                     {{turno.horaInicio}}
                                 </div>
-                                <div class="item-hora">
+                                <div class="item-hora" [class]="turno.nombre">
                                     {{turno.horaFin}}
                                 </div>
                                 <div id="trash-i" title="eliminar">
@@ -53,13 +53,15 @@
 
                             <div class="btn-group" role="group">
                                 <button type="button" class="buttom-multiple-seleccion dropdown-toggle"
-                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                    data-bs-toggle="dropdown" aria-expanded="false"
+                                    [disabled]="validarTurnoDescanso(itemDiaTurno.numeroDia)">
                                     agregar...
                                 </button>
                                 <ul class="dropdown-menu p-0">
                                     <li *ngFor="let horarioTurno of horariosturno">
                                         <button class="dropdown-item item-buttom-multiple"
-                                            (click)="agregarHorarioTurno(horarioTurno,itemDiaTurno.numeroDia)">
+                                            (click)="agregarHorarioTurno(horarioTurno,itemDiaTurno.numeroDia)"
+                                            [disabled]="validarturnoSeleccionado(horarioTurno,itemDiaTurno.numeroDia)">
                                             <div class="d-flex" style="gap:0.2rem">
                                                 <div class="col">
                                                     {{horarioTurno.nombre}}:

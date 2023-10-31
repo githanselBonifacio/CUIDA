@@ -42,6 +42,11 @@ td {
     vertical-align: middle;
 }
 
+.item-td-flex {
+    display: flex;
+    align-items: center;
+}
+
 tr:nth-child(n):hover,
 tr:nth-child(n):hover td {
     background-color: var(--gris2-color);

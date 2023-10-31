@@ -27,13 +27,18 @@ export class MaestrosService {
         this.regionales = resp.result;
       });
   }
-
+  getRegionalesObservable() {
+    return this.http.get<Respuesta>(`${environment.URL_API_CUIDA}/${this.resourceUrl}/regionales`);
+  }
   async getHorarioTurno() {
     this.http.get<Respuesta>(`${environment.URL_API_CUIDA}/${this.resourceUrl}/horarioTurno`)
       .subscribe(resp => {
         this.horariosTurno = resp.result;
       });
 
+  }
+  getHorarioTurnoObservable() {
+    return this.http.get<Respuesta>(`${environment.URL_API_CUIDA}/${this.resourceUrl}/horarioTurno`);
   }
   async getTiposIdentificacion() {
     this.http.get<Respuesta>(`${environment.URL_API_CUIDA}/${this.resourceUrl}/tipoIdentificacion`)

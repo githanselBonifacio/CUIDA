@@ -1,0 +1,33 @@
+@import url('../../../styles.css');
+
+.simple-checkbox {
+    position: relative;
+    visibility: hidden;
+    margin-left: 0.5rem;
+}
+
+.simple-checkbox::after {
+    visibility: visible;
+    padding: 0px;
+    margin: 0px;
+    content: "";
+    width: 1.2rem;
+    height: 1.2rem;
+    border: 1px solid var(--gris3-color);
+    border-radius: 4px;
+    position: absolute;
+    right: 0%;
+    top: 30%;
+    transition: all 0.2s;
+}
+
+.simple-checkbox:checked::after {
+    content: "\2713";
+    color: var(--gris4-color);
+    font-weight: bolder;
+    font-family: 'Times New Roman';
+    font-size: 0.8rem;
+    text-align: center;
+    background-color: var(--second-color);
+    transition: all 0.2s;
+}

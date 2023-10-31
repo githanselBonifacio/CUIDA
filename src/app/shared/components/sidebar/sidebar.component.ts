@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { formatoFecha } from '../../interfaces/maestros.interfaces';
 
 @Component({
   selector: 'app-shared-sidebar',
@@ -6,10 +7,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./sidebar.component.css']
 })
 export class SidebarComponent {
-  today = new Date();
-  year = this.today.getFullYear();
-  month = (this.today.getMonth() + 1).toString().padStart(2, '0');
-  day = this.today.getDate().toString().padStart(2, '0');
-  
-  fechaHoy = `${this.year}-${this.month}-${this.day}`;
+
 }

@@ -12,6 +12,7 @@ import { HorarioTurno, Regional, formatoFecha } from 'src/app/shared/interfaces/
 import { FormBuilder, Validators } from '@angular/forms';
 import localeEs from '@angular/common/locales/es';
 import { registerLocaleData } from '@angular/common';
+import { SelectionModel } from '@angular/cdk/collections';
 @Component({
   selector: 'app-servicio-farmaceutico-page',
   templateUrl: './servicio-farmaceutico-page.component.html',
@@ -32,6 +33,7 @@ export class ServicioFarmaceuticoPageComponent implements OnInit, AfterViewInit 
 
   displayedColumns: string[] = ['Remisión', 'Paciente', 'Tipo', 'Medicamento', 'Dosis', 'Vía', 'Volumen', 'Fecha programada', 'Notificado'];
   dataSource = new MatTableDataSource<NotificacionFarmacia>([]);
+  selection = new SelectionModel<NotificacionFarmacia>(true, []);
 
   filtroAvanzadoActivado: string = "";
   filtroBusqueda: string = "";
@@ -87,6 +89,32 @@ export class ServicioFarmaceuticoPageComponent implements OnInit, AfterViewInit 
     return this.formfiltro.get("idRegional")?.value;
   }
 
+  todoEstaSeleccionado() {
+    const numSelected = this.selection.selected.length;
+    const numRows = this.dataSource.data.length;
+    return numSelected === numRows;
+  }
+
+  seleccionarTodoFilas() {
+    if (this.todoEstaSeleccionado()) {
+      this.selection.clear();
+      return;
+    }
+
+    this.selection.select(...this.dataSource.data.slice().filter(s => !s.notificado));
+  }
+
+
+  checkboxLabel(row?: any): string {
+    if (!row) {
+      return `${this.todoEstaSeleccionado() ? 'deselect' : 'select'} all`;
+    }
+    return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.position + 1}`;
+  }
+
+  validarDisabledMasterCheck() {
+    return this.dataSource.data.slice().filter(d => !d.notificado).length == 0;
+  }
   consultaAvanzada() {
     this.spinnerService.show();
     if (this.formfiltro.valid) {
@@ -137,16 +165,15 @@ export class ServicioFarmaceuticoPageComponent implements OnInit, AfterViewInit 
     this.deshabilitarCheckbox("check-sin-notificar");
     this.notificacionesSeleccionadas = [];
     this.filtrarByEstadoNotificacion();
-    this.quitarSeleccionCompleta();
-    this.validarMasterCheck()
+    this.selection.clear();
+
   }
   onCheckboxChangeSinNotificado(event: any) {
     this.checkedSinNotificado = event.target.checked;
     this.checkedNotificado = false;
     this.deshabilitarCheckbox("check-notificado");
     this.filtrarByEstadoNotificacion();
-    this.quitarSeleccionCompleta();
-    this.validarMasterCheck()
+    this.selection.clear();
   }
 
 
@@ -179,83 +206,13 @@ export class ServicioFarmaceuticoPageComponent implements OnInit, AfterViewInit 
 
 
   hayNotificacionesSeleccionadas() {
-    return this.notificacionesSeleccionadas.length > 0
+    return this.selection.selected.length > 0
   }
 
-  agregarListaSeleccionada(notificacionSeleccionada: NotificacionFarmacia, event: any): void {
-    this.quitarSeleccionCompleta();
-    const checkbox = document.getElementById(`${(notificacionSeleccionada.idTratamiento ?? 0) + (notificacionSeleccionada.idSoporteNutricional ?? 0)}`);
-    var tr = checkbox?.closest('tr');
-    if (event.target.checked) {
 
-      this.notificacionesSeleccionadas.push(notificacionSeleccionada);
-      tr?.setAttribute("activaCelta", "true")
-    } else {
-      tr?.setAttribute("activaCelta", "false")
-      this.notificacionesSeleccionadas = this.notificacionesSeleccionadas.filter(notificacion => {
-        const idTratamiento = notificacionSeleccionada.idTratamiento;
-        const idSoporteNutricional = notificacionSeleccionada.idSoporteNutricional;
-        if (idTratamiento != null && notificacion.idTratamiento != null) {
-
-          return notificacion.idTratamiento != idTratamiento;
-        } else if (idSoporteNutricional != null && notificacion.idSoporteNutricional != null) {
-
-          return notificacion.idSoporteNutricional != idSoporteNutricional;
-        } else {
-          return true;
-        }
-
-      });
-    }
-    this.checkedMasterListaCompleta();
-    this.validarMasterCheck();
-
-  }
-  handlePageChange(event: any): void {
-    this.notificacionesSeleccionadas = [];
-    const checkboxMaster = document.getElementById('master-check') as HTMLInputElement;
-    checkboxMaster.checked = false;
-  }
-
-  quitarSeleccionCompleta(): void {
-
-    const checkboxMaster = document.getElementById('master-check') as HTMLInputElement;
-    checkboxMaster.checked = false;
-
-  }
-  checkedMasterListaCompleta(): void {
-
-    if (this.notificacionesSeleccionadas.length === this.dataSource.data.length) {
-      const checkboxMaster = document.getElementById('master-check') as HTMLInputElement;
-      checkboxMaster.checked = true;
-
-    }
-  }
-  agregarTodasNotificacionesMostradas(event: any): void {
-
-    const checkboxes = document.getElementsByName('individual-check');
-
-    for (var i = 0; i < checkboxes.length; i++) {
-      const check = checkboxes[i] as HTMLInputElement;
-      var tr = checkboxes[i]?.closest('tr');
-      if (check.type === 'checkbox' && !check.disabled) {
-        check.checked = event.target.checked;
-        tr?.setAttribute("activaCelta", `${check.checked}`)
-      }
-    }
-    if (event.target.checked) {
-
-      this.notificacionesSeleccionadas = this.dataSource.data.slice()
-        .filter(notificacion => notificacion.notificado == false);
-    } else {
-
-      this.notificacionesSeleccionadas = [];
-    }
-
-  }
   notificarSeleccion(): void {
     this.spinnerService.show();
-    this.adminService.notificarMedicamentosToFarmacia(this.notificacionesSeleccionadas)
+    this.adminService.notificarMedicamentosToFarmacia(this.selection.selected)
       .subscribe(resp => {
         if (resp.status == 200) {
 
@@ -264,8 +221,6 @@ export class ServicioFarmaceuticoPageComponent implements OnInit, AfterViewInit 
 
           this.toastService.mostrarToast(ToastType.Error, TitleToast.Error, resp.message, 5)
         }
-        const checkboxMaster = document.getElementById('master-check') as HTMLInputElement;
-        checkboxMaster.checked = false;
         this.ngOnInit();
         this.spinnerService.hide();
       })

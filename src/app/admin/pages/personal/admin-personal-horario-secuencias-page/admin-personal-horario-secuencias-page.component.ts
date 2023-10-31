@@ -1,5 +1,5 @@
 import { DatePipe, registerLocaleData } from '@angular/common';
-import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit, OnChanges, SimpleChanges } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { AdminRemisionService } from 'src/app/admin/services/admin-remision.service';
 import { MaestrosService } from 'src/app/shared/services/maestros/maestros.service';
@@ -9,14 +9,14 @@ import localeEs from '@angular/common/locales/es';
 import { Profesional, Secuencia } from 'src/app/agenda/interfaces/profesional.interface';
 import { SelectionModel } from '@angular/cdk/collections';
 import { MatTableDataSource } from '@angular/material/table';
-import { MatPaginator } from '@angular/material/paginator';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { ModalConfiguracionSecuenciaComponent } from 'src/app/admin/components/modal-configuracion-secuencia/modal-configuracion-secuencia.component';
 import { AccionFormulario } from 'src/app/admin/interfaces/enum';
 import { TitleToast, ToastType } from 'src/app/shared/components/toast/toast.component';
-import { DialogRef } from '@angular/cdk/dialog';
 import { ModalAccionLimpiarHorarioComponent } from 'src/app/admin/components/modal-accion-limpiar-horario/modal-accion-limpiar-horario.component';
 import { ModalAccionAgregarSecuenciaComponent } from 'src/app/admin/components/modal-accion-agregar-secuencia/modal-accion-agregar-secuencia.component';
-import { formatoFecha } from 'src/app/shared/interfaces/maestros.interfaces';
+import { formatoFecha, funtionGetIdTipoIdentificacionById, funtionGetNombreProfesionById, funtionGetNombreRegionalById } from 'src/app/shared/interfaces/maestros.interfaces';
+import { ModalInfoResultadosAccionMasivaHorarioComponent } from 'src/app/admin/components/modal-info-resultados-accion-masiva-horario/modal-info-resultados-accion-masiva-horario.component';
 
 @Component({
   selector: 'app-admin-personal-horario-secuencias-page',
@@ -35,30 +35,38 @@ export class AdminPersonalHorarioSecuenciasPageComponent implements OnInit, Afte
 
 
   mostrarListAccionesMasivas = false;
-
-  mesFiltro: string = formatoFecha(new Date()).slice(0, 7);
-  opcionIdRegional: string = "427";
+  opcionIdRegional: string = localStorage.getItem('idRegionalSecuenciaFiltro') ?? '';
 
 
   secuencias: Secuencia[] = [];
+  profesionales: Profesional[] = [];
+  profesionalesMostrados: Profesional[] = [];
 
-  //tablas
+  //funciones
+  mostrarNombreTipoIdentificacion = funtionGetIdTipoIdentificacionById;
+  mostrarNombreRegional = funtionGetNombreRegionalById;
+  mostrarNombreProfesion = funtionGetNombreProfesionById;
+
+  //tabla
   @ViewChild('paginatorPersonalSecuencias') paginator!: MatPaginator;
   displayedColumns: string[] = ['select', 'identificacion', 'profesional', 'profesion', 'regional'];
   dataSource = new MatTableDataSource<Profesional>();
   selection = new SelectionModel<Profesional>(true, []);
+  numerosPaginaSeleccionada = Number(localStorage.getItem('paginasTablaProfesionalSecuencia'));
+  numeroPaginasPaginator = [4, 5, 6, 7, 8, 9, 10];
 
   ngOnInit(): void {
     this.maestroService.getRegionales();
+    this.maestroService.getTiposIdentificacion();
     this.maestroService.getProfesiones();
     this.maestroService.getHorarioTurno();
     this.consultarSecuencia();
     this.buscarPersonal();
   }
   ngAfterViewInit(): void {
-
     this.dataSource.paginator = this.paginator;
   }
+
   get regionales() {
     return this.maestroService.regionales;
 
@@ -70,14 +78,33 @@ export class AdminPersonalHorarioSecuenciasPageComponent implements OnInit, Afte
   get horariosTurnos() {
     return this.maestroService.horariosTurno;
   }
+  get tiposIdentificacion() {
+    return this.maestroService.tiposIdentificacion
+      .filter(tipoIdentificacion => tipoIdentificacion.esMayorEdad == true);
+  }
+
+  guardarLocalStorage() {
+    localStorage.setItem("idRegionalSecuenciaFiltro", this.opcionIdRegional);
+    localStorage.setItem("paginasTablaProfesionalSecuencia", `${this.numerosPaginaSeleccionada}`);
+  }
+  onPaginateChange(event: PageEvent) {
+    this.numerosPaginaSeleccionada = event.pageSize;
+    this.guardarLocalStorage();
+  }
+  actualizarfiltroIdRegional() {
+    this.profesionalesMostrados = this.profesionales.slice().filter(p => p.idRegional == this.opcionIdRegional);
+    this.dataSource.data = this.profesionalesMostrados;
+    this.guardarLocalStorage();
+  }
 
   buscarPersonal() {
-
-    this.adminService.getProfesionalesRegional(this.opcionIdRegional)
+    this.adminService.getAllProfesionales()
       .subscribe(resp => {
-        this.dataSource.data = resp.result;
+        this.profesionales = resp.result;
+        this.actualizarfiltroIdRegional()
 
       })
+
   }
   consultarSecuencia() {
     this.spinnerService.show()
@@ -85,6 +112,7 @@ export class AdminPersonalHorarioSecuenciasPageComponent implements OnInit, Afte
       this.secuencias = resp.result
       this.spinnerService.hide()
     });
+
   }
   mostrarOpcionesMasivas() {
     if (this.mostrarListAccionesMasivas) {
@@ -140,6 +168,7 @@ export class AdminPersonalHorarioSecuenciasPageComponent implements OnInit, Afte
           });
       }
       this.spinnerService.hide();
+      this.selection.clear();
     });
   }
 
@@ -159,7 +188,8 @@ export class AdminPersonalHorarioSecuenciasPageComponent implements OnInit, Afte
 
             if (resp.status == 200) {
               if (resp.result.length > 0) {
-                this.toastService.mostrarToast(ToastType.Info, TitleToast.Info, JSON.stringify(resp.result), 5);
+                this.dialogo.open(ModalInfoResultadosAccionMasivaHorarioComponent, { data: { "profesionales": this.selection.selected, "turnos": resp.result } });
+
               } else {
                 this.toastService.mostrarToast(ToastType.Success, TitleToast.Success, resp.message, 5);
               }
@@ -168,11 +198,12 @@ export class AdminPersonalHorarioSecuenciasPageComponent implements OnInit, Afte
               this.toastService.mostrarToast(ToastType.Error, TitleToast.Error, resp.message, 5);
             }
             this.spinnerService.hide();
+            this.selection.clear();
           })
       }
-
     })
   }
+
   abrirModalAccionAsignarSecuencia(profesionales: Profesional[]) {
     const dialogRef = this.dialogo.open(ModalAccionAgregarSecuenciaComponent, {
       data: {
@@ -190,7 +221,8 @@ export class AdminPersonalHorarioSecuenciasPageComponent implements OnInit, Afte
 
             if (resp.status == 200) {
               if (resp.result.length > 0) {
-                this.toastService.mostrarToast(ToastType.Info, TitleToast.Info, JSON.stringify(resp.result), 5);
+                this.dialogo.open(ModalInfoResultadosAccionMasivaHorarioComponent, { data: { "profesionales": this.selection.selected, "turnos": resp.result } });
+
               } else {
                 this.toastService.mostrarToast(ToastType.Success, TitleToast.Success, resp.message, 5);
               }
@@ -198,6 +230,7 @@ export class AdminPersonalHorarioSecuenciasPageComponent implements OnInit, Afte
               this.toastService.mostrarToast(ToastType.Error, TitleToast.Error, resp.message, 5);
             }
             this.spinnerService.hide();
+            this.selection.clear();
           })
       }
 

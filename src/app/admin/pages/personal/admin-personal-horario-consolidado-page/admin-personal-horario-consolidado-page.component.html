@@ -4,11 +4,19 @@
             <input [(ngModel)]="mesFiltro" type="month" id="mes">
             <label for="mes">Mes</label>
         </div>
-        <div class="container-input">
-            <select id="regional" [(ngModel)]="opcionIdRegional">
-                <option *ngFor="let regional of regionales" [value]="regional.id">{{regional.nombre}}</option>
-            </select>
-            <label for="regional">Regional</label>
+        <div class="btn-group" role="group">
+            <button type="button" class="buttom-outline-list" data-bs-toggle="dropdown" aria-expanded="false">
+                {{getRegionalfiltro(opcionIdRegional)?.nombre}}
+            </button>
+            <label>Regional</label>
+            <ul class="dropdown-menu p-0">
+                <li *ngFor="let regional of regionales">
+                    <button (click)="actualizarRegionalFilter(regional.id)"
+                        [class.selected]="regional.id==opcionIdRegional"
+                        class="dropdown-item item-buttom-multiple">{{regional.nombre}}</button>
+                </li>
+
+            </ul>
         </div>
         <div class="container-input">
             <button class="buttom-seleccion" (click)="buscarTurno()">Buscar</button>
@@ -80,8 +88,8 @@
             <hr>
             <div class="paginator-container">
                 <label>personas por páginas</label>
-                <select [(ngModel)]="numerosPaginaSeleccionada">
-                    <option *ngFor="let pagina of numeroPaginasPaginator">{{pagina}}
+                <select [(ngModel)]="numerosPaginaSeleccionada" (ngModelChange)="onPaginateChange()">
+                    <option *ngFor="let pagina of numeroPaginasPaginator" [value]="pagina">{{pagina}}
                     </option>
                 </select>
                 <pagination-controls id="cuadro-turno" previousLabel="Anterior" nextLabel="Siguiente"

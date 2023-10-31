@@ -5,16 +5,16 @@ import { MainComponentAgendaComponent } from './pages/main-agenda-page/main-agen
 
 export const routes: Routes = [
   {
-    path:"",
-    component:MainComponentAgendaComponent,
+    path: "",
+    component: MainComponentAgendaComponent,
   },
   {
-      path:":idTurno/:idCiudad/:idHorarioTurno",
-      component:MainComponentAgendaComponent,
+    path: ":fechaTurno/:idRegional/:idHorarioTurno",
+    component: MainComponentAgendaComponent,
   },
   {
-    path:'**',
-    redirectTo:''
+    path: '**',
+    redirectTo: ''
   }
 ]
 

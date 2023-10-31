@@ -18,39 +18,53 @@
 
                         </div>
 
-                        <div class="d-flex">
+                        <div class="container-buttom-flex ">
                             <div class="container-input">
                                 <label for="fecha">Fecha</label>
                                 <input type="date" id="fecha" [(ngModel)]="fechaFiltroTurno">
                             </div>
 
-                            <div class="container-input">
-                                <label for="opcionRegional">Regional</label>
-                                <select name="select-regional" [(ngModel)]="opcionRegional" id="opcionRegional">
-                                    <option value="default" selected disabled>seleccione..</option>
-                                    <option *ngFor="let regional of regionales" [value]="regional.id">
-                                        {{regional.nombre}}
-                                    </option>
-                                </select>
+                            <div class="btn-group" role="group">
+                                <button type="button" class="buttom-outline-list" data-bs-toggle="dropdown"
+                                    aria-expanded="false">
+                                    {{getRegionalfiltro(opcionRegional)?.nombre}}
+                                </button>
+                                <label>Regional</label>
+                                <ul class="dropdown-menu p-0">
+                                    <li *ngFor="let regional of regionales">
+                                        <button (click)="actualizarRegionalFilter(regional.id)"
+                                            [class.selected]="regional.id==opcionRegional"
+                                            class="dropdown-item item-buttom-multiple">{{regional.nombre}}</button>
+                                    </li>
+
+                                </ul>
                             </div>
 
-                            <div class="container-input">
-                                <label for="opcionTurno">Turno enfermeria</label>
-                                <select name="select-turno" [(ngModel)]="opcionHorariosTurno" id="opcionTurno">
-                                    <option value="default" selected disabled>seleccione..</option>
-                                    <option *ngFor="let option of horarioTurno" [value]="option.id">{{option.nombre}}
-                                    </option>
-                                </select>
-                            </div>
+                            <div class="btn-group" role="group">
 
+                                <button type="button" class="buttom-outline-list" data-bs-toggle="dropdown"
+                                    aria-expanded="false">
+                                    {{getHorariofiltro(opcionHorarioTurno)?.nombre}}
+                                </button>
+                                <label>Turno</label>
+                                <ul class="dropdown-menu p-0">
+                                    <li *ngFor="let horario of horariosTurno">
+                                        <button (click)="actualizarHorarioFilter(horario.id)"
+                                            [class.selected]="horario.id==opcionHorarioTurno"
+                                            class="dropdown-item item-buttom-multiple">{{horario.nombre}}</button>
+                                    </li>
+
+                                </ul>
+                            </div>
+                            <div class="input-group">
+                                <button class="buttom-seleccion" (click)="consultarCitas()">
+                                    Buscar
+                                </button>
+                            </div>
 
                         </div>
 
-                        <div class="input-group">
-                            <button class="buttom-seleccion" (click)="consultarCitas()">
-                                Buscar
-                            </button>
-                        </div>
+
                     </div>
                 </div>
             </div>
@@ -80,7 +94,7 @@
 
                     <app-agenda-card-cita (actualizarMainView)="actualizarComponenteMainAgenda()" [cita]="cita"
                         [idRegional]="opcionRegional" [fechaTurno]="fechaFiltroTurno"
-                        [idHorarioTurno]="opcionHorariosTurno" [estadosCita]="estadosCita">
+                        [idHorarioTurno]="opcionHorarioTurno" [estadosCita]="estadosCita">
                     </app-agenda-card-cita>
                 </div>
 

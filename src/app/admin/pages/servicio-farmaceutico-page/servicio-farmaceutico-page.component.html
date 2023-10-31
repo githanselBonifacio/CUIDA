@@ -10,7 +10,7 @@
         <div class="content-toolbar">
 
             <button id="notificar" title="Notificar" (click)="notificarSeleccion()"
-                [ngClass]="{'active': hayNotificacionesSeleccionadas()}" [disabled]="!hayNotificacionesSeleccionadas()">
+                [ngClass]="{'active': hayNotificacionesSeleccionadas()}" [disabled]="selection.selected.length==0">
                 <div>
                     <i class="bi bi-bell-fill"></i>
                 </div>
@@ -18,10 +18,13 @@
 
             <div class="content-check-notificacion">
 
-                <input id="check-notificado" type="checkbox" (change)="onCheckboxChangeNotificado($event)">
+                <input class="simple-checkbox" id="check-notificado" type="checkbox"
+                    (change)="onCheckboxChangeNotificado($event)">
                 <label class="label-notificacion" for="check-notificado">Notificado</label>
 
-                <input id="check-sin-notificar" type="checkbox" (change)="onCheckboxChangeSinNotificado($event)">
+
+                <input class="simple-checkbox" id="check-sin-notificar" type="checkbox"
+                    (change)="onCheckboxChangeSinNotificado($event)">
                 <label class="label-notificacion" for="check-sin-notificar">Sin Notificar</label>
 
             </div>
@@ -30,6 +33,7 @@
                 class="form-control" placeholder="Buscar...">
         </div>
     </div>
+
     <div id="content-activate-buttom">
         <button [class]="'buttom-primary buttom-circular-activador '+filtroAvanzadoActivado" (click)="activarFiltro()"
             title="Filtro avanzado">Filtro avanzado
@@ -74,116 +78,130 @@
         </form>
     </div>
 
-
+    <div>
+        <p class="p-seleccionados">{{selection.selected.length}} seleccionados</p>
+    </div>
     <div class="content-item">
 
-        <table class="mat-elevation-z8" mat-table [dataSource]="dataSource">
-            <ng-container matColumnDef="Remisión">
-                <th mat-header-cell *matHeaderCellDef class="th-start">
-                    <span>
-                        <input id="master-check" type="checkbox" (change)="agregarTodasNotificacionesMostradas($event)"
-                            [disabled]="checkedDisabledMaster">
-                        <label for="master-check"> Remisión</label>
+        <section class="container-table-farmacia" tabindex="0">
 
-                    </span>
-                </th>
-                <td mat-cell *matCellDef="let notificacion" class="card-item">
-                    <span>
-                        <input name="individual-check" type="checkbox"
-                            [id]="notificacion.idTratamiento+notificacion.idSoporteNutricional"
-                            (change)="agregarListaSeleccionada(notificacion,$event)"
-                            [disabled]="notificacion.notificado">
-                        <label [for]="notificacion.idTratamiento+notificacion.idSoporteNutricional">
-                            {{notificacion.idRemision}}</label>
-                    </span>
-                </td>
-            </ng-container>
+            <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+                <ng-container matColumnDef="Remisión">
+                    <th mat-header-cell *matHeaderCellDef class="th-start">
 
-            <ng-container matColumnDef="Paciente">
-                <th mat-header-cell *matHeaderCellDef> Paciente </th>
-                <td mat-cell *matCellDef="let notificacion">
-                    <div class="card-item">
-                        {{ notificacion.nombres |titlecase }} {{ notificacion.apellidos|titlecase }}
-                    </div>
-                    <div class="card-item">
-                        {{ notificacion.tipoIdentificacion |obtenerSiglasIdentificacion }}: {{
-                        notificacion.numeroIdentificacion }}
-                    </div>
-                </td>
-            </ng-container>
+                        <mat-checkbox class="check-primary" (change)="$event ? seleccionarTodoFilas() : null"
+                            [checked]="selection.hasValue() && todoEstaSeleccionado()"
+                            [indeterminate]="selection.hasValue() && !todoEstaSeleccionado()"
+                            [aria-label]="checkboxLabel()" [color]="'primary'"
+                            [disabled]="validarDisabledMasterCheck()">
+                        </mat-checkbox>Remisión
 
-            <ng-container matColumnDef="Tipo">
-                <th mat-header-cell *matHeaderCellDef> Tipo </th>
-                <td class="td-start" mat-cell *matCellDef="let notificacion"> {{notificacion.tipo}} </td>
-            </ng-container>
-
-            <ng-container matColumnDef="Medicamento">
-                <th mat-header-cell *matHeaderCellDef> Medicamento </th>
-                <td mat-cell *matCellDef="let notificacion">
-                    <div>
-
-                        <div class="card-item td-start">
-                            {{notificacion.presentacionMedicamento|titlecase}}
+                    </th>
+                    <td mat-cell *matCellDef="let notificacion" class="card-item">
+                        <div class="d-flex">
+                            <div>
+                                <mat-checkbox (click)="$event.stopPropagation()"
+                                    (change)="$event ? selection.toggle(notificacion) : null"
+                                    [checked]="selection.isSelected(notificacion)" [color]="'primary'"
+                                    [disabled]="notificacion.notificado">
+                                </mat-checkbox>
+                            </div>
+                            <div class="item-td-flex">
+                                {{notificacion.idRemision}}
+                            </div>
                         </div>
 
+
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="Paciente">
+                    <th mat-header-cell *matHeaderCellDef> Paciente </th>
+                    <td mat-cell *matCellDef="let notificacion">
                         <div class="card-item">
-                            {{notificacion.codigoMedicamento}}
+                            {{ notificacion.nombres |titlecase }} {{ notificacion.apellidos|titlecase }}
                         </div>
+                        <div class="card-item">
+                            {{ notificacion.tipoIdentificacion |obtenerSiglasIdentificacion }}: {{
+                            notificacion.numeroIdentificacion }}
+                        </div>
+                    </td>
+                </ng-container>
 
-                    </div>
-                </td>
-            </ng-container>
+                <ng-container matColumnDef="Tipo">
+                    <th mat-header-cell *matHeaderCellDef> Tipo </th>
+                    <td class="td-start" mat-cell *matCellDef="let notificacion"> {{notificacion.tipo}} </td>
+                </ng-container>
 
-            <ng-container matColumnDef="Dosis">
-                <th mat-header-cell *matHeaderCellDef> Dosis </th>
-                <td class="td-start" *matCellDef="let notificacion">
-                    <span>{{notificacion.cantidadDosis}}
-                        ({{notificacion.unidadDosis}})
-                    </span>
-                </td>
-            </ng-container>
+                <ng-container matColumnDef="Medicamento">
+                    <th mat-header-cell *matHeaderCellDef> Medicamento </th>
+                    <td mat-cell *matCellDef="let notificacion">
+                        <div>
 
-            <ng-container matColumnDef="Vía">
-                <th mat-header-cell *matHeaderCellDef> Vía </th>
-                <td mat-cell *matCellDef="let notificacion"> <span
-                        *ngIf="notificacion.viaAdministracion">{{notificacion.viaAdministracion}}</span>
-                    <span class="badge-no-aplica" *ngIf="!notificacion.viaAdministracion">NA</span>
-                </td>
-            </ng-container>
+                            <div class="card-item td-start">
+                                {{notificacion.presentacionMedicamento|titlecase}}
+                            </div>
 
-            <ng-container matColumnDef="Volumen">
-                <th mat-header-cell *matHeaderCellDef> Volumen </th>
-                <td mat-cell *matCellDef="let notificacion">
-                    <span *ngIf="notificacion.volumen">{{notificacion.volumen}} (gr)</span>
-                    <span class="badge-no-aplica" *ngIf="!notificacion.volumen">NA</span>
-                </td>
-            </ng-container>
+                            <div class="card-item">
+                                {{notificacion.codigoMedicamento}}
+                            </div>
 
-            <ng-container matColumnDef="Fecha programada">
-                <th mat-header-cell *matHeaderCellDef> Fecha programada </th>
-                <td mat-cell *matCellDef="let notificacion"> {{notificacion.fechaProgramada| date:'dd/MM/yyyy HH:mm'}}
-                </td>
-            </ng-container>
+                        </div>
+                    </td>
+                </ng-container>
 
-            <ng-container matColumnDef="Notificado">
-                <th mat-header-cell *matHeaderCellDef> Notificado </th>
-                <td mat-cell *matCellDef="let notificacion">
-                    <i *ngIf="notificacion.notificado" class="bi bi-check-square-fill" id="notificado"></i>
-                    <i *ngIf="!notificacion.notificado" class="bi bi-slash-circle-fill" id="no-notificado"></i>
-                </td>
-            </ng-container>
-            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-            <tr *matNoDataRow>
-                <p style="padding: 0.5rem 0.5rem 0.5rem 1rem;">hay notificaciones pendientes !!!
+                <ng-container matColumnDef="Dosis">
+                    <th mat-header-cell *matHeaderCellDef> Dosis </th>
+                    <td class="td-start" *matCellDef="let notificacion">
+                        <span>{{notificacion.cantidadDosis}}
+                            ({{notificacion.unidadDosis}})
+                        </span>
+                    </td>
+                </ng-container>
 
-                </p>
-            </tr>
+                <ng-container matColumnDef="Vía">
+                    <th mat-header-cell *matHeaderCellDef> Vía </th>
+                    <td mat-cell *matCellDef="let notificacion"> <span
+                            *ngIf="notificacion.viaAdministracion">{{notificacion.viaAdministracion}}</span>
+                        <span class="badge-no-aplica" *ngIf="!notificacion.viaAdministracion">NA</span>
+                    </td>
+                </ng-container>
 
-        </table>
+                <ng-container matColumnDef="Volumen">
+                    <th mat-header-cell *matHeaderCellDef> Volumen </th>
+                    <td mat-cell *matCellDef="let notificacion">
+                        <span *ngIf="notificacion.volumen">{{notificacion.volumen}} (gr)</span>
+                        <span class="badge-no-aplica" *ngIf="!notificacion.volumen">NA</span>
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="Fecha programada">
+                    <th mat-header-cell *matHeaderCellDef> Fecha programada </th>
+                    <td mat-cell *matCellDef="let notificacion"> {{notificacion.fechaProgramada| date:'dd/MM/yyyy
+                        HH:mm'}}
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="Notificado">
+                    <th mat-header-cell *matHeaderCellDef> Notificado </th>
+                    <td mat-cell *matCellDef="let notificacion">
+                        <i *ngIf="notificacion.notificado" class="bi bi-check-square-fill" id="notificado"></i>
+                        <i *ngIf="!notificacion.notificado" class="bi bi-slash-circle-fill" id="no-notificado"></i>
+                    </td>
+                </ng-container>
+                <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                <tr *matNoDataRow>
+                    <p style="padding: 0.5rem 0.5rem 0.5rem 1rem;">hay notificaciones pendientes !!!</p>
+                </tr>
+
+            </table>
+        </section>
+
+    </div>
+    <div class="paginator">
+        <mat-paginator #paginatorFarmacia [pageSizeOptions]="[7,8,9,10,15,20,50,100]" aria-label="Select page"
+            itemsPerPageLabel="notificaciones por página" showFirstLastButtons="true">
+        </mat-paginator>
     </div>
 </div>
-
-<mat-paginator #paginatorFarmacia [pageSizeOptions]="[7,8,9,10,15,20,50,100]" aria-label="Select page"
-    itemsPerPageLabel="notificaciones por página" showFirstLastButtons="true" (page)="handlePageChange($event)">
-</mat-paginator>

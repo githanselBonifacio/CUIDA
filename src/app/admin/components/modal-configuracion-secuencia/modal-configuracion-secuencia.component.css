@@ -53,6 +53,11 @@
     border: 1px solid var(--gris3-color);
 }
 
+.item-hora.D {
+    border: 1px solid var(--green-color);
+    color: var(--green-color-dark) !important;
+}
+
 .hora-inicio::after {
     position: absolute;
     content: "";

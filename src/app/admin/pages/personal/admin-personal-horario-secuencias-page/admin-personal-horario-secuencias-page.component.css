@@ -15,6 +15,21 @@
     box-shadow: 1px 1px 1px 1px var(--gris3-color);
 }
 
+.c-radio-regionales {
+    display: flex;
+    gap: 1rem;
+}
+
+.c-radio-regionales label {
+    color: var(--orange-color-dark);
+    min-width: 6rem;
+}
+
+.c-radio-regionales input:checked+label {
+    background-color: var(--orange-color);
+    color: var(--gris4-color);
+}
+
 .borde-t-b {
     border-top: 1px solid var(--gris3-color);
     border-bottom: 1px solid var(--gris3-color);
@@ -50,6 +65,10 @@
     top: 0;
     color: var(--second-color);
     font-size: 1.2rem;
+}
+
+.container-table {
+    margin-bottom: 0.5rem;
 }
 
 .container-card {

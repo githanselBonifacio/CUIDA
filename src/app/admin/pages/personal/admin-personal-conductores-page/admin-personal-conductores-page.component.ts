@@ -5,7 +5,7 @@ import { MaestrosService } from 'src/app/shared/services/maestros/maestros.servi
 import { AccionFormulario } from '../../../interfaces/enum';
 import { Conductor } from 'src/app/agenda/interfaces/conductores.interface';
 import { funtionGetIdTipoIdentificacionById, funtionGetNombreRegionalById } from 'src/app/shared/interfaces/maestros.interfaces';
-import { AdminRemisionService } from '../../../services/admin-remision.service';
+import { AdminPersonalService } from 'src/app/admin/services/admin-personal.service';
 
 @Component({
   selector: 'app-admin-personal-conductores-page',
@@ -15,12 +15,13 @@ import { AdminRemisionService } from '../../../services/admin-remision.service';
 export class AdminPersonalConductoresPageComponent implements OnInit, AfterViewInit {
 
   constructor(
-    private adminService: AdminRemisionService,
+    private adminPersonalService: AdminPersonalService,
     private maestrosService: MaestrosService) { }
 
   @ViewChild('paginatorConductor') paginator!: MatPaginator;
   columnas: string[] = ['TipoIdentificacion', 'Nombres', 'Apellidos', 'Regional', "acciones"];
   conductoresSource = new MatTableDataSource<Conductor>([]);
+  pageSizeOptions = [7, 8, 9, 10, 15, 20, 50, 100];
   accionFormulario = AccionFormulario.CREAR;
   estadoVisualFormCrear?: string;
   conductorSeleccionado?: Conductor;
@@ -32,14 +33,14 @@ export class AdminPersonalConductoresPageComponent implements OnInit, AfterViewI
     this.estadoVisualFormCrear = "";
     this.maestrosService.getTiposIdentificacion();
     this.maestrosService.getRegionales();
-    this.adminService.getAllConductores().subscribe(resp => {
+    this.adminPersonalService.getAllConductores().subscribe(resp => {
       if (resp.status === 200) {
         this.conductoresSource.data = resp.result;
       }
     })
   }
   actualizarDatos() {
-    this.adminService.getAllConductores().subscribe(resp => {
+    this.adminPersonalService.getAllConductores().subscribe(resp => {
       if (resp.status === 200) {
         this.conductoresSource.data = resp.result;
         this.paginator.pageIndex = 0;
@@ -48,7 +49,10 @@ export class AdminPersonalConductoresPageComponent implements OnInit, AfterViewI
   }
 
   ngAfterViewInit(): void {
-    this.conductoresSource.paginator = this.paginator;
+    Promise.resolve().then(() => {
+      this.conductoresSource.paginator = this.paginator;
+      this.paginator.pageSize = parseInt(`${localStorage.getItem("pageSizeConductores")}` ?? `${this.pageSizeOptions[0]}`);
+    });
   }
 
   get tiposIdentificacion() {
@@ -60,7 +64,9 @@ export class AdminPersonalConductoresPageComponent implements OnInit, AfterViewI
     return this.maestrosService.regionales;
   }
 
-
+  actualizarPage() {
+    localStorage.setItem("pageSizeConductores", `${this.paginator.pageSize}`)
+  }
   mostrarFormularioCrearConductor() {
 
     if (this.estadoVisualFormCrear == 'activate') {

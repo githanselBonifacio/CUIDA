@@ -1,6 +1,5 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MaestrosService } from 'src/app/shared/services/maestros/maestros.service';
-import { AdminRemisionService } from '../../../services/admin-remision.service';
 import { MatPaginator } from '@angular/material/paginator';
 import { Movil } from 'src/app/agenda/interfaces/conductores.interface';
 import { MatTableDataSource } from '@angular/material/table';
@@ -8,6 +7,7 @@ import { AccionFormulario } from '../../../interfaces/enum';
 import { funtionGetNombreRegionalById } from '../../../../shared/interfaces/maestros.interfaces';
 import localeEs from '@angular/common/locales/es';
 import { registerLocaleData } from '@angular/common';
+import { AdminPersonalService } from 'src/app/admin/services/admin-personal.service';
 
 @Component({
   selector: 'app-admin-personal-vehiculos-page',
@@ -17,13 +17,14 @@ import { registerLocaleData } from '@angular/common';
 export class AdminPersonalVehiculosPageComponent implements OnInit, AfterViewInit {
 
   constructor(
-    private adminService: AdminRemisionService,
+    private personalService: AdminPersonalService,
     private maestrosService: MaestrosService) { }
 
   @ViewChild('paginatorVehiculo') paginator!: MatPaginator;
 
   columnas: string[] = ['matricula', 'marca', 'modelo', 'regional', "acciones"];
   movilesSource = new MatTableDataSource<Movil>([]);
+  pageSizeOptions = [7, 8, 9, 10, 15, 20, 50, 100];
 
   accionFormulario = AccionFormulario.CREAR;
   estadoVisualFormCrear?: string;
@@ -36,22 +37,29 @@ export class AdminPersonalVehiculosPageComponent implements OnInit, AfterViewIni
     this.estadoVisualFormCrear = "";
     this.maestrosService.getTiposIdentificacion();
     this.maestrosService.getRegionales();
-    this.adminService.getAllMoviles().subscribe(resp => {
+    this.personalService.getAllMoviles().subscribe(resp => {
       if (resp.status === 200) {
         this.movilesSource.data = resp.result;
       }
     })
   }
   ngAfterViewInit(): void {
-    this.movilesSource.paginator = this.paginator;
+    Promise.resolve().then(() => {
+      this.movilesSource.paginator = this.paginator;
+      this.paginator.pageSize = parseInt(`${localStorage.getItem("pageSizeVehiculo")}` ?? `${this.pageSizeOptions[0]}`);
+    });
   }
 
   get regionales() {
     return this.maestrosService.regionales;
   }
 
+  actualizarPage() {
+    localStorage.setItem("pageSizeVehiculo", `${this.paginator.pageSize}`)
+  }
+
   actualizarDatos() {
-    this.adminService.getAllMoviles()
+    this.personalService.getAllMoviles()
       .subscribe(
         resp => {
           this.movilesSource.data = resp.result;

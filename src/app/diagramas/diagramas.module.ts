@@ -1,17 +1,29 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DecimalPipe } from '@angular/common';
 import { GanttComponent } from './components/gantt/gantt.component';
-import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { DiagramaVarchartComponent } from './components/diagrama-varchart/diagrama-varchart.component';
+import { PipesModule } from '../pipes/pipes.module';
+import { DiagramaPiechartComponent } from './components/diagrama-piechart/diagrama-piechart.component';
+import { DiagramaProgressChartComponent } from './components/diagrama-progress-chart/diagrama-progress-chart.component';
+
+
+
 @NgModule({
   declarations: [
-    GanttComponent
+    GanttComponent,
+    DiagramaVarchartComponent,
+    DiagramaPiechartComponent,
+    DiagramaProgressChartComponent
   ],
   imports: [
     CommonModule,
-    MatProgressBarModule
+    PipesModule
   ],
   exports: [
-    GanttComponent
+    GanttComponent,
+    DiagramaVarchartComponent,
+    DiagramaPiechartComponent,
+    DiagramaProgressChartComponent
   ]
 })
 export class DiagramasModule { }

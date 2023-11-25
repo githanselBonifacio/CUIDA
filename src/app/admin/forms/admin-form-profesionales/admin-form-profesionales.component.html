@@ -7,8 +7,7 @@
         <div class="row">
             <div class="col-lg-6 col-xl-3">
                 <div class="container-input">
-                    <select [disabled]="validacionDisabled"
-                        [class.invalid]="campoTipoIdentificacion?.touched && campoTipoIdentificacion?.invalid"
+                    <select [class.invalid]="campoTipoIdentificacion?.touched && campoTipoIdentificacion?.invalid"
                         [class.valid]="campoTipoIdentificacion?.touched && campoTipoIdentificacion?.valid" required
                         formControlName="tipoIdentificacion" id="campoTipoIdentificacion">
                         <option value="" [selected] [disabled]="validacionDisabled">Seleccione...</option>
@@ -37,8 +36,7 @@
             </div>
             <div class="col-lg-6 col-xl-3">
                 <div class="container-input">
-                    <input [readonly]="validacionDisabled" required
-                        [class.invalid]="campoNombres?.touched && campoNombres?.invalid"
+                    <input required [class.invalid]="campoNombres?.touched && campoNombres?.invalid"
                         [class.valid]="campoNombres?.touched && campoNombres?.valid" formControlName="nombres"
                         id="campoNombres" type="text" />
                     <label for="campoNombres">Nombres</label>
@@ -49,8 +47,7 @@
             </div>
             <div class="col-lg-6 col-xl-3">
                 <div class="container-input">
-                    <input [readonly]="validacionDisabled" required
-                        [class.invalid]="campoApellidos?.touched && campoApellidos?.invalid"
+                    <input required [class.invalid]="campoApellidos?.touched && campoApellidos?.invalid"
                         [class.valid]="campoApellidos?.touched && campoApellidos?.valid" formControlName="nombres"
                         formControlName="apellidos" id="campoApellidos" type="text" />
                     <label for="campoApellidos">Apellidos</label>

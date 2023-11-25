@@ -2,11 +2,18 @@
 
 .container-input {
     position: relative;
-    margin: 0 1rem 0 1rem;
 }
 
 .input-100 {
     width: 100%;
+}
+
+.container-input-group {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0 0.5rem 0 0.5rem;
 }
 
 .container-input label {

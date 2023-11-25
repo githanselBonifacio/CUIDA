@@ -1,0 +1,18 @@
+<div class="content-chart">
+    <div id="title">
+        {{title|titlecase}}
+    </div>
+    <div #contentRing class="content-ring">
+        <div class="value">
+            {{value|formatCifras}}%
+        </div>
+        <div class="content-sgv">
+            <svg id="chart-sgv">
+                <circle id="secondaryCircle" [ngStyle]="{'stroke':colors.secondary,'stroke-width':widthLine}" />
+                <circle id="primaryCircle"
+                    [@animatePercentage]="{value:true, params: { strokeOffsetMax:600,strokeOffset: percentage } }"
+                    [ngStyle]="{'stroke':colors.primary,'stroke-width':widthLine,'stroke-dasharray':lenghtCircle,'stroke-dashoffset':percentagePx}" />
+            </svg>
+        </div>
+    </div>
+</div>

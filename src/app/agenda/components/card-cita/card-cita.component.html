@@ -82,8 +82,12 @@
 
                         </ng-container>
                         <ng-container *ngIf="cita.idEstado == 1">
+                            <i class="bi bi-clock" id="i-card-agenda-reprogramar" title="Reprogramar"
+                                (click)="reprogramarHoraCita(cita)">
+                            </i>
                             <i class="bi bi-calendar-plus-fill" (click)="asignarProfesionalCita(cita)" title="Agendar"
-                                id="i-card-agenda-agendar"></i>
+                                id="i-card-agenda-agendar">
+                            </i>
                         </ng-container>
                     </div>
                 </div>

@@ -7,8 +7,7 @@
             <div class="col-lg-6 col-xl-3">
                 <div class="container-input">
 
-                    <select [disabled]="validacionDisabled"
-                        [class.invalid]="campoTipoIdentificacion?.touched && campoTipoIdentificacion?.invalid"
+                    <select [class.invalid]="campoTipoIdentificacion?.touched && campoTipoIdentificacion?.invalid"
                         [class.valid]="campoTipoIdentificacion?.touched && campoTipoIdentificacion?.valid" required
                         formControlName="IdTipoIdentificacion" id="campoTipoIdentificacion">
                         <option value="" [selected] [disabled]="validacionDisabled">Seleccione...</option>
@@ -104,7 +103,9 @@
                         [class.valid]="campoCelular?.touched && campoCelular?.valid" formControlName="celular"
                         placeholder="(3xx) xxx xx-xx" id="campoCelular" type="tel" />
                     <label for="campoCelular">Celular</label>
-
+                    <p *ngIf="campoCelular?.touched && campoCelular?.invalid">
+                        {{mensageValidadores.VALIDADOR_CAMPO_VACIO}} ({{mensageValidadores.EXPRESION_REGULAR_CELULAR}})
+                    </p>
                 </div>
             </div>
             <div class="col-lg-6 col-xl-3">

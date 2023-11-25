@@ -206,10 +206,10 @@ div[name="container-actividad-time"] {
 }
 
 
-/*::ng-deep app-diagramas-gantt .tarea-visita[estado="4"] {
-    animation: parpadeo-progreso 3s ease-in-out infinite !important;
+::ng-deep app-diagramas-gantt .tarea-visita[estado="4"] {
+    animation: parpadeo-progreso 2s ease-in-out infinite !important;
 }
 
 ::ng-deep app-diagramas-gantt .tarea-visita[estado="6"] {
-    opacity: 0.3 !important;
-}*/
+    filter: saturate(50%) !important;
+}

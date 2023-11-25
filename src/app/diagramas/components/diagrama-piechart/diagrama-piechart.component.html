@@ -1,0 +1,43 @@
+<div class="content-chart">
+    <div id="title">
+        {{title|titlecase}}
+    </div>
+
+    <div class="content-circle" #contentPie>
+        <div class="circle">
+            <svg id="circlePie" xmlns="http://www.w3.org/2000/svg">
+                <circle id="circlePieChart" fill="gray" stroke="black" stroke-width="0.1" />
+                <path [id]="'piece-'+i" class="piece" stroke="white" stroke-width="0.5" [attr.d]="d.pathd"
+                    [attr.fill]="d.fill" class="piece" *ngFor="let d of dataChart;let i =index">
+
+                </path>
+            </svg>
+            <div class="label-chart" [id]="'label-chart-'+i" [style.left]="d.labex" [style.top]="d.labely"
+                text-anchor="middle" *ngFor="let d of dataChart;let i =index">
+                {{d.percentage}}
+            </div>
+
+        </div>
+        <div class="legend">
+            <div class="legend-item" [id]="'legend-item-'+i" *ngFor="let d of dataChart;let i=index">
+                <div class=" color-ref" [style.background-color]="colors[i]"></div>
+                <div class="description">
+                    <p>{{d.name|titlecase}}</p>
+                </div>
+                <div class="description-detail" [id]="'description-detail-'+i">
+                    <div>
+                        <p>{{d.name|titlecase}}</p>
+                    </div>
+                    <div>
+                        <p>{{d.value}} {{unit}}</p>
+                    </div>
+                    <div>
+                        <p>{{d.percentage}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>

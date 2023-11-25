@@ -93,7 +93,7 @@ export class GanttComponent implements AfterViewInit, AfterViewChecked, OnChange
 
     // Asignar estilos al div tarea
     div.className = `tarea-${tarea.tipo}`;
-    div.setAttribute("estado", `${tarea.idEstado}`)
+    div.setAttribute("estado", `${tarea.idEstado}`);
     const idNuevoDiv = `tarea-${tarea.tipo}-${tarea.id}`;
     div.id = idNuevoDiv;
     div.style.fontSize = '0rem';
@@ -229,8 +229,6 @@ export class GanttComponent implements AfterViewInit, AfterViewChecked, OnChange
     }
   }
 
-
-
   obtenerElementoConEspera = (id: string, tiempoEspera: number): Promise<HTMLElement> => {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
@@ -245,10 +243,9 @@ export class GanttComponent implements AfterViewInit, AfterViewChecked, OnChange
   };
 
   mostrarRutaMapa(tareas: Tarea[]): void {
-    console.log(tareas)
-    const dialogRef = this.modalMapRuta.open(MapRutaComponent, {
+    /*const dialogRef = this.modalMapRuta.open(MapRutaComponent, {
       data: tareas
-    })
+    })*/
 
   }
 

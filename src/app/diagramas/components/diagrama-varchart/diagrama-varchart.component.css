@@ -1,0 +1,200 @@
+** {
+    font-family: 'Times New Roman', Times, serif;
+}
+
+#title-chart {
+    text-align: center;
+    padding-top: 0.25rem;
+    color: #38526d !important;
+    font-size: 1.5rem;
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: bold;
+
+}
+
+.container-chart {
+    position: relative;
+    display: flex;
+    height: calc(95%);
+    padding: 0rem 0.5rem 1.6rem 0.5rem;
+    background-color: transparent;
+    color: #304a64;
+}
+
+#title-y {
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    height: 100%;
+    text-align: center;
+
+}
+
+.chart {
+    position: relative;
+    display: flex;
+    gap: 1rem;
+    height: 100%;
+    width: 100%;
+    border: 1px solid rgba(128, 128, 128, 0.514);
+    padding: 0.8rem 0.2rem 0.2rem 0.2rem;
+}
+
+.item {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 4fr 0.5fr;
+    gap: 0em 0em;
+    width: 100%;
+
+}
+
+.axis {
+    height: calc(100% - 8px);
+    width: fit-content;
+    min-width: 1.2rem;
+}
+
+
+
+#axis-y {
+    position: relative;
+    padding-left: 0.5rem;
+    font-size: 0.9rem;
+    height: 100%;
+}
+
+.axis-value {
+    position: absolute;
+    white-space: nowrap;
+}
+
+
+.line-grid {
+    position: absolute;
+    border-bottom: 1px dashed #304a6477;
+    left: 2.4rem;
+    z-index: 0;
+}
+
+.content-chart {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 95%;
+}
+
+
+.content-bars {
+    position: relative;
+    display: flex;
+    gap: 1rem;
+    width: 100%;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    padding-left: 1.5rem;
+    padding-right: 1.2rem;
+}
+
+
+.bar {
+    position: relative;
+    border-radius: 5px 5px 0 0;
+    width: calc(100%);
+    min-width: 2rem;
+    max-width: 5rem;
+}
+
+.bar:hover {
+    background-color: #C7C9C7 !important;
+    transition: 0.25s all ease-in;
+}
+
+
+
+.col-chart {
+    position: relative;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    flex-direction: column;
+}
+
+.legend {
+    position: absolute;
+    font-family: 'Times New Roman', Times, serif;
+    text-align: center;
+    min-width: 4rem;
+    padding: 0.25rem 0.5rem 0.25rem 0.5rem;
+    border-radius: 3px;
+    font-size: 0.85rem;
+    transform: translateX(-50%);
+    left: calc(50%);
+    visibility: hidden;
+    pointer-events: none;
+    opacity: 1;
+    z-index: 1;
+    transition: all 0.2s ease-in;
+}
+
+.bar:hover .legend {
+    visibility: visible;
+    transition: all 0.25s ease-in;
+}
+
+.bar:hover .legend.bottom {
+    bottom: 0%;
+}
+
+.bar:hover .legend.top {
+    z-index: 2;
+    top: calc(0% - 60px);
+}
+
+.legend.top {
+    top: calc(0% - 70px);
+    transform: translate(-50%, 0%);
+}
+
+
+.legend.top::after {
+    position: absolute;
+    content: "";
+    right: 35%;
+    top: 96%;
+    border: 0.5rem solid transparent;
+    border-top-color: var(--quarter-color);
+}
+
+.legend.bottom {
+    bottom: 5%;
+    transform: translate(-50%, -20%);
+}
+
+.legend.bottom::after {
+    position: absolute;
+    content: "";
+    right: 35%;
+    top: 96%;
+    border: 0.5rem solid transparent;
+    border-top-color: var(--quarter-color);
+}
+
+.legend-value {
+    white-space: nowrap;
+}
+
+
+
+
+.axis-x {
+    text-align: center;
+    font-size: 0.9rem;
+}
+
+#title-x {
+    background-color: transparent;
+    width: 100%;
+    text-align: center;
+}

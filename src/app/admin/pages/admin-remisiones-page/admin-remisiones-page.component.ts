@@ -22,7 +22,7 @@ export class AdminRemisionesPageComponent implements AfterViewInit {
 
   displayedColumns: string[] = ['Id', 'Paciente', 'Admisión', 'Programa', 'Regional', 'Remitente', 'Estado', 'Historial'];
   dataSource = new MatTableDataSource<Remision>([]);
-
+  pageSizeOptions = [7, 8, 9, 10, 15, 20, 50, 100];
 
   filtroBusqueda: string = "";
   remisiones: Remision[] = [];
@@ -35,6 +35,7 @@ export class AdminRemisionesPageComponent implements AfterViewInit {
         this.remisiones = resp.result;
         this.dataSource.data = this.remisiones;
       })
+    this.paginator.pageSize = parseInt(localStorage.getItem("pageSizeRemisiones") ?? '0');
   }
 
 
@@ -60,4 +61,7 @@ export class AdminRemisionesPageComponent implements AfterViewInit {
     this.router.navigate(['admin']);
   }
 
+  actualizarPage() {
+    localStorage.setItem("pageSizeRemisiones", `${this.paginator.pageSize}`);
+  }
 }

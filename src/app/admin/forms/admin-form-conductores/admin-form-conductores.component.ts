@@ -9,7 +9,7 @@ import { expresionesRegulares, mesajeExpresionRegular } from '../../../shared/fo
 import { Conductor } from 'src/app/agenda/interfaces/conductores.interface';
 import { ToastType, TitleToast } from 'src/app/shared/components/toast/toast.component';
 import { validatorMayorEdad } from 'src/app/shared/forms/validadors.validaciones';
-import { AdminRemisionService } from '../../services/admin-remision.service';
+import { AdminPersonalService } from '../../services/admin-personal.service';
 
 @Component({
   selector: 'app-admin-from-conductores',
@@ -21,7 +21,7 @@ export class AdminFormConductoresComponent implements OnChanges {
     private formBuilder: FormBuilder,
     private toastservice: ToastService,
     private spinnerService: SpinnerService,
-    private adminService: AdminRemisionService) {
+    private adminPersonalService: AdminPersonalService) {
 
     this.formConductor = this.formBuilder.group({
       IdTipoIdentificacion: [this.conductor?.idTipoIdentificacion, [Validators.required]],
@@ -60,7 +60,11 @@ export class AdminFormConductoresComponent implements OnChanges {
   ngOnChanges(changes: SimpleChanges) {
     if (changes['accionFormulario'] || changes['conductor']) {
       this.tituloFormulario = (this.accionFormulario === AccionFormulario.CREAR) ? "Crear conductor" : "Actualizar conductor";
+
       this.validacionDisabled = this.accionFormulario === AccionFormulario.ACTUALIZAR;
+      if (this.validacionDisabled) {
+        this.campoTipoIdentificacion?.disabled;
+      }
       this.formConductor.patchValue({
         IdTipoIdentificacion: this.conductor?.idTipoIdentificacion,
         numeroIdentificacion: this.conductor?.numeroIdentificacion,
@@ -138,7 +142,7 @@ export class AdminFormConductoresComponent implements OnChanges {
         activo: true,
       };
       if (this.accionFormulario == AccionFormulario.CREAR) {
-        this.adminService.crearConductor(this.conductor)
+        this.adminPersonalService.crearConductor(this.conductor)
           .subscribe(resp => {
             if (resp.status == 200) {
               this.enviado.emit();
@@ -151,7 +155,7 @@ export class AdminFormConductoresComponent implements OnChanges {
           })
       } else if (this.accionFormulario == AccionFormulario.ACTUALIZAR) {
 
-        this.adminService.actualizarConductor(this.conductor).subscribe(resp => {
+        this.adminPersonalService.actualizarConductor(this.conductor).subscribe(resp => {
           if (resp.status == 200) {
             this.enviado.emit();
             this.formConductor.reset();

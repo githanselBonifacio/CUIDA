@@ -7,8 +7,9 @@
             [profesional]="profesionalSeleccionado"></app-admin-form-profesionales>
     </div>
     <div class="tool-bar">
-        <button class="buttom-red bordeado" *ngIf="accionFormulario == 1" (click)="volverCrear()"> Volver a crear
-            profesional</button>
+        <button class="buttom-red bordeado" *ngIf="accionFormulario == 1" (click)="volverCrear()">
+            Volver a crearprofesional
+        </button>
         <button [class]="'buttom-primary buttom-circular-activador invertido '+estadoVisualFormCrearProfesional"
             (click)="mostrarFormularioCrearProfesional()" id="desplegar-form">
             {{tituloButtomDesplagarForm}}
@@ -65,8 +66,8 @@
         </table>
     </div>
 
-    <mat-paginator #paginatorProfesionales [pageSizeOptions]="[5,6,7,8,9, 10,15, 20,50,100]" aria-label="Select page"
-        itemsPerPageLabel="profesionales por páginas" showFirstLastButtons="true">
+    <mat-paginator #paginatorProfesionales [pageSizeOptions]="pageSizeOptions" aria-label="Select page"
+        itemsPerPageLabel="profesionales por páginas" showFirstLastButtons="true" (page)="actualizarPage()">
     </mat-paginator>
 
 </div>

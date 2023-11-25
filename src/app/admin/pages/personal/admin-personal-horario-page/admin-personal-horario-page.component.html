@@ -2,10 +2,12 @@
     <div class="nav-bar-horario">
         <nav>
             <ul>
-                <li routerLink="consolidado" routerLinkActive="active">
-                    Consolidado</li>
-                <li routerLink="secuencias" routerLinkActive="active">
-                    Secuencias</li>
+                <li routerLink="consolidado" routerLinkActive="active" (click)="actualizaUltimaSeleccion(0)">
+                    {{opcionesMenu[0]|titlecase}}
+                </li>
+                <li routerLink="secuencias" routerLinkActive="active" (click)="actualizaUltimaSeleccion(1)">
+                    {{opcionesMenu[1]|titlecase}}
+                </li>
             </ul>
         </nav>
         <hr>

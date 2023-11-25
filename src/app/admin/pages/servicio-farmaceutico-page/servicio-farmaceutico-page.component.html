@@ -1,13 +1,13 @@
 <div class="container-view">
     <div class="header">
-        <div class="content-toolbar">
+        <div class="container-input-group">
             <i id="back-admin" class="bi bi-arrow-left-square-fill" title="volver a remisiones"
                 (click)="backRemisionesTabla()"></i>
             <h2>Servicio Farmaceutico</h2>
         </div>
 
 
-        <div class="content-toolbar">
+        <div class="container-input-group">
 
             <button id="notificar" title="Notificar" (click)="notificarSeleccion()"
                 [ngClass]="{'active': hayNotificacionesSeleccionadas()}" [disabled]="selection.selected.length==0">
@@ -45,7 +45,7 @@
     <div [class]="'filter '+filtroAvanzadoActivado">
         <form [formGroup]="formfiltro" (ngSubmit)="consultaAvanzada()">
 
-            <div class="d-flex">
+            <div class="container-input-group">
 
                 <div class="container-input">
                     <label for="fechaTurno">Fecha</label>
@@ -71,8 +71,6 @@
                         </option>
                     </select>
                 </div>
-
-
                 <button type="submit" class="buttom-seleccion" [disabled]="!formfiltro.valid">Buscar</button>
             </div>
         </form>

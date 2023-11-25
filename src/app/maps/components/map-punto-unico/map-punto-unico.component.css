@@ -1,13 +1,13 @@
-@media screen  and (max-width:1799px){
-    div{
-        width:29vw;
+@media screen and (max-width:1799px) {
+    div {
+        width: 29vw;
         height: 30vh;
     }
 }
 
-@media screen  and (min-width: 1800px) and (max-width: 2200px) {
-    div{
-        width:27vw;
+@media screen and (min-width: 1800px) and (max-width: 2200px) {
+    div {
+        width: 27vw;
         height: 20vh;
     }
 }

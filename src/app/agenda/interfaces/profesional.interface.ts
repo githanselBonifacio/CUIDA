@@ -20,7 +20,7 @@ export interface ProfesionalConTurnos extends Profesional {
 }
 export interface Turno {
     idTurno: number | null,
-    fechaTurno: Date,
+    fechaTurno: Date | string | null,
     idHorarioTurno: any | HorarioTurno,
     idProfesional: string,
     idRegional: string
@@ -36,7 +36,12 @@ export interface ItemDiaTurno {
     horariosTurno: HorarioTurno[];
 }
 
-
+export interface TurnoProfesional {
+    fechaTurno: Date | string;
+    idHorarioTurno: number;
+    idProfesional: string;
+    idRegional: string;
+}
 
 export class ConvertTurno {
     public static toTurno(json: string): Turno {

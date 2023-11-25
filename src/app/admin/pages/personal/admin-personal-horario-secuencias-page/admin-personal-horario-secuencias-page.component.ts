@@ -1,7 +1,6 @@
-import { DatePipe, registerLocaleData } from '@angular/common';
-import { Component, OnInit, ViewChild, AfterViewInit, OnChanges, SimpleChanges } from '@angular/core';
+import { registerLocaleData } from '@angular/common';
+import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { AdminRemisionService } from 'src/app/admin/services/admin-remision.service';
 import { MaestrosService } from 'src/app/shared/services/maestros/maestros.service';
 import { SpinnerService } from 'src/app/shared/services/spinner/spinner.service.service';
 import { ToastService } from 'src/app/shared/services/toast/toast.service';
@@ -15,8 +14,9 @@ import { AccionFormulario } from 'src/app/admin/interfaces/enum';
 import { TitleToast, ToastType } from 'src/app/shared/components/toast/toast.component';
 import { ModalAccionLimpiarHorarioComponent } from 'src/app/admin/components/modal-accion-limpiar-horario/modal-accion-limpiar-horario.component';
 import { ModalAccionAgregarSecuenciaComponent } from 'src/app/admin/components/modal-accion-agregar-secuencia/modal-accion-agregar-secuencia.component';
-import { formatoFecha, funtionGetIdTipoIdentificacionById, funtionGetNombreProfesionById, funtionGetNombreRegionalById } from 'src/app/shared/interfaces/maestros.interfaces';
+import { Regional, funtionGetIdTipoIdentificacionById, funtionGetNombreProfesionById, funtionGetNombreRegionalById } from 'src/app/shared/interfaces/maestros.interfaces';
 import { ModalInfoResultadosAccionMasivaHorarioComponent } from 'src/app/admin/components/modal-info-resultados-accion-masiva-horario/modal-info-resultados-accion-masiva-horario.component';
+import { AdminPersonalService } from 'src/app/admin/services/admin-personal.service';
 
 @Component({
   selector: 'app-admin-personal-horario-secuencias-page',
@@ -26,7 +26,7 @@ import { ModalInfoResultadosAccionMasivaHorarioComponent } from 'src/app/admin/c
 export class AdminPersonalHorarioSecuenciasPageComponent implements OnInit, AfterViewInit {
 
   constructor(
-    private adminService: AdminRemisionService,
+    private personalService: AdminPersonalService,
     private maestroService: MaestrosService,
     private dialogo: MatDialog,
     private spinnerService: SpinnerService,
@@ -35,6 +35,8 @@ export class AdminPersonalHorarioSecuenciasPageComponent implements OnInit, Afte
 
 
   mostrarListAccionesMasivas = false;
+
+  regionales: Regional[] = [];
   opcionIdRegional: string = localStorage.getItem('idRegionalSecuenciaFiltro') ?? '';
 
 
@@ -49,28 +51,30 @@ export class AdminPersonalHorarioSecuenciasPageComponent implements OnInit, Afte
 
   //tabla
   @ViewChild('paginatorPersonalSecuencias') paginator!: MatPaginator;
-  displayedColumns: string[] = ['select', 'identificacion', 'profesional', 'profesion', 'regional'];
+  displayedColumns: string[] = ['select', 'identificación', 'profesional', 'profesión', 'regional'];
   dataSource = new MatTableDataSource<Profesional>();
   selection = new SelectionModel<Profesional>(true, []);
   numerosPaginaSeleccionada = Number(localStorage.getItem('paginasTablaProfesionalSecuencia'));
   numeroPaginasPaginator = [4, 5, 6, 7, 8, 9, 10];
 
   ngOnInit(): void {
-    this.maestroService.getRegionales();
+    this.maestroService.getRegionalesObservable().subscribe(resp => {
+      if (resp.status == 200) {
+        this.regionales = resp.result;
+        this.opcionIdRegional = (this.opcionIdRegional == '') ? this.regionales[0].id : this.opcionIdRegional;
+      }
+    });
     this.maestroService.getTiposIdentificacion();
     this.maestroService.getProfesiones();
     this.maestroService.getHorarioTurno();
     this.consultarSecuencia();
     this.buscarPersonal();
+
   }
   ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
   }
 
-  get regionales() {
-    return this.maestroService.regionales;
-
-  }
   get profesiones() {
     return this.maestroService.profesiones;
 
@@ -95,10 +99,11 @@ export class AdminPersonalHorarioSecuenciasPageComponent implements OnInit, Afte
     this.profesionalesMostrados = this.profesionales.slice().filter(p => p.idRegional == this.opcionIdRegional);
     this.dataSource.data = this.profesionalesMostrados;
     this.guardarLocalStorage();
+    this.selection.clear();
   }
 
   buscarPersonal() {
-    this.adminService.getAllProfesionales()
+    this.personalService.getAllProfesionales()
       .subscribe(resp => {
         this.profesionales = resp.result;
         this.actualizarfiltroIdRegional()
@@ -108,7 +113,7 @@ export class AdminPersonalHorarioSecuenciasPageComponent implements OnInit, Afte
   }
   consultarSecuencia() {
     this.spinnerService.show()
-    this.adminService.getSecuenciasTurno().subscribe(resp => {
+    this.personalService.getSecuenciasTurno().subscribe(resp => {
       this.secuencias = resp.result
       this.spinnerService.hide()
     });
@@ -156,7 +161,7 @@ export class AdminPersonalHorarioSecuenciasPageComponent implements OnInit, Afte
     dialogRef.afterClosed().subscribe(result => {
       this.spinnerService.show();
       if (result != null) {
-        this.adminService.crearSecuenciaTurno(result)
+        this.personalService.crearSecuenciaTurno(result)
           .subscribe(resp => {
             if (resp.status == 200) {
               this.toastService.mostrarToast(ToastType.Success, TitleToast.Success, resp.message, 5);
@@ -183,7 +188,7 @@ export class AdminPersonalHorarioSecuenciasPageComponent implements OnInit, Afte
 
       if (data != null) {
         this.spinnerService.show();
-        this.adminService.eliminarTurnoProfesionalAccionMasiva(data)
+        this.personalService.eliminarTurnoProfesionalAccionMasiva(data)
           .subscribe(resp => {
 
             if (resp.status == 200) {
@@ -216,7 +221,7 @@ export class AdminPersonalHorarioSecuenciasPageComponent implements OnInit, Afte
 
       if (data != null) {
         this.spinnerService.show();
-        this.adminService.asignarTurnoProfesionalAccionMasiva(data)
+        this.personalService.asignarTurnoProfesionalAccionMasiva(data)
           .subscribe(resp => {
 
             if (resp.status == 200) {
@@ -232,6 +237,7 @@ export class AdminPersonalHorarioSecuenciasPageComponent implements OnInit, Afte
             this.spinnerService.hide();
             this.selection.clear();
           })
+
       }
 
     })

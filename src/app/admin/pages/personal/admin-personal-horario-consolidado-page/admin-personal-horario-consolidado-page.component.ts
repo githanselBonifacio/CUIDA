@@ -1,6 +1,5 @@
 
-import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
-import { AdminRemisionService } from 'src/app/admin/services/admin-remision.service';
+import { Component, OnInit } from '@angular/core';
 import { ProfesionalConTurnos, Turno } from 'src/app/agenda/interfaces/profesional.interface';
 import { Dia, Regional, formatoFecha, funtionGetColorReferenciaTurnoById, funtionGetNombreProfesionById } from 'src/app/shared/interfaces/maestros.interfaces';
 import { MaestrosService } from 'src/app/shared/services/maestros/maestros.service';
@@ -11,6 +10,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ModalAsignarTurnoIndividualComponent } from 'src/app/admin/components/modal-asignar-turno-individual/modal-asignar-turno-individual.component';
 import { ToastService } from 'src/app/shared/services/toast/toast.service';
 import { TitleToast, ToastType } from 'src/app/shared/components/toast/toast.component';
+import { AdminPersonalService } from 'src/app/admin/services/admin-personal.service';
 
 @Component({
   selector: 'app-admin-personal-horario-consolidado-page',
@@ -21,7 +21,7 @@ import { TitleToast, ToastType } from 'src/app/shared/components/toast/toast.com
 export class AdminPersonalHorarioConsolidadoPageComponent implements OnInit {
 
   constructor(
-    private adminService: AdminRemisionService,
+    private adminPersonalService: AdminPersonalService,
     private maestroService: MaestrosService,
     private dialogo: MatDialog,
     private spinnerService: SpinnerService,
@@ -57,9 +57,11 @@ export class AdminPersonalHorarioConsolidadoPageComponent implements OnInit {
       .subscribe(resp => {
         if (resp.status == 200) {
           this.regionales = resp.result;
+          this.opcionIdRegional = (this.opcionIdRegional == '') ? this.regionales[0].id : this.opcionIdRegional;
+          this.buscarTurno();
         }
       });
-    this.buscarTurno();
+
 
   }
 
@@ -102,7 +104,7 @@ export class AdminPersonalHorarioConsolidadoPageComponent implements OnInit {
       this.dias.push(day);
     }
 
-    this.adminService.getProfesionalesWithTurno(this.mesFiltro, this.opcionIdRegional)
+    this.adminPersonalService.getProfesionalesWithTurno(this.mesFiltro, this.opcionIdRegional)
 
       .subscribe(resp => {
         this.profesionales = resp.result;
@@ -149,7 +151,7 @@ export class AdminPersonalHorarioConsolidadoPageComponent implements OnInit {
     })
     dialogoRef.afterClosed().subscribe(turnos => {
       if (turnos != null) {
-        this.adminService.actualizarTurnoProfesional(turnos).subscribe(
+        this.adminPersonalService.actualizarTurnoProfesional(turnos).subscribe(
           resp => {
             if (resp.status == 200) {
               this.buscarTurno();

@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { MaestrosService } from 'src/app/shared/services/maestros/maestros.service';
 
 @Component({
   selector: 'app-admin-personal-horario-page',
@@ -11,7 +10,14 @@ export class AdminPersonalHorarioPageComponent implements OnInit {
   constructor(
     private router: Router) {
   }
+
+  opcionesMenu: string[] = ["consolidado", "secuencias"];
+
+  actualizaUltimaSeleccion(numberOpcion: number) {
+    localStorage.setItem("menuHorario", `${numberOpcion}`)
+  }
   ngOnInit(): void {
-    this.router.navigate(['admin/personal/horario/consolidado']);
+    const opcion: number = parseInt(localStorage.getItem("menuHorario") ?? '0') ?? 0;
+    this.router.navigate([`admin/personal/horario/${this.opcionesMenu[opcion]}`]);
   }
 }

@@ -1,0 +1,112 @@
+@import url('../../../../styles.css');
+@import url('../../../../assets/styles/inputs/checkbox.css');
+@import url('../../../../assets/styles/buttons/button-multiple-seleccion.css');
+@import url('../../../../assets/styles/inputs/inputs.css');
+@import url('../../../../assets/styles/buttons/button-seleccion.css');
+
+.container-reporte-page {
+    height: 100%;
+    padding-top: 4rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.header {
+    width: 90%;
+
+
+}
+
+.c-radio-regionales {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+}
+
+.c-radio-regionales input:checked+label {
+    background-color: var(--primary-color);
+    color: var(--gris4-color);
+}
+
+.content-reporte {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--gris4-color);
+    width: 90%;
+    height: 90%;
+}
+
+.filters {
+    display: flex;
+    gap: 1rem;
+    padding: 1rem;
+}
+
+#content-filter-option {
+    min-width: 22rem;
+    display: flex;
+    gap: 1rem
+}
+
+.bg-white {
+    background-color: white;
+}
+
+.container-cards {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns:
+        repeat(auto-fit, minmax(12rem, 1fr));
+    justify-content: space-between;
+    padding: 0.5rem;
+}
+
+.info-card {
+    position: absolute;
+    font-family: 'Times New Roman', Times, serif;
+    right: 1rem;
+    top: 0px;
+    cursor: default;
+}
+
+.card-reporte {
+    position: relative;
+    padding: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    border-radius: 5px;
+    color: var(--gris4-color);
+}
+
+.card-reporte h3 {
+    font-size: 3rem;
+}
+
+.card-capacidad {
+    width: 100%;
+    min-height: 5rem;
+    background-color: white;
+    color: #38526d;
+}
+
+.container-graficos {
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.row {
+    height: 100%;
+}
+
+.container-grafico {
+    position: relative;
+    border: 1px solid var(--gris3-color);
+    background-color: var(--cero-color);
+    height: 18rem;
+    margin: 0.5rem 0.5rem 0.5rem 0.5rem;
+}

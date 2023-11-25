@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DecimalPipe } from '@angular/common';
 
 import { MainAdminPageComponent } from './pages/main-admin-page/main-admin-page.component';
 import { AdminRoutingModule } from './admin-routing.module';
@@ -20,6 +20,7 @@ import { AdminFormProfesionalesComponent } from './forms/admin-form-profesionale
 
 import { NgxPaginationModule } from 'ngx-pagination';
 
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableModule } from '@angular/material/table';
@@ -41,6 +42,8 @@ import { ModalConfiguracionSecuenciaComponent } from './components/modal-configu
 import { ModalAccionLimpiarHorarioComponent } from './components/modal-accion-limpiar-horario/modal-accion-limpiar-horario.component';
 import { ModalAccionAgregarSecuenciaComponent } from './components/modal-accion-agregar-secuencia/modal-accion-agregar-secuencia.component';
 import { ModalInfoResultadosAccionMasivaHorarioComponent } from './components/modal-info-resultados-accion-masiva-horario/modal-info-resultados-accion-masiva-horario.component';
+import { AdminReportesPageComponent } from './pages/admin-reportes-page/admin-reportes-page.component';
+import { DiagramasModule } from '../diagramas/diagramas.module';
 
 
 @NgModule({
@@ -67,16 +70,18 @@ import { ModalInfoResultadosAccionMasivaHorarioComponent } from './components/mo
     ModalConfiguracionSecuenciaComponent,
     ModalAccionLimpiarHorarioComponent,
     ModalAccionAgregarSecuenciaComponent,
-    ModalInfoResultadosAccionMasivaHorarioComponent
+    ModalInfoResultadosAccionMasivaHorarioComponent,
+    AdminReportesPageComponent
   ],
   imports: [
     CommonModule,
     AdminRoutingModule,
     AgendaModule,
+    PipesModule,
     NgxPaginationModule,
     FormsModule,
+    DiagramasModule,
     MatFormFieldModule,
-    PipesModule,
     MatPaginatorModule,
     MatTableModule,
     MatSelectModule,
@@ -85,8 +90,10 @@ import { ModalInfoResultadosAccionMasivaHorarioComponent } from './components/mo
     MatDatepickerModule,
     MatInputModule,
     MatDialogModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatSlideToggleModule
   ],
+  providers: [DecimalPipe],
   exports: [
     MainAdminPageComponent,
   ],

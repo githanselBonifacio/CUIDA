@@ -57,8 +57,8 @@
         </table>
     </div>
 
-    <mat-paginator #paginatorConductor [pageSizeOptions]="[5,6,7,8,9, 10,15, 20,50,100]" aria-label="Select page"
-        itemsPerPageLabel="conductores por páginas" showFirstLastButtons="true">
+    <mat-paginator #paginatorConductor [pageSizeOptions]="pageSizeOptions" aria-label="Select page"
+        itemsPerPageLabel="conductores por páginas" showFirstLastButtons="true" (page)="actualizarPage()">
     </mat-paginator>
 
 </div>

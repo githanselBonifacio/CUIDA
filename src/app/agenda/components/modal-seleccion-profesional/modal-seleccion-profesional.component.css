@@ -1,26 +1,27 @@
-
-#content-dialog{
-    padding: 1rem 1rem 1rem 1rem;
+#content-dialog {
+  padding: 1rem 1rem 1rem 1rem;
 }
-#content-option{
-    display: flex;
-    justify-content: flex-end;
-  }
 
-  #option-boton{
-    padding: 1rem 0 0 1rem;
-  }
- #opcionProfesional{
-    font-size: 1.1rem;
-    padding: 0.5rem 0.5rem 0.5rem 0.5rem;
- } 
+#content-option {
+  display: flex;
+  justify-content: flex-end;
+}
 
- .opcion-profesional-card{
+#option-boton {
+  padding: 1rem 0 0 1rem;
+}
+
+#opcionProfesional {
+  font-size: 1.1rem;
+  padding: 0.5rem 0.5rem 0.5rem 0.5rem;
+}
+
+.opcion-profesional-card {
   position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: start;
+  align-items: flex-start;
   height: 100%;
   padding: 0.5rem;
   width: 17rem;
@@ -29,8 +30,9 @@
   border-radius: 8px;
   flex-grow: 1;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
-} 
- .opcion-profesional-card:hover{
+}
+
+.opcion-profesional-card:hover {
   background-color: var(--primary-color);
   color: white;
 }

@@ -1,0 +1,47 @@
+<div id="title-chart">
+    {{titleChart|titlecase}}
+</div>
+<div class="container-chart" [style.color]="colorLegend">
+    <div id="title-y">
+        {{titleY}}
+    </div>
+    <div class="content-chart">
+        <div class="chart">
+            <div class="item axis">
+                <div id="axis-y">
+                    <div class="axis-value" *ngFor="let v of ejeY" [style.bottom]="(getSizeBar(v)-6)+'%'">
+                        {{ v|formatCifras }}
+                    </div>
+                    <div *ngIf="xAxis">
+                        <div class=line-grid *ngFor="let v of ejeY"
+                            [ngStyle]="{'width':sizeContentPx,'bottom':getSizeBar(v)+'%'}">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="content-bars" #chartContent>
+                <div class="item" *ngFor="let d of data;let i=index">
+                    <div class="col-chart">
+                        <div class="bar"
+                            [ngStyle]="{'height':getSizeBar(d.value)+'%','background-color':(isColorIndividual)?colorThemeIndividual:colorThemeDomain[i]}">
+
+                            <div class="legend" [class.top]="getSizeBar(d.value)<maxColLegend"
+                                [class.bottom]="getSizeBar(d.value)>=maxColLegend"
+                                [ngStyle]="{'background-color':colorLegend,'color':colorFontLegend}">
+                                <div class="legend-axis">{{d.name|titlecase}}</div>
+                                <div class="legend-value">{{d.value}} {{unitEjeY}}</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="axis-x">
+                        {{ (d.name !== null && d.name !== undefined) ? d.name.substring(0, 3) : '' }}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="title-x">
+            {{titleEjeX|titlecase}}
+        </div>
+    </div>
+</div>

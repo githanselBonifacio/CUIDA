@@ -1,0 +1,53 @@
+.content-chart {
+    position: relative;
+    height: 100%;
+}
+
+#title {
+    padding-top: 0.25rem;
+    text-align: center;
+    color: #38526d !important;
+    font-size: 1.5rem;
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: bold;
+}
+
+.content-ring {
+    width: 100%;
+    height: 90%;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+}
+
+.content-sgv {
+    position: relative;
+}
+
+.value {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    font-size: 2.5rem;
+    transform: translate(-50%, -50%);
+    font-family: 'Times New Roman', Times, serif;
+    color: #38526d;
+    font-weight: bold;
+}
+
+svg {
+    position: relative;
+    transform: rotate(-90deg) !important;
+}
+
+svg circle {
+    width: 100%;
+    height: 100%;
+    left: 0%;
+    top: 0%;
+    fill: none;
+    stroke-linecap: round !important;
+
+}

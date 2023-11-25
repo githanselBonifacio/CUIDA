@@ -1,13 +1,14 @@
 import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Movil } from 'src/app/agenda/interfaces/conductores.interface';
-import { expresionesRegulares, mesajeExpresionRegular } from 'src/app/shared/forms/expresiones-regulares.validaciones';
+import { mesajeExpresionRegular } from 'src/app/shared/forms/expresiones-regulares.validaciones';
 import { SpinnerService } from 'src/app/shared/services/spinner/spinner.service.service';
 import { ToastService } from 'src/app/shared/services/toast/toast.service';
 import { AdminRemisionService } from '../../services/admin-remision.service';
 import { AccionFormulario } from '../../interfaces/enum';
 import { Regional } from 'src/app/shared/interfaces/maestros.interfaces';
 import { ToastType, TitleToast } from 'src/app/shared/components/toast/toast.component';
+import { AdminPersonalService } from '../../services/admin-personal.service';
 
 @Component({
   selector: 'app-admin-from-moviles',
@@ -19,7 +20,7 @@ export class AdminFromMovilesComponent implements OnChanges {
     private formBuilder: FormBuilder,
     private toastservice: ToastService,
     private spinnerService: SpinnerService,
-    private adminService: AdminRemisionService) {
+    private adminPersonalService: AdminPersonalService) {
 
     this.formMovil = this.formBuilder.group({
       matricula: [this.movil?.matricula, [Validators.required]],
@@ -51,6 +52,7 @@ export class AdminFromMovilesComponent implements OnChanges {
     if (changes['accionFormulario'] || changes['movil']) {
       this.tituloFormulario = (this.accionFormulario === AccionFormulario.CREAR) ? "Crear vehículo" : "Actualizar vehículo";
       this.validacionDisabled = this.accionFormulario === AccionFormulario.ACTUALIZAR;
+
       this.formMovil.patchValue({
         matricula: this.movil?.matricula,
         marca: this.movil?.marca,
@@ -89,7 +91,7 @@ export class AdminFromMovilesComponent implements OnChanges {
 
       };
       if (this.accionFormulario == AccionFormulario.CREAR) {
-        this.adminService.crearMovil(this.movil)
+        this.adminPersonalService.crearMovil(this.movil)
           .subscribe(resp => {
             if (resp.status == 200) {
               this.enviado.emit();
@@ -101,7 +103,7 @@ export class AdminFromMovilesComponent implements OnChanges {
           })
       } else if (this.accionFormulario == AccionFormulario.ACTUALIZAR) {
         console.log("Entro a actualizar")
-        this.adminService.actualizarMovil(this.movil).subscribe(resp => {
+        this.adminPersonalService.actualizarMovil(this.movil).subscribe(resp => {
           if (resp.status == 200) {
             this.enviado.emit();
             this.toastservice.mostrarToast(ToastType.Success, TitleToast.Success, resp.message, 5);

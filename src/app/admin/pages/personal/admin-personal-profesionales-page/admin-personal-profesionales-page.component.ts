@@ -6,7 +6,7 @@ import { Profesional } from 'src/app/agenda/interfaces/profesional.interface';
 import { funtionGetIdTipoIdentificacionById, funtionGetNombreProfesionById, funtionGetNombreRegionalById } from 'src/app/shared/interfaces/maestros.interfaces';
 import { MaestrosService } from 'src/app/shared/services/maestros/maestros.service';
 import { AccionFormulario } from '../../../interfaces/enum'
-import { AdminRemisionService } from '../../../services/admin-remision.service';
+import { AdminPersonalService } from 'src/app/admin/services/admin-personal.service';
 
 @Component({
   selector: 'app-personal-admin-profesionales-page',
@@ -17,12 +17,13 @@ export class AdminPersonalProfesionalesPageComponent implements OnInit, AfterVie
 
   constructor(
     public dialogRef: MatDialog,
-    private adminService: AdminRemisionService,
+    private personalService: AdminPersonalService,
     private maestrosService: MaestrosService) { }
 
   @ViewChild('paginatorProfesionales') paginator!: MatPaginator;
   columnas: string[] = ['TipoIdentificacion', 'Nombres', 'Apellidos', 'Regional', "Profesion", "acciones"];
   profesionalesSource = new MatTableDataSource<Profesional>([]);
+  pageSizeOptions = [7, 8, 9, 10, 15, 20, 50, 100];
   accionFormulario = AccionFormulario.CREAR;
   estadoVisualFormCrearProfesional?: string;
   profesionalSeleccionado?: Profesional;
@@ -37,7 +38,7 @@ export class AdminPersonalProfesionalesPageComponent implements OnInit, AfterVie
     this.maestrosService.getTiposIdentificacion();
     this.maestrosService.getRegionales();
     this.maestrosService.getProfesiones();
-    this.adminService.getAllProfesionales()
+    this.personalService.getAllProfesionales()
       .subscribe(
         resp => {
           this.profesionalesSource.data = resp.result;
@@ -46,8 +47,17 @@ export class AdminPersonalProfesionalesPageComponent implements OnInit, AfterVie
       );
 
   }
+
+  ngAfterViewInit(): void {
+    Promise.resolve().then(() => {
+      this.profesionalesSource.paginator = this.paginator;
+      this.paginator.pageSize = parseInt(`${localStorage.getItem("pageSizeProfesional")}` ?? `${this.pageSizeOptions[0]}`);
+    });
+
+  }
+
   actualizarDatos() {
-    this.adminService.getAllProfesionales()
+    this.personalService.getAllProfesionales()
       .subscribe(
         resp => {
           this.profesionalesSource.data = resp.result;
@@ -58,10 +68,9 @@ export class AdminPersonalProfesionalesPageComponent implements OnInit, AfterVie
 
   }
 
-  ngAfterViewInit(): void {
-    this.profesionalesSource.paginator = this.paginator;
+  actualizarPage() {
+    localStorage.setItem("pageSizeProfesional", `${this.paginator.pageSize}`)
   }
-
   get tiposIdentificacion() {
     return this.maestrosService.tiposIdentificacion
       .filter(tipoIdentificacion => tipoIdentificacion.esMayorEdad == true);

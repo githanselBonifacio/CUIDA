@@ -11,6 +11,7 @@ import { AdminPersonalHorarioPageComponent } from './pages/personal/admin-person
 import { AdminPersonalVehiculosPageComponent } from './pages/personal/admin-personal-vehiculos-page/admin-personal-vehiculos-page.component';
 import { AdminPersonalHorarioConsolidadoPageComponent } from './pages/personal/admin-personal-horario-consolidado-page/admin-personal-horario-consolidado-page.component';
 import { AdminPersonalHorarioSecuenciasPageComponent } from './pages/personal/admin-personal-horario-secuencias-page/admin-personal-horario-secuencias-page.component';
+import { AdminReportesPageComponent } from './pages/admin-reportes-page/admin-reportes-page.component';
 
 
 export const routes: Routes = [
@@ -58,10 +59,13 @@ export const routes: Routes = [
       },
       {
         path: "vehiculos",
-        component: AdminPersonalVehiculosPageComponent
-      }
-    ]
-
+        component: AdminPersonalVehiculosPageComponent,
+      },
+    ],
+  },
+  {
+    path: "reportes",
+    component: AdminReportesPageComponent
   }
 ]
 

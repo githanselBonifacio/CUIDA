@@ -79,6 +79,6 @@
     </div>
 
 </div>
-<mat-paginator #paginatorRemisiones [pageSizeOptions]="[7,8,9, 10,15, 20,50,100]" aria-label="Select page"
-    itemsPerPageLabel="remisiones por páginas" showFirstLastButtons="true">
+<mat-paginator #paginatorRemisiones [pageSizeOptions]="pageSizeOptions" aria-label="Select page"
+    itemsPerPageLabel="remisiones por páginas" showFirstLastButtons="true" (page)="actualizarPage()">
 </mat-paginator>

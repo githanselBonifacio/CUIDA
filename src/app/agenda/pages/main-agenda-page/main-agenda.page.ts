@@ -1,15 +1,17 @@
-import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { MatDialog } from '@angular/material/dialog'
 
 
 import { AgendaService } from 'src/app/agenda/services/agenda.service';
+import { TurnoProfesional } from 'src/app/agenda/interfaces/profesional.interface'
 import { Cita } from "../../interfaces/remision.interface"
 import { MaestrosService } from 'src/app/shared/services/maestros/maestros.service';
 import { EstadoCita, HorarioTurno, Regional, formatoFecha } from 'src/app/shared/interfaces/maestros.interfaces';
 import { Actividad } from 'src/app/diagramas/interfaces/tarea-gantt.interface';
 import { generarHorario } from '../../../shared/interfaces/maestros.interfaces'
+import { EstadosCita } from '../../interfaces/estadosCita.interface'
 
 import { ModalSeleccionProfesionalComponent } from '../../../agenda/components/modal-seleccion-profesional/modal-seleccion-profesional.component';
 import { VentanaConfirmacionComponent } from 'src/app/shared/components/ventana-confirmacion/ventana-confirmacion.component';
@@ -26,8 +28,6 @@ import { ToastType, TitleToast } from 'src/app/shared/components/toast/toast.com
   styleUrls: ['./main-agenda.page.css']
 })
 export class MainComponentAgendaComponent implements OnInit {
-
-
 
   loadingPage = false;
   horasTurnoString: string[] = [];
@@ -55,12 +55,14 @@ export class MainComponentAgendaComponent implements OnInit {
       .subscribe(resp => {
         if (resp.status == 200) {
           this.regionales = resp.result;
+          this.opcionRegional = (this.opcionRegional == "") ? this.regionales[0].id : this.opcionRegional;
         }
       });
     this.maestroService.getHorarioTurnoObservable()
       .subscribe(resp => {
         if (resp.status == 200) {
           this.horariosTurno = resp.result.filter((h: HorarioTurno) => h.esHorarioBase);
+          this.opcionHorarioTurno = (this.opcionHorarioTurno == 0) ? this.horariosTurno[0].id : this.opcionHorarioTurno;
         }
       });
 
@@ -82,7 +84,6 @@ export class MainComponentAgendaComponent implements OnInit {
 
   }
 
-
   get citas(): Cita[] {
     return this.agendaService.citas;
   }
@@ -98,6 +99,9 @@ export class MainComponentAgendaComponent implements OnInit {
     return this.maestroService.estadosCita;
   }
 
+  get disabledAutoagendar(): boolean {
+    return !this.citas.slice().every(cita => cita.idEstado == EstadosCita.SIN_AGENDAR || cita.idEstado == EstadosCita.AGENDADA);
+  }
   guardarLocalStorage() {
     localStorage.setItem("fechaTurnoAgenda", this.fechaFiltroTurno);
     localStorage.setItem("idRegionalAgendaFiltro", this.opcionRegional);
@@ -181,12 +185,13 @@ export class MainComponentAgendaComponent implements OnInit {
           let respuesta: Observable<Respuesta>;
           if (opcionProfesional) {
             this.spinnerService.show();
-            respuesta = this.agendaService.asignarProfesionalTurno(
-              this.fechaFiltroTurno,
-              this.opcionHorarioTurno,
-              opcionProfesional,
-              this.opcionRegional
-            );
+            let turnoProfesional: TurnoProfesional = {
+              fechaTurno: this.fechaFiltroTurno,
+              idHorarioTurno: this.opcionHorarioTurno,
+              idProfesional: opcionProfesional,
+              idRegional: this.opcionRegional
+            };
+            respuesta = this.agendaService.asignarProfesionalTurno(turnoProfesional);
           } else {
             respuesta = new Observable<Respuesta>
           }
@@ -204,36 +209,33 @@ export class MainComponentAgendaComponent implements OnInit {
       });
   }
   desasignarProfesionalTurno(actividadProfesional: Actividad): void {
-    if (actividadProfesional.tareas.filter(tarea => tarea.idEstado != 1 && tarea.idEstado != 2 && tarea.idEstado != null).length > 0) {
-      const msg = "No es posible desagendar el profesional porque tiene citas asignadas en estado confirmada, " +
-        "en progreso o finalizada, por favor verifique la agenda"
-      this.toastService.mostrarToast(ToastType.Error, TitleToast.Error, msg, 8)
 
-    } else {
-      const dialogRef = this.dialogoSeleccionProfesional.open(VentanaConfirmacionComponent, {
-        data: {
-          mensaje: "Desea desasignar este profesional?",
-          nota: "Las citas asociadas serán desagendadas"
-        },
-      });
+    const dialogRef = this.dialogoSeleccionProfesional.open(VentanaConfirmacionComponent, {
+      data: {
+        mensaje: "Desea desasignar este profesional?",
+        nota: "Las citas asociadas serán desagendadas"
+      },
+    });
 
-      dialogRef.afterClosed().pipe(
-        filter(resp => !!resp),
+    dialogRef.afterClosed().pipe(
+      filter(resp => !!resp),
 
-        switchMap(() => this.agendaService.desasignarProfesionalTurno(
-          this.fechaFiltroTurno,
-          this.opcionHorarioTurno,
-          actividadProfesional.numeroIdentificacion)
-        )
-      ).subscribe(resp => {
-        if (resp.status == 200) {
-          this.consultarCitas();
-          this.toastService.mostrarToast(ToastType.Success, TitleToast.Success, resp.message, 5);
-        } else {
-          this.toastService.mostrarToast(ToastType.Error, TitleToast.Error, resp.message, 5)
-        }
-      });
-    }
+      switchMap(() => this.agendaService.desasignarProfesionalTurno(
+        {
+          fechaTurno: this.fechaFiltroTurno,
+          idHorarioTurno: this.opcionHorarioTurno,
+          idProfesional: actividadProfesional.numeroIdentificacion,
+          idRegional: this.opcionRegional
+        })
+      )
+    ).subscribe(resp => {
+      if (resp.status == 200) {
+        this.consultarCitas();
+        this.toastService.mostrarToast(ToastType.Success, TitleToast.Success, resp.message, 5);
+      } else {
+        this.toastService.mostrarToast(ToastType.Error, TitleToast.Error, resp.message, 6)
+      }
+    });
 
   }
 

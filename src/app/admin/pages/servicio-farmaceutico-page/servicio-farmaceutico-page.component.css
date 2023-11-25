@@ -5,10 +5,7 @@
 @import url('../../../../assets/styles/inputs/inputs.css');
 @import url('../../../../assets/styles/inputs/checkbox.css');
 
-.content-toolbar {
-    display: flex;
-    padding: 0.8rem 0.5rem 0.8rem 0.5rem;
-}
+
 
 .filter {
     height: 0px;
@@ -17,6 +14,7 @@
     opacity: 0;
     align-items: center;
     justify-content: flex-end;
+    pointer-events: none;
     transition: all 0.3s ease-in-out;
 }
 
@@ -24,6 +22,7 @@
     height: 100%;
     opacity: 1;
     padding: 1.5rem 0.5rem 1rem 0.5rem;
+    pointer-events: all;
     transition: all 0.2s ease-in-out;
 }
 
@@ -36,7 +35,7 @@
 
 #content-activate-buttom button {
 
-    transform: translateY(-40%);
+    transform: translateY(-20%);
 }
 
 #idHorarioturno {

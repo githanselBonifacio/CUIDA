@@ -8,7 +8,7 @@ import { ToastService } from 'src/app/shared/services/toast/toast.service';
 import { AccionFormulario } from '../../interfaces/enum';
 import { expresionesRegulares, mesajeExpresionRegular } from 'src/app/shared/forms/expresiones-regulares.validaciones';
 import { validatorMayorEdad } from 'src/app/shared/forms/validadors.validaciones';
-import { AdminRemisionService } from '../../services/admin-remision.service';
+import { AdminPersonalService } from '../../services/admin-personal.service';
 
 @Component({
   selector: 'app-admin-form-profesionales',
@@ -22,7 +22,7 @@ export class AdminFormProfesionalesComponent implements OnChanges {
     private formBuilder: FormBuilder,
     private toastservice: ToastService,
     private spinnerService: SpinnerService,
-    private adminService: AdminRemisionService,) {
+    private adminPersonalService: AdminPersonalService) {
   }
   @Output() enviado = new EventEmitter<void>();
 
@@ -65,6 +65,10 @@ export class AdminFormProfesionalesComponent implements OnChanges {
   ngOnChanges(changes: SimpleChanges) {
     if (changes['accionFormulario'] || changes['profesional']) {
       this.tituloFormulario = (this.accionFormulario === AccionFormulario.CREAR) ? "Crear profesional" : "Actualizar profesional";
+      if (this.accionFormulario === AccionFormulario.ACTUALIZAR) {
+        this.campoTipoIdentificacion?.disabled;
+        this.campoNumeroIdentificacion?.disabled;
+      }
       this.validacionDisabled = this.accionFormulario === AccionFormulario.ACTUALIZAR;
       this.formProfesional.patchValue({
         tipoIdentificacion: this.profesional?.idTipoIdentificacion,
@@ -149,7 +153,7 @@ export class AdminFormProfesionalesComponent implements OnChanges {
         activo: true,
       };
       if (this.accionFormulario == AccionFormulario.CREAR) {
-        this.adminService.crearProfesional(this.profesional)
+        this.adminPersonalService.crearProfesional(this.profesional)
           .subscribe(resp => {
             if (resp.status == 200) {
               this.enviado.emit();
@@ -161,7 +165,7 @@ export class AdminFormProfesionalesComponent implements OnChanges {
           })
       } else if (this.accionFormulario == AccionFormulario.ACTUALIZAR) {
 
-        this.adminService.actualizarProfesional(this.profesional).subscribe(resp => {
+        this.adminPersonalService.actualizarProfesional(this.profesional).subscribe(resp => {
           if (resp.status == 200) {
             this.enviado.emit();
             this.toastservice.mostrarToast(ToastType.Success, TitleToast.Success, resp.message, 5);

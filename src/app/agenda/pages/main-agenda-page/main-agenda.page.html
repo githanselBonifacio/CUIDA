@@ -1,21 +1,17 @@
 <div class="container-view">
     <div class="row">
         <div class="col-lg-3" id="titulo-agenda">
-
             <h1>Gestion de agenda</h1>
-
         </div>
         <div class="col-lg-9">
             <div class="d-flex" id="header_filtro_agenda">
                 <div class="form-group row">
-
                     <div class="d-flex" id="filtro_agenda">
-
                         <div class="buttom-group-horinzontal">
-
-                            <button class="buttom-seleccion" (click)=" autoagendar()">Agendar</button>
-                            <button class="buttom-seleccion" (click)="desagendarTurnoCompleto()">Desagendar </button>
-
+                            <button class="buttom-seleccion" (click)="autoagendar()"
+                                [disabled]="disabledAutoagendar">Agendar</button>
+                            <button class="buttom-seleccion" (click)="desagendarTurnoCompleto()"
+                                [disabled]="disabledAutoagendar">Desagendar </button>
                         </div>
 
                         <div class="container-buttom-flex ">
@@ -36,12 +32,10 @@
                                             [class.selected]="regional.id==opcionRegional"
                                             class="dropdown-item item-buttom-multiple">{{regional.nombre}}</button>
                                     </li>
-
                                 </ul>
                             </div>
 
                             <div class="btn-group" role="group">
-
                                 <button type="button" class="buttom-outline-list" data-bs-toggle="dropdown"
                                     aria-expanded="false">
                                     {{getHorariofiltro(opcionHorarioTurno)?.nombre}}
@@ -53,7 +47,6 @@
                                             [class.selected]="horario.id==opcionHorarioTurno"
                                             class="dropdown-item item-buttom-multiple">{{horario.nombre}}</button>
                                     </li>
-
                                 </ul>
                             </div>
                             <div class="input-group">
@@ -61,17 +54,12 @@
                                     Buscar
                                 </button>
                             </div>
-
                         </div>
-
-
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
-
 
     <div class="row">
         <div class="col-lg-3 col-xl-3 col-xxl-2" id="container-list-citas">
@@ -91,14 +79,11 @@
                     No se encontrarón citas!!!
                 </p>
                 <div *ngFor="let cita of citas" id="container-card-citas">
-
                     <app-agenda-card-cita (actualizarMainView)="actualizarComponenteMainAgenda()" [cita]="cita"
                         [idRegional]="opcionRegional" [fechaTurno]="fechaFiltroTurno"
                         [idHorarioTurno]="opcionHorarioTurno" [estadosCita]="estadosCita">
                     </app-agenda-card-cita>
                 </div>
-
-
             </div>
         </div>
         <div class="col-lg-9 col-xl-9  col-xxl-10" id="container-agenda-gantt">
@@ -109,17 +94,12 @@
                         (idprofesionalEvent)="desasignarProfesionalTurno($event)">
                     </app-diagramas-gantt>
                 </div>
-
                 <div>
-
                     <button id="agregar-profesional" (click)="agregarProfesionalTurno()">
                         <i class="bi bi-person-plus-fill" title="Agregar profesional"></i>
                     </button>
-
                 </div>
             </div>
         </div>
-
     </div>
-
 </div>

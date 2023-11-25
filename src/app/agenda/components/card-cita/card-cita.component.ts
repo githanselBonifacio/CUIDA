@@ -13,12 +13,13 @@ import { ToastComponent, ToastType, TitleToast, crearConfig } from 'src/app/shar
 import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 import { EstadoCita, funtionGetNombreEstadoCitaById } from 'src/app/shared/interfaces/maestros.interfaces';
 import localeEs from '@angular/common/locales/es';
-import { registerLocaleData } from '@angular/common';
+import { DatePipe, registerLocaleData } from '@angular/common';
 
 @Component({
   selector: 'app-agenda-card-cita',
   templateUrl: './card-cita.component.html',
   styleUrls: ['./card-cita.component.css'],
+  providers: [DatePipe]
 })
 export class CardCitaComponent {
   @Input()
@@ -42,7 +43,8 @@ export class CardCitaComponent {
   constructor(
     private dialogo: MatDialog,
     private agendaService: AgendaService,
-    private _snackBar: MatSnackBar
+    private _snackBar: MatSnackBar,
+    private datePipe: DatePipe
   ) {
     registerLocaleData(localeEs);
   }
@@ -64,7 +66,7 @@ export class CardCitaComponent {
               this.agendaService.asignarProfesionaByIdCita(
                 citaSeleccionada.idCita,
                 opcionProfesional,
-                this.fechaTurno,
+                this.datePipe.transform(citaSeleccionada.fechaProgramada, 'yyyy-MM-dd HH:mm') ?? '',
                 this.idHorarioTurno,
                 this.idRegional
               ).subscribe(resp => {
@@ -75,6 +77,8 @@ export class CardCitaComponent {
                   this.mostrarToast(ToastType.Error, TitleToast.Error, resp.message, 5);
                 }
                 this.actualizarComponenteMainAgenda();
+              }, error => {
+                this.mostrarToast(ToastType.Error, TitleToast.Error, "Error operación", 5);
               });
 
             });
@@ -102,9 +106,9 @@ export class CardCitaComponent {
         )))
       .subscribe(resp => {
         if (resp.status == 200) {
-          this.mostrarToast(ToastType.Success, TitleToast.Success, "Se desagendó cita al profesional", 5)
+          this.mostrarToast(ToastType.Success, TitleToast.Success, resp.message, 5)
         } else {
-          this.mostrarToast(ToastType.Error, TitleToast.Error, "Se presentó un error al desagendar cita", 5)
+          this.mostrarToast(ToastType.Error, TitleToast.Error, resp.message, 5)
         }
         this.actualizarComponenteMainAgenda()
       });
@@ -145,9 +149,9 @@ export class CardCitaComponent {
       .subscribe(resp => {
 
         if (resp.status == 200) {
-          this.mostrarToast(ToastType.Success, TitleToast.Success, "Se reprogramó cita al profesional", 5)
+          this.mostrarToast(ToastType.Success, TitleToast.Success, resp.message, 5)
         } else {
-          this.mostrarToast(ToastType.Error, TitleToast.Error, "Se presentó un error al reprogramar cita", 5)
+          this.mostrarToast(ToastType.Error, TitleToast.Error, resp.message, 5)
         }
         this.actualizarComponenteMainAgenda()
       });

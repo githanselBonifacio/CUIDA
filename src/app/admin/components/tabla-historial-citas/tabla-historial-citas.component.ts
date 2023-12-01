@@ -19,15 +19,24 @@ export class TablaHistorialCitasComponent implements OnInit {
     private dialogoDetalleCita: MatDialog,
   ) { }
   @Input() public citas: Cita[] = [];
+  @Input() public nuevasCitas: Cita[] = [];
   @Input() public estadosCita: EstadoCita[] = [];
   @Input() public isHistorial: boolean = false;
 
+  citasCompletas: Cita[] = [];
   convertEstados = funtionGetNombreEstadoCitaById;
+
   ngOnInit() {
     this.tableId = uuidv4().substr(0, 7);
+    this.nuevasCitas = this.nuevasCitas.map(cita => {
+      return {
+        ...cita,
+        idEstado: 0
+      }
+    });
+    this.citasCompletas = this.citas.concat(this.nuevasCitas);
+
   }
-
-
 
   mostrarModalDetalleCita(citaSeleccionada: Cita): void {
     const modalCita = this.dialogoDetalleCita.open(ModalDetalleCitasHistorialComponent, {

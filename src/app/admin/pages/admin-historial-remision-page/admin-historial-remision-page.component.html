@@ -132,14 +132,12 @@
               </ng-template>
 
               <div *ngIf="i-1>=0">
-                <app-tabla-historial-citas
-                  [citas]="agregarCitasEstadoAnterior(registro.citas, historialRemisiones[i-1].citas, registro.fechaAplicacionNovedad)"
+                <app-tabla-historial-citas [citas]="registro.citas" [nuevasCitas]="registro.citasNuevas"
                   [estadosCita]="estados" [isHistorial]="true"></app-tabla-historial-citas>
               </div>
 
               <div *ngIf="i-1<0">
-                <app-tabla-historial-citas
-                  [citas]="agregarCitasEstadoAnterior(registro.citas,remisionDataActual.citas,registro.fechaAplicacionNovedad)"
+                <app-tabla-historial-citas [citas]="registro.citas" [nuevasCitas]="registro.citasNuevas"
                   [estadosCita]="estados" [isHistorial]="true"></app-tabla-historial-citas>
 
               </div>

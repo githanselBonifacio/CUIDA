@@ -64,8 +64,8 @@ export class GanttComponent implements AfterViewInit, AfterViewChecked, OnChange
 
   limpiaLineaTiempo() {
 
-    const visitas = document.querySelectorAll(".tarea-visita");
-    const holguras = document.querySelectorAll(".tarea-dvisita");
+    const visitas = document.querySelectorAll(".tarea-VISITA");
+    const holguras = document.querySelectorAll(".tarea-DVISITA");
     const gridTime = document.querySelectorAll(".grid-time");
     const holguraGrid = document.querySelectorAll(".holgura");
     visitas.forEach(elemento => elemento.remove());

@@ -7,6 +7,7 @@ import { EstadoCita } from 'src/app/shared/interfaces/maestros.interfaces';
 import { Cita } from '../../interfaces/historialRemison.interface';
 import localeEs from '@angular/common/locales/es';
 import { registerLocaleData } from '@angular/common';
+import { SpinnerService } from 'src/app/shared/services/spinner/spinner.service.service';
 @Component({
   selector: 'app-admin-historial-remision-page',
   templateUrl: './admin-historial-remision-page.component.html',
@@ -29,9 +30,12 @@ export class AdminHistorialRemisionPageComponent implements OnInit {
     private maestroService: MaestrosService,
     private activateRoute: ActivatedRoute,
     private router: Router
-  ) { }
+  ) {
+
+  }
 
   ngOnInit() {
+
     registerLocaleData(localeEs);
     this.maestroService.getEstadosCita();
     this.activateRoute.params.subscribe(
@@ -46,6 +50,7 @@ export class AdminHistorialRemisionPageComponent implements OnInit {
     this.adminService.consultarDataActualRemision(this.idRemision)
       .subscribe(resp => {
         this.remisionDataActual = resp.result
+
       })
   }
 
@@ -58,15 +63,15 @@ export class AdminHistorialRemisionPageComponent implements OnInit {
   }
 
   agregarCitasEstadoAnterior(citaAnteriores: Cita[], citasNuevas: Cita[], fechaAplicacionNovedad: Date): Cita[] {
-    let cn: Cita[] = citasNuevas?.map(cita => ({ ...cita, datosCita: { ...cita.datosCita, idEstado: "0" } })) ?? [];
-    cn = cn.filter(c => fechaAplicacionNovedad < c.datosCita.fechaProgramada);
+    let cn: Cita[] = citasNuevas?.map(cita => ({ ...cita, datosCita: { ...cita, idEstado: "0" } })) ?? [];
+    cn = cn.filter(c => fechaAplicacionNovedad < c.fechaProgramada);
     if (citaAnteriores != null) {
       const ca: Cita[] = citaAnteriores.slice();
 
       return ca.concat(cn);
 
     } else {
-      cn = cn.filter(c1 => !this.remisionDataActual.citas.some((c2: { datosCita: { idCita: string; }; }) => c2.datosCita.idCita === c1.datosCita.idCita));
+      cn = cn.filter(c1 => !this.remisionDataActual.citas.some((c2: { datosCita: { idCita: string; }; }) => c2.datosCita.idCita === c1.idCita));
       return cn;
     }
   }

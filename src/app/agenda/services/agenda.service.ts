@@ -25,7 +25,7 @@ export class AgendaService {
     const params = new HttpParams()
       .set('fechaTurno', fechaTurno)
       .set('idRegional', idRegional)
-    return this.http.get<Respuesta>(`${environment.URL_API_CUIDA}/${this.urlRecurso}/profesionalesByTurnoCiudad`, { params });
+    return this.http.get<Respuesta>(`${environment.URL_API_CUIDA}/${this.urlRecurso}/profesionalesByTurnoRegional`, { params });
   }
 
   getProfesionaFromTurnoCiudad(fechaTurno: string, idRegional: string, idHorarioTurno: number) {
@@ -34,7 +34,7 @@ export class AgendaService {
       .set('idRegional', idRegional)
       .set('idHorarioTurno', idHorarioTurno)
 
-    return this.http.get<Respuesta>(`${environment.URL_API_CUIDA}/${this.urlRecurso}/profesionalesFromTurnoCiudad`, { params });
+    return this.http.get<Respuesta>(`${environment.URL_API_CUIDA}/${this.urlRecurso}/profesionalesFromTurnoRegional`, { params });
   }
   asignarProfesionalTurno(turnoProfesional: TurnoProfesional) {
     return this.http.post<Respuesta>(`${environment.URL_API_CUIDA}/${this.urlRecurso}/asignarProfesionalTurno`, turnoProfesional);
@@ -79,7 +79,7 @@ export class AgendaService {
       .set('idHorarioTurno', idHorarioTurno)
       .set('idRegional', idRegional)
 
-    this.http.get<Respuesta>(`${environment.URL_API_CUIDA}/${this.urlRecurso}/actividadesByprofesionalesCiudadHorario`, { params })
+    this.http.get<Respuesta>(`${environment.URL_API_CUIDA}/${this.urlRecurso}/actividadesByprofesionalesRegionalHorario`, { params })
 
       .subscribe(resp => {
         this.agendaGantt = resp.result

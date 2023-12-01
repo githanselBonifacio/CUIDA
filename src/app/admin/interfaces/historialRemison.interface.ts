@@ -15,31 +15,28 @@ export interface HistorialRemision {
     datosAtencion: DatosAtencionRemision;
     diagnosticos: Diagnostico[];
     citas: Cita[];
+    citasNuevas: Cita[];
     cambioDatosPaciente: boolean;
     cambioDatosAtencion: boolean;
 
 }
 
 export interface Cita {
-    datosCita: DatosCita;
-    tratamientos: Tratamiento[];
-    procedimientos: Procedimientos;
-}
-
-export interface DatosCita {
-    holgura: number;
     idCita: string;
     latitud: number;
     duracion: number;
+    holgura: number;
     longitud: number;
     idRegional: string;
-    idEstado: string;
+    idEstado: number;
     idRemision: string;
     especialidad: string;
     fechaInicio: Date;
     idConductor: string | null;
     idProfesional: string | null;
     fechaProgramada: Date;
+    tratamientos: Tratamiento[];
+    procedimientos: Procedimientos;
 }
 
 export interface Procedimientos {

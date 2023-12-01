@@ -141,7 +141,7 @@ div[name="container-actividad-time"] {
 
 }
 
-::ng-deep app-diagramas-gantt .tarea-visita {
+::ng-deep app-diagramas-gantt .tarea-VISITA {
     position: absolute !important;
     height: 2rem !important;
     margin: 0px auto !important;
@@ -152,7 +152,7 @@ div[name="container-actividad-time"] {
 
 
 
-::ng-deep app-diagramas-gantt .tarea-dvisita {
+::ng-deep app-diagramas-gantt .tarea-DVISITA {
     position: absolute !important;
     height: 2rem !important;
     margin: 0px auto !important;

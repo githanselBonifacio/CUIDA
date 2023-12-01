@@ -13,6 +13,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import localeEs from '@angular/common/locales/es';
 import { registerLocaleData } from '@angular/common';
 import { SelectionModel } from '@angular/cdk/collections';
+import { AdminFarmaciaService } from '../../services/admin-farmacia.service';
 @Component({
   selector: 'app-servicio-farmaceutico-page',
   templateUrl: './servicio-farmaceutico-page.component.html',
@@ -21,7 +22,7 @@ import { SelectionModel } from '@angular/cdk/collections';
 export class ServicioFarmaceuticoPageComponent implements OnInit, AfterViewInit {
 
   constructor(
-    private adminService: AdminRemisionService,
+    private adminFarmaciaService: AdminFarmaciaService,
     private maestrosService: MaestrosService,
     private router: Router,
     private formBuilder: FormBuilder,
@@ -55,7 +56,7 @@ export class ServicioFarmaceuticoPageComponent implements OnInit, AfterViewInit 
     this.maestrosService.getRegionales();
     this.maestrosService.getHorarioTurno();
     this.dataSource.paginator = this.paginator;
-    this.adminService.getNotificacionesFarmacia()
+    this.adminFarmaciaService.getNotificacionesFarmacia()
       .subscribe(resp => {
         if (resp.status == 200) {
           this.notificacionesCompleta = resp.result;
@@ -118,7 +119,7 @@ export class ServicioFarmaceuticoPageComponent implements OnInit, AfterViewInit 
   consultaAvanzada() {
     this.spinnerService.show();
     if (this.formfiltro.valid) {
-      this.adminService.getNotificacionesFarmaciaWithFilter(
+      this.adminFarmaciaService.getNotificacionesFarmaciaWithFilter(
         this.fecha ?? '', this.idHorario ?? 0, this.idRegional ?? '')
         .subscribe(resp => {
           this.dataSource.data = resp.result
@@ -131,7 +132,7 @@ export class ServicioFarmaceuticoPageComponent implements OnInit, AfterViewInit 
     if (this.filtroAvanzadoActivado == "activate") {
       this.spinnerService.show()
       this.filtroAvanzadoActivado = "";
-      this.adminService.getNotificacionesFarmacia();
+      this.adminFarmaciaService.getNotificacionesFarmacia();
       this.dataSource.data = this.notificacionesCompleta.slice();
       this.validarMasterCheck();
       this.spinnerService.hide()
@@ -212,7 +213,7 @@ export class ServicioFarmaceuticoPageComponent implements OnInit, AfterViewInit 
 
   notificarSeleccion(): void {
     this.spinnerService.show();
-    this.adminService.notificarMedicamentosToFarmacia(this.selection.selected)
+    this.adminFarmaciaService.notificarMedicamentosToFarmacia(this.selection.selected)
       .subscribe(resp => {
         if (resp.status == 200) {
 

@@ -139,7 +139,6 @@ export class MainComponentAgendaComponent implements OnInit {
 
   autoagendar(): void {
     this.spinnerService.show();
-    this.maestroService.getEstadosCita();
     this.agendaService.autoagendar(
       this.citas[0].fechaInicio,
       this.opcionHorarioTurno,

@@ -19,14 +19,14 @@ export class AgendaService {
 
   //profesionales
 
-  getProfesionalDisponibleByturnoCiudad(fechaTurno: string, idRegional: string) {
+  getProfesionalDisponibleByturnoRegional(fechaTurno: string, idRegional: string) {
     const params = new HttpParams()
       .set('fechaTurno', fechaTurno)
       .set('idRegional', idRegional)
     return this.http.get<Respuesta>(`${environment.URL_API_CUIDA}/${this.urlRecurso}/profesionalesByTurnoRegional`, { params });
   }
 
-  getProfesionaFromTurnoCiudad(fechaTurno: string, idRegional: string, idHorarioTurno: number) {
+  getProfesionaFromTurnoRegional(fechaTurno: string, idRegional: string, idHorarioTurno: number) {
     const params = new HttpParams()
       .set('fechaTurno', fechaTurno)
       .set('idRegional', idRegional)
@@ -112,23 +112,20 @@ export class AgendaService {
     return this.http.put<Respuesta>(`${environment.URL_API_CUIDA}/${this.urlRecurso}/reprogramarCita`, params)
   }
 
-  calcularDesplazamientoTurnoCompleto(turno: Cita[]) {
-    return this.http.post(`${this.serviceUrl}/citas/calcularDesplazamiento`, turno)
-  }
 
-  desagendarTurnoCompleto(fechaTurno: Date, idHorarioTurno: number, idRegional: string) {
+  desagendarTurnoCompleto(fechaTurno: string, idHorarioTurno: number, idRegional: string) {
     const params = new HttpParams()
-      .set('fechaTurno', `${formatoFecha(fechaTurno)}`)
+      .set('fechaTurno', fechaTurno)
       .set('idHorarioTurno', idHorarioTurno)
       .set('idRegional', idRegional)
 
-    return this.http.get<Respuesta>(`${environment.URL_API_CUIDA}/${this.urlRecurso}/desagendarTurnoCompleto`, { params })
+    return this.http.put<Respuesta>(`${environment.URL_API_CUIDA}/${this.urlRecurso}/desagendarTurnoCompleto`, params)
   }
-  autoagendar(fechaTurno: Date, idHorarioTurno: number, idRegional: string) {
+  autoagendar(fechaTurno: string, idHorarioTurno: number, idRegional: string) {
     const params = new HttpParams()
-      .set('fechaTurno', `${formatoFecha(fechaTurno)}`)
+      .set('fechaTurno', fechaTurno)
       .set('idHorarioTurno', idHorarioTurno)
       .set('idRegional', idRegional)
-    return this.http.get<Respuesta>(`${environment.URL_API_CUIDA}/${this.urlRecurso}/autoagendarTurnoCompleto`, { params })
+    return this.http.put<Respuesta>(`${environment.URL_API_CUIDA}/${this.urlRecurso}/autoagendarTurnoCompleto`, params)
   }
 }

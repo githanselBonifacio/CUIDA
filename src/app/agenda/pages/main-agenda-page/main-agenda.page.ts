@@ -153,7 +153,7 @@ export class MainComponentAgendaComponent implements OnInit {
   autoagendar(): void {
     this.spinnerService.show();
     this.agendaService.autoagendar(
-      this.citas[0].fechaInicio,
+      this.datePipe.transform(this.citas[0].fechaInicio, "yyyy-MM-dd") ?? '',
       this.opcionHorarioTurno,
       this.opcionRegional
     ).subscribe(resp => {
@@ -169,7 +169,7 @@ export class MainComponentAgendaComponent implements OnInit {
 
   desagendarTurnoCompleto(): void {
     this.spinnerService.show();
-    this.agendaService.desagendarTurnoCompleto(this.citas[0].fechaProgramada, this.opcionHorarioTurno, this.opcionRegional)
+    this.agendaService.desagendarTurnoCompleto(this.datePipe.transform(this.citas[0].fechaInicio, "yyyy-MM-dd") ?? '', this.opcionHorarioTurno, this.opcionRegional)
       .subscribe(resp => {
         if (resp.status == 200) {
           this.spinnerService.hide();
@@ -183,7 +183,7 @@ export class MainComponentAgendaComponent implements OnInit {
   }
   agregarProfesionalTurno(): void {
     this.agendaService
-      .getProfesionalDisponibleByturnoCiudad(this.fechaFiltroTurno, this.opcionRegional)
+      .getProfesionalDisponibleByturnoRegional(this.fechaFiltroTurno, this.opcionRegional)
       .pipe(
         switchMap(profesionales => {
           const dialogRef = this.dialogo.open(ModalSeleccionProfesionalComponent, {

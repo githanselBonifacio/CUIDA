@@ -13,7 +13,7 @@ export class AdminFarmaciaService {
 
   //farmacia
   getNotificacionesFarmacia() {
-    return this.http.get<Respuesta>(`${environment.URL_API_CUIDA}/${this.urlRecurso}/tratamientosFarmacia/`)
+    return this.http.get<Respuesta>(`${environment.URL_API_CUIDA}/${this.urlRecurso}/tratamientosFarmacia`)
 
   }
   getNotificacionesFarmaciaWithFilter(fechaTurno: string, idHorarioTurno: number, idRegional: string) {

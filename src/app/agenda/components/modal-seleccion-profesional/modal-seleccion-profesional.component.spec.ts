@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ModalAsignarProfesionalComponent } from './modal-seleccion-profesional.component';
+import { ModalSeleccionProfesionalComponent } from './modal-seleccion-profesional.component';
 
 describe('ModalAsignarProfesionalComponent', () => {
-  let component: ModalAsignarProfesionalComponent;
-  let fixture: ComponentFixture<ModalAsignarProfesionalComponent>;
+  let component: ModalSeleccionProfesionalComponent;
+  let fixture: ComponentFixture<ModalSeleccionProfesionalComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [ModalAsignarProfesionalComponent]
+      declarations: [ModalSeleccionProfesionalComponent]
     });
-    fixture = TestBed.createComponent(ModalAsignarProfesionalComponent);
+    fixture = TestBed.createComponent(ModalSeleccionProfesionalComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

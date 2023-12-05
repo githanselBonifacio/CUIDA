@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AdminFromConductoresComponent } from './admin-form-conductores.component';
+import { AdminFormConductoresComponent } from './admin-form-conductores.component';
 
 describe('AdminFromConductoresComponent', () => {
-  let component: AdminFromConductoresComponent;
-  let fixture: ComponentFixture<AdminFromConductoresComponent>;
+  let component: AdminFormConductoresComponent;
+  let fixture: ComponentFixture<AdminFormConductoresComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [AdminFromConductoresComponent]
+      declarations: [AdminFormConductoresComponent]
     });
-    fixture = TestBed.createComponent(AdminFromConductoresComponent);
+    fixture = TestBed.createComponent(AdminFormConductoresComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

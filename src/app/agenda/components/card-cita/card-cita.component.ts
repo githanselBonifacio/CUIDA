@@ -52,7 +52,7 @@ export class CardCitaComponent {
 
   asignarProfesionalCita(citaSeleccionada: Cita): void {
     this.agendaService
-      .getProfesionaFromTurnoCiudad(this.fechaTurno, this.idRegional, this.idHorarioTurno)
+      .getProfesionaFromTurnoRegional(this.fechaTurno, this.idRegional, this.idHorarioTurno)
       .pipe(
         tap(({ result: profesionales }) => {
           const dialogRef = this.dialogo.open(ModalSeleccionProfesionalComponent, {

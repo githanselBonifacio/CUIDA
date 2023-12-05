@@ -9,6 +9,7 @@ export interface Cita {
     latitud: number;
     longitud: number;
     idRegional: string;
+    idHorarioTurno: number;
     idEstado: number;
     idProfesional: string | null;
     idConductor: string | null;

@@ -136,13 +136,12 @@ export class CardCitaComponent {
             citaSeleccionada.idCita,
             fechaFormateada,
             nuevaHora,
-            this.fechaTurno,
             this.idHorarioTurno,
             this.idRegional,
             citaSeleccionada.idProfesional ?? ''
           )
         } else {
-          throw Error('No se ha seleccionado una hora');
+          throw Error('No se ha seleccionado hora');
         }
       }
       ))

@@ -14,8 +14,6 @@ export class AgendaService {
   private serviceUrl: string = 'http://localhost:9090';
   private urlRecurso = 'agenda'
 
-  public citas: Cita[] = [];
-  public agendaGantt: Actividad[] = [];
 
   constructor(private http: HttpClient) { };
 
@@ -45,16 +43,13 @@ export class AgendaService {
   }
 
   //citas
-  async getCitas(fechaTurno: string, idRegional: string, idHorarioTurno: number) {
+  getCitas(fechaTurno: string, idRegional: string, idHorarioTurno: number) {
     const params = new HttpParams()
       .set('fechaTurno', fechaTurno)
       .set('idHorarioTurno', idHorarioTurno)
       .set('idRegional', idRegional)
 
-    this.http.get<Respuesta>(`${environment.URL_API_CUIDA}/${this.urlRecurso}/citas`, { params })
-      .subscribe(resp => {
-        this.citas = resp.result
-      });
+    return this.http.get<Respuesta>(`${environment.URL_API_CUIDA}/${this.urlRecurso}/citas`, { params });
 
   }
 
@@ -73,31 +68,16 @@ export class AgendaService {
   }
 
   //actividades gantt
-  async getActividadesAgendaGantt(fechaTurno: string, idRegional: string, idHorarioTurno: number) {
+  getActividadesAgendaGantt(fechaTurno: string, idRegional: string, idHorarioTurno: number) {
     const params = new HttpParams()
       .set('fechaTurno', fechaTurno)
       .set('idHorarioTurno', idHorarioTurno)
       .set('idRegional', idRegional)
 
-    this.http.get<Respuesta>(`${environment.URL_API_CUIDA}/${this.urlRecurso}/actividadesByprofesionalesRegionalHorario`, { params })
-
-      .subscribe(resp => {
-        this.agendaGantt = resp.result
-      });
+    return this.http.get<Respuesta>(`${environment.URL_API_CUIDA}/${this.urlRecurso}/actividadesByprofesionalesRegionalHorario`, { params });
 
   }
 
-  //admin agenda
-  async filtrarCitasByIdRemision(criterioBusqueda: string) {
-    const criterioNombrePaciente = criterioBusqueda.toLowerCase();
-    this.citas = this.citas.filter(cita => {
-      return cita.idRemision.includes(criterioBusqueda) ||
-        cita.idProfesional?.includes(criterioBusqueda) ||
-        cita.paciente.toLowerCase().includes(criterioNombrePaciente) ||
-        cita.numeroIdentificacionPaciente.includes(criterioBusqueda);
-
-    });
-  }
 
   asignarProfesionaByIdCita(idCita: string, numeroIdentificacion: string, fechaProgramada: string, idHorarioTurno: number, idRegional: string) {
     const params = new HttpParams()
@@ -120,12 +100,11 @@ export class AgendaService {
 
     return this.http.put<Respuesta>(`${environment.URL_API_CUIDA}/${this.urlRecurso}/desasignarProfesionalCita`, params)
   }
-  reprogramarCita(idCita: string, fechaProgramada: string, nuevaHora: string, fechaTurno: string, idHorarioTurno: number, idRegional: string, idProfesional: string) {
+  reprogramarCita(idCita: string, fechaProgramada: string, nuevaHora: string, idHorarioTurno: number, idRegional: string, idProfesional: string) {
     const params = new HttpParams()
       .set('idCita', idCita)
       .set('fechaProgramada', fechaProgramada)
       .set('nuevaHora', nuevaHora)
-      .set('fechaTurno', fechaTurno)
       .set('idHorarioTurno', idHorarioTurno)
       .set('idRegional', idRegional)
       .set('idProfesional', idProfesional)

@@ -17,17 +17,23 @@ import { ModalSeleccionProfesionalComponent } from '../../../agenda/components/m
 import { VentanaConfirmacionComponent } from 'src/app/shared/components/ventana-confirmacion/ventana-confirmacion.component';
 import { switchMap, filter } from 'rxjs/operators';
 import { SpinnerService } from 'src/app/shared/services/spinner/spinner.service.service';
-import { Observable } from 'rxjs';
+import { Observable, forkJoin } from 'rxjs';
 import { Respuesta } from 'src/app/shared/interfaces/response.interfaces';
 import { ToastService } from 'src/app/shared/services/toast/toast.service';
 import { ToastType, TitleToast } from 'src/app/shared/components/toast/toast.component';
+import { DatePipe } from '@angular/common';
+import { ModalCambioHoraCitaComponent } from '../../components/modal-cambio-hora-cita/modal-cambio-hora-cita.component';
 
 @Component({
   selector: 'app-main-component-agenda',
   templateUrl: './main-agenda.page.html',
-  styleUrls: ['./main-agenda.page.css']
+  styleUrls: ['./main-agenda.page.css'],
+  providers: [DatePipe]
 })
 export class MainComponentAgendaComponent implements OnInit {
+
+  public citas: Cita[] = [];
+  public actividades: Actividad[] = [];
 
   loadingPage = false;
   horasTurnoString: string[] = [];
@@ -44,9 +50,10 @@ export class MainComponentAgendaComponent implements OnInit {
     private maestroService: MaestrosService,
     private activateRoute: ActivatedRoute,
     private router: Router,
-    private dialogoSeleccionProfesional: MatDialog,
+    private dialogo: MatDialog,
     private spinnerService: SpinnerService,
-    private toastService: ToastService
+    private toastService: ToastService,
+    private datePipe: DatePipe
   ) { }
 
   ngOnInit() {
@@ -84,16 +91,6 @@ export class MainComponentAgendaComponent implements OnInit {
 
   }
 
-  get citas(): Cita[] {
-    return this.agendaService.citas;
-  }
-  set citas(value: Cita[]) {
-    this.citas = value;
-  }
-
-  get actividades(): Actividad[] {
-    return this.agendaService.agendaGantt;
-  }
 
   get estadosCita(): EstadoCita[] {
     return this.maestroService.estadosCita;
@@ -122,19 +119,35 @@ export class MainComponentAgendaComponent implements OnInit {
     localStorage.setItem("idHorarioTurnoAgendaFiltro", `${this.opcionHorarioTurno}`);
   }
   consultarCitas(): void {
+    this.spinnerService.show();
     this.horasTurnoString = generarHorario(this.opcionHorarioTurno);
-    this.agendaService.getCitas(this.fechaFiltroTurno, this.opcionRegional, this.opcionHorarioTurno);
-    this.agendaService.getActividadesAgendaGantt(this.fechaFiltroTurno, this.opcionRegional, this.opcionHorarioTurno);
+
+    forkJoin([
+      this.agendaService.getCitas(this.fechaFiltroTurno, this.opcionRegional, this.opcionHorarioTurno),
+      this.agendaService.getActividadesAgendaGantt(this.fechaFiltroTurno, this.opcionRegional, this.opcionHorarioTurno)
+    ]).subscribe(([citas, actividades]) => {
+      this.citas = citas.result;
+      this.actividades = actividades.result;
+      this.spinnerService.hide();
+    })
+
     this.horasTurnoString = generarHorario(this.opcionHorarioTurno);
     this.router.navigate(['agenda', this.fechaFiltroTurno, this.opcionRegional, this.opcionHorarioTurno]);
     this.guardarLocalStorage();
   }
 
-  filtrarCitasByIdRemision(): void {
+  filtrarCitasByIdRemision() {
     if (this.idRemision.length === 0) {
       this.consultarCitas()
     }
-    this.agendaService.filtrarCitasByIdRemision(this.idRemision);
+    const criterioNombrePaciente = this.idRemision.toLowerCase();
+    this.citas = this.citas.filter(cita => {
+      return cita.idRemision.includes(this.idRemision) ||
+        cita.idProfesional?.includes(this.idRemision) ||
+        cita.paciente.toLowerCase().includes(criterioNombrePaciente) ||
+        cita.numeroIdentificacionPaciente.includes(this.idRemision);
+
+    });
   }
 
   autoagendar(): void {
@@ -173,7 +186,7 @@ export class MainComponentAgendaComponent implements OnInit {
       .getProfesionalDisponibleByturnoCiudad(this.fechaFiltroTurno, this.opcionRegional)
       .pipe(
         switchMap(profesionales => {
-          const dialogRef = this.dialogoSeleccionProfesional.open(ModalSeleccionProfesionalComponent, {
+          const dialogRef = this.dialogo.open(ModalSeleccionProfesionalComponent, {
             data: {
               profesionales: profesionales.result
             }
@@ -209,7 +222,7 @@ export class MainComponentAgendaComponent implements OnInit {
   }
   desasignarProfesionalTurno(actividadProfesional: Actividad): void {
 
-    const dialogRef = this.dialogoSeleccionProfesional.open(VentanaConfirmacionComponent, {
+    const dialogRef = this.dialogo.open(VentanaConfirmacionComponent, {
       data: {
         mensaje: "Desea desasignar este profesional?",
         nota: "Las citas asociadas serán desagendadas"
@@ -236,6 +249,70 @@ export class MainComponentAgendaComponent implements OnInit {
       }
     });
 
+  }
+
+  desagendarCita(idCita: string) {
+    const citaSeleccionada = this.citas.find(cita => cita.idCita == idCita);
+    if (citaSeleccionada) {
+      const dialogRef = this.dialogo.open(VentanaConfirmacionComponent, {
+        data: {
+          mensaje: "Desea desagendar esta cita?"
+        }
+      });
+      dialogRef.afterClosed()
+        .pipe(
+          filter(result => result),
+          switchMap(() => this.agendaService.retirarProfesional(
+            citaSeleccionada?.idCita,
+            citaSeleccionada?.idProfesional ?? '',
+            this.datePipe.transform(new Date(citaSeleccionada.fechaProgramada), 'yyyy-MM-dd') ?? '',
+            citaSeleccionada?.idHorarioTurno,
+            citaSeleccionada?.idRegional
+          )))
+        .subscribe(resp => {
+          if (resp.status == 200) {
+            this.toastService.mostrarToast(ToastType.Success, TitleToast.Success, resp.message, 5)
+          } else {
+            this.toastService.mostrarToast(ToastType.Error, TitleToast.Error, resp.message, 5)
+          }
+          this.actualizarComponenteMainAgenda()
+        });
+    }
+
+  }
+
+  reprogramarCita(idCita: string) {
+    const citaSeleccionada = this.citas.find(cita => cita.idCita == idCita);
+    if (citaSeleccionada) {
+      const dialogRef = this.dialogo.open(ModalCambioHoraCitaComponent, {
+        data: this.datePipe.transform(new Date(citaSeleccionada.fechaProgramada), 'HH:mm') ?? ''
+      })
+      dialogRef.afterClosed().pipe(
+        switchMap(nuevaHora => {
+          if (nuevaHora !== '') {
+            return this.agendaService.reprogramarCita(
+              citaSeleccionada.idCita,
+              this.datePipe.transform(new Date(citaSeleccionada.fechaProgramada), 'yyyy-MM-dd HH:mm') ?? '',
+              nuevaHora,
+              citaSeleccionada?.idHorarioTurno,
+              citaSeleccionada?.idRegional,
+              citaSeleccionada?.idProfesional ?? ''
+            )
+          } else {
+            throw Error('No se ha seleccionado una hora');
+          }
+        }
+        ))
+        .subscribe(resp => {
+
+          if (resp.status == 200) {
+            this.toastService.mostrarToast(ToastType.Success, TitleToast.Success, resp.message, 5)
+          } else {
+            this.toastService.mostrarToast(ToastType.Error, TitleToast.Error, resp.message, 5)
+          }
+          this.actualizarComponenteMainAgenda()
+        });
+    }
   }
 
   actualizarComponenteMainAgenda() {

@@ -41,7 +41,7 @@ describe('AdminPersonalService', () => {
     service.getAllProfesionales().subscribe(resp => {
       expect(resp).toBeDefined();
     })
-    expect(service).toBeTruthy();
+
     const req = httpMock.expectOne(`${environment.URL_API_CUIDA}/${urlRecurso}/profesionales`
       , "consultar todos los profesionales")
     expect(req.request.method).toBe('GET');
@@ -51,7 +51,7 @@ describe('AdminPersonalService', () => {
     service.getProfesionalesRegional(idRegional).subscribe(resp => {
       expect(resp).toBeDefined();
     })
-    expect(service).toBeTruthy();
+
     const req = httpMock.expectOne(`${environment.URL_API_CUIDA}/${urlRecurso}/profesionales/${idRegional}`
       , "consultar profesionales por regional")
     expect(req.request.method).toBe('GET');
@@ -62,7 +62,7 @@ describe('AdminPersonalService', () => {
     service.crearProfesional(profesional).subscribe(resp => {
       expect(resp).toBeDefined();
     })
-    expect(service).toBeTruthy();
+
     const req = httpMock.expectOne(`${environment.URL_API_CUIDA}/${urlRecurso}/crearProfesional`
       , "crear profesional")
     expect(req.request.method).toBe('POST');
@@ -72,7 +72,7 @@ describe('AdminPersonalService', () => {
     service.actualizarProfesional(profesional).subscribe(resp => {
       expect(resp).toBeDefined();
     })
-    expect(service).toBeTruthy();
+
     const req = httpMock.expectOne(`${environment.URL_API_CUIDA}/${urlRecurso}/actualizarProfesional`
       , "actualizar profesional")
     expect(req.request.method).toBe('PUT');
@@ -83,7 +83,7 @@ describe('AdminPersonalService', () => {
     service.getAllConductores().subscribe(resp => {
       expect(resp).toBeDefined();
     })
-    expect(service).toBeTruthy();
+
     const req = httpMock.expectOne(`${environment.URL_API_CUIDA}/${urlRecurso}/conductores`
       , "consultar todos los conductores")
     expect(req.request.method).toBe('GET');
@@ -93,7 +93,7 @@ describe('AdminPersonalService', () => {
     service.crearConductor(conductor).subscribe(resp => {
       expect(resp).toBeDefined();
     })
-    expect(service).toBeTruthy();
+
     const req = httpMock.expectOne(`${environment.URL_API_CUIDA}/${urlRecurso}/crearConductor`
       , "crear conductores")
     expect(req.request.method).toBe('POST');
@@ -103,7 +103,7 @@ describe('AdminPersonalService', () => {
     service.actualizarConductor(conductor).subscribe(resp => {
       expect(resp).toBeDefined();
     })
-    expect(service).toBeTruthy();
+
     const req = httpMock.expectOne(`${environment.URL_API_CUIDA}/${urlRecurso}/actualizarConductor`
       , "actualizar conductores")
     expect(req.request.method).toBe('PUT');
@@ -115,7 +115,7 @@ describe('AdminPersonalService', () => {
     service.getAllMoviles().subscribe(resp => {
       expect(resp).toBeDefined();
     })
-    expect(service).toBeTruthy();
+
     const req = httpMock.expectOne(`${environment.URL_API_CUIDA}/${urlRecurso}/moviles`
       , "consultar todos los moviles")
     expect(req.request.method).toBe('GET');
@@ -125,7 +125,7 @@ describe('AdminPersonalService', () => {
     service.getMovilesByIdRegional(idRegional).subscribe(resp => {
       expect(resp).toBeDefined();
     })
-    expect(service).toBeTruthy();
+
     const req = httpMock.expectOne(`${environment.URL_API_CUIDA}/${urlRecurso}/moviles/${idRegional}`
       , "consultar moviles por regional")
     expect(req.request.method).toBe('GET');
@@ -135,7 +135,7 @@ describe('AdminPersonalService', () => {
     service.getAllMovilesSinConductor().subscribe(resp => {
       expect(resp).toBeDefined();
     })
-    expect(service).toBeTruthy();
+
     const req = httpMock.expectOne(`${environment.URL_API_CUIDA}/${urlRecurso}/movilesSinConductor`
       , "consultar moviles sin conductor asignado")
     expect(req.request.method).toBe('GET');
@@ -145,7 +145,7 @@ describe('AdminPersonalService', () => {
     service.crearMovil(movil).subscribe(resp => {
       expect(resp).toBeDefined();
     })
-    expect(service).toBeTruthy();
+
     const req = httpMock.expectOne(`${environment.URL_API_CUIDA}/${urlRecurso}/crearMovil`
       , "crear moviles")
     expect(req.request.method).toBe('POST');
@@ -155,7 +155,7 @@ describe('AdminPersonalService', () => {
     service.actualizarMovil(movil).subscribe(resp => {
       expect(resp).toBeDefined();
     })
-    expect(service).toBeTruthy();
+
     const req = httpMock.expectOne(`${environment.URL_API_CUIDA}/${urlRecurso}/actualizarMovil`
       , "actualizar moviles")
     expect(req.request.method).toBe('PUT');
@@ -166,7 +166,7 @@ describe('AdminPersonalService', () => {
     service.getProfesionalesWithTurno(fechaTurno, idRegional).subscribe(resp => {
       expect(resp).toBeDefined();
     })
-    expect(service).toBeTruthy();
+
     const req = httpMock.expectOne(`${environment.URL_API_CUIDA}/${urlRecurso}/horarioTurno?fechaTurno=${fechaTurno}&idRegional=${idRegional}`
       , "profesionales con turno")
     expect(req.request.method).toBe('GET');
@@ -176,7 +176,7 @@ describe('AdminPersonalService', () => {
     service.actualizarTurnoProfesional(turnos).subscribe(resp => {
       expect(resp).toBeDefined();
     })
-    expect(service).toBeTruthy();
+
     const req = httpMock.expectOne(`${environment.URL_API_CUIDA}/${urlRecurso}/actualizarTurnoProfesional`
       , "actualizar turno profesional")
     expect(req.request.method).toBe('PUT');
@@ -186,7 +186,7 @@ describe('AdminPersonalService', () => {
     service.eliminarTurnoProfesionalAccionMasiva(turnos).subscribe(resp => {
       expect(resp).toBeDefined();
     })
-    expect(service).toBeTruthy();
+
     const req = httpMock.expectOne(`${environment.URL_API_CUIDA}/${urlRecurso}/eliminarTurnosProfesionalesAccionMasiva`
       , "eliminar turno profesional accion masiva")
     expect(req.request.method).toBe('POST');
@@ -196,7 +196,7 @@ describe('AdminPersonalService', () => {
     service.asignarTurnoProfesionalAccionMasiva(turnos).subscribe(resp => {
       expect(resp).toBeDefined();
     })
-    expect(service).toBeTruthy();
+
     const req = httpMock.expectOne(`${environment.URL_API_CUIDA}/${urlRecurso}/asignarTurnosProfesionalesAccionMasiva`
       , "asignar turno profesional accion masiva")
     expect(req.request.method).toBe('POST');
@@ -207,7 +207,7 @@ describe('AdminPersonalService', () => {
     service.getSecuenciasTurno().subscribe(resp => {
       expect(resp).toBeDefined();
     })
-    expect(service).toBeTruthy();
+
     const req = httpMock.expectOne(`${environment.URL_API_CUIDA}/${urlRecurso}/secuenciasTurno`
       , "consultar secuencias")
     expect(req.request.method).toBe('GET');
@@ -217,7 +217,7 @@ describe('AdminPersonalService', () => {
     service.crearSecuenciaTurno(secuencia).subscribe(resp => {
       expect(resp).toBeDefined();
     })
-    expect(service).toBeTruthy();
+
     const req = httpMock.expectOne(`${environment.URL_API_CUIDA}/${urlRecurso}/secuenciasTurno`
       , "crear secuencia turno")
     expect(req.request.method).toBe('POST');

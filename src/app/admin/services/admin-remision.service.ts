@@ -27,7 +27,7 @@ export class AdminRemisionService {
 
   //remisiones pacientes
   getPacienteByRemision(idRemision: string) {
-    return this.http.get<Respuesta>(`${environment.URL_API_CUIDA}/${this.urlRecurso}/pacienteFromRemision/${idRemision}`)
+    return this.http.get<Respuesta>(`${environment.URL_API_CUIDA}/${this.urlRecurso}/pacienteRemision/${idRemision}`)
 
   }
 

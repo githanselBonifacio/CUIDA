@@ -15,7 +15,7 @@ describe('DiagramaPiechartComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('crear componente', () => {
     expect(component).toBeTruthy();
   });
 });

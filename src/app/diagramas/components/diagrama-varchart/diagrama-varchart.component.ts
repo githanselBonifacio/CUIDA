@@ -11,7 +11,7 @@ export interface Data {
   styleUrls: ['./diagrama-varchart.component.css']
 })
 
-export class DiagramaVarchartComponent implements OnInit, OnChanges {
+export class DiagramaVarchartComponent implements OnInit, OnChanges, AfterViewInit {
 
 
 
@@ -31,6 +31,11 @@ export class DiagramaVarchartComponent implements OnInit, OnChanges {
       this.normalizarEjeY();
     }
 
+  }
+  ngAfterViewInit(): void {
+    Promise.resolve().then(() => {
+      this.sizeContentInit = this.chartContent?.nativeElement.offsetWidth ?? 0;
+    })
   }
 
 
@@ -59,9 +64,10 @@ export class DiagramaVarchartComponent implements OnInit, OnChanges {
   valueMaxY: number = 0;
   maxColLegend: number = 74;
 
+  sizeContentInit: number = 0;
 
   get sizeContentPx() {
-    return `${this.chartContent?.nativeElement.offsetWidth ?? 0}px`
+    return `${this.sizeContentInit}px`
   }
   get titleY() {
     return `${this.titleEjeY} ( ${this.unitEjeY})`

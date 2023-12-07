@@ -47,10 +47,10 @@
             <div class="col">
               <h5>Ubicación</h5>
               <div style="display: flex;">
-                <div> <span> {{paciente.ubicacion.direccion}} </span> </div>
-                <div> <span>, {{paciente.ubicacion.barrio}} :: </span> </div>
+                <div> <span> {{paciente.ubicacion?.direccion}} </span> </div>
+                <div> <span>, {{paciente.ubicacion?.barrio}} :: </span> </div>
 
-                <div *ngIf="paciente.ubicacion.sinNomenclatura" class="item-procedimiento">
+                <div *ngIf="paciente.ubicacion?.sinNomenclatura" class="item-procedimiento">
                   <div class="badge-advertencia">
                     <span>Sin Nomenclatura</span>
                   </div>

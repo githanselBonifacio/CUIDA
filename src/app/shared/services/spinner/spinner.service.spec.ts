@@ -10,7 +10,21 @@ describe('SpinnerServiceService', () => {
     service = TestBed.inject(SpinnerService);
   });
 
-  it('should be created', () => {
+  it('crear servicio', () => {
     expect(service).toBeTruthy();
   });
+
+  it('mostrar spinner', () => {
+    service.show();
+    service.spinnerObservable.subscribe(resp => {
+      expect(resp).toBeTruthy();
+    })
+  })
+
+  it('ocultar spinner', () => {
+    service.hide();
+    service.spinnerObservable.subscribe(resp => {
+      expect(resp).toBeFalsy();
+    })
+  })
 });

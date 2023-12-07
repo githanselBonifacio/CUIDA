@@ -3,7 +3,7 @@
   <mat-form-field style="width:20rem;">
     <mat-label>Seleccione profesional</mat-label>
     <mat-select [(ngModel)]="opcionProfesional">
-      <mat-option *ngFor="let profesional of data['profesionales']" [value]="profesional.numeroIdentificacion"
+      <mat-option *ngFor="let profesional of profesionales" [value]="profesional.numeroIdentificacion"
         [ngClass]="'option-profesional'">
 
         <div class="opcion-profesional-card">
@@ -16,7 +16,7 @@
         </div>
 
       </mat-option>
-      <mat-option *ngIf="data['profesionales'].length == 0" disabled [value]="null">No hay profesionales
+      <mat-option *ngIf="profesionales?.length == 0" disabled [value]="null">No hay profesionales
         disponibles</mat-option>
     </mat-select>
   </mat-form-field>

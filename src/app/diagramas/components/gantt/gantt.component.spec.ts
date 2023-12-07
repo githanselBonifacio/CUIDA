@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { GanttComponent } from './gantt.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 describe('GanttComponent', () => {
   let component: GanttComponent;
@@ -8,14 +9,17 @@ describe('GanttComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [GanttComponent]
+      declarations: [GanttComponent],
+      imports: [
+        MatDialogModule
+      ]
     });
     fixture = TestBed.createComponent(GanttComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('crear componente', () => {
     expect(component).toBeTruthy();
   });
 });

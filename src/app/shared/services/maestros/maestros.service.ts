@@ -53,14 +53,14 @@ export class MaestrosService {
     }
   }
 
-  getEstadosCita() {
+  async getEstadosCita() {
     return this.http.get<Respuesta>(`${environment.URL_API_CUIDA}/${this.resourceUrl}/estadosCita`)
       .subscribe(resp => {
         this.estadosCita = resp.result;
       })
   }
 
-  getProfesiones() {
+  async getProfesiones() {
     return this.http.get<Respuesta>(`${environment.URL_API_CUIDA}/${this.resourceUrl}/profesiones`)
       .subscribe(resp => {
         this.profesiones = resp.result;

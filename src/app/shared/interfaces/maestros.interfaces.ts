@@ -57,7 +57,7 @@ export function formatoFecha(date: Date | string): string {
 }
 
 export interface EstadoCita {
-    id: string,
+    id: number,
     nombre: string,
 }
 

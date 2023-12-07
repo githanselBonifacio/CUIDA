@@ -9,16 +9,26 @@ import { ProcedimientosHistorial, TratamientoHistorial } from 'src/app/admin/int
 })
 export class ItemsCitaComponent {
 
-  @Input() procedimientos!: ProcedimientosHistorial;
-  @Input() tratamientos!: TratamientoHistorial[];
+  @Input() procedimientos: ProcedimientosHistorial = {
+    canalizaciones: [],
+    fototerapias: [],
+    sondajes: [],
+    soporteNutricionales: [],
+    tomaMuestras: [],
+    curaciones: [],
+    secreciones: []
+
+  };
+  @Input() tratamientos: TratamientoHistorial[] = [];
 
   contieneProcedimientos() {
-    return this.procedimientos?.curaciones == null &&
-      this.procedimientos?.canalizaciones == null &&
-      this.procedimientos?.secreciones == null &&
-      this.procedimientos?.fototerapias == null &&
-      this.procedimientos?.tomaMuestras == null &&
-      this.procedimientos?.sondajes == null &&
-      this.procedimientos?.soporteNutricionales == null
+
+    return this.procedimientos?.curaciones?.length == 0 &&
+      this.procedimientos?.canalizaciones?.length == 0 &&
+      this.procedimientos?.secreciones?.length == 0 &&
+      this.procedimientos?.fototerapias?.length == 0 &&
+      this.procedimientos?.tomaMuestras?.length == 0 &&
+      this.procedimientos?.sondajes?.length == 0 &&
+      this.procedimientos?.soporteNutricionales?.length == 0
   }
 }

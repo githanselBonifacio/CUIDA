@@ -9,13 +9,13 @@ describe('MapPuntoUnicoComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [MapPuntoUnicoComponent]
-    });
+    }).compileComponents();
     fixture = TestBed.createComponent(MapPuntoUnicoComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('crear componente', () => {
     expect(component).toBeTruthy();
   });
 });

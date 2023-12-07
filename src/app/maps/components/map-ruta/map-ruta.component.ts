@@ -24,27 +24,30 @@ export class MapRutaComponent implements AfterViewInit {
     let map = new mapboxgl.Map({
       container: this.divMap?.nativeElement, // container ID
       style: 'mapbox://styles/mapbox/streets-v12', // style URL
-      center: [this.tareas[0].longitud, this.tareas[0].latitud], // starting position [lng, lat]
+      center: [this.tareas[0]?.longitud ?? 0, this.tareas[0]?.latitud ?? 0], // starting position [lng, lat]
       zoom: 15,
 
     });
 
-    let limites = new mapboxgl.LngLatBounds()
+    let limites = new mapboxgl.LngLatBounds();
 
-    for (let tarea of this.tareas) {
-      if (tarea.tipo != "dvisita") {
+    for (let i = 0; i < this.tareas.length; i++) {
+      if (this.tareas[i].tipo != "dvisita") {
         let marker = new mapboxgl.Marker({
           color: '#0033A0'
         })
-          .setLngLat([tarea.longitud, tarea.latitud])
+          .setLngLat([this.tareas[i].longitud, this.tareas[i].latitud])
           .addTo(map);
         limites.extend(marker.getLngLat())
       }
     }
 
-    map.fitBounds(limites, {
-      padding: 50
-    })
+    if (!limites.isEmpty()) {
+      map.fitBounds(limites, {
+        padding: 50
+      })
+    }
+
   }
 
 }

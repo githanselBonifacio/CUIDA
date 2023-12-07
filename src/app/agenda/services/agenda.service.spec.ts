@@ -53,7 +53,7 @@ describe('AgendaService', () => {
 
 
   it('consultar todos los profesionales en turno en regional', () => {
-    service.getProfesionaFromTurnoRegional(fechaTurno, idRegional, idHorarioTurno).subscribe(resp => {
+    service.getProfesionaTurnoRegional(fechaTurno, idRegional, idHorarioTurno).subscribe(resp => {
       expect(resp).toBeDefined();
     })
 

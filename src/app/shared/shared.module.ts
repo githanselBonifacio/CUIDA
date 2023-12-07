@@ -30,8 +30,6 @@ import { PlaceholderTableComponent } from './components/placeholder-table/placeh
     AdminComponent,
     SpinnerComponent,
     ToastComponent,
-
-
   ],
   imports: [
     CommonModule,

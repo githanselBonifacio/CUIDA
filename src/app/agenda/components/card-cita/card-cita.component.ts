@@ -1,6 +1,6 @@
-import { Component, Input, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 
-import { Cita } from '../../interfaces/remision.interface';
+import { Cita, EstadosCita } from '../../interfaces/remision.interface';
 
 import { MatDialog } from '@angular/material/dialog'
 import { ModalSeleccionProfesionalComponent } from '../modal-seleccion-profesional/modal-seleccion-profesional.component';
@@ -9,11 +9,11 @@ import { AgendaService } from 'src/app/agenda/services/agenda.service';
 import { ModalCambioHoraCitaComponent } from '../modal-cambio-hora-cita/modal-cambio-hora-cita.component';
 import { ModalDetalleRemisionComponent } from '../modal-detalle-remision/modal-detalle-remision.component';
 import { switchMap, filter, tap } from 'rxjs/operators';
-import { ToastComponent, ToastType, TitleToast, crearConfig } from 'src/app/shared/components/toast/toast.component';
-import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
+import { ToastType, TitleToast } from 'src/app/shared/components/toast/toast.component';
 import { EstadoCita, funtionGetNombreEstadoCitaById } from 'src/app/shared/interfaces/maestros.interfaces';
 import localeEs from '@angular/common/locales/es';
 import { DatePipe, registerLocaleData } from '@angular/common';
+import { ToastService } from 'src/app/shared/services/toast/toast.service';
 
 @Component({
   selector: 'app-agenda-card-cita',
@@ -22,37 +22,29 @@ import { DatePipe, registerLocaleData } from '@angular/common';
   providers: [DatePipe]
 })
 export class CardCitaComponent {
-  @Input()
-  public cita!: Cita;
-  @Input()
-  public estadosCita: EstadoCita[] = [];
+  @Input() public cita?: Cita;
+  @Input() public estadosCita: EstadoCita[] = [];
+  @Input() public idRegional: string = '';
+  @Input() public fechaTurno: string = new Date().toISOString().slice(0, 10);
+  @Input() public idHorarioTurno: number = 0
 
-  @Output()
-  actualizarMainView = new EventEmitter();
-
-  citaSeleccionada: Cita | any = {};
-
-  @Input()
-  public idRegional: string = '';
-  @Input()
-  public fechaTurno: string = new Date().toISOString().slice(0, 10);
-  @Input()
-  public idHorarioTurno: number = 0
+  @Output() actualizarMainView = new EventEmitter();
 
   convertEstado = funtionGetNombreEstadoCitaById;
   constructor(
     private dialogo: MatDialog,
     private agendaService: AgendaService,
-    private _snackBar: MatSnackBar,
+    private toastService: ToastService,
     private datePipe: DatePipe
   ) {
     registerLocaleData(localeEs);
   }
 
 
-  asignarProfesionalCita(citaSeleccionada: Cita): void {
+  asignarProfesionalCita(): void {
+
     this.agendaService
-      .getProfesionaFromTurnoRegional(this.fechaTurno, this.idRegional, this.idHorarioTurno)
+      .getProfesionaTurnoRegional(this.fechaTurno, this.idRegional, this.idHorarioTurno)
       .pipe(
         tap(({ result: profesionales }) => {
           const dialogRef = this.dialogo.open(ModalSeleccionProfesionalComponent, {
@@ -64,66 +56,64 @@ export class CardCitaComponent {
             .subscribe(opcionProfesional => {
 
               this.agendaService.asignarProfesionaByIdCita(
-                citaSeleccionada.idCita,
+                this.cita!.idCita,
                 opcionProfesional,
-                this.datePipe.transform(citaSeleccionada.fechaProgramada, 'yyyy-MM-dd HH:mm') ?? '',
+                this.datePipe.transform(this.cita!.fechaProgramada, 'yyyy-MM-dd HH:mm') ?? '',
                 this.idHorarioTurno,
                 this.idRegional
               ).subscribe(resp => {
                 if (resp.status == 200) {
 
-                  this.mostrarToast(ToastType.Success, TitleToast.Success, resp.message, 5);
+                  this.toastService.mostrarToast(ToastType.Success, TitleToast.Success, resp.message, 5);
+
                 } else {
-                  this.mostrarToast(ToastType.Error, TitleToast.Error, resp.message, 5);
+                  this.toastService.mostrarToast(ToastType.Error, TitleToast.Error, resp.message, 5);
+
                 }
                 this.actualizarComponenteMainAgenda();
-              }, error => {
-                this.mostrarToast(ToastType.Error, TitleToast.Error, "Error operación", 5);
+
               });
 
             });
         }),
       )
-      .subscribe();
   }
-  desagendarProfesionalCita(citaSeleccionada: Cita, mensaje: string): void {
-    this.citaSeleccionada = citaSeleccionada;
+
+
+
+  desagendarProfesionalCita(): void {
 
     const dialogRef = this.dialogo.open(VentanaConfirmacionComponent, {
       data: {
-        mensaje: mensaje
+        mensaje: "Desea desagendar cita ?"
       }
     });
     dialogRef.afterClosed()
       .pipe(
         filter(result => result),
         switchMap(() => this.agendaService.retirarProfesional(
-          citaSeleccionada.idCita,
-          citaSeleccionada.idProfesional ?? '',
+          this.cita!.idCita,
+          this.cita!.idProfesional ?? '',
           this.fechaTurno,
           this.idHorarioTurno,
           this.idRegional
         )))
       .subscribe(resp => {
         if (resp.status == 200) {
-          this.mostrarToast(ToastType.Success, TitleToast.Success, resp.message, 5)
+          this.toastService.mostrarToast(ToastType.Success, TitleToast.Success, resp.message, 5)
         } else {
-          this.mostrarToast(ToastType.Error, TitleToast.Error, resp.message, 5)
+          this.toastService.mostrarToast(ToastType.Error, TitleToast.Error, resp.message, 5)
         }
         this.actualizarComponenteMainAgenda()
+
       });
 
   }
 
-  reprogramarHoraCita(citaSeleccionada: Cita): void {
-    const fecha = new Date(citaSeleccionada.fechaProgramada);
-
-    const year = fecha.getFullYear();
-    const month = (fecha.getMonth() + 1).toString().padStart(2, '0');
-    const day = fecha.getDate().toString().padStart(2, '0');
+  reprogramarHoraCita(): void {
+    const fecha = new Date(this.cita!.fechaProgramada);
     const hours = fecha.getHours().toString().padStart(2, '0');
     const minutes = fecha.getMinutes().toString().padStart(2, '0');
-    const fechaFormateada = `${year}-${month}-${day} ${hours}:${minutes}`
     const horaActual = `${hours}:${minutes}`
 
     const dialogRef = this.dialogo.open(ModalCambioHoraCitaComponent, {
@@ -133,14 +123,15 @@ export class CardCitaComponent {
       switchMap(nuevaHora => {
         if (nuevaHora !== '') {
           return this.agendaService.reprogramarCita(
-            citaSeleccionada.idCita,
-            fechaFormateada,
+            this.cita!.idCita,
+            this.datePipe.transform(fecha, "yyyy-MM-dd HH:mm") ?? '',
             nuevaHora,
             this.idHorarioTurno,
             this.idRegional,
-            citaSeleccionada.idProfesional ?? ''
+            this.cita!.idProfesional ?? ''
           )
         } else {
+          this.toastService.mostrarToast(ToastType.Error, TitleToast.Error, "No se ha seleccionado hora", 5);
           throw Error('No se ha seleccionado hora');
         }
       }
@@ -148,27 +139,25 @@ export class CardCitaComponent {
       .subscribe(resp => {
 
         if (resp.status == 200) {
-          this.mostrarToast(ToastType.Success, TitleToast.Success, resp.message, 5)
+          this.toastService.mostrarToast(ToastType.Success, TitleToast.Success, resp.message, 5)
         } else {
-          this.mostrarToast(ToastType.Error, TitleToast.Error, resp.message, 5)
+          this.toastService.mostrarToast(ToastType.Error, TitleToast.Error, resp.message, 5)
         }
         this.actualizarComponenteMainAgenda()
       });
   }
 
-  mostrarDetalleCita(citaSeleccionada: Cita): void {
-    this.citaSeleccionada = citaSeleccionada;
+  mostrarDetalleCita(citaSeleccionada: Cita | undefined): void {
     const modalCita = this.dialogo.open(ModalDetalleRemisionComponent, {
-      data: this.citaSeleccionada
+      data: citaSeleccionada
     })
-
-
   }
 
-
-  mostrarToast(tipo: ToastType, titulo: TitleToast, mensaje: string, duracion: number) {
-    const config: MatSnackBarConfig = crearConfig(tipo, titulo, mensaje, duracion)
-    this._snackBar.openFromComponent(ToastComponent, config)
+  validarEstadoNoAgendado(cita: Cita | undefined) {
+    return cita?.idEstado == EstadosCita.sinAgendar;
+  }
+  validarEstadoAgendado(cita: Cita | undefined): boolean {
+    return cita?.idEstado == EstadosCita.agendada;
   }
 
   actualizarComponenteMainAgenda() {

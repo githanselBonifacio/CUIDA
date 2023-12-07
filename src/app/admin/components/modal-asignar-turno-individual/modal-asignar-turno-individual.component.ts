@@ -47,7 +47,7 @@ export class ModalAsignarTurnoIndividualComponent implements OnInit {
   get dia(): string {
     return this.data['dia']
   }
-  get profesional(): ProfesionalConTurnos {
+  get profesional(): ProfesionalConTurnos | undefined {
     return this.data['profesional']
   }
 
@@ -92,8 +92,8 @@ export class ModalAsignarTurnoIndividualComponent implements OnInit {
           idTurno: null,
           fechaTurno: this.fechaTurno,
           idHorarioTurno: this.horarioSeleccionado ?? 0,
-          idProfesional: this.profesional.numeroIdentificacion,
-          idRegional: this.profesional.idRegional
+          idProfesional: this.profesional?.numeroIdentificacion,
+          idRegional: this.profesional?.idRegional
         }
       } else if (this.horarioSeleccionado?.duracionHoras == 0) {
         this.mesajeValidacion = validacionDescansoTurno
@@ -107,8 +107,8 @@ export class ModalAsignarTurnoIndividualComponent implements OnInit {
           idTurno: null,
           fechaTurno: this.fechaTurno,
           idHorarioTurno: this.horarioSeleccionado ?? 0,
-          idProfesional: this.profesional.numeroIdentificacion,
-          idRegional: this.profesional.idRegional
+          idProfesional: this.profesional?.numeroIdentificacion,
+          idRegional: this.profesional?.idRegional
         }
       }
 

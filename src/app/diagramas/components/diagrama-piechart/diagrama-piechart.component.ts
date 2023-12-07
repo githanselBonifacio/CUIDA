@@ -1,12 +1,10 @@
-import { style } from '@angular/animations';
+
 import { Component, Input, ViewChild, HostListener, ElementRef, OnInit, AfterViewInit, OnChanges, SimpleChanges } from '@angular/core';
-import { stringify } from 'uuid';
 
 interface Data {
   name: string;
   value: number;
 }
-
 
 interface DataPieChar {
   name: string;
@@ -17,7 +15,6 @@ interface DataPieChar {
   labex: string | null;
   labely: string | null;
 }
-
 
 @Component({
   selector: 'app-diagrama-piechart',

@@ -26,7 +26,7 @@ export class AgendaService {
     return this.http.get<Respuesta>(`${environment.URL_API_CUIDA}/${this.urlRecurso}/profesionalesByTurnoRegional`, { params });
   }
 
-  getProfesionaFromTurnoRegional(fechaTurno: string, idRegional: string, idHorarioTurno: number) {
+  getProfesionaTurnoRegional(fechaTurno: string, idRegional: string, idHorarioTurno: number) {
     const params = new HttpParams()
       .set('fechaTurno', fechaTurno)
       .set('idRegional', idRegional)

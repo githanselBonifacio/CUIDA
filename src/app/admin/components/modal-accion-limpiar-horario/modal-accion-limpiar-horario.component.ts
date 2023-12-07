@@ -26,7 +26,7 @@ export class ModalAccionLimpiarHorarioComponent {
   semanaInput: any;
   fechasSemanas: any[] = [];
 
-  getFechasSemanas() {
+  extraerSemanaSecuencia() {
     let year = parseInt(this.semanaInput.substring(0, 4));
     let week = parseInt(this.semanaInput.substring(6));
     let date = new Date(year, 0, 1);
@@ -36,15 +36,26 @@ export class ModalAccionLimpiarHorarioComponent {
       days.push(new Date(date));
       date.setDate(date.getDate() + 1);
     }
+    return days;
+  }
 
+  validarInsercionSemanaSecuencia(days: Date[]) {
     const fechasBuscadas = this.fechasSemanas.find(fechas => JSON.stringify(fechas) === JSON.stringify(days));
+    return fechasBuscadas === undefined;
+  }
 
-    if (fechasBuscadas === undefined) {
+  agregarFechasSemanas() {
+    let days: Date[] = this.extraerSemanaSecuencia();
+    const validarInsercionSemana = this.validarInsercionSemanaSecuencia(days);
+
+    if (validarInsercionSemana) {
       this.fechasSemanas.push(days);
+
     } else {
       this.toastService.mostrarToast(ToastType.Info, TitleToast.Info, "Ya fue agregado esta semana", 5);
     }
   }
+
   eliminarSemana(fechasEliminar: any[]) {
     this.fechasSemanas = this.fechasSemanas.filter(fechas => JSON.stringify(fechas) != JSON.stringify(fechasEliminar));
   }

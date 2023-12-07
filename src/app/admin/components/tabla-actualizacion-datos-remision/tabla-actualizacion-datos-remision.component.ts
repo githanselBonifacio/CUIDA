@@ -19,18 +19,18 @@ export class TablaActualizacionDatosRemisionComponent implements OnInit {
 
   ngOnInit() {
     this.atributosDatosAtencion = [
-      this.registroAnterior.datosAtencion.nombreCuidador,
-      this.registroAnterior.datosAtencion.nombreResponsable,
-      this.registroAnterior.datosAtencion.telefonoPaciente,
-      this.registroAnterior.datosAtencion.celularPaciente,
-      `${this.registroAnterior.ubicacionPaciente.direccion}${this.registroAnterior.ubicacionPaciente.municipio}${this.registroAnterior.ubicacionPaciente.barrio}`,
+      this.registroAnterior?.datosAtencion.nombreCuidador,
+      this.registroAnterior?.datosAtencion.nombreResponsable,
+      this.registroAnterior?.datosAtencion.telefonoPaciente,
+      this.registroAnterior?.datosAtencion.celularPaciente,
+      `${this.registroAnterior?.ubicacionPaciente.direccion}${this.registroAnterior?.ubicacionPaciente.municipio}${this.registroAnterior?.ubicacionPaciente.barrio}`,
     ];
 
     this.atributosDatosPaciente = [
-      this.registroAnterior.paciente.sexo,
-      this.registroAnterior.paciente.edad,
-      this.registroAnterior.paciente.nombreAseguradora,
-      this.registroAnterior.paciente.tipoAfiliacion,
+      this.registroAnterior?.paciente.sexo,
+      this.registroAnterior?.paciente.edad,
+      this.registroAnterior?.paciente.nombreAseguradora,
+      this.registroAnterior?.paciente.tipoAfiliacion,
 
     ]
     this.tieneCambiosDatosPaciente = this.tieneCambiosPaciente();
@@ -45,18 +45,18 @@ export class TablaActualizacionDatosRemisionComponent implements OnInit {
   }
 
   tieneCambiosPaciente(): boolean {
-    return !this.existeEnDatosPaciente(this.registroNuevo.paciente.sexo) ||
-      !this.existeEnDatosPaciente(this.registroNuevo.paciente.edad) ||
-      !this.existeEnDatosPaciente(this.registroNuevo.paciente.nombreAseguradora) ||
-      !this.existeEnDatosPaciente(this.registroNuevo.paciente.tipoAfiliacion);
+    return !this.existeEnDatosPaciente(this.registroNuevo?.paciente.sexo) ||
+      !this.existeEnDatosPaciente(this.registroNuevo?.paciente.edad) ||
+      !this.existeEnDatosPaciente(this.registroNuevo?.paciente.nombreAseguradora) ||
+      !this.existeEnDatosPaciente(this.registroNuevo?.paciente.tipoAfiliacion);
   }
 
   tieneCambiosAtencion(): boolean {
-    return !this.existeEnDatosAtencion(this.registroNuevo.datosAtencion.nombreCuidador) ||
-      !this.existeEnDatosAtencion(this.registroNuevo.datosAtencion.nombreResponsable) ||
-      !this.existeEnDatosAtencion(this.registroNuevo.datosAtencion.telefonoPaciente) ||
-      !this.existeEnDatosAtencion(this.registroNuevo.datosAtencion.celularPaciente) ||
-      !this.existeEnDatosAtencion(`${this.registroAnterior.ubicacionPaciente.direccion}${this.registroAnterior.ubicacionPaciente.municipio}${this.registroAnterior.ubicacionPaciente.barrio}`)
+    return !this.existeEnDatosAtencion(this.registroNuevo?.datosAtencion.nombreCuidador) ||
+      !this.existeEnDatosAtencion(this.registroNuevo?.datosAtencion.nombreResponsable) ||
+      !this.existeEnDatosAtencion(this.registroNuevo?.datosAtencion.telefonoPaciente) ||
+      !this.existeEnDatosAtencion(this.registroNuevo?.datosAtencion.celularPaciente) ||
+      !this.existeEnDatosAtencion(`${this.registroAnterior?.ubicacionPaciente.direccion}${this.registroAnterior?.ubicacionPaciente.municipio}${this.registroAnterior?.ubicacionPaciente.barrio}`)
 
 
   }

@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Cita } from '../../interfaces/historialRemison.interface';
+import { CitaHitorial } from '../../interfaces/historialRemison.interface';
 import { EstadoCita, funtionGetNombreEstadoCitaById } from 'src/app/shared/interfaces/maestros.interfaces';
 import { v4 as uuidv4 } from 'uuid';
 import { MatDialog } from '@angular/material/dialog'
@@ -18,12 +18,12 @@ export class TablaHistorialCitasComponent implements OnInit {
   constructor(
     private dialogoDetalleCita: MatDialog,
   ) { }
-  @Input() public citas: Cita[] = [];
-  @Input() public nuevasCitas: Cita[] = [];
+  @Input() public citas: CitaHitorial[] = [];
+  @Input() public nuevasCitas: CitaHitorial[] = [];
   @Input() public estadosCita: EstadoCita[] = [];
   @Input() public isHistorial: boolean = false;
 
-  citasCompletas: Cita[] = [];
+  citasCompletas: CitaHitorial[] = [];
   convertEstados = funtionGetNombreEstadoCitaById;
 
   ngOnInit() {
@@ -34,11 +34,11 @@ export class TablaHistorialCitasComponent implements OnInit {
         idEstado: 0
       }
     });
-    this.citasCompletas = this.citas.concat(this.nuevasCitas);
+    this.citasCompletas = this.citas?.concat(this.nuevasCitas);
 
   }
 
-  mostrarModalDetalleCita(citaSeleccionada: Cita): void {
+  mostrarModalDetalleCita(citaSeleccionada: CitaHitorial): void {
     const modalCita = this.dialogoDetalleCita.open(ModalDetalleCitasHistorialComponent, {
       data: citaSeleccionada
     })

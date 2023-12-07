@@ -1,4 +1,4 @@
-<div class="content-item" *ngIf="citasCompletas.length >0">
+<div class="content-item" *ngIf="citasCompletas?.length??0>0">
     <h6 *ngIf="isHistorial">Actualización de citas</h6>
 
     <div class="paginador" *ngIf="citasCompletas.length >4">

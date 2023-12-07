@@ -17,7 +17,7 @@ export class ModalInfoResultadosAccionMasivaHorarioComponent implements OnInit {
   informacionMostrada: any[] = [];
 
   ngOnInit(): void {
-    this.informacionMostrada = this.turnos.map((t: any) => {
+    this.informacionMostrada = this.turnos?.map((t: any) => {
       return {
         "profesional": this.profesionales.find(p => p.numeroIdentificacion == t.idProfesional),
         "fechaTurno": t.fechaTurno

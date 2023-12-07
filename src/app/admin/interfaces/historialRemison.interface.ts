@@ -14,14 +14,14 @@ export interface HistorialRemision {
     ubicacionPaciente: Ubicacion;
     datosAtencion: DatosAtencionRemision;
     diagnosticos: Diagnostico[];
-    citas: Cita[];
-    citasNuevas: Cita[];
+    citas: CitaHitorial[];
+    citasNuevas: CitaHitorial[];
     cambioDatosPaciente: boolean;
     cambioDatosAtencion: boolean;
 
 }
 
-export interface Cita {
+export interface CitaHitorial {
     idCita: string;
     latitud: number;
     duracion: number;
@@ -35,22 +35,22 @@ export interface Cita {
     idConductor: string | null;
     idProfesional: string | null;
     fechaProgramada: Date;
-    tratamientos: Tratamiento[];
-    procedimientos: Procedimientos;
+    tratamientos: TratamientoHistorial[];
+    procedimientos: ProcedimientosHistorial;
 }
 
-export interface Procedimientos {
+export interface ProcedimientosHistorial {
     sondajes: Sondaje[];
     curaciones: Curacion[];
     secreciones: Secrecion[];
     fototerapias: Fototerapia[];
     canalizaciones: Canalizacion[];
-    tomaMuestra: TomaMuestra[];
+    tomaMuestras: TomaMuestra[];
     soporteNutricionales: SoporteNutricional[];
 }
 
 
-export interface Tratamiento {
+export interface TratamientoHistorial {
     noPbs: boolean;
     idCita: string;
     duracion: number;

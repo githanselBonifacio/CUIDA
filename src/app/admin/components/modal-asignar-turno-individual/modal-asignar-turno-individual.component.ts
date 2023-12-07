@@ -2,6 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { ConvertMaestros, ProfesionalConTurnos, Turno } from 'src/app/agenda/interfaces/profesional.interface';
 import { HorarioTurno } from 'src/app/shared/interfaces/maestros.interfaces';
+import { validacionDescansoTurno, validarHorasMaximasTrabajadas } from '../../interfaces/mensajes.data';
 
 @Component({
   selector: 'app-modal-asignar-turno-individual',
@@ -54,23 +55,85 @@ export class ModalAsignarTurnoIndividualComponent implements OnInit {
     return this.data['horariosTurno']
   }
   get turnosDia(): Turno[] {
-    return this.profesional.turnos.filter(t => `${t.fechaTurno}`.slice(8) == this.dia)
+    let turnos: Turno[] = this.profesional?.turnos ?? [];
+    if (turnos.length > 0) {
+      return turnos.filter(t => `${t.fechaTurno}`.slice(8) == this.dia) ?? [];
+    }
+    else {
+      return [];
+    }
   }
 
-
-  onClose(): void {
-    this.dialogRef.close(null);
-  }
   filtrarListaHorariosDisponibles() {
-
-    this.horariosTurnoValidos = this.horariosTurno.slice()
+    this.horariosTurnoValidos = this.horariosTurno?.slice()
       .filter(h => this.turnosDiaHorario.find(t => t.idHorarioTurno.nombre == h.nombre) == undefined);
   }
+
   actualizarHorasTrabajadas() {
     this.totalHorasTrabajadas = this.turnosDiaHorario
       .map(t => t.idHorarioTurno.duracionHoras)
       .reduce((total, h) => total + h, 0);
   }
+
+  eliminarTurno(idHorarioTurno: number) {
+    this.mesajeValidacion = "";
+    this.turnosDiaHorario = this.turnosDiaHorario.filter(h => h.idHorarioTurno.id !== idHorarioTurno)
+    this.actualizarHorasTrabajadas();
+    this.filtrarListaHorariosDisponibles();
+    this.seRealizoCambioTurno = true;
+  }
+
+  buildNuevoTurno() {
+    let nuevoTurno: Turno | any = null;
+    if (this.horarioSeleccionado != null) {
+
+      if (this.turnosDiaHorario.length == 0) {
+        nuevoTurno = {
+          idTurno: null,
+          fechaTurno: this.fechaTurno,
+          idHorarioTurno: this.horarioSeleccionado ?? 0,
+          idProfesional: this.profesional.numeroIdentificacion,
+          idRegional: this.profesional.idRegional
+        }
+      } else if (this.horarioSeleccionado?.duracionHoras == 0) {
+        this.mesajeValidacion = validacionDescansoTurno
+
+      } else if (this.totalHorasTrabajadas + this.horarioSeleccionado?.duracionHoras > this.horasMaximasTrabajadas) {
+
+        this.mesajeValidacion = `${validarHorasMaximasTrabajadas} ${this.horasMaximasTrabajadas} horas`
+      } else {
+        this.mesajeValidacion = "";
+        nuevoTurno = {
+          idTurno: null,
+          fechaTurno: this.fechaTurno,
+          idHorarioTurno: this.horarioSeleccionado ?? 0,
+          idProfesional: this.profesional.numeroIdentificacion,
+          idRegional: this.profesional.idRegional
+        }
+      }
+
+    }
+    return nuevoTurno;
+  }
+  agregarNuevoTurno() {
+
+    const nuevoTurno = this.buildNuevoTurno();
+    if (nuevoTurno != null) {
+      this.turnosDiaHorario.push(nuevoTurno);
+
+      if (nuevoTurno.idHorarioTurno.nombre == 'D') {
+        this.horariosTurnoValidos = [];
+      } else {
+        this.filtrarListaHorariosDisponibles();
+      }
+      this.horarioSeleccionado = undefined;
+      this.actualizarHorasTrabajadas();
+      this.seRealizoCambioTurno = true;
+
+    }
+  }
+
+
   onConfirm(): void {
     const turnosData = this.turnosDiaHorario.map(t => {
       return {
@@ -83,60 +146,9 @@ export class ModalAsignarTurnoIndividualComponent implements OnInit {
     } else {
       this.dialogRef.close(null);
     }
-
-
-  }
-  eliminarTurno(idHorarioTurno: number) {
-    this.mesajeValidacion = "";
-    this.turnosDiaHorario = this.turnosDiaHorario.filter(h => h.idHorarioTurno.id !== idHorarioTurno)
-    this.actualizarHorasTrabajadas();
-    this.filtrarListaHorariosDisponibles();
-    this.seRealizoCambioTurno = true;
   }
 
-  agregarNuevoTurno() {
-    let nuevoturno: Turno | any = null;
-
-    if (this.horarioSeleccionado != null) {
-
-      if (this.turnosDiaHorario.length == 0) {
-        nuevoturno = {
-          idTurno: null,
-          fechaTurno: this.fechaTurno,
-          idHorarioTurno: this.horarioSeleccionado ?? 0,
-          idProfesional: this.profesional.numeroIdentificacion,
-          idRegional: this.profesional.idRegional
-        }
-      } else if (this.horarioSeleccionado?.duracionHoras == 0) {
-        this.mesajeValidacion = `Si selecciona descanso no puede agregar otro turno`
-
-      } else if (this.totalHorasTrabajadas + this.horarioSeleccionado?.duracionHoras > this.horasMaximasTrabajadas) {
-
-        this.mesajeValidacion = `La suma de horas debe ser menor a ${this.horasMaximasTrabajadas} horas`
-      } else {
-        this.mesajeValidacion = "";
-        nuevoturno = {
-          idTurno: null,
-          fechaTurno: this.fechaTurno,
-          idHorarioTurno: this.horarioSeleccionado ?? 0,
-          idProfesional: this.profesional.numeroIdentificacion,
-          idRegional: this.profesional.idRegional
-        }
-      }
-
-    }
-    if (nuevoturno != null) {
-      this.turnosDiaHorario.push(nuevoturno);
-      if (nuevoturno.idHorarioTurno.nombre == 'D') {
-        this.horariosTurnoValidos = [];
-      } else {
-        this.filtrarListaHorariosDisponibles();
-      }
-      this.horarioSeleccionado = undefined;
-      this.actualizarHorasTrabajadas();
-      this.seRealizoCambioTurno = true;
-
-    }
+  onClose(): void {
+    this.dialogRef.close(null);
   }
-
 }

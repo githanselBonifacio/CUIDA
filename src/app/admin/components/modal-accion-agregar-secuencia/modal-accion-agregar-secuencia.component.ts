@@ -31,8 +31,7 @@ export class ModalAccionAgregarSecuenciaComponent {
   secuenciasSemana: any[] = [];
 
 
-
-  getFechasSemanas() {
+  extraerSemanaSecuencia() {
     let year = parseInt(this.semanaInput.substring(0, 4));
     let week = parseInt(this.semanaInput.substring(6));
     let date = new Date(year, 0, 1);
@@ -42,16 +41,27 @@ export class ModalAccionAgregarSecuenciaComponent {
       days.push(new Date(date));
       date.setDate(date.getDate() + 1);
     }
+    return days;
+  }
 
+  validarInsercionSemanaSecuencia(days: Date[]) {
     const fechasBuscadas = this.secuenciasSemana.find(sc => JSON.stringify(sc.semana) === JSON.stringify(days));
+    return fechasBuscadas === undefined;
+  }
 
-    if (fechasBuscadas === undefined) {
+  agregarFechaSecuencia() {
+    let days: Date[] = this.extraerSemanaSecuencia();
+    const validarInsercionSemana = this.validarInsercionSemanaSecuencia(days);
+
+    if (validarInsercionSemana) {
       this.secuenciasSemana.push({ "secuencia": {}, "semana": days });
 
     } else {
       this.toastService.mostrarToast(ToastType.Info, TitleToast.Info, "Ya fue agregado esta semana", 5);
     }
   }
+
+
   eliminarSemana(fechasEliminar: any[]) {
     this.secuenciasSemana = this.secuenciasSemana.filter(sc => JSON.stringify(sc.semana) != JSON.stringify(fechasEliminar));
   }
@@ -100,7 +110,7 @@ export class ModalAccionAgregarSecuenciaComponent {
       .flat();
   }
 
-  validarFormulario() {
+  validarSecuencias() {
     const todosConSecuencia = this.secuenciasSemana.map(s => Object.keys(s.secuencia).length > 0)
       .reduce((accumulator, currentValue) => accumulator && currentValue, true);
 

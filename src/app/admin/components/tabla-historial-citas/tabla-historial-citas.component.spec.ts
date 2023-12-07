@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { TablaHistorialCitasComponent } from './tabla-historial-citas.component';
+import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 
 describe('TablaHistorialCitasComponent', () => {
   let component: TablaHistorialCitasComponent;
@@ -8,14 +9,17 @@ describe('TablaHistorialCitasComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [TablaHistorialCitasComponent]
-    });
+      declarations: [TablaHistorialCitasComponent],
+      providers: [
+        { provide: MatDialog, useValue: {} },
+      ]
+    }).compileComponents();
     fixture = TestBed.createComponent(TablaHistorialCitasComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('crear componente', () => {
     expect(component).toBeTruthy();
   });
 });

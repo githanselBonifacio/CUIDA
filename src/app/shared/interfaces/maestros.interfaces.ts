@@ -62,7 +62,7 @@ export interface EstadoCita {
 }
 
 function getNombreEstadoCitaById(id: string | number, list: EstadoCita[]): string | undefined {
-    const item = list.find(item => item.id == id);
+    const item = list?.find(item => item.id == id);
     return item?.nombre;
 }
 

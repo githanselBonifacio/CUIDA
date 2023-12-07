@@ -6,8 +6,8 @@
             </div>
 
             <div class="d-flex">
-                <input type="week" [(ngModel)]="semanaInput">
-                <button class="buttom-i" (click)="getFechasSemanas()">
+                <input id="semanaSeleccionada" type="week" [(ngModel)]="semanaInput">
+                <button class="buttom-i" (click)="agregarFechaSecuencia()">
                     <i class="bi bi-plus-circle-fill"></i>
                 </button>
             </div>
@@ -66,7 +66,7 @@
         </div>
         <div class="item-vertical">
             <div class="container-buttom-flex">
-                <button class="buttom-second" (click)="enviar()" [disabled]="!validarFormulario()">Enviar</button>
+                <button class="buttom-second" (click)="enviar()" [disabled]="!validarSecuencias()">Enviar</button>
                 <button class="buttom-red" (click)="cancel()">Cancelar</button>
             </div>
         </div>

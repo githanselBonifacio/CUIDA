@@ -1,6 +1,5 @@
 import { Component, OnInit, Inject, OnChanges, SimpleChanges } from '@angular/core';
 import { MaestrosService } from 'src/app/shared/services/maestros/maestros.service';
-import { AdminRemisionService } from '../../services/admin-remision.service';
 import { ItemDiaTurno, Secuencia } from 'src/app/agenda/interfaces/profesional.interface';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { AccionFormulario } from '../../interfaces/enum';
@@ -66,14 +65,7 @@ export class ModalConfiguracionSecuenciaComponent implements OnInit, OnChanges {
     }
   }
 
-  getDuracionTotal(horariosTurno: HorarioTurno[]): number {
-    let duracionTotal = 0;
-    for (const horario of horariosTurno) {
-      duracionTotal += horario.duracionHoras;
-    }
-    return duracionTotal;
-  }
-  get horariosturno() {
+  get horariosTurno() {
     return this.maestrosService.horariosTurno;
   }
   get secuencia(): Secuencia {
@@ -83,12 +75,17 @@ export class ModalConfiguracionSecuenciaComponent implements OnInit, OnChanges {
     return this.data['accion']
   }
 
+  calcularDuracionTotal(horariosTurno: HorarioTurno[]): number {
+    let duracionTotal = 0;
+    for (const horario of horariosTurno) {
+      duracionTotal += horario.duracionHoras;
+    }
+    return duracionTotal;
+  }
   calcularHorasTotales() {
     this.sumaTotalHoras = this.secuenciaEditable?.itemsDiaTurno.reduce((tot, item) => tot + item.horariosTurno.reduce((acc, curr) => acc + curr.duracionHoras, 0), 0) ?? 0
   }
-  onCancel() {
-    this.dialogRef.close(null);
-  }
+
 
   gethorariosSeleccionadosDiaTurno(numeroDia: number) {
     let itemTurnoDiaSeleccionado = this.secuenciaEditable?.itemsDiaTurno.find(itemTurno => itemTurno.numeroDia == numeroDia);
@@ -163,6 +160,11 @@ export class ModalConfiguracionSecuenciaComponent implements OnInit, OnChanges {
     }
 
   }
+
+  onCancel() {
+    this.dialogRef.close(null);
+  }
+
   mostrarOpciones(id: string) {
     const selectorHorario = document.getElementsByName("selector-horario");
     const selectorHorarioButtoms = document.getElementsByName("selector-horario-buttom");

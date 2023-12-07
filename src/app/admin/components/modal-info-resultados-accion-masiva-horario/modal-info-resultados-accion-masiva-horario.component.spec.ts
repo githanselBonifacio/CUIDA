@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ModalInfoResultadosAccionMasivaHorarioComponent } from './modal-info-resultados-accion-masiva-horario.component';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 describe('ModalInfoResultadosAccionMasivaHorarioComponent', () => {
   let component: ModalInfoResultadosAccionMasivaHorarioComponent;
@@ -8,14 +9,18 @@ describe('ModalInfoResultadosAccionMasivaHorarioComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [ModalInfoResultadosAccionMasivaHorarioComponent]
+      declarations: [ModalInfoResultadosAccionMasivaHorarioComponent],
+      providers: [
+        { provide: MatDialogRef, useValue: {} },
+        { provide: MAT_DIALOG_DATA, useValue: {} },
+      ]
     });
     fixture = TestBed.createComponent(ModalInfoResultadosAccionMasivaHorarioComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('crear componente', () => {
     expect(component).toBeTruthy();
   });
 });

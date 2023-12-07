@@ -4,10 +4,10 @@ import { HistorialRemision } from '../../interfaces/historialRemison.interface';
 import { AdminRemisionService } from '../../services/admin-remision.service';
 import { MaestrosService } from '../../../shared/services/maestros/maestros.service';
 import { EstadoCita } from 'src/app/shared/interfaces/maestros.interfaces';
-import { Cita } from '../../interfaces/historialRemison.interface';
 import localeEs from '@angular/common/locales/es';
 import { registerLocaleData } from '@angular/common';
-import { SpinnerService } from 'src/app/shared/services/spinner/spinner.service.service';
+
+
 @Component({
   selector: 'app-admin-historial-remision-page',
   templateUrl: './admin-historial-remision-page.component.html',
@@ -62,18 +62,6 @@ export class AdminHistorialRemisionPageComponent implements OnInit {
     this.router.navigate(['admin/remisiones']);
   }
 
-  agregarCitasEstadoAnterior(citaAnteriores: Cita[], citasNuevas: Cita[], fechaAplicacionNovedad: Date): Cita[] {
-    let cn: Cita[] = citasNuevas?.map(cita => ({ ...cita, datosCita: { ...cita, idEstado: "0" } })) ?? [];
-    cn = cn.filter(c => fechaAplicacionNovedad < c.fechaProgramada);
-    if (citaAnteriores != null) {
-      const ca: Cita[] = citaAnteriores.slice();
 
-      return ca.concat(cn);
-
-    } else {
-      cn = cn.filter(c1 => !this.remisionDataActual.citas.some((c2: { datosCita: { idCita: string; }; }) => c2.datosCita.idCita === c1.idCita));
-      return cn;
-    }
-  }
 
 }

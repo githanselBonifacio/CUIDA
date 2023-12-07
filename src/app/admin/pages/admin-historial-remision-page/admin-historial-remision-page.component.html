@@ -17,31 +17,31 @@
           <div class="col" id="datos-personales">
             <div class="row">
               <div class="col-2">Nombres</div>
-              <div class="col-3">{{remisionDataActual.paciente.nombres|titlecase}}</div>
+              <div class="col-3">{{remisionDataActual.paciente?.nombres|titlecase}}</div>
 
               <div class="col-2">Apellidos</div>
-              <div class="col-3">{{remisionDataActual.paciente.apellidos|titlecase}}</div>
+              <div class="col-3">{{remisionDataActual.paciente?.apellidos|titlecase}}</div>
 
               <div class="col">Genero</div>
-              <div class="col">{{remisionDataActual.paciente.sexo}}</div>
+              <div class="col">{{remisionDataActual.paciente?.sexo}}</div>
 
             </div>
             <div class="row">
               <div class="col-2">Tipo identificación</div>
-              <div class="col-3">{{remisionDataActual.paciente.tipoIdentificacion}}</div>
+              <div class="col-3">{{remisionDataActual.paciente?.tipoIdentificacion}}</div>
 
               <div class="col-2">Número identificación</div>
-              <div class="col-3">{{remisionDataActual.paciente.numeroIdentificacion}}</div>
+              <div class="col-3">{{remisionDataActual.paciente?.numeroIdentificacion}}</div>
 
               <div class="col">Edad</div>
-              <div class="col">{{remisionDataActual.paciente.edad}} años</div>
+              <div class="col">{{remisionDataActual.paciente?.edad}} años</div>
             </div>
             <div class="row">
               <div class="col-2">Plan salud</div>
-              <div class="col-3">{{remisionDataActual.paciente.tipoAfiliacion}}</div>
+              <div class="col-3">{{remisionDataActual.paciente?.tipoAfiliacion}}</div>
 
               <div class="col-2">Aseguradora</div>
-              <div class="col">{{remisionDataActual.paciente.nombreAseguradora}}</div>
+              <div class="col">{{remisionDataActual.paciente?.nombreAseguradora}}</div>
             </div>
 
           </div>
@@ -53,27 +53,27 @@
 
         <div class="row">
           <div class="col-2">Cuidador </div>
-          <div class="col">{{remisionDataActual.datosAtencion.nombreCuidador}}</div>
+          <div class="col">{{remisionDataActual.datosAtencion?.nombreCuidador}}</div>
           <div class="col-2"> Responsable</div>
-          <div class="col">{{remisionDataActual.datosAtencion.nombreResponsable}}</div>
+          <div class="col">{{remisionDataActual.datosAtencion?.nombreResponsable}}</div>
         </div>
         <div class="row">
           <div class="col-2">Telefono </div>
-          <div class="col">{{remisionDataActual.datosAtencion.telefonoPaciente}}</div>
+          <div class="col">{{remisionDataActual.datosAtencion?.telefonoPaciente}}</div>
           <div class="col-2">Celular</div>
-          <div class="col">{{remisionDataActual.datosAtencion.celularPaciente}}<span
-              *ngIf="remisionDataActual.datosAtencion.telefono_paciente2"> -
-              {{remisionDataActual.datosAtencion.celularPaciente2}}</span></div>
+          <div class="col">{{remisionDataActual.datosAtencion?.celularPaciente}}<span
+              *ngIf="remisionDataActual.datosAtencion?.telefono_paciente2"> -
+              {{remisionDataActual.datosAtencion?.celularPaciente2}}</span></div>
         </div>
         <div class="row">
           <div class="col-2">Ubicación</div>
           <div class="col">
             <div style="display: flex;">
-              <div> <span> {{remisionDataActual.ubicacionPaciente.direccion}} </span> </div>
-              <div> <span>, {{remisionDataActual.ubicacionPaciente.municipio|titlecase}} </span> </div>
-              <div> <span>, Barrio {{remisionDataActual.ubicacionPaciente.barrio}}</span> </div>
+              <div> <span> {{remisionDataActual.ubicacionPaciente?.direccion}} </span> </div>
+              <div> <span>, {{remisionDataActual.ubicacionPaciente?.municipio|titlecase}} </span> </div>
+              <div> <span>, Barrio {{remisionDataActual.ubicacionPaciente?.barrio}}</span> </div>
 
-              <div *ngIf="remisionDataActual.ubicacionPaciente.sin_nomenclatura">
+              <div *ngIf="remisionDataActual.ubicacionPaciente?.sin_nomenclatura">
                 <span id="badge-advertencia"> Sin Nomenclatura</span>
               </div>
 

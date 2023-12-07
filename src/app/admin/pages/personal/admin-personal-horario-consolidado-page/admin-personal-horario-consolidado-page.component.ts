@@ -50,7 +50,7 @@ export class AdminPersonalHorarioConsolidadoPageComponent implements OnInit {
     if (this.numerosPaginaSeleccionada == 0) {
       this.numerosPaginaSeleccionada = this.numeroPaginasPaginator[0];
     }
-
+    this.getDiasMes();
     this.maestroService.getProfesiones();
     this.maestroService.getHorarioTurno();
     this.maestroService.getRegionalesObservable()
@@ -64,7 +64,6 @@ export class AdminPersonalHorarioConsolidadoPageComponent implements OnInit {
 
 
   }
-
 
   get profesiones() {
     return this.maestroService.profesiones;
@@ -87,11 +86,9 @@ export class AdminPersonalHorarioConsolidadoPageComponent implements OnInit {
     this.opcionIdRegional = idRegional;
     localStorage.setItem("idRegionalAgendaFiltro", this.opcionIdRegional);
   }
-  buscarTurno() {
-    this.spinnerService.show()
-    this.currentPagePaginator = 1;
+  getDiasMes() {
     this.dias = [];
-    const fecha = new Date(`${this.mesFiltro}-02`)
+    const fecha = new Date(`${this.mesFiltro}-01 00:00`)
     const mes = fecha.getMonth();
     const year = fecha.getFullYear();
     const diasEnMes = new Date(year, mes + 1, 0).getDate();
@@ -103,7 +100,10 @@ export class AdminPersonalHorarioConsolidadoPageComponent implements OnInit {
       };
       this.dias.push(day);
     }
+  }
 
+  buscarTurno() {
+    this.spinnerService.show();
     this.adminPersonalService.getProfesionalesWithTurno(this.mesFiltro, this.opcionIdRegional)
 
       .subscribe(resp => {

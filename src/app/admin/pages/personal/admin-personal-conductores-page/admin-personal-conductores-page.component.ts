@@ -57,7 +57,7 @@ export class AdminPersonalConductoresPageComponent implements OnInit, AfterViewI
 
   get tiposIdentificacion() {
     return this.maestrosService.tiposIdentificacion
-      .filter(tipoIdentificacion => tipoIdentificacion.esMayorEdad == true);;
+      ?.filter(tipoIdentificacion => tipoIdentificacion.esMayorEdad == true);
   }
 
   get regionales() {

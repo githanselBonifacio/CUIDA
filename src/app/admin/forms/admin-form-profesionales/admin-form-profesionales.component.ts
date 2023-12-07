@@ -131,27 +131,30 @@ export class AdminFormProfesionalesComponent implements OnChanges {
     return this.formProfesional.get("profesion")
   }
 
-
+  buildprofesional() {
+    return {
+      idTipoIdentificacion: this.campoTipoIdentificacion?.value ?? 0,
+      numeroIdentificacion: this.campoNumeroIdentificacion?.value ?? '',
+      nombres: this.campoNombres?.value ?? '',
+      apellidos: this.campoApellidos?.value ?? '',
+      email: this.campoEmail?.value ?? '',
+      telefono: this.campoTelefono?.value ?? '',
+      celular: this.campoCelular?.value ?? '',
+      direccion: this.campoDireccion?.value ?? '',
+      genero: this.campoGenero?.value ?? '',
+      idProfesion: this.campoProfesion?.value ?? 0,
+      fechaNacimiento: this.campoFechaNacimiento?.value ?? '',
+      idRegional: this.campoRegional?.value ?? '',
+      activo: true,
+    };
+  }
 
   enviarFormulario() {
     this.spinnerService.show()
     this.formProfesional.markAllAsTouched();
     if (this.formProfesional.valid) {
-      this.profesional = {
-        idTipoIdentificacion: this.campoTipoIdentificacion?.value ?? 0,
-        numeroIdentificacion: this.campoNumeroIdentificacion?.value ?? '',
-        nombres: this.campoNombres?.value ?? '',
-        apellidos: this.campoApellidos?.value ?? '',
-        email: this.campoEmail?.value ?? '',
-        telefono: this.campoTelefono?.value ?? '',
-        celular: this.campoCelular?.value ?? '',
-        direccion: this.campoDireccion?.value ?? '',
-        genero: this.campoGenero?.value ?? '',
-        idProfesion: this.campoProfesion?.value ?? 0,
-        fechaNacimiento: this.campoFechaNacimiento?.value ?? '',
-        idRegional: this.campoRegional?.value ?? '',
-        activo: true,
-      };
+      this.profesional = this.buildprofesional();
+
       if (this.accionFormulario == AccionFormulario.CREAR) {
         this.adminPersonalService.crearProfesional(this.profesional)
           .subscribe(resp => {

@@ -184,7 +184,6 @@ export class ServicioFarmaceuticoPageComponent implements OnInit, AfterViewInit 
   }
 
   filtrarByEstadoNotificacion() {
-    console.log(`notificado: ${this.checkedNotificado}; sin notificar: ${this.checkedSinNotificado}`)
     this.dataSource.data = this.notificacionesCompleta.slice();
     if (this.checkedNotificado === true && this.checkedSinNotificado === false) {
       this.dataSource.data = this.dataSource.data.filter(notificacion => {

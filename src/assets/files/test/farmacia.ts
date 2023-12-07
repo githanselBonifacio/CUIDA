@@ -1,0 +1,50 @@
+import { NotificacionFarmacia } from "src/app/admin/interfaces/servicioFarmaceutico.interface";
+
+export const notificacionesFarmaciaTest: NotificacionFarmacia[] = [
+    {
+        "idRemision": "4ps585hh",
+        "idTratamiento": null,
+        "idSoporteNutricional": 27,
+        "numeroIdentificacion": "989898",
+        "tipoIdentificacion": "Cédula ciudadania",
+        "nombres": "Carla",
+        "apellidos": "Camargo",
+        "idMedicamento": "54421",
+        "nombreMedicamento": "NUTREN 1.0",
+        "presentacionMedicamento": "250 ML SOLUCION",
+        "codigoMedicamento": "190199",
+        "cantidadDosis": 1,
+        "unidadDosis": "Bolsas",
+        "viaAdministracion": "",
+        "frecuencia": "",
+        "duracion": 60,
+        "volumen": 88,
+        "noPBS": false,
+        "fechaProgramada": new Date("2023-07-07 11:30:00"),
+        "notificado": true,
+        "tipo": "Soporte nutricional"
+    },
+    {
+        "idRemision": "74hjg45",
+        "idTratamiento": 28,
+        "idSoporteNutricional": null,
+        "numeroIdentificacion": "14528746825",
+        "tipoIdentificacion": "Cédula ciudadania",
+        "nombres": "MARIANA",
+        "apellidos": "VILLA GARCIA",
+        "idMedicamento": "53438",
+        "nombreMedicamento": "SYNAGIS",
+        "presentacionMedicamento": "100 MG POLVO PARA INYECCION",
+        "codigoMedicamento": "1266366",
+        "cantidadDosis": 100,
+        "unidadDosis": "mg",
+        "viaAdministracion": "I.M.",
+        "frecuencia": "Mensual",
+        "duracion": 5,
+        "volumen": null,
+        "noPBS": false,
+        "fechaProgramada": new Date("2023-07-07T11:30:00"),
+        "notificado": true,
+        "tipo": "Aplicacion de medicamento"
+    }
+]

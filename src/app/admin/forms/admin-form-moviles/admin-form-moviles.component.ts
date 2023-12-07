@@ -4,18 +4,17 @@ import { Movil } from 'src/app/agenda/interfaces/conductores.interface';
 import { mesajeExpresionRegular } from 'src/app/shared/forms/expresiones-regulares.validaciones';
 import { SpinnerService } from 'src/app/shared/services/spinner/spinner.service.service';
 import { ToastService } from 'src/app/shared/services/toast/toast.service';
-import { AdminRemisionService } from '../../services/admin-remision.service';
 import { AccionFormulario } from '../../interfaces/enum';
 import { Regional } from 'src/app/shared/interfaces/maestros.interfaces';
 import { ToastType, TitleToast } from 'src/app/shared/components/toast/toast.component';
 import { AdminPersonalService } from '../../services/admin-personal.service';
 
 @Component({
-  selector: 'app-admin-from-moviles',
-  templateUrl: './admin-from-moviles.component.html',
-  styleUrls: ['./admin-from-moviles.component.css']
+  selector: 'app-admin-form-moviles',
+  templateUrl: './admin-form-moviles.component.html',
+  styleUrls: ['./admin-form-moviles.component.css']
 })
-export class AdminFromMovilesComponent implements OnChanges {
+export class AdminFormMovilesComponent implements OnChanges {
   constructor(
     private formBuilder: FormBuilder,
     private toastservice: ToastService,
@@ -77,19 +76,23 @@ export class AdminFromMovilesComponent implements OnChanges {
   get campoIdRegional() {
     return this.formMovil.get("idRegional")
   }
+
+  buildMovil() {
+    return {
+      matricula: this.campoMatricula?.value ?? '',
+      marca: this.campoMarca?.value ?? '',
+      modelo: this.campoModelo?.value ?? '',
+      idRegional: this.campoIdRegional?.value ?? '',
+      activo: true
+
+    };
+  }
+
   enviarFormulario() {
     this.formMovil.markAllAsTouched();
-    console.log(this.accionFormulario)
     this.spinnerService.show()
     if (this.formMovil.valid) {
-      this.movil = {
-        matricula: this.campoMatricula?.value ?? '',
-        marca: this.campoMarca?.value ?? '',
-        modelo: this.campoModelo?.value ?? '',
-        idRegional: this.campoIdRegional?.value ?? '',
-        activo: true
-
-      };
+      this.movil = this.buildMovil();
       if (this.accionFormulario == AccionFormulario.CREAR) {
         this.adminPersonalService.crearMovil(this.movil)
           .subscribe(resp => {

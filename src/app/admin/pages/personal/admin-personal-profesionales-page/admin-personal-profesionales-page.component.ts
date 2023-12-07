@@ -73,7 +73,7 @@ export class AdminPersonalProfesionalesPageComponent implements OnInit, AfterVie
   }
   get tiposIdentificacion() {
     return this.maestrosService.tiposIdentificacion
-      .filter(tipoIdentificacion => tipoIdentificacion.esMayorEdad == true);
+      ?.filter(tipoIdentificacion => tipoIdentificacion.esMayorEdad == true);
   }
 
   get regionales() {

@@ -80,11 +80,11 @@ function getIdTipoIdentificacionById(id: number, list: TipoIdentificacion[]): st
     return item?.idTipo;
 }
 function getNombreProfesionById(id: number, list: Profesion[]): string | undefined {
-    const item = list.find(item => item.idProfesion == id);
+    const item = list?.find(item => item.idProfesion == id);
     return item?.nombre;
 }
 function getColorReferenciaTurnoById(id: number | any, list: HorarioTurno[]): string | undefined {
-    const item = list.find(item => item.id == id);
+    const item = list?.find(item => item.id == id);
     return item?.colorHexReferencia;
 }
 

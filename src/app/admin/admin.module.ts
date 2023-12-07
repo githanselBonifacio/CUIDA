@@ -30,7 +30,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatDialogModule } from '@angular/material/dialog';
 import { AdminFormConductoresComponent } from './forms/admin-form-conductores/admin-form-conductores.component';
 import { AdminPersonalVehiculosPageComponent } from './pages/personal/admin-personal-vehiculos-page/admin-personal-vehiculos-page.component';
-import { AdminFromMovilesComponent } from './forms/admin-from-moviles/admin-from-moviles.component';
+import { AdminFormMovilesComponent } from './forms/admin-form-moviles/admin-form-moviles.component';
 import { AdminPersonalHorarioConsolidadoPageComponent } from './pages/personal/admin-personal-horario-consolidado-page/admin-personal-horario-consolidado-page.component';
 import { ModalAsignarTurnoIndividualComponent } from './components/modal-asignar-turno-individual/modal-asignar-turno-individual.component';
 import { MatSelectModule } from '@angular/material/select';
@@ -62,7 +62,7 @@ import { DiagramasModule } from '../diagramas/diagramas.module';
     AdminFormProfesionalesComponent,
     AdminFormConductoresComponent,
     AdminPersonalVehiculosPageComponent,
-    AdminFromMovilesComponent,
+    AdminFormMovilesComponent,
     AdminPersonalHorarioConsolidadoPageComponent,
     AdminPersonalHorarioSecuenciasPageComponent,
     ModalAsignarTurnoIndividualComponent,

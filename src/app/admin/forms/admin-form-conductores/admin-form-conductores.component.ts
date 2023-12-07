@@ -1,6 +1,5 @@
 import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AgendaService } from 'src/app/agenda/services/agenda.service';
 import { TipoIdentificacion, Regional } from 'src/app/shared/interfaces/maestros.interfaces';
 import { SpinnerService } from 'src/app/shared/services/spinner/spinner.service.service';
 import { ToastService } from 'src/app/shared/services/toast/toast.service';
@@ -30,7 +29,7 @@ export class AdminFormConductoresComponent implements OnChanges {
       apellidos: [this.conductor?.apellidos, [Validators.required, Validators.pattern(expresionesRegulares.EXPRESION_REGULAR_TEXT), Validators.maxLength(35)]],
       email: [this.conductor?.email, [Validators.required, Validators.pattern(expresionesRegulares.EXPRESION_REGULAR_EMAIL_SURA), Validators.email]],
       telefono: [this.conductor?.telefono, [Validators.pattern(expresionesRegulares.EXPRESION_REGULAR_SOLO_NUMEROS)]],
-      celular: [this.conductor?.celular, [Validators.required, Validators.pattern(expresionesRegulares.EXPRESION_REGULAR_CELULAR), Validators.maxLength(10), Validators.minLength(10)]],
+      celular: [this.conductor?.celular, [Validators.required, Validators.maxLength(10), Validators.minLength(10), Validators.pattern(expresionesRegulares.EXPRESION_REGULAR_CELULAR)]],
       direccion: [this.conductor?.direccion, [Validators.required]],
       fechaNacimiento: [this.conductor?.fechaNacimiento, [Validators.required, validatorMayorEdad]],
       idRegional: [this.conductor?.idRegional, [Validators.required]],
@@ -121,26 +120,28 @@ export class AdminFormConductoresComponent implements OnChanges {
     return this.formConductor.get("genero")
   }
 
-
+  buildConductor() {
+    return {
+      idTipoIdentificacion: this.campoTipoIdentificacion?.value ?? 0,
+      numeroIdentificacion: this.campoNumeroIdentificacion?.value ?? '',
+      nombres: this.campoNombres?.value ?? '',
+      apellidos: this.campoApellidos?.value ?? '',
+      email: this.campoEmail?.value ?? '',
+      telefono: this.campoTelefono?.value ?? '',
+      celular: this.campoCelular?.value ?? '',
+      direccion: this.campoDireccion?.value ?? '',
+      genero: this.campoGenero?.value ?? '',
+      fechaNacimiento: this.campoFechaNacimiento?.value ?? '',
+      idRegional: this.campoRegional?.value ?? '',
+      activo: true,
+    }
+  }
 
   enviarFormulario() {
     this.formConductor.markAllAsTouched();
     this.spinnerService.show()
     if (this.formConductor.valid) {
-      this.conductor = {
-        idTipoIdentificacion: this.campoTipoIdentificacion?.value ?? 0,
-        numeroIdentificacion: this.campoNumeroIdentificacion?.value ?? '',
-        nombres: this.campoNombres?.value ?? '',
-        apellidos: this.campoApellidos?.value ?? '',
-        email: this.campoEmail?.value ?? '',
-        telefono: this.campoTelefono?.value ?? '',
-        celular: this.campoCelular?.value ?? '',
-        direccion: this.campoDireccion?.value ?? '',
-        genero: this.campoGenero?.value ?? '',
-        fechaNacimiento: this.campoFechaNacimiento?.value ?? '',
-        idRegional: this.campoRegional?.value ?? '',
-        activo: true,
-      };
+      this.conductor = this.buildConductor();
       if (this.accionFormulario == AccionFormulario.CREAR) {
         this.adminPersonalService.crearConductor(this.conductor)
           .subscribe(resp => {

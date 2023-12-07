@@ -1,8 +1,8 @@
 <div class="container">
     <h1>Vehículos</h1>
     <div class="form {{estadoVisualFormCrear}}">
-        <app-admin-from-moviles (enviado)="actualizarDatos()" [regionales]="regionales" [movil]="movilSeleccionado"
-            [accionFormulario]="accionFormulario"></app-admin-from-moviles>
+        <app-admin-form-moviles (enviado)="actualizarDatos()" [regionales]="regionales" [movil]="movilSeleccionado"
+            [accionFormulario]="accionFormulario"></app-admin-form-moviles>
     </div>
     <div class="tool-bar">
         <button class="buttom-red bordeado" *ngIf="accionFormulario == 1" (click)="volverCrear()"> Volver a crear

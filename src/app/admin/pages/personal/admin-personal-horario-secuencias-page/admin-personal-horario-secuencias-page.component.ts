@@ -113,10 +113,11 @@ export class AdminPersonalHorarioSecuenciasPageComponent implements OnInit, Afte
   }
   consultarSecuencia() {
     this.spinnerService.show()
-    this.personalService.getSecuenciasTurno().subscribe(resp => {
-      this.secuencias = resp.result
-      this.spinnerService.hide()
-    });
+    this.personalService.getSecuenciasTurno()
+      .subscribe(resp => {
+        this.secuencias = resp.result
+        this.spinnerService.hide()
+      });
 
   }
   mostrarOpcionesMasivas() {

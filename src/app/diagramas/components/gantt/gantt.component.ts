@@ -33,11 +33,14 @@ export class GanttComponent implements AfterViewInit {
 
   @Input() widthContainer = 0;
 
-  ngAfterViewInit(): void {
-    setTimeout(() => {
+  ngAfterViewInit() {
+    setTimeout(async () => {
       this.widthContainer = this.containerGeneric?.nativeElement.offsetWidth ?? 0;
+      const result = await waitForCondition(1000, this.widthContainer);
     }, 500);
   }
+
+
 
   get intervaloPx() {
     return (this.fechaFinTurnoUnix - this.fechaInicioTurnoUnix);
@@ -80,5 +83,10 @@ export class GanttComponent implements AfterViewInit {
   }
   emitirReprogramarTarea(idTarea: string) {
     this.reprogramarTareaEvent.emit(idTarea);
+  }
+}
+async function waitForCondition(maxTime: number, value: number): Promise<void> {
+  while (value == 0) {
+    await new Promise(resolve => setTimeout(resolve, 100));
   }
 }

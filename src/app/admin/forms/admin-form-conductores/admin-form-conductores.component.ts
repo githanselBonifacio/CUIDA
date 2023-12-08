@@ -122,17 +122,17 @@ export class AdminFormConductoresComponent implements OnChanges {
 
   buildConductor() {
     return {
-      idTipoIdentificacion: this.campoTipoIdentificacion?.value ?? 0,
-      numeroIdentificacion: this.campoNumeroIdentificacion?.value ?? '',
-      nombres: this.campoNombres?.value ?? '',
-      apellidos: this.campoApellidos?.value ?? '',
-      email: this.campoEmail?.value ?? '',
-      telefono: this.campoTelefono?.value ?? '',
-      celular: this.campoCelular?.value ?? '',
-      direccion: this.campoDireccion?.value ?? '',
-      genero: this.campoGenero?.value ?? '',
-      fechaNacimiento: this.campoFechaNacimiento?.value ?? '',
-      idRegional: this.campoRegional?.value ?? '',
+      idTipoIdentificacion: this.campoTipoIdentificacion?.value,
+      numeroIdentificacion: this.campoNumeroIdentificacion?.value,
+      nombres: this.campoNombres?.value,
+      apellidos: this.campoApellidos?.value,
+      email: this.campoEmail?.value,
+      telefono: this.campoTelefono?.value,
+      celular: this.campoCelular?.value,
+      direccion: this.campoDireccion?.value,
+      genero: this.campoGenero?.value,
+      fechaNacimiento: this.campoFechaNacimiento?.value,
+      idRegional: this.campoRegional?.value,
       activo: true,
     }
   }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { MatDialog } from '@angular/material/dialog'
@@ -53,7 +53,8 @@ export class MainComponentAgendaComponent implements OnInit {
     private dialogo: MatDialog,
     private spinnerService: SpinnerService,
     private toastService: ToastService,
-    private datePipe: DatePipe
+    private datePipe: DatePipe,
+    private cdr: ChangeDetectorRef
   ) { }
 
   ngOnInit() {
@@ -129,6 +130,7 @@ export class MainComponentAgendaComponent implements OnInit {
       this.citas = citas.result;
       this.actividades = actividades.result;
       this.spinnerService.hide();
+      this.cdr.detectChanges();
     })
 
     this.horasTurnoString = generarHorario(this.opcionHorarioTurno);

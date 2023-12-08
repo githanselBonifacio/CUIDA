@@ -5,6 +5,8 @@ import { of } from 'rxjs';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AdminPersonalService } from '../../services/admin-personal.service';
 import { ToastService } from 'src/app/shared/services/toast/toast.service';
+import { SimpleChange } from '@angular/core';
+import { AccionFormulario } from '../../interfaces/enum';
 
 describe('AdminFormProfesionalesComponent', () => {
   let component: AdminFormProfesionalesComponent;
@@ -25,11 +27,31 @@ describe('AdminFormProfesionalesComponent', () => {
     idRegional: '427',
     activo: true,
   }
-
-
-  const adminPersonalServiceMock = {
-    getAllProfesionales: () => of({ result: [] })
+  const profesionalVacioData = {
+    idTipoIdentificacion: 0,
+    numeroIdentificacion: "",
+    nombres: '',
+    apellidos: '',
+    email: '',
+    telefono: '',
+    celular: "",
+    direccion: '',
+    genero: '',
+    idProfesion: 0,
+    fechaNacimiento: "",
+    idRegional: '',
+    activo: true,
   }
+  const adminPersonalServiceMock = {
+    crearProfesional: () => of({ status: 200 }),
+    actualizarProfesional: () => of({ status: 200 }),
+
+  }
+  const toastServiceMock = {
+    mostrarToast: () => of({ result: true }),
+  }
+
+
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [AdminFormProfesionalesComponent],
@@ -38,7 +60,7 @@ describe('AdminFormProfesionalesComponent', () => {
       ],
       providers: [
         { provide: AdminPersonalService, useValue: adminPersonalServiceMock },
-        { provide: ToastService, useValue: {} },
+        { provide: ToastService, useValue: toastServiceMock },
       ]
     }).compileComponents();
     fixture = TestBed.createComponent(AdminFormProfesionalesComponent);
@@ -150,14 +172,6 @@ describe('AdminFormProfesionalesComponent', () => {
     fixture.detectChanges();
     expect(component.campoCelular?.valid).toBeFalsy();
 
-    /*component.formConductor.controls['celular'].setValue(300298);
-    fixture.detectChanges();
-    expect(component.campoCelular?.valid).toBeFalsy();
-
-    component.formConductor.controls['celular'].setValue(306546546540298);
-    fixture.detectChanges();
-    expect(component.campoCelular?.valid).toBeFalsy();*/
-
     component.formProfesional.controls['celular'].setValue("3054859741");
     fixture.detectChanges();
     expect(component.campoCelular?.valid).toBeTruthy();
@@ -216,6 +230,11 @@ describe('AdminFormProfesionalesComponent', () => {
   it('validar formulario', () => {
     expect(component.formProfesional?.valid).toBeFalsy();
 
+    const profesionalVacio = component.buildprofesional();
+    fixture.detectChanges();
+    expect(profesionalVacio).toEqual(profesionalVacioData);
+    expect(component.formProfesional.valid).toBeFalsy();
+
     component.formProfesional.controls['tipoIdentificacion'].setValue(profesionalData.idTipoIdentificacion);
     component.formProfesional.controls['numeroIdentificacion'].setValue(profesionalData.numeroIdentificacion);
     component.formProfesional.controls['nombres'].setValue(profesionalData.nombres);
@@ -233,6 +252,81 @@ describe('AdminFormProfesionalesComponent', () => {
     fixture.detectChanges();
     expect(component.formProfesional.valid).toBeTruthy();
     expect(profesional).toEqual(profesionalData);
+  })
+
+  it('validar formulario y crear profesional', () => {
+    expect(component.formProfesional?.valid).toBeFalsy();
+
+    component.formProfesional.controls['tipoIdentificacion'].setValue(profesionalData.idTipoIdentificacion);
+    component.formProfesional.controls['numeroIdentificacion'].setValue(profesionalData.numeroIdentificacion);
+    component.formProfesional.controls['nombres'].setValue(profesionalData.nombres);
+    component.formProfesional.controls['apellidos'].setValue(profesionalData.apellidos);
+    component.formProfesional.controls['email'].setValue(profesionalData.email);
+
+    component.formProfesional.controls['celular'].setValue(profesionalData.celular);
+    component.formProfesional.controls['direccion'].setValue(profesionalData.direccion);
+    component.formProfesional.controls['idRegional'].setValue(profesionalData.idRegional);
+    component.formProfesional.controls['genero'].setValue(profesionalData.genero);
+    component.formProfesional.controls['profesion'].setValue(profesionalData.idProfesion);
+    component.formProfesional.controls['fechaNacimiento'].setValue(profesionalData.fechaNacimiento);
+
+    const profesional = component.buildprofesional();
+    fixture.detectChanges();
+    expect(component.formProfesional.valid).toBeTruthy();
+    expect(profesional).toEqual(profesionalData);
+    component.enviarFormulario();
+    fixture.detectChanges();
+  })
+
+  it('validar formulario y actualizar profesional', () => {
+    expect(component.formProfesional?.valid).toBeFalsy();
+
+    component.formProfesional.controls['tipoIdentificacion'].setValue(profesionalData.idTipoIdentificacion);
+    component.formProfesional.controls['numeroIdentificacion'].setValue(profesionalData.numeroIdentificacion);
+    component.formProfesional.controls['nombres'].setValue(profesionalData.nombres);
+    component.formProfesional.controls['apellidos'].setValue(profesionalData.apellidos);
+    component.formProfesional.controls['email'].setValue(profesionalData.email);
+
+    component.formProfesional.controls['celular'].setValue(profesionalData.celular);
+    component.formProfesional.controls['direccion'].setValue(profesionalData.direccion);
+    component.formProfesional.controls['idRegional'].setValue(profesionalData.idRegional);
+    component.formProfesional.controls['genero'].setValue(profesionalData.genero);
+    component.formProfesional.controls['profesion'].setValue(profesionalData.idProfesion);
+    component.formProfesional.controls['fechaNacimiento'].setValue(profesionalData.fechaNacimiento);
+
+    const profesional = component.buildprofesional();
+    fixture.detectChanges();
+
+    expect(component.formProfesional.valid).toBeTruthy();
+    expect(profesional).toEqual(profesionalData);
+    component.accionFormulario = AccionFormulario.ACTUALIZAR;
+    component.enviarFormulario();
+    fixture.detectChanges();
+  })
+
+  it("cambio en acción formulario", () => {
+    component.accionFormulario = AccionFormulario.ACTUALIZAR;
+    component.profesional = profesionalData;
+    component.ngOnChanges({
+      accionFormulario: new SimpleChange(null, component.accionFormulario, true),
+      conductor: new SimpleChange(undefined, component.profesional, true),
+    });
+    fixture.detectChanges();
+    expect(component.tituloFormulario).toBe('Actualizar profesional');
+    expect(component.validacionDisabled).toBe(true);
+    expect(component.profesional).toBe(profesionalData);
+
+  })
+  it("cambio en profesional", () => {
+    component.profesional = profesionalData;
+    fixture.detectChanges();
+    component.ngOnChanges({
+      conductor: new SimpleChange(undefined, component.profesional, true),
+    });
+
+    fixture.detectChanges();
+    expect(component.profesional).toBe(profesionalData);
+
   })
 
 });

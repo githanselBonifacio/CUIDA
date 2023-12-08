@@ -5,19 +5,24 @@ import { ToastService } from 'src/app/shared/services/toast/toast.service';
 import { AdminPersonalService } from '../../services/admin-personal.service';
 import { of } from 'rxjs';
 import { ReactiveFormsModule } from '@angular/forms';
+import { AccionFormulario } from '../../interfaces/enum';
+import { Respuesta } from 'src/app/shared/interfaces/response.interfaces';
+import { Conductor } from 'src/app/agenda/interfaces/conductores.interface';
+import { SimpleChange } from '@angular/core';
+
 
 describe('AdminFormConductoresComponent', () => {
     let component: AdminFormConductoresComponent;
     let fixture: ComponentFixture<AdminFormConductoresComponent>;
 
-    const conductorData = {
+    const conductorData: Conductor = {
         idTipoIdentificacion: 1,
-        numeroIdentificacion: 959595,
+        numeroIdentificacion: "959595",
         nombres: 'Juan Andres',
         apellidos: 'Camargo Rodriguez',
         email: 'correo@sura.com.co',
-        telefono: '',
-        celular: 3054859741,
+        telefono: null,
+        celular: "3054859741",
         direccion: 'direccion #$20++**',
         genero: 'Masculino',
         fechaNacimiento: "1996-07-07",
@@ -26,9 +31,14 @@ describe('AdminFormConductoresComponent', () => {
     }
 
     const adminPersonalServiceMock = {
-        getAllConductores: () => of({ result: [] })
-    }
+        getAllConductores: () => of({ result: [] }),
+        crearConductor: () => of({ status: 200 }),
+        actualizarConductor: () => of({ status: 200 }),
 
+    }
+    const toastServiceMock = {
+        mostrarToast: () => of({ result: true }),
+    }
     beforeEach(() => {
         TestBed.configureTestingModule({
             declarations: [AdminFormConductoresComponent],
@@ -37,7 +47,7 @@ describe('AdminFormConductoresComponent', () => {
             ],
             providers: [
                 { provide: AdminPersonalService, useValue: adminPersonalServiceMock },
-                { provide: ToastService, useValue: {} },
+                { provide: ToastService, useValue: toastServiceMock },
             ]
         }).compileComponents();
         fixture = TestBed.createComponent(AdminFormConductoresComponent);
@@ -149,14 +159,6 @@ describe('AdminFormConductoresComponent', () => {
         fixture.detectChanges();
         expect(component.campoCelular?.valid).toBeFalsy();
 
-        /*component.formConductor.controls['celular'].setValue(300298);
-        fixture.detectChanges();
-        expect(component.campoCelular?.valid).toBeFalsy();
-
-        component.formConductor.controls['celular'].setValue(306546546540298);
-        fixture.detectChanges();
-        expect(component.campoCelular?.valid).toBeFalsy();*/
-
         component.formConductor.controls['celular'].setValue(3054859741);
         fixture.detectChanges();
         expect(component.campoCelular?.valid).toBeTruthy();
@@ -203,7 +205,7 @@ describe('AdminFormConductoresComponent', () => {
         expect(component.campoFechaNacimiento?.value).toEqual("1996-07-07");
     })
 
-    it('validar formulario', () => {
+    it('validar formulario y crear conductor', () => {
         expect(component.formConductor?.valid).toBeFalsy();
 
         component.formConductor.controls['IdTipoIdentificacion'].setValue(conductorData.idTipoIdentificacion);
@@ -220,7 +222,60 @@ describe('AdminFormConductoresComponent', () => {
 
         const conductor = component.buildConductor();
         fixture.detectChanges();
+
         expect(component.formConductor.valid).toBeTruthy();
         expect(conductor).toEqual(conductorData);
+        component.enviarFormulario();
+        fixture.detectChanges();
+    })
+
+    it('validar formulario y actualizar conductor', () => {
+        expect(component.formConductor?.valid).toBeFalsy();
+
+        component.formConductor.controls['IdTipoIdentificacion'].setValue(conductorData.idTipoIdentificacion);
+        component.formConductor.controls['numeroIdentificacion'].setValue(conductorData.numeroIdentificacion);
+        component.formConductor.controls['nombres'].setValue(conductorData.nombres);
+        component.formConductor.controls['apellidos'].setValue(conductorData.apellidos);
+        component.formConductor.controls['email'].setValue(conductorData.email);
+
+        component.formConductor.controls['celular'].setValue(conductorData.celular);
+        component.formConductor.controls['direccion'].setValue(conductorData.direccion);
+        component.formConductor.controls['idRegional'].setValue(conductorData.idRegional);
+        component.formConductor.controls['genero'].setValue(conductorData.genero);
+        component.formConductor.controls['fechaNacimiento'].setValue(conductorData.fechaNacimiento);
+
+        const conductor = component.buildConductor();
+        fixture.detectChanges();
+
+        expect(component.formConductor.valid).toBeTruthy();
+        expect(conductor).toEqual(conductorData);
+        component.accionFormulario = AccionFormulario.ACTUALIZAR;
+        component.enviarFormulario();
+        fixture.detectChanges();
+    })
+
+    it("cambio en acción formulario", () => {
+        component.accionFormulario = AccionFormulario.ACTUALIZAR;
+        component.conductor = conductorData;
+        component.ngOnChanges({
+            accionFormulario: new SimpleChange(null, component.accionFormulario, true),
+            conductor: new SimpleChange(undefined, component.conductor, true),
+        });
+        fixture.detectChanges();
+        expect(component.tituloFormulario).toBe('Actualizar conductor');
+        expect(component.validacionDisabled).toBe(true);
+        expect(component.conductor).toBe(conductorData);
+
+    })
+    it("cambio en conductor", () => {
+        component.conductor = conductorData;
+        fixture.detectChanges();
+        component.ngOnChanges({
+            conductor: new SimpleChange(undefined, component.conductor, true),
+        });
+
+        fixture.detectChanges();
+        expect(component.conductor).toBe(conductorData);
+
     })
 });

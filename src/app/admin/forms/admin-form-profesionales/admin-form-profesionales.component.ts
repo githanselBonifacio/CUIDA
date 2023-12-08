@@ -131,7 +131,7 @@ export class AdminFormProfesionalesComponent implements OnChanges {
     return this.formProfesional.get("profesion")
   }
 
-  buildprofesional() {
+  buildprofesional(): Profesional {
     return {
       idTipoIdentificacion: this.campoTipoIdentificacion?.value ?? 0,
       numeroIdentificacion: this.campoNumeroIdentificacion?.value ?? '',

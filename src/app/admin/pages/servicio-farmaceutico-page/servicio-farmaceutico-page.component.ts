@@ -14,6 +14,7 @@ import localeEs from '@angular/common/locales/es';
 import { registerLocaleData } from '@angular/common';
 import { SelectionModel } from '@angular/cdk/collections';
 import { AdminFarmaciaService } from '../../services/admin-farmacia.service';
+
 @Component({
   selector: 'app-servicio-farmaceutico-page',
   templateUrl: './servicio-farmaceutico-page.component.html',

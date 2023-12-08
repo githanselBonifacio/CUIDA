@@ -1,8 +1,9 @@
 
 import { Actividad } from '../../interfaces/tarea-gantt.interface';
-import { Component, Input, EventEmitter, Output, HostListener, ViewChild, ElementRef, ViewChildren, AfterViewChecked, AfterContentInit, AfterContentChecked } from '@angular/core';
+import { Component, Input, EventEmitter, Output, HostListener, ViewChild, ElementRef, ViewChildren, AfterViewChecked, AfterContentInit, AfterContentChecked, AfterViewInit, ChangeDetectorRef, OnChanges, SimpleChanges } from '@angular/core';
 import { Tarea } from '../../interfaces/tarea-gantt.interface'
 import { MatDialog } from '@angular/material/dialog'
+import { Observable, delay, of } from 'rxjs';
 
 
 @Component({
@@ -11,38 +12,37 @@ import { MatDialog } from '@angular/material/dialog'
   styleUrls: ['./gantt.component.css'],
 })
 
-export class GanttComponent {
+export class GanttComponent implements AfterViewInit {
+
+  constructor(
+    private modalMapRuta: MatDialog
+  ) { }
+
+
+  @ViewChild('containerActividad') containerGeneric: ElementRef | undefined;
+  @Input() public actividades: Actividad[] = [];
+  @Input() public horas: string[] = [];
+  @Input() public tituloActorResponsable = "";
 
   @Output() idprofesionalEvent = new EventEmitter<Actividad>();
   @Output() retirarTareaEvent = new EventEmitter<string>();
   @Output() reprogramarTareaEvent = new EventEmitter<string>();
 
-  @ViewChild('containerActividad') containerGeneric: ElementRef | undefined;
-
-  constructor(
-    private modalMapRuta: MatDialog,
-  ) { }
-
-
-  @Input() public actividades: Actividad[] = [];
-  @Input() public horas: string[] = [];
-  @Input() public tituloActorResponsable = "";
-
-
   @HostListener('window:resize', ['$event'])
-  onResize(event: any) {
+  onResize(event: any) { }
 
+  @Input() widthContainer = 0;
 
+  ngAfterViewInit(): void {
+    setTimeout(() => {
+      this.widthContainer = this.containerGeneric?.nativeElement.offsetWidth ?? 0;
+    }, 500);
   }
 
-  get widthContainer() {
-    return this.containerGeneric?.nativeElement.offsetWidth ?? 0;
-  }
   get intervaloPx() {
     return (this.fechaFinTurnoUnix - this.fechaInicioTurnoUnix);
   }
   get fechaInicioTurnoUnix() {
-
     return new Date(this.actividades[0].tareas[0].fechaProgramada).setHours(parseInt(this.horas[0])) / 1000;
   }
   get fechaFinTurnoUnix() {

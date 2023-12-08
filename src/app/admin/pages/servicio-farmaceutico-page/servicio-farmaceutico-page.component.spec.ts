@@ -11,7 +11,6 @@ import { MatTableModule } from '@angular/material/table';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { notificacionesFarmaciaTest } from 'src/assets/files/test/farmacia';
-import { ObtenerSiglasIdentificacionPipe } from 'src/app/pipes/conversiones/obtener-siglas-identificacion.pipe';
 import { PipesModule } from 'src/app/pipes/pipes.module';
 
 describe('ServicioFarmaceuticoPageComponent', () => {

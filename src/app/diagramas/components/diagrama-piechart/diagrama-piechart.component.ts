@@ -24,7 +24,7 @@ interface DataPieChar {
 export class DiagramaPiechartComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
-    if (this.data?.length) {
+    if (this.data?.length != 0) {
       this.setValues()
     }
 
@@ -32,7 +32,7 @@ export class DiagramaPiechartComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     Promise.resolve().then(() => {
-      if (this.data?.length) {
+      if (this.data?.length != 0) {
         this.buildChart();
       }
 
@@ -42,13 +42,10 @@ export class DiagramaPiechartComponent implements OnInit, AfterViewInit {
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['data']) {
       this.clean();
-      if (this.data?.length) {
+      if (this.data?.length != 0) {
         this.setValues();
         this.buildChart();
       }
-    }
-    if (changes['dataChart']) {
-      window.alert("selected")
     }
   }
   @ViewChild('contentPie') contentPie?: ElementRef;
@@ -107,8 +104,8 @@ export class DiagramaPiechartComponent implements OnInit, AfterViewInit {
     this.ubicationLabels = [];
   }
   setValues() {
-    this.data = this.data.sort((d1, d2) => d1.value - d2.value);
-    this.sumValues = this.data.map(d => d.value).reduce((tot, acc) => tot = tot + acc);
+    this.data = this.data?.sort((d1, d2) => d1.value - d2.value);
+    this.sumValues = this.data?.map(d => d.value)?.reduce((tot, acc) => tot = tot + acc);
     this.colors = this.isMonoColor ? this.colorScheme.individual : this.colorScheme.domain;
   }
 
@@ -134,7 +131,7 @@ export class DiagramaPiechartComponent implements OnInit, AfterViewInit {
       var xi = 2 * this.radio;
       var yi = this.radio;
 
-      this.data.forEach((d, i) => {
+      this.data?.forEach((d, i) => {
 
         const percentageAngle = this.calculatePercentage(d.value);
         const angleNext = (2 * Math.PI * (percentageAngle / 100));

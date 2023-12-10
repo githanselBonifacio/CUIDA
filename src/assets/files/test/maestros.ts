@@ -26,6 +26,10 @@ export const horarioTurnoTest = [
         "descripcion": "mañana",
         "duracionHoras": 8
     },
+
+]
+export const horarioTurnoTest2 = [
+
     {
         "id": 2,
         "nombre": "T2",
@@ -35,5 +39,17 @@ export const horarioTurnoTest = [
         "esHorarioBase": true,
         "descripcion": "tarde",
         "duracionHoras": 8
+    },
+]
+export const horarioTurnoTestDescanso = [
+    {
+        "id": 4,
+        "nombre": "D",
+        "horaInicio": new Date("06:00:00"),
+        "horaFin": new Date("05:59:00"),
+        "colorHexReferencia": "#FADBA5",
+        "esHorarioBase": true,
+        "descripcion": "tarde",
+        "duracionHoras": 0
     },
 ]

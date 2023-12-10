@@ -11,7 +11,7 @@ import { Respuesta } from 'src/app/shared/interfaces/response.interfaces';
   providedIn: 'root'
 })
 export class AgendaService {
-  private serviceUrl: string = 'http://localhost:9090';
+
   private urlRecurso = 'agenda'
 
 

@@ -191,9 +191,8 @@ export class AdminPersonalHorarioSecuenciasPageComponent implements OnInit, Afte
         this.spinnerService.show();
         this.personalService.eliminarTurnoProfesionalAccionMasiva(data)
           .subscribe(resp => {
-
             if (resp.status == 200) {
-              if (resp.result.length > 0) {
+              if (resp.result?.length > 0) {
                 this.dialogo.open(ModalInfoResultadosAccionMasivaHorarioComponent, { data: { "profesionales": this.selection.selected, "turnos": resp.result } });
 
               } else {
@@ -226,7 +225,7 @@ export class AdminPersonalHorarioSecuenciasPageComponent implements OnInit, Afte
           .subscribe(resp => {
 
             if (resp.status == 200) {
-              if (resp.result.length > 0) {
+              if (resp.result?.length > 0) {
                 this.dialogo.open(ModalInfoResultadosAccionMasivaHorarioComponent, { data: { "profesionales": this.selection.selected, "turnos": resp.result } });
 
               } else {

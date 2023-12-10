@@ -165,27 +165,6 @@ export class ModalConfiguracionSecuenciaComponent implements OnInit, OnChanges {
     this.dialogRef.close(null);
   }
 
-  mostrarOpciones(id: string) {
-    const selectorHorario = document.getElementsByName("selector-horario");
-    const selectorHorarioButtoms = document.getElementsByName("selector-horario-buttom");
 
-    for (let i = 0; i < selectorHorario.length; i++) {
-      if (selectorHorario[i].getAttribute("id") != id && selectorHorarioButtoms[i].getAttribute("id") != `${id}-body`) {
-        selectorHorario[i].setAttribute("deployed", "false");
-        selectorHorarioButtoms[i].setAttribute("deployed", "false");
-      }
-
-    }
-    const btnOpcion = document.getElementById(id)
-    const btnOpcionBody = document.getElementById(`${id}-body`)
-    if (btnOpcion?.getAttribute("deployed") == "true") {
-      btnOpcion.setAttribute("deployed", "false");
-      btnOpcionBody?.setAttribute("deployed", "false");
-    } else {
-      btnOpcion?.setAttribute("deployed", "true");
-      btnOpcionBody?.setAttribute("deployed", "true");
-    }
-
-  }
 
 }

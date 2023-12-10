@@ -18,9 +18,19 @@ describe('VentanaConfirmacionComponent', () => {
     fixture = TestBed.createComponent(VentanaConfirmacionComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
+    component.dialogRef = jasmine.createSpyObj('MatDialogRef', ['close']);
   });
 
   it('crear componente', () => {
     expect(component).toBeTruthy();
   });
+
+  it('confirmar', () => {
+    component.onConfirm()
+    expect(component.dialogRef.close).toHaveBeenCalledWith(true)
+  })
+  it('cerrar', () => {
+    component.onNoClick()
+    expect(component.dialogRef.close).toHaveBeenCalledWith(false)
+  })
 });

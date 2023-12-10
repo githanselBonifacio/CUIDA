@@ -1,4 +1,4 @@
-import { ProfesionalConTurnos } from "src/app/agenda/interfaces/profesional.interface";
+import { Profesional, ProfesionalConTurnos } from "src/app/agenda/interfaces/profesional.interface";
 import { Dia } from "src/app/shared/interfaces/maestros.interfaces";
 
 export const diasFebrero: Dia[] = [
@@ -111,5 +111,55 @@ export const profesionalesDataTest: ProfesionalConTurnos[] = [
         "idRegional": "427",
         "activo": true,
         "turnos": []
+    }
+]
+export const profesionalesDataTest2: Profesional[] = [
+    {
+        "idTipoIdentificacion": 1,
+        "numeroIdentificacion": "1248946452",
+        "nombres": "Alicia Paula",
+        "apellidos": "Rodriguez",
+        "email": "prueba@sura.com.co",
+        "telefono": null,
+        "celular": "300254896",
+        "direccion": "direccion XX prueba",
+        "genero": "Femenino",
+        "idProfesion": 1,
+        "fechaNacimiento": "1996-05-05",
+        "idRegional": "427",
+        "activo": false,
+
+    },
+    {
+        "idTipoIdentificacion": 1,
+        "numeroIdentificacion": "96325454",
+        "nombres": "Beatriz Andrea",
+        "apellidos": "Benjarano Marquez",
+        "email": "prueba@sura.com.co",
+        "telefono": "3018654",
+        "celular": "3002548900",
+        "direccion": "direccion XX prueba",
+        "genero": "Femenino",
+        "idProfesion": 1,
+        "fechaNacimiento": "1999-05-05",
+        "idRegional": "427",
+        "activo": true,
+
+    },
+    {
+        "idTipoIdentificacion": 1,
+        "numeroIdentificacion": "963252874",
+        "nombres": "Camila Paola",
+        "apellidos": "Gonzalez Cala",
+        "email": "prueba@sura.com.co",
+        "telefono": null,
+        "celular": "300254896",
+        "direccion": "direccion XX prueba",
+        "genero": "Femenino",
+        "idProfesion": 1,
+        "fechaNacimiento": "1996-08-09",
+        "idRegional": "427",
+        "activo": true,
+
     }
 ]

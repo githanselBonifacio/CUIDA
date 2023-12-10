@@ -25,4 +25,15 @@ describe('AdminPersonalPageComponent', () => {
   it('crear componente', () => {
     expect(component).toBeTruthy();
   });
+  it('ocultar navbar', () => {
+    component.ocultarVerticalNavbar();
+    expect(fixture.nativeElement.querySelector('#vertical-nav-bar').getAttribute("close")).toBeTruthy();
+  })
+  it('mostrar navbar', () => {
+    const btn = fixture.nativeElement.querySelector('#vertical-nav-bar');
+    btn.setAttribute("close", "true");
+    component.ocultarVerticalNavbar();
+    fixture.detectChanges();
+    expect(fixture.nativeElement.querySelector('#vertical-nav-bar').getAttribute("close")).toBeTruthy();
+  })
 });

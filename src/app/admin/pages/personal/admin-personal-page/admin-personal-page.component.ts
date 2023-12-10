@@ -8,6 +8,7 @@ import { Component } from '@angular/core';
 export class AdminPersonalPageComponent {
 
   estadoMenu: string = "activate";
+
   ocultarVerticalNavbar() {
     const button = document.getElementById("vertical-nav-bar");
     const spans = document.getElementsByClassName('titulo-menu');

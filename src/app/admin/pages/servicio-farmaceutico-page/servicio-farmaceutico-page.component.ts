@@ -134,7 +134,7 @@ export class ServicioFarmaceuticoPageComponent implements OnInit, AfterViewInit 
       this.spinnerService.show()
       this.filtroAvanzadoActivado = "";
       this.adminFarmaciaService.getNotificacionesFarmacia();
-      this.dataSource.data = this.notificacionesCompleta.slice();
+      this.dataSource.data = this.notificacionesCompleta?.slice();
       this.validarMasterCheck();
       this.spinnerService.hide()
 
@@ -147,7 +147,7 @@ export class ServicioFarmaceuticoPageComponent implements OnInit, AfterViewInit 
 
     if (this.filtroBusqueda.length == 0) {
 
-      this.dataSource.data = this.notificacionesCompleta.slice();
+      this.dataSource.data = this.notificacionesCompleta?.slice();
       this.filtrarByEstadoNotificacion();
     } else {
       this.dataSource.data = this.notificacionesCompleta.slice()
@@ -185,7 +185,7 @@ export class ServicioFarmaceuticoPageComponent implements OnInit, AfterViewInit 
   }
 
   filtrarByEstadoNotificacion() {
-    this.dataSource.data = this.notificacionesCompleta.slice();
+    this.dataSource.data = this.notificacionesCompleta?.slice();
     if (this.checkedNotificado === true && this.checkedSinNotificado === false) {
       this.dataSource.data = this.dataSource.data.filter(notificacion => {
         const notificado = notificacion.notificado

@@ -69,7 +69,7 @@ export class MainComponentAgendaComponent implements OnInit {
     this.maestroService.getHorarioTurnoObservable()
       .subscribe(resp => {
         if (resp.status == 200) {
-          this.horariosTurno = resp.result.filter((h: HorarioTurno) => h.esHorarioBase);
+          this.horariosTurno = resp.result?.filter((h: HorarioTurno) => h.esHorarioBase);
           this.opcionHorarioTurno = (this.opcionHorarioTurno == 0) ? this.horariosTurno[0].id : this.opcionHorarioTurno;
         }
       });
@@ -86,12 +86,8 @@ export class MainComponentAgendaComponent implements OnInit {
         }
         this.consultarCitas()
         this.spinnerService.hide();
-      }
-
-    )
-
+      })
   }
-
 
   get estadosCita(): EstadoCita[] {
     return this.maestroService.estadosCita;
@@ -106,14 +102,14 @@ export class MainComponentAgendaComponent implements OnInit {
     localStorage.setItem("idHorarioTurnoAgendaFiltro", `${this.opcionHorarioTurno}`);
   }
   getRegionalfiltro(idRegional: string) {
-    return this.regionales.find(r => r.id == idRegional);
+    return this.regionales?.find(r => r.id == idRegional);
   }
   actualizarRegionalFilter(idRegional: string) {
     this.opcionRegional = idRegional;
     localStorage.setItem("idRegionalAgendaFiltro", this.opcionRegional);
   }
   getHorariofiltro(idHorario: number) {
-    return this.horariosTurno.find(h => h.id == idHorario);
+    return this.horariosTurno?.find(h => h.id == idHorario);
   }
   actualizarHorarioFilter(idHorario: number) {
     this.opcionHorarioTurno = idHorario;
@@ -132,7 +128,6 @@ export class MainComponentAgendaComponent implements OnInit {
       this.spinnerService.hide();
       this.cdr.detectChanges();
     })
-
     this.horasTurnoString = generarHorario(this.opcionHorarioTurno);
     this.router.navigate(['agenda', this.fechaFiltroTurno, this.opcionRegional, this.opcionHorarioTurno]);
     this.guardarLocalStorage();
@@ -143,11 +138,11 @@ export class MainComponentAgendaComponent implements OnInit {
       this.consultarCitas()
     }
     const criterioNombrePaciente = this.idRemision.toLowerCase();
-    this.citas = this.citas.filter(cita => {
-      return cita.idRemision.includes(this.idRemision) ||
+    this.citas = this.citas?.filter(cita => {
+      return cita.idRemision?.includes(this.idRemision) ||
         cita.idProfesional?.includes(this.idRemision) ||
-        cita.paciente.toLowerCase().includes(criterioNombrePaciente) ||
-        cita.numeroIdentificacionPaciente.includes(this.idRemision);
+        cita.paciente?.toLowerCase().includes(criterioNombrePaciente) ||
+        cita.numeroIdentificacionPaciente?.includes(this.idRemision);
 
     });
   }

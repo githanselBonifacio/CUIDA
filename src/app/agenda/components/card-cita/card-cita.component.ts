@@ -10,7 +10,7 @@ import { ModalCambioHoraCitaComponent } from '../modal-cambio-hora-cita/modal-ca
 import { ModalDetalleRemisionComponent } from '../modal-detalle-remision/modal-detalle-remision.component';
 import { switchMap, filter, tap } from 'rxjs/operators';
 import { ToastType, TitleToast } from 'src/app/shared/components/toast/toast.component';
-import { EstadoCita, funtionGetNombreEstadoCitaById } from 'src/app/shared/interfaces/maestros.interfaces';
+import { EstadoCita, formatoFecha, formatoFechaHora, funtionGetNombreEstadoCitaById } from 'src/app/shared/interfaces/maestros.interfaces';
 import localeEs from '@angular/common/locales/es';
 import { DatePipe, registerLocaleData } from '@angular/common';
 import { ToastService } from 'src/app/shared/services/toast/toast.service';
@@ -19,7 +19,6 @@ import { ToastService } from 'src/app/shared/services/toast/toast.service';
   selector: 'app-agenda-card-cita',
   templateUrl: './card-cita.component.html',
   styleUrls: ['./card-cita.component.css'],
-  providers: [DatePipe]
 })
 export class CardCitaComponent {
   @Input() public cita?: Cita;
@@ -35,7 +34,6 @@ export class CardCitaComponent {
     private dialogo: MatDialog,
     private agendaService: AgendaService,
     private toastService: ToastService,
-    private datePipe: DatePipe
   ) {
     registerLocaleData(localeEs);
   }
@@ -58,7 +56,7 @@ export class CardCitaComponent {
               this.agendaService.asignarProfesionaByIdCita(
                 this.cita!.idCita,
                 opcionProfesional,
-                this.datePipe.transform(this.cita!.fechaProgramada, 'yyyy-MM-dd HH:mm') ?? '',
+                formatoFecha(this.cita!.fechaProgramada),
                 this.idHorarioTurno,
                 this.idRegional
               ).subscribe(resp => {
@@ -124,7 +122,7 @@ export class CardCitaComponent {
         if (nuevaHora !== '') {
           return this.agendaService.reprogramarCita(
             this.cita!.idCita,
-            this.datePipe.transform(fecha, "yyyy-MM-dd HH:mm") ?? '',
+            formatoFechaHora(fecha),
             nuevaHora,
             this.idHorarioTurno,
             this.idRegional,

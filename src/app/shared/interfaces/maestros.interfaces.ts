@@ -1,4 +1,5 @@
-
+import { DatePipe, registerLocaleData } from "@angular/common";
+import localeEs from '@angular/common/locales/es';
 export interface Regional {
     id: string,
     nombre: string,
@@ -45,17 +46,21 @@ export function generarHorario(idHorarioTurno: number): string[] {
     }
     return horarioArray;
 }
-export function formatoFecha(date: Date | string): string {
-
-    const dateTime = new Date(date);
-    const day = (dateTime.getDate()).toString().padStart(2, '0');
-    const month = (dateTime.getMonth() + 1).toString().padStart(2, '0');
-    const year = dateTime.getFullYear().toString();
-    const hours = dateTime.getHours().toString().padStart(2, '0');
-    const minutes = dateTime.getMinutes().toString().padStart(2, '0');
-    return `${year}-${month}-${day}`;
+export function formatoFecha(fecha: Date): string {
+    registerLocaleData(localeEs);
+    const datePipe = new DatePipe('es');
+    return datePipe.transform(fecha, "yyyy-MM-dd") ?? "";
 }
-
+export function formatoFechaHora(fecha: Date): string {
+    registerLocaleData(localeEs);
+    const datePipe = new DatePipe('es');
+    return datePipe.transform(fecha, "yyyy-MM-dd HH:mm") ?? "";
+}
+export function formatoHora(fecha: Date): string {
+    registerLocaleData(localeEs);
+    const datePipe = new DatePipe('es');
+    return datePipe.transform(fecha, "HH:mm") ?? "";
+}
 export interface EstadoCita {
     id: number,
     nombre: string,
@@ -67,16 +72,16 @@ function getNombreEstadoCitaById(id: string | number, list: EstadoCita[]): strin
 }
 
 function getNombreRegionalById(id: string, list: Regional[]): string | undefined {
-    const item = list.find(item => item.id == id);
+    const item = list?.find(item => item.id == id);
     return item?.nombre;
 }
 
 function getNombreTipoIdentificacionById(id: number, list: TipoIdentificacion[]): string | undefined {
-    const item = list.find(item => item.id == id);
+    const item = list?.find(item => item.id == id);
     return item?.nombre;
 }
 function getIdTipoIdentificacionById(id: number, list: TipoIdentificacion[]): string | undefined {
-    const item = list.find(item => item.id == id);
+    const item = list?.find(item => item.id == id);
     return item?.idTipo;
 }
 function getNombreProfesionById(id: number, list: Profesion[]): string | undefined {

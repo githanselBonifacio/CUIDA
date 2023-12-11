@@ -2,12 +2,21 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CardCitaComponent } from './card-cita.component';
 import { DatePipe } from '@angular/common';
-import { MatDialogModule } from '@angular/material/dialog';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { AgendaService } from '../../services/agenda.service';
 import { ToastService } from 'src/app/shared/services/toast/toast.service';
 import { PipesModule } from 'src/app/pipes/pipes.module';
 import { Cita, EstadosCita } from '../../interfaces/remision.interface';
-import { of } from 'rxjs';
+import { Observable, of } from 'rxjs';
+import { profesionalesDataTest2 } from 'src/assets/files/test/personal';
+
+export class MatDialogMock {
+  open() {
+    return {
+      afterClosed: () => of('string')
+    };
+  }
+}
 
 describe('CardCitaComponent', () => {
   let component: CardCitaComponent;
@@ -33,22 +42,35 @@ describe('CardCitaComponent', () => {
     "tipoIdentificacionPaciente": "Cédula ciudadania"
   }
   const agendaServiceMock = {
-    getProfesionaTurnoRegional: (fechaTurno: string, idRegional: string, idHorarioTurno: number) => of({ result: [] }),
-    reprogramarCita: (idCita: string, fechaProgramada: string, nuevaHora: string, idHorarioTurno: number, idRegional: string, idProfesional: string) => of()
+    getProfesionaTurnoRegional: () => of(
+      {
+        status: 200,
+        result: profesionalesDataTest2
+      }
+    ),
+    retirarProfesional: () => of(
+      {
+        status: 200
+      }
+    ),
+    reprogramarCita: () => of()
   };
-
+  const toastServiceMock = {
+    mostrarToast: (): Observable<any> => of(),
+  };
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [CardCitaComponent],
       imports: [
         MatDialogModule,
-        PipesModule
+        PipesModule,
       ],
       providers: [
         { provide: AgendaService, useValue: agendaServiceMock },
         { provide: ToastService, useValue: {} },
-        DatePipe
-      ]
+        { provide: MatDialog, useClass: MatDialogMock },
+        { provide: ToastService, useValue: toastServiceMock },
+        DatePipe]
     });
     fixture = TestBed.createComponent(CardCitaComponent);
     component = fixture.componentInstance;
@@ -75,7 +97,6 @@ describe('CardCitaComponent', () => {
 
   it('agendar cita a profesional', () => {
     component.cita = citaDataTest;
-
     component.asignarProfesionalCita()
     expect(component).toBeDefined();
   })

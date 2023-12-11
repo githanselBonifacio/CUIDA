@@ -1,8 +1,9 @@
-import { DatePipe } from '@angular/common';
-import { Component, Inject, OnInit } from '@angular/core';
+
+import { Component, Inject, LOCALE_ID, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ItemDiaTurno, Profesional, Secuencia, Turno } from 'src/app/agenda/interfaces/profesional.interface';
 import { ToastType, TitleToast } from 'src/app/shared/components/toast/toast.component';
+import { formatoFecha } from 'src/app/shared/interfaces/maestros.interfaces';
 import { ToastService } from 'src/app/shared/services/toast/toast.service';
 
 
@@ -10,7 +11,7 @@ import { ToastService } from 'src/app/shared/services/toast/toast.service';
   selector: 'app-modal-accion-agregar-secuencia',
   templateUrl: './modal-accion-agregar-secuencia.component.html',
   styleUrls: ['./modal-accion-agregar-secuencia.component.css'],
-  providers: [DatePipe]
+  providers: [{ provide: LOCALE_ID, useValue: 'es' }],
 })
 export class ModalAccionAgregarSecuenciaComponent {
 
@@ -18,7 +19,7 @@ export class ModalAccionAgregarSecuenciaComponent {
     public dialogRef: MatDialogRef<ModalAccionAgregarSecuenciaComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private toastService: ToastService,
-    private datePipe: DatePipe
+
   ) { }
 
   get profesionalesSeleccionados(): Profesional[] {
@@ -62,12 +63,12 @@ export class ModalAccionAgregarSecuenciaComponent {
   }
 
 
-  eliminarSemana(fechasEliminar: any[]) {
+  eliminarSemana(fechasEliminar: Date[]) {
     this.secuenciasSemana = this.secuenciasSemana.filter(sc => JSON.stringify(sc.semana) != JSON.stringify(fechasEliminar));
   }
 
   agregarSecuenciaSemana(secuencia: Secuencia, index: number) {
-    this.secuenciasSemana[index].secuencia = secuencia;
+    this.secuenciasSemana[index]!.secuencia = secuencia;
   }
   enviar() {
     const turnos: Turno[] = this.profesionalesSeleccionados
@@ -92,7 +93,7 @@ export class ModalAccionAgregarSecuenciaComponent {
         return ts.idHorarioTurno.map(idHorarioTurno => {
           return {
             idTurno: null,
-            fechaTurno: this.datePipe.transform(ts.fechaTurno, 'yyyy-MM-dd'),
+            fechaTurno: formatoFecha(ts.fechaTurno),
             idProfesional: ts.idProfesional,
             idRegional: ts.idRegional,
             idHorarioTurno: idHorarioTurno

@@ -53,3 +53,26 @@ export const horarioTurnoTestDescanso = [
         "duracionHoras": 0
     },
 ]
+
+export const tipoIdentificacionTest = [
+    [
+        {
+            "id": 7,
+            "idTipo": "CC",
+            "nombre": "Cédula de ciudadanía",
+            "esMayorEdad": true
+        },
+        {
+            "id": 8,
+            "idTipo": "CE",
+            "nombre": "Cédula de extranjería",
+            "esMayorEdad": true
+        },
+        {
+            "id": 9,
+            "idTipo": "RC",
+            "nombre": "Registro Civil",
+            "esMayorEdad": false
+        }
+    ]
+]

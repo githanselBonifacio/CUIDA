@@ -1,7 +1,6 @@
-import { DatePipe } from '@angular/common';
 import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { Profesional, Turno } from 'src/app/agenda/interfaces/profesional.interface';
+import { Profesional } from 'src/app/agenda/interfaces/profesional.interface';
 import { TitleToast, ToastType } from 'src/app/shared/components/toast/toast.component';
 import { formatoFecha } from 'src/app/shared/interfaces/maestros.interfaces';
 import { ToastService } from 'src/app/shared/services/toast/toast.service';

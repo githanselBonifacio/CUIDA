@@ -142,263 +142,84 @@ export const motivoCancelacionCitaReporteAnual = {
             }
         ]
     },
-    "reportes": {
-        "year": 2023,
-        "meses": [
-            {
-                "nombre": "enero",
-                "motivosCancelacion": [
-                    {
-                        "nombre": "paciente no recibe visita",
-                        "cantidad": 20
-                    },
-                    {
-                        "nombre": "paciente no se encuentra en domicilio",
-                        "cantidad": 20
-                    },
-                    {
-                        "nombre": "no hay disponibilidad de personal",
-                        "cantidad": 20
-                    },
-                    {
-                        "nombre": "otros",
-                        "cantidad": 50
-                    }
-                ],
-            },
-            {
-                "nombre": "febrero",
-                "motivosCancelacion": [
-                    {
-                        "nombre": "paciente no recibe visita",
-                        "cantidad": 20
-                    },
-                    {
-                        "nombre": "paciente no se encuentra en domicilio",
-                        "cantidad": 20
-                    },
-                    {
-                        "nombre": "no hay disponibilidad de personal",
-                        "cantidad": 20
-                    },
-                    {
-                        "nombre": "otros",
-                        "cantidad": 50
-                    }
-                ],
-            },
-            {
-                "nombre": "marzo",
-                "motivosCancelacion": [
-                    {
-                        "nombre": "paciente no recibe visita",
-                        "cantidad": 20
-                    },
-                    {
-                        "nombre": "paciente no se encuentra en domicilio",
-                        "cantidad": 20
-                    },
-                    {
-                        "nombre": "no hay disponibilidad de personal",
-                        "cantidad": 20
-                    },
-                    {
-                        "nombre": "otros",
-                        "cantidad": 50
-                    }
-                ],
-            },
-            {
-                "nombre": "abril",
-                "motivosCancelacion": [
-                    {
-                        "nombre": "paciente no recibe visita",
-                        "cantidad": 20
-                    },
-                    {
-                        "nombre": "paciente no se encuentra en domicilio",
-                        "cantidad": 20
-                    },
-                    {
-                        "nombre": "no hay disponibilidad de personal",
-                        "cantidad": 20
-                    },
-                    {
-                        "nombre": "otros",
-                        "cantidad": 50
-                    }
-                ],
-            },
-            {
-                "nombre": "mayo",
-                "motivosCancelacion": [
-                    {
-                        "nombre": "paciente no recibe visita",
-                        "cantidad": 20
-                    },
-                    {
-                        "nombre": "paciente no se encuentra en domicilio",
-                        "cantidad": 20
-                    },
-                    {
-                        "nombre": "no hay disponibilidad de personal",
-                        "cantidad": 20
-                    },
-                    {
-                        "nombre": "otros",
-                        "cantidad": 50
-                    }
-                ],
-            },
-            {
-                "nombre": "junio",
-                "motivosCancelacion": [
-                    {
-                        "nombre": "paciente no recibe visita",
-                        "cantidad": 20
-                    },
-                    {
-                        "nombre": "paciente no se encuentra en domicilio",
-                        "cantidad": 20
-                    },
-                    {
-                        "nombre": "no hay disponibilidad de personal",
-                        "cantidad": 20
-                    },
-                    {
-                        "nombre": "otros",
-                        "cantidad": 50
-                    }
-                ],
-            },
-            {
-                "nombre": "julio",
-                "motivosCancelacion": [
-                    {
-                        "nombre": "paciente no recibe visita",
-                        "cantidad": 20
-                    },
-                    {
-                        "nombre": "paciente no se encuentra en domicilio",
-                        "cantidad": 20
-                    },
-                    {
-                        "nombre": "no hay disponibilidad de personal",
-                        "cantidad": 20
-                    },
-                    {
-                        "nombre": "otros",
-                        "cantidad": 50
-                    }
-                ],
-            },
-            {
-                "nombre": "agosto",
-                "motivosCancelacion": [
-                    {
-                        "nombre": "paciente no recibe visita",
-                        "cantidad": 20
-                    },
-                    {
-                        "nombre": "paciente no se encuentra en domicilio",
-                        "cantidad": 20
-                    },
-                    {
-                        "nombre": "no hay disponibilidad de personal",
-                        "cantidad": 20
-                    },
-                    {
-                        "nombre": "otros",
-                        "cantidad": 50
-                    }
-                ],
-            },
-            {
-                "nombre": "septiembre",
-                "motivosCancelacion": [
-                    {
-                        "nombre": "paciente no recibe visita",
-                        "cantidad": 20
-                    },
-                    {
-                        "nombre": "paciente no se encuentra en domicilio",
-                        "cantidad": 20
-                    },
-                    {
-                        "nombre": "no hay disponibilidad de personal",
-                        "cantidad": 20
-                    },
-                    {
-                        "nombre": "otros",
-                        "cantidad": 50
-                    }
-                ],
-            },
-            {
-                "nombre": "octubre",
-                "motivosCancelacion": [
-                    {
-                        "nombre": "paciente no recibe visita",
-                        "cantidad": 20
-                    },
-                    {
-                        "nombre": "paciente no se encuentra en domicilio",
-                        "cantidad": 20
-                    },
-                    {
-                        "nombre": "no hay disponibilidad de personal",
-                        "cantidad": 20
-                    },
-                    {
-                        "nombre": "otros",
-                        "cantidad": 50
-                    }
-                ],
-            },
-            {
-                "nombre": "noviembre",
-                "motivosCancelacion": [
-                    {
-                        "nombre": "paciente no recibe visita",
-                        "cantidad": 20
-                    },
-                    {
-                        "nombre": "paciente no se encuentra en domicilio",
-                        "cantidad": 20
-                    },
-                    {
-                        "nombre": "no hay disponibilidad de personal",
-                        "cantidad": 20
-                    },
-                    {
-                        "nombre": "otros",
-                        "cantidad": 50
-                    }
-                ],
-            },
-            {
-                "nombre": "diciembre",
-                "motivosCancelacion": [
-                    {
-                        "nombre": "paciente no recibe visita",
-                        "cantidad": 20
-                    },
-                    {
-                        "nombre": "paciente no se encuentra en domicilio",
-                        "cantidad": 20
-                    },
-                    {
-                        "nombre": "no hay disponibilidad de personal",
-                        "cantidad": 20
-                    },
-                    {
-                        "nombre": "otros",
-                        "cantidad": 50
-                    }
-                ],
-            }
-        ]
-    }
+    "reportes": [
+        {
+            "mes": "enero",
+            "totalCitasCanceladas": 1,
+            "registros": [
+                {
+                    "descripcion": "Paciente se encuentra hospitalizado",
+                    "cantidad": 1
+                }
+            ]
+        },
+        {
+            "mes": "febrero",
+            "totalCitasCanceladas": 1,
+            "registros": [
+                {
+                    "descripcion": "Reprogramar",
+                    "cantidad": 3
+                }
+            ]
+        },
+        {
+            "mes": "noviembre",
+            "totalCitasCanceladas": 8,
+            "registros": [
+                {
+                    "descripcion": "Alta especialista",
+                    "cantidad": 1
+                },
+                {
+                    "descripcion": "Novedad plan de manejo",
+                    "cantidad": 2
+                },
+                {
+                    "descripcion": "Paciente falleció",
+                    "cantidad": 1
+                },
+                {
+                    "descripcion": "Paciente no desea recibir la atenció",
+                    "cantidad": 1
+                },
+                {
+                    "descripcion": "Paciente no ingresa al servicio",
+                    "cantidad": 1
+                },
+                {
+                    "descripcion": "Paciente no se encuentra en el domicilio",
+                    "cantidad": 1
+                },
+                {
+                    "descripcion": "Remitido a otro nivel de atención",
+                    "cantidad": 1
+                },
+                {
+                    "descripcion": "Reprogramar",
+                    "cantidad": 1
+                }
+            ]
+        },
+        {
+            "mes": "diciembre",
+            "totalCitasCanceladas": 2,
+            "registros": [
+                {
+                    "descripcion": "Novedad plan de manejo",
+                    "cantidad": 1
+                },
+                {
+                    "descripcion": "Reprogramar",
+                    "cantidad": 1
+                }
+            ]
+        }
+    ]
+
+
+
+
 }
 
 export const reporteMensual = {
@@ -710,660 +531,21 @@ export const motivoCancelacionCitaReporteMensual = {
             }
         ]
     },
-    "reportes": {
-        "mes": "Marzo",
-        "dia": [
-            {
-                "dia": 1,
-                "motivosCancelacion": [
-                    {
-                        "nombre": "paciente no recibe visita",
-                        "cantidad": 20
-                    },
-                    {
-                        "nombre": "paciente no se encuentra en domicilio",
-                        "cantidad": 20
-                    },
-                    {
-                        "nombre": "no hay disponibilidad de personal",
-                        "cantidad": 20
-                    },
-                    {
-                        "nombre": "otros",
-                        "cantidad": 50
-                    }
-                ],
-            },
-            {
-                "dia": 2,
-                "motivosCancelacion": [
-                    {
-                        "nombre": "paciente no recibe visita",
-                        "cantidad": 20
-                    },
-                    {
-                        "nombre": "paciente no se encuentra en domicilio",
-                        "cantidad": 20
-                    },
-                    {
-                        "nombre": "no hay disponibilidad de personal",
-                        "cantidad": 20
-                    },
-                    {
-                        "nombre": "otros",
-                        "cantidad": 50
-                    }
-                ],
-            },
-            {
-                "dia": 3,
-                "motivosCancelacion": [
-                    {
-                        "nombre": "paciente no recibe visita",
-                        "cantidad": 20
-                    },
-                    {
-                        "nombre": "paciente no se encuentra en domicilio",
-                        "cantidad": 20
-                    },
-                    {
-                        "nombre": "no hay disponibilidad de personal",
-                        "cantidad": 20
-                    },
-                    {
-                        "nombre": "otros",
-                        "cantidad": 50
-                    }
-                ],
-            },
-            {
-                "dia": 4,
-                "motivosCancelacion": [
-                    {
-                        "nombre": "paciente no recibe visita",
-                        "cantidad": 20
-                    },
-                    {
-                        "nombre": "paciente no se encuentra en domicilio",
-                        "cantidad": 20
-                    },
-                    {
-                        "nombre": "no hay disponibilidad de personal",
-                        "cantidad": 20
-                    },
-                    {
-                        "nombre": "otros",
-                        "cantidad": 50
-                    }
-                ],
-            },
-            {
-                "dia": 5,
-                "motivosCancelacion": [
-                    {
-                        "nombre": "paciente no recibe visita",
-                        "cantidad": 20
-                    },
-                    {
-                        "nombre": "paciente no se encuentra en domicilio",
-                        "cantidad": 20
-                    },
-                    {
-                        "nombre": "no hay disponibilidad de personal",
-                        "cantidad": 20
-                    },
-                    {
-                        "nombre": "otros",
-                        "cantidad": 50
-                    }
-                ],
-            },
-            {
-                "dia": 6,
-                "motivosCancelacion": [
-                    {
-                        "nombre": "paciente no recibe visita",
-                        "cantidad": 20
-                    },
-                    {
-                        "nombre": "paciente no se encuentra en domicilio",
-                        "cantidad": 20
-                    },
-                    {
-                        "nombre": "no hay disponibilidad de personal",
-                        "cantidad": 20
-                    },
-                    {
-                        "nombre": "otros",
-                        "cantidad": 50
-                    }
-                ],
-            },
-            {
-                "dia": 7,
-                "motivosCancelacion": [
-                    {
-                        "nombre": "paciente no recibe visita",
-                        "cantidad": 20
-                    },
-                    {
-                        "nombre": "paciente no se encuentra en domicilio",
-                        "cantidad": 20
-                    },
-                    {
-                        "nombre": "no hay disponibilidad de personal",
-                        "cantidad": 20
-                    },
-                    {
-                        "nombre": "otros",
-                        "cantidad": 50
-                    }
-                ],
-            },
-            {
-                "dia": 8,
-                "motivosCancelacion": [
-                    {
-                        "nombre": "paciente no recibe visita",
-                        "cantidad": 20
-                    },
-                    {
-                        "nombre": "paciente no se encuentra en domicilio",
-                        "cantidad": 20
-                    },
-                    {
-                        "nombre": "no hay disponibilidad de personal",
-                        "cantidad": 20
-                    },
-                    {
-                        "nombre": "otros",
-                        "cantidad": 50
-                    }
-                ],
-            },
-            {
-                "dia": 9,
-                "motivosCancelacion": [
-                    {
-                        "nombre": "paciente no recibe visita",
-                        "cantidad": 20
-                    },
-                    {
-                        "nombre": "paciente no se encuentra en domicilio",
-                        "cantidad": 20
-                    },
-                    {
-                        "nombre": "no hay disponibilidad de personal",
-                        "cantidad": 20
-                    },
-                    {
-                        "nombre": "otros",
-                        "cantidad": 50
-                    }
-                ],
-            },
-            {
-                "dia": 10,
-                "motivosCancelacion": [
-                    {
-                        "nombre": "paciente no recibe visita",
-                        "cantidad": 20
-                    },
-                    {
-                        "nombre": "paciente no se encuentra en domicilio",
-                        "cantidad": 20
-                    },
-                    {
-                        "nombre": "no hay disponibilidad de personal",
-                        "cantidad": 20
-                    },
-                    {
-                        "nombre": "otros",
-                        "cantidad": 50
-                    }
-                ],
-            },
-            {
-                "dia": 11,
-                "motivosCancelacion": [
-                    {
-                        "nombre": "paciente no recibe visita",
-                        "cantidad": 20
-                    },
-                    {
-                        "nombre": "paciente no se encuentra en domicilio",
-                        "cantidad": 20
-                    },
-                    {
-                        "nombre": "no hay disponibilidad de personal",
-                        "cantidad": 20
-                    },
-                    {
-                        "nombre": "otros",
-                        "cantidad": 50
-                    }
-                ],
-            },
-            {
-                "dia": 12,
-                "motivosCancelacion": [
-                    {
-                        "nombre": "paciente no recibe visita",
-                        "cantidad": 20
-                    },
-                    {
-                        "nombre": "paciente no se encuentra en domicilio",
-                        "cantidad": 20
-                    },
-                    {
-                        "nombre": "no hay disponibilidad de personal",
-                        "cantidad": 20
-                    },
-                    {
-                        "nombre": "otros",
-                        "cantidad": 50
-                    }
-                ],
-            },
-            {
-                "dia": 13,
-                "motivosCancelacion": [
-                    {
-                        "nombre": "paciente no recibe visita",
-                        "cantidad": 20
-                    },
-                    {
-                        "nombre": "paciente no se encuentra en domicilio",
-                        "cantidad": 20
-                    },
-                    {
-                        "nombre": "no hay disponibilidad de personal",
-                        "cantidad": 20
-                    },
-                    {
-                        "nombre": "otros",
-                        "cantidad": 50
-                    }
-                ],
-            },
-            {
-                "dia": 14,
-                "motivosCancelacion": [
-                    {
-                        "nombre": "paciente no recibe visita",
-                        "cantidad": 20
-                    },
-                    {
-                        "nombre": "paciente no se encuentra en domicilio",
-                        "cantidad": 20
-                    },
-                    {
-                        "nombre": "no hay disponibilidad de personal",
-                        "cantidad": 20
-                    },
-                    {
-                        "nombre": "otros",
-                        "cantidad": 50
-                    }
-                ],
-            },
-            {
-                "dia": 15,
-                "motivosCancelacion": [
-                    {
-                        "nombre": "paciente no recibe visita",
-                        "cantidad": 20
-                    },
-                    {
-                        "nombre": "paciente no se encuentra en domicilio",
-                        "cantidad": 20
-                    },
-                    {
-                        "nombre": "no hay disponibilidad de personal",
-                        "cantidad": 20
-                    },
-                    {
-                        "nombre": "otros",
-                        "cantidad": 50
-                    }
-                ],
-            },
-            {
-                "dia": 16,
-                "motivosCancelacion": [
-                    {
-                        "nombre": "paciente no recibe visita",
-                        "cantidad": 20
-                    },
-                    {
-                        "nombre": "paciente no se encuentra en domicilio",
-                        "cantidad": 20
-                    },
-                    {
-                        "nombre": "no hay disponibilidad de personal",
-                        "cantidad": 20
-                    },
-                    {
-                        "nombre": "otros",
-                        "cantidad": 50
-                    }
-                ],
-            },
-            {
-                "dia": 17,
-                "motivosCancelacion": [
-                    {
-                        "nombre": "paciente no recibe visita",
-                        "cantidad": 20
-                    },
-                    {
-                        "nombre": "paciente no se encuentra en domicilio",
-                        "cantidad": 20
-                    },
-                    {
-                        "nombre": "no hay disponibilidad de personal",
-                        "cantidad": 20
-                    },
-                    {
-                        "nombre": "otros",
-                        "cantidad": 50
-                    }
-                ],
-            },
-            {
-                "dia": 18,
-                "motivosCancelacion": [
-                    {
-                        "nombre": "paciente no recibe visita",
-                        "cantidad": 20
-                    },
-                    {
-                        "nombre": "paciente no se encuentra en domicilio",
-                        "cantidad": 20
-                    },
-                    {
-                        "nombre": "no hay disponibilidad de personal",
-                        "cantidad": 20
-                    },
-                    {
-                        "nombre": "otros",
-                        "cantidad": 50
-                    }
-                ],
-            },
-            {
-                "dia": 19,
-                "motivosCancelacion": [
-                    {
-                        "nombre": "paciente no recibe visita",
-                        "cantidad": 20
-                    },
-                    {
-                        "nombre": "paciente no se encuentra en domicilio",
-                        "cantidad": 20
-                    },
-                    {
-                        "nombre": "no hay disponibilidad de personal",
-                        "cantidad": 20
-                    },
-                    {
-                        "nombre": "otros",
-                        "cantidad": 50
-                    }
-                ],
-            },
-            {
-                "dia": 20,
-                "motivosCancelacion": [
-                    {
-                        "nombre": "paciente no recibe visita",
-                        "cantidad": 20
-                    },
-                    {
-                        "nombre": "paciente no se encuentra en domicilio",
-                        "cantidad": 20
-                    },
-                    {
-                        "nombre": "no hay disponibilidad de personal",
-                        "cantidad": 20
-                    },
-                    {
-                        "nombre": "otros",
-                        "cantidad": 50
-                    }
-                ],
-            },
-            {
-                "dia": 21,
-                "motivosCancelacion": [
-                    {
-                        "nombre": "paciente no recibe visita",
-                        "cantidad": 20
-                    },
-                    {
-                        "nombre": "paciente no se encuentra en domicilio",
-                        "cantidad": 20
-                    },
-                    {
-                        "nombre": "no hay disponibilidad de personal",
-                        "cantidad": 20
-                    },
-                    {
-                        "nombre": "otros",
-                        "cantidad": 50
-                    }
-                ],
-            },
-            {
-                "dia": 22,
-                "motivosCancelacion": [
-                    {
-                        "nombre": "paciente no recibe visita",
-                        "cantidad": 20
-                    },
-                    {
-                        "nombre": "paciente no se encuentra en domicilio",
-                        "cantidad": 20
-                    },
-                    {
-                        "nombre": "no hay disponibilidad de personal",
-                        "cantidad": 20
-                    },
-                    {
-                        "nombre": "otros",
-                        "cantidad": 50
-                    }
-                ],
-            },
-            {
-                "dia": 23,
-                "motivosCancelacion": [
-                    {
-                        "nombre": "paciente no recibe visita",
-                        "cantidad": 20
-                    },
-                    {
-                        "nombre": "paciente no se encuentra en domicilio",
-                        "cantidad": 20
-                    },
-                    {
-                        "nombre": "no hay disponibilidad de personal",
-                        "cantidad": 20
-                    },
-                    {
-                        "nombre": "otros",
-                        "cantidad": 50
-                    }
-                ],
-            },
-            {
-                "dia": 24,
-                "motivosCancelacion": [
-                    {
-                        "nombre": "paciente no recibe visita",
-                        "cantidad": 20
-                    },
-                    {
-                        "nombre": "paciente no se encuentra en domicilio",
-                        "cantidad": 20
-                    },
-                    {
-                        "nombre": "no hay disponibilidad de personal",
-                        "cantidad": 20
-                    },
-                    {
-                        "nombre": "otros",
-                        "cantidad": 50
-                    }
-                ],
-            },
-            {
-                "dia": 25,
-                "motivosCancelacion": [
-                    {
-                        "nombre": "paciente no recibe visita",
-                        "cantidad": 20
-                    },
-                    {
-                        "nombre": "paciente no se encuentra en domicilio",
-                        "cantidad": 20
-                    },
-                    {
-                        "nombre": "no hay disponibilidad de personal",
-                        "cantidad": 20
-                    },
-                    {
-                        "nombre": "otros",
-                        "cantidad": 50
-                    }
-                ],
-            },
-            {
-                "dia": 26,
-                "motivosCancelacion": [
-                    {
-                        "nombre": "paciente no recibe visita",
-                        "cantidad": 20
-                    },
-                    {
-                        "nombre": "paciente no se encuentra en domicilio",
-                        "cantidad": 20
-                    },
-                    {
-                        "nombre": "no hay disponibilidad de personal",
-                        "cantidad": 20
-                    },
-                    {
-                        "nombre": "otros",
-                        "cantidad": 50
-                    }
-                ],
-            },
-            {
-                "dia": 27,
-                "motivosCancelacion": [
-                    {
-                        "nombre": "paciente no recibe visita",
-                        "cantidad": 20
-                    },
-                    {
-                        "nombre": "paciente no se encuentra en domicilio",
-                        "cantidad": 20
-                    },
-                    {
-                        "nombre": "no hay disponibilidad de personal",
-                        "cantidad": 20
-                    },
-                    {
-                        "nombre": "otros",
-                        "cantidad": 50
-                    }
-                ],
-            },
-            {
-                "dia": 28,
-                "motivosCancelacion": [
-                    {
-                        "nombre": "paciente no recibe visita",
-                        "cantidad": 20
-                    },
-                    {
-                        "nombre": "paciente no se encuentra en domicilio",
-                        "cantidad": 20
-                    },
-                    {
-                        "nombre": "no hay disponibilidad de personal",
-                        "cantidad": 20
-                    },
-                    {
-                        "nombre": "otros",
-                        "cantidad": 50
-                    }
-                ],
-            },
-            {
-                "dia": 29,
-                "motivosCancelacion": [
-                    {
-                        "nombre": "paciente no recibe visita",
-                        "cantidad": 20
-                    },
-                    {
-                        "nombre": "paciente no se encuentra en domicilio",
-                        "cantidad": 20
-                    },
-                    {
-                        "nombre": "no hay disponibilidad de personal",
-                        "cantidad": 20
-                    },
-                    {
-                        "nombre": "otros",
-                        "cantidad": 50
-                    }
-                ],
-            },
-            {
-                "dia": 30,
-                "motivosCancelacion": [
-                    {
-                        "nombre": "paciente no recibe visita",
-                        "cantidad": 20
-                    },
-                    {
-                        "nombre": "paciente no se encuentra en domicilio",
-                        "cantidad": 20
-                    },
-                    {
-                        "nombre": "no hay disponibilidad de personal",
-                        "cantidad": 20
-                    },
-                    {
-                        "nombre": "otros",
-                        "cantidad": 50
-                    }
-                ],
-            },
-            {
-                "dia": 31,
-                "motivosCancelacion": [
-                    {
-                        "nombre": "paciente no recibe visita",
-                        "cantidad": 20
-                    },
-                    {
-                        "nombre": "paciente no se encuentra en domicilio",
-                        "cantidad": 20
-                    },
-                    {
-                        "nombre": "no hay disponibilidad de personal",
-                        "cantidad": 20
-                    },
-                    {
-                        "nombre": "otros",
-                        "cantidad": 50
-                    }
-                ],
-            }
-        ]
-    }
+    "reportes": [
+        {
+            "dia": "13",
+            "totalCitasCanceladas": 2,
+            "registros": [
+                {
+                    "descripcion": "Novedad plan de manejo",
+                    "cantidad": 1
+                },
+                {
+                    "descripcion": "Reprogramar",
+                    "cantidad": 1
+                }
+            ]
+        }
+    ]
+
 }

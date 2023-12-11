@@ -84,7 +84,7 @@ export interface SoporteNutricional {
     notificado: boolean;
     descripcion: string;
     unidadDosis: string;
-    cantidadDosis: number;
+    cantidadDosis: string;
     idMedicamento: string;
     tipoPrestacion: string;
     codigoMedicamento: string;

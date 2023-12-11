@@ -6,11 +6,15 @@ import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { of } from 'rxjs/internal/observable/of';
 
 describe('ModalSeleccionProfesionalComponent', () => {
   let component: ModalSeleccionProfesionalComponent;
   let fixture: ComponentFixture<ModalSeleccionProfesionalComponent>;
 
+  const matDialogRefMock = {
+    close: () => of("resp"),
+  }
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [ModalSeleccionProfesionalComponent],
@@ -21,7 +25,7 @@ describe('ModalSeleccionProfesionalComponent', () => {
         BrowserAnimationsModule
       ],
       providers: [
-        { provide: MatDialogRef, useValue: {} },
+        { provide: MatDialogRef, useValue: matDialogRefMock },
         { provide: MAT_DIALOG_DATA, useValue: {} },
       ]
     }).compileComponents();
@@ -33,4 +37,12 @@ describe('ModalSeleccionProfesionalComponent', () => {
   it('crear componente', () => {
     expect(component).toBeTruthy();
   });
+  it('no seleccionar', () => {
+    component.onNoClick();
+    expect(component).toBeTruthy();
+  })
+  it(' seleccionar profesional', () => {
+    component.onConfirm();
+    expect(component).toBeTruthy();
+  })
 });

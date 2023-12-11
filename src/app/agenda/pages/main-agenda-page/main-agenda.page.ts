@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, LOCALE_ID, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { MatDialog } from '@angular/material/dialog'
@@ -8,7 +8,7 @@ import { AgendaService } from 'src/app/agenda/services/agenda.service';
 import { TurnoProfesional } from 'src/app/agenda/interfaces/profesional.interface'
 import { Cita } from "../../interfaces/remision.interface"
 import { MaestrosService } from 'src/app/shared/services/maestros/maestros.service';
-import { EstadoCita, HorarioTurno, Regional, formatoFecha } from 'src/app/shared/interfaces/maestros.interfaces';
+import { EstadoCita, HorarioTurno, Regional, formatoFecha, formatoFechaHora, formatoHora } from 'src/app/shared/interfaces/maestros.interfaces';
 import { Actividad } from 'src/app/diagramas/interfaces/tarea-gantt.interface';
 import { generarHorario } from '../../../shared/interfaces/maestros.interfaces'
 import { EstadosCita } from '../../interfaces/estadosCita.interface'
@@ -21,14 +21,13 @@ import { Observable, forkJoin } from 'rxjs';
 import { Respuesta } from 'src/app/shared/interfaces/response.interfaces';
 import { ToastService } from 'src/app/shared/services/toast/toast.service';
 import { ToastType, TitleToast } from 'src/app/shared/components/toast/toast.component';
-import { DatePipe } from '@angular/common';
 import { ModalCambioHoraCitaComponent } from '../../components/modal-cambio-hora-cita/modal-cambio-hora-cita.component';
 
 @Component({
   selector: 'app-main-component-agenda',
   templateUrl: './main-agenda.page.html',
   styleUrls: ['./main-agenda.page.css'],
-  providers: [DatePipe]
+
 })
 export class MainComponentAgendaComponent implements OnInit {
 
@@ -53,7 +52,6 @@ export class MainComponentAgendaComponent implements OnInit {
     private dialogo: MatDialog,
     private spinnerService: SpinnerService,
     private toastService: ToastService,
-    private datePipe: DatePipe,
     private cdr: ChangeDetectorRef
   ) { }
 
@@ -96,6 +94,11 @@ export class MainComponentAgendaComponent implements OnInit {
   get disabledAutoagendar(): boolean {
     return !this.citas.slice().every(cita => cita.idEstado == EstadosCita.SIN_AGENDAR || cita.idEstado == EstadosCita.AGENDADA);
   }
+
+  get fechaTurnoFormat() {
+    return formatoFecha(this.citas[0].fechaInicio);
+  }
+
   guardarLocalStorage() {
     localStorage.setItem("fechaTurnoAgenda", this.fechaFiltroTurno);
     localStorage.setItem("idRegionalAgendaFiltro", this.opcionRegional);
@@ -150,7 +153,7 @@ export class MainComponentAgendaComponent implements OnInit {
   autoagendar(): void {
     this.spinnerService.show();
     this.agendaService.autoagendar(
-      this.datePipe.transform(this.citas[0].fechaInicio, "yyyy-MM-dd") ?? '',
+      this.fechaTurnoFormat,
       this.opcionHorarioTurno,
       this.opcionRegional
     ).subscribe(resp => {
@@ -166,7 +169,7 @@ export class MainComponentAgendaComponent implements OnInit {
 
   desagendarTurnoCompleto(): void {
     this.spinnerService.show();
-    this.agendaService.desagendarTurnoCompleto(this.datePipe.transform(this.citas[0].fechaInicio, "yyyy-MM-dd") ?? '', this.opcionHorarioTurno, this.opcionRegional)
+    this.agendaService.desagendarTurnoCompleto(this.fechaTurnoFormat, this.opcionHorarioTurno, this.opcionRegional)
       .subscribe(resp => {
         if (resp.status == 200) {
           this.spinnerService.hide();
@@ -262,7 +265,7 @@ export class MainComponentAgendaComponent implements OnInit {
           switchMap(() => this.agendaService.retirarProfesional(
             citaSeleccionada?.idCita,
             citaSeleccionada?.idProfesional ?? '',
-            this.datePipe.transform(new Date(citaSeleccionada.fechaProgramada), 'yyyy-MM-dd') ?? '',
+            formatoFecha(citaSeleccionada.fechaProgramada),
             citaSeleccionada?.idHorarioTurno,
             citaSeleccionada?.idRegional
           )))
@@ -282,14 +285,14 @@ export class MainComponentAgendaComponent implements OnInit {
     const citaSeleccionada = this.citas.find(cita => cita.idCita == idCita);
     if (citaSeleccionada) {
       const dialogRef = this.dialogo.open(ModalCambioHoraCitaComponent, {
-        data: this.datePipe.transform(new Date(citaSeleccionada.fechaProgramada), 'HH:mm') ?? ''
+        data: formatoHora(new Date(citaSeleccionada.fechaProgramada))
       })
       dialogRef.afterClosed().pipe(
         switchMap(nuevaHora => {
           if (nuevaHora !== '') {
             return this.agendaService.reprogramarCita(
               citaSeleccionada.idCita,
-              this.datePipe.transform(new Date(citaSeleccionada.fechaProgramada), 'yyyy-MM-dd HH:mm') ?? '',
+              formatoFechaHora(citaSeleccionada.fechaProgramada),
               nuevaHora,
               citaSeleccionada?.idHorarioTurno,
               citaSeleccionada?.idRegional,

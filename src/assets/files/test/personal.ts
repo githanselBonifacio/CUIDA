@@ -1,4 +1,6 @@
+import { Conductor } from "src/app/agenda/interfaces/conductores.interface";
 import { Profesional, ProfesionalConTurnos } from "src/app/agenda/interfaces/profesional.interface";
+import { Movil } from "src/app/agenda/interfaces/conductores.interface";
 import { Dia } from "src/app/shared/interfaces/maestros.interfaces";
 
 export const diasFebrero: Dia[] = [
@@ -162,4 +164,52 @@ export const profesionalesDataTest2: Profesional[] = [
         "activo": true,
 
     }
+]
+
+export const conductoresDataTest: Conductor[] = [
+    {
+        "idTipoIdentificacion": 7,
+        "numeroIdentificacion": "2545465465",
+        "nombres": "Brian",
+        "apellidos": "o'conell",
+        "email": "bo@sura.com.co",
+        "telefono": "",
+        "celular": "3009654840",
+        "direccion": "Calle 89#20-65",
+        "genero": "Masculino",
+        "fechaNacimiento": "1975-09-24",
+        "idRegional": "427",
+        "activo": true
+    },
+    {
+        "idTipoIdentificacion": 7,
+        "numeroIdentificacion": "148332151",
+        "nombres": "Carlos Daniel",
+        "apellidos": "Camargo Rodriguez",
+        "email": "efd@sura.com.co",
+        "telefono": "3058954",
+        "celular": "3009875652",
+        "direccion": "Calle 96#65-98",
+        "genero": "Masculino",
+        "fechaNacimiento": "1997-02-09",
+        "idRegional": "586",
+        "activo": true
+    }
+]
+
+export const movilesTest: Movil[] = [
+    {
+        "matricula": "fds-454",
+        "idRegional": "4292",
+        "marca": "Mazda",
+        "modelo": new Date("2012-01-01"),
+        "activo": true
+    },
+    {
+        "matricula": "dfg-455",
+        "idRegional": "586",
+        "marca": "Mazda",
+        "modelo": new Date("2021-02-17"),
+        "activo": true
+    },
 ]

@@ -11,6 +11,8 @@ import { MaestrosService } from 'src/app/shared/services/maestros/maestros.servi
 import { ToastService } from 'src/app/shared/services/toast/toast.service';
 import { MatDialogModule } from '@angular/material/dialog';
 import { AdminFormProfesionalesComponent } from 'src/app/admin/forms/admin-form-profesionales/admin-form-profesionales.component';
+import { AccionFormulario } from 'src/app/admin/interfaces/enum';
+import { conductoresDataTest, profesionalesDataTest } from 'src/assets/files/test/personal';
 
 describe('AdminProfesionalesPageComponent', () => {
   let component: AdminPersonalProfesionalesPageComponent;
@@ -55,4 +57,22 @@ describe('AdminProfesionalesPageComponent', () => {
   it('crear componente', () => {
     expect(component).toBeTruthy();
   });
+  it('actualizar datos', () => {
+    component.actualizarDatos();
+    component.actualizarPage();
+    component.estadoVisualFormCrearProfesional = 'activate';
+    component.mostrarFormularioCrearProfesional();
+    component.estadoVisualFormCrearProfesional = '';
+    component.mostrarFormularioCrearProfesional();
+    component.getIconActivar(true);
+    component.getIconActivar(false);
+    component.volverCrear();
+    component.accionFormulario = AccionFormulario.ACTUALIZAR;
+    fixture.detectChanges();
+    component.volverCrear();
+    component.abrirFormEditarProfesional(profesionalesDataTest[0])
+    fixture.detectChanges();
+    expect(component).toBeTruthy();
+    expect(component.profesionalSeleccionado).toEqual(profesionalesDataTest[0])
+  })
 });

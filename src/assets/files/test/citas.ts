@@ -1,3 +1,4 @@
+import { CitaHitorial } from "src/app/admin/interfaces/historialRemison.interface";
 import { Cita, EstadosCita } from "src/app/agenda/interfaces/remision.interface";
 import { EstadoCita } from "src/app/shared/interfaces/maestros.interfaces";
 
@@ -144,4 +145,153 @@ export const estadosCitaTest: EstadoCita[] = [
         id: EstadosCita.finalizada,
         nombre: "Finalizada"
     }
+]
+
+export const citaHistorialTest: CitaHitorial[] = [
+    {
+        "idCita": "333333333-9",
+        "holgura": 900,
+        "latitud": 10.988778,
+        "duracion": 2700,
+        "idEstado": 1,
+        "longitud": -74.814696,
+        "idRegional": "427",
+        "idRemision": "333333333",
+        "fechaInicio": new Date("2023-09-02 12:30"),
+        "idConductor": null,
+        "especialidad": "Enfermeria",
+        "tratamientos": [],
+        "idProfesional": null,
+        "procedimientos": {
+            "sondajes": [],
+            "curaciones": [
+                {
+                    "sesiones": 4,
+                    "descripcion": "asdas",
+                    "tipoCuracion": "Herida Mayor segunda sesion"
+                }
+            ],
+            "secreciones": [
+                {
+                    "nasal": false,
+                    "tipoSonda": "Adulto",
+                    "traqueostomia": true,
+                    "envioAspirador": true,
+                    "tipoPrestacion": "Secrecion",
+                    "diasTratamiento": 20,
+                    "visitaEnfermeria": true
+                }
+            ],
+            "fototerapias": [],
+            "tomaMuestras": [],
+            "canalizaciones": [
+                {
+                    "tipoPrestacion": "Canalizacion",
+                    "tipoCanalizacion": "Intravenosa"
+                }
+            ],
+            "soporteNutricionales": [
+                {
+                    "idSoporteNutricional": 10,
+                    "idCita": "333333333-9",
+                    "tipo": "Enteral",
+                    "volumen": 88,
+                    "duracion": 60,
+                    "descripcion": "S.O.G",
+                    "nombreMedicamento": "NUTREN 1.0",
+                    "presentacionMedicamento": "500 ML SOLUCION",
+                    "idMedicamento": "54421",
+                    "codigoMedicamento": "190199",
+                    "cantidadDosis": "Bolsas",
+                    "unidadDosis": "CC",
+                    "noPbs": false,
+                    "notificado": false,
+                    "tipoPrestacion": "Sondaje"
+                }
+            ]
+        },
+        "fechaProgramada": new Date("2023-09-02 12:30")
+    },
+    {
+        "idCita": "333333333-10",
+        "holgura": 900,
+        "latitud": 10.988778,
+        "duracion": 2700,
+        "idEstado": 1,
+        "longitud": -74.814696,
+        "idRegional": "427",
+        "idRemision": "333333333",
+        "fechaInicio": new Date("2023-09-05 14:00"),
+        "idConductor": null,
+        "especialidad": "Enfermeria",
+        "tratamientos": [
+            {
+                "idTratamiento": 2,
+                "idCita": "333333333-10",
+                "duracion": 5,
+                "frecuencia": "Mensual",
+                "notificado": false,
+                "nombreMedicamento": "NUTREN 1.0",
+                "presentacionMedicamento": "500 ML SOLUCION",
+                "idMedicamento": "54421",
+                "codigoMedicamento": "190199",
+                "unidadDosis": "mg",
+                "cantidadDosis": 200,
+                "tipoPrestacion": "AplicacionMedicamentos",
+                "tipoTratamiento": "MEDICAMENTOS",
+                "viaAdministracion": "I.M.",
+                "noPbs": false,
+            }
+        ],
+        "idProfesional": null,
+        "procedimientos": {
+            "sondajes": [
+                {
+
+                    "tipoSonda": "Toma de Muestra",
+                    "tipoSondaje": "Sonda Nasogástrica (BK)",
+                    "totalSesiones": 1,
+                    "tipoPrestacion": "Sondaje"
+                }
+            ],
+            "curaciones": [],
+            "secreciones": [],
+            "fototerapias": [
+                {
+                    "cantidadDosis": "2",
+                    "tipoFrecuencia": "4x4",
+                    "tipoPrestacion": "Fototerapia",
+                    "diasTratamiento": 2
+                }
+            ],
+            "tomaMuestras": [
+                {
+                    "tipoMuestra": "Orina",
+                    "requiereAyuno": false,
+                    "tipoPrestacion": "TomaMuestra"
+                }
+            ],
+            "canalizaciones": [],
+            "soporteNutricionales": [
+                {
+                    "idSoporteNutricional": 3,
+                    "idCita": "333333333-10",
+                    "tipo": "Enteral",
+                    "volumen": 88,
+                    "duracion": 60,
+                    "descripcion": "S.O.G",
+                    "idMedicamento": "54421",
+                    "nombreMedicamento": "NUTREN 1.0",
+                    "codigoMedicamento": "190199",
+                    "presentacionMedicamento": "500 ML SOLUCION",
+                    "unidadDosis": "mg",
+                    "cantidadDosis": "200",
+                    "tipoPrestacion": "Sondaje",
+                    "noPbs": false,
+                    "notificado": false,
+                }
+            ]
+        },
+        "fechaProgramada": new Date("2023-09-05 14:00")
+    },
 ]

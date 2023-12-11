@@ -7,8 +7,10 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HorarioTurno } from 'src/app/shared/interfaces/maestros.interfaces';
-import { ProfesionalConTurnos, Turno } from 'src/app/agenda/interfaces/profesional.interface';
+import { ProfesionalConTurnos } from 'src/app/agenda/interfaces/profesional.interface';
 import { validacionDescansoTurno, validarHorasMaximasTrabajadas } from '../../interfaces/mensajes.data';
+import { horarioTurnoTest } from 'src/assets/files/test/maestros';
+import { of } from 'rxjs';
 
 describe('ModalAsignarTurnoIndividualComponent', () => {
   let component: ModalAsignarTurnoIndividualComponent;
@@ -60,7 +62,17 @@ describe('ModalAsignarTurnoIndividualComponent', () => {
     "fechaNacimiento": "1996-05-05",
     "idRegional": "427",
     "activo": false,
-    "turnos": []
+    "turnos": [
+      {
+        "idTurno": 1,
+        "fechaTurno": new Date("2023-07-07"),
+        "idHorarioTurno": 1,
+        "idProfesional": "145854565",
+        "idRegional": "427"
+      },]
+  }
+  const matDialogRefMock = {
+    close: () => of("resp"),
   }
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -72,7 +84,7 @@ describe('ModalAsignarTurnoIndividualComponent', () => {
         BrowserAnimationsModule
       ],
       providers: [
-        { provide: MatDialogRef, useValue: {} },
+        { provide: MatDialogRef, useValue: matDialogRefMock },
         { provide: MAT_DIALOG_DATA, useValue: {} },
       ]
     });
@@ -158,4 +170,22 @@ describe('ModalAsignarTurnoIndividualComponent', () => {
     expect(component.turnosDiaHorario.length).toEqual(0);
 
   })
+
+  it("agragar nuevo turno", () => {
+    component.data = {
+      'fechaTurno': new Date(),
+      "dia": "1",
+      "profesional": profesional,
+      "horariosTurno": horarioTurnoTest
+    }
+    component.ngOnInit();
+    component.horarioSeleccionado = horarioT2;
+    component.agregarNuevoTurno();
+    expect(component.turnosDiaHorario.length).toEqual(1);
+    const spyDialog = spyOn(matDialogRefMock, 'close').and.callThrough();
+    component.onConfirm();
+    fixture.detectChanges();
+    expect(spyDialog).toHaveBeenCalled();
+  })
+
 });

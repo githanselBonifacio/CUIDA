@@ -1,10 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { TurnoProfesional } from '../interfaces/profesional.interface'
-import { Cita } from '../interfaces/remision.interface'
-import { Actividad } from '../../diagramas/interfaces/tarea-gantt.interface'
 import { environment } from '../../../environments/environments';
-import { formatoFecha } from '../../shared/interfaces/maestros.interfaces'
 import { Respuesta } from 'src/app/shared/interfaces/response.interfaces';
 
 @Injectable({

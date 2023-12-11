@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, LOCALE_ID, OnInit } from '@angular/core';
 import localeEs from '@angular/common/locales/es';
 import { registerLocaleData } from '@angular/common';
 import { MaestrosService } from 'src/app/shared/services/maestros/maestros.service';
@@ -13,7 +13,8 @@ import { TitleToast, ToastType } from 'src/app/shared/components/toast/toast.com
 @Component({
   selector: 'app-admin-reportes-page',
   templateUrl: './admin-reportes-page.component.html',
-  styleUrls: ['./admin-reportes-page.component.css']
+  styleUrls: ['./admin-reportes-page.component.css'],
+  providers: [{ provide: LOCALE_ID, useValue: 'es' }],
 })
 export class AdminReportesPageComponent implements OnInit {
 
@@ -21,7 +22,7 @@ export class AdminReportesPageComponent implements OnInit {
     private maestroService: MaestrosService,
     private adminReporteService: AdminReportesServiceService,
     private spinner: SpinnerService,
-    private toast: ToastService
+    private toast: ToastService,
   ) { registerLocaleData(localeEs); }
 
   ngOnInit(): void {
@@ -55,7 +56,7 @@ export class AdminReportesPageComponent implements OnInit {
   regionales: Regional[] = [];
   opcionIdRegional: string = localStorage.getItem('idRegionalReporteFiltro') ?? '';
 
-  mesFiltro: string = localStorage.getItem('mesTurnoReporte') ?? formatoFecha(new Date()).slice(0, 7);
+  mesFiltro: string = localStorage.getItem('mesTurnoReporte') ?? formatoFecha(new Date());
 
 
 
@@ -124,7 +125,7 @@ export class AdminReportesPageComponent implements OnInit {
   }
 
   get dataMotivoCancelacionCitaResumen() {
-    return { ...this.reporteCancelacionCitas }?.resumen?.registrosCancelacion.map((m: any) => {
+    return { ...this.reporteCancelacionCitas }?.resumen?.registrosCancelacion?.map((m: any) => {
       return {
         "name": `${m.descripcion}`,
         "value": m.cantidad
@@ -191,3 +192,5 @@ export class AdminReportesPageComponent implements OnInit {
 
 
 }
+
+

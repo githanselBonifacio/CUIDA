@@ -3,7 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MainComponentAgendaComponent } from './main-agenda.page';
 import { AgendaService } from '../../services/agenda.service';
 import { DatePipe } from '@angular/common';
-import { Observable, Subject, of } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { ToastService } from 'src/app/shared/services/toast/toast.service';
 import { MaestrosService } from 'src/app/shared/services/maestros/maestros.service';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
@@ -19,7 +19,6 @@ import { PipesModule } from 'src/app/pipes/pipes.module';
 import { CardCitaComponent } from '../../components/card-cita/card-cita.component';
 import { profesionalesDataTest2 } from 'src/assets/files/test/personal';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { DialogRef } from '@angular/cdk/dialog';
 import { ModalSeleccionProfesionalComponent } from '../../components/modal-seleccion-profesional/modal-seleccion-profesional.component';
 
 export class MatDialogMock {

@@ -1,4 +1,4 @@
-import { Component, AfterViewInit, ViewChild, OnInit } from '@angular/core';
+import { Component, AfterViewInit, ViewChild, OnInit, LOCALE_ID } from '@angular/core';
 import { AdminRemisionService } from '../../services/admin-remision.service';
 import { NotificacionFarmacia } from '../../interfaces/servicioFarmaceutico.interface';
 import { TitleToast, ToastType } from 'src/app/shared/components/toast/toast.component';
@@ -18,7 +18,8 @@ import { AdminFarmaciaService } from '../../services/admin-farmacia.service';
 @Component({
   selector: 'app-servicio-farmaceutico-page',
   templateUrl: './servicio-farmaceutico-page.component.html',
-  styleUrls: ['./servicio-farmaceutico-page.component.css']
+  styleUrls: ['./servicio-farmaceutico-page.component.css'],
+  providers: [{ provide: LOCALE_ID, useValue: 'es' }],
 })
 export class ServicioFarmaceuticoPageComponent implements OnInit, AfterViewInit {
 
@@ -29,7 +30,7 @@ export class ServicioFarmaceuticoPageComponent implements OnInit, AfterViewInit 
     private formBuilder: FormBuilder,
     private spinnerService: SpinnerService,
     private toastService: ToastService
-  ) { }
+  ) { registerLocaleData(localeEs); }
 
   @ViewChild('paginatorFarmacia') paginator!: MatPaginator;
 

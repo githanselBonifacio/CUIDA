@@ -110,7 +110,6 @@
 .color-ref {
     min-height: 1.25rem;
     min-width: 1.25rem;
-    border-radius: 2px;
     font-size: 0.8rem;
     white-space: nowrap;
     color: rgb(255, 255, 255);

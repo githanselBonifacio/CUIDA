@@ -84,8 +84,6 @@ select:required+label::after {
 
 select {
     border-radius: 5px;
-    padding-left: 0.5rem;
-    color: var(--gris4-color);
     height: 2rem;
     border: 1px solid var(--gris2-color);
     color: var(--quarter-color);
@@ -125,18 +123,18 @@ input[type="checkbox"]+label {
 
 /* angular material*/
 input[type="checkbox"] {
-    accent-color: var(--second-color) !important;
+    color: var(--second-color) !important;
 }
 
 .check-primary {
-    background-color: white;
+
     padding: 0;
     margin: 0;
     background:
         linear-gradient(to right, var(--primary-color), var(--primary-color)) top left,
         linear-gradient(to right, var(--primary-color), var(--primary-color)) top right,
         linear-gradient(to bottom, #ffffff 40%, var(--primary-color) 70%) bottom;
-
+    background-color: white;
     background-size: 30% 100%, 30% 100%, 100% 70%;
     background-repeat: no-repeat;
 

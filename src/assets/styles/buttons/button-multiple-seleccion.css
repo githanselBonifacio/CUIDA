@@ -40,7 +40,7 @@
 
 .buttom-outline-list::after {
     position: absolute;
-    font-family: 'Times New Roman, Bodoni, Garamond, Minion Web, ITC Stone Serif, MS Georgia, Bitstream Cyberbit';
+    font-family: system-ui;
     content: "\23f7";
     right: 0.2rem;
     color: var(--gris2-color);

@@ -6,7 +6,7 @@ import { ToastService } from 'src/app/shared/services/toast/toast.service';
 import { AccionFormulario } from '../../interfaces/enum';
 import { expresionesRegulares, mesajeExpresionRegular } from '../../../shared/forms/expresiones-regulares.validaciones';
 import { Conductor } from 'src/app/agenda/interfaces/conductores.interface';
-import { ToastType, TitleToast } from 'src/app/shared/components/toast/toast.component';
+import { ToastType } from 'src/app/shared/components/toast/toast.component';
 import { validatorMayorEdad } from 'src/app/shared/forms/validadors.validaciones';
 import { AdminPersonalService } from '../../services/admin-personal.service';
 
@@ -62,7 +62,7 @@ export class AdminFormConductoresComponent implements OnChanges {
 
       this.validacionDisabled = this.accionFormulario === AccionFormulario.ACTUALIZAR;
       if (this.validacionDisabled) {
-        this.campoTipoIdentificacion?.disabled;
+        this.campoTipoIdentificacion?.disable();
       }
       this.formConductor.patchValue({
         IdTipoIdentificacion: this.conductor?.idTipoIdentificacion,

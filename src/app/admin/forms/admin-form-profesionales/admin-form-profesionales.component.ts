@@ -1,7 +1,7 @@
 import { Component, EventEmitter, OnChanges, Input, Output, SimpleChanges } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Profesional } from 'src/app/agenda/interfaces/profesional.interface';
-import { TitleToast, ToastType } from 'src/app/shared/components/toast/toast.component';
+import { ToastType } from 'src/app/shared/components/toast/toast.component';
 import { Profesion, Regional, TipoIdentificacion } from 'src/app/shared/interfaces/maestros.interfaces';
 import { SpinnerService } from 'src/app/shared/services/spinner/spinner.service.service';
 import { ToastService } from 'src/app/shared/services/toast/toast.service';
@@ -66,8 +66,8 @@ export class AdminFormProfesionalesComponent implements OnChanges {
     if (changes['accionFormulario'] || changes['profesional']) {
       this.tituloFormulario = (this.accionFormulario === AccionFormulario.CREAR) ? "Crear profesional" : "Actualizar profesional";
       if (this.accionFormulario === AccionFormulario.ACTUALIZAR) {
-        this.campoTipoIdentificacion?.disabled;
-        this.campoNumeroIdentificacion?.disabled;
+        this.campoTipoIdentificacion?.disable();
+        this.campoNumeroIdentificacion?.disable();
       }
       this.validacionDisabled = this.accionFormulario === AccionFormulario.ACTUALIZAR;
       this.formProfesional.patchValue({

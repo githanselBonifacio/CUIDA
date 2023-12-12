@@ -1,0 +1,330 @@
+<h5>Tratamientos</h5>
+
+<div class="tratamientos ">
+    <p *ngIf="tratamientos ==null">La cita no contiene tratamientos</p>
+    <div class="content-item" *ngIf="tratamientos">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Tipo tratamiento</th>
+                    <th scope="col">Prestación</th>
+                    <th scope="col">Medicamento</th>
+                    <th scope="col">Dosis</th>
+                    <th scope="col">Via</th>
+                    <th scope="col">Fecuencia</th>
+                    <th scope="col">Duracion</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let tratamiento of tratamientos;let i = index;">
+                    <th scope="row">{{i+1}}</th>
+                    <td>{{tratamiento.tipoTratamiento}}</td>
+                    <td>{{tratamiento.tipoPrestacion}}</td>
+                    <td>
+                        <div>{{tratamiento.nombreMedicamento}} </div>
+                        <div>{{tratamiento.presentacionMedicamento}}</div>
+                    </td>
+                    <td>{{tratamiento.cantidadDosis}} {{tratamiento.unidadDosis}}</td>
+                    <td>{{tratamiento.viaAdministracion}}</td>
+                    <td>{{tratamiento.frecuencia}}</td>
+                    <td>{{tratamiento.duracion}}</td>
+                </tr>
+
+            </tbody>
+        </table>
+
+    </div>
+
+
+</div>
+
+<h5>Procedimientos</h5>
+<div class="procedimientos">
+    <p *ngIf="contieneProcedimientos()">La cita no contiene procedimientos</p>
+
+    <div class="accordion accordion-flush" id="accordionFlushCuracion" *ngIf="procedimientos?.curaciones?.length??0">
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="flush-headingOne">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#flush-collapseCuracion" aria-expanded="false"
+                    aria-controls="flush-collapseCuracion">
+                    Curaciones
+                </button>
+            </h2>
+
+            <div id="flush-collapseCuracion" class="accordion-collapse collapse"
+                aria-labelledby="flush-collapseCuracion" data-bs-parent="#accordionFlushCuracion">
+                <div class="accordion-body">
+                    <div *ngFor="let curacion of procedimientos?.curaciones,let i = index">
+
+                        <div class="content-procedimiento">
+
+                            <div class="item-procedimiento">
+                                <span>Tipo: {{curacion.tipoCuracion}}</span>
+                            </div>
+
+                            <div class="item-procedimiento">
+                                <span>Descripción: {{curacion.descripcion}}</span>
+                            </div>
+
+                            <div class="item-procedimiento">
+                                <span>Sesiones: {{curacion.sesiones}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="accordion accordion-flush" id="accordionFlushCanalizacion"
+        *ngIf="procedimientos?.canalizaciones?.length??0">
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="flush-headingCanalizacion">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#flush-collapseCanalizacion" aria-expanded="false"
+                    aria-controls="flush-collapseCanalizacion">
+                    Canalización
+                </button>
+            </h2>
+            <div id="flush-collapseCanalizacion" class="accordion-collapse collapse"
+                aria-labelledby="flush-headingCanalizacion" data-bs-parent="#accordionFlushCanalizacion">
+                <div class="accordion-body">
+
+                    <div *ngFor="let canalizacion of procedimientos?.canalizaciones,let i =index">
+
+                        <div class="content-procedimiento">
+
+                            <div class="item-procedimiento">
+                                <span>Tipo: {{canalizacion.tipoCanalizacion}}</span>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="accordion accordion-flush" id="accordionFlushFototerapia"
+        *ngIf="procedimientos?.fototerapias?.length??0">
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="flush-headingFototerapia">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#flush-collapseFototerapia" aria-expanded="false"
+                    aria-controls="flush-collapseFototerapia">
+                    Fototerapia
+                </button>
+            </h2>
+            <div id="flush-collapseFototerapia" class="accordion-collapse collapse"
+                aria-labelledby="flush-headingFototerapia" data-bs-parent="#accordionFlushFototerapia">
+                <div class="accordion-body">
+                    <div *ngFor="let fototerapia of procedimientos?.fototerapias,let i = index">
+
+                        <div class="content-procedimiento">
+
+                            <div class="item-procedimiento">
+                                <span> Fecuencia: {{fototerapia.tipoFrecuencia}}</span>
+                            </div>
+                            <div class="item-procedimiento">
+                                <span>Dias tratamiento: {{fototerapia.diasTratamiento}}</span>
+                            </div>
+                            <div class="item-procedimiento">
+                                <span>Dosis: {{fototerapia.cantidadDosis}}</span>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="accordion accordion-flush" id="accordionFlushTomaMuestras"
+        *ngIf="procedimientos?.tomaMuestras?.length??0>0">
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="flush-headingTomaMuestras">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#flush-collapseTomaMuestras" aria-expanded="false"
+                    aria-controls="flush-collapseOne">
+                    Toma de muestras
+                </button>
+            </h2>
+            <div id="flush-collapseTomaMuestras" class="accordion-collapse collapse"
+                aria-labelledby="flush-headingTomaMuestras" data-bs-parent="#accordionFlushTomaMuestras">
+                <div class="accordion-body">
+                    <div *ngFor="let tomaMuestra of procedimientos?.tomaMuestras,let i = index">
+
+                        <div class="content-procedimiento">
+
+                            <div class="item-procedimiento">
+                                <span>Tipo: {{tomaMuestra.tipoMuestra}}</span>
+                            </div>
+
+                            <div *ngIf="tomaMuestra.requiereAyuno" class="item-procedimiento">
+                                <div class="badge-advertencia">
+                                    <span>Requiere ayuno</span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="accordion accordion-flush" id="accordionFlushSondaje" *ngIf="procedimientos?.sondajes?.length??0>0">
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="flush-headingSondaje">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#flush-collapseSondaje" aria-expanded="false" aria-controls="flush-collapseSondaje">
+                    Sondaje
+                </button>
+            </h2>
+            <div id="flush-collapseSondaje" class="accordion-collapse collapse" aria-labelledby="flush-headingSondaje"
+                data-bs-parent="#accordionFlushSondaje">
+                <div class="accordion-body">
+                    <div *ngFor="let sondaje of procedimientos?.sondajes,let i = index">
+
+                        <div class="content-procedimiento">
+
+                            <div class="item-procedimiento">
+                                <span> Tipo: {{sondaje.tipoSondaje}}</span>
+                            </div>
+                            <div class="item-procedimiento">
+                                <span>Sonda: {{sondaje.tipoSondaje}}</span>
+                            </div>
+                            <div class="item-procedimiento">
+                                <span>Sesiones: {{sondaje.totalSesiones}}</span>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="accordion accordion-flush" id="accordionFlushSecrecion"
+        *ngIf="procedimientos?.secreciones?.length??0>0">
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="flush-headingSecrecion">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#flush-collapseSecrecion" aria-expanded="false"
+                    aria-controls="flush-collapseSecrecion">
+                    Secreción
+                </button>
+            </h2>
+            <div id="flush-collapseSecrecion" class="accordion-collapse collapse"
+                aria-labelledby="flush-headingSecrecion" data-bs-parent="#accordionFlushSecrecion">
+                <div class="accordion-body">
+                    <div *ngFor="let secrecion of procedimientos?.secreciones,let i = index">
+
+                        <div class="content-procedimiento">
+
+                            <div class="item-procedimiento">
+                                <span>Tipo sonda: {{secrecion.tipoSonda}}</span>
+                            </div>
+                            <div class="item-procedimiento">
+                                <span>Dias tratamiento: {{secrecion.diasTratamiento}}</span>
+                            </div>
+
+                            <div *ngIf="secrecion.visitaEnfermeria">
+                                <div class="badge-advertencia">
+                                    <span>Tiene visita enfermería</span>
+                                </div>
+
+                            </div>
+                            <div *ngIf="secrecion.envioAspirador">
+                                <div class="badge-advertencia">
+                                    <span>Tiene Respirador</span>
+                                </div>
+                                <br>
+                            </div>
+                            <div *ngIf="secrecion.nasal">
+                                <div class="badge-advertencia">
+                                    <span>Nasal</span>
+                                </div>
+
+                            </div>
+                            <div *ngIf="secrecion.traqueostomia">
+                                <div class="badge-advertencia">
+                                    <span>Traqueostomia</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="accordion accordion-flush" id="accordionFlushSoporteNutricional"
+        *ngIf="procedimientos?.soporteNutricionales?.length??0>0">
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="flush-headingSoporteNutricional">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#flush-collapseSoporteNutricional" aria-expanded="false"
+                    aria-controls="flush-collapseSoporteNutricional">
+                    Soporte nutricional
+                </button>
+            </h2>
+
+            <div id="flush-collapseSoporteNutricional" class="accordion-collapse collapse"
+                aria-labelledby="flush-headingSoporteNutricional" data-bs-parent="#accordionFlushSoporteNutricional">
+                <div class="accordion-body">
+                    <div *ngFor="let soporteNutricional of procedimientos?.soporteNutricionales,let i = index">
+
+                        <div class="content-procedimiento">
+
+                            <div class="item-procedimiento">
+                                <div class="card-medicamento">
+                                    <h6>Medicamento</h6>
+                                    <div class="item-medicamento">
+                                        {{soporteNutricional.nombreMedicamento}}
+                                    </div>
+                                    <div class="item-medicamento">
+                                        {{soporteNutricional.presentacionMedicamento}}
+                                    </div>
+
+                                </div>
+                            </div>
+
+
+                            <div class="item-procedimiento">
+                                <span> Dosis: {{soporteNutricional.cantidadDosis}}
+                                    ({{soporteNutricional.unidadDosis}})</span>
+                            </div>
+                            <div class="item-procedimiento">
+                                <span>Tipo: {{soporteNutricional.tipo}}</span>
+                            </div>
+                            <div class="item-procedimiento">
+                                <span> Descripción: {{soporteNutricional.descripcion}}</span>
+
+                            </div>
+                            <div class="item-procedimiento">
+                                <span> Duración: {{soporteNutricional.duracion}}</span>
+                            </div>
+                            <div class="item-procedimiento">
+                                <span>volumen: {{soporteNutricional.volumen}}</span>
+                            </div>
+
+                            <div *ngIf="soporteNutricional.noPbs">
+                                <div class="badge-advertencia">
+                                    <span>No PBS</span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

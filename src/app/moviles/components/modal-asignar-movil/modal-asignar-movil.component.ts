@@ -1,6 +1,6 @@
 import { Component,Inject ,OnInit} from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
-import { MovilesService } from 'src/app/shared/services/moviles/moviles.service';
+import { MovilesService } from 'src/app/moviles/services/moviles.service';
 import { Desplazamiento } from '../../interfaces/desplazamiento.interface';
 @Component({
   selector: 'app-modal-asignar-movil',

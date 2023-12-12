@@ -1,41 +1,20 @@
-<div>
-    <li  routerLink=""
-         routerLinkActive="active"
-         [routerLinkActiveOptions]="{ exact : true}"
-         class="nav-item">
-         <button type="button" class="btn-sidebar" data-bs-dismiss="offcanvas">
-            <span class="bi-house-fill"></span> Inicio
-        </button>
-    </li>
-    <hr>
-    <li routerLink="admin" 
-    routerLinkActive="active"
-    class="nav-item">
-        <button type="button" class="btn-sidebar" data-bs-dismiss="offcanvas" aria-label="Close">
-            <span class="bi-calendar2-check-fill"></span> Administración</button>
-    </li>
-    <hr>
-    <li routerLink="citas" 
-    routerLinkActive="active"
-    class="nav-item">
-        <button type="button" class="btn-sidebar" data-bs-dismiss="offcanvas" aria-label="Close">
-            <span class="bi-calendar2-check-fill"></span> Citas</button>
-    </li>
-    <hr>
-    <li [routerLink]="['/agenda']"
-    routerLinkActive="active" 
-    class="nav-item">
-        <button type="button" class="btn-sidebar" data-bs-dismiss="offcanvas" aria-label="Close">
-            <span class="bi-journal-bookmark-fill"></span> Agenda</button>
-    </li>
-    <hr>
-    <li [routerLink]="['/moviles']"
-    routerLinkActive="active" 
-    class="nav-item">
-        <button type="button" class="btn-sidebar" data-bs-dismiss="offcanvas" aria-label="Close">
-            <span class="bi-truck"></span> Moviles</button>
-    </li>
-    <hr>
-</div>
-    
+<div class="content-navbar">
+    <nav>
+        <ul class="navbar-menu">
+            <li routerLink="" routerLinkActive="active" [routerLinkActiveOptions]="{ exact : true}">
+                <button class="navbar-button" type="button"> Inicio</button>
+            </li>
 
+            <li routerLink="/admin" routerLinkActive="active">
+                <button class="navbar-button" type="button">Administración</button>
+            </li>
+
+            <li routerLink="/agenda" [routerLinkActiveOptions]="{exact: false}" routerLinkActive="active">
+                <button class="navbar-button" type="button">Agenda</button>
+            </li>
+            <li [routerLink]="['/moviles']" routerLinkActive="active">
+                <button class="navbar-button" type="button">Moviles</button>
+            </li>
+        </ul>
+    </nav>
+</div>

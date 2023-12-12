@@ -1,0 +1,96 @@
+<div class="container">
+  <app-shared-placeholder-table *ngIf="!pageLoaded"></app-shared-placeholder-table>
+  <div class="container-detail" *ngIf="pageLoaded">
+    <Div id="btn-close">
+      <h4>Detalle cita</h4>
+      <div id="i-cont">
+        <i class="bi bi-x" (click)='onClose()'></i>
+      </div>
+
+    </Div>
+
+    <h5>Datos del paciente</h5>
+    <div class="datos-paciente">
+      <div class="row">
+        <div class="col" id="datos-personales">
+          <div class="row">
+
+            <div class="col">Tipo Identificación</div>
+            <div class="col">{{paciente.tipoIdentificacion}}</div>
+          </div>
+
+          <div class="row">
+            <div class="col">Numero Identificación</div>
+            <div class="col">{{paciente.numeroIdentificacion}}</div>
+          </div>
+
+          <div class="row">
+            <div class="col-3">Nombres</div>
+            <div class="col">{{paciente.nombres}}</div>
+          </div>
+
+          <div class="row">
+            <div class="col-3">Apellidos:</div>
+            <div class="col">{{paciente.apellidos}}</div>
+          </div>
+
+          <div class="row">
+
+            <div class="col">Edad:</div>
+            <div class="col">{{paciente.edad}} años</div>
+            <div class="col">Genero:</div>
+            <div class="col">{{paciente.sexo}}</div>
+
+          </div>
+          <div class="row">
+
+            <div class="col">
+              <h5>Ubicación</h5>
+              <div style="display: flex;">
+                <div> <span> {{paciente.ubicacion?.direccion}} </span> </div>
+                <div> <span>, {{paciente.ubicacion?.barrio}} :: </span> </div>
+
+                <div *ngIf="paciente.ubicacion?.sinNomenclatura" class="item-procedimiento">
+                  <div class="badge-advertencia">
+                    <span>Sin Nomenclatura</span>
+                  </div>
+                </div>
+              </div>
+
+
+            </div>
+
+          </div>
+        </div>
+        <div class="col-5" id="map-ubicacion">
+          <!--<app-map-punto-unico [latitud]="paciente.ubicacion.latitud" [longitud]="paciente.ubicacion.longitud">
+          </app-map-punto-unico>-->
+        </div>
+
+      </div>
+    </div>
+    <h5>Datos de atención</h5>
+    <div class="datos-atencion">
+
+      <div class="row">
+        <div class="col-2">Nombre cuidador:</div>
+        <div class="col">{{datosAtencionRemision.nombreCuidador}}</div>
+        <div class="col-2"> Nombre responsable</div>
+        <div class="col">{{datosAtencionRemision.nombreResponsable}}</div>
+      </div>
+      <div class="row">
+        <div class="col-2">Telefono: </div>
+        <div class="col">{{datosAtencionRemision.telefonoPaciente}}</div>
+        <div class="col-2">Celular</div>
+        <div class="col">{{datosAtencionRemision.celularPaciente}}<span *ngIf="datosAtencionRemision.celularPaciente2">
+            -
+            {{datosAtencionRemision.celularPaciente2}}</span></div>
+      </div>
+
+    </div>
+
+    <app-agenda-items-cita [procedimientos]="procedimientos" [tratamientos]="tratamientos"></app-agenda-items-cita>
+  </div>
+
+
+</div>

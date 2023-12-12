@@ -1,67 +1,96 @@
-<div>
-    <div class="row">
-            <div class="col-3" *ngIf="currentUrl.includes('agenda'); else elseProfesional">
-                <h5 id="header-prefesional-gantt">Profesionales</h5>
-            </div>
-            <ng-template #elseProfesional>
-                <h5 id="header-prefesional-gantt">Móviles</h5>
-            </ng-template>
+<div class="row">
+    <div class="col-3">
+        <h5>{{tituloActorResponsable}}</h5>
     </div>
- 
-    <div class="overflow-auto" class="container-actividades-panel">
-        
-        <div *ngFor="let actividad of actividades; let i = index">
-            
-            <div class="row">
-                <div class="col-2">
-                    <div  class="row" id = 'container-card'>
-                        <div class="col-md-12" id = "container-card-gantt">
-                            <div class="card">
-                                <div class="card-body">
-                                    <h6 class="card-title">{{actividad.responsable}}</h6>
-                                   
-                                    <div>
-                                        {{actividad.numero_identificacion}}
-                                    </div>
-                                    <div *ngIf="actividad.Clasificacion_habilidad_responsable">
-                                        {{actividad.Clasificacion_habilidad_responsable}}
-                                    </div>
-                                    <div *ngIf="actividad.id_movil">
-                                        {{actividad.id_movil}}
-                                    </div>
+</div>
+
+<div class="row w100" id="panel-horas">
+    <div class="col-md-2 col-lg-3 col-xl-3 col-xxl-2"></div>
+    <div class="col-md-9 col-lg-8 col-xl-8 col-xxl-9" id="header-hora">
+        <div *ngFor="let hora  of horas.slice(0, -1)">
+            {{hora}}
+        </div>
+    </div>
+</div>
+
+<div class="overflow-auto" class="container-actividades-panel">
+    <p *ngIf="actividades.length==0"> No se encontrarón actividades para este turno!!!</p>
+    <div *ngFor="let actividad of actividades; let i = index">
+
+        <div class="row w100">
+            <div class="col-md-2 col-lg-3 col-xl-3 col-xxl-2">
+                <div class="row" id='container-card'>
+                    <div class="col-md-12" id="container-card-gantt">
+                        <div class="card">
+                            <div class="card-body">
+                                <h6 class="card-title">{{actividad.responsable}}</h6>
+                                <div>
+                                    CC: {{actividad.numeroIdentificacion}}
                                 </div>
+
+                                <div *ngIf="actividad.idMovil">
+                                    {{actividad.idMovil}}
+                                </div>
+
+                                <i class="bi bi-person-x-fill" id="retirar-profesional" title="Retirar profesional"
+                                    (click)="emitirProfesionalTurno(actividad)">
+
+                                </i>
+
                             </div>
                         </div>
                     </div>
                 </div>
+            </div>
 
-                <div class="col-9" id = "container-actividad-time">
-                        <div class = "container-linea-tiempo" id="{{actividad.numero_identificacion}}">
-                        
-                            <ng-container *ngIf="i <= actividades.length - 1">
-                                <ng-container *ngFor="let tarea of actividad.tareas">
-                                    <ng-container *ngIf="tarea">
-                                    
-                                        {{crearLineaTiempoTarea(
-                                            actividad.numero_identificacion,
-                                            tarea
-                                        )
-                                        }}
-                                       
-                                    </ng-container>
-                                </ng-container>
-                                
-                            </ng-container>
-                    </div>
-                </div>
-                <div class="col-1" id ="container-map">
-                
-                        <div  *ngIf="actividad.tareas.length>0" class="map-content">
-                             <i class="bi bi-geo-alt-fill" title="ubicación" (click)="mostrarRutaMapa(actividad.tareas)"></i>
+            <div #containerActividad class="col-md-9 col-lg-8 col-xl-8 col-xxl-9" name="container-actividad-time">
+
+
+                <div class="container-linea-tiempo" [id]="'container-linea-tiempo-'+i">
+
+                    <!--  lineas de tiempo -->
+                    <div *ngFor="let tarea of actividad.tareas " [class]="'tarea-'+tarea.tipo"
+                        [attr.estado]="tarea.idEstado"
+                        [ngStyle]="{width:calcularWidth(tarea.duracion)+'px',left:calcularLeft(tarea.fechaProgramada)+'px'}">
+
+                        <div class="vignette" [ngClass]="'gantt-'+i+'-'+tarea.tipo"
+                            *ngIf="tarea.tipo=='VISITA';else DVISITA">
+                            <div>id: {{tarea.id}}</div>
+                            <div>Hora: {{tarea.fechaProgramada|date : 'HH:mm'}}</div>
+                            <div>Duracion: {{tarea.duracion|formatearSegundos}}</div>
+                            <div class="v-i">
+                                <i class="bi bi-calendar2-x-fill" (click)="emitirDesagendarTarea(tarea.id)"
+                                    title="Desagendar cita"></i>
+                                <i class="bi bi-clock" (click)="emitirReprogramarTarea(tarea.id)"
+                                    title="reprogramar cita"></i>
+
+                            </div>
                         </div>
-                   
+                        <ng-template #DVISITA>
+                            <div class="vignette" [ngClass]="'gantt-'+i+'-'+tarea.tipo">
+                                <div>id: {{tarea.id}}</div>
+                                <div>Hora: {{tarea.fechaProgramada|date : 'HH:mm'}}</div>
+                                <div>Duracion: {{tarea.duracion|formatearSegundos}}</div>
+                            </div>
+
+                        </ng-template>
+                    </div>
+
                 </div>
+
+                <div *ngFor="let h of horas;let i = index" class="grid-time" [style]="{left:(divisionHora*i)+'px'}">
+
+                </div>
+
+            </div>
+            <div class="col-md-1 col-lg-1 col-xl-1" id="container-map">
+
+                <div *ngIf="actividad.tareas.length>0" class="map-content">
+                    <i class="bi bi-geo-alt-fill" title="ubicación" (click)="mostrarRutaMapa(actividad.tareas)"></i>
+                </div>
+
             </div>
         </div>
     </div>
+
 </div>

@@ -1,0 +1,135 @@
+<div class="container-secuencias">
+    <div class="tool-bar">
+
+        <div class="c-radio-regionales">
+            <div *ngFor="let regional of regionales">
+                <input type="radio" class="btn-check" name="options-outlined" [id]="'btn-'+regional.nombre"
+                    autocomplete="off" checked [(ngModel)]="opcionIdRegional" [value]="regional.id"
+                    (ngModelChange)="actualizarfiltroIdRegional()">
+                <label class="btn" [for]="'btn-'+regional.nombre">{{regional.nombre}}</label>
+            </div>
+
+        </div>
+
+    </div>
+    <div class="tool-bar borde-t-b">
+        <p><strong>{{selection.selected.length}} seleccionados</strong></p>
+
+        <div class="btn-group dropend" role="group">
+            <button type="button" class="buttom-multiple-seleccion buttom-color-second buttom-enfasis dropdown-toggle"
+                data-bs-toggle="dropdown" aria-expanded="false">
+                Acciones masivas
+            </button>
+            <ul class="dropdown-menu p-0">
+                <li><button class="dropdown-item item-buttom-multiple"
+                        (click)="abrirModalAccionLimpiarHorario(selection.selected)"
+                        [disabled]="selection.selected.length==0">Limpiar
+                        horario</button></li>
+                <li><button class="dropdown-item item-buttom-multiple"
+                        (click)="abrirModalAccionAsignarSecuencia(selection.selected)"
+                        [disabled]="selection.selected.length==0">Asignar
+                        secuencia</button></li>
+            </ul>
+        </div>
+
+
+    </div>
+
+    <div class="row">
+        <div class="col-xl-8 col-xxl-9">
+            <div class="c-seccion">
+                <section class="container-table" tabindex="0">
+                    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+                        <!-- Checkbox Column -->
+                        <ng-container matColumnDef="select">
+
+                            <th mat-header-cell *matHeaderCellDef>
+                                <mat-checkbox class="check-primary" (change)="$event ? seleccionarTodoFilas() : null"
+                                    [checked]="selection.hasValue() && todoEstaSeleccionado()"
+                                    [indeterminate]="selection.hasValue() && !todoEstaSeleccionado()"
+                                    [aria-label]="checkboxLabel()" [color]="'primary'">
+                                </mat-checkbox>
+                            </th>
+                            <td mat-cell *matCellDef="let row">
+                                <mat-checkbox (click)="$event.stopPropagation()"
+                                    (change)="$event ? selection.toggle(row) : null"
+                                    [checked]="selection.isSelected(row)" [aria-label]="checkboxLabel(row)"
+                                    [color]="'primary'">
+                                </mat-checkbox>
+                            </td>
+
+                        </ng-container>
+
+                        <ng-container matColumnDef="identificación">
+                            <th mat-header-cell *matHeaderCellDef> Identificación </th>
+                            <td mat-cell *matCellDef="let profesional" class="td-start">
+                                {{mostrarNombreTipoIdentificacion(profesional.idTipoIdentificacion,
+                                tiposIdentificacion)}}: {{profesional.numeroIdentificacion}}
+                            </td>
+                        </ng-container>
+                        <ng-container matColumnDef="profesional">
+                            <th mat-header-cell *matHeaderCellDef> Profesional </th>
+                            <td mat-cell *matCellDef="let profesional" class="td-start">
+                                {{profesional.nombres}} {{profesional.apellidos}}
+                            </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="profesión">
+                            <th mat-header-cell *matHeaderCellDef> Profesión </th>
+                            <td mat-cell *matCellDef="let profesional">
+                                {{mostrarNombreProfesion(profesional.idProfesion,
+                                profesiones)}}
+                            </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="regional">
+                            <th mat-header-cell *matHeaderCellDef> Regional </th>
+                            <td mat-cell *matCellDef="let profesional">
+                                {{mostrarNombreRegional(profesional.idRegional,regionales)}} </td>
+                        </ng-container>
+
+
+                        <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+                        <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="selection.toggle(row)">
+                        </tr>
+                    </table>
+                </section>
+                <div class="paginador">
+                    <mat-paginator #paginatorPersonalSecuencias [pageSizeOptions]="numeroPaginasPaginator"
+                        [pageSize]="numerosPaginaSeleccionada" aria-label="Select page"
+                        itemsPerPageLabel="notificaciones por página" showFirstLastButtons="true"
+                        (page)="onPaginateChange($event)">
+                    </mat-paginator>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-xl-4 col-xxl-3">
+            <div class="c-seccion">
+
+                <div class="header-secuencia">
+                    <h5>Secuencias</h5>
+                    <div id="boton-plus" title="Agregar secuencia">
+                        <i class="bi bi-plus-circle-fill" (click)="abrirModalConfiguracionSecuencia()"></i>
+                    </div>
+
+                </div>
+                <div class="container-card">
+                    <div *ngFor="let secuencia of secuencias" class="card">
+
+                        <div class="card-body">
+                            <h5 class="card-title">{{secuencia.nombre}}</h5>
+                            <p class="card-text">{{secuencia.descripcion}}</p>
+                            <div (click)="abrirModalConfiguracionSecuencia(secuencia)" id="icon-edit"
+                                title="editar secuencia">
+                                <i class="bi bi-pencil-square"></i>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

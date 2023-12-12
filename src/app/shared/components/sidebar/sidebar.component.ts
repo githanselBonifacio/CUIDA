@@ -1,4 +1,4 @@
-import { Component,Input } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-shared-sidebar',
@@ -6,10 +6,5 @@ import { Component,Input } from '@angular/core';
   styleUrls: ['./sidebar.component.css']
 })
 export class SidebarComponent {
-  today = new Date();
-  year = this.today.getFullYear();
-  month = (this.today.getMonth() + 1).toString().padStart(2, '0');
-  day = this.today.getDate().toString().padStart(2, '0');
-  @Input()
-  fechaHoy = `${this.year}-${this.month}-${this.day}`;
+
 }

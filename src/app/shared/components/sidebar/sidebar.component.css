@@ -1,20 +1,49 @@
 @import url('../../../../styles.css');
-.btn-sidebar {
-    background-color: transparent;
-    border: none;
-    color: var(--quarter-color) ;
-    cursor: pointer;
-    font-size: 1.3rem;
-    padding: 0;
-    text-align: left;
-    text-decoration: none;
-    padding: 1rem 1rem 1rem 1rem ;
-  }
-  
-.btn-sidebar:hover {
-    color:var(--second-color) ;
-    font-size: 1.5rem;
+@import url('../../../../assets/styles/buttons/button-navbar.css');
+
+.content-navbar {
+  display: flex;
+  justify-content: flex-end;
+  position: fixed;
+  width: 100%;
+  height: 3rem;
+  top: 0px;
+  z-index: 1;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
 }
-hr {
-  color: black;
+
+nav {
+  padding: 0px;
+}
+
+ul {
+  padding: 0.2rem 4rem 0.2rem 0.2rem;
+  display: flex;
+  margin: 0.3rem 0.3rem 0.3rem 0.3rem;
+}
+
+li {
+  list-style: none;
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+
+}
+
+.content-navbar {
+  background-color: var(--second-color);
+
+}
+
+.navbar-menu li {
+  border-bottom: 2px solid transparent;
+}
+
+.navbar-menu li.active {
+  border-bottom: 2px solid var(--third-color);
+  color: var(--third-color);
+  transition: border-bottom 0.5s ease-in;
+}
+
+.navbar-menu li.active button {
+  color: var(--third-color);
 }

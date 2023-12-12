@@ -1,0 +1,120 @@
+<div class="container-reporte-page">
+    <div class="header">
+        <div class="c-radio-regionales">
+            <div *ngFor="let regional of regionales">
+                <input type="radio" class="btn-check" name="options-outlined" [id]="'btn-'+regional.nombre"
+                    autocomplete="off" [checked]="opcionIdRegional==regional.id" [(ngModel)]="opcionIdRegional"
+                    [value]="regional.id" (ngModelChange)="actualizarfiltroIdRegional()">
+                <label class="btn" [for]="'btn-'+regional.nombre">{{regional.nombre}}</label>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="content-reporte">
+        <div class="filters">
+            <div id="content-filter-option">
+                <div class="btn-group bg-white" role="group">
+                    <button type="button" class="buttom-outline-list" data-bs-toggle="dropdown" aria-expanded="false">
+                        {{opcionTipoReporte}}
+                    </button>
+
+                    <ul class="dropdown-menu p-0">
+                        <li>
+                            <button *ngFor="let tipoReporte of opcionesTipoReporte;let i= index"
+                                (click)="actualizarTipoReporte(tipoReporte)"
+                                [class.selected]="tipoReporte==opcionTipoReporte"
+                                class="dropdown-item item-buttom-multiple">{{tipoReporte}}</button>
+
+
+                    </ul>
+                </div>
+                <div *ngIf="opcionTipoReporte=='Mensual'" class="btn-group" role="group">
+                    <div class="container-input">
+                        <input type="month" id="mes" [(ngModel)]="mesFiltro" (ngModelChange)="actualizarMes()">
+                    </div>
+                </div>
+                <div *ngIf="opcionTipoReporte=='Anual'" class="btn-group bg-white" role="group">
+                    <button type="button" class="buttom-outline-list" data-bs-toggle="dropdown" aria-expanded="false">
+                        {{opcionYear}}
+                    </button>
+
+                    <ul class="dropdown-menu p-0">
+                        <li>
+                            <button *ngFor="let year of years" (click)="actualizarOpcionYear(year)"
+                                [class.selected]="year==opcionYear"
+                                class="dropdown-item item-buttom-multiple">{{year}}</button>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+
+            <button #consultarReporte class="buttom-second" (click)="consultarData()">Consultar
+            </button>
+
+        </div>
+        <div class="container-cards">
+            <div class="card-reporte card-capacidad">
+                <div class="info-card">i</div>
+                <h3>{{reporteTurno?.resumen?.capacidadPromedio??0|formatCifras}} %</h3>
+                Capacidad promedio
+            </div>
+            <div class="card-reporte card-capacidad">
+                <div class="info-card" title="Info">i</div>
+                <h3>{{reporteTurno?.resumen?.totalRemisiones??0|formatCifras}}</h3>
+
+                Remisiones
+            </div>
+            <div class="card-reporte card-capacidad">
+                <div class="info-card" title="Info">i</div>
+                <h3>{{reporteTurno?.resumen?.totalNovedades??0|formatCifras}}</h3>
+                Novedades
+            </div>
+            <div class="card-reporte card-capacidad">
+                <div class="info-card" title="Info">i</div>
+                <h3>{{reporteTurno?.resumen?.totalCitasCompletadas??0|formatCifras}}</h3>
+                Citas completadas
+            </div>
+            <div class="card-reporte card-capacidad" [style.color]="'white'"
+                [style.background-color]="estilos.redColor">
+                <div class="info-card" title="Info">i</div>
+                <h3>{{reporteTurno?.resumen?.totalCitasCanceladas??0|formatCifras}}</h3>
+                Citas canceladas
+            </div>
+
+        </div>
+        <div class="container-graficos">
+            <div class="row">
+                <div class="col-lg-12 col-xl-7 col-xxl-8">
+                    <div class="container-grafico">
+                        <app-diagrama-varchart [titleChart]="'Capacidad promedio'" [titleEjeY]="'Capacidad promedio'"
+                            [titleEjeX]="titleX" [data]="dataCapacidadTurno" [isPercentageEjeY]="true"
+                            [unitEjeY]="'%'"></app-diagrama-varchart>
+                    </div>
+                </div>
+                <div class="col-lg-12 col-xl-5 col-xxl-4">
+                    <div class="container-grafico">
+                        <app-diagrama-progress-chart [title]="'Cumplimiento'"
+                            [value]="cumplimientoPromedio"></app-diagrama-progress-chart>
+                    </div>
+                </div>
+                <div class="col-lg-12 col-xl-7 col-xxl-8">
+
+                    <div class="container-grafico">
+                        <app-diagrama-varchart [titleChart]="'Citas canceladas'" [titleEjeY]="'Citas canceladas'"
+                            [titleEjeX]="titleX" [data]="dataCitasCanceladasTurno" [unitEjeY]="'citas'"
+                            [NumberDivideEjeY]="6"></app-diagrama-varchart>
+                    </div>
+                </div>
+                <div class="col-lg-12 col-xl-5 col-xxl-4">
+                    <div class="container-grafico">
+
+                        <app-diagrama-piechart [data]="dataMotivoCancelacionCitaResumen" [unit]="'citas'"
+                            [title]="'Motivo cancelación citas'"></app-diagrama-piechart>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

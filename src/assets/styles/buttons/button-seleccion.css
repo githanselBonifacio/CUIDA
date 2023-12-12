@@ -1,0 +1,174 @@
+@import url("../../../styles.css");
+
+.container-buttom-flex {
+    display: flex;
+    gap: 1rem;
+}
+
+.buttom-primary {
+    background-color: var(--primary-color);
+    color: var(--gris4-color);
+    border-color: transparent;
+    border-radius: 5px;
+    outline: none;
+}
+
+.buttom-primary:hover {
+    box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5);
+
+}
+
+.buttom-border {
+    border: 1px solid var(--gris3-color);
+    background-color: transparent;
+
+}
+
+.buttom-border-red {
+    color: var(--red-color);
+}
+
+.buttom-border:hover {
+    background-color: var(--red-color);
+    color: var(--gris4-color);
+}
+
+
+
+.buttom-red {
+    border-radius: 5px;
+    background-color: var(--red-color);
+    color: var(--gris4-color);
+    outline: none;
+    border-color: transparent;
+
+}
+
+.buttom-red:hover {
+    background-color: var(--red-dark-color);
+    box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5);
+}
+
+.buttom-second {
+    background-color: var(--second-color);
+    color: var(--gris4-color);
+    border-radius: 5px;
+    border-color: transparent;
+
+}
+
+
+
+.redondo {
+    padding: 0;
+    margin: 0;
+    width: 2rem;
+    height: 2rem;
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+}
+
+.bordeado {
+    border-radius: 15px;
+}
+
+
+.buttom-i {
+    border: none;
+    background-color: transparent;
+    color: var(--second-color);
+}
+
+.buttom-i i {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+}
+
+.buttom-primary:disabled,
+.buttom-second:disabled,
+.buttom-primary:disabled:hover,
+.buttom-second:disabled:hover {
+    opacity: 0.8;
+    box-shadow: none;
+    background-color: var(--gris2-color);
+    color: var(--gris4-color);
+}
+
+.buttom-seleccion {
+    background-color: var(--second-color);
+    color: var(--gris4-color);
+    border: solid 1px var(--gris4-color);
+    border-color: transparent;
+    border-radius: 0.5rem;
+    height: 60%;
+    text-align: center;
+    min-width: 5rem;
+    min-height: 2rem;
+}
+
+.buttom-seleccion:disabled,
+.buttom-seleccion:disabled:hover {
+    opacity: 0.7;
+    box-shadow: none;
+    color: var(--gris4-color);
+}
+
+
+.buttom-seleccion:hover,
+.buttom-second:hover {
+    color: var(--third-color);
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.5);
+}
+
+.buttom-group-horinzontal {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 1rem;
+    padding: 0 1rem 0 1rem;
+}
+
+.buttom-circular-activador {
+    display: flex;
+    position: relative;
+    padding: 0.2rem 1.6rem 0.2rem 0.5rem;
+    border-radius: 15px;
+
+}
+
+.buttom-circular-activador::after {
+    content: "";
+    position: absolute;
+    border: 1px solid var(--gris4-color);
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    padding: 3px;
+    bottom: 30%;
+    right: 8px;
+    transform: rotate(-135deg);
+    -webkit-transform: rotate(-135deg);
+    transition-duration: 0.5s;
+}
+
+.buttom-circular-activador.activate::after {
+    bottom: 40%;
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+    transition-duration: 0.5s;
+}
+
+.buttom-circular-activador.invertido.activate::after {
+    bottom: 30%;
+    transform: rotate(-135deg);
+    -webkit-transform: rotate(-135deg);
+    transition-duration: 0.5s;
+}
+
+.buttom-circular-activador.invertido::after {
+    bottom: 40%;
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+    transition-duration: 0.5s;
+}

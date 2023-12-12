@@ -1,0 +1,35 @@
+<div class="container">
+    <div class="header">
+        <h5>Turnos no modificados</h5>
+        <p>Los siguiente turno no fueron modificados por tener citas asignadas a un profesional</p>
+    </div>
+    <div class="content-table">
+        <table>
+            <thead>
+                <tr>
+                    <th>Profesional</th>
+                    <th>fecha turno</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let info of informacionMostrada">
+                    <td>
+                        <div>
+                            {{info.profesional.nombres}} {{info.profesional.apellidos}}
+                        </div>
+                        <div>
+                            {{info.profesional.numeroIdentificacion}}
+                        </div>
+
+                    </td>
+                    <td>{{info.fechaTurno}}</td>
+
+                </tr>
+            </tbody>
+        </table>
+        <div class="container-buttom">
+            <button class="buttom-second" (click)="onConfirm()">Aceptar</button>
+        </div>
+    </div>
+
+</div>

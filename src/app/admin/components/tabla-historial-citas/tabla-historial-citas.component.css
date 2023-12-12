@@ -1,0 +1,93 @@
+@import url('../../../../styles.css');
+@import url('../../../../assets/styles/tablas/tabla.css');
+
+h6 {
+    padding-bottom: 0.4rem;
+}
+
+.content-item {
+    padding-top: 0.5rem;
+}
+
+.content-item table {
+    box-shadow: 5px 5px 10px var(--gris2-color);
+}
+
+.paginador {
+    text-align: center;
+}
+
+
+#header-table th {
+    color: var(--gris4-color);
+    font-weight: bold;
+    background-color: var(--primary-color);
+}
+
+.row {
+    margin: 0;
+}
+
+tbody {
+    border: 1px solid var(--gris3-color);
+}
+
+i {
+    color: var(--second-color);
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+i:hover {
+    box-shadow: 5px 5px 15px var(--gris2-color);
+    padding: 0.2rem 0.2rem 0.2rem 0.2rem;
+    border-radius: 5px;
+}
+
+td {
+    border: 0;
+}
+
+tr {
+    border-bottom: 1px solid var(--gris3-color);
+}
+
+.estado {
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    border: 0;
+}
+
+.estado div {
+    padding: 0.1rem 0.5rem 0.2rem 0.5rem;
+    margin: 0;
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
+    min-width: 60%
+}
+
+#estado-1 {
+    background-color: var(--orange-color);
+}
+
+#estado-2 {
+    background-color: var(--second-color-2);
+}
+
+#estado-3 {
+    background-color: purple;
+}
+
+#estado-4 {
+    background-color: var(--green-color);
+}
+
+#estado-5 {
+    background-color: var(--quarter-color);
+}
+
+#estado-6 {
+    background-color: black;
+}

@@ -1,0 +1,51 @@
+<div class="content-item" *ngIf="citasCompletas?.length??0>0">
+    <h6 *ngIf="isHistorial">Actualización de citas</h6>
+
+    <div class="paginador" *ngIf="citasCompletas.length >4">
+        <pagination-controls [id]="tableId" previousLabel="Anterior" nextLabel="Siguiente"
+            (pageChange)="currentPage = $event"></pagination-controls>
+    </div>
+
+    <table class="table table-hover">
+        <thead>
+            <tr id="header-table">
+                <th scope="col">ID</th>
+                <th scope="col">Fecha programada</th>
+                <th scope="col">Duración</th>
+                <th scope="col">Holgura</th>
+                <th scope="col">Especialidad</th>
+                <th scope="col">{{getTituloEstados()}}</th>
+                <th scope="col">Detalle</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            <tr *ngFor="let cita of citasCompletas | paginate:{id:tableId, itemsPerPage: 4, currentPage: currentPage}">
+                <td scope="row">{{cita.idCita}}</td>
+                <td>{{cita.fechaProgramada|date :'dd/MM/yyyy HH:mm'}}</td>
+                <td>{{cita.duracion |formatearSegundos }}</td>
+                <td>{{cita.holgura |formatearSegundos}}</td>
+                <td>{{cita.especialidad}}</td>
+
+                <td [ngClass]="{'estado': true}">
+                    <div *ngIf="!isHistorial; else historial" [attr.id]="'estado-' + cita.idEstado">
+                        {{ convertEstados(cita.idEstado, estadosCita) }}
+                    </div>
+
+                    <ng-template #historial>
+                        <div>
+                            <i [ngClass]="{'bi bi-trash-fill':cita.idEstado !== 0,'bi bi-plus-circle-fill':cita.idEstado === 0}"
+                                [ngStyle]="{'color':cita.idEstado !== 0 ?'var(--red-color)':''}"></i>
+                        </div>
+                    </ng-template>
+                </td>
+
+                <td>
+                    <i class="bi bi-eye" title="ver detalle" (click)="mostrarModalDetalleCita(cita)"></i>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+
+</div>

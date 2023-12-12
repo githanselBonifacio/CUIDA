@@ -1,0 +1,73 @@
+<div class="container">
+    <h1>Profesionales</h1>
+    <div id="formulario-profesional" class="form {{estadoVisualFormCrearProfesional}}">
+        <app-admin-form-profesionales (enviado)="actualizarDatos()" [regionales]="regionales"
+            [profesiones]="profesiones" [accionFormulario]="accionFormulario"
+            [tiposIdentificacion]="tiposIdentificacion"
+            [profesional]="profesionalSeleccionado"></app-admin-form-profesionales>
+    </div>
+    <div class="tool-bar">
+        <button class="buttom-red bordeado" *ngIf="accionFormulario == 1" (click)="volverCrear()">
+            Volver a crearprofesional
+        </button>
+        <button [class]="'buttom-primary buttom-circular-activador invertido '+estadoVisualFormCrearProfesional"
+            (click)="mostrarFormularioCrearProfesional()" id="desplegar-form">
+            {{tituloButtomDesplagarForm}}
+        </button>
+    </div>
+
+    <div class="mat-elevation-z8" id="content-tabla-profesionales">
+        <table mat-table [dataSource]="profesionalesSource">
+
+            <ng-container matColumnDef="TipoIdentificacion">
+                <th mat-header-cell *matHeaderCellDef>Tipo identificación</th>
+                <td class="td-start" mat-cell *matCellDef="let profesional">
+                    {{mostrarNombreTipoIdentificacion(profesional.idTipoIdentificacion, tiposIdentificacion)}}:
+                    {{profesional.numeroIdentificacion}}
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="Nombres">
+                <th mat-header-cell *matHeaderCellDef>Nombres</th>
+                <td class="td-start" mat-cell *matCellDef="let profesional">{{profesional.nombres|titlecase}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="Apellidos">
+                <th mat-header-cell *matHeaderCellDef>Apellidos</th>
+                <td class="td-start" mat-cell *matCellDef="let profesional">{{profesional.apellidos|titlecase}}</td>
+            </ng-container>
+
+
+            <ng-container matColumnDef="Regional">
+                <th mat-header-cell *matHeaderCellDef>Regional</th>
+                <td mat-cell *matCellDef="let profesional">{{mostrarNombreRegional(profesional.idRegional,regionales)}}
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="Profesion">
+                <th mat-header-cell *matHeaderCellDef>Profesión</th>
+                <td mat-cell *matCellDef="let profesional">{{mostrarNombreProfesion(profesional.idProfesion,
+                    profesiones)}}
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="acciones">
+                <th mat-header-cell *matHeaderCellDef>Acciones</th>
+                <td mat-cell *matCellDef="let profesional">
+                    <i name="accion-ico" class="bi bi-pencil-square" title="editar"
+                        (click)="abrirFormEditarProfesional(profesional)"></i>
+                    <i name="accion-ico" [class]="'bi bi-toggle-'+getIconActivar(profesional.activo)"
+                        title="activar"></i>
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="columnas"></tr>
+            <tr mat-row *matRowDef="let row; columns:columnas;"></tr>
+        </table>
+    </div>
+
+    <mat-paginator #paginatorProfesionales [pageSizeOptions]="pageSizeOptions" aria-label="Select page"
+        itemsPerPageLabel="profesionales por páginas" showFirstLastButtons="true" (page)="actualizarPage()">
+    </mat-paginator>
+
+</div>

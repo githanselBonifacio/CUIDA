@@ -1,0 +1,83 @@
+@import url('../../../../styles.css');
+@import url('../../../../assets/styles/tablas/tabla.css');
+
+@media screen and (min-width: 850px) and (max-width:1799px) {
+    .container {
+        height: 80vh !important;
+        width: 75vw !important;
+    }
+}
+
+@media screen and (min-width: 1800px) and (max-width: 2200px) {
+    .container {
+        height: 80vh !important;
+        width: 90vw !important;
+    }
+}
+
+#btn-close {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 0.5rem;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+i {
+    right: 1.5rem;
+    font-size: 2rem;
+    color: var(--second-color);
+
+}
+
+i:hover {
+    color: var(--second-color-2);
+    font-weight: bold;
+}
+
+h5 {
+    padding-top: 0.5rem;
+    color: var(--second-color);
+    font-weight: bold;
+}
+
+.content-item {
+    padding-right: 1rem;
+    padding-left: 1rem;
+}
+
+.row {
+    margin: 0;
+}
+
+.col,
+.col-3,
+.col-2 {
+    border: 1px solid var(--gris3-color);
+
+}
+
+span {
+    word-wrap: break-word;
+    overflow-wrap: normal;
+    line-height: 0px;
+}
+
+#datos-personales {
+    padding: 0;
+}
+
+.datos-atencion,
+.datos-paciente {
+    color: var(--quarter-color);
+    border: 1px solid var(--gris3-color);
+    padding: 0.5rem 0.5rem 0.5rem 0.5rem;
+    margin-bottom: 1rem;
+}
+
+#map-ubicacion {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    vertical-align: middle;
+}

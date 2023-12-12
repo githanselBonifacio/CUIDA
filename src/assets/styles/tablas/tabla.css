@@ -1,0 +1,82 @@
+@import url('../../../styles.css');
+
+.container-table {
+    padding: 0;
+    margin: 0;
+    height: 55vh;
+    overflow: auto;
+}
+
+.container-table-full-screen {
+    padding: 0;
+    margin: 0;
+    height: 75vh;
+    overflow: auto;
+}
+
+@media screen and (min-height: 600px) and (max-height: 800px) {
+    .container-table {
+        height: 41vh;
+        overflow-y: auto;
+    }
+
+    .container-table-full-screen {
+        height: 66vh;
+        overflow-y: auto;
+    }
+}
+
+th {
+    color: var(--gris4-color);
+    text-align: center;
+    background-color: var(--primary-color) !important;
+}
+
+th:nth-child(n+2) {
+    border-left: 1px solid var(--gris4-color);
+}
+
+td {
+    color: var(--quarter-color);
+    text-align: center;
+    vertical-align: middle;
+}
+
+.item-td-flex {
+    display: flex;
+    align-items: center;
+}
+
+tr:nth-child(n):hover,
+tr:nth-child(n):hover td {
+    background-color: var(--gris2-color);
+    color: var(--cero-color);
+
+}
+
+tr:nth-child(n):hover i,
+tr:nth-child(n):hover div::before {
+    color: var(--cero-color) !important;
+}
+
+tr:nth-child(even) {
+    background-color: var(--gris4-color);
+}
+
+.th-start,
+.td-start {
+    text-align: start;
+    white-space: nowrap;
+}
+
+@media screen and (max-height:650px) {
+    th {
+        font-size: 1rem;
+    }
+
+    td {
+        color: var(--quarter-color);
+        text-align: center;
+        vertical-align: middle;
+    }
+}

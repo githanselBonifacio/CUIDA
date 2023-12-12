@@ -1,57 +1,29 @@
-import { Component , Inject,OnInit} from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
-import {Turno} from '../../interfaces/turno.interface'
-import { AgendaService } from 'src/app/shared/services/agenda/agenda.service';
+import { Component, Inject, OnInit } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+
 
 @Component({
   selector: 'app-modal-cambio-hora-cita',
   templateUrl: './modal-cambio-hora-cita.component.html',
   styleUrls: ['./modal-cambio-hora-cita.component.css']
 })
-export class ModalCambioHoraCitaComponent implements OnInit{
+export class ModalCambioHoraCitaComponent implements OnInit {
 
-  horaCita = "";
+  horaCitaNueva = "";
   constructor(
     public dialogRef: MatDialogRef<ModalCambioHoraCitaComponent>,
-    @Inject(MAT_DIALOG_DATA) public citaSeleccionada: Turno,
-    private agendaService: AgendaService,
-  ) {}
+    @Inject(MAT_DIALOG_DATA) public horaActual: string,
+  ) { }
 
-  ngOnInit() {
-    this.horaCita = this.getHoraFecha();
-    console.log(this.horaCita)
-  }
-  getHoraFecha():string{
-  const [fechaCompleta, horaCompleta] = this.citaSeleccionada.fecha_programada.split('T');
-  const hora = horaCompleta.substring(0, 5);
+  ngOnInit(): void {
+    this.horaCitaNueva = this.horaActual;
 
-  return hora;
   }
 
   onNoClick(): void {
-    this.dialogRef.close(false);
+    this.dialogRef.close('');
   }
-  onConfirm():void{
-    const fecha = new Date(this.citaSeleccionada.fecha_inicio);
-    
-    const year = fecha.getFullYear();
-    const month = fecha.getMonth()+1;
-    const day = fecha.getDate();
-
-    this.agendaService.reprogramarCita(
-      this.citaSeleccionada.id_cita,
-      `${year}-${month}-${day}`,
-      this.horaCita
-    ).subscribe(resp =>{
-      this.agendaService.calcularDesplazamientosTurno(
-        this.citaSeleccionada
-      ).subscribe(resp =>{
-        this.dialogRef.close(true)
-        location.reload();
-         
-      })
-    });
-    
-   
+  onConfirm(): void {
+    this.dialogRef.close(this.horaCitaNueva)
   }
 }

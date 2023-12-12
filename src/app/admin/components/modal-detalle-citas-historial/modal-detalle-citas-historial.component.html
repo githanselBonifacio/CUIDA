@@ -1,0 +1,12 @@
+<div class="container">
+
+  <Div id="btn-close">
+    <h4>Detalle cita</h4>
+    <div id="i-cont">
+      <i class="bi bi-x" (click)='onClose()' title="cerrar"></i>
+    </div>
+
+  </Div>
+  <app-agenda-items-cita [procedimientos]="citaSeleccionada.procedimientos"
+    [tratamientos]="citaSeleccionada.tratamientos"></app-agenda-items-cita>
+</div>

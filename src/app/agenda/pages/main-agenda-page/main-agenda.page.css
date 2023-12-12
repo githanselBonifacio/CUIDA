@@ -1,92 +1,92 @@
 @import url('../../../../styles.css');
+@import url('../../../../assets/styles/buttons/button-seleccion.css');
+@import url('../../../../assets/styles/buttons/button-multiple-seleccion.css');
+@import url('../../../../assets/styles/inputs/inputs.css');
+@import url('../../../../assets/styles/inputs/fecha.css');
 
-h1{
-    color: var( --second-color);
+
+#titulo-agenda {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
 }
-#container-agenda{
-    margin: 4rem 4rem 4rem 4rem ;
-}
-#container-list-citas{
-    border:1px solid var( --gris3-color);
-    background-color:var(---primary-color);
+
+#container-list-citas {
+    border: 1px solid var(--gris3-color);
+    background-color: var(---primary-color);
     padding-top: 1.5rem;
 }
-#container-list-citas h2{
-    padding: 0 0.5rem 0 0;
-    color: var(--second-color);
+
+#container-agenda-gantt {
+    border: 1px solid var(--gris3-color);
+    padding-top: 1rem;
 }
-#container-agenda-gantt{
-    border:1px solid var(--gris3-color);
+
+#header_filtro_agenda {
+    justify-content: end;
+    flex-direction: row;
+    align-items: end;
+    padding: 1rem 1rem 1rem 1rem;
+
 }
-#header_filtro_agenda{
-   justify-content: space-between;
-   flex-direction: row;
-   align-items: center;
+
+#filtro_agenda {
+    justify-content: end;
 }
-#container-buttom-header{
+
+.d-flex-col {
+    align-items: center;
+    margin: 0rem 0.5rem 0rem 0.5rem;
+}
+
+.input-group {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-end !important;
+}
+
+#buscar-remision span,
+#buscar-remision input {
+    border: 1px solid var(--gris3-color);
+}
+
+#container-card-citas {
+    margin: 0.3rem 0.3rem 0.3rem 0;
+}
+
+#container-card {
+    overflow-y: auto;
+    overflow-x: hidden;
+    max-height: 70vh;
+}
+
+@media screen and (min-height: 600px) and (max-height: 800px) {
+    #container-card {
+        max-height: 60vh;
+    }
+}
+
+.panel-gantt {
     display: flex;
-}
-.btn-agendamientos{
-    padding-left: 1rem;
-}
-#filtro_agenda{
-    justify-content: space-between;
-    padding: 1rem 1rem 1rem 1rem;
- }
- .input-group div{
-    padding: 1rem 1rem 1rem 1rem;
-    color: var( --primary-color);
- }
- .input-group input{
-    margin: 0 1rem 0 0;
- }
- select {
-    background-color: var(--gris4-color);
-    color: var(--quarter-color);
-    padding: 0.5rem 0.5rem;
-    border: solid var(--gris3-color) 0.1rem;
-    border-color:  var(--gris3-color);
-    border-radius: 1px;
-  }
-  
-option {
-    background-color: var(--gris4-color);
-    color: var(--quarter-color);
+    flex-direction: column;
+    height: 100%;
+    justify-content: flex-start;
 }
 
-input{
-    border: solid 0.1rem;
-    border-color:var( --gris3-color);
-}
-#fecha-consultada{
-    background-color:var(--gris4-color);
-    color: var(--quarter-color);
-    padding: 0.4rem 0.4rem 0.4rem 0.4rem;
-    border: solid 0.1rem;
-    border-color: var(--gris4-color);
-}
-.bnt-consulta{
-    background-color:var(--second-color);
-    color:var( --gris4-color);
-    padding: 0.4rem 0.4rem 0.4rem 0.4rem;
-    border: solid 1px var(--gris4-color);
-    border-color: transparent;
-    border-radius: 0.5rem;
-    font-size: 1.2rem;
-}
- button:hover{
-    color: var( --third-color);
-}
-
-.bnt-bot-agendamiento{
-    background-color: var( --second-color);
-    color: var(--gris4-color);
-    font-weight: bold;
-    font-size: 1.4rem;
+#agregar-profesional {
+    font-size: 2.5rem;
+    color: var(--third-color);
+    text-align: center;
+    border: 1px solid var(--gris3-color);
     border-radius: 5px;
-    border: none;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    width: 12rem;
 }
-.bnt-bot-agendamiento:hover{
-    font-size: 1.5rem;
-    color: var( --third-color);
+
+#agregar-profesional:hover {
+    color: var(--orange-color);
+    background-color: var(--gris4-color);
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+
 }

@@ -1,0 +1,20 @@
+@import url('../../../../styles.css');
+@import url('../../../../assets/styles/tablas/tablaSimple.css');
+@import url('../../../../assets/styles/buttons/button-seleccion.css');
+
+.container {
+    padding: 1rem;
+    max-width: 30rem;
+}
+
+.content-table {
+    padding: 0.25rem;
+}
+
+.header {
+    padding-bottom: 1rem;
+}
+
+.container-buttom {
+    padding-top: 0.5rem;
+}

@@ -1,0 +1,165 @@
+.content-chart {
+    height: 100%;
+}
+
+#title {
+    padding: 0.25rem;
+    text-align: center;
+    color: #38526d !important;
+    font-size: 1.5rem;
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: bold;
+}
+
+.content-circle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    height: 90%;
+    padding: 0.25rem 0.25rem 0.25rem 0.6rem;
+}
+
+.circle {
+    position: relative;
+    background-color: transparent;
+    width: fit-content;
+    padding: 0.2rem;
+    transition: all 0.2s ease-in-out;
+}
+
+#circlePieChart {
+    padding: 0.2rem;
+    z-index: 999;
+}
+
+.piece[selected=true] {
+    fill: gray;
+}
+
+.piece:hover {
+    fill-opacity: 0.4;
+    transition: all 0.3s ease-in;
+}
+
+.label-chart {
+    position: absolute;
+    color: white;
+    font-size: 0.8rem;
+    font-weight: lighter;
+    background-color: #38526d;
+    border-radius: 5px;
+    padding: 0.2rem 0.2rem 0.2rem 0.2rem;
+    transform: translate(-50%, -50%);
+
+}
+
+.legend {
+    position: relative;
+    padding: 0.2rem;
+    width: calc(60%);
+    max-height: 70%;
+    overflow: auto;
+    scroll-padding-top: 20px;
+    z-index: 0;
+}
+
+.legend>div:nth-child(-n+3) .description-detail {
+    transform: translate(0%, 190%);
+    transition: transform 0.25s ease;
+}
+
+.legend>div:hover:nth-child(-n+3) .description-detail {
+    transform: translate(0%, 180%);
+    transition: transform 0.25s ease;
+}
+
+.legend>div:nth-child(-n+3) .description-detail::after {
+    position: absolute;
+    content: "";
+    left: 50%;
+    top: -30%;
+    border: 0.5rem solid transparent;
+    border-bottom-color: #53565A;
+}
+
+
+
+.legend-item {
+    position: relative;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 0.5rem;
+    border-radius: 5px;
+    cursor: pointer;
+    padding: 0.25rem 0.25rem 0.25rem 0.25rem;
+}
+
+.legend-item:hover .description-detail {
+    visibility: visible;
+    transform: translate(0%, -15%);
+    transition: transform 0.25s ease-in;
+    z-index: 999;
+}
+
+.legend-item:hover {
+    background-color: rgb(207, 207, 207);
+}
+
+.color-ref {
+    min-height: 1.25rem;
+    min-width: 1.25rem;
+    border-radius: 2px;
+    font-size: 0.8rem;
+    white-space: nowrap;
+    color: rgb(255, 255, 255);
+    font-family: 'Times New Roman', Times, serif;
+    padding: 0rem 0.4rem 0rem 0.4rem;
+    border-radius: 5px;
+}
+
+.description {
+    font-size: 0.9rem;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.description p {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+
+.description-detail {
+    position: absolute;
+    visibility: hidden;
+    background-color: #53565A;
+    padding: 0.3rem;
+    font-size: 0.8rem;
+    text-align: center;
+    border-radius: 5px;
+    z-index: 999;
+    min-width: 6rem;
+    bottom: calc(0% + 2rem);
+    text-indent: 0.5rem;
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 0.9rem;
+    transform: translate(0%, -30%);
+    transition: transform 0.25s ease-in;
+}
+
+.description-detail::after {
+    position: absolute;
+    content: "";
+    left: 50%;
+    top: 100%;
+    border: 0.5rem solid transparent;
+    border-top-color: #53565A;
+}
+
+.description-detail p {
+    color: white !important;
+}

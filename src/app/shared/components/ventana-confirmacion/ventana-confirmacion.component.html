@@ -2,17 +2,18 @@
 
 <div class="custom-dialog" mat-dialog-actions>
     <div >
-        <h5 mat-dialog-title>{{data["mensaje"]}}</h5>
+        <h4 mat-dialog-title>{{data["mensaje"]}}</h4>
+        <h6 *ngIf="data['nota']" mat-dialog-title><i class="bi bi-exclamation-triangle-fill"></i> {{data["nota"]}}</h6>
         <div class="content-option">
             <div>
-                <button mat-button  class="btn btn-outline-success" (click)="onNoClick()" >Cancelar</button>
+                <button mat-button  class="btn btn-outline-danger" (click)="onNoClick()" >Cancelar</button>
             </div>
             <div>
-                <button mat-button class="btn btn-outline-danger" cdkFocusInitial (click)="onConfirm()">Confirmar</button>
+                <button mat-button class="btn btn-outline-success" cdkFocusInitial (click)="onConfirm()">Confirmar</button>
             </div>
             
         </div>
-        
+       
     </div>
     
 </div>

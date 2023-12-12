@@ -4,35 +4,47 @@ import { MainComponentAgendaComponent } from './pages/main-agenda-page/main-agen
 import { DiagramasModule } from '../diagramas/diagramas.module';
 import { CardCitaComponent } from './components/card-cita/card-cita.component';
 import { FormsModule } from '@angular/forms';
-import {MatInputModule} from '@angular/material/input';
-import {MatDialogModule} from '@angular/material/dialog'
-import {MatFormFieldModule} from '@angular/material/form-field';
-import { ModalAsignarProfesionalComponent } from './components/modal-asignar-profesional/modal-asignar-profesional.component';
-import {AgendaRoutingModule} from './agenda-routing.module';
+import { MatInputModule } from '@angular/material/input';
+import { MatDialogModule } from '@angular/material/dialog'
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { ModalSeleccionProfesionalComponent } from './components/modal-seleccion-profesional/modal-seleccion-profesional.component';
+import { AgendaRoutingModule } from './agenda-routing.module';
 import { ModalCambioHoraCitaComponent } from './components/modal-cambio-hora-cita/modal-cambio-hora-cita.component';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { SpinnerComponent } from '../shared/components/spinner/spinner.component';
+import { ModalDetalleRemisionComponent } from './components/modal-detalle-remision/modal-detalle-remision.component';
+import { MapsModule } from '../maps/maps.module';
+import { MatSelectModule } from '@angular/material/select';
+import { PipesModule } from '../pipes/pipes.module';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { ItemsCitaComponent } from './components/items-cita/items-cita.component';
+import { PlaceholderTableComponent } from '../shared/components/placeholder-table/placeholder-table.component';
 
 @NgModule({
   declarations: [
     MainComponentAgendaComponent,
     CardCitaComponent,
-    ModalAsignarProfesionalComponent,
+    ModalSeleccionProfesionalComponent,
     ModalCambioHoraCitaComponent,
-    SpinnerComponent
+    ModalDetalleRemisionComponent,
+    ItemsCitaComponent,
+    PlaceholderTableComponent,
   ],
   imports: [
     CommonModule,
     DiagramasModule,
-    FormsModule,
-    MatFormFieldModule, 
-    MatInputModule, 
-    MatDialogModule,
     AgendaRoutingModule,
-    MatProgressSpinnerModule, 
+    FormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatDialogModule,
+    MapsModule,
+    PipesModule,
+    MatSelectModule,
+    MatSnackBarModule
   ],
-  exports:[
-    MainComponentAgendaComponent
+  exports: [
+    MainComponentAgendaComponent,
+    ItemsCitaComponent
+
   ]
 })
 export class AgendaModule { }

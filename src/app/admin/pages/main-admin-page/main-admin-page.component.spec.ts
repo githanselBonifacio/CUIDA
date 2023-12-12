@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { MainAdminPageComponent } from './main-admin-page.component';
+import { ActivatedRoute, RouterModule } from '@angular/router';
+
 
 describe('MainAdminPageComponent', () => {
   let component: MainAdminPageComponent;
@@ -8,14 +10,20 @@ describe('MainAdminPageComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [MainAdminPageComponent]
+      declarations: [MainAdminPageComponent],
+      imports: [
+        RouterModule
+      ],
+      providers: [
+        { provide: ActivatedRoute, useValue: {} },
+      ]
     });
     fixture = TestBed.createComponent(MainAdminPageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('crear componente', () => {
     expect(component).toBeTruthy();
   });
 });

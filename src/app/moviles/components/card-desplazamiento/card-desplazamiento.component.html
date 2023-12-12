@@ -1,4 +1,4 @@
-<div class="row" id = 'container-card'>
+<div class="row" id='container-card'>
 
     <div *ngFor="let desplazamiento of desplazamientos" class="container-card-citas">
 
@@ -7,25 +7,26 @@
             <div class="card-body">
 
                 <h5 class="card-title">Desplazamiento</h5>
-                <h5 class="card-title">{{desplazamiento.id_cita_partida}} => {{desplazamiento.id_cita_destino}}</h5>
-              
-                
-                <span class="input-group-text" id="basic-addon2"><i class="bi bi-calendar"></i> {{formatDateTime(desplazamiento.fecha_inicio_desplazamiento)}}</span>
-                <span class="input-group-text" id="basic-addon2"><i class="bi bi-calendar-check" ></i> {{formatDateTime(desplazamiento.fecha_programada_desplazamiento)}}</span>
-                <span class="input-group-text" id="basic-addon2"><i class="bi bi-clock"></i> {{convertSecondsToMinutesOrHours(desplazamiento.duracion_seg)}}</span>
-                <span class="input-group-text" id="basic-addon2"><i class="bi bi-hourglass-bottom"></i> {{convertSecondsToMinutesOrHours(desplazamiento.holgura_seg)}}</span>
+                <h5 class="card-title">{{desplazamiento.idCitaPartida}} => {{desplazamiento.idCitaDestino}}</h5>
+
+
+
+                <span class="input-group-text" id="basic-addon2"><i class="bi bi-calendar-check"></i>
+                    {{formatDateTime(desplazamiento.fechaProgramada)}}</span>
+                <span class="input-group-text" id="basic-addon2"><i class="bi bi-clock"></i>
+                    {{convertSecondsToMinutesOrHours(desplazamiento.duracion)}}</span>
+                <span class="input-group-text" id="basic-addon2"><i class="bi bi-hourglass-bottom"></i>
+                    {{convertSecondsToMinutesOrHours(desplazamiento.holgura)}}</span>
                 <div class="i-card-agenda">
-                    
-                  
-                        <i class="bi bi-calendar-plus-fill"  *ngIf="desplazamiento.id_estado == 1"
-                            title="Agendar"
-                            id = "i-card-agenda-agendar" (click) = "asignarDesplazamiento(desplazamiento)">
-                        </i>
-                        
-                        <i class="bi bi-calendar2-x-fill"   *ngIf="desplazamiento.id_estado == 2"
-                                title="Desagendar"
-                                id="i-card-agenda-desagendar" (click) = "desasignarDesplazamiento(desplazamiento)">
-                        </i>
+
+
+                    <i class="bi bi-calendar-plus-fill" *ngIf="desplazamiento.idEstado == 1" title="Agendar"
+                        id="i-card-agenda-agendar" (click)="asignarDesplazamiento(desplazamiento)">
+                    </i>
+
+                    <i class="bi bi-calendar2-x-fill" *ngIf="desplazamiento.idEstado == 2" title="Desagendar"
+                        id="i-card-agenda-desagendar" (click)="desasignarDesplazamiento(desplazamiento)">
+                    </i>
 
                 </div>
             </div>

@@ -1,0 +1,65 @@
+@import url('../../../../styles.css');
+@import url('../../../../assets/styles/buttons/button-seleccion.css');
+@import url('../../../../assets/styles/inputs/fecha.css');
+
+.container {
+    min-width: 25vw;
+    min-height: 45vh;
+    max-height: 65vh;
+    padding: 2rem;
+}
+
+.d-flex {
+    padding-bottom: 1rem;
+}
+
+.vertical-flex {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 40vh;
+    gap: 1rem;
+}
+
+.item-vertical {
+    height: 100%;
+    width: 100%;
+}
+
+.title-header {
+    margin-bottom: 0.5rem;
+}
+
+.container-tabla {
+    margin-bottom: 0.5rem;
+    margin-top: 0.5rem;
+    max-height: 30vh;
+    min-height: 20vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+    border: 1px solid var(--gris3-color);
+}
+
+.table-semanas {
+    width: 100%;
+    margin: 0.5rem;
+}
+
+.table-semanas tr {
+    border: 0.2rem solid transparent;
+}
+
+.container-dias {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.container-dias td:nth-child(1) {
+    min-width: 50%;
+}
+
+
+table {
+    table-layout: auto;
+}

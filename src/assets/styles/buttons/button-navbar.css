@@ -1,0 +1,12 @@
+@import url('../../../styles.css');
+
+.navbar-button {
+    background-color: transparent;
+    color: var(--gris4-color);
+    border-width: 0px;
+
+}
+
+.navbar-button:hover {
+    color: var(--third-color);
+}

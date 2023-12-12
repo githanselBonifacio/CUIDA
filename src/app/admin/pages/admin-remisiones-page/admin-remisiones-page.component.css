@@ -1,0 +1,49 @@
+@import url('../../../../styles.css');
+@import url('../../../../assets/styles/tablas/tabla.css');
+@import url('../../../../assets/styles/inputs/inputs.css');
+
+.content-toolbar {
+    display: flex;
+}
+
+#back-admin {
+    display: flex;
+    align-items: center;
+    padding-right: 2rem;
+    font-size: 1.5rem;
+    color: var(--primary-color);
+}
+
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem 0.5rem 0.5rem 0.5rem;
+    align-items: center;
+}
+
+.card-item,
+.card-item td {
+    text-align: start;
+}
+
+.content-item {
+    padding-right: 1rem;
+    padding-left: 1rem;
+}
+
+.card-item,
+.card-item td {
+    text-align: start;
+}
+
+
+#history {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--second-color);
+}
+
+.col-left {
+    text-align: start;
+}

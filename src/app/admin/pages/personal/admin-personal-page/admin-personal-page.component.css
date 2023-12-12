@@ -1,0 +1,115 @@
+@import url('../../../../../styles.css');
+
+
+#container-personal {
+    display: flex;
+    height: 100%;
+}
+
+#item-personal {
+    margin: 0;
+    width: 100%;
+    overflow: auto;
+}
+
+#vertical-nav-bar {
+    position: relative;
+    margin: 0rem 0rem 0rem 0rem;
+    background-color: var(--primary-color);
+}
+
+#vertical-nav-bar[close="false"] span {
+    opacity: 1;
+    font-size: 1rem;
+    transition: font-size linear 0.3s;
+
+}
+
+#vertical-nav-bar[close="true"] span {
+    opacity: 0;
+    font-size: 0;
+    transition: font-size linear 0.3s;
+}
+
+
+#control-show {
+    position: absolute;
+    top: 3rem;
+    right: -1rem;
+}
+
+.control-show-button {
+    border: 0;
+    padding: 0.2rem 0.5rem 0.5rem 0.5rem;
+    border-radius: 50%;
+    background-color: var(--third-color);
+    width: 2rem;
+    height: 2rem;
+}
+
+.control-show-button::after {
+    content: "";
+    position: absolute;
+    border: 1px solid var(--second-color);
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    padding: 3px;
+    bottom: 30%;
+    right: 8px;
+    transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+    transition-duration: 0.3s;
+}
+
+.control-show-button.activate::after {
+    transform: rotate(135deg);
+    -webkit-transform: rotate(135deg);
+    transition-duration: 0.3s;
+}
+
+.titulo-menu {
+    padding-left: 0.5rem;
+}
+
+.vertical-item button {
+    border: 0;
+    color: var(--gris4-color);
+    font-size: 1rem;
+    background-color: transparent;
+    white-space: nowrap;
+}
+
+.vertical-item button:hover {
+
+    color: var(--quater-color);
+    background-color: var(--gris4-color);
+    border-radius: 15px;
+}
+
+.vertical-bar ul {
+    padding: 5rem 1rem 1rem 1rem;
+}
+
+li {
+    list-style: none;
+    margin: 1rem 0rem 0rem 0rem;
+
+}
+
+li button {
+    padding: 0.2rem 1rem 0.2rem 1rem;
+    width: 100%;
+    text-align: start;
+}
+
+li.active button {
+    border-radius: 15px;
+    background-color: var(--gris4-color);
+    color: var(--quater-color);
+    padding: 0.2rem 1rem 0.2rem 1rem;
+}
+
+svg {
+    text-align: center;
+    transform: translateX(30%);
+}

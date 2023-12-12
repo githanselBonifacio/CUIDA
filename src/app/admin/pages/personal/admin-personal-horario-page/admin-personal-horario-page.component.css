@@ -1,0 +1,49 @@
+@import url('../../../../../styles.css');
+
+.content-horario {
+    margin: 0px;
+    padding: 0px;
+    height: 90%;
+}
+
+.container-horario {
+    padding: 5rem 1rem 1rem 1rem;
+    background-color: var(--gris4-color);
+    height: 100%;
+    overflow: auto;
+}
+
+.container-horario ul {
+    display: flex;
+    justify-content: flex-start;
+    gap: 1rem;
+}
+
+.container-horario li {
+    list-style: none;
+    font-weight: bold;
+    color: var(--quarter-color);
+    cursor: default;
+    border-bottom: 2px solid transparent;
+}
+
+@keyframes li-nav {
+    0% {
+        border-bottom-width: 20%;
+    }
+
+    50% {
+        border-bottom-width: 50%;
+    }
+
+    100% {
+        border-bottom-width: 100%;
+    }
+
+}
+
+.container-horario li.active {
+    border-bottom-color: var(--second-color);
+    border-bottom-width: 50%;
+    animation: li-nav 0.5s;
+}

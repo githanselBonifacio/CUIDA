@@ -1,0 +1,175 @@
+@import url('../../../../styles.css');
+@import url('../../../../assets/styles/tablas/tabla.css');
+@import url('../../../../assets/styles/buttons/button-seleccion.css');
+@import url('../../../../assets/styles/inputs/fecha.css');
+@import url('../../../../assets/styles/inputs/inputs.css');
+@import url('../../../../assets/styles/inputs/checkbox.css');
+
+
+
+.filter {
+    height: 0px;
+    padding: 0rem 0.5rem 0rem 0.5rem;
+    display: flex;
+    opacity: 0;
+    align-items: center;
+    justify-content: flex-end;
+    pointer-events: none;
+    transition: all 0.3s ease-in-out;
+}
+
+.filter.activate {
+    height: 100%;
+    opacity: 1;
+    padding: 1.5rem 0.5rem 1rem 0.5rem;
+    pointer-events: all;
+    transition: all 0.2s ease-in-out;
+}
+
+#content-activate-buttom {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 1rem;
+}
+
+#content-activate-buttom button {
+
+    transform: translateY(-20%);
+}
+
+#idHorarioturno {
+    min-width: 8rem;
+}
+
+#back-admin {
+    display: flex;
+    align-items: center;
+    padding-right: 2rem;
+    font-size: 1.5rem;
+    color: var(--primary-color);
+}
+
+#notificar {
+    background-color: transparent;
+    border: 0;
+}
+
+#notificar:disabled i {
+    color: var(--gris3-color);
+    border: 0;
+}
+
+#notificar i {
+    font-size: 1.6rem;
+    font-weight: bold;
+    padding: 0.5rem 1rem 0.5rem 1rem;
+    border-radius: 5px;
+    color: var(--green-color);
+    margin-right: 0.5rem;
+
+}
+
+#notificar.active i {
+    animation: notificar 1s infinite;
+}
+
+#notificar i:hover {
+    box-shadow: 3px 3px 3px var(--gris3-color);
+}
+
+@keyframes notificar {
+    0% {
+        color: var(--green-color);
+
+    }
+
+    50% {
+        color: var(--green-color-dark);
+
+    }
+
+    100% {
+        color: var(--green-color);
+
+    }
+}
+
+
+.content-check-notificacion {
+    display: flex;
+}
+
+.label-notificacion {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: right;
+    white-space: nowrap;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    border: 1px solid var(--gris3-color);
+    align-items: center;
+    vertical-align: middle;
+    padding: 0.5rem 0.5rem 0.5rem 0.5rem;
+    border-radius: 5px;
+}
+
+.p-seleccionados {
+    padding-left: 1rem;
+    font-weight: bold;
+}
+
+.content-item {
+    padding-right: 1rem;
+    padding-left: 1rem;
+}
+
+.card-item {
+    text-align: start;
+}
+
+#notificado {
+    color: var(--green-color);
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+#no-notificado {
+    color: var(--third-color);
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.badge-no-aplica {
+
+    background-color: var(--orange-color);
+    padding: 0.2rem 0.2rem 0.2rem 0.2rem;
+    border-radius: 5px;
+    color: white;
+}
+
+
+.container-table-farmacia {
+    padding: 0;
+    margin: 0;
+    height: 66vh;
+    overflow: auto;
+}
+
+@media screen and (min-height: 600px) and (max-height: 800px) {
+
+    .container-table-farmacia {
+        height: 53vh;
+        overflow: auto;
+    }
+}
+
+.paginator {
+    padding-top: 0.5rem;
+}

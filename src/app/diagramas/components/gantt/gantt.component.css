@@ -1,40 +1,86 @@
-#header-horas{
-    flex-grow: 1;
+@import url("../../../../styles.css");
+
+#panel-horas {
+    padding-left: 1rem;
+    padding-right: 1rem
+}
+
+#header-hora {
     display: flex;
     justify-content: space-around;
-    padding: 0;
-
+    height: 2rem;
+    padding: 0px;
+    color: var(--quarter-color);
+    font-weight: lighter;
 }
-#content-hora{
+
+#content-hora {
     text-align: center;
     position: relative;
 }
-#position-hora{
+
+#position-hora {
     position: absolute;
     padding: 0;
 }
-#container-card-gantt{
+
+#container-card-gantt {
     margin: 0.2rem 0 0.2rem 0;
-    box-shadow: 0px 0px 4px 0px var(--gris3-color);
 }
 
-#header-prefesional-gantt{
-    padding: 0.5rem 0.5rem 0.5rem 0.5rem;
-    color: var(--second-color);
+.card {
+    box-shadow: 2px 2px 4px var(--gris3-color) !important;
+}
+
+
+.panel-gantt div {
+    height: 100%;
+}
+
+#retirar-profesional::before {
+    position: absolute;
     font-size: 1.5rem;
-}
-.container-actividades-panel{
-    max-height: 50rem;
- 
+    color: var(--red-color);
+    right: 0.5rem;
+    bottom: 0.5rem;
+
 }
 
-#container-actividad-time{
-   position: relative;
-   padding: 0 0.6rem 0 0;
-   text-align: center;
-   border: 1px dotted var(--gris3-color);
+#retirar-profesional:hover {
+    border-bottom: 1px solid var(--red-dark-color);
 }
-.container-linea-tiempo{
+
+
+.container-actividades-panel {
+    overflow-y: auto;
+    max-height: calc(60vh);
+    overflow-x: hidden;
+    border: 1px solid var(--gris3-color);
+    padding: 0.2rem 0.2rem 0.2rem 0.2rem;
+}
+
+@media screen and (max-height:650px) {
+    .container-actividades-panel {
+        max-height: calc(48vh);
+    }
+}
+
+.w100 {
+    width: 100%;
+}
+
+div[name="container-actividad-time"] {
+    position: relative;
+    padding: 0px;
+    text-align: center;
+    border: 1px dotted var(--gris3-color);
+    margin-top: 0.2rem;
+    margin-bottom: 0.2rem;
+    border-radius: 5px 0px 0px 5px;
+
+}
+
+.container-linea-tiempo {
     display: flex;
     position: absolute;
     align-items: center;
@@ -43,15 +89,34 @@
     margin: auto;
     height: 50%;
     width: 100%;
-}
-#container-map {
-    border: 1px dotted var(--gris3-color) !important;
-}
-.map-ruta{
-     text-align: center;
+
 }
 
-.map-content{
+#container-map {
+    border: 1px dotted var(--gris3-color) !important;
+    padding: 0px;
+    display: flex;
+    justify-content: center;
+    margin-top: 0.2rem;
+    margin-bottom: 0.2rem;
+    border-radius: 0px 5px 5px 0px;
+}
+
+#container-map div {
+    padding: 0px;
+}
+
+#container-map i {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.map-ruta {
+    text-align: center;
+}
+
+.map-content {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -59,7 +124,132 @@
     font-size: 2rem;
     color: var(--second-color);
 }
-.map-content:hover{
+
+.map-content:hover {
     font-size: 2.3rem;
     color: var(--primary-color);
+}
+
+@keyframes parpadeo-progreso {
+
+    0% {
+        opacity: 1;
+
+
+    }
+
+    50% {
+        opacity: 0.4;
+
+    }
+
+    100% {
+        opacity: 1;
+
+    }
+
+}
+
+.tarea-VISITA {
+    position: absolute !important;
+    height: 2rem !important;
+    margin: 0px auto !important;
+    background-color: var(--primary-color) !important;
+    height: 2rem;
+
+}
+
+
+
+.tarea-DVISITA {
+    position: absolute !important;
+    height: 2rem !important;
+    margin: 0px auto !important;
+    background-color: var(--orange-color) !important;
+
+}
+
+
+.holgura {
+    position: absolute !important;
+    height: 2rem !important;
+    margin: 0px auto !important;
+    background-color: #f9e4478f !important;
+    border-radius: 0.4rem !important;
+    z-index: 9999 !important;
+    display: none;
+}
+
+
+
+.vignette {
+    position: absolute !important;
+    text-wrap: nowrap;
+    top: 0% !important;
+    left: 50%;
+    transform: translate(-50%, -105%) !important;
+    background-color: var(--quarter-color) !important;
+    color: #ffffff !important;
+    font-weight: lighter !important;
+    z-index: 99999 !important;
+    border-radius: 2px !important;
+    visibility: hidden;
+    padding: 0.5rem;
+    text-align: left;
+    font-size: 0.9rem;
+    line-height: 1.1rem;
+    transition: visibility 0.2s ease-in !important;
+}
+
+.gantt-0-VISITA {
+    position: absolute;
+    transform: translate(-50%, 40%) !important;
+}
+
+.gantt-0-DVISITA {
+    position: absolute;
+    transform: translate(-50%, 55%) !important;
+}
+
+.gantt-0-VISITA::before {
+    position: absolute;
+    content: "";
+    right: 45%;
+    top: -50%;
+    border: 1rem solid transparent !important;
+    border-Bottom-color: var(--quarter-color);
+    z-index: 999 !important;
+
+}
+
+.v-i {
+    display: flex;
+    gap: 0.5rem;
+    padding: 0.25rem;
+
+}
+
+.tarea-VISITA:hover .vignette,
+.tarea-DVISITA:hover .vignette {
+    visibility: visible;
+    transition: all 0.5s !important;
+}
+
+
+
+
+.grid-time {
+    border-left: 1px dotted #c7c9c7 !important;
+    margin: 0px auto !important;
+    height: 200% !important;
+    position: absolute !important;
+}
+
+
+.tarea-VISITA[estado="4"] {
+    animation: parpadeo-progreso 2s ease-in-out infinite !important;
+}
+
+.tarea-VISITA[estado="6"] {
+    filter: saturate(50%) !important;
 }

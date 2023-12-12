@@ -1,38 +1,41 @@
-#content-dialog{
-    padding: 1rem 1rem 1rem 1rem;
+#content-dialog {
+  padding: 1rem 1rem 1rem 1rem;
 }
-#content-option{
-    display: flex;
-    justify-content: flex-end;
-  }
 
-  #option-boton{
-    padding: 1rem 0 0 1rem;
-  }
- #opcionProfesional{
+#content-option {
+  display: flex;
+  justify-content: flex-end;
+}
+
+#option-boton {
+  padding: 1rem 0 0 1rem;
+}
+
+#opcionProfesional {
   font-size: 1.1rem;
   padding: 0.5rem 0.5rem 0.5rem 0.5rem;
- } 
+}
 
- #opcionProfesional input{
+#opcionProfesional input {
   color: var(--quarter-color);
- }
- input{
+}
+
+input {
   display: block;
   font-size: 1.2rem;
   text-align: center;
   align-content: center;
   align-items: center;
-  text-align: center;
   border: 1px solid var(--gris3-color);
   padding: 0.5rem 0.5rem 0.5rem 0.5rem;
- }
+}
 
- #content{
+#content {
   text-align: center;
- }
- #content-input{
+}
+
+#content-input {
   padding-top: 0.5rem;
   display: flex;
   justify-content: center;
- }
+}

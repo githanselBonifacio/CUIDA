@@ -2,8 +2,8 @@
     [ngClass]="{'toast-success': data['type'] === 'success', 'toast-info': data['type'] === 'info', 'toast-error': data['type'] === 'error'}">
     <div class="container-toast">
         <div class="icon-toast">
-            <i
-                [ngClass]="{'bi bi-check-circle-fill': data['type'] === 'success', 'bi bi-info-circle-fill': data['type'] === 'info', 'bi bi-x-circle-fill': data['type'] === 'error'}"></i>
+            <em
+                [ngClass]="{'bi bi-check-circle-fill': data['type'] === 'success', 'bi bi-info-circle-fill': data['type'] === 'info', 'bi bi-x-circle-fill': data['type'] === 'error'}"></em>
         </div>
         <div class="body-toast">
             <h5>{{ data['title'] }}</h5>

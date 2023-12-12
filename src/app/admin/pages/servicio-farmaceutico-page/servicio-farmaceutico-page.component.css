@@ -55,7 +55,7 @@
     border: 0;
 }
 
-#notificar:disabled i {
+#notificar:disabled em {
     color: var(--gris3-color);
     border: 0;
 }
@@ -74,7 +74,7 @@
     animation: notificar 1s infinite;
 }
 
-#notificar i:hover {
+#notificar em:hover {
     box-shadow: 3px 3px 3px var(--gris3-color);
 }
 

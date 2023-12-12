@@ -32,16 +32,11 @@ tbody {
     border: 1px solid var(--gris3-color);
 }
 
-i {
+em {
     color: var(--second-color);
     font-size: 1.2rem;
     font-weight: bold;
-}
-
-i:hover {
-    box-shadow: 5px 5px 15px var(--gris2-color);
-    padding: 0.2rem 0.2rem 0.2rem 0.2rem;
-    border-radius: 5px;
+    background-color: transparent;
 }
 
 td {

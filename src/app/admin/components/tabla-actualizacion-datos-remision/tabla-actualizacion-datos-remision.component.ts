@@ -45,18 +45,18 @@ export class TablaActualizacionDatosRemisionComponent implements OnInit {
   }
 
   tieneCambiosPaciente(): boolean {
-    return !this.existeEnDatosPaciente(this.registroNuevo?.paciente.sexo) ||
-      !this.existeEnDatosPaciente(this.registroNuevo?.paciente.edad) ||
-      !this.existeEnDatosPaciente(this.registroNuevo?.paciente.nombreAseguradora) ||
-      !this.existeEnDatosPaciente(this.registroNuevo?.paciente.tipoAfiliacion);
+    return !this.existeEnDatosPaciente(this.registroNuevo?.paciente?.sexo) ||
+      !this.existeEnDatosPaciente(this.registroNuevo?.paciente?.edad) ||
+      !this.existeEnDatosPaciente(this.registroNuevo?.paciente?.nombreAseguradora) ||
+      !this.existeEnDatosPaciente(this.registroNuevo?.paciente?.tipoAfiliacion);
   }
 
   tieneCambiosAtencion(): boolean {
-    return !this.existeEnDatosAtencion(this.registroNuevo?.datosAtencion.nombreCuidador) ||
-      !this.existeEnDatosAtencion(this.registroNuevo?.datosAtencion.nombreResponsable) ||
-      !this.existeEnDatosAtencion(this.registroNuevo?.datosAtencion.telefonoPaciente) ||
-      !this.existeEnDatosAtencion(this.registroNuevo?.datosAtencion.celularPaciente) ||
-      !this.existeEnDatosAtencion(`${this.registroAnterior?.ubicacionPaciente.direccion}${this.registroAnterior?.ubicacionPaciente.municipio}${this.registroAnterior?.ubicacionPaciente.barrio}`)
+    return !this.existeEnDatosAtencion(this.registroNuevo?.datosAtencion?.nombreCuidador) ||
+      !this.existeEnDatosAtencion(this.registroNuevo?.datosAtencion?.nombreResponsable) ||
+      !this.existeEnDatosAtencion(this.registroNuevo?.datosAtencion?.telefonoPaciente) ||
+      !this.existeEnDatosAtencion(this.registroNuevo?.datosAtencion?.celularPaciente) ||
+      !this.existeEnDatosAtencion(`${this.registroAnterior?.ubicacionPaciente?.direccion}${this.registroAnterior?.ubicacionPaciente.municipio}${this.registroAnterior?.ubicacionPaciente.barrio}`)
 
 
   }

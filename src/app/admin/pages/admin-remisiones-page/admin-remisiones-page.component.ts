@@ -28,14 +28,17 @@ export class AdminRemisionesPageComponent implements AfterViewInit {
   remisiones: Remision[] = [];
 
   ngAfterViewInit() {
-    registerLocaleData(localeEs);
-    this.dataSource.paginator = this.paginator;
-    this.adminService.consultarRemisiones()
-      .subscribe(resp => {
-        this.remisiones = resp.result;
-        this.dataSource.data = this.remisiones;
-      })
-    this.paginator.pageSize = parseInt(localStorage.getItem("pageSizeRemisiones")!);
+    Promise.resolve().then(resp => {
+      registerLocaleData(localeEs);
+      this.dataSource.paginator = this.paginator;
+      this.adminService.consultarRemisiones()
+        .subscribe(resp => {
+          this.remisiones = resp.result;
+          this.dataSource.data = this.remisiones;
+        })
+      this.paginator.pageSize = parseInt(localStorage.getItem("pageSizeRemisiones")!);
+    });
+
   }
 
 

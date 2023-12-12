@@ -1,5 +1,5 @@
 
-import { Component, Input, ViewChild, HostListener, ElementRef, OnInit, AfterViewInit, SimpleChanges } from '@angular/core';
+import { Component, Input, ViewChild, HostListener, ElementRef, OnInit, AfterViewInit, OnChanges, SimpleChanges } from '@angular/core';
 
 interface Data {
   name: string;
@@ -75,7 +75,7 @@ export class DiagramaPiechartComponent implements OnInit, AfterViewInit {
   get diameterPie() {
     const height = this.contentPie?.nativeElement.offsetHeight ?? 100;
     const width = this.contentPie?.nativeElement.offsetWidth ?? 100;
-    let deltaResize = 0;
+    var deltaResize = 0;
     if ((height / width) > 0.4) {
       deltaResize = 0.3;
     } else {
@@ -104,8 +104,8 @@ export class DiagramaPiechartComponent implements OnInit, AfterViewInit {
     this.ubicationLabels = [];
   }
   setValues() {
-    const sortedData = [...this.data].sort((d1, d2) => d1.value - d2.value);
-    this.data = sortedData;
+    const citasOrdenadas: Data[] = this.data?.sort((d1, d2) => d1.value - d2.value);
+    this.data = citasOrdenadas;
     this.sumValues = this.data?.map(d => d.value)?.reduce((tot, acc) => tot = tot + acc);
     this.colors = this.isMonoColor ? this.colorScheme.individual : this.colorScheme.domain;
   }
@@ -128,17 +128,17 @@ export class DiagramaPiechartComponent implements OnInit, AfterViewInit {
       circle.style.width = `${this.diameterPie}`;
       circle.style.height = `${this.diameterPie}`;
 
-      let angleAccu = 0;
-      let xi = 2 * this.radio;
-      let yi = this.radio;
+      var angleAccu = 0;
+      var xi = 2 * this.radio;
+      var yi = this.radio;
 
       this.data?.forEach((d, i) => {
 
         const percentageAngle = this.calculatePercentage(d.value);
         const angleNext = (2 * Math.PI * (percentageAngle / 100));
 
-        let angle = angleAccu + angleNext;
-        let arcCompletion = "";
+        var angle = angleAccu + angleNext;
+        var arcCompletion = "";
         if (percentageAngle > 50) {
           angle = angleAccu + angleNext / 2;
           const xf = this.cx + this.radio * Math.cos(angle);

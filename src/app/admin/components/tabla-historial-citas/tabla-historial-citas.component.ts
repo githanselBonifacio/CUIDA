@@ -23,7 +23,7 @@ export class TablaHistorialCitasComponent implements OnInit {
   @Input() public estadosCita: EstadoCita[] = [];
   @Input() public isHistorial: boolean = false;
 
-  citasCompletas: CitaHitorial[] = [];
+  //citasCompletas: CitaHitorial[] = [];
   convertEstados = funtionGetNombreEstadoCitaById;
 
   ngOnInit() {
@@ -34,8 +34,10 @@ export class TablaHistorialCitasComponent implements OnInit {
         idEstado: 0
       }
     });
-    this.citasCompletas = this.citas?.concat(this.nuevasCitas);
 
+  }
+  get citasCompletas() {
+    return this.citas?.concat(this.nuevasCitas);
   }
 
   mostrarModalDetalleCita(citaSeleccionada: CitaHitorial): void {

@@ -133,7 +133,6 @@ input[type="checkbox"] {
         linear-gradient(to right, var(--primary-color), var(--primary-color)) top left,
         linear-gradient(to right, var(--primary-color), var(--primary-color)) top right,
         linear-gradient(to bottom, #ffffff 40%, var(--primary-color) 70%) bottom;
-
     background-size: 30% 100%, 30% 100%, 100% 70%;
     background-repeat: no-repeat;
 

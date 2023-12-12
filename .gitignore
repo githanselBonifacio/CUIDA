@@ -47,3 +47,4 @@ src/environments/environments.ts
 
 #coverage
 coverage/
+.scannerwork

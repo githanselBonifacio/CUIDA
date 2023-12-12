@@ -1,7 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { fakeAsync, tick } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 import { ModalConfiguracionSecuenciaComponent } from './modal-configuracion-secuencia.component';
-import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MaestrosService } from 'src/app/shared/services/maestros/maestros.service';
 import { ToastService } from 'src/app/shared/services/toast/toast.service';
 import { FormsModule } from '@angular/forms';

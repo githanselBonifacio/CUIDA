@@ -15,7 +15,7 @@ import { Observable, delay, of } from 'rxjs';
 export class GanttComponent implements AfterViewInit {
 
   constructor(
-    private modalMapRuta: MatDialog
+    private modalMapRuta: MatDialog,
   ) { }
 
 
@@ -29,16 +29,19 @@ export class GanttComponent implements AfterViewInit {
   @Output() reprogramarTareaEvent = new EventEmitter<string>();
 
   @HostListener('window:resize', ['$event'])
-  onResize(event: any) { this.widthContainer = this.containerGeneric?.nativeElement.offsetWidth; }
+  onResize(event: any) { this.sizeScreen() }
 
   @Input() widthContainer = 0;
 
   ngAfterViewInit() {
     setTimeout(() => {
-      this.widthContainer = this.containerGeneric?.nativeElement.offsetWidth;
-    }, 500);
+      this.sizeScreen();
+    }, 800);
   }
 
+  sizeScreen() {
+    this.widthContainer = this.containerGeneric?.nativeElement.offsetWidth;
+  }
   get intervaloPx() {
     return (this.fechaFinTurnoUnix - this.fechaInicioTurnoUnix);
   }

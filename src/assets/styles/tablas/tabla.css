@@ -48,9 +48,10 @@ td {
 }
 
 tr:nth-child(n):hover,
-tr:nth-child(n):hover td {
+tr:nth-child(n):hover td,
+tr:nth-child(n):hover em {
     background-color: var(--gris2-color);
-    color: var(--cero-color);
+    color: var(--cero-color) !important;
 
 }
 

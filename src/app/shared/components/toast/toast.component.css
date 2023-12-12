@@ -13,7 +13,7 @@
   vertical-align: middle;
 }
 
-.icon-toast i {
+.icon-toast em {
   display: flex;
   align-items: center;
   font-size: 1.8rem;
@@ -39,7 +39,7 @@
   background: linear-gradient(to right, var(--green-color) 0%, var(--green-color) 5%, white 5%, white 90%);
 }
 
-#toast-success i {
+#toast-success em {
   color: var(--green-color);
 }
 
@@ -47,7 +47,7 @@
   background: linear-gradient(to right, var(--red-dark-color) 0%, var(--red-dark-color) 5%, white 5%, white 90%);
 }
 
-#toast-error i {
+#toast-error em {
   color: var(--red-dark-color);
 }
 
@@ -55,6 +55,6 @@
   background: linear-gradient(to right, var(--second-color) 0%, var(--second-color) 5%, white 5%, white 90%);
 }
 
-#toast-info i {
+#toast-info em {
   color: var(--second-color);
 }

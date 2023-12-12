@@ -21,7 +21,7 @@
         <tbody>
 
             <tr *ngFor="let cita of citasCompletas | paginate:{id:tableId, itemsPerPage: 4, currentPage: currentPage}">
-                <td scope="row">{{cita.idCita}}</td>
+                <td>{{cita.idCita}}</td>
                 <td>{{cita.fechaProgramada|date :'dd/MM/yyyy HH:mm'}}</td>
                 <td>{{cita.duracion |formatearSegundos }}</td>
                 <td>{{cita.holgura |formatearSegundos}}</td>
@@ -33,10 +33,10 @@
                     </div>
 
                     <ng-template #historial>
-                        <div>
-                            <em [ngClass]="{'bi bi-trash-fill':cita.idEstado !== 0,'bi bi-plus-circle-fill':cita.idEstado === 0}"
-                                [ngStyle]="{'color':cita.idEstado !== 0 ?'var(--red-color)':''}"></em>
-                        </div>
+
+                        <em [ngClass]="{'bi bi-trash':cita.idEstado !== 0,'bi bi-plus-circle-fill':cita.idEstado === 0}"
+                            [ngStyle]="{'color':cita.idEstado !== 0 ?'var(--red-color)':''}"></em>
+
                     </ng-template>
                 </td>
 

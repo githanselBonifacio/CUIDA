@@ -49,17 +49,17 @@ export function generarHorario(idHorarioTurno: number): string[] {
 export function formatoFecha(fecha: Date): string {
     registerLocaleData(localeEs);
     const datePipe = new DatePipe('es');
-    return datePipe.transform(fecha, "yyyy-MM-dd") ?? "";
+    return datePipe.transform(fecha, "yyyy-MM-dd")!;
 }
 export function formatoFechaHora(fecha: Date): string {
     registerLocaleData(localeEs);
     const datePipe = new DatePipe('es');
-    return datePipe.transform(fecha, "yyyy-MM-dd HH:mm") ?? "";
+    return datePipe.transform(fecha, "yyyy-MM-dd HH:mm")!;
 }
 export function formatoHora(fecha: Date): string {
     registerLocaleData(localeEs);
     const datePipe = new DatePipe('es');
-    return datePipe.transform(fecha, "HH:mm") ?? "";
+    return datePipe.transform(fecha, "HH:mm")!;
 }
 export interface EstadoCita {
     id: number,

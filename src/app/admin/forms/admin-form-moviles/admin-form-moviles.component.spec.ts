@@ -22,10 +22,10 @@ describe('AdminFormMovilesComponent', () => {
 
     };
     const movilDataVacio = {
-        matricula: '',
-        marca: '',
-        modelo: '',
-        idRegional: '',
+        matricula: null,
+        marca: null,
+        modelo: null,
+        idRegional: null,
         activo: true
     }
     const adminPersonalServiceMock = {

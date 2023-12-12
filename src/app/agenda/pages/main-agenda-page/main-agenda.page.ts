@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, LOCALE_ID, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { MatDialog } from '@angular/material/dialog'
@@ -12,7 +12,6 @@ import { EstadoCita, HorarioTurno, Regional, formatoFecha, formatoFechaHora, for
 import { Actividad } from 'src/app/diagramas/interfaces/tarea-gantt.interface';
 import { generarHorario } from '../../../shared/interfaces/maestros.interfaces'
 import { EstadosCita } from '../../interfaces/estadosCita.interface'
-
 import { ModalSeleccionProfesionalComponent } from '../../../agenda/components/modal-seleccion-profesional/modal-seleccion-profesional.component';
 import { VentanaConfirmacionComponent } from 'src/app/shared/components/ventana-confirmacion/ventana-confirmacion.component';
 import { switchMap, filter } from 'rxjs/operators';
@@ -20,7 +19,6 @@ import { SpinnerService } from 'src/app/shared/services/spinner/spinner.service.
 import { Observable, forkJoin } from 'rxjs';
 import { Respuesta } from 'src/app/shared/interfaces/response.interfaces';
 import { ToastService } from 'src/app/shared/services/toast/toast.service';
-import { ToastType, TitleToast } from 'src/app/shared/components/toast/toast.component';
 import { ModalCambioHoraCitaComponent } from '../../components/modal-cambio-hora-cita/modal-cambio-hora-cita.component';
 
 @Component({
@@ -40,9 +38,9 @@ export class MainComponentAgendaComponent implements OnInit {
   horariosTurno: HorarioTurno[] = [];
 
   idRemision: string = "";
-  fechaFiltroTurno: string = localStorage.getItem("fechaTurnoAgenda") ?? formatoFecha(new Date());
-  opcionRegional: string = localStorage.getItem("idRegionalAgendaFiltro") ?? "";
-  opcionHorarioTurno: number = Number(localStorage.getItem("idHorarioTurnoAgendaFiltro")) ?? 0;
+  fechaFiltroTurno: string = localStorage.getItem("fechaTurnoAgenda")!;
+  opcionRegional: string = localStorage.getItem("idRegionalAgendaFiltro")!;
+  opcionHorarioTurno: number = Number(localStorage.getItem("idHorarioTurnoAgendaFiltro"))!;
 
   constructor(
     private agendaService: AgendaService,
@@ -61,14 +59,14 @@ export class MainComponentAgendaComponent implements OnInit {
       .subscribe(resp => {
         if (resp.status == 200) {
           this.regionales = resp.result;
-          this.opcionRegional = (this.opcionRegional == "") ? this.regionales[0].id : this.opcionRegional;
+          this.opcionRegional = (!this.opcionRegional) ? this.regionales[0].id : this.opcionRegional;
         }
       });
     this.maestroService.getHorarioTurnoObservable()
       .subscribe(resp => {
         if (resp.status == 200) {
           this.horariosTurno = resp.result?.filter((h: HorarioTurno) => h.esHorarioBase);
-          this.opcionHorarioTurno = (this.opcionHorarioTurno == 0) ? this.horariosTurno[0].id : this.opcionHorarioTurno;
+          this.opcionHorarioTurno = (!this.opcionHorarioTurno) ? this.horariosTurno[0].id : this.opcionHorarioTurno;
         }
       });
 
@@ -157,11 +155,7 @@ export class MainComponentAgendaComponent implements OnInit {
       this.opcionHorarioTurno,
       this.opcionRegional
     ).subscribe(resp => {
-      if (resp.status == 200) {
-        this.toastService.mostrarToast(ToastType.Success, TitleToast.Success, resp.message, 7)
-      } else {
-        this.toastService.mostrarToast(ToastType.Error, TitleToast.Error, resp.message, 7)
-      }
+      this.toastService.mostrarToast({ status: resp.status, menssage: resp.message });
       this.spinnerService.hide();
       this.consultarCitas();
     });
@@ -172,13 +166,11 @@ export class MainComponentAgendaComponent implements OnInit {
     this.agendaService.desagendarTurnoCompleto(this.fechaTurnoFormat, this.opcionHorarioTurno, this.opcionRegional)
       .subscribe(resp => {
         if (resp.status == 200) {
-          this.spinnerService.hide();
           this.consultarCitas();
-          this.toastService.mostrarToast(ToastType.Success, TitleToast.Success, resp.message, 5)
         } else {
-          this.toastService.mostrarToast(ToastType.Error, TitleToast.Error, resp.message, 5)
         }
-
+        this.spinnerService.hide();
+        this.toastService.mostrarToast({ status: resp.status, menssage: resp.message });
       })
   }
   agregarProfesionalTurno(): void {
@@ -211,11 +203,7 @@ export class MainComponentAgendaComponent implements OnInit {
         })
       )
       .subscribe(resp => {
-        if (resp.status == 200) {
-          this.toastService.mostrarToast(ToastType.Success, TitleToast.Success, resp.message, 5)
-        } else {
-          this.toastService.mostrarToast(ToastType.Error, TitleToast.Error, resp.message, 5)
-        }
+        this.toastService.mostrarToast({ status: resp.status, menssage: resp.message });
         this.consultarCitas();
         this.spinnerService.hide();
       });
@@ -243,10 +231,8 @@ export class MainComponentAgendaComponent implements OnInit {
     ).subscribe(resp => {
       if (resp.status == 200) {
         this.consultarCitas();
-        this.toastService.mostrarToast(ToastType.Success, TitleToast.Success, resp.message, 5);
-      } else {
-        this.toastService.mostrarToast(ToastType.Error, TitleToast.Error, resp.message, 6)
       }
+      this.toastService.mostrarToast({ status: resp.status, menssage: resp.message }, 6);
     });
 
   }
@@ -264,17 +250,13 @@ export class MainComponentAgendaComponent implements OnInit {
           filter(result => result),
           switchMap(() => this.agendaService.retirarProfesional(
             citaSeleccionada?.idCita,
-            citaSeleccionada?.idProfesional ?? '',
+            citaSeleccionada?.idProfesional!,
             formatoFecha(citaSeleccionada.fechaProgramada),
             citaSeleccionada?.idHorarioTurno,
             citaSeleccionada?.idRegional
           )))
         .subscribe(resp => {
-          if (resp.status == 200) {
-            this.toastService.mostrarToast(ToastType.Success, TitleToast.Success, resp.message, 5)
-          } else {
-            this.toastService.mostrarToast(ToastType.Error, TitleToast.Error, resp.message, 5)
-          }
+          this.toastService.mostrarToast({ status: resp.status, menssage: resp.message });
           this.actualizarComponenteMainAgenda()
         });
     }
@@ -296,7 +278,7 @@ export class MainComponentAgendaComponent implements OnInit {
               nuevaHora,
               citaSeleccionada?.idHorarioTurno,
               citaSeleccionada?.idRegional,
-              citaSeleccionada?.idProfesional ?? ''
+              citaSeleccionada?.idProfesional!
             )
           } else {
             throw Error('No se ha seleccionado una hora');
@@ -304,12 +286,7 @@ export class MainComponentAgendaComponent implements OnInit {
         }
         ))
         .subscribe(resp => {
-
-          if (resp.status == 200) {
-            this.toastService.mostrarToast(ToastType.Success, TitleToast.Success, resp.message, 5)
-          } else {
-            this.toastService.mostrarToast(ToastType.Error, TitleToast.Error, resp.message, 5)
-          }
+          this.toastService.mostrarToast({ status: resp.status, menssage: resp.message });
           this.actualizarComponenteMainAgenda()
         });
     }

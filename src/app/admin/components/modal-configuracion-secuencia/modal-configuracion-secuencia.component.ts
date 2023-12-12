@@ -83,7 +83,7 @@ export class ModalConfiguracionSecuenciaComponent implements OnInit, OnChanges {
     return duracionTotal;
   }
   calcularHorasTotales() {
-    this.sumaTotalHoras = this.secuenciaEditable?.itemsDiaTurno.reduce((tot, item) => tot + item.horariosTurno.reduce((acc, curr) => acc + curr.duracionHoras, 0), 0) ?? 0
+    this.sumaTotalHoras = this.secuenciaEditable?.itemsDiaTurno.reduce((tot, item) => tot + item.horariosTurno.reduce((acc, curr) => acc + curr.duracionHoras, 0), 0)!
   }
 
 
@@ -156,7 +156,7 @@ export class ModalConfiguracionSecuenciaComponent implements OnInit, OnChanges {
       this.secuenciaEditable.descripcion = this.descripcionSecuencia;
       this.dialogRef.close(this.secuenciaEditable);
     } else {
-      this.toastService.mostrarToast(ToastType.Error, TitleToast.Error, "Datos faltantes verifique datos", 5);
+      this.toastService.mostrarToast({ status: null, menssage: "Datos faltantes verifique datos" }, 5, ToastType.Error);
     }
 
   }

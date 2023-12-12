@@ -53,7 +53,21 @@ describe('CardCitaComponent', () => {
         status: 200
       }
     ),
-    reprogramarCita: () => of()
+    reprogramarCita: () => of(
+      of(
+        {
+          status: 200
+        }
+      )
+    ),
+
+    asignarProfesionaByIdCita: () =>
+      of(
+        {
+          status: 200
+        }
+      )
+
   };
   const toastServiceMock = {
     mostrarToast: (): Observable<any> => of(),

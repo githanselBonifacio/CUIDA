@@ -9,10 +9,9 @@ import { AgendaService } from 'src/app/agenda/services/agenda.service';
 import { ModalCambioHoraCitaComponent } from '../modal-cambio-hora-cita/modal-cambio-hora-cita.component';
 import { ModalDetalleRemisionComponent } from '../modal-detalle-remision/modal-detalle-remision.component';
 import { switchMap, filter, tap } from 'rxjs/operators';
-import { ToastType, TitleToast } from 'src/app/shared/components/toast/toast.component';
 import { EstadoCita, formatoFecha, formatoFechaHora, funtionGetNombreEstadoCitaById } from 'src/app/shared/interfaces/maestros.interfaces';
 import localeEs from '@angular/common/locales/es';
-import { DatePipe, registerLocaleData } from '@angular/common';
+import { registerLocaleData } from '@angular/common';
 import { ToastService } from 'src/app/shared/services/toast/toast.service';
 
 @Component({
@@ -37,47 +36,35 @@ export class CardCitaComponent {
   ) {
     registerLocaleData(localeEs);
   }
-
-
   asignarProfesionalCita(): void {
 
     this.agendaService
       .getProfesionaTurnoRegional(this.fechaTurno, this.idRegional, this.idHorarioTurno)
-      .pipe(
-        tap(({ result: profesionales }) => {
-          const dialogRef = this.dialogo.open(ModalSeleccionProfesionalComponent, {
-            data: { profesionales },
-          });
+      .subscribe(resp => {
+        const dialogRef = this.dialogo.open(ModalSeleccionProfesionalComponent, {
+          data: {
+            profesionales: resp.result
+          }
 
-          dialogRef.afterClosed()
-            .pipe(filter(opcionProfesional => opcionProfesional !== '' && opcionProfesional))
-            .subscribe(opcionProfesional => {
+        });
+        dialogRef.afterClosed()
+          .pipe(filter(opcionProfesional => opcionProfesional !== '' && opcionProfesional))
+          .subscribe(opcionProfesional => {
 
-              this.agendaService.asignarProfesionaByIdCita(
-                this.cita!.idCita,
-                opcionProfesional,
-                formatoFecha(this.cita!.fechaProgramada),
-                this.idHorarioTurno,
-                this.idRegional
-              ).subscribe(resp => {
-                if (resp.status == 200) {
-
-                  this.toastService.mostrarToast(ToastType.Success, TitleToast.Success, resp.message, 5);
-
-                } else {
-                  this.toastService.mostrarToast(ToastType.Error, TitleToast.Error, resp.message, 5);
-
-                }
-                this.actualizarComponenteMainAgenda();
-
-              });
+            this.agendaService.asignarProfesionaByIdCita(
+              this.cita!.idCita,
+              opcionProfesional,
+              formatoFechaHora(this.cita!.fechaProgramada),
+              this.idHorarioTurno,
+              this.idRegional
+            ).subscribe(resp => {
+              this.toastService.mostrarToast({ status: resp.status, menssage: resp.message });
+              this.actualizarComponenteMainAgenda();
 
             });
-        }),
-      )
+          })
+      })
   }
-
-
 
   desagendarProfesionalCita(): void {
 
@@ -97,11 +84,7 @@ export class CardCitaComponent {
           this.idRegional
         )))
       .subscribe(resp => {
-        if (resp.status == 200) {
-          this.toastService.mostrarToast(ToastType.Success, TitleToast.Success, resp.message, 5)
-        } else {
-          this.toastService.mostrarToast(ToastType.Error, TitleToast.Error, resp.message, 5)
-        }
+        this.toastService.mostrarToast({ status: resp.status, menssage: resp.message });
         this.actualizarComponenteMainAgenda()
 
       });
@@ -126,21 +109,15 @@ export class CardCitaComponent {
             nuevaHora,
             this.idHorarioTurno,
             this.idRegional,
-            this.cita!.idProfesional ?? ''
+            this.cita!.idProfesional!
           )
         } else {
-          this.toastService.mostrarToast(ToastType.Error, TitleToast.Error, "No se ha seleccionado hora", 5);
           throw Error('No se ha seleccionado hora');
         }
       }
       ))
       .subscribe(resp => {
-
-        if (resp.status == 200) {
-          this.toastService.mostrarToast(ToastType.Success, TitleToast.Success, resp.message, 5)
-        } else {
-          this.toastService.mostrarToast(ToastType.Error, TitleToast.Error, resp.message, 5)
-        }
+        this.toastService.mostrarToast({ status: resp.status, menssage: resp.message });
         this.actualizarComponenteMainAgenda()
       });
   }

@@ -79,10 +79,10 @@ export class AdminFormMovilesComponent implements OnChanges {
 
   buildMovil() {
     return {
-      matricula: this.campoMatricula?.value ?? '',
-      marca: this.campoMarca?.value ?? '',
-      modelo: this.campoModelo?.value ?? '',
-      idRegional: this.campoIdRegional?.value ?? '',
+      matricula: this.campoMatricula?.value!,
+      marca: this.campoMarca?.value!,
+      modelo: this.campoModelo?.value!,
+      idRegional: this.campoIdRegional?.value!,
       activo: true
 
     };
@@ -98,28 +98,22 @@ export class AdminFormMovilesComponent implements OnChanges {
           .subscribe(resp => {
             if (resp.status == 200) {
               this.enviado.emit();
-              this.toastservice.mostrarToast(ToastType.Success, TitleToast.Success, resp.message, 5);
-            } else {
-              this.toastservice.mostrarToast(ToastType.Error, TitleToast.Error, resp.message, 5);
             }
-
+            this.toastservice.mostrarToast({ status: resp.status, menssage: resp.message });
           })
       } else if (this.accionFormulario == AccionFormulario.ACTUALIZAR) {
         console.log("Entro a actualizar")
         this.adminPersonalService.actualizarMovil(this.movil).subscribe(resp => {
           if (resp.status == 200) {
             this.enviado.emit();
-            this.toastservice.mostrarToast(ToastType.Success, TitleToast.Success, resp.message, 5);
-          } else {
-            this.toastservice.mostrarToast(ToastType.Error, TitleToast.Error, resp.message, 5);
           }
+          this.toastservice.mostrarToast({ status: resp.status, menssage: resp.message });
         })
 
       }
       this.formMovil.reset();
     } else {
-
-      this.toastservice.mostrarToast(ToastType.Error, TitleToast.Error, "Error en campos del formulario", 5);
+      this.toastservice.mostrarToast({ status: null, menssage: "Error en campos del formulario" }, 5, ToastType.Error);
     }
 
     this.spinnerService.hide()

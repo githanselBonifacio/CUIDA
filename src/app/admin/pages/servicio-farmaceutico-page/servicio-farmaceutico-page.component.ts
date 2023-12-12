@@ -1,7 +1,5 @@
 import { Component, AfterViewInit, ViewChild, OnInit, LOCALE_ID } from '@angular/core';
-import { AdminRemisionService } from '../../services/admin-remision.service';
 import { NotificacionFarmacia } from '../../interfaces/servicioFarmaceutico.interface';
-import { TitleToast, ToastType } from 'src/app/shared/components/toast/toast.component';
 import { Router } from '@angular/router';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
@@ -122,7 +120,7 @@ export class ServicioFarmaceuticoPageComponent implements OnInit, AfterViewInit 
     this.spinnerService.show();
     if (this.formfiltro.valid) {
       this.adminFarmaciaService.getNotificacionesFarmaciaWithFilter(
-        this.fecha ?? '', this.idHorario ?? 0, this.idRegional ?? '')
+        this.fecha!, this.idHorario!, this.idRegional!)
         .subscribe(resp => {
           this.dataSource.data = resp.result
         })
@@ -216,13 +214,7 @@ export class ServicioFarmaceuticoPageComponent implements OnInit, AfterViewInit 
     this.spinnerService.show();
     this.adminFarmaciaService.notificarMedicamentosToFarmacia(this.selection.selected)
       .subscribe(resp => {
-        if (resp.status == 200) {
-
-          this.toastService.mostrarToast(ToastType.Success, TitleToast.Success, resp.message, 5)
-        } else {
-
-          this.toastService.mostrarToast(ToastType.Error, TitleToast.Error, resp.message, 5)
-        }
+        this.toastService.mostrarToast({ status: resp.status, menssage: resp.message });
         this.ngOnInit();
         this.spinnerService.hide();
       })

@@ -51,7 +51,7 @@ export class ModalAccionLimpiarHorarioComponent {
       this.fechasSemanas.push(days);
 
     } else {
-      this.toastService.mostrarToast(ToastType.Info, TitleToast.Info, "Ya fue agregado esta semana", 5);
+      this.toastService.mostrarToast({ status: null, menssage: "Ya fue agregado esta semana" }, 5, ToastType.Info)
     }
   }
 

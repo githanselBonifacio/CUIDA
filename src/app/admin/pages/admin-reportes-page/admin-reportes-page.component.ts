@@ -29,7 +29,7 @@ export class AdminReportesPageComponent implements OnInit {
     this.maestroService.getRegionalesObservable()
       .subscribe(resp => {
         this.regionales = resp.result;
-        if (this.opcionIdRegional == '') {
+        if (this.opcionIdRegional) {
           this.opcionIdRegional = this.regionales[0].id;
         }
         this.consultarData();
@@ -51,10 +51,10 @@ export class AdminReportesPageComponent implements OnInit {
   opcionTipoReporte: string = localStorage.getItem('tipoReporte') ?? this.opcionesTipoReporte[0];
 
   years: number[] = [2023, 2024, 2025];
-  opcionYear?: number = parseInt(localStorage.getItem('opcionYearReporte') ?? '0');
+  opcionYear?: number = parseInt(localStorage.getItem('opcionYearReporte')!);
 
   regionales: Regional[] = [];
-  opcionIdRegional: string = localStorage.getItem('idRegionalReporteFiltro') ?? '';
+  opcionIdRegional: string = localStorage.getItem('idRegionalReporteFiltro')!;
 
   mesFiltro: string = localStorage.getItem('mesTurnoReporte') ?? formatoFecha(new Date());
 
@@ -102,7 +102,7 @@ export class AdminReportesPageComponent implements OnInit {
   }
 
   get cumplimientoPromedio() {
-    return { ...this.reporteTurno }?.resumen?.cumplimientoCitasPromedio ?? 0;
+    return { ...this.reporteTurno }?.resumen?.cumplimientoCitasPromedio!;
   }
 
   get dataCapacidadTurno() {
@@ -136,7 +136,7 @@ export class AdminReportesPageComponent implements OnInit {
   consultarData() {
     if (!this.btnConsultaDeshabilitado) {
       if (this.opcionTipoReporte == this.getTipoReporte(0)) {
-        this.adminReporteService.getReporteTurnoMensual(this.opcionYear ?? 0, parseInt(this.mesFiltro.slice(-2)), this.opcionIdRegional)
+        this.adminReporteService.getReporteTurnoMensual(this.opcionYear!, parseInt(this.mesFiltro.slice(-2)), this.opcionIdRegional)
           .subscribe(resp => {
 
             if (resp.status == 200) {
@@ -145,7 +145,7 @@ export class AdminReportesPageComponent implements OnInit {
 
             this.deshabilitarBtnConsulta();
           });
-        this.adminReporteService.getReporteCancelacioncitasMensual(this.opcionYear ?? 0, parseInt(this.mesFiltro.slice(-2)), this.opcionIdRegional)
+        this.adminReporteService.getReporteCancelacioncitasMensual(this.opcionYear!, parseInt(this.mesFiltro.slice(-2)), this.opcionIdRegional)
           .subscribe(resp => {
 
             if (resp.status == 200) {
@@ -155,7 +155,7 @@ export class AdminReportesPageComponent implements OnInit {
             this.deshabilitarBtnConsulta();
           });
       } else {
-        this.adminReporteService.getReporteTurnoAnual(this.opcionYear ?? 0, this.opcionIdRegional)
+        this.adminReporteService.getReporteTurnoAnual(this.opcionYear!, this.opcionIdRegional)
           .subscribe(resp => {
 
             if (resp.status == 200) {
@@ -165,7 +165,7 @@ export class AdminReportesPageComponent implements OnInit {
 
             this.deshabilitarBtnConsulta();
           });
-        this.adminReporteService.getReporteCancelacioncitasAnual(this.opcionYear ?? 0, this.opcionIdRegional)
+        this.adminReporteService.getReporteCancelacioncitasAnual(this.opcionYear!, this.opcionIdRegional)
           .subscribe(resp => {
 
             if (resp.status == 200) {
@@ -177,7 +177,7 @@ export class AdminReportesPageComponent implements OnInit {
           });
       }
     } else {
-      this.toast.mostrarToast(ToastType.Info, TitleToast.Info, "Los criterios de busqueda son los mismos", 5);
+      this.toast.mostrarToast({ status: null, menssage: "Los criterios de busqueda son los mismos" }, 5, ToastType.Info);
     }
 
   }

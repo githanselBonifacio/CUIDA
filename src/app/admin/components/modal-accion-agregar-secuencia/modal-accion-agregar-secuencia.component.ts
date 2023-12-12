@@ -1,5 +1,5 @@
 
-import { Component, Inject, LOCALE_ID, OnInit } from '@angular/core';
+import { Component, Inject, LOCALE_ID } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ItemDiaTurno, Profesional, Secuencia, Turno } from 'src/app/agenda/interfaces/profesional.interface';
 import { ToastType, TitleToast } from 'src/app/shared/components/toast/toast.component';
@@ -58,7 +58,8 @@ export class ModalAccionAgregarSecuenciaComponent {
       this.secuenciasSemana.push({ "secuencia": {}, "semana": days });
 
     } else {
-      this.toastService.mostrarToast(ToastType.Info, TitleToast.Info, "Ya fue agregado esta semana", 5);
+
+      this.toastService.mostrarToast({ status: null, menssage: "Ya fue agregado esta semana" }, 5, ToastType.Info)
     }
   }
 

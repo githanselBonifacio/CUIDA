@@ -37,7 +37,7 @@ export class AdminPersonalHorarioSecuenciasPageComponent implements OnInit, Afte
   mostrarListAccionesMasivas = false;
 
   regionales: Regional[] = [];
-  opcionIdRegional: string = localStorage.getItem('idRegionalSecuenciaFiltro') ?? '';
+  opcionIdRegional: string = localStorage.getItem('idRegionalSecuenciaFiltro')!;
 
 
   secuencias: Secuencia[] = [];
@@ -84,7 +84,7 @@ export class AdminPersonalHorarioSecuenciasPageComponent implements OnInit, Afte
   }
   get tiposIdentificacion() {
     return this.maestroService.tiposIdentificacion
-      .filter(tipoIdentificacion => tipoIdentificacion.esMayorEdad == true);
+      ?.filter(tipoIdentificacion => tipoIdentificacion.esMayorEdad == true);
   }
 
   guardarLocalStorage() {
@@ -164,12 +164,7 @@ export class AdminPersonalHorarioSecuenciasPageComponent implements OnInit, Afte
       if (result != null) {
         this.personalService.crearSecuenciaTurno(result)
           .subscribe(resp => {
-            if (resp.status == 200) {
-              this.toastService.mostrarToast(ToastType.Success, TitleToast.Success, resp.message, 5);
-            } else {
-              this.toastService.mostrarToast(ToastType.Error, TitleToast.Error, resp.message, 5);
-
-            }
+            this.toastService.mostrarToast({ status: resp.status, menssage: resp.message });
             this.consultarSecuencia();
           });
       }
@@ -191,17 +186,11 @@ export class AdminPersonalHorarioSecuenciasPageComponent implements OnInit, Afte
         this.spinnerService.show();
         this.personalService.eliminarTurnoProfesionalAccionMasiva(data)
           .subscribe(resp => {
-            if (resp.status == 200) {
-              if (resp.result?.length > 0) {
-                this.dialogo.open(ModalInfoResultadosAccionMasivaHorarioComponent, { data: { "profesionales": this.selection.selected, "turnos": resp.result } });
+            if (resp.status == 200 && resp.result?.length > 0) {
 
-              } else {
-                this.toastService.mostrarToast(ToastType.Success, TitleToast.Success, resp.message, 5);
-              }
-
-            } else {
-              this.toastService.mostrarToast(ToastType.Error, TitleToast.Error, resp.message, 5);
+              this.dialogo.open(ModalInfoResultadosAccionMasivaHorarioComponent, { data: { "profesionales": this.selection.selected, "turnos": resp.result } });
             }
+            this.toastService.mostrarToast({ status: resp.status, menssage: resp.message });
             this.spinnerService.hide();
             this.selection.clear();
           })
@@ -224,16 +213,11 @@ export class AdminPersonalHorarioSecuenciasPageComponent implements OnInit, Afte
         this.personalService.asignarTurnoProfesionalAccionMasiva(data)
           .subscribe(resp => {
 
-            if (resp.status == 200) {
-              if (resp.result?.length > 0) {
-                this.dialogo.open(ModalInfoResultadosAccionMasivaHorarioComponent, { data: { "profesionales": this.selection.selected, "turnos": resp.result } });
+            if (resp.status == 200 && resp.result?.length > 0) {
 
-              } else {
-                this.toastService.mostrarToast(ToastType.Success, TitleToast.Success, resp.message, 5);
-              }
-            } else {
-              this.toastService.mostrarToast(ToastType.Error, TitleToast.Error, resp.message, 5);
+              this.dialogo.open(ModalInfoResultadosAccionMasivaHorarioComponent, { data: { "profesionales": this.selection.selected, "turnos": resp.result } });
             }
+            this.toastService.mostrarToast({ status: resp.status, menssage: resp.message });
             this.spinnerService.hide();
             this.selection.clear();
           })

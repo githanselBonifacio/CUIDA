@@ -148,9 +148,10 @@ describe('MainComponentAgendaComponent', () => {
     fixture.detectChanges();
   });
 
-  it('crear componente', () => {
+  it('iniciar componente sin datos almacendados en filtro', () => {
+    component.ngOnInit();
     expect(component).toBeTruthy();
-  });
+  })
 
   it('iniciar componente con los datos consultados', () => {
     component.ngOnInit();

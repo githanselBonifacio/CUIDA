@@ -133,18 +133,18 @@ export class AdminFormProfesionalesComponent implements OnChanges {
 
   buildprofesional(): Profesional {
     return {
-      idTipoIdentificacion: this.campoTipoIdentificacion?.value ?? 0,
-      numeroIdentificacion: this.campoNumeroIdentificacion?.value ?? '',
-      nombres: this.campoNombres?.value ?? '',
-      apellidos: this.campoApellidos?.value ?? '',
-      email: this.campoEmail?.value ?? '',
-      telefono: this.campoTelefono?.value ?? '',
-      celular: this.campoCelular?.value ?? '',
-      direccion: this.campoDireccion?.value ?? '',
-      genero: this.campoGenero?.value ?? '',
-      idProfesion: this.campoProfesion?.value ?? 0,
-      fechaNacimiento: this.campoFechaNacimiento?.value ?? '',
-      idRegional: this.campoRegional?.value ?? '',
+      idTipoIdentificacion: this.campoTipoIdentificacion?.value!,
+      numeroIdentificacion: this.campoNumeroIdentificacion?.value!,
+      nombres: this.campoNombres?.value!,
+      apellidos: this.campoApellidos?.value!,
+      email: this.campoEmail?.value!,
+      telefono: this.campoTelefono?.value!,
+      celular: this.campoCelular?.value!,
+      direccion: this.campoDireccion?.value!,
+      genero: this.campoGenero?.value!,
+      idProfesion: this.campoProfesion?.value!,
+      fechaNacimiento: this.campoFechaNacimiento?.value!,
+      idRegional: this.campoRegional?.value!,
       activo: true,
     };
   }
@@ -160,28 +160,22 @@ export class AdminFormProfesionalesComponent implements OnChanges {
           .subscribe(resp => {
             if (resp.status == 200) {
               this.enviado.emit();
-              this.toastservice.mostrarToast(ToastType.Success, TitleToast.Success, resp.message, 5);
-            } else {
-              this.toastservice.mostrarToast(ToastType.Error, TitleToast.Error, resp.message, 5);
             }
-
+            this.toastservice.mostrarToast({ status: resp.status, menssage: resp.message });
           })
       } else if (this.accionFormulario == AccionFormulario.ACTUALIZAR) {
 
         this.adminPersonalService.actualizarProfesional(this.profesional).subscribe(resp => {
           if (resp.status == 200) {
             this.enviado.emit();
-            this.toastservice.mostrarToast(ToastType.Success, TitleToast.Success, resp.message, 5);
-          } else {
-            this.toastservice.mostrarToast(ToastType.Error, TitleToast.Error, resp.message, 5);
           }
+          this.toastservice.mostrarToast({ status: resp.status, menssage: resp.message });
         })
 
       }
       this.formProfesional.reset();
     } else {
-
-      this.toastservice.mostrarToast(ToastType.Error, TitleToast.Error, "Error en campos del formulario", 5);
+      this.toastservice.mostrarToast({ status: null, menssage: "Error en campos del formulario" }, 5, ToastType.Error);
     }
 
     this.spinnerService.hide()

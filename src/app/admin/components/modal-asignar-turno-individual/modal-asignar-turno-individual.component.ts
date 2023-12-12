@@ -91,7 +91,7 @@ export class ModalAsignarTurnoIndividualComponent implements OnInit {
         nuevoTurno = {
           idTurno: null,
           fechaTurno: this.fechaTurno,
-          idHorarioTurno: this.horarioSeleccionado ?? 0,
+          idHorarioTurno: this.horarioSeleccionado,
           idProfesional: this.profesional?.numeroIdentificacion,
           idRegional: this.profesional?.idRegional
         }
@@ -106,7 +106,7 @@ export class ModalAsignarTurnoIndividualComponent implements OnInit {
         nuevoTurno = {
           idTurno: null,
           fechaTurno: this.fechaTurno,
-          idHorarioTurno: this.horarioSeleccionado ?? 0,
+          idHorarioTurno: this.horarioSeleccionado,
           idProfesional: this.profesional?.numeroIdentificacion,
           idRegional: this.profesional?.idRegional
         }

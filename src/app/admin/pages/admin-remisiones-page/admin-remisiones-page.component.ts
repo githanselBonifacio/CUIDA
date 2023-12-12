@@ -35,7 +35,7 @@ export class AdminRemisionesPageComponent implements AfterViewInit {
         this.remisiones = resp.result;
         this.dataSource.data = this.remisiones;
       })
-    this.paginator.pageSize = parseInt(localStorage.getItem("pageSizeRemisiones") ?? '0');
+    this.paginator.pageSize = parseInt(localStorage.getItem("pageSizeRemisiones")!);
   }
 
 

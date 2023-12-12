@@ -27,8 +27,16 @@ describe('ToastService', () => {
     expect(service).toBeTruthy();
   });
 
-  it('mostrar toast', () => {
-    service.mostrarToast(ToastType.Info, TitleToast.Info, "msg", 5);
+  it('mostrar toast info', () => {
+    service.mostrarToast({ status: null, menssage: "menssage" }, 5, ToastType.Info);
+    expect(service).toBeTruthy();
+  })
+  it('mostrar toast error', () => {
+    service.mostrarToast({ status: 500, menssage: "menssage" }, 5);
+    expect(service).toBeTruthy();
+  })
+  it('mostrar toast success', () => {
+    service.mostrarToast({ status: 200, menssage: "menssage" });
     expect(service).toBeTruthy();
   })
 });

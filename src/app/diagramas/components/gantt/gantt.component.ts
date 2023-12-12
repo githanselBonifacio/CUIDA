@@ -29,13 +29,13 @@ export class GanttComponent implements AfterViewInit {
   @Output() reprogramarTareaEvent = new EventEmitter<string>();
 
   @HostListener('window:resize', ['$event'])
-  onResize(event: any) { }
+  onResize(event: any) { this.widthContainer = this.containerGeneric?.nativeElement.offsetWidth; }
 
   @Input() widthContainer = 0;
 
   ngAfterViewInit() {
     setTimeout(() => {
-      this.widthContainer = this.containerGeneric?.nativeElement.offsetWidth ?? 0;
+      this.widthContainer = this.containerGeneric?.nativeElement.offsetWidth;
     }, 500);
   }
 

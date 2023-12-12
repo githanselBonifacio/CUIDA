@@ -11,7 +11,7 @@ import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 import { MatTableModule } from '@angular/material/table';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { horarioTurnoTest, horarioTurnoTest2, horarioTurnoTestDescanso, regionalesTest } from 'src/assets/files/test/maestros';
+import { horarioTurnoTest, horarioTurnoTest2, horarioTurnoTestDescanso, profesionesTest, regionalesTest, tipoIdentificacionTest } from 'src/assets/files/test/maestros';
 import { FormsModule } from '@angular/forms';
 import { Secuencia } from 'src/app/agenda/interfaces/profesional.interface';
 import { profesionalesDataTest } from 'src/assets/files/test/personal';
@@ -78,13 +78,22 @@ describe('AdminPersonalHorarioSecuenciasPageComponent', () => {
 
   const maestrosServiceMock = {
     getProfesiones: jasmine.createSpy('getProfesiones').and
-      .returnValue([]),
+      .returnValue({
+        status: 200,
+        result: profesionesTest
+      }),
 
     getTiposIdentificacion: jasmine.createSpy('getTiposIdentificacion').and
-      .returnValue([]),
+      .returnValue({
+        status: 200,
+        result: tipoIdentificacionTest
+      }),
 
     getHorarioTurno: jasmine.createSpy('getHorarioTurno').and
-      .returnValue([]),
+      .returnValue({
+        status: 200,
+        result: horarioTurnoTest
+      }),
 
     getRegionalesObservable: () => of({
       result: regionalesTest,
@@ -151,17 +160,20 @@ describe('AdminPersonalHorarioSecuenciasPageComponent', () => {
   })
 
   it("abrir modal configuracion secuencia", () => {
+    const toasTSpy = spyOn(toastServiceMock, 'mostrarToast').and.callThrough();
     component.abrirModalConfiguracionSecuencia(secuencia);
-    expect(component).toBeTruthy();
+    expect(toasTSpy).toHaveBeenCalled();
   })
 
   it("abrir modal limpiar  horario", () => {
+    const toasTSpy = spyOn(toastServiceMock, 'mostrarToast').and.callThrough();
     component.abrirModalAccionLimpiarHorario(profesionalesDataTest);
-    expect(component).toBeTruthy();
+    expect(toasTSpy).toHaveBeenCalled();
   })
 
   it("abrir modal asignar secuencia", () => {
+    const toasTSpy = spyOn(toastServiceMock, 'mostrarToast').and.callThrough();
     component.abrirModalAccionAsignarSecuencia(profesionalesDataTest);
-    expect(component).toBeTruthy();
+    expect(toasTSpy).toHaveBeenCalled();
   })
 });

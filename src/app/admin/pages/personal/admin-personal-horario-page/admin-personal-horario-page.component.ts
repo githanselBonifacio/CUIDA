@@ -17,7 +17,7 @@ export class AdminPersonalHorarioPageComponent implements OnInit {
     localStorage.setItem("menuHorario", `${numberOpcion}`)
   }
   ngOnInit(): void {
-    const opcion: number = parseInt(localStorage.getItem("menuHorario") ?? '0') ?? 0;
+    const opcion: number = parseInt(localStorage.getItem("menuHorario")!) ?? 0;
     this.router.navigate([`admin/personal/horario/${this.opcionesMenu[opcion]}`]);
   }
 }

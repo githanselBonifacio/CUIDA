@@ -18,7 +18,7 @@ describe('AdminFormProfesionalesComponent', () => {
     nombres: 'Juan Andres',
     apellidos: 'Camargo Rodriguez',
     email: 'correo@sura.com.co',
-    telefono: '',
+    telefono: null,
     celular: "3054859741",
     direccion: 'direccion #$20++**',
     genero: 'Masculino',
@@ -28,18 +28,18 @@ describe('AdminFormProfesionalesComponent', () => {
     activo: true,
   }
   const profesionalVacioData = {
-    idTipoIdentificacion: 0,
-    numeroIdentificacion: "",
-    nombres: '',
-    apellidos: '',
-    email: '',
-    telefono: '',
-    celular: "",
-    direccion: '',
-    genero: '',
-    idProfesion: 0,
-    fechaNacimiento: "",
-    idRegional: '',
+    idTipoIdentificacion: null,
+    numeroIdentificacion: null,
+    nombres: null,
+    apellidos: null,
+    email: null,
+    telefono: null,
+    celular: null,
+    direccion: null,
+    genero: null,
+    idProfesion: null,
+    fechaNacimiento: null,
+    idRegional: null,
     activo: true,
   }
   const adminPersonalServiceMock = {
@@ -232,7 +232,7 @@ describe('AdminFormProfesionalesComponent', () => {
 
     const profesionalVacio = component.buildprofesional();
     fixture.detectChanges();
-    expect(profesionalVacio).toEqual(profesionalVacioData);
+    expect(JSON.stringify(profesionalVacio)).toEqual(JSON.stringify(profesionalVacioData));
     expect(component.formProfesional.valid).toBeFalsy();
 
     component.formProfesional.controls['tipoIdentificacion'].setValue(profesionalData.idTipoIdentificacion);

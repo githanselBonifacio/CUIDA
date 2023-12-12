@@ -1,5 +1,10 @@
 @import url("../../../../styles.css");
 
+#panel-horas {
+    padding-left: 1rem;
+    padding-right: 1rem
+}
+
 #header-hora {
     display: flex;
     justify-content: space-around;

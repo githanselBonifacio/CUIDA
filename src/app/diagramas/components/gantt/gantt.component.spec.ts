@@ -42,8 +42,8 @@ describe('GanttComponent', () => {
   it('calcular posicion barra tiempo gantt', () => {
     component.actividades = actividadesTest;
     component.horas = horas;
-    component.widthContainer = widthContainer;
     component.onResize({});
+    component.widthContainer = widthContainer;
     fixture.detectChanges();
     const fechaTareaMedio = actividadesTest[0].tareas[1].fechaProgramada;
     const leftMedio = component.calcularLeft(fechaTareaMedio);

@@ -9,7 +9,6 @@ import { SpinnerService } from 'src/app/shared/services/spinner/spinner.service.
 import { MatDialog } from '@angular/material/dialog';
 import { ModalAsignarTurnoIndividualComponent } from 'src/app/admin/components/modal-asignar-turno-individual/modal-asignar-turno-individual.component';
 import { ToastService } from 'src/app/shared/services/toast/toast.service';
-import { TitleToast, ToastType } from 'src/app/shared/components/toast/toast.component';
 import { AdminPersonalService } from 'src/app/admin/services/admin-personal.service';
 
 @Component({
@@ -39,7 +38,7 @@ export class AdminPersonalHorarioConsolidadoPageComponent implements OnInit {
   dias: Dia[] = [];
 
   mesFiltro: string = localStorage.getItem('fechaTurnoHorarioConsolidado') ?? formatoFecha(new Date()).slice(0, 7);
-  opcionIdRegional: string = localStorage.getItem('idRegionalHorarioConsolidadoFiltro') ?? '';
+  opcionIdRegional: string = localStorage.getItem('idRegionalHorarioConsolidadoFiltro')!;
 
 
   regionales: Regional[] = [];
@@ -57,7 +56,7 @@ export class AdminPersonalHorarioConsolidadoPageComponent implements OnInit {
       .subscribe(resp => {
         if (resp.status == 200) {
           this.regionales = resp.result;
-          this.opcionIdRegional = (this.opcionIdRegional == '') ? this.regionales[0].id : this.opcionIdRegional;
+          this.opcionIdRegional = (!this.opcionIdRegional) ? this.regionales[0].id : this.opcionIdRegional;
           this.buscarTurno();
         }
       });
@@ -155,10 +154,8 @@ export class AdminPersonalHorarioConsolidadoPageComponent implements OnInit {
           resp => {
             if (resp.status == 200) {
               this.buscarTurno();
-              this.toastService.mostrarToast(ToastType.Success, TitleToast.Success, resp.message, 5);
-            } else {
-              this.toastService.mostrarToast(ToastType.Error, TitleToast.Error, resp.message, 5);
             }
+            this.toastService.mostrarToast({ status: resp.status, menssage: resp.message });
           }
         )
       }

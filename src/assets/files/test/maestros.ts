@@ -1,3 +1,5 @@
+import { Profesion } from "src/app/shared/interfaces/maestros.interfaces"
+
 export const regionalesTest = [
     {
         "id": "4292",
@@ -55,24 +57,39 @@ export const horarioTurnoTestDescanso = [
 ]
 
 export const tipoIdentificacionTest = [
-    [
-        {
-            "id": 7,
-            "idTipo": "CC",
-            "nombre": "Cédula de ciudadanía",
-            "esMayorEdad": true
-        },
-        {
-            "id": 8,
-            "idTipo": "CE",
-            "nombre": "Cédula de extranjería",
-            "esMayorEdad": true
-        },
-        {
-            "id": 9,
-            "idTipo": "RC",
-            "nombre": "Registro Civil",
-            "esMayorEdad": false
-        }
-    ]
+
+    {
+        "id": 7,
+        "idTipo": "CC",
+        "nombre": "Cédula de ciudadanía",
+        "esMayorEdad": true
+    },
+    {
+        "id": 8,
+        "idTipo": "CE",
+        "nombre": "Cédula de extranjería",
+        "esMayorEdad": true
+    },
+    {
+        "id": 9,
+        "idTipo": "RC",
+        "nombre": "Registro Civil",
+        "esMayorEdad": false
+    }
+
+]
+
+export const profesionesTest: Profesion[] = [
+    {
+        "idProfesion": 1,
+        "nombre": "Auxiliar de enfermería"
+    },
+    {
+        "idProfesion": 3,
+        "nombre": "Médico General"
+    },
+    {
+        "idProfesion": 4,
+        "nombre": "Médico especialista"
+    },
 ]

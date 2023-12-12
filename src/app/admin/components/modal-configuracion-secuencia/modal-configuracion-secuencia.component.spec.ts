@@ -93,6 +93,7 @@ describe('ModalConfiguracionSecuenciaComponent', () => {
       "secuencia": secuencia,
       "accion": AccionFormulario.ACTUALIZAR
     }
+
     fixture.detectChanges();
     expect(component).toBeTruthy();
   })
@@ -104,6 +105,7 @@ describe('ModalConfiguracionSecuenciaComponent', () => {
       "secuencia": secuencia,
       "accion": AccionFormulario.CREAR
     }
+
     component.descripcionSecuencia = 'nueva descripcion';
     component.ngOnChanges({
       descripcionSecuencia: new SimpleChange(null, component.descripcionSecuencia, true),
@@ -133,6 +135,8 @@ describe('ModalConfiguracionSecuenciaComponent', () => {
       "accion": AccionFormulario.ACTUALIZAR
     }
 
+    componentDuracion.ngOnInit();
+    componentDuracion.secuenciaEditable = secuencia;
     fixtureDuracion.detectChanges()
     expect(componentDuracion.sumaTotalHoras).toEqual(sumaHorasTotalesSecuencia);
     expect(componentDuracion.secuenciaEditable).toEqual(secuencia);

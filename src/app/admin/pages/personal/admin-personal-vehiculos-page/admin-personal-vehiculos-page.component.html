@@ -39,9 +39,9 @@
             <ng-container matColumnDef="acciones">
                 <th mat-header-cell *matHeaderCellDef>Acciones</th>
                 <td mat-cell *matCellDef="let movil">
-                    <i name="accion-ico" class="bi bi-pencil-square" title="editar"
-                        (click)="abrirFormEditarMovil(movil)"></i>
-                    <i name="accion-ico" [class]="'bi bi-toggle-'+getIconActivar(movil.activo)" title="activar"></i>
+                    <em name="accion-ico" class="bi bi-pencil-square" title="editar"
+                        (click)="abrirFormEditarMovil(movil)"></em>
+                    <em name="accion-ico" [class]="'bi bi-toggle-'+getIconActivar(movil.activo)" title="activar"></em>
                 </td>
             </ng-container>
 

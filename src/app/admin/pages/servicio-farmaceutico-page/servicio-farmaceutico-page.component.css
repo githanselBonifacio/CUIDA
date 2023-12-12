@@ -60,7 +60,7 @@
     border: 0;
 }
 
-#notificar i {
+#notificar em {
     font-size: 1.6rem;
     font-weight: bold;
     padding: 0.5rem 1rem 0.5rem 1rem;
@@ -70,7 +70,7 @@
 
 }
 
-#notificar.active i {
+#notificar.active em {
     animation: notificar 1s infinite;
 }
 

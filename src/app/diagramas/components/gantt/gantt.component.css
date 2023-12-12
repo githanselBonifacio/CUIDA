@@ -241,7 +241,7 @@ div[name="container-actividad-time"] {
 .grid-time {
     border-left: 1px dotted #c7c9c7 !important;
     margin: 0px auto !important;
-    height: 200% !important;
+    height: 100% !important;
     position: absolute !important;
 }
 

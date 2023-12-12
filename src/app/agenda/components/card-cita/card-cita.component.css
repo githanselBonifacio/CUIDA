@@ -79,10 +79,15 @@ div[name="contenido-accordion"] {
 }
 
 
+.continer-icon {
+    font-size: 5rem;
+}
 
 .i-card-agenda {
     display: flex;
     justify-content: flex-end;
+    font-size: 1.5rem;
+    gap: 0.5rem;
 }
 
 .i-card-agenda i {

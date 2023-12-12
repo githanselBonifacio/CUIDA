@@ -75,6 +75,10 @@ hr {
     box-shadow: 5px 5px 10px var(--gris1-color);
 }
 
+em {
+    display: inline-flex;
+}
+
 mat-snack-bar-container div {
     padding: 0px !important;
     border-radius: 20px !important;

@@ -32,10 +32,10 @@
                                     {{actividad.idMovil}}
                                 </div>
 
-                                <i class="bi bi-person-x-fill" id="retirar-profesional" title="Retirar profesional"
+                                <em class="bi bi-person-x-fill" id="retirar-profesional" title="Retirar profesional"
                                     (click)="emitirProfesionalTurno(actividad)">
 
-                                </i>
+                                </em>
 
                             </div>
                         </div>
@@ -59,10 +59,10 @@
                             <div>Hora: {{tarea.fechaProgramada|date : 'HH:mm'}}</div>
                             <div>Duracion: {{tarea.duracion|formatearSegundos}}</div>
                             <div class="v-i">
-                                <i class="bi bi-calendar2-x-fill" (click)="emitirDesagendarTarea(tarea.id)"
-                                    title="Desagendar cita"></i>
-                                <i class="bi bi-clock" (click)="emitirReprogramarTarea(tarea.id)"
-                                    title="reprogramar cita"></i>
+                                <em class="bi bi-calendar2-x-fill" (click)="emitirDesagendarTarea(tarea.id)"
+                                    title="Desagendar cita"></em>
+                                <em class="bi bi-clock" (click)="emitirReprogramarTarea(tarea.id)"
+                                    title="reprogramar cita"></em>
 
                             </div>
                         </div>
@@ -86,7 +86,7 @@
             <div class="col-md-1 col-lg-1 col-xl-1" id="container-map">
 
                 <div *ngIf="actividad.tareas.length>0" class="map-content">
-                    <i class="bi bi-geo-alt-fill" title="ubicación" (click)="mostrarRutaMapa(actividad.tareas)"></i>
+                    <em class="bi bi-geo-alt-fill" title="ubicación" (click)="mostrarRutaMapa(actividad.tareas)"></em>
                 </div>
 
             </div>

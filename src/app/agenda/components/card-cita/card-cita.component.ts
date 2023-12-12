@@ -8,8 +8,8 @@ import { VentanaConfirmacionComponent } from '../../../shared/components/ventana
 import { AgendaService } from 'src/app/agenda/services/agenda.service';
 import { ModalCambioHoraCitaComponent } from '../modal-cambio-hora-cita/modal-cambio-hora-cita.component';
 import { ModalDetalleRemisionComponent } from '../modal-detalle-remision/modal-detalle-remision.component';
-import { switchMap, filter, tap } from 'rxjs/operators';
-import { EstadoCita, formatoFecha, formatoFechaHora, funtionGetNombreEstadoCitaById } from 'src/app/shared/interfaces/maestros.interfaces';
+import { switchMap, filter } from 'rxjs/operators';
+import { EstadoCita, formatoFechaHora, funtionGetNombreEstadoCitaById } from 'src/app/shared/interfaces/maestros.interfaces';
 import localeEs from '@angular/common/locales/es';
 import { registerLocaleData } from '@angular/common';
 import { ToastService } from 'src/app/shared/services/toast/toast.service';

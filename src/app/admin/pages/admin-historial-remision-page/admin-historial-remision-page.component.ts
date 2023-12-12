@@ -6,6 +6,8 @@ import { MaestrosService } from '../../../shared/services/maestros/maestros.serv
 import { EstadoCita } from 'src/app/shared/interfaces/maestros.interfaces';
 import localeEs from '@angular/common/locales/es';
 import { registerLocaleData } from '@angular/common';
+import { SpinnerComponent } from 'src/app/shared/components/spinner/spinner.component';
+import { SpinnerService } from 'src/app/shared/services/spinner/spinner.service.service';
 
 
 @Component({
@@ -29,13 +31,14 @@ export class AdminHistorialRemisionPageComponent implements OnInit {
     private adminService: AdminRemisionService,
     private maestroService: MaestrosService,
     private activateRoute: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private spinner: SpinnerService
   ) {
 
   }
 
   ngOnInit() {
-
+    this.spinner.show();
     registerLocaleData(localeEs);
     this.maestroService.getEstadosCita();
     this.activateRoute.params.subscribe(
@@ -50,7 +53,7 @@ export class AdminHistorialRemisionPageComponent implements OnInit {
     this.adminService.consultarDataActualRemision(this.idRemision)
       .subscribe(resp => {
         this.remisionDataActual = resp.result
-
+        this.spinner.hide();
       })
   }
 

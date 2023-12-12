@@ -1,8 +1,8 @@
 <div class="container-view">
     <div class=" header">
         <div class="content-toolbar">
-            <i id="back-admin" class="bi bi-arrow-left-square-fill" title="volver a remisiones"
-                (click)="backAdmin()"></i>
+            <em id="back-admin" class="bi bi-arrow-left-square-fill" title="volver a remisiones"
+                (click)="backAdmin()"></em>
             <h2>Remisiones</h2>
         </div>
         <div class="content-toolbar">
@@ -64,8 +64,8 @@
                 <ng-container matColumnDef="Historial">
                     <th mat-header-cell *matHeaderCellDef> Historial </th>
                     <td mat-cell *matCellDef="let remision">
-                        <i class="bi bi-clock-history" id="history" title="ver historial"
-                            (click)="verHistorialRemision(remision.idRemision)"></i>
+                        <em class="bi bi-clock-history" id="history" title="ver historial"
+                            (click)="verHistorialRemision(remision.idRemision)"></em>
                     </td>
                 </ng-container>
 

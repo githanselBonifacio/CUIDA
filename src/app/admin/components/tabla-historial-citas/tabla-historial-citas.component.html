@@ -34,14 +34,14 @@
 
                     <ng-template #historial>
                         <div>
-                            <i [ngClass]="{'bi bi-trash-fill':cita.idEstado !== 0,'bi bi-plus-circle-fill':cita.idEstado === 0}"
-                                [ngStyle]="{'color':cita.idEstado !== 0 ?'var(--red-color)':''}"></i>
+                            <em [ngClass]="{'bi bi-trash-fill':cita.idEstado !== 0,'bi bi-plus-circle-fill':cita.idEstado === 0}"
+                                [ngStyle]="{'color':cita.idEstado !== 0 ?'var(--red-color)':''}"></em>
                         </div>
                     </ng-template>
                 </td>
 
                 <td>
-                    <i class="bi bi-eye" title="ver detalle" (click)="mostrarModalDetalleCita(cita)"></i>
+                    <em class="bi bi-eye" title="ver detalle" (click)="mostrarModalDetalleCita(cita)"></em>
                 </td>
             </tr>
 

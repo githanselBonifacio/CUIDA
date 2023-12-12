@@ -11,22 +11,22 @@
 
 
 
-                <span class="input-group-text" id="basic-addon2"><i class="bi bi-calendar-check"></i>
+                <span class="input-group-text" id="basic-addon2"><em class="bi bi-calendar-check"></em>
                     {{formatDateTime(desplazamiento.fechaProgramada)}}</span>
-                <span class="input-group-text" id="basic-addon2"><i class="bi bi-clock"></i>
+                <span class="input-group-text" id="basic-addon2"><em class="bi bi-clock"></em>
                     {{convertSecondsToMinutesOrHours(desplazamiento.duracion)}}</span>
-                <span class="input-group-text" id="basic-addon2"><i class="bi bi-hourglass-bottom"></i>
+                <span class="input-group-text" id="basic-addon2"><em class="bi bi-hourglass-bottom"></em>
                     {{convertSecondsToMinutesOrHours(desplazamiento.holgura)}}</span>
                 <div class="i-card-agenda">
 
 
-                    <i class="bi bi-calendar-plus-fill" *ngIf="desplazamiento.idEstado == 1" title="Agendar"
+                    <em class="bi bi-calendar-plus-fill" *ngIf="desplazamiento.idEstado == 1" title="Agendar"
                         id="i-card-agenda-agendar" (click)="asignarDesplazamiento(desplazamiento)">
-                    </i>
+                    </em>
 
-                    <i class="bi bi-calendar2-x-fill" *ngIf="desplazamiento.idEstado == 2" title="Desagendar"
+                    <em class="bi bi-calendar2-x-fill" *ngIf="desplazamiento.idEstado == 2" title="Desagendar"
                         id="i-card-agenda-desagendar" (click)="desasignarDesplazamiento(desplazamiento)">
-                    </i>
+                    </em>
 
                 </div>
             </div>

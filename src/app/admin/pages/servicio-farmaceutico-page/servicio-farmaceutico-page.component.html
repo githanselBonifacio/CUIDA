@@ -1,8 +1,8 @@
 <div class="container-view">
     <div class="header">
         <div class="container-input-group">
-            <i id="back-admin" class="bi bi-arrow-left-square-fill" title="volver a remisiones"
-                (click)="backRemisionesTabla()"></i>
+            <em id="back-admin" class="bi bi-arrow-left-square-fill" title="volver a remisiones"
+                (click)="backRemisionesTabla()"></em>
             <h2>Servicio Farmaceutico</h2>
         </div>
 
@@ -12,7 +12,7 @@
             <button id="notificar" title="Notificar" (click)="notificarSeleccion()"
                 [ngClass]="{'active': hayNotificacionesSeleccionadas()}" [disabled]="selection.selected.length==0">
                 <div>
-                    <i class="bi bi-bell-fill"></i>
+                    <em class=" bi bi-bell-fill"></em>
                 </div>
             </button>
 
@@ -183,8 +183,8 @@
                 <ng-container matColumnDef="Notificado">
                     <th mat-header-cell *matHeaderCellDef> Notificado </th>
                     <td mat-cell *matCellDef="let notificacion">
-                        <i *ngIf="notificacion.notificado" class="bi bi-check-square-fill" id="notificado"></i>
-                        <i *ngIf="!notificacion.notificado" class="bi bi-slash-circle-fill" id="no-notificado"></i>
+                        <em *ngIf="notificacion.notificado" class="bi bi-check-square-fill" id="notificado"></em>
+                        <em *ngIf="!notificacion.notificado" class="bi bi-slash-circle-fill" id="no-notificado"></em>
                     </td>
                 </ng-container>
                 <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>

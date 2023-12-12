@@ -8,7 +8,7 @@
             <div class="d-flex">
                 <input id="semanaSeleccionada" type="week" [(ngModel)]="semanaInput">
                 <button class="buttom-i" (click)="agregarFechaSecuencia()">
-                    <i class="bi bi-plus-circle-fill"></i>
+                    <em class="bi bi-plus-circle-fill"></em>
                 </button>
             </div>
             <div class="title-header">
@@ -34,11 +34,11 @@
                                 <div class="btn-group" role="group">
                                     <button type="button" class="buttom-multiple-seleccion dropdown-toggle"
                                         data-bs-toggle="dropdown" aria-expanded="false">
-                                        <i *ngIf="secuenciaSemana.secuencia.nombre==undefined; else accionBtn">
+                                        <em *ngIf="secuenciaSemana.secuencia.nombre==undefined; else accionBtn">
                                             agregar secuencia...
-                                        </i>
+                                        </em>
                                         <ng-template #accionBtn>
-                                            <i>editar secuencia...</i>
+                                            <em>editar secuencia...</em>
                                         </ng-template>
                                     </button>
 

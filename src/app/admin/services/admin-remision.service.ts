@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Respuesta } from 'src/app/shared/interfaces/response.interfaces';
 import { environment } from '../../../environments/environments';
-import { Conductor, Movil } from 'src/app/agenda/interfaces/conductores.interface';
+import { Conductor } from 'src/app/agenda/interfaces/conductores.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +18,7 @@ export class AdminRemisionService {
     return this.http.get<Respuesta>(`${environment.URL_API_CUIDA}/${this.urlRecurso}`);
   }
   consultarDataActualRemision(idRemision: string) {
-    return this.http.get<Respuesta>(`${environment.URL_API_CUIDA}/${this.urlRecurso}/remision/${idRemision}`)
+    return this.http.get<Respuesta>(`${environment.URL_API_CUIDA}/${this.urlRecurso}/${idRemision}`)
   }
 
   consultarHistorialRemision(idRemision: string) {

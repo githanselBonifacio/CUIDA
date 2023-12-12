@@ -88,18 +88,17 @@
         </div>
         <div class="col-lg-9 col-xl-9  col-xxl-10" id="container-agenda-gantt">
             <div class="panel-gantt">
-                <div>
-                    <app-diagramas-gantt [actividades]="actividades" [horas]="horasTurnoString"
-                        [tituloActorResponsable]="'Profesionales'"
-                        (idprofesionalEvent)="desasignarProfesionalTurno($event)"
-                        (retirarTareaEvent)="desagendarCita($event)" (reprogramarTareaEvent)="reprogramarCita($event)">
-                    </app-diagramas-gantt>
-                </div>
-                <div>
-                    <button id="agregar-profesional" (click)="agregarProfesionalTurno()">
-                        <i class="bi bi-person-plus-fill" title="Agregar profesional"></i>
-                    </button>
-                </div>
+
+                <app-diagramas-gantt [actividades]="actividades" [horas]="horasTurnoString"
+                    [tituloActorResponsable]="'Profesionales'" (idprofesionalEvent)="desasignarProfesionalTurno($event)"
+                    (retirarTareaEvent)="desagendarCita($event)" (reprogramarTareaEvent)="reprogramarCita($event)">
+                </app-diagramas-gantt>
+
+
+                <button id="agregar-profesional" (click)="agregarProfesionalTurno()">
+                    <em class="bi bi-person-plus-fill" title="Agregar profesional"></em>
+                </button>
+
             </div>
         </div>
     </div>

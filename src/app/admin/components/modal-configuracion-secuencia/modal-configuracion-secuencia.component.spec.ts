@@ -127,7 +127,7 @@ describe('ModalConfiguracionSecuenciaComponent', () => {
     expect(component.secuenciaEditable).toEqual(secuencia);
   })
 
-  /*it('calcular duracion total secuencia', () => {
+  it('calcular duracion total secuencia', () => {
     let fixtureDuracion = TestBed.createComponent(ModalConfiguracionSecuenciaComponent);
     let componentDuracion = fixtureDuracion.componentInstance;
     componentDuracion.data = {
@@ -140,7 +140,7 @@ describe('ModalConfiguracionSecuenciaComponent', () => {
     fixtureDuracion.detectChanges()
     expect(componentDuracion.sumaTotalHoras).toEqual(sumaHorasTotalesSecuencia);
     expect(componentDuracion.secuenciaEditable).toEqual(secuencia);
-  })*/
+  })
 
   it('validar seleccion de horarios', () => {
     const fixture = TestBed.createComponent(ModalConfiguracionSecuenciaComponent);

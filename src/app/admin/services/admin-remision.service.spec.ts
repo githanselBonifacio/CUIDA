@@ -40,7 +40,7 @@ describe('AdminRemisionService', () => {
     service.consultarDataActualRemision(idRemision).subscribe(resp => {
       expect(resp).toBeDefined();
     })
-    const req = httpMock.expectOne(`${environment.URL_API_CUIDA}/${urlRecurso}/remision/${idRemision}`)
+    const req = httpMock.expectOne(`${environment.URL_API_CUIDA}/${urlRecurso}/${idRemision}`)
     expect(req.request.method).toBe('GET')
   })
 

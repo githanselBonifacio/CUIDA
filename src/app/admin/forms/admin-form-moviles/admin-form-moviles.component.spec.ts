@@ -6,8 +6,8 @@ import { AdminPersonalService } from '../../services/admin-personal.service';
 import { ToastService } from 'src/app/shared/services/toast/toast.service';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SimpleChange } from '@angular/core';
-import { AccionFormulario } from '../../interfaces/enum';
-import { Movil } from 'src/app/agenda/interfaces/conductores.interface';
+import { AccionFormulario } from '../../../shared/interfaces/general/enum';
+import { Movil } from 'src/app/shared/interfaces/agenda/conductores.interface';
 
 describe('AdminFormMovilesComponent', () => {
     let component: AdminFormMovilesComponent;

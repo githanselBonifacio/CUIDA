@@ -2,12 +2,13 @@ import { Component, LOCALE_ID, OnInit } from '@angular/core';
 import localeEs from '@angular/common/locales/es';
 import { registerLocaleData } from '@angular/common';
 import { MaestrosService } from 'src/app/shared/services/maestros/maestros.service';
-import { Regional, formatoFecha } from 'src/app/shared/interfaces/maestros.interfaces';
+import { Regional, formatoFecha, formatoFechaMes } from 'src/app/shared/interfaces/maestros/maestros.interfaces';
 import * as estilos from '../../../../assets/files/variables';
 import { AdminReportesServiceService } from '../../services/admin-reportes.service';
 import { SpinnerService } from 'src/app/shared/services/spinner/spinner.service.service';
 import { ToastService } from 'src/app/shared/services/toast/toast.service';
-import { TitleToast, ToastType } from 'src/app/shared/components/toast/toast.component';
+import { ToastType } from 'src/app/shared/components/toast/toast.component';
+import { criterioBusquedaSinCambiosMsg } from 'src/app/shared/interfaces/general/mensajes.data';
 
 
 @Component({
@@ -29,13 +30,13 @@ export class AdminReportesPageComponent implements OnInit {
     this.maestroService.getRegionalesObservable()
       .subscribe(resp => {
         this.regionales = resp.result;
-        if (this.opcionIdRegional) {
+        if (this.opcionIdRegional == null) {
           this.opcionIdRegional = this.regionales[0].id;
         }
         this.consultarData();
       });
 
-    this.opcionYear = (this.opcionYear == 0) ? this.years[0] : this.opcionYear;
+    this.opcionYear = (isNaN(this.opcionYear!)) ? this.years[0] : this.opcionYear;
 
   }
 
@@ -56,7 +57,7 @@ export class AdminReportesPageComponent implements OnInit {
   regionales: Regional[] = [];
   opcionIdRegional: string = localStorage.getItem('idRegionalReporteFiltro')!;
 
-  mesFiltro: string = localStorage.getItem('mesTurnoReporte') ?? formatoFecha(new Date());
+  mesFiltro: string = localStorage.getItem('mesTurnoReporte') ?? formatoFechaMes(new Date());
 
 
 
@@ -133,55 +134,70 @@ export class AdminReportesPageComponent implements OnInit {
     });
   }
 
+  consultarDataMensual() {
+    this.spinner.show();
+    this.adminReporteService.getReporteTurnoMensual(this.opcionYear!, parseInt(this.mesFiltro.slice(-2)), this.opcionIdRegional)
+      .subscribe(resp => {
+
+        if (resp.status == 200) {
+          this.reporteTurno = resp.result;
+        }
+
+        this.deshabilitarBtnConsulta();
+      }).add(() => {
+        this.spinner.hide();
+      });
+    this.adminReporteService.getReporteCancelacioncitasMensual(this.opcionYear!, parseInt(this.mesFiltro.slice(-2)), this.opcionIdRegional)
+      .subscribe(resp => {
+
+        if (resp.status == 200) {
+          this.reporteCancelacionCitas = resp.result;
+
+        }
+
+        this.deshabilitarBtnConsulta();
+      }).add(() => {
+        this.spinner.hide();
+      });
+  }
+  consultarDataAnual() {
+    this.spinner.show();
+    this.adminReporteService.getReporteTurnoAnual(this.opcionYear!, this.opcionIdRegional)
+      .subscribe(resp => {
+
+        if (resp.status == 200) {
+          this.reporteTurno = resp.result;
+
+        }
+        this.deshabilitarBtnConsulta();
+      }).add(() => {
+        this.spinner.hide();
+      });
+    this.adminReporteService.getReporteCancelacioncitasAnual(this.opcionYear!, this.opcionIdRegional)
+      .subscribe(resp => {
+
+        if (resp.status == 200) {
+          this.reporteCancelacionCitas = resp.result;
+
+        }
+
+        this.deshabilitarBtnConsulta();
+      }).add(() => {
+        this.spinner.hide();
+      });
+  }
   consultarData() {
     if (!this.btnConsultaDeshabilitado) {
       if (this.opcionTipoReporte == this.getTipoReporte(0)) {
-        this.adminReporteService.getReporteTurnoMensual(this.opcionYear!, parseInt(this.mesFiltro.slice(-2)), this.opcionIdRegional)
-          .subscribe(resp => {
-
-            if (resp.status == 200) {
-              this.reporteTurno = resp.result;
-            }
-
-            this.deshabilitarBtnConsulta();
-          });
-        this.adminReporteService.getReporteCancelacioncitasMensual(this.opcionYear!, parseInt(this.mesFiltro.slice(-2)), this.opcionIdRegional)
-          .subscribe(resp => {
-
-            if (resp.status == 200) {
-              this.reporteCancelacionCitas = resp.result;
-            }
-
-            this.deshabilitarBtnConsulta();
-          });
+        this.consultarDataMensual();
       } else {
-        this.adminReporteService.getReporteTurnoAnual(this.opcionYear!, this.opcionIdRegional)
-          .subscribe(resp => {
-
-            if (resp.status == 200) {
-              this.reporteTurno = resp.result;
-
-            }
-
-            this.deshabilitarBtnConsulta();
-          });
-        this.adminReporteService.getReporteCancelacioncitasAnual(this.opcionYear!, this.opcionIdRegional)
-          .subscribe(resp => {
-
-            if (resp.status == 200) {
-              this.reporteCancelacionCitas = resp.result;
-
-            }
-
-            this.deshabilitarBtnConsulta();
-          });
+        this.consultarDataAnual();
       }
     } else {
-      this.toast.mostrarToast({ status: null, menssage: "Los criterios de busqueda son los mismos" }, 5, ToastType.Info);
+      this.toast.mostrarToast({ status: null, menssage: criterioBusquedaSinCambiosMsg }, 5, ToastType.Info);
     }
 
   }
-
 
   deshabilitarBtnConsulta() {
     this.btnConsultaDeshabilitado = true;

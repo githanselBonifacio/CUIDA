@@ -1,7 +1,7 @@
-import { Conductor } from "src/app/agenda/interfaces/conductores.interface";
-import { Profesional, ProfesionalConTurnos } from "src/app/agenda/interfaces/profesional.interface";
-import { Movil } from "src/app/agenda/interfaces/conductores.interface";
-import { Dia } from "src/app/shared/interfaces/maestros.interfaces";
+import { Conductor } from "src/app/shared/interfaces/agenda/conductores.interface";
+import { Profesional, ProfesionalConTurnos } from "src/app/shared/interfaces/agenda/profesional.interface";
+import { Movil } from "src/app/shared/interfaces/agenda/conductores.interface";
+import { Dia } from "src/app/shared/interfaces/maestros/maestros.interfaces";
 
 export const diasFebrero: Dia[] = [
     { numero: "01", nombre: "Mié" },

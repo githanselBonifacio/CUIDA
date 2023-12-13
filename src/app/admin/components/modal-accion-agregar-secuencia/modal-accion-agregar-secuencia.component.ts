@@ -1,17 +1,17 @@
 
 import { Component, Inject, LOCALE_ID } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { ItemDiaTurno, Profesional, Secuencia, Turno } from 'src/app/agenda/interfaces/profesional.interface';
-import { ToastType, TitleToast } from 'src/app/shared/components/toast/toast.component';
-import { formatoFecha } from 'src/app/shared/interfaces/maestros.interfaces';
+import { ItemDiaTurno, Profesional, Secuencia, Turno } from 'src/app/shared/interfaces/agenda/profesional.interface';
+import { ToastType } from 'src/app/shared/components/toast/toast.component';
+import { formatoFecha } from 'src/app/shared/interfaces/maestros/maestros.interfaces';
 import { ToastService } from 'src/app/shared/services/toast/toast.service';
+import { semanaAgregadaMsg } from 'src/app/shared/interfaces/general/mensajes.data';
 
 
 @Component({
   selector: 'app-modal-accion-agregar-secuencia',
   templateUrl: './modal-accion-agregar-secuencia.component.html',
   styleUrls: ['./modal-accion-agregar-secuencia.component.css'],
-  providers: [{ provide: LOCALE_ID, useValue: 'es' }],
 })
 export class ModalAccionAgregarSecuenciaComponent {
 
@@ -59,7 +59,7 @@ export class ModalAccionAgregarSecuenciaComponent {
 
     } else {
 
-      this.toastService.mostrarToast({ status: null, menssage: "Ya fue agregado esta semana" }, 5, ToastType.Info)
+      this.toastService.mostrarToast({ status: null, menssage: semanaAgregadaMsg }, 5, ToastType.Info)
     }
   }
 

@@ -6,7 +6,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AdminPersonalService } from '../../services/admin-personal.service';
 import { ToastService } from 'src/app/shared/services/toast/toast.service';
 import { SimpleChange } from '@angular/core';
-import { AccionFormulario } from '../../interfaces/enum';
+import { AccionFormulario } from '../../../shared/interfaces/general/enum';
 
 describe('AdminFormProfesionalesComponent', () => {
   let component: AdminFormProfesionalesComponent;

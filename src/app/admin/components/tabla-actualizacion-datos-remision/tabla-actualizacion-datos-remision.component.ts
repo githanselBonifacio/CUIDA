@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { HistorialRemision } from '../../interfaces/historialRemison.interface';
+import { HistorialRemision } from '../../../shared/interfaces/admin/historialRemison.interface';
 
 @Component({
   selector: 'app-tabla-actualizacion-datos-remision',

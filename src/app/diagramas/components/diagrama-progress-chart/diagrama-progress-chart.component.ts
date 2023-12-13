@@ -28,7 +28,7 @@ export class DiagramaProgressChartComponent implements AfterViewInit {
 
 
   @Input() title: string = '';
-  @Input() value: number = 0;
+  @Input() value!: number;
 
   //optional
   @Input() widthLine: number = 12;
@@ -62,7 +62,7 @@ export class DiagramaProgressChartComponent implements AfterViewInit {
   buildChart() {
     const ratioAspect = this.heightContent / this.widthContent;
     const deltaResize = 0.85;
-    var size = (ratioAspect > 1) ? this.widthContent * deltaResize : this.heightContent * deltaResize;
+    let size = (ratioAspect > 1) ? this.widthContent * deltaResize : this.heightContent * deltaResize;
 
     const chartSgvElement = document.getElementById("chart-sgv");
     if (chartSgvElement) {

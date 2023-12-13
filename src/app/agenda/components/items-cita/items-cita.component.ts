@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { ProcedimientosHistorial, TratamientoHistorial } from 'src/app/admin/interfaces/historialRemison.interface';
+import { Procedimientos, Tratamiento } from 'src/app/shared/interfaces/agenda/remision.interface';
 
 
 @Component({
@@ -9,7 +9,7 @@ import { ProcedimientosHistorial, TratamientoHistorial } from 'src/app/admin/int
 })
 export class ItemsCitaComponent {
 
-  @Input() procedimientos: ProcedimientosHistorial = {
+  @Input() procedimientos: Procedimientos = {
     canalizaciones: [],
     fototerapias: [],
     sondajes: [],
@@ -19,7 +19,7 @@ export class ItemsCitaComponent {
     secreciones: []
 
   };
-  @Input() tratamientos: TratamientoHistorial[] = [];
+  @Input() tratamientos: Tratamiento[] = [];
 
   contieneProcedimientos() {
 

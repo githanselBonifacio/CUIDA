@@ -3,8 +3,8 @@ import { TestBed } from '@angular/core/testing';
 import { AdminPersonalService } from './admin-personal.service';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { environment } from 'src/environments/environments';
-import { Profesional, Secuencia, Turno } from 'src/app/agenda/interfaces/profesional.interface';
-import { Conductor, Movil } from 'src/app/agenda/interfaces/conductores.interface';
+import { Profesional, Secuencia, Turno } from 'src/app/shared/interfaces/agenda/profesional.interface';
+import { Conductor, Movil } from 'src/app/shared/interfaces/agenda/conductores.interface';
 
 describe('AdminPersonalService', () => {
   let service: AdminPersonalService;

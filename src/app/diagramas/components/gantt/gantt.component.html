@@ -51,14 +51,14 @@
                     <!--  lineas de tiempo -->
                     <div *ngFor="let tarea of actividad.tareas " [class]="'tarea-'+tarea.tipo"
                         [attr.estado]="tarea.idEstado"
-                        [ngStyle]="{width:calcularWidth(tarea.duracion)+'px',left:calcularLeft(tarea.fechaProgramada)+'px'}">
+                        [ngStyle]="{width:calcularWidth(tarea.duracion,widthContainer)+'px',left:calcularLeft(tarea.fechaProgramada,widthContainer)+'px'}">
 
                         <div class="vignette" [ngClass]="'gantt-'+i+'-'+tarea.tipo"
-                            *ngIf="tarea.tipo=='VISITA';else DVISITA">
+                            *ngIf="tarea.tipo=='VISITA' && validState(tarea.idEstado);else DVISITA">
                             <div>id: {{tarea.id}}</div>
                             <div>Hora: {{tarea.fechaProgramada|date : 'HH:mm'}}</div>
                             <div>Duracion: {{tarea.duracion|formatearSegundos}}</div>
-                            <div class="v-i">
+                            <div class="constainer-em">
                                 <em class="bi bi-calendar2-x-fill" (click)="emitirDesagendarTarea(tarea.id)"
                                     title="Desagendar cita"></em>
                                 <em class="bi bi-clock" (click)="emitirReprogramarTarea(tarea.id)"

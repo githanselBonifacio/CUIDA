@@ -1,11 +1,12 @@
 import { Component, AfterViewInit, ViewChild } from '@angular/core';
 import { AdminRemisionService } from '../../services/admin-remision.service';
-import { Remision } from '../../interfaces/remision.interface';
+
 import { Router } from '@angular/router';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { registerLocaleData } from '@angular/common';
 import localeEs from '@angular/common/locales/es';
+import { Remision } from 'src/app/shared/interfaces/agenda/remision.interface';
 
 @Component({
   selector: 'app-admin-remisiones-page',

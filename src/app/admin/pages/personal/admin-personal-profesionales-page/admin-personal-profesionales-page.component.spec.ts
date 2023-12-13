@@ -11,7 +11,7 @@ import { MaestrosService } from 'src/app/shared/services/maestros/maestros.servi
 import { ToastService } from 'src/app/shared/services/toast/toast.service';
 import { MatDialogModule } from '@angular/material/dialog';
 import { AdminFormProfesionalesComponent } from 'src/app/admin/forms/admin-form-profesionales/admin-form-profesionales.component';
-import { AccionFormulario } from 'src/app/admin/interfaces/enum';
+import { AccionFormulario } from 'src/app/shared/interfaces/general/enum';
 import { conductoresDataTest, profesionalesDataTest } from 'src/assets/files/test/personal';
 
 describe('AdminProfesionalesPageComponent', () => {

@@ -1,4 +1,4 @@
-import { NotificacionFarmacia } from "src/app/admin/interfaces/servicioFarmaceutico.interface";
+import { NotificacionFarmacia } from "src/app/shared/interfaces/admin/servicioFarmaceutico.interface";
 
 export const notificacionesFarmaciaTest: NotificacionFarmacia[] = [
     {

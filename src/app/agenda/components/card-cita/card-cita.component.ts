@@ -1,6 +1,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 
-import { Cita, EstadosCita } from '../../interfaces/remision.interface';
+import { Cita, EstadosCita } from '../../../shared/interfaces/agenda/remision.interface';
 
 import { MatDialog } from '@angular/material/dialog'
 import { ModalSeleccionProfesionalComponent } from '../modal-seleccion-profesional/modal-seleccion-profesional.component';
@@ -9,7 +9,7 @@ import { AgendaService } from 'src/app/agenda/services/agenda.service';
 import { ModalCambioHoraCitaComponent } from '../modal-cambio-hora-cita/modal-cambio-hora-cita.component';
 import { ModalDetalleRemisionComponent } from '../modal-detalle-remision/modal-detalle-remision.component';
 import { switchMap, filter } from 'rxjs/operators';
-import { EstadoCita, formatoFechaHora, funtionGetNombreEstadoCitaById } from 'src/app/shared/interfaces/maestros.interfaces';
+import { EstadoCita, formatoFechaHora, funtionGetNombreEstadoCitaById } from 'src/app/shared/interfaces/maestros/maestros.interfaces';
 import localeEs from '@angular/common/locales/es';
 import { registerLocaleData } from '@angular/common';
 import { ToastService } from 'src/app/shared/services/toast/toast.service';

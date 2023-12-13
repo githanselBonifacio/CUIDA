@@ -12,7 +12,7 @@ import { of } from 'rxjs';
 import { AdminFormMovilesComponent } from 'src/app/admin/forms/admin-form-moviles/admin-form-moviles.component';
 import { regionalesTest, tipoIdentificacionTest } from 'src/assets/files/test/maestros';
 import { movilesTest } from 'src/assets/files/test/personal';
-import { AccionFormulario } from 'src/app/admin/interfaces/enum';
+import { AccionFormulario } from 'src/app/shared/interfaces/general/enum';
 
 describe('AdminPersonalVehiculosPageComponent', () => {
   let component: AdminPersonalVehiculosPageComponent;

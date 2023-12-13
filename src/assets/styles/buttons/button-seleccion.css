@@ -72,13 +72,13 @@
 }
 
 
-.buttom-i {
+.buttom-em {
     border: none;
     background-color: transparent;
     color: var(--second-color);
 }
 
-.buttom-i i {
+.buttom-em em {
     display: flex;
     justify-content: center;
     align-items: center;

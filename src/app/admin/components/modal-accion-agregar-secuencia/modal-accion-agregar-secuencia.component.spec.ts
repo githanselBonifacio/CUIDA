@@ -1,13 +1,13 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ModalAccionAgregarSecuenciaComponent } from './modal-accion-agregar-secuencia.component';
-import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { ToastService } from 'src/app/shared/services/toast/toast.service';
 import { DatePipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Observable, of } from 'rxjs';
-import { Secuencia } from 'src/app/agenda/interfaces/profesional.interface';
-import { profesionalesDataTest, profesionalesDataTest2 } from 'src/assets/files/test/personal';
+import { Secuencia } from 'src/app/shared/interfaces/agenda/profesional.interface';
+import { profesionalesDataTest } from 'src/assets/files/test/personal';
 
 describe('ModalAccionAgregarSecuenciaComponent', () => {
   let component: ModalAccionAgregarSecuenciaComponent;
@@ -140,8 +140,8 @@ describe('ModalAccionAgregarSecuenciaComponent', () => {
   })
 
   it('agregar fecha a secuencia', () => {
-    var fixtureAgregar = TestBed.createComponent(ModalAccionAgregarSecuenciaComponent);
-    var componentAgregar = fixtureAgregar.componentInstance;
+    let fixtureAgregar = TestBed.createComponent(ModalAccionAgregarSecuenciaComponent);
+    let componentAgregar = fixtureAgregar.componentInstance;
     const spyToast = spyOn(toastServiceMock, 'mostrarToast').and.callThrough();
     componentAgregar.semanaInput = valorSemana;
     fixtureAgregar.detectChanges();
@@ -153,8 +153,8 @@ describe('ModalAccionAgregarSecuenciaComponent', () => {
   })
 
   it('eliminar semana', () => {
-    var fixtureEliminar = TestBed.createComponent(ModalAccionAgregarSecuenciaComponent);
-    var componentEliminar = fixtureEliminar.componentInstance;
+    let fixtureEliminar = TestBed.createComponent(ModalAccionAgregarSecuenciaComponent);
+    let componentEliminar = fixtureEliminar.componentInstance;
     componentEliminar.semanaInput = valorSemana;
     componentEliminar.secuenciasSemana = [];
     componentEliminar.secuenciasSemana.push(secuencia)
@@ -164,8 +164,8 @@ describe('ModalAccionAgregarSecuenciaComponent', () => {
   })
 
   it('agregar semana a secuencia', () => {
-    var fixtureAgregarSemana = TestBed.createComponent(ModalAccionAgregarSecuenciaComponent);
-    var componentSemana = fixtureAgregarSemana.componentInstance;
+    let fixtureAgregarSemana = TestBed.createComponent(ModalAccionAgregarSecuenciaComponent);
+    let componentSemana = fixtureAgregarSemana.componentInstance;
     componentSemana.secuenciasSemana = [{ secuencia: {}, semana: diasW49 }];
     const secuenciaAgregar: Secuencia = {
       nombre: "s001",
@@ -178,8 +178,8 @@ describe('ModalAccionAgregarSecuenciaComponent', () => {
   })
 
   it('enviar secuencia', () => {
-    var fixtureEnviar = TestBed.createComponent(ModalAccionAgregarSecuenciaComponent);
-    var componentEnviar = fixtureEnviar.componentInstance;
+    let fixtureEnviar = TestBed.createComponent(ModalAccionAgregarSecuenciaComponent);
+    let componentEnviar = fixtureEnviar.componentInstance;
     componentEnviar.data = {
       profesionales: profesionalesDataTest,
     }

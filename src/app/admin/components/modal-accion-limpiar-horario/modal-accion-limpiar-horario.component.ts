@@ -1,9 +1,10 @@
 import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { Profesional } from 'src/app/agenda/interfaces/profesional.interface';
-import { TitleToast, ToastType } from 'src/app/shared/components/toast/toast.component';
-import { formatoFecha } from 'src/app/shared/interfaces/maestros.interfaces';
+import { Profesional } from 'src/app/shared/interfaces/agenda/profesional.interface';
+import { ToastType } from 'src/app/shared/components/toast/toast.component';
+import { formatoFecha } from 'src/app/shared/interfaces/maestros/maestros.interfaces';
 import { ToastService } from 'src/app/shared/services/toast/toast.service';
+import { semanaAgregadaMsg } from 'src/app/shared/interfaces/general/mensajes.data';
 
 @Component({
   selector: 'app-modal-accion-limpiar-horario',
@@ -51,7 +52,7 @@ export class ModalAccionLimpiarHorarioComponent {
       this.fechasSemanas.push(days);
 
     } else {
-      this.toastService.mostrarToast({ status: null, menssage: "Ya fue agregado esta semana" }, 5, ToastType.Info)
+      this.toastService.mostrarToast({ status: null, menssage: semanaAgregadaMsg }, 5, ToastType.Info)
     }
   }
 

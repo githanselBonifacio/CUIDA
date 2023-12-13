@@ -6,9 +6,9 @@ import { FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HorarioTurno } from 'src/app/shared/interfaces/maestros.interfaces';
-import { ProfesionalConTurnos } from 'src/app/agenda/interfaces/profesional.interface';
-import { validacionDescansoTurno, validarHorasMaximasTrabajadas } from '../../interfaces/mensajes.data';
+import { HorarioTurno } from 'src/app/shared/interfaces/maestros/maestros.interfaces';
+import { ProfesionalConTurnos } from 'src/app/shared/interfaces/agenda/profesional.interface';
+import { validacionDescansoTurno, validarHorasMaximasTrabajadas } from '../../../shared/interfaces/general/mensajes.data';
 import { horarioTurnoTest } from 'src/assets/files/test/maestros';
 import { of } from 'rxjs';
 
@@ -110,7 +110,7 @@ describe('ModalAsignarTurnoIndividualComponent', () => {
   it('agregar turno exitosamente', () => {
     component.horarioSeleccionado = horarioT1;
     component.data['profesional'] = profesional
-    var nuevoTurno = component.buildNuevoTurno();
+    let nuevoTurno = component.buildNuevoTurno();
 
     fixture.detectChanges();
     expect(nuevoTurno.idProfesional).toEqual(profesional.numeroIdentificacion);

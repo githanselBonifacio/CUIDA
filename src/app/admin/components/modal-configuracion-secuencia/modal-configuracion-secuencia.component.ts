@@ -1,11 +1,12 @@
 import { Component, OnInit, Inject, OnChanges, SimpleChanges } from '@angular/core';
 import { MaestrosService } from 'src/app/shared/services/maestros/maestros.service';
-import { ItemDiaTurno, Secuencia } from 'src/app/agenda/interfaces/profesional.interface';
+import { ItemDiaTurno, Secuencia } from 'src/app/shared/interfaces/agenda/profesional.interface';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { AccionFormulario } from '../../interfaces/enum';
-import { HorarioTurno } from 'src/app/shared/interfaces/maestros.interfaces';
+import { AccionFormulario } from '../../../shared/interfaces/general/enum';
+import { HorarioTurno } from 'src/app/shared/interfaces/maestros/maestros.interfaces';
 import { ToastService } from 'src/app/shared/services/toast/toast.service';
-import { TitleToast, ToastType } from 'src/app/shared/components/toast/toast.component';
+import { ToastType } from 'src/app/shared/components/toast/toast.component';
+import { datosFaltantesFormMsg } from 'src/app/shared/interfaces/general/mensajes.data';
 
 @Component({
   selector: 'app-modal-configuracion-secuencia',
@@ -156,7 +157,7 @@ export class ModalConfiguracionSecuenciaComponent implements OnInit, OnChanges {
       this.secuenciaEditable.descripcion = this.descripcionSecuencia;
       this.dialogRef.close(this.secuenciaEditable);
     } else {
-      this.toastService.mostrarToast({ status: null, menssage: "Datos faltantes verifique datos" }, 5, ToastType.Error);
+      this.toastService.mostrarToast({ status: null, menssage: datosFaltantesFormMsg }, 5, ToastType.Error);
     }
 
   }

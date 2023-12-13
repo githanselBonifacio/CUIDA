@@ -1,8 +1,8 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Conductor, Movil } from 'src/app/agenda/interfaces/conductores.interface';
-import { Profesional, Turno, Secuencia } from 'src/app/agenda/interfaces/profesional.interface';
-import { Respuesta } from 'src/app/shared/interfaces/response.interfaces';
+import { Conductor, Movil } from 'src/app/shared/interfaces/agenda/conductores.interface';
+import { Profesional, Turno, Secuencia } from 'src/app/shared/interfaces/agenda/profesional.interface';
+import { Respuesta } from 'src/app/shared/interfaces/maestros/response.interfaces';
 import { environment } from 'src/environments/environments';
 
 @Injectable({

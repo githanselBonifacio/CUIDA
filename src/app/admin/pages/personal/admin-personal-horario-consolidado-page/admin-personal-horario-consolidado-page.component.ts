@@ -1,7 +1,7 @@
 
 import { Component, OnInit } from '@angular/core';
-import { ProfesionalConTurnos, Turno } from 'src/app/agenda/interfaces/profesional.interface';
-import { Dia, Regional, formatoFecha, funtionGetColorReferenciaTurnoById, funtionGetNombreProfesionById } from 'src/app/shared/interfaces/maestros.interfaces';
+import { ProfesionalConTurnos, Turno } from 'src/app/shared/interfaces/agenda/profesional.interface';
+import { Dia, Regional, formatoFecha, funtionGetColorReferenciaTurnoById, funtionGetNombreProfesionById } from 'src/app/shared/interfaces/maestros/maestros.interfaces';
 import { MaestrosService } from 'src/app/shared/services/maestros/maestros.service';
 import { registerLocaleData } from '@angular/common';
 import localeEs from '@angular/common/locales/es';

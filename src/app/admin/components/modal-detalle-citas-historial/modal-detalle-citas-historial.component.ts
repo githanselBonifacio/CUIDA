@@ -1,6 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { CitaHitorial } from '../../interfaces/historialRemison.interface';
+import { CitaHitorial } from '../../../shared/interfaces/admin/historialRemison.interface';
 @Component({
   selector: 'app-modal-detalle-citas-historial',
   templateUrl: './modal-detalle-citas-historial.component.html',

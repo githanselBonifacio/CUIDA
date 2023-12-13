@@ -2,9 +2,9 @@ import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { MaestrosService } from 'src/app/shared/services/maestros/maestros.service';
-import { AccionFormulario } from '../../../interfaces/enum';
-import { Conductor } from 'src/app/agenda/interfaces/conductores.interface';
-import { funtionGetIdTipoIdentificacionById, funtionGetNombreRegionalById } from 'src/app/shared/interfaces/maestros.interfaces';
+import { AccionFormulario } from '../../../../shared/interfaces/general/enum';
+import { Conductor } from 'src/app/shared/interfaces/agenda/conductores.interface';
+import { funtionGetIdTipoIdentificacionById, funtionGetNombreRegionalById } from 'src/app/shared/interfaces/maestros/maestros.interfaces';
 import { AdminPersonalService } from 'src/app/admin/services/admin-personal.service';
 
 @Component({

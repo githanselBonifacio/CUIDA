@@ -2,10 +2,10 @@ import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import { Profesional } from 'src/app/agenda/interfaces/profesional.interface';
-import { funtionGetIdTipoIdentificacionById, funtionGetNombreProfesionById, funtionGetNombreRegionalById } from 'src/app/shared/interfaces/maestros.interfaces';
+import { Profesional } from 'src/app/shared/interfaces/agenda/profesional.interface';
+import { funtionGetIdTipoIdentificacionById, funtionGetNombreProfesionById, funtionGetNombreRegionalById } from 'src/app/shared/interfaces/maestros/maestros.interfaces';
 import { MaestrosService } from 'src/app/shared/services/maestros/maestros.service';
-import { AccionFormulario } from '../../../interfaces/enum'
+import { AccionFormulario } from '../../../../shared/interfaces/general/enum'
 import { AdminPersonalService } from 'src/app/admin/services/admin-personal.service';
 
 @Component({

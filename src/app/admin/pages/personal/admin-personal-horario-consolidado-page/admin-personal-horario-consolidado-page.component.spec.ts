@@ -10,7 +10,7 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { PlaceholderHorarioTurnosComponent } from 'src/app/shared/components/placeholder-horario-turnos/placeholder-horario-turnos.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { FormsModule } from '@angular/forms';
-import { Dia } from 'src/app/shared/interfaces/maestros.interfaces';
+import { Dia } from 'src/app/shared/interfaces/maestros/maestros.interfaces';
 import { diasFebrero, profesionalesDataTest } from 'src/assets/files/test/personal';
 import { horarioTurnoTest, regionalesTest } from 'src/assets/files/test/maestros';
 import { DialogRef } from '@angular/cdk/dialog';

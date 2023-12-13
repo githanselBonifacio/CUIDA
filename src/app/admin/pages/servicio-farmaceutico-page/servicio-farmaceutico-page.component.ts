@@ -1,12 +1,12 @@
 import { Component, AfterViewInit, ViewChild, OnInit, LOCALE_ID } from '@angular/core';
-import { NotificacionFarmacia } from '../../interfaces/servicioFarmaceutico.interface';
+import { NotificacionFarmacia } from '../../../shared/interfaces/admin/servicioFarmaceutico.interface';
 import { Router } from '@angular/router';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { SpinnerService } from 'src/app/shared/services/spinner/spinner.service.service';
 import { ToastService } from 'src/app/shared/services/toast/toast.service';
 import { MaestrosService } from 'src/app/shared/services/maestros/maestros.service';
-import { HorarioTurno, Regional, formatoFecha } from 'src/app/shared/interfaces/maestros.interfaces';
+import { HorarioTurno, Regional, formatoFecha } from 'src/app/shared/interfaces/maestros/maestros.interfaces';
 import { FormBuilder, Validators } from '@angular/forms';
 import localeEs from '@angular/common/locales/es';
 import { registerLocaleData } from '@angular/common';

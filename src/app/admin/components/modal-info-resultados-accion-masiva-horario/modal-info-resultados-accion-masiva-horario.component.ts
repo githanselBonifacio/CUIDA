@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { Profesional } from 'src/app/agenda/interfaces/profesional.interface';
+import { Profesional } from 'src/app/shared/interfaces/agenda/profesional.interface';
 
 @Component({
   selector: 'app-modal-info-resultados-accion-masiva-horario',

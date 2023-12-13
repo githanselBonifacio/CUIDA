@@ -1,14 +1,15 @@
 import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { TipoIdentificacion, Regional } from 'src/app/shared/interfaces/maestros.interfaces';
+import { TipoIdentificacion, Regional } from 'src/app/shared/interfaces/maestros/maestros.interfaces';
 import { SpinnerService } from 'src/app/shared/services/spinner/spinner.service.service';
 import { ToastService } from 'src/app/shared/services/toast/toast.service';
-import { AccionFormulario } from '../../interfaces/enum';
+import { AccionFormulario } from '../../../shared/interfaces/general/enum';
 import { expresionesRegulares, mesajeExpresionRegular } from '../../../shared/forms/expresiones-regulares.validaciones';
-import { Conductor } from 'src/app/agenda/interfaces/conductores.interface';
+import { Conductor } from 'src/app/shared/interfaces/agenda/conductores.interface';
 import { ToastType } from 'src/app/shared/components/toast/toast.component';
 import { validatorMayorEdad } from 'src/app/shared/forms/validadors.validaciones';
 import { AdminPersonalService } from '../../services/admin-personal.service';
+import { errorCamposFormMsg } from 'src/app/shared/interfaces/general/mensajes.data';
 
 @Component({
   selector: 'app-admin-from-conductores',
@@ -165,7 +166,7 @@ export class AdminFormConductoresComponent implements OnChanges {
 
     } else {
 
-      this.toastservice.mostrarToast({ status: null, menssage: "Error en campos del formulario" }, 5, ToastType.Error);
+      this.toastservice.mostrarToast({ status: null, menssage: errorCamposFormMsg }, 5, ToastType.Error);
     }
 
     this.spinnerService.hide()

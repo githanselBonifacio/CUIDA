@@ -4,6 +4,7 @@
     <p *ngIf="tratamientos ==null">La cita no contiene tratamientos</p>
     <div class="content-item" *ngIf="tratamientos">
         <table class="table table-hover">
+            <caption> tratamientos de remisión</caption>
             <thead>
                 <tr>
                     <th scope="col">#</th>
@@ -22,8 +23,8 @@
                     <td>{{tratamiento.tipoTratamiento}}</td>
                     <td>{{tratamiento.tipoPrestacion}}</td>
                     <td>
-                        <div>{{tratamiento.nombreMedicamento}} </div>
-                        <div>{{tratamiento.presentacionMedicamento}}</div>
+                        <div>{{tratamiento.medicamento.nombre}} </div>
+                        <div>{{tratamiento.medicamento.presentacion}}</div>
                     </td>
                     <td>{{tratamiento.cantidadDosis}} {{tratamiento.unidadDosis}}</td>
                     <td>{{tratamiento.viaAdministracion}}</td>
@@ -286,10 +287,10 @@
                                 <div class="card-medicamento">
                                     <h6>Medicamento</h6>
                                     <div class="item-medicamento">
-                                        {{soporteNutricional.nombreMedicamento}}
+                                        {{soporteNutricional.medicamento.nombre}}
                                     </div>
                                     <div class="item-medicamento">
-                                        {{soporteNutricional.presentacionMedicamento}}
+                                        {{soporteNutricional.medicamento.presentacion}}
                                     </div>
 
                                 </div>

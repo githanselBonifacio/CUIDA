@@ -1,13 +1,14 @@
 import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Movil } from 'src/app/agenda/interfaces/conductores.interface';
+import { Movil } from 'src/app/shared/interfaces/agenda/conductores.interface';
 import { mesajeExpresionRegular } from 'src/app/shared/forms/expresiones-regulares.validaciones';
 import { SpinnerService } from 'src/app/shared/services/spinner/spinner.service.service';
 import { ToastService } from 'src/app/shared/services/toast/toast.service';
-import { AccionFormulario } from '../../interfaces/enum';
-import { Regional } from 'src/app/shared/interfaces/maestros.interfaces';
-import { ToastType, TitleToast } from 'src/app/shared/components/toast/toast.component';
+import { AccionFormulario } from '../../../shared/interfaces/general/enum';
+import { Regional } from 'src/app/shared/interfaces/maestros/maestros.interfaces';
+import { ToastType } from 'src/app/shared/components/toast/toast.component';
 import { AdminPersonalService } from '../../services/admin-personal.service';
+import { errorCamposFormMsg } from 'src/app/shared/interfaces/general/mensajes.data';
 
 @Component({
   selector: 'app-admin-form-moviles',
@@ -79,10 +80,10 @@ export class AdminFormMovilesComponent implements OnChanges {
 
   buildMovil() {
     return {
-      matricula: this.campoMatricula?.value!,
-      marca: this.campoMarca?.value!,
-      modelo: this.campoModelo?.value!,
-      idRegional: this.campoIdRegional?.value!,
+      matricula: this.campoMatricula?.value,
+      marca: this.campoMarca?.value,
+      modelo: this.campoModelo?.value,
+      idRegional: this.campoIdRegional?.value,
       activo: true
 
     };
@@ -113,7 +114,7 @@ export class AdminFormMovilesComponent implements OnChanges {
       }
       this.formMovil.reset();
     } else {
-      this.toastservice.mostrarToast({ status: null, menssage: "Error en campos del formulario" }, 5, ToastType.Error);
+      this.toastservice.mostrarToast({ status: null, menssage: errorCamposFormMsg }, 5, ToastType.Error);
     }
 
     this.spinnerService.hide()

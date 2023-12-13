@@ -1,14 +1,15 @@
 import { Component, EventEmitter, OnChanges, Input, Output, SimpleChanges } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { Profesional } from 'src/app/agenda/interfaces/profesional.interface';
+import { Profesional } from 'src/app/shared/interfaces/agenda/profesional.interface';
 import { ToastType } from 'src/app/shared/components/toast/toast.component';
-import { Profesion, Regional, TipoIdentificacion } from 'src/app/shared/interfaces/maestros.interfaces';
+import { Profesion, Regional, TipoIdentificacion } from 'src/app/shared/interfaces/maestros/maestros.interfaces';
 import { SpinnerService } from 'src/app/shared/services/spinner/spinner.service.service';
 import { ToastService } from 'src/app/shared/services/toast/toast.service';
-import { AccionFormulario } from '../../interfaces/enum';
+import { AccionFormulario } from '../../../shared/interfaces/general/enum';
 import { expresionesRegulares, mesajeExpresionRegular } from 'src/app/shared/forms/expresiones-regulares.validaciones';
 import { validatorMayorEdad } from 'src/app/shared/forms/validadors.validaciones';
 import { AdminPersonalService } from '../../services/admin-personal.service';
+import { errorCamposFormMsg } from 'src/app/shared/interfaces/general/mensajes.data';
 
 @Component({
   selector: 'app-admin-form-profesionales',
@@ -175,7 +176,7 @@ export class AdminFormProfesionalesComponent implements OnChanges {
       }
       this.formProfesional.reset();
     } else {
-      this.toastservice.mostrarToast({ status: null, menssage: "Error en campos del formulario" }, 5, ToastType.Error);
+      this.toastservice.mostrarToast({ status: null, menssage: errorCamposFormMsg }, 5, ToastType.Error);
     }
 
     this.spinnerService.hide()

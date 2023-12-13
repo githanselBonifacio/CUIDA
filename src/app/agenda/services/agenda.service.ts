@@ -1,8 +1,8 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { TurnoProfesional } from '../interfaces/profesional.interface'
+import { TurnoProfesional } from '../../shared/interfaces/agenda/profesional.interface'
 import { environment } from '../../../environments/environments';
-import { Respuesta } from 'src/app/shared/interfaces/response.interfaces';
+import { Respuesta } from 'src/app/shared/interfaces/maestros/response.interfaces';
 
 @Injectable({
   providedIn: 'root'

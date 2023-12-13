@@ -1,4 +1,4 @@
-import { EstadosCita } from "src/app/agenda/interfaces/estadosCita.interface";
+import { EstadosCita } from "src/app/shared/interfaces/agenda/estadosCita.interface";
 import { formatoFecha, formatoFechaHora, formatoHora, funtionGetColorReferenciaTurnoById, funtionGetIdTipoIdentificacionById, funtionGetNombreEstadoCitaById, funtionGetNombreProfesionById, funtionGetNombreRegionalById, funtionGetNombreTipoIdentificacionById, generarHorario } from "./maestros.interfaces";
 import { estadosCitaTest } from "src/assets/files/test/citas";
 import { horarioTurnoTest, profesionesTest, regionalesTest, tipoIdentificacionTest } from "src/assets/files/test/maestros";

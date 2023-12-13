@@ -5,16 +5,15 @@ import { MaestrosService } from 'src/app/shared/services/maestros/maestros.servi
 import { SpinnerService } from 'src/app/shared/services/spinner/spinner.service.service';
 import { ToastService } from 'src/app/shared/services/toast/toast.service';
 import localeEs from '@angular/common/locales/es';
-import { Profesional, Secuencia } from 'src/app/agenda/interfaces/profesional.interface';
+import { Profesional, Secuencia } from 'src/app/shared/interfaces/agenda/profesional.interface';
 import { SelectionModel } from '@angular/cdk/collections';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { ModalConfiguracionSecuenciaComponent } from 'src/app/admin/components/modal-configuracion-secuencia/modal-configuracion-secuencia.component';
-import { AccionFormulario } from 'src/app/admin/interfaces/enum';
-import { TitleToast, ToastType } from 'src/app/shared/components/toast/toast.component';
+import { AccionFormulario } from 'src/app/shared/interfaces/general/enum';
 import { ModalAccionLimpiarHorarioComponent } from 'src/app/admin/components/modal-accion-limpiar-horario/modal-accion-limpiar-horario.component';
 import { ModalAccionAgregarSecuenciaComponent } from 'src/app/admin/components/modal-accion-agregar-secuencia/modal-accion-agregar-secuencia.component';
-import { Regional, funtionGetIdTipoIdentificacionById, funtionGetNombreProfesionById, funtionGetNombreRegionalById } from 'src/app/shared/interfaces/maestros.interfaces';
+import { Regional, funtionGetIdTipoIdentificacionById, funtionGetNombreProfesionById, funtionGetNombreRegionalById } from 'src/app/shared/interfaces/maestros/maestros.interfaces';
 import { ModalInfoResultadosAccionMasivaHorarioComponent } from 'src/app/admin/components/modal-info-resultados-accion-masiva-horario/modal-info-resultados-accion-masiva-horario.component';
 import { AdminPersonalService } from 'src/app/admin/services/admin-personal.service';
 
@@ -61,7 +60,7 @@ export class AdminPersonalHorarioSecuenciasPageComponent implements OnInit, Afte
     this.maestroService.getRegionalesObservable().subscribe(resp => {
       if (resp.status == 200) {
         this.regionales = resp.result;
-        this.opcionIdRegional = (this.opcionIdRegional == '') ? this.regionales[0].id : this.opcionIdRegional;
+        this.opcionIdRegional = this.opcionIdRegional ?? this.regionales[0].id;
       }
     });
     this.maestroService.getTiposIdentificacion();
@@ -84,7 +83,7 @@ export class AdminPersonalHorarioSecuenciasPageComponent implements OnInit, Afte
   }
   get tiposIdentificacion() {
     return this.maestroService.tiposIdentificacion
-      ?.filter(tipoIdentificacion => tipoIdentificacion.esMayorEdad == true);
+      ?.filter(tipoIdentificacion => tipoIdentificacion.esMayorEdad);
   }
 
   guardarLocalStorage() {

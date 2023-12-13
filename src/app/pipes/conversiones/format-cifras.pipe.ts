@@ -23,8 +23,9 @@ export class FormatCifrasPipe implements PipeTransform {
       suffix = '';
     }
 
-
-    if (Number.isInteger(newValue)) {
+    if (newValue == null) {
+      return "0";
+    } else if (Number.isInteger(newValue)) {
       return `${newValue} ${suffix}`;
     } else {
       return `${this.decimalPipe.transform(newValue, '1.1-2')} ${suffix}`;

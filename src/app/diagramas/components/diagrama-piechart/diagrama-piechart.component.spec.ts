@@ -55,4 +55,18 @@ describe('DiagramaPiechartComponent', () => {
     fixture.detectChanges();
     expect(fixture.isStable).toBeTruthy();
   })
+  it(' validar ordenamiento de data', () => {
+    component.data = [
+      { name: "categoria 1", value: 50 },
+      { name: "categoria 2", value: 10 },
+      { name: "categoria 3", value: 20 },
+    ]
+    component.ngOnInit();
+    fixture.detectChanges();
+    expect(component.data).toEqual([
+      { name: "categoria 2", value: 10 },
+      { name: "categoria 3", value: 20 },
+      { name: "categoria 1", value: 50 },
+    ])
+  })
 });

@@ -1,6 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { Profesional } from '../../interfaces/profesional.interface';
+import { Profesional } from '../../../shared/interfaces/agenda/profesional.interface';
 
 
 @Component({

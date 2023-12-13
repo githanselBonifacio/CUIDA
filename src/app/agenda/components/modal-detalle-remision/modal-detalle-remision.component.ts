@@ -1,10 +1,9 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { forkJoin } from 'rxjs';
-import { DatosAtencionRemision, Paciente, Cita } from '../../interfaces/remision.interface'
+import { DatosAtencionRemision, Paciente, Cita, Procedimientos, Tratamiento } from '../../../shared/interfaces/agenda/remision.interface'
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { AgendaService } from 'src/app/agenda/services/agenda.service';
 import { AdminRemisionService } from 'src/app/admin/services/admin-remision.service';
-import { ProcedimientosHistorial, TratamientoHistorial } from 'src/app/admin/interfaces/historialRemison.interface';
 
 @Component({
   selector: 'app-modal-detalle-remision',
@@ -15,10 +14,10 @@ export class ModalDetalleRemisionComponent implements OnInit {
 
 
   pageLoaded: boolean = false;
-  paciente: Paciente | any = {};
-  datosAtencionRemision: DatosAtencionRemision | any = {};
-  tratamientos: TratamientoHistorial[] = [];
-  procedimientos: ProcedimientosHistorial | any;
+  paciente!: Paciente;
+  datosAtencionRemision!: DatosAtencionRemision;
+  tratamientos: Tratamiento[] = [];
+  procedimientos!: Procedimientos;
 
 
   constructor(

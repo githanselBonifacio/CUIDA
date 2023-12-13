@@ -1,10 +1,10 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MaestrosService } from 'src/app/shared/services/maestros/maestros.service';
 import { MatPaginator } from '@angular/material/paginator';
-import { Movil } from 'src/app/agenda/interfaces/conductores.interface';
+import { Movil } from 'src/app/shared/interfaces/agenda/conductores.interface';
 import { MatTableDataSource } from '@angular/material/table';
-import { AccionFormulario } from '../../../interfaces/enum';
-import { funtionGetNombreRegionalById } from '../../../../shared/interfaces/maestros.interfaces';
+import { AccionFormulario } from '../../../../shared/interfaces/general/enum';
+import { funtionGetNombreRegionalById } from '../../../../shared/interfaces/maestros/maestros.interfaces';
 import localeEs from '@angular/common/locales/es';
 import { registerLocaleData } from '@angular/common';
 import { AdminPersonalService } from 'src/app/admin/services/admin-personal.service';

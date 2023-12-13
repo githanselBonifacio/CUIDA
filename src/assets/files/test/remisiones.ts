@@ -1,4 +1,5 @@
-import { Remision } from "src/app/admin/interfaces/remision.interface"
+import { Remision } from "src/app/shared/interfaces/agenda/remision.interface"
+
 
 export const dataActualRemision = {
 

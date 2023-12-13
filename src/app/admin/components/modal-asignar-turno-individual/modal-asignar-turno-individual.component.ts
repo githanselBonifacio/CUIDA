@@ -1,8 +1,8 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { ConvertMaestros, ProfesionalConTurnos, Turno } from 'src/app/agenda/interfaces/profesional.interface';
-import { HorarioTurno } from 'src/app/shared/interfaces/maestros.interfaces';
-import { validacionDescansoTurno, validarHorasMaximasTrabajadas } from '../../interfaces/mensajes.data';
+import { ConvertMaestros, ProfesionalConTurnos, Turno } from 'src/app/shared/interfaces/agenda/profesional.interface';
+import { HorarioTurno } from 'src/app/shared/interfaces/maestros/maestros.interfaces';
+import { validacionDescansoTurno, validarHorasMaximasTrabajadas } from '../../../shared/interfaces/general/mensajes.data';
 
 @Component({
   selector: 'app-modal-asignar-turno-individual',

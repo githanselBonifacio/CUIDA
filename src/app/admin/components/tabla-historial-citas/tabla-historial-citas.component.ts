@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { CitaHitorial } from '../../interfaces/historialRemison.interface';
-import { EstadoCita, funtionGetNombreEstadoCitaById } from 'src/app/shared/interfaces/maestros.interfaces';
+import { CitaHitorial } from '../../../shared/interfaces/admin/historialRemison.interface';
+import { EstadoCita, funtionGetNombreEstadoCitaById } from 'src/app/shared/interfaces/maestros/maestros.interfaces';
 import { v4 as uuidv4 } from 'uuid';
 import { MatDialog } from '@angular/material/dialog'
 import { ModalDetalleCitasHistorialComponent } from '../modal-detalle-citas-historial/modal-detalle-citas-historial.component';

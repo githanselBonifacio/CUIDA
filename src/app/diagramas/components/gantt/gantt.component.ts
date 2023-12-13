@@ -1,9 +1,8 @@
 
-import { Actividad } from '../../interfaces/tarea-gantt.interface';
-import { Component, Input, EventEmitter, Output, HostListener, ViewChild, ElementRef, ViewChildren, AfterViewChecked, AfterContentInit, AfterContentChecked, AfterViewInit, ChangeDetectorRef, OnChanges, SimpleChanges } from '@angular/core';
-import { Tarea } from '../../interfaces/tarea-gantt.interface'
+import { Actividad, Tarea } from '../../interfaces/tarea-gantt.interface';
+import { Component, Input, EventEmitter, Output, HostListener, ViewChild, ElementRef, AfterViewInit, ChangeDetectorRef } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog'
-import { Observable, delay, of } from 'rxjs';
+import { EstadosCita } from 'src/app/shared/interfaces/agenda/remision.interface';
 
 
 @Component({
@@ -12,11 +11,13 @@ import { Observable, delay, of } from 'rxjs';
   styleUrls: ['./gantt.component.css'],
 })
 
-export class GanttComponent implements AfterViewInit {
+export class GanttComponent {
 
   constructor(
-    private modalMapRuta: MatDialog,
+    private modalMapRuta: MatDialog
   ) { }
+
+
 
 
   @ViewChild('containerActividad') containerGeneric: ElementRef | undefined;
@@ -29,18 +30,14 @@ export class GanttComponent implements AfterViewInit {
   @Output() reprogramarTareaEvent = new EventEmitter<string>();
 
   @HostListener('window:resize', ['$event'])
-  onResize(event: any) { this.sizeScreen() }
+  onResize(event: any) { }
 
-  @Input() widthContainer = 0;
 
-  ngAfterViewInit() {
-    setTimeout(() => {
-      this.sizeScreen();
-    }, 800);
+  validState(estado: number): boolean {
+    return estado == EstadosCita.agendada
   }
-
-  sizeScreen() {
-    this.widthContainer = this.containerGeneric?.nativeElement.offsetWidth;
+  get widthContainer() {
+    return this.containerGeneric?.nativeElement.offsetWidth;
   }
   get intervaloPx() {
     return (this.fechaFinTurnoUnix - this.fechaInicioTurnoUnix);
@@ -63,13 +60,13 @@ export class GanttComponent implements AfterViewInit {
 
   }
 
-  calcularWidth(duracion: number) {
-    return (duracion * this.widthContainer) / this.intervaloPx;
+  calcularWidth(duracion: number, width: number) {
+    return (duracion * width) / this.intervaloPx;
   }
 
-  calcularLeft(fechaTarea: string) {
+  calcularLeft(fechaTarea: string, width: number) {
     const fechaIso = new Date(fechaTarea).getTime() / 1000;
-    const m = (this.widthContainer / (this.fechaFinTurnoUnix - this.fechaInicioTurnoUnix));
+    const m = (width / (this.fechaFinTurnoUnix - this.fechaInicioTurnoUnix));
     return Math.round((fechaIso * m - this.fechaInicioTurnoUnix * m) * 100) / 100;
 
   }

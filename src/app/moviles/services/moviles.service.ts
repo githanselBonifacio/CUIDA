@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { Desplazamiento } from 'src/app/moviles/interfaces/desplazamiento.interface';
+import { Desplazamiento } from 'src/app/shared/interfaces/moviles/desplazamiento.interface';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Actividad } from 'src/app/diagramas/interfaces/tarea-gantt.interface';
-import { Movil } from '../interfaces/movil.interface'
+import { Movil } from '../../shared/interfaces/moviles/movil.interface'
 import { environment } from '../../../environments/environments';
-import { Respuesta } from 'src/app/shared/interfaces/response.interfaces';
+import { Respuesta } from 'src/app/shared/interfaces/maestros/response.interfaces';
 
 @Injectable({
   providedIn: 'root'

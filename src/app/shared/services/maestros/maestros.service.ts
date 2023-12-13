@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { Regional, HorarioTurno, TipoIdentificacion, Profesion } from '../../interfaces/maestros.interfaces'
+import { Regional, HorarioTurno, TipoIdentificacion, Profesion } from '../../interfaces/maestros/maestros.interfaces'
 import { HttpClient } from '@angular/common/http';
-import { EstadoCita } from "../../interfaces/maestros.interfaces"
+import { EstadoCita } from "../../interfaces/maestros/maestros.interfaces"
 import { environment } from '../../../../environments/environments';
-import { Respuesta } from '../../interfaces/response.interfaces';
+import { Respuesta } from '../../interfaces/maestros/response.interfaces';
 
 @Injectable({
   providedIn: 'root'

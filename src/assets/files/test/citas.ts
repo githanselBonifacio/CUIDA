@@ -1,6 +1,6 @@
-import { CitaHitorial } from "src/app/admin/interfaces/historialRemison.interface";
-import { Cita, EstadosCita } from "src/app/agenda/interfaces/remision.interface";
-import { EstadoCita } from "src/app/shared/interfaces/maestros.interfaces";
+import { CitaHitorial } from "src/app/shared/interfaces/admin/historialRemison.interface";
+import { Cita, EstadosCita } from "src/app/shared/interfaces/agenda/remision.interface";
+import { EstadoCita } from "src/app/shared/interfaces/maestros/maestros.interfaces";
 
 export const citasTest: Cita[] = [
     {
@@ -192,16 +192,16 @@ export const citaHistorialTest: CitaHitorial[] = [
             ],
             "soporteNutricionales": [
                 {
-                    "idSoporteNutricional": 10,
-                    "idCita": "333333333-9",
                     "tipo": "Enteral",
                     "volumen": 88,
                     "duracion": 60,
                     "descripcion": "S.O.G",
-                    "nombreMedicamento": "NUTREN 1.0",
-                    "presentacionMedicamento": "500 ML SOLUCION",
-                    "idMedicamento": "54421",
-                    "codigoMedicamento": "190199",
+                    "medicamento": {
+                        "idMedicamento": "54421",
+                        "nombre": "NUTREN 1.0",
+                        "codigoMedicamento": "190199",
+                        "presentacion": "500 ML SOLUCION",
+                    },
                     "cantidadDosis": "Bolsas",
                     "unidadDosis": "CC",
                     "noPbs": false,
@@ -226,15 +226,18 @@ export const citaHistorialTest: CitaHitorial[] = [
         "especialidad": "Enfermeria",
         "tratamientos": [
             {
-                "idTratamiento": 2,
-                "idCita": "333333333-10",
+
                 "duracion": 5,
                 "frecuencia": "Mensual",
                 "notificado": false,
-                "nombreMedicamento": "NUTREN 1.0",
-                "presentacionMedicamento": "500 ML SOLUCION",
-                "idMedicamento": "54421",
-                "codigoMedicamento": "190199",
+
+                "medicamento": {
+                    "idMedicamento": "54421",
+                    "nombre": "NUTREN 1.0",
+                    "codigoMedicamento": "190199",
+                    "presentacion": "500 ML SOLUCION",
+                },
+
                 "unidadDosis": "mg",
                 "cantidadDosis": 200,
                 "tipoPrestacion": "AplicacionMedicamentos",
@@ -274,16 +277,17 @@ export const citaHistorialTest: CitaHitorial[] = [
             "canalizaciones": [],
             "soporteNutricionales": [
                 {
-                    "idSoporteNutricional": 3,
-                    "idCita": "333333333-10",
                     "tipo": "Enteral",
                     "volumen": 88,
                     "duracion": 60,
                     "descripcion": "S.O.G",
-                    "idMedicamento": "54421",
-                    "nombreMedicamento": "NUTREN 1.0",
-                    "codigoMedicamento": "190199",
-                    "presentacionMedicamento": "500 ML SOLUCION",
+                    "medicamento": {
+                        "idMedicamento": "54421",
+                        "nombre": "NUTREN 1.0",
+                        "codigoMedicamento": "190199",
+                        "presentacion": "500 ML SOLUCION",
+                    },
+
                     "unidadDosis": "mg",
                     "cantidadDosis": "200",
                     "tipoPrestacion": "Sondaje",

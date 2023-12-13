@@ -51,6 +51,11 @@ export function formatoFecha(fecha: Date): string {
     const datePipe = new DatePipe('es');
     return datePipe.transform(fecha, "yyyy-MM-dd")!;
 }
+export function formatoFechaMes(fecha: Date): string {
+    registerLocaleData(localeEs);
+    const datePipe = new DatePipe('es');
+    return datePipe.transform(fecha, "yyyy-MM")!;
+}
 export function formatoFechaHora(fecha: Date): string {
     registerLocaleData(localeEs);
     const datePipe = new DatePipe('es');

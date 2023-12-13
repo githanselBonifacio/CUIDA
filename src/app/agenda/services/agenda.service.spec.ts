@@ -2,8 +2,8 @@ import { TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { AgendaService } from '../services/agenda.service';
 import { environment } from 'src/environments/environments';
-import { TurnoProfesional } from '../interfaces/profesional.interface';
-import { Cita } from '../interfaces/remision.interface';
+import { TurnoProfesional } from '../../shared/interfaces/agenda/profesional.interface';
+import { Cita } from '../../shared/interfaces/agenda/remision.interface';
 
 describe('AgendaService', () => {
   let service: AgendaService;

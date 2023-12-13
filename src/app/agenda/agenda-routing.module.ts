@@ -12,10 +12,6 @@ export const routes: Routes = [
     path: ":fechaTurno/:idRegional/:idHorarioTurno",
     component: MainComponentAgendaComponent,
   },
-  {
-    path: '**',
-    redirectTo: ''
-  }
 ]
 
 

@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { CommonModule, DecimalPipe } from '@angular/common';
 
 import { MainAdminPageComponent } from './pages/main-admin-page/main-admin-page.component';
@@ -93,7 +93,8 @@ import { DiagramasModule } from '../diagramas/diagramas.module';
     MatCheckboxModule,
     MatSlideToggleModule
   ],
-  providers: [DecimalPipe],
+  providers: [DecimalPipe,
+    { provide: LOCALE_ID, useValue: 'es' }],
   exports: [
     MainAdminPageComponent,
   ],

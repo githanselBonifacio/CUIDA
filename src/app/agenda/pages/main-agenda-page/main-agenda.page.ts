@@ -5,19 +5,19 @@ import { MatDialog } from '@angular/material/dialog'
 
 
 import { AgendaService } from 'src/app/agenda/services/agenda.service';
-import { TurnoProfesional } from 'src/app/agenda/interfaces/profesional.interface'
-import { Cita } from "../../interfaces/remision.interface"
+import { TurnoProfesional } from 'src/app/shared/interfaces/agenda/profesional.interface'
+import { Cita } from "../../../shared/interfaces/agenda/remision.interface"
 import { MaestrosService } from 'src/app/shared/services/maestros/maestros.service';
-import { EstadoCita, HorarioTurno, Regional, formatoFecha, formatoFechaHora, formatoHora } from 'src/app/shared/interfaces/maestros.interfaces';
+import { EstadoCita, HorarioTurno, Regional, formatoFecha, formatoFechaHora, formatoHora } from 'src/app/shared/interfaces/maestros/maestros.interfaces';
 import { Actividad } from 'src/app/diagramas/interfaces/tarea-gantt.interface';
-import { generarHorario } from '../../../shared/interfaces/maestros.interfaces'
-import { EstadosCita } from '../../interfaces/estadosCita.interface'
+import { generarHorario } from '../../../shared/interfaces/maestros/maestros.interfaces'
+import { EstadosCita } from '../../../shared/interfaces/agenda/estadosCita.interface'
 import { ModalSeleccionProfesionalComponent } from '../../../agenda/components/modal-seleccion-profesional/modal-seleccion-profesional.component';
 import { VentanaConfirmacionComponent } from 'src/app/shared/components/ventana-confirmacion/ventana-confirmacion.component';
 import { switchMap, filter } from 'rxjs/operators';
 import { SpinnerService } from 'src/app/shared/services/spinner/spinner.service.service';
 import { Observable, forkJoin } from 'rxjs';
-import { Respuesta } from 'src/app/shared/interfaces/response.interfaces';
+import { Respuesta } from 'src/app/shared/interfaces/maestros/response.interfaces';
 import { ToastService } from 'src/app/shared/services/toast/toast.service';
 import { ModalCambioHoraCitaComponent } from '../../components/modal-cambio-hora-cita/modal-cambio-hora-cita.component';
 
@@ -38,7 +38,7 @@ export class MainComponentAgendaComponent implements OnInit {
   horariosTurno: HorarioTurno[] = [];
 
   idRemision: string = "";
-  fechaFiltroTurno: string = localStorage.getItem("fechaTurnoAgenda")!;
+  fechaFiltroTurno: string = localStorage.getItem("fechaTurnoAgenda") ?? formatoFecha(new Date());
   opcionRegional: string = localStorage.getItem("idRegionalAgendaFiltro")!;
   opcionHorarioTurno: number = Number(localStorage.getItem("idHorarioTurnoAgendaFiltro"))!;
 
@@ -54,35 +54,32 @@ export class MainComponentAgendaComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.spinnerService.show();
-    this.maestroService.getRegionalesObservable()
-      .subscribe(resp => {
-        if (resp.status == 200) {
-          this.regionales = resp.result;
-          this.opcionRegional = (!this.opcionRegional) ? this.regionales[0].id : this.opcionRegional;
-        }
-      });
-    this.maestroService.getHorarioTurnoObservable()
-      .subscribe(resp => {
-        if (resp.status == 200) {
-          this.horariosTurno = resp.result?.filter((h: HorarioTurno) => h.esHorarioBase);
-          this.opcionHorarioTurno = (!this.opcionHorarioTurno) ? this.horariosTurno[0].id : this.opcionHorarioTurno;
-        }
-      });
-
-
     this.maestroService.getEstadosCita();
     this.activateRoute.params.subscribe(
       params => {
         if (params['fechaTurno'] != null) {
-
           this.fechaFiltroTurno = params['fechaTurno'];
           this.opcionRegional = params['idRegional'];
           this.opcionHorarioTurno = params['idHorarioTurno'];
         }
-        this.consultarCitas()
-        this.spinnerService.hide();
+
       })
+    forkJoin([
+      this.maestroService.getRegionalesObservable(),
+      this.maestroService.getHorarioTurnoObservable()
+    ]).subscribe(([regionalResp, horarioResp]) => {
+      if (regionalResp.status == 200) {
+        this.regionales = regionalResp.result;
+        this.opcionRegional = this.opcionRegional ?? this.regionales[0].id;
+      }
+      if (horarioResp.status == 200) {
+        this.horariosTurno = horarioResp.result?.filter((h: HorarioTurno) => h.esHorarioBase);
+        this.opcionHorarioTurno = this.opcionHorarioTurno == 0 ? this.horariosTurno[0].id : this.opcionHorarioTurno;
+      }
+
+      this.consultarCitas();
+    })
+
   }
 
   get estadosCita(): EstadoCita[] {
@@ -128,10 +125,11 @@ export class MainComponentAgendaComponent implements OnInit {
       this.actividades = actividades.result;
       this.spinnerService.hide();
       this.cdr.detectChanges();
+      this.spinnerService.hide();
     })
     this.horasTurnoString = generarHorario(this.opcionHorarioTurno);
-    this.router.navigate(['agenda', this.fechaFiltroTurno, this.opcionRegional, this.opcionHorarioTurno]);
     this.guardarLocalStorage();
+    this.router.navigate(['agenda', this.fechaFiltroTurno, this.opcionRegional, this.opcionHorarioTurno]);
   }
 
   filtrarCitasByIdRemision() {

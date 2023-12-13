@@ -88,3 +88,9 @@ tr:nth-child(even) {
     gap: 0.5rem;
     font-size: 1rem
 }
+
+caption {
+    font-size: 0.9;
+    padding-left: 0.5rem;
+    font-style: italic;
+}

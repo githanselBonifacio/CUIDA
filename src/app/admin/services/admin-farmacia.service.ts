@@ -1,8 +1,8 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Respuesta } from 'src/app/shared/interfaces/response.interfaces';
+import { Respuesta } from 'src/app/shared/interfaces/maestros/response.interfaces';
 import { environment } from 'src/environments/environments';
-import { NotificacionFarmacia } from '../interfaces/servicioFarmaceutico.interface';
+import { NotificacionFarmacia } from '../../shared/interfaces/admin/servicioFarmaceutico.interface';
 
 @Injectable({
   providedIn: 'root'

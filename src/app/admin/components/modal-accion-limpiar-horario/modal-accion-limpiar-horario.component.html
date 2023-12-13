@@ -7,7 +7,7 @@
 
             <div class="d-flex">
                 <input type="week" id="semanaSeleccionada" [(ngModel)]="semanaInput">
-                <button class="buttom-i" (click)="agregarFechasSemanas()">
+                <button class="buttom-em" (click)="agregarFechasSemanas()">
                     <em class="bi bi-plus-circle-fill"></em>
                 </button>
             </div>
@@ -18,6 +18,7 @@
 
                 <p *ngIf="fechasSemanas.length==0">agregue semanas...</p>
                 <table class="table-semanas">
+
                     <tbody>
                         <tr *ngFor="let fechas of fechasSemanas" class="container-dias">
                             <td>{{fechas[0]|date:'MMMM'}}</td>

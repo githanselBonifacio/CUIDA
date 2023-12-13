@@ -3,7 +3,7 @@ import { TestBed } from '@angular/core/testing';
 import { AdminFarmaciaService } from './admin-farmacia.service';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { environment } from 'src/environments/environments';
-import { NotificacionFarmacia } from '../interfaces/servicioFarmaceutico.interface';
+import { NotificacionFarmacia } from '../../shared/interfaces/admin/servicioFarmaceutico.interface';
 
 describe('AdminFarmaciaService', () => {
   let service: AdminFarmaciaService;

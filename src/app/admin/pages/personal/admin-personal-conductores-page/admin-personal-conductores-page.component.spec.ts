@@ -10,7 +10,7 @@ import { of } from 'rxjs';
 import { MatTableModule } from '@angular/material/table';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { AccionFormulario } from 'src/app/admin/interfaces/enum';
+import { AccionFormulario } from 'src/app/shared/interfaces/general/enum';
 import { conductoresDataTest } from 'src/assets/files/test/personal';
 import { regionalesTest, tipoIdentificacionTest } from 'src/assets/files/test/maestros';
 

@@ -13,7 +13,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { horarioTurnoTest, horarioTurnoTest2, horarioTurnoTestDescanso, profesionesTest, regionalesTest, tipoIdentificacionTest } from 'src/assets/files/test/maestros';
 import { FormsModule } from '@angular/forms';
-import { Secuencia } from 'src/app/agenda/interfaces/profesional.interface';
+import { Secuencia } from 'src/app/shared/interfaces/agenda/profesional.interface';
 import { profesionalesDataTest } from 'src/assets/files/test/personal';
 
 export class MatDialogMock {

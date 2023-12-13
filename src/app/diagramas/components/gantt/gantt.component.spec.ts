@@ -4,14 +4,14 @@ import { GanttComponent } from './gantt.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { actividadesTest, horas } from 'src/assets/files/test/actividades';
 import { PipesModule } from 'src/app/pipes/pipes.module';
-import { ElementRef } from '@angular/core';
+
+import { EstadosCita } from 'src/app/shared/interfaces/agenda/remision.interface';
 
 describe('GanttComponent', () => {
   let component: GanttComponent;
   let fixture: ComponentFixture<GanttComponent>;
 
   const widthContainer = 100;
-  const divisioncontainerHora = 12.5;
   const postMediaContainer = 50;
   const widthDuracionUnaHora = 12.5;
   beforeEach(() => {
@@ -31,31 +31,22 @@ describe('GanttComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('calcular division hora', () => {
-    component.actividades = actividadesTest;
-    component.horas = horas;
-    component.widthContainer = widthContainer;
-    fixture.detectChanges();
-    const division = component.divisionHora;
-    expect(division).toEqual(divisioncontainerHora)
-  })
   it('calcular posicion barra tiempo gantt', () => {
     component.actividades = actividadesTest;
     component.horas = horas;
     component.onResize({});
-    component.widthContainer = widthContainer;
-    fixture.detectChanges();
     const fechaTareaMedio = actividadesTest[0].tareas[1].fechaProgramada;
-    const leftMedio = component.calcularLeft(fechaTareaMedio);
+    const leftMedio = component.calcularLeft(fechaTareaMedio, widthContainer);
     expect(leftMedio).toEqual(postMediaContainer);
 
+  })
+  it('validar state', () => {
+    expect(component.validState(EstadosCita.agendada)).toBeTruthy();
   })
   it('calcular duracion  barra tiempo gantt', () => {
     component.actividades = actividadesTest;
     component.horas = horas;
-    component.widthContainer = widthContainer;
-    fixture.detectChanges();
-    const widtMedio = component.calcularWidth(actividadesTest[0].tareas[1].duracion);
+    const widtMedio = component.calcularWidth(actividadesTest[0].tareas[1].duracion, widthContainer);
     expect(widtMedio).toEqual(widthDuracionUnaHora);
 
   })

@@ -6,7 +6,7 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { AgendaService } from '../../services/agenda.service';
 import { ToastService } from 'src/app/shared/services/toast/toast.service';
 import { PipesModule } from 'src/app/pipes/pipes.module';
-import { Cita, EstadosCita } from '../../interfaces/remision.interface';
+import { Cita, EstadosCita } from '../../../shared/interfaces/agenda/remision.interface';
 import { Observable, of } from 'rxjs';
 import { profesionalesDataTest2 } from 'src/assets/files/test/personal';
 

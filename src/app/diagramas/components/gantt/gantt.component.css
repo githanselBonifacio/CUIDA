@@ -139,7 +139,7 @@ div[name="container-actividad-time"] {
     }
 
     50% {
-        opacity: 0.4;
+        opacity: 0.7;
 
     }
 
@@ -220,7 +220,7 @@ div[name="container-actividad-time"] {
 
 }
 
-.v-i {
+.constainer-em {
     display: flex;
     gap: 0.5rem;
     padding: 0.25rem;

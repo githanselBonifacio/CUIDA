@@ -1,4 +1,4 @@
-import { HorarioTurno } from "src/app/shared/interfaces/maestros.interfaces";
+import { HorarioTurno } from "src/app/shared/interfaces/maestros/maestros.interfaces";
 
 export interface Profesional {
     idTipoIdentificacion: number;
@@ -43,11 +43,6 @@ export interface TurnoProfesional {
     idRegional: string;
 }
 
-export class ConvertTurno {
-    public static toTurno(json: string): Turno {
-        return JSON.parse(json);
-    }
-}
 
 export class ConvertMaestros {
     public static toProfesional(json: string): Profesional {

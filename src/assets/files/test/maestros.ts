@@ -1,4 +1,4 @@
-import { Profesion } from "src/app/shared/interfaces/maestros.interfaces"
+import { Profesion } from "src/app/shared/interfaces/maestros/maestros.interfaces"
 
 export const regionalesTest = [
     {

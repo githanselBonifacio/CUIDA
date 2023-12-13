@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Respuesta } from 'src/app/shared/interfaces/response.interfaces';
+import { Respuesta } from 'src/app/shared/interfaces/maestros/response.interfaces';
 import { environment } from '../../../environments/environments';
-import { Conductor } from 'src/app/agenda/interfaces/conductores.interface';
+import { Conductor } from 'src/app/shared/interfaces/agenda/conductores.interface';
 
 @Injectable({
   providedIn: 'root'

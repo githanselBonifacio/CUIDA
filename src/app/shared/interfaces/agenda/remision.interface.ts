@@ -1,3 +1,18 @@
+
+
+export interface Remision {
+    idRemision: string;
+    estado: string;
+    numeroIdentificacionPaciente: string;
+    paciente: string;
+    fechaAdmision: Date;
+    programa: string;
+    regional: string;
+    tipoAdmision: string;
+    institucionRemite: string;
+}
+
+
 export interface Cita {
     idCita: string;
     idRemision: string;
@@ -36,14 +51,15 @@ export interface Medicamento {
 
 export interface Tratamiento {
     tipoTratamiento: string;
-    cantidadDosis: string;
+    cantidadDosis: string | number;
     medicamento: Medicamento;
     unidadDosis: string;
     viaAdministracion: string;
     frecuencia: string;
     duracion: number;
-    noPBS: boolean;
+    noPbs: boolean;
     tipoPrestacion: string;
+    notificado: boolean;
 }
 export interface Procedimientos {
     curaciones: Curacion[];
@@ -73,16 +89,17 @@ export interface TomaMuestra {
 }
 
 export interface SoporteNutricional {
+
     medicamento: Medicamento;
-    cantidadDosis: number;
+    cantidadDosis: string | number;
     unidadDosis: string;
     tipo: string;
     descripcion: string;
     duracion: number;
     volumen: number;
-    noPBS: string;
+    noPbs: boolean;
     tipoPrestacion: string;
-
+    notificado: boolean;
 
 }
 export interface Fototerapia {
@@ -139,16 +156,10 @@ export interface Paciente {
     tipoAfiliacion: string;
     nombreAseguradora: string;
     fechaNacimiento: Date;
-    ubicacion: Ubicacion;
+    ubicacion?: Ubicacion;
 }
-
-
-export class Convert {
-    public static toTurno(json: string): Cita {
-        return JSON.parse(json);
-    }
-
-    public static TurnoToJson(value: Cita): string {
-        return JSON.stringify(value);
-    }
+export interface Diagnostico {
+    idRemision: string;
+    idDiagnostico: number;
+    nombreDiagnostico: string;
 }

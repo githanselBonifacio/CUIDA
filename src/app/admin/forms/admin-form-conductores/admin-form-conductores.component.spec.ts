@@ -5,9 +5,8 @@ import { ToastService } from 'src/app/shared/services/toast/toast.service';
 import { AdminPersonalService } from '../../services/admin-personal.service';
 import { of } from 'rxjs';
 import { ReactiveFormsModule } from '@angular/forms';
-import { AccionFormulario } from '../../interfaces/enum';
-import { Respuesta } from 'src/app/shared/interfaces/response.interfaces';
-import { Conductor } from 'src/app/agenda/interfaces/conductores.interface';
+import { AccionFormulario } from '../../../shared/interfaces/general/enum';
+import { Conductor } from 'src/app/shared/interfaces/agenda/conductores.interface';
 import { SimpleChange } from '@angular/core';
 
 

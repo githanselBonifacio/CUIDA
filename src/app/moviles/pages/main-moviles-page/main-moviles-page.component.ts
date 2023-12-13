@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { MaestrosService } from 'src/app/shared/services/maestros/maestros.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MovilesService } from 'src/app/moviles/services/moviles.service';
-import { generarHorario } from '../../../shared/interfaces/maestros.interfaces'
-import { Desplazamiento } from '../../interfaces/desplazamiento.interface'
-import { HorarioTurno, Regional } from 'src/app/shared/interfaces/maestros.interfaces';
+import { generarHorario } from '../../../shared/interfaces/maestros/maestros.interfaces'
+import { Desplazamiento } from '../../../shared/interfaces/moviles/desplazamiento.interface'
+import { HorarioTurno, Regional } from 'src/app/shared/interfaces/maestros/maestros.interfaces';
 import { Actividad } from 'src/app/diagramas/interfaces/tarea-gantt.interface';
 
 

@@ -104,8 +104,7 @@ export class DiagramaPiechartComponent implements OnInit, AfterViewInit {
     this.ubicationLabels = [];
   }
   setValues() {
-    const citasOrdenadas: Data[] = this.data?.sort((d1, d2) => d1.value - d2.value);
-    this.data = citasOrdenadas;
+    this.data?.sort((d1, d2) => d1.value - d2.value);
     this.sumValues = this.data?.map(d => d.value)?.reduce((tot, acc) => tot = tot + acc);
     this.colors = this.isMonoColor ? this.colorScheme.individual : this.colorScheme.domain;
   }

@@ -79,9 +79,11 @@
                     No se encontrarón citas!!!
                 </p>
                 <div *ngFor="let cita of citas" id="container-card-citas">
-                    <app-agenda-card-cita (actualizarMainView)="actualizarComponenteMainAgenda()" [cita]="cita"
-                        [idRegional]="opcionRegional" [fechaTurno]="fechaFiltroTurno"
-                        [idHorarioTurno]="opcionHorarioTurno" [estadosCita]="estadosCita">
+                    <app-agenda-card-cita [cita]="cita" [estadosCita]="estadosCita"
+                        (actualizarMainView)="actualizarComponenteMainAgenda()"
+                        (desagendarCitaEvent)="desagendarCita($event)" (reprogramarCitaEvent)="reprogramarCita($event)"
+                        (mostrarDetalleCitaEvent)="mostrarDetalleCita($event)"
+                        (asignarProfesionalCitaEvent)="asignarProfesionalCita($event)">
                     </app-agenda-card-cita>
                 </div>
             </div>

@@ -20,12 +20,14 @@ import { Observable, forkJoin } from 'rxjs';
 import { Respuesta } from 'src/app/shared/interfaces/maestros/response.interfaces';
 import { ToastService } from 'src/app/shared/services/toast/toast.service';
 import { ModalCambioHoraCitaComponent } from '../../components/modal-cambio-hora-cita/modal-cambio-hora-cita.component';
+import { ModalDetalleRemisionComponent } from '../../components/modal-detalle-remision/modal-detalle-remision.component';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-main-component-agenda',
   templateUrl: './main-agenda.page.html',
   styleUrls: ['./main-agenda.page.css'],
-
+  providers: [DatePipe]
 })
 export class MainComponentAgendaComponent implements OnInit {
 
@@ -262,7 +264,8 @@ export class MainComponentAgendaComponent implements OnInit {
   }
 
   reprogramarCita(idCita: string) {
-    const citaSeleccionada = this.citas.find(cita => cita.idCita == idCita);
+    let citaSeleccionada: Cita = this.citas.find(cita => cita.idCita == idCita)!;
+
     if (citaSeleccionada) {
       const dialogRef = this.dialogo.open(ModalCambioHoraCitaComponent, {
         data: formatoHora(new Date(citaSeleccionada.fechaProgramada))
@@ -270,14 +273,15 @@ export class MainComponentAgendaComponent implements OnInit {
       dialogRef.afterClosed().pipe(
         switchMap(nuevaHora => {
           if (nuevaHora !== '') {
-            return this.agendaService.reprogramarCita(
-              citaSeleccionada.idCita,
-              formatoFechaHora(citaSeleccionada.fechaProgramada),
-              nuevaHora,
-              citaSeleccionada?.idHorarioTurno,
-              citaSeleccionada?.idRegional,
-              citaSeleccionada?.idProfesional!
-            )
+            const [hora, minutos] = nuevaHora.split(':').map(Number);
+
+            let nuevaFechaProgramada: Date = new Date(`${formatoFechaHora(citaSeleccionada.fechaProgramada)}`);
+            nuevaFechaProgramada.setHours(hora, minutos, 0);
+
+            let citaActualizada: Cita = { ...citaSeleccionada, fechaProgramada: new Date(`${formatoFechaHora(nuevaFechaProgramada)}`) }
+            citaActualizada["fechaProgramada"] = new Date(`${formatoFechaHora(nuevaFechaProgramada)}:00`);
+
+            return this.agendaService.reprogramarCita(citaActualizada)
           } else {
             throw Error('No se ha seleccionado una hora');
           }
@@ -290,6 +294,35 @@ export class MainComponentAgendaComponent implements OnInit {
     }
   }
 
+  asignarProfesionalCita(cita: Cita): void {
+    this.agendaService
+      .getProfesionaTurnoRegional(this.fechaFiltroTurno, this.opcionRegional, this.opcionHorarioTurno)
+      .subscribe(resp => {
+        const dialogRef = this.dialogo.open(ModalSeleccionProfesionalComponent, {
+          data: {
+            profesionales: resp.result
+          }
+
+        });
+        dialogRef.afterClosed()
+          .pipe(filter(opcionProfesional => opcionProfesional !== '' && opcionProfesional))
+          .subscribe(opcionProfesional => {
+            cita["idProfesional"] = opcionProfesional;
+            this.agendaService.asignarProfesionaByIdCita(cita)
+              .subscribe(resp => {
+                this.toastService.mostrarToast({ status: resp.status, menssage: resp.message });
+                this.actualizarComponenteMainAgenda();
+
+              });
+          })
+      })
+  }
+
+  mostrarDetalleCita(citaSeleccionada: Cita | undefined): void {
+    this.dialogo.open(ModalDetalleRemisionComponent, {
+      data: citaSeleccionada
+    })
+  }
   actualizarComponenteMainAgenda() {
     this.consultarCitas()
   }

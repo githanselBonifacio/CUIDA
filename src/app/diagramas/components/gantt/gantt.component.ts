@@ -1,6 +1,6 @@
 
 import { Actividad, Tarea } from '../../interfaces/tarea-gantt.interface';
-import { Component, Input, EventEmitter, Output, HostListener, ViewChild, ElementRef, AfterViewInit, ChangeDetectorRef } from '@angular/core';
+import { Component, Input, EventEmitter, Output, HostListener, ViewChild, ElementRef } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog'
 import { EstadosCita } from 'src/app/shared/interfaces/agenda/remision.interface';
 

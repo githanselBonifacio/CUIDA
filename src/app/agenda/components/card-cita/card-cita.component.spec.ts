@@ -128,4 +128,11 @@ describe('CardCitaComponent', () => {
     component.reprogramarHoraCita()
     expect(component).toBeDefined();
   })
+
+  it('mostrar detalle  cita', () => {
+    component.cita = citaDataTest;
+
+    component.mostrarDetalleCita(citaDataTest)
+    expect(component).toBeDefined();
+  })
 });

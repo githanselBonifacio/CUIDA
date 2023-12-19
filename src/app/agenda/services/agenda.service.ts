@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 import { TurnoProfesional } from '../../shared/interfaces/agenda/profesional.interface'
 import { environment } from '../../../environments/environments';
 import { Respuesta } from 'src/app/shared/interfaces/maestros/response.interfaces';
+import { Cita } from 'src/app/shared/interfaces/agenda/remision.interface';
+import { formatoFechaHora } from 'src/app/shared/interfaces/maestros/maestros.interfaces';
 
 @Injectable({
   providedIn: 'root'
@@ -76,15 +78,9 @@ export class AgendaService {
   }
 
 
-  asignarProfesionaByIdCita(idCita: string, numeroIdentificacion: string, fechaProgramada: string, idHorarioTurno: number, idRegional: string) {
-    const params = new HttpParams()
-      .set('idCita', idCita)
-      .set('idProfesional', numeroIdentificacion)
-      .set('fechaProgramada', fechaProgramada)
-      .set('idHorarioTurno', idHorarioTurno)
-      .set('idRegional', idRegional)
+  asignarProfesionaByIdCita(Cita: Cita) {
 
-    return this.http.put<Respuesta>(`${environment.URL_API_CUIDA}/${this.urlRecurso}/asignarProfesionalCita`, params)
+    return this.http.put<Respuesta>(`${environment.URL_API_CUIDA}/${this.urlRecurso}/asignarProfesionalCita`, Cita)
   }
 
   retirarProfesional(idCita: string, numeoIdentificacion: string, fechaTurno: string, idHorarioTurno: number, idRegional: string) {
@@ -97,16 +93,9 @@ export class AgendaService {
 
     return this.http.put<Respuesta>(`${environment.URL_API_CUIDA}/${this.urlRecurso}/desasignarProfesionalCita`, params)
   }
-  reprogramarCita(idCita: string, fechaProgramada: string, nuevaHora: string, idHorarioTurno: number, idRegional: string, idProfesional: string) {
-    const params = new HttpParams()
-      .set('idCita', idCita)
-      .set('fechaProgramada', fechaProgramada)
-      .set('nuevaHora', nuevaHora)
-      .set('idHorarioTurno', idHorarioTurno)
-      .set('idRegional', idRegional)
-      .set('idProfesional', idProfesional)
-
-    return this.http.put<Respuesta>(`${environment.URL_API_CUIDA}/${this.urlRecurso}/reprogramarCita`, params)
+  reprogramarCita(cita: Cita) {
+    const request = { ...cita, fechaProgramada: formatoFechaHora(cita.fechaProgramada) }
+    return this.http.put<Respuesta>(`${environment.URL_API_CUIDA}/${this.urlRecurso}/reprogramarCita`, request)
   }
 
 

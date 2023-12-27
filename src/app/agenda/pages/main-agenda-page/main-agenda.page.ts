@@ -9,7 +9,7 @@ import { TurnoProfesional } from 'src/app/shared/interfaces/agenda/profesional.i
 import { Cita } from "../../../shared/interfaces/agenda/remision.interface"
 import { MaestrosService } from 'src/app/shared/services/maestros/maestros.service';
 import { EstadoCita, HorarioTurno, Regional, formatoFecha, formatoFechaHora, formatoHora } from 'src/app/shared/interfaces/maestros/maestros.interfaces';
-import { Actividad } from 'src/app/diagramas/interfaces/tarea-gantt.interface';
+import { Actividad, Tarea } from 'src/app/diagramas/interfaces/tarea-gantt.interface';
 import { generarHorario } from '../../../shared/interfaces/maestros/maestros.interfaces'
 import { EstadosCita } from '../../../shared/interfaces/agenda/estadosCita.interface'
 import { ModalSeleccionProfesionalComponent } from '../../../agenda/components/modal-seleccion-profesional/modal-seleccion-profesional.component';
@@ -22,6 +22,7 @@ import { ToastService } from 'src/app/shared/services/toast/toast.service';
 import { ModalCambioHoraCitaComponent } from '../../components/modal-cambio-hora-cita/modal-cambio-hora-cita.component';
 import { ModalDetalleRemisionComponent } from '../../components/modal-detalle-remision/modal-detalle-remision.component';
 import { DatePipe } from '@angular/common';
+import { MapRutaComponent } from 'src/app/maps/components/map-ruta/map-ruta.component';
 
 @Component({
   selector: 'app-main-component-agenda',
@@ -95,7 +96,15 @@ export class MainComponentAgendaComponent implements OnInit {
   get fechaTurnoFormat() {
     return formatoFecha(this.citas[0].fechaInicio);
   }
+  get fechaTurno() {
 
+    if (this.citas.length > 0) {
+      return new Date(`${formatoFecha(this.citas[0].fechaInicio)} 00:00:00`);
+    } else {
+      return new Date(`${this.fechaFiltroTurno} 00:00:00`)
+    }
+
+  }
   guardarLocalStorage() {
     localStorage.setItem("fechaTurnoAgenda", this.fechaFiltroTurno);
     localStorage.setItem("idRegionalAgendaFiltro", this.opcionRegional);
@@ -167,7 +176,6 @@ export class MainComponentAgendaComponent implements OnInit {
       .subscribe(resp => {
         if (resp.status == 200) {
           this.consultarCitas();
-        } else {
         }
         this.spinnerService.hide();
         this.toastService.mostrarToast({ status: resp.status, menssage: resp.message });
@@ -321,6 +329,11 @@ export class MainComponentAgendaComponent implements OnInit {
   mostrarDetalleCita(citaSeleccionada: Cita | undefined): void {
     this.dialogo.open(ModalDetalleRemisionComponent, {
       data: citaSeleccionada
+    })
+  }
+  mostrarRutaProfesionalMap(tareas: Tarea[]) {
+    const dialogRef = this.dialogo.open(MapRutaComponent, {
+      data: tareas.filter(t => t.tipo != "DVISITA")
     })
   }
   actualizarComponenteMainAgenda() {

@@ -37,7 +37,7 @@
     height: 100%;
 }
 
-#retirar-profesional::before {
+#retirar-profesional {
     position: absolute;
     font-size: 1.5rem;
     color: var(--red-color);
@@ -47,7 +47,7 @@
 }
 
 #retirar-profesional:hover {
-    border-bottom: 1px solid var(--red-dark-color);
+    transform: scale(1.1);
 }
 
 
@@ -189,14 +189,14 @@ div[name="container-actividad-time"] {
     background-color: var(--quarter-color) !important;
     color: #ffffff !important;
     font-weight: lighter !important;
-    z-index: 99999 !important;
+    z-index: 2 !important;
     border-radius: 2px !important;
     visibility: hidden;
     padding: 0.5rem;
     text-align: left;
     font-size: 0.9rem;
     line-height: 1.1rem;
-    transition: visibility 0.2s ease-in !important;
+    transition: visibility 0.1s ease-in !important;
 }
 
 .gantt-0-VISITA {
@@ -230,7 +230,6 @@ div[name="container-actividad-time"] {
 .tarea-VISITA:hover .vignette,
 .tarea-DVISITA:hover .vignette {
     visibility: visible;
-    transition: all 0.5s !important;
 }
 
 

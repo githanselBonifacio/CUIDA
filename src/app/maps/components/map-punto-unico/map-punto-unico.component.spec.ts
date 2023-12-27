@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { MapPuntoUnicoComponent } from './map-punto-unico.component';
 
 describe('MapPuntoUnicoComponent', () => {

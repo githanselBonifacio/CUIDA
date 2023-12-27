@@ -34,6 +34,7 @@ describe('GanttComponent', () => {
   it('calcular posicion barra tiempo gantt', () => {
     component.actividades = actividadesTest;
     component.horas = horas;
+    component.fechaTurno = new Date(actividadesTest[0].tareas[0].fechaProgramada);
     component.onResize({});
     const fechaTareaMedio = actividadesTest[0].tareas[1].fechaProgramada;
     const leftMedio = component.calcularLeft(fechaTareaMedio, widthContainer);
@@ -46,6 +47,7 @@ describe('GanttComponent', () => {
   it('calcular duracion  barra tiempo gantt', () => {
     component.actividades = actividadesTest;
     component.horas = horas;
+    component.fechaTurno = new Date();
     const widtMedio = component.calcularWidth(actividadesTest[0].tareas[1].duracion, widthContainer);
     expect(widtMedio).toEqual(widthDuracionUnaHora);
 

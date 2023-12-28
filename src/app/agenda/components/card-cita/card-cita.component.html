@@ -68,16 +68,17 @@
                 <div class="i-card-agenda">
                     <ng-container *ngIf="validarEstadoAgendado(cita)">
 
+                        <em class="bi bi-calendar2-check" id="i-card-agenda-confirmar" title="Confirmar"
+                            (click)="confirmarCita()">
+                        </em>
 
                         <em class="bi bi-clock" id="i-card-agenda-reprogramar" title="Reprogramar"
                             (click)="reprogramarHoraCita()">
                         </em>
 
-                        <em class="bi bi-calendar2-x-fill" id="i-card-agenda-desagendar" title="Desagendar"
+                        <em class="bi bi-calendar2-x" id="i-card-agenda-desagendar" title="Desagendar"
                             (click)="desagendarProfesionalCita()">
                         </em>
-
-
 
                     </ng-container>
                     <ng-container *ngIf="validarEstadoNoAgendado(cita)">

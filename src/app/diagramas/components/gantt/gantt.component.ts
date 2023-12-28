@@ -30,6 +30,7 @@ export class GanttComponent {
   @Output() idprofesionalEvent = new EventEmitter<Actividad>();
   @Output() retirarTareaEvent = new EventEmitter<string>();
   @Output() reprogramarTareaEvent = new EventEmitter<string>();
+  @Output() confirmarTareaEvent = new EventEmitter<string>();
   @Output() mostrarRutaMapaEvent = new EventEmitter<Tarea[]>();
 
 
@@ -80,5 +81,8 @@ export class GanttComponent {
   }
   emitirReprogramarTarea(idTarea: string) {
     this.reprogramarTareaEvent.emit(idTarea);
+  }
+  emitirConfirmarTarea(idTarea: string) {
+    this.confirmarTareaEvent.emit(idTarea);
   }
 }

@@ -93,6 +93,16 @@ export class AgendaService {
 
     return this.http.put<Respuesta>(`${environment.URL_API_CUIDA}/${this.urlRecurso}/desasignarProfesionalCita`, params)
   }
+  confirmarCita(idCita: string) {
+    const params = new HttpParams()
+      .set('idCita', idCita)
+    return this.http.put<Respuesta>(`${environment.URL_API_CUIDA}/${this.urlRecurso}/confirmarCita`, params);
+  }
+
+  confirmarCitasTurno(citas: Cita[]) {
+    return this.http.post<Respuesta>(`${environment.URL_API_CUIDA}/${this.urlRecurso}/confirmarCitasTurno`, citas);
+  }
+
   reprogramarCita(cita: Cita) {
     const request = { ...cita, fechaProgramada: formatoFechaHora(cita.fechaProgramada) }
     return this.http.put<Respuesta>(`${environment.URL_API_CUIDA}/${this.urlRecurso}/reprogramarCita`, request)

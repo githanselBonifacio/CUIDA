@@ -163,11 +163,11 @@ em {
 }
 
 #i-card-agenda-desagendar {
-    color: var(--orange-color);
+    color: var(--red-color);
 }
 
 #i-card-agenda-desagendar:hover {
-    color: var(--orange-color-dark);
+    color: var(--red-dark-color);
 }
 
 #i-card-agenda-cancelar {
@@ -178,12 +178,20 @@ em {
     color: var(--red-dark-color);
 }
 
-#i-card-agenda-reprogramar {
+#i-card-agenda-confirmar {
     color: var(--green-color);
 }
 
-#i-card-agenda-reprogramar:hover {
+#i-card-agenda-confirmar:hover {
     color: var(--green-color-dark);
+}
+
+#i-card-agenda-reprogramar {
+    color: var(--orange-color);
+}
+
+#i-card-agenda-reprogramar:hover {
+    color: var(--orange-color-dark);
 }
 
 #conductor-card h5 {

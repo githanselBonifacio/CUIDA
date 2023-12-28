@@ -110,7 +110,9 @@ describe('MainComponentAgendaComponent', () => {
     asignarProfesionalTurno: (): Observable<any> => of({ status: 200, }),
     desasignarProfesionalTurno: (): Observable<any> => of({ status: 200, }),
     retirarProfesional: (): Observable<any> => of({ status: 200, }),
-    reprogramarCita: (): Observable<any> => of({ status: 200 })
+    confirmarCita: (): Observable<any> => of({ status: 200, }),
+    reprogramarCita: (): Observable<any> => of({ status: 200 }),
+    confirmarCitasTurno: (): Observable<any> => of({ status: 200 })
   };
 
   const maestrosServiceMock = {
@@ -295,7 +297,21 @@ describe('MainComponentAgendaComponent', () => {
     fixture.detectChanges();
     expect(component).toBeTruthy();
   })
+  it('confirmar cita ', () => {
+    component.ngOnInit();
+    component.citas = [citaDataTest];
+    component.confirmarCita(citaDataTest.idCita);
+    fixture.detectChanges();
+    expect(component).toBeTruthy();
+  })
 
+  it('confirmar cita turno ', () => {
+    component.ngOnInit();
+    component.citas = [citaDataTest];
+    component.confirmarTurno();
+    fixture.detectChanges();
+    expect(component).toBeTruthy();
+  })
   it('asignar cita a profesional', () => {
     component.ngOnInit();
     component.citas = [citaDataTest];

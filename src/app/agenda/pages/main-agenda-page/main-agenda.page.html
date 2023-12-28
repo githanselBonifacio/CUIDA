@@ -12,6 +12,7 @@
                                 [disabled]="disabledAutoagendar">Agendar</button>
                             <button class="buttom-seleccion" (click)="desagendarTurnoCompleto()"
                                 [disabled]="disabledAutoagendar">Desagendar </button>
+                            <button class="buttom-confirm" (click)="confirmarTurno()">Confirmar</button>
                         </div>
 
                         <div class="container-buttom-flex ">
@@ -84,7 +85,8 @@
                         (actualizarMainView)="actualizarComponenteMainAgenda()"
                         (desagendarCitaEvent)="desagendarCita($event)" (reprogramarCitaEvent)="reprogramarCita($event)"
                         (mostrarDetalleCitaEvent)="mostrarDetalleCita($event)"
-                        (asignarProfesionalCitaEvent)="asignarProfesionalCita($event)">
+                        (asignarProfesionalCitaEvent)="asignarProfesionalCita($event)"
+                        (confirmarCitaEvent)="confirmarCita($event)">
                     </app-agenda-card-cita>
                 </div>
             </div>
@@ -95,7 +97,8 @@
                 <app-diagramas-gantt [actividades]="actividades" [horas]="horasTurnoString" [fechaTurno]="fechaTurno"
                     [tituloActorResponsable]="'Profesionales'" (idprofesionalEvent)="desasignarProfesionalTurno($event)"
                     (mostrarRutaMapaEvent)="mostrarRutaProfesionalMap($event)"
-                    (retirarTareaEvent)="desagendarCita($event)" (reprogramarTareaEvent)="reprogramarCita($event)">
+                    (retirarTareaEvent)="desagendarCita($event)" (reprogramarTareaEvent)="reprogramarCita($event)"
+                    (confirmarTareaEvent)="confirmarCita($event)">
                 </app-diagramas-gantt>
 
 

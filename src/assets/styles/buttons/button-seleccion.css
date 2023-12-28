@@ -5,6 +5,20 @@
     gap: 1rem;
 }
 
+.buttom-confirm {
+    border-color: transparent;
+    background-color: var(--green-color);
+    border-radius: 5px;
+    color: white;
+    outline: none;
+}
+
+.buttom-confirm:hover {
+    background-color: var(--green-color-dark);
+    color: var(--gris4-color);
+    box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5);
+}
+
 .buttom-primary {
     background-color: var(--primary-color);
     color: var(--gris4-color);

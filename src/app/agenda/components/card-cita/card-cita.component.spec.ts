@@ -41,34 +41,7 @@ describe('CardCitaComponent', () => {
     "numeroIdentificacionPaciente": "14528746825",
     "tipoIdentificacionPaciente": "Cédula ciudadania"
   }
-  const agendaServiceMock = {
-    getProfesionaTurnoRegional: () => of(
-      {
-        status: 200,
-        result: profesionalesDataTest2
-      }
-    ),
-    retirarProfesional: () => of(
-      {
-        status: 200
-      }
-    ),
-    reprogramarCita: () => of(
-      of(
-        {
-          status: 200
-        }
-      )
-    ),
 
-    asignarProfesionaByIdCita: () =>
-      of(
-        {
-          status: 200
-        }
-      )
-
-  };
   const toastServiceMock = {
     mostrarToast: (): Observable<any> => of(),
   };
@@ -80,7 +53,6 @@ describe('CardCitaComponent', () => {
         PipesModule,
       ],
       providers: [
-        { provide: AgendaService, useValue: agendaServiceMock },
         { provide: ToastService, useValue: {} },
         { provide: MatDialog, useClass: MatDialogMock },
         { provide: ToastService, useValue: toastServiceMock },
@@ -128,7 +100,12 @@ describe('CardCitaComponent', () => {
     component.reprogramarHoraCita()
     expect(component).toBeDefined();
   })
+  it('confirmar cita ', () => {
+    component.cita = citaDataTest;
 
+    component.confirmarCita()
+    expect(component).toBeDefined();
+  })
   it('mostrar detalle  cita', () => {
     component.cita = citaDataTest;
 

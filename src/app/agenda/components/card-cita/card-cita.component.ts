@@ -19,10 +19,12 @@ export class CardCitaComponent {
   @Output() reprogramarCitaEvent = new EventEmitter<string>();
   @Output() desagendarCitaEvent = new EventEmitter<string>();
   @Output() mostrarDetalleCitaEvent = new EventEmitter<Cita>();
+  @Output() confirmarCitaEvent = new EventEmitter<string>();
   @Output() asignarProfesionalCitaEvent = new EventEmitter<Cita>();
 
   convertEstado = funtionGetNombreEstadoCitaById;
   constructor() { registerLocaleData(localeEs); }
+
   asignarProfesionalCita(): void {
     this.asignarProfesionalCitaEvent.emit(this.cita);
   }
@@ -33,6 +35,9 @@ export class CardCitaComponent {
 
   reprogramarHoraCita(): void {
     this.reprogramarCitaEvent.emit(this.cita?.idCita);
+  }
+  confirmarCita(): void {
+    this.confirmarCitaEvent.emit(this.cita?.idCita);
   }
 
   mostrarDetalleCita(citaSeleccionada: Cita | undefined): void {
@@ -45,6 +50,7 @@ export class CardCitaComponent {
   validarEstadoAgendado(cita: Cita | undefined): boolean {
     return cita?.idEstado == EstadosCita.agendada;
   }
+
 
   actualizarComponenteMainAgenda() {
     this.actualizarMainView.emit();

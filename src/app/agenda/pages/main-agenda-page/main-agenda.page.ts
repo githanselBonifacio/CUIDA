@@ -181,6 +181,26 @@ export class MainComponentAgendaComponent implements OnInit {
         this.toastService.mostrarToast({ status: resp.status, menssage: resp.message });
       })
   }
+  confirmarTurno() {
+    const dialogoRef = this.dialogo.open(VentanaConfirmacionComponent, {
+      data: {
+        "mensaje": "Desea confirmar todas las citas de este turno?"
+      }
+    });
+
+    dialogoRef.afterClosed()
+      .subscribe(resp => {
+        if (resp) {
+          this.spinnerService.show();
+          this.agendaService.confirmarCitasTurno(this.citas)
+            .subscribe(response => {
+              this.consultarCitas();
+              this.spinnerService.hide();
+              this.toastService.mostrarToast({ status: response.status, menssage: response.message });
+            })
+        }
+      })
+  }
   agregarProfesionalTurno(): void {
     this.agendaService
       .getProfesionalDisponibleByturnoRegional(this.fechaFiltroTurno, this.opcionRegional)
@@ -302,6 +322,23 @@ export class MainComponentAgendaComponent implements OnInit {
     }
   }
 
+  confirmarCita(idCita: string) {
+    const dialogRef = this.dialogo.open(VentanaConfirmacionComponent, {
+      data: {
+        "mensaje": "Desea confirmar cita?"
+      }
+    })
+    dialogRef.afterClosed()
+      .subscribe(resp => {
+        if (resp) {
+          this.agendaService.confirmarCita(idCita)
+            .subscribe(response => {
+              this.toastService.mostrarToast({ status: response.status, menssage: response.message });
+              this.consultarCitas();
+            })
+        }
+      })
+  }
   asignarProfesionalCita(cita: Cita): void {
     this.agendaService
       .getProfesionaTurnoRegional(this.fechaFiltroTurno, this.opcionRegional, this.opcionHorarioTurno)

@@ -85,4 +85,17 @@ describe('GanttComponent', () => {
     component.emitirReprogramarTarea(tareaEmitida);
     fixture.detectChanges();
   })
+
+
+  it('emitir confirmar tarea', () => {
+    let tareaRecibida: string = "";
+    const tareaEmitida = actividadesTest[0].tareas[0].id;
+
+    component.confirmarTareaEvent.asObservable().subscribe((tarea: string) => {
+      tareaRecibida = tarea;
+      expect(tareaRecibida).toEqual(tareaEmitida)
+    });
+    component.emitirConfirmarTarea(tareaEmitida);
+    fixture.detectChanges();
+  })
 });

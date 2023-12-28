@@ -4,6 +4,7 @@ import { AgendaService } from '../services/agenda.service';
 import { environment } from 'src/environments/environments';
 import { TurnoProfesional } from '../../shared/interfaces/agenda/profesional.interface';
 import { Cita } from '../../shared/interfaces/agenda/remision.interface';
+import { citasTest } from 'src/assets/files/test/citas';
 
 describe('AgendaService', () => {
   let service: AgendaService;
@@ -20,7 +21,7 @@ describe('AgendaService', () => {
     idProfesional: 'ID del profesional',
     idRegional: 'ID del regional',
   };
-  const citas: Cita[] = []
+
   const cita: Cita = {
     "idCita": "plm6g5f4_2",
     "idRemision": "plm6g5f4",
@@ -90,7 +91,27 @@ describe('AgendaService', () => {
   })
 
 
+  it('confirmar cita', () => {
+    service.confirmarCita(cita.idCita).subscribe(resp => {
+      expect(resp).toBeDefined();
+    })
 
+    const req = httpMock.expectOne(`${environment.URL_API_CUIDA}/${urlRecurso}/confirmarCita`
+      , "confirmar cita")
+    expect(req.request.method).toBe('PUT');
+
+  })
+
+  it('confirmar citas turno', () => {
+    service.confirmarCitasTurno(citasTest).subscribe(resp => {
+      expect(resp).toBeDefined();
+    })
+
+    const req = httpMock.expectOne(`${environment.URL_API_CUIDA}/${urlRecurso}/confirmarCitasTurno`
+      , "confirmar citas turno")
+    expect(req.request.method).toBe('POST');
+
+  })
   it('desasignar profesional a turno', () => {
     service.desasignarProfesionalTurno(turnoProfesional).subscribe(resp => {
       expect(resp).toBeDefined();

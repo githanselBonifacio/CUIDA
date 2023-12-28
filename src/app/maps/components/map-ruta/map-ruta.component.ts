@@ -1,4 +1,4 @@
-import { Component, Inject, AfterViewInit, SimpleChanges, ViewChild, ElementRef, OnChanges } from '@angular/core';
+import { Component, Inject, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
 import * as mapboxgl from 'mapbox-gl';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Tarea } from 'src/app/diagramas/interfaces/tarea-gantt.interface';
@@ -24,19 +24,17 @@ export class MapRutaComponent implements AfterViewInit {
     let map = new mapboxgl.Map({
       container: this.divMap?.nativeElement, // container ID
       style: 'mapbox://styles/mapbox/streets-v12', // style URL
-      center: [this.tareas[0]?.longitud ?? 0, this.tareas[0]?.latitud ?? 0], // starting position [lng, lat]
       zoom: 15,
 
     });
 
     let limites = new mapboxgl.LngLatBounds();
 
-    for (let i = 0; i < this.tareas.length; i++) {
-      if (this.tareas[i].tipo != "dvisita") {
-        let marker = new mapboxgl.Marker({
-          color: '#0033A0'
-        })
-          .setLngLat([this.tareas[i].longitud, this.tareas[i].latitud])
+    console.log(JSON.stringify(this.tareas))
+    for (const element of this.tareas) {
+      if (element.tipo != "DVISITA") {
+        let marker = new mapboxgl.Marker({ color: '#0033A0' })
+          .setLngLat([element.longitud, element.latitud])
           .addTo(map);
         limites.extend(marker.getLngLat())
       }

@@ -4,6 +4,7 @@ import { AgendaService } from '../services/agenda.service';
 import { environment } from 'src/environments/environments';
 import { TurnoProfesional } from '../../shared/interfaces/agenda/profesional.interface';
 import { Cita } from '../../shared/interfaces/agenda/remision.interface';
+import { citasTest } from 'src/assets/files/test/citas';
 
 describe('AgendaService', () => {
   let service: AgendaService;
@@ -13,16 +14,30 @@ describe('AgendaService', () => {
   const idProfesional = '989898989';
   const idRegional = '427';
   const fechaTurno = '2023-07-07';
-  const fechaCita = '2023-07-07 08:00';
-  const nuevaHora = "09:30";
   const idHorarioTurno = 1;
   const turnoProfesional: TurnoProfesional = {
-    fechaTurno: new Date(), // O un string
+    fechaTurno: new Date(),
     idHorarioTurno: 1,
     idProfesional: 'ID del profesional',
     idRegional: 'ID del regional',
   };
-  const citas: Cita[] = []
+
+  const cita: Cita = {
+    "idCita": "plm6g5f4_2",
+    "idRemision": "plm6g5f4",
+    "duracion": 2700,
+    "holgura": 900,
+    "fechaInicio": new Date("2023-07-08 11:50:00"),
+    "fechaProgramada": new Date("2023-07-08 11:50:00"),
+    "latitud": 10.988777, "longitud": -74.814695,
+    "especialidad": "Enfermeria", "idEstado": 1,
+    "idRegional": "427", "idHorarioTurno": 1,
+    "idProfesional": "14141414141",
+    "idConductor": null,
+    "paciente": "SOFIA LOPERA MARTINEZ",
+    "numeroIdentificacionPaciente": "84545588555",
+    "tipoIdentificacionPaciente": "Cédula ciudadania"
+  }
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
@@ -76,7 +91,27 @@ describe('AgendaService', () => {
   })
 
 
+  it('confirmar cita', () => {
+    service.confirmarCita(cita.idCita).subscribe(resp => {
+      expect(resp).toBeDefined();
+    })
 
+    const req = httpMock.expectOne(`${environment.URL_API_CUIDA}/${urlRecurso}/confirmarCita`
+      , "confirmar cita")
+    expect(req.request.method).toBe('PUT');
+
+  })
+
+  it('confirmar citas turno', () => {
+    service.confirmarCitasTurno(citasTest).subscribe(resp => {
+      expect(resp).toBeDefined();
+    })
+
+    const req = httpMock.expectOne(`${environment.URL_API_CUIDA}/${urlRecurso}/confirmarCitasTurno`
+      , "confirmar citas turno")
+    expect(req.request.method).toBe('POST');
+
+  })
   it('desasignar profesional a turno', () => {
     service.desasignarProfesionalTurno(turnoProfesional).subscribe(resp => {
       expect(resp).toBeDefined();
@@ -134,7 +169,7 @@ describe('AgendaService', () => {
 
 
   it('asignar  profesional a cita por id cita', () => {
-    service.asignarProfesionaByIdCita(idCita, idProfesional, fechaTurno, idHorarioTurno, idRegional).subscribe(resp => {
+    service.asignarProfesionaByIdCita(cita).subscribe(resp => {
       expect(resp).toBeDefined();
     })
 
@@ -155,7 +190,7 @@ describe('AgendaService', () => {
   });
 
   it('reprogramar cita mismo turno y profesional', () => {
-    service.reprogramarCita(idCita, fechaCita, nuevaHora, idHorarioTurno, idRegional, idProfesional).subscribe(resp => {
+    service.reprogramarCita(cita).subscribe(resp => {
       expect(resp).toBeDefined();
     })
 

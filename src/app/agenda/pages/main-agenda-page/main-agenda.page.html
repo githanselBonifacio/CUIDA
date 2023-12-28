@@ -12,6 +12,7 @@
                                 [disabled]="disabledAutoagendar">Agendar</button>
                             <button class="buttom-seleccion" (click)="desagendarTurnoCompleto()"
                                 [disabled]="disabledAutoagendar">Desagendar </button>
+                            <button class="buttom-confirm" (click)="confirmarTurno()">Confirmar</button>
                         </div>
 
                         <div class="container-buttom-flex ">
@@ -78,10 +79,14 @@
                 <p *ngIf="citas.length==0">
                     No se encontrarón citas!!!
                 </p>
+
                 <div *ngFor="let cita of citas" id="container-card-citas">
-                    <app-agenda-card-cita (actualizarMainView)="actualizarComponenteMainAgenda()" [cita]="cita"
-                        [idRegional]="opcionRegional" [fechaTurno]="fechaFiltroTurno"
-                        [idHorarioTurno]="opcionHorarioTurno" [estadosCita]="estadosCita">
+                    <app-agenda-card-cita [cita]="cita" [estadosCita]="estadosCita"
+                        (actualizarMainView)="actualizarComponenteMainAgenda()"
+                        (desagendarCitaEvent)="desagendarCita($event)" (reprogramarCitaEvent)="reprogramarCita($event)"
+                        (mostrarDetalleCitaEvent)="mostrarDetalleCita($event)"
+                        (asignarProfesionalCitaEvent)="asignarProfesionalCita($event)"
+                        (confirmarCitaEvent)="confirmarCita($event)">
                     </app-agenda-card-cita>
                 </div>
             </div>
@@ -89,9 +94,11 @@
         <div class="col-lg-9 col-xl-9  col-xxl-10" id="container-agenda-gantt">
             <div class="panel-gantt">
 
-                <app-diagramas-gantt [actividades]="actividades" [horas]="horasTurnoString"
+                <app-diagramas-gantt [actividades]="actividades" [horas]="horasTurnoString" [fechaTurno]="fechaTurno"
                     [tituloActorResponsable]="'Profesionales'" (idprofesionalEvent)="desasignarProfesionalTurno($event)"
-                    (retirarTareaEvent)="desagendarCita($event)" (reprogramarTareaEvent)="reprogramarCita($event)">
+                    (mostrarRutaMapaEvent)="mostrarRutaProfesionalMap($event)"
+                    (retirarTareaEvent)="desagendarCita($event)" (reprogramarTareaEvent)="reprogramarCita($event)"
+                    (confirmarTareaEvent)="confirmarCita($event)">
                 </app-diagramas-gantt>
 
 

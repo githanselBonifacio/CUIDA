@@ -1,7 +1,60 @@
 @import url('../../../../styles.css');
 
 
-#accordion-citas button {
+.session-card {
+    display: block;
+    width: 100%;
+    color: var(--quarter-color);
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+    padding: 0.5rem 0.3rem 0.8rem 1.5rem;
+    box-shadow: 2px 2px 5px var(--gris2-color);
+    border: 1px solid var(--gris3-color);
+}
+
+.detail-card {
+    display: block;
+
+}
+
+details {
+    margin-top: -1.5rem;
+}
+
+@keyframes reveal {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+
+details[open] summary+* {
+    animation: reveal 0.5s;
+
+}
+
+
+summary {
+    margin-top: -2.5rem;
+    margin-left: 1.5rem;
+    padding-bottom: 0.5rem;
+    color: var(--quarter-color);
+}
+
+summary::before {
+    margin-right: 0.2rem;
+}
+
+.card-body-detail {
+    padding: 0.5rem 0.5rem 0.5rem 1.5rem;
+    border: 1px solid var(--gris3-color);
+}
+
+button {
     display: block;
     width: 100%;
     color: var(--quarter-color);
@@ -12,28 +65,28 @@
 
 }
 
-#accordion-citas button[name="estado-1"] {
+.estado-1 {
     background: linear-gradient(to right, var(--orange-color) 0%, var(--orange-color) 5%, white 5%, white 95%);
 }
 
-#accordion-citas button[name="estado-2"] {
+.estado-2 {
     background: linear-gradient(to right, var(--second-color-2) 0%, var(--second-color-2) 5%, white 5%, white 95%);
 }
 
-#accordion-citas button[name="estado-3"] {
+.estado-3 {
     background: linear-gradient(to right, purple 0%, purple 5%, white 5%, white 95%);
 }
 
-#accordion-citas button[name="estado-4"] {
+.estado-4 {
     background: linear-gradient(to right, var(--green-color) 0%, var(--green-color) 5%, white 5%, white 95%);
 }
 
-#accordion-citas button[name="estado-5"] {
+.estado-5 {
     background: linear-gradient(to right, var(--quarter-color) 0%, var(--quarter-color) 5%, white 5%, white 95%);
 
 }
 
-#accordion-citas button[name="estado-6"] {
+.estado-6 {
     background: linear-gradient(to right, black 0%, black 5%, white 5%, white 95%);
 }
 
@@ -42,7 +95,7 @@ div[name="contenido-accordion"] {
     border: 1px solid var(--gris3-color)
 }
 
-#accordion-citas button::after {
+button::after {
     background-color: var(--third-color);
     border-radius: 50%;
 
@@ -83,6 +136,10 @@ div[name="contenido-accordion"] {
     font-size: 5rem;
 }
 
+em {
+    margin-right: 0.25rem;
+}
+
 .i-card-agenda {
     display: flex;
     justify-content: flex-end;
@@ -106,11 +163,11 @@ div[name="contenido-accordion"] {
 }
 
 #i-card-agenda-desagendar {
-    color: var(--orange-color);
+    color: var(--red-color);
 }
 
 #i-card-agenda-desagendar:hover {
-    color: var(--orange-color-dark);
+    color: var(--red-dark-color);
 }
 
 #i-card-agenda-cancelar {
@@ -121,12 +178,20 @@ div[name="contenido-accordion"] {
     color: var(--red-dark-color);
 }
 
-#i-card-agenda-reprogramar {
+#i-card-agenda-confirmar {
     color: var(--green-color);
 }
 
-#i-card-agenda-reprogramar:hover {
+#i-card-agenda-confirmar:hover {
     color: var(--green-color-dark);
+}
+
+#i-card-agenda-reprogramar {
+    color: var(--orange-color);
+}
+
+#i-card-agenda-reprogramar:hover {
+    color: var(--orange-color-dark);
 }
 
 #conductor-card h5 {

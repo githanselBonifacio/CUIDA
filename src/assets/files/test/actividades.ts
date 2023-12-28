@@ -10,7 +10,7 @@ export const actividadesTest: Actividad[] = [
             {
                 "id": "8d4asdff54f_2",
                 "fechaInicio": "2023-07-08 06:00",
-                "fechaProgramada": "2023-07-08 06:00",
+                "fechaProgramada": "2023-07-08 06:00:00",
                 "duracion": 3600,
                 "holgura": 3600,
                 "latitud": 11.004831,

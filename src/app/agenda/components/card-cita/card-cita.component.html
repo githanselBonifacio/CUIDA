@@ -1,100 +1,97 @@
-<div class="accordion accordion-flush" id="accordion-citas">
-    <div class="accordion-item">
-        <h2 class="accordion-header" id="heading{{cita?.idCita}}">
-            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                [attr.data-bs-target]="'#collapse'+cita?.idCita" aria-expanded="false"
-                [attr.aria-controls]="'#collapse'+cita?.idCita" [name]="'estado-'+cita?.idEstado">
+<div class="container-card" [ngClass]="'estado-'+cita?.idEstado">
+    <section class="session-card">
+        <div class="card-body">
+            <div class="header-cita">
+                <h6>{{cita?.idRemision}}</h6>
+                <div>
+                    <em class="bi bi-eye-fill" title="ubicación" (click)="mostrarDetalleCita(cita)"></em>
+                </div>
+            </div>
 
-                <div class="header-cita">
-                    <h6>{{cita?.idRemision}}</h6>
+            <div class="item-cita">
+                <div>
+                    {{cita?.paciente|titlecase}}
                     <div>
-                        <em class="bi bi-eye-fill" title="ubicación" (click)="mostrarDetalleCita(cita)"></em>
-                    </div>
-                </div>
-
-                <div class="item-cita">
-                    <div>
-                        {{cita?.paciente|titlecase}}
-                        <div>
-                            {{cita?.tipoIdentificacionPaciente??''|obtenerSiglasIdentificacion}}:
-                            {{cita?.numeroIdentificacionPaciente}}
-                        </div>
-                    </div>
-                </div>
-
-
-                <div style="margin-top: 0.5rem;" *ngIf="cita?.idProfesional">
-                    <span>Profesional:</span>
-                    {{cita?.idProfesional}}
-                </div>
-                <div class="content-estado-card">
-                    <div class="item-cita" id="estado-{{cita?.idEstado}}" name="estado-card">
-                        {{convertEstado(cita?.idEstado??'', estadosCita)}}
-                    </div>
-                </div>
-
-
-            </button>
-        </h2>
-        <div id="collapse{{cita?.idCita}}" class="accordion-collapse collapse" name="contenido-accordion"
-            [attr.aria-labelledby]="'heading'+cita?.idCita" data-bs-parent="#accordion-citas">
-            <div class="accordion-body">
-                <div class="card-body">
-
-                    <div class="item-cita">
-                        <em class="bi bi-calendar"></em>
-                        {{cita?.fechaInicio |date :'dd/MM/yyyy HH:mm' }}
-                    </div>
-
-                    <div class="item-cita">
-                        <em class="bi bi-calendar-check"></em>
-                        {{cita?.fechaProgramada |date:'dd/MM/yyyy HH:mm'}}
-                    </div>
-                    <div class="item-cita">
-                        <em class="bi bi-clock"> </em>
-                        {{cita?.duracion??0|formatearSegundos }}
-                    </div>
-                    <div class="item-cita">
-                        <em class="bi bi-hourglass-bottom"></em>
-                        {{cita?.holgura??0
-                        |formatearSegundos}}
-                    </div>
-
-                    <div class="card-body" *ngIf="cita?.idConductor" id="conductor-card">
-                        <h5 for="conductor" class="card-title">conductor asignado</h5>
-                        <span class="input-group-text" id="conductor">
-                            <em class="bi bi-file-person-fill"></em>
-                            {{cita?.idConductor}}</span>
-                        <span class="input-group-text"><em class="bi bi-card-heading"></em> {{cita?.idConductor}}</span>
-                    </div>
-
-
-                    <div class="i-card-agenda">
-                        <ng-container *ngIf="validarEstadoAgendado(cita)">
-
-
-                            <em class="bi bi-clock" id="i-card-agenda-reprogramar" title="Reprogramar"
-                                (click)="reprogramarHoraCita()">
-                            </em>
-
-                            <em class="bi bi-calendar2-x-fill" id="i-card-agenda-desagendar" title="Desagendar"
-                                (click)="desagendarProfesionalCita()">
-                            </em>
-
-
-
-                        </ng-container>
-                        <ng-container *ngIf="validarEstadoNoAgendado(cita)">
-                            <em class="bi bi-clock" id="i-card-agenda-reprogramar" title="Reprogramar"
-                                (click)="reprogramarHoraCita()">
-                            </em>
-                            <em class="bi bi-calendar-plus-fill" (click)="asignarProfesionalCita()" title="Agendar"
-                                id="i-card-agenda-agendar">
-                            </em>
-                        </ng-container>
+                        {{cita?.tipoIdentificacionPaciente??''|obtenerSiglasIdentificacion}}:
+                        {{cita?.numeroIdentificacionPaciente}}
                     </div>
                 </div>
             </div>
+
+            <div style="margin-top: 0.5rem;" *ngIf="cita?.idProfesional">
+                <span>Profesional:</span>
+                {{cita?.idProfesional}}
+            </div>
+            <div class="content-estado-card">
+                <div class="item-cita" id="estado-{{cita?.idEstado}}" name="estado-card">
+                    {{convertEstado(cita?.idEstado??'', estadosCita)}}
+                </div>
+            </div>
+
         </div>
-    </div>
+
+    </section>
+</div>
+<div class="detail-card">
+    <section>
+        <details>
+            <summary>ver más</summary>
+            <div class="card-body-detail">
+                <div class="item-cita">
+                    <em class="bi bi-calendar"></em>
+                    {{cita?.fechaInicio |date :'dd/MM/yyyy HH:mm' }}
+                </div>
+
+                <div class="item-cita">
+                    <em class="bi bi-calendar-check"></em>
+                    {{cita?.fechaProgramada |date:'dd/MM/yyyy HH:mm'}}
+                </div>
+                <div class="item-cita">
+                    <em class="bi bi-clock"> </em>
+                    {{cita?.duracion??0|formatearSegundos }}
+                </div>
+                <div class="item-cita">
+                    <em class="bi bi-hourglass-bottom"></em>
+                    {{cita?.holgura??0
+                    |formatearSegundos}}
+                </div>
+
+                <div class="card-body" *ngIf="cita?.idConductor" id="conductor-card">
+                    <h5 for="conductor" class="card-title">conductor asignado</h5>
+                    <span class="input-group-text" id="conductor">
+                        <em class="bi bi-file-person-fill"></em>
+                        {{cita?.idConductor}}</span>
+                    <span class="input-group-text"><em class="bi bi-card-heading"></em> {{cita?.idConductor}}</span>
+                </div>
+
+
+                <div class="i-card-agenda">
+                    <ng-container *ngIf="validarEstadoAgendado(cita)">
+
+                        <em class="bi bi-calendar2-check" id="i-card-agenda-confirmar" title="Confirmar"
+                            (click)="confirmarCita()">
+                        </em>
+
+                        <em class="bi bi-clock" id="i-card-agenda-reprogramar" title="Reprogramar"
+                            (click)="reprogramarHoraCita()">
+                        </em>
+
+                        <em class="bi bi-calendar2-x" id="i-card-agenda-desagendar" title="Desagendar"
+                            (click)="desagendarProfesionalCita()">
+                        </em>
+
+                    </ng-container>
+                    <ng-container *ngIf="validarEstadoNoAgendado(cita)">
+                        <em class="bi bi-clock" id="i-card-agenda-reprogramar" title="Reprogramar"
+                            (click)="reprogramarHoraCita()">
+                        </em>
+                        <em class="bi bi-calendar-plus-fill" (click)="asignarProfesionalCita()" title="Agendar"
+                            id="i-card-agenda-agendar">
+                        </em>
+                    </ng-container>
+                </div>
+            </div>
+        </details>
+
+    </section>
 </div>

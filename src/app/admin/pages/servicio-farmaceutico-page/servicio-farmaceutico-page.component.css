@@ -60,21 +60,24 @@
     border: 0;
 }
 
-#notificar em {
+#notificar {
     font-size: 1.6rem;
     font-weight: bold;
-    padding: 0.5rem 1rem 0.5rem 1rem;
+    padding: 1rem;
     border-radius: 5px;
-    color: var(--green-color);
     margin-right: 0.5rem;
 
+}
+
+#notificar em {
+    color: var(--green-color);
 }
 
 #notificar.active em {
     animation: notificar 1s infinite;
 }
 
-#notificar em:hover {
+#notificar:hover {
     box-shadow: 3px 3px 3px var(--gris3-color);
 }
 

@@ -59,10 +59,13 @@
                             <div>Hora: {{tarea.fechaProgramada|date : 'HH:mm'}}</div>
                             <div>Duracion: {{tarea.duracion|formatearSegundos}}</div>
                             <div class="constainer-em">
-                                <em class="bi bi-calendar2-x-fill" (click)="emitirDesagendarTarea(tarea.id)"
+                                <em class="bi bi-calendar2-x" (click)="emitirDesagendarTarea(tarea.id)"
                                     title="Desagendar cita"></em>
                                 <em class="bi bi-clock" (click)="emitirReprogramarTarea(tarea.id)"
                                     title="reprogramar cita"></em>
+                                <em class="bi bi-calendar2-check" id="i-card-agenda-confirmar" title="Confirmar"
+                                    (click)="emitirConfirmarTarea(tarea.id)">
+                                </em>
 
                             </div>
                         </div>

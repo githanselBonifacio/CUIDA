@@ -20,11 +20,13 @@ import { CardCitaComponent } from '../../components/card-cita/card-cita.componen
 import { profesionalesDataTest2 } from 'src/assets/files/test/personal';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { ModalSeleccionProfesionalComponent } from '../../components/modal-seleccion-profesional/modal-seleccion-profesional.component';
+import { Cita } from 'src/app/shared/interfaces/agenda/remision.interface';
+import { VentanaConfirmacionComponent } from 'src/app/shared/components/ventana-confirmacion/ventana-confirmacion.component';
 
 export class MatDialogMock {
   open() {
     return {
-      afterClosed: () => of('string')
+      afterClosed: () => of('10:50')
     };
   }
 }
@@ -41,6 +43,26 @@ describe('MainComponentAgendaComponent', () => {
   const idRegional = '427';
   const idHorarioTurno = 1;
 
+  const citaDataTest: Cita = {
+    "idCita": "74hjg45_2",
+    "idRemision": "74hjg45",
+    "duracion": 7200,
+    "holgura": 900,
+    "fechaInicio": new Date("2023-07-08 11:40"),
+    "fechaProgramada": new Date("2023-07-08 11:40"),
+    "latitud": 10.96535,
+    "longitud": -74.817936,
+    "especialidad": "Enfermeria",
+    "idEstado": 1,
+    "idRegional": "427",
+    "idHorarioTurno": 1,
+    "idProfesional": null,
+    "idConductor": null,
+    "paciente": "MARIANA VILLA GARCIA",
+    "numeroIdentificacionPaciente": "14528746825",
+    "tipoIdentificacionPaciente": "Cédula ciudadania"
+  }
+
   const agendaServiceMock = {
     getCitas: (): Observable<any> => of({
       result: citasTest,
@@ -52,6 +74,22 @@ describe('MainComponentAgendaComponent', () => {
     }),
     getActividadesAgendaGantt: (): Observable<any> => of({
       result: actividadesTest,
+      status: 200,
+      flag: true,
+      message: "peticion exitosa",
+      tecnicalMessage: "peticion exitosa",
+      detail: "peticion exitosa"
+    }),
+    getProfesionaTurnoRegional: (): Observable<any> => of({
+      result: profesionalesDataTest2,
+      status: 200,
+      flag: true,
+      message: "peticion exitosa",
+      tecnicalMessage: "peticion exitosa",
+      detail: "peticion exitosa"
+    }),
+    asignarProfesionaByIdCita: (): Observable<any> => of({
+      result: profesionalesDataTest2,
       status: 200,
       flag: true,
       message: "peticion exitosa",
@@ -72,7 +110,9 @@ describe('MainComponentAgendaComponent', () => {
     asignarProfesionalTurno: (): Observable<any> => of({ status: 200, }),
     desasignarProfesionalTurno: (): Observable<any> => of({ status: 200, }),
     retirarProfesional: (): Observable<any> => of({ status: 200, }),
-    reprogramarCita: (): Observable<any> => of({ status: 200 })
+    confirmarCita: (): Observable<any> => of({ status: 200, }),
+    reprogramarCita: (): Observable<any> => of({ status: 200 }),
+    confirmarCitasTurno: (): Observable<any> => of({ status: 200 })
   };
 
   const maestrosServiceMock = {
@@ -123,7 +163,8 @@ describe('MainComponentAgendaComponent', () => {
         MainComponentAgendaComponent,
         GanttComponent,
         CardCitaComponent,
-        ModalSeleccionProfesionalComponent
+        ModalSeleccionProfesionalComponent,
+        VentanaConfirmacionComponent
       ],
       imports: [
         RouterTestingModule.withRoutes(routes),
@@ -243,14 +284,46 @@ describe('MainComponentAgendaComponent', () => {
 
   it('desagendar cita a profesional', () => {
     component.ngOnInit();
-    component.desagendarCita(component.citas[0].idCita);
+    component.citas = [citaDataTest];
+    component.desagendarCita(citaDataTest.idCita);
     fixture.detectChanges();
     expect(component).toBeTruthy();
   })
 
   it('reprogramar cita a profesional', () => {
     component.ngOnInit();
-    component.reprogramarCita(component.citas[0].idCita);
+    component.citas = [citaDataTest];
+    component.reprogramarCita(citaDataTest.idCita);
+    fixture.detectChanges();
+    expect(component).toBeTruthy();
+  })
+  it('confirmar cita ', () => {
+    component.ngOnInit();
+    component.citas = [citaDataTest];
+    component.confirmarCita(citaDataTest.idCita);
+    fixture.detectChanges();
+    expect(component).toBeTruthy();
+  })
+
+  it('confirmar cita turno ', () => {
+    component.ngOnInit();
+    component.citas = [citaDataTest];
+    component.confirmarTurno();
+    fixture.detectChanges();
+    expect(component).toBeTruthy();
+  })
+  it('asignar cita a profesional', () => {
+    component.ngOnInit();
+    component.citas = [citaDataTest];
+    component.asignarProfesionalCita(citaDataTest);
+    fixture.detectChanges();
+    expect(component).toBeTruthy();
+  })
+
+  it('mostrar detalle cita', () => {
+    component.ngOnInit();
+    component.citas = [citaDataTest];
+    component.mostrarDetalleCita(citaDataTest);
     fixture.detectChanges();
     expect(component).toBeTruthy();
   })

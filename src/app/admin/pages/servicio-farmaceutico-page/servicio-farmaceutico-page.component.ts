@@ -61,6 +61,7 @@ export class ServicioFarmaceuticoPageComponent implements OnInit, AfterViewInit 
         if (resp.status == 200) {
           this.notificacionesCompleta = resp.result;
           this.dataSource.data = resp.result;
+          this.selection.clear();
           this.validarMasterCheck();
         }
 
@@ -77,7 +78,7 @@ export class ServicioFarmaceuticoPageComponent implements OnInit, AfterViewInit 
     return this.maestrosService.regionales;
   }
   get horariosTurno(): HorarioTurno[] {
-    return this.maestrosService.horariosTurno;
+    return this.maestrosService.horariosTurno?.filter(h => h.esHorarioBase);
   }
 
   get fecha() {

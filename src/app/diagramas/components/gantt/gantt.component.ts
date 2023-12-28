@@ -1,7 +1,8 @@
 
 import { Actividad, Tarea } from '../../interfaces/tarea-gantt.interface';
-import { Component, Input, EventEmitter, Output, HostListener, ViewChild, ElementRef, AfterViewInit, ChangeDetectorRef } from '@angular/core';
+import { Component, Input, EventEmitter, Output, HostListener, ViewChild, ElementRef } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog'
+import { MapRutaComponent } from 'src/app/maps/components/map-ruta/map-ruta.component';
 import { EstadosCita } from 'src/app/shared/interfaces/agenda/remision.interface';
 
 
@@ -24,10 +25,14 @@ export class GanttComponent {
   @Input() public actividades: Actividad[] = [];
   @Input() public horas: string[] = [];
   @Input() public tituloActorResponsable = "";
+  @Input() public fechaTurno!: Date;
 
   @Output() idprofesionalEvent = new EventEmitter<Actividad>();
   @Output() retirarTareaEvent = new EventEmitter<string>();
   @Output() reprogramarTareaEvent = new EventEmitter<string>();
+  @Output() confirmarTareaEvent = new EventEmitter<string>();
+  @Output() mostrarRutaMapaEvent = new EventEmitter<Tarea[]>();
+
 
   @HostListener('window:resize', ['$event'])
   onResize(event: any) { }
@@ -43,21 +48,17 @@ export class GanttComponent {
     return (this.fechaFinTurnoUnix - this.fechaInicioTurnoUnix);
   }
   get fechaInicioTurnoUnix() {
-    return new Date(this.actividades[0].tareas[0].fechaProgramada).setHours(parseInt(this.horas[0])) / 1000;
+    return this.fechaTurno.setHours(parseInt(this.horas[0])) / 1000;
   }
   get fechaFinTurnoUnix() {
-
-    return new Date(this.actividades[0].tareas[0].fechaProgramada).setHours(parseInt(this.horas[this.horas.length - 1])) / 1000;
+    return this.fechaTurno.setHours(parseInt(this.horas[this.horas.length - 1])) / 1000;
   }
   get divisionHora() {
     return this.widthContainer / (this.horas.length - 1);
   }
 
   mostrarRutaMapa(tareas: Tarea[]): void {
-    /*const dialogRef = this.modalMapRuta.open(MapRutaComponent, {
-      data: tareas
-    })*/
-
+    this.mostrarRutaMapaEvent.emit(tareas);
   }
 
   calcularWidth(duracion: number, width: number) {
@@ -80,5 +81,8 @@ export class GanttComponent {
   }
   emitirReprogramarTarea(idTarea: string) {
     this.reprogramarTareaEvent.emit(idTarea);
+  }
+  emitirConfirmarTarea(idTarea: string) {
+    this.confirmarTareaEvent.emit(idTarea);
   }
 }

@@ -27,65 +27,70 @@
                     {{convertEstado(cita?.idEstado??'', estadosCita)}}
                 </div>
             </div>
-            <details>
-                <div class="card-body">
-
-                    <div class="item-cita">
-                        <em class="bi bi-calendar"></em>
-                        {{cita?.fechaInicio |date :'dd/MM/yyyy HH:mm' }}
-                    </div>
-
-                    <div class="item-cita">
-                        <em class="bi bi-calendar-check"></em>
-                        {{cita?.fechaProgramada |date:'dd/MM/yyyy HH:mm'}}
-                    </div>
-                    <div class="item-cita">
-                        <em class="bi bi-clock"> </em>
-                        {{cita?.duracion??0|formatearSegundos }}
-                    </div>
-                    <div class="item-cita">
-                        <em class="bi bi-hourglass-bottom"></em>
-                        {{cita?.holgura??0
-                        |formatearSegundos}}
-                    </div>
-
-                    <div class="card-body" *ngIf="cita?.idConductor" id="conductor-card">
-                        <h5 for="conductor" class="card-title">conductor asignado</h5>
-                        <span class="input-group-text" id="conductor">
-                            <em class="bi bi-file-person-fill"></em>
-                            {{cita?.idConductor}}</span>
-                        <span class="input-group-text"><em class="bi bi-card-heading"></em> {{cita?.idConductor}}</span>
-                    </div>
-
-
-                    <div class="i-card-agenda">
-                        <ng-container *ngIf="validarEstadoAgendado(cita)">
-
-
-                            <em class="bi bi-clock" id="i-card-agenda-reprogramar" title="Reprogramar"
-                                (click)="reprogramarHoraCita()">
-                            </em>
-
-                            <em class="bi bi-calendar2-x-fill" id="i-card-agenda-desagendar" title="Desagendar"
-                                (click)="desagendarProfesionalCita()">
-                            </em>
-
-
-
-                        </ng-container>
-                        <ng-container *ngIf="validarEstadoNoAgendado(cita)">
-                            <em class="bi bi-clock" id="i-card-agenda-reprogramar" title="Reprogramar"
-                                (click)="reprogramarHoraCita()">
-                            </em>
-                            <em class="bi bi-calendar-plus-fill" (click)="asignarProfesionalCita()" title="Agendar"
-                                id="i-card-agenda-agendar">
-                            </em>
-                        </ng-container>
-                    </div>
-                </div>
-            </details>
 
         </div>
+
+    </section>
+</div>
+<div class="detail-card">
+    <section>
+        <details>
+            <summary>ver más</summary>
+            <div class="card-body-detail">
+                <div class="item-cita">
+                    <em class="bi bi-calendar"></em>
+                    {{cita?.fechaInicio |date :'dd/MM/yyyy HH:mm' }}
+                </div>
+
+                <div class="item-cita">
+                    <em class="bi bi-calendar-check"></em>
+                    {{cita?.fechaProgramada |date:'dd/MM/yyyy HH:mm'}}
+                </div>
+                <div class="item-cita">
+                    <em class="bi bi-clock"> </em>
+                    {{cita?.duracion??0|formatearSegundos }}
+                </div>
+                <div class="item-cita">
+                    <em class="bi bi-hourglass-bottom"></em>
+                    {{cita?.holgura??0
+                    |formatearSegundos}}
+                </div>
+
+                <div class="card-body" *ngIf="cita?.idConductor" id="conductor-card">
+                    <h5 for="conductor" class="card-title">conductor asignado</h5>
+                    <span class="input-group-text" id="conductor">
+                        <em class="bi bi-file-person-fill"></em>
+                        {{cita?.idConductor}}</span>
+                    <span class="input-group-text"><em class="bi bi-card-heading"></em> {{cita?.idConductor}}</span>
+                </div>
+
+
+                <div class="i-card-agenda">
+                    <ng-container *ngIf="validarEstadoAgendado(cita)">
+
+
+                        <em class="bi bi-clock" id="i-card-agenda-reprogramar" title="Reprogramar"
+                            (click)="reprogramarHoraCita()">
+                        </em>
+
+                        <em class="bi bi-calendar2-x-fill" id="i-card-agenda-desagendar" title="Desagendar"
+                            (click)="desagendarProfesionalCita()">
+                        </em>
+
+
+
+                    </ng-container>
+                    <ng-container *ngIf="validarEstadoNoAgendado(cita)">
+                        <em class="bi bi-clock" id="i-card-agenda-reprogramar" title="Reprogramar"
+                            (click)="reprogramarHoraCita()">
+                        </em>
+                        <em class="bi bi-calendar-plus-fill" (click)="asignarProfesionalCita()" title="Agendar"
+                            id="i-card-agenda-agendar">
+                        </em>
+                    </ng-container>
+                </div>
+            </div>
+        </details>
 
     </section>
 </div>

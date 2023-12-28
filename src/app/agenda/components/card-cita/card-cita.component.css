@@ -12,8 +12,46 @@
     border: 1px solid var(--gris3-color);
 }
 
+.detail-card {
+    display: block;
+
+}
+
 details {
     margin-top: -1.5rem;
+}
+
+@keyframes reveal {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+
+details[open] summary+* {
+    animation: reveal 0.5s;
+
+}
+
+
+summary {
+    margin-top: -2.5rem;
+    margin-left: 1.5rem;
+    padding-bottom: 0.5rem;
+    color: var(--quarter-color);
+}
+
+summary::before {
+    margin-right: 0.2rem;
+}
+
+.card-body-detail {
+    padding: 0.5rem 0.5rem 0.5rem 1.5rem;
+    border: 1px solid var(--gris3-color);
 }
 
 button {

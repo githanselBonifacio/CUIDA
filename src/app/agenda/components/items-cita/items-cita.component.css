@@ -58,6 +58,7 @@ caption {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(19rem, 1fr));
     flex-wrap: wrap;
+    gap: 0.5rem;
     justify-content: space-evenly;
     border: 1px solid var(--gris3-color);
     padding: 0.5rem 0.5rem 0.5rem 0.5rem;
@@ -109,21 +110,85 @@ caption {
     padding: 0rem 0rem 0rem 0rem !important;
 }
 
-.accordion {
-    margin: 0rem 0.5rem 0rem 0.5rem !important;
+.container-detail {
+    width: 100%;
+    position: relative;
+
 }
 
-.accordion button,
-.accordion button.collapse {
+.header-detail {
     background-color: var(--second-color);
-    color: var(--third-color);
+    border-radius: 10px;
+    width: 100%;
+    padding: 1rem;
     font-size: 1.2rem;
     font-weight: bold;
-    border-radius: 10px !important;
-    text-align: center;
+    color: var(--third-color);
 }
 
-.accordion button::after {
-    background-color: var(--third-color);
+.content-detail {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    text-align: center;
+    position: relative;
+
+}
+
+summary {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    list-style: none;
+    font-size: 1.5rem;
+    font-weight: bold;
+    width: 1.5rem;
+    height: 1.5rem;
+    text-align: center;
     border-radius: 50%;
+    color: var(--quarter-color);
+    margin-top: -2.7rem;
+    right: 1.5rem;
+    background-color: var(--third-color);
+}
+
+summary::before {
+    content: "+";
+}
+
+details[open] summary::before {
+    content: "-";
+}
+
+@keyframes reveal {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+
+details[open] summary+* {
+    animation: reveal 0.5s;
+
+}
+
+details[open] summary {
+    top: 0%;
+
+}
+
+details:not([open]) summary {
+    top: 0%;
+
+}
+
+.body-detail {
+    text-align: left;
+    padding-top: 0.5rem;
+    width: 95%;
 }

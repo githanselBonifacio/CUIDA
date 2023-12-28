@@ -370,7 +370,10 @@ export class MainComponentAgendaComponent implements OnInit {
   }
   mostrarRutaProfesionalMap(tareas: Tarea[]) {
     const dialogRef = this.dialogo.open(MapRutaComponent, {
-      data: tareas.filter(t => t.tipo != "DVISITA")
+      data: {
+        "tareas": tareas.filter(t => t.tipo != "DVISITA"),
+        "origen": this.regionales.filter(r => r.id == this.opcionRegional)[0]
+      }
     })
   }
   actualizarComponenteMainAgenda() {

@@ -27,7 +27,10 @@ describe('MapRutaComponent', () => {
       providers: [
         { provide: MatDialogRef, useValue: {} },
         {
-          provide: MAT_DIALOG_DATA, useValue: tareas
+          provide: MAT_DIALOG_DATA, useValue: {
+            tareas: tareas,
+            origen: { longitud: 11.2, latitud: -7.5 }
+          }
         },
       ]
     }).compileComponents();

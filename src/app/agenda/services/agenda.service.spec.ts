@@ -60,7 +60,7 @@ describe('AgendaService', () => {
       expect(resp).toBeDefined();
     })
     expect(service).toBeTruthy();
-    const req = httpMock.expectOne(`${environment.URL_API_CUIDA}/${urlRecurso}/profesionalesByTurnoRegional?fechaTurno=${fechaTurno}&idRegional=${idRegional}`
+    const req = httpMock.expectOne(`${environment.URL_API_CUIDA}/${urlRecurso}/profesionalesDisponiblesByTurnoRegional?fechaTurno=${fechaTurno}&idRegional=${idRegional}`
       , "consultar profesionales disponibles en turno en regional")
     expect(req.request.method).toBe('GET');
   })

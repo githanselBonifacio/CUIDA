@@ -22,7 +22,7 @@ export class AgendaService {
     const params = new HttpParams()
       .set('fechaTurno', fechaTurno)
       .set('idRegional', idRegional)
-    return this.http.get<Respuesta>(`${environment.URL_API_CUIDA}/${this.urlRecurso}/profesionalesByTurnoRegional`, { params });
+    return this.http.get<Respuesta>(`${environment.URL_API_CUIDA}/${this.urlRecurso}/profesionalesDisponiblesByTurnoRegional`, { params });
   }
 
   getProfesionaTurnoRegional(fechaTurno: string, idRegional: string, idHorarioTurno: number) {

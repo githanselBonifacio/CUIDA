@@ -62,9 +62,7 @@ export class AdminFormConductoresComponent implements OnChanges {
       this.tituloFormulario = (this.accionFormulario === AccionFormulario.CREAR) ? "Crear conductor" : "Actualizar conductor";
 
       this.validacionDisabled = this.accionFormulario === AccionFormulario.ACTUALIZAR;
-      if (this.validacionDisabled) {
-        this.campoTipoIdentificacion?.disable();
-      }
+
       this.formConductor.patchValue({
         IdTipoIdentificacion: this.conductor?.idTipoIdentificacion,
         numeroIdentificacion: this.conductor?.numeroIdentificacion,

@@ -66,10 +66,7 @@ export class AdminFormProfesionalesComponent implements OnChanges {
   ngOnChanges(changes: SimpleChanges) {
     if (changes['accionFormulario'] || changes['profesional']) {
       this.tituloFormulario = (this.accionFormulario === AccionFormulario.CREAR) ? "Crear profesional" : "Actualizar profesional";
-      if (this.accionFormulario === AccionFormulario.ACTUALIZAR) {
-        this.campoTipoIdentificacion?.disable();
-        this.campoNumeroIdentificacion?.disable();
-      }
+
       this.validacionDisabled = this.accionFormulario === AccionFormulario.ACTUALIZAR;
       this.formProfesional.patchValue({
         tipoIdentificacion: this.profesional?.idTipoIdentificacion,

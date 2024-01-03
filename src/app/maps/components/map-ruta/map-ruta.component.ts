@@ -29,26 +29,29 @@ export class MapRutaComponent implements AfterViewInit {
 
     });
 
-    let limites = new mapboxgl.LngLatBounds();
 
-    let markerOrigen = new mapboxgl.Marker({ color: "#0033A0" })
+    let limites = new mapboxgl.LngLatBounds();
+    const markerOrigenHtml = `<div class="marker">Sede ${this.data["origen"].nombre}</div>`;
+    let markerOrigen = new mapboxgl.Marker({
+      color: "#d19004"
+    })
       .setLngLat([this.data["origen"].longitud, this.data["origen"].latitud])
+      .setPopup(new mapboxgl.Popup().setHTML(markerOrigenHtml))
       .addTo(map);
     limites.extend(markerOrigen.getLngLat())
 
     for (const tarea of this.data["tareas"]) {
       if (tarea.tipo != "DVISITA") {
-        const markerHtml = document.createElement("div");
-        markerHtml.innerHTML = `
-        <div class="marker" style=" display: flex;flex-direction: column;justify-content: center;clip-path: polygon(0% 0%, 100% 0%, 100% 90%, 55% 90%, 50% 100%, 45% 90%, 0% 90%);"> 
-            <div class="hora" style=" font-size:0.8rem; background-color: gray;color: white;padding: 0.5rem;border-radius: 5px;text-align: center;">
+
+        const markerHtml = `
+            <div style=" font-size:0.8rem;text-align: center;">
               <div>${tarea.id}</div>
               <div>${formatoHora(new Date(tarea.fechaProgramada))}</div>
             </div>
-        </div>
         `;
-        let marker = new mapboxgl.Marker({ element: markerHtml })
+        let marker = new mapboxgl.Marker({ color: "#0033A0" })
           .setLngLat([tarea.longitud, tarea.latitud])
+          .setPopup(new mapboxgl.Popup().setHTML(markerHtml))
           .addTo(map);
         limites.extend(marker.getLngLat())
       }

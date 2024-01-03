@@ -1,4 +1,13 @@
 div {
-    width: 50vw;
-    height: 50vh;
+    width: 60vw;
+    height: 60vh;
+}
+
+.mapboxgl-popup-content {
+    background-color: black !important;
+    color: white !important;
+}
+
+.mapboxgl-popup-close-button {
+    display: none !important;
 }
